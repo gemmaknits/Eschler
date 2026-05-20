@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PublishUrlHistory>\\srv-gemmaknits\eschler_programs\SalesOrderSystem\|E:\Eschler_System\ESCHLER_PROGRAMS\SalesOrderSystem\|D:\Program2017\SalesOrderSystem\|\\172.16.9.4\Setup\Programs2014\SalesOrderSystem\|\\172.16.3.4\Setup\Programs2014\SalesOrderSystem\</PublishUrlHistory>
+    <InstallUrlHistory>\\srv-gemmaknits\eschler_programs\SalesOrderSystem\|\\172.16.3.2\eschler_programs\SalesOrderSystem\|\\172.16.3.11\Program2017\SalesOrderSystem\|\\127.0.0.1\Program2017\SalesOrderSystem\|\\172.16.9.4\Setup\Programs2014\SalesOrderSystem\</InstallUrlHistory>
+    <SupportUrlHistory />
+    <UpdateUrlHistory>\\172.16.9.4\Setup\Programs2014\SalesOrderSystem\|\\172.16.3.4\Setup\Programs2014\SalesOrderSystem\|\\192.168.1.5\Setup\Programs2014\SalesOrderSystem\|\\192.168.1.5\Setup\Programs2010\SalesOrderSystem\|\\172.16.3.4\Setup\Programs2010\SalesOrderSystem\</UpdateUrlHistory>
+    <BootstrapperUrlHistory>\\srv-gemmaknits\ESCHLER_PROGRAMS\MSI|\\srv-gemmaknits\ESCHLER_PROGRAMS\MSI\|D:\Setup\Programs2014\SalesOrderSystem\CRforVS_clickonce_13_0_14\th</BootstrapperUrlHistory>
+    <ErrorReportUrlHistory />
+    <FallbackCulture>en-US</FallbackCulture>
+    <VerifyUploadedFiles>false</VerifyUploadedFiles>
+    <ProjectView>ShowAllFiles</ProjectView>
+  </PropertyGroup>
+  <PropertyGroup>
+    <EnableSecurityDebugging>false</EnableSecurityDebugging>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ReferencePath>C:\Program Files (x86)\SAP BusinessObjects\Crystal Reports for .NET Framework 4.0\Common\SAP BusinessObjects Enterprise XI 4.0\win32_x86\dotnet\</ReferencePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <EnableSQLServerDebugging>false</EnableSQLServerDebugging>
+  </PropertyGroup>
+</Project>

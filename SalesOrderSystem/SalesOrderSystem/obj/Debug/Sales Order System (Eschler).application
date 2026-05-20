@@ -14,14 +14,14 @@
     <framework targetVersion="4.5.2" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="Sales Order System (Eschler).exe.manifest" size="33754">
+    <dependentAssembly dependencyType="install" codebase="Sales Order System (Eschler).exe.manifest" size="33767">
       <assemblyIdentity name="Sales Order System (Eschler).exe" version="1.0.0.996" publicKeyToken="0000000000000000" language="en" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>IXeQ0x9Oj+1ZfEOPbYtA5arUx9pnnzhDRSTkVVeZ4Ho=</dsig:DigestValue>
+        <dsig:DigestValue>tgNp4+2aVY2DFl1O2MlkMAHubJj3q3sX51aF8fhDb7U=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

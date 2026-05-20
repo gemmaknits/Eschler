@@ -11,6 +11,8 @@ Public Class frmDyingOrderV01
     Dim idx As Long = 0
     Dim idx2 As Long = 0
     Dim dtGetSODesignGrid As DataTable
+    Private _dtColor As DataTable
+    Private _selectedColorRow As DataRow
 
 #Region "Constant"
     'For Eschler lookup_type = DF_TYPE(lookup_id= 37)
@@ -204,10 +206,11 @@ Public Class frmDyingOrderV01
         'Me.cboColor.ValueMember = "col"
 
         'Sitthana 07/06/2018  Change cboColor combo to multicolumn combo
-        mltcboColor.DataSource = objDB.GetSOColor(config.IsNull(txtsono.Text, "").ToString.Trim)
-        mltcboColor.MultiColumn = True
-        mltcboColor.ValueMember = "col" 'id_yarnchange
+        _dtColor = objDB.GetSOColor(config.IsNull(txtsono.Text, "").ToString.Trim)
+        mltcboColor.DataSource = _dtColor
+        mltcboColor.ValueMember = "col"
         mltcboColor.DisplayMember = "col"
+        _selectedColorRow = Nothing
     End Sub
 
     Private Sub BindData(ByVal dt As DataTable)
@@ -851,8 +854,8 @@ Public Class frmDyingOrderV01
         If grdDF.Rows.Count = 0 Then Return True
         If MessageBox.Show("Program must clear all Roll No. in right pane before change " & strChangeType & vbCrLf _
          & "Would you still like to change " & strChangeType & " ?" & vbCrLf _
-         & "â»Ãá¡ÃÁ¨Ðà¤ÅÕÂÃìÁéÇ¹·ÕèàÅ×Í¡äÇé·Ñé§ËÁ´ÍÑµÔâ¹ÁÑµÔ¡èÍ¹à»ÅÕèÂ¹ " & strChangeType & vbCrLf _
-         & "¤Ø³ÂÑ§µéÍ§¡ÒÃ¨Ðà»ÅÕèÂ¹ " & strChangeType & " ÍÕ¡ËÃ×ÍäÁè ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.No Then
+         & "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñµï¿½ï¿½ï¿½ÑµÔ¡ï¿½Í¹ï¿½ï¿½ï¿½ï¿½Â¹ " & strChangeType & vbCrLf _
+         & "ï¿½Ø³ï¿½Ñ§ï¿½ï¿½Í§ï¿½ï¿½Ã¨ï¿½ï¿½ï¿½ï¿½ï¿½Â¹ " & strChangeType & " ï¿½Õ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.No Then
             Return False
         Else
             Return True
@@ -920,8 +923,8 @@ Public Class frmDyingOrderV01
                     Else
                         MessageBox.Show("Roll No. " & dt.Rows(i)("roll_no").ToString.Trim & " Color " & dt.Rows(i)("col").ToString.Trim & " is duplicated in right grid." & vbCrLf _
                         & "If you want to add same Roll No., Please change color by change S/O No. ID in Grid Above." & vbCrLf _
-                        & "àÅ¢ÁéÇ¹ " & dt.Rows(i)("roll_no").ToString.Trim & " ÊÕ " & dt.Rows(i)("col").ToString.Trim & " «éÓ¡Ñº·ÕèàÅ×Í¡äÇéáÅéÇ´éÒ¹¢ÇÒ" & vbCrLf _
-                        & "¶éÒ¨ÐãªéàÅ¢ÁéÇ¹à´ÔÁµéÍ§à»ÅÕèÂ¹ÊÕ ¶éÒ¨Ðà»ÅÕèÂ¹ÊÕãËéàÅ×Í¡ S/O No. ID ¨Ò¡µÒÃÒ§´éÒ¹º¹ãËÁè áÅéÇ¡ÅÑºÁÒàÅ×Í¡ÁéÇ¹à´ÔÁ." & vbCrLf _
+                        & "ï¿½Å¢ï¿½ï¿½Ç¹ " & dt.Rows(i)("roll_no").ToString.Trim & " ï¿½ï¿½ " & dt.Rows(i)("col").ToString.Trim & " ï¿½ï¿½Ó¡Ñºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç´ï¿½Ò¹ï¿½ï¿½ï¿½" & vbCrLf _
+                        & "ï¿½ï¿½Ò¨ï¿½ï¿½ï¿½ï¿½Å¢ï¿½ï¿½Ç¹ï¿½ï¿½ï¿½ï¿½ï¿½Í§ï¿½ï¿½ï¿½ï¿½Â¹ï¿½ï¿½ ï¿½ï¿½Ò¨ï¿½ï¿½ï¿½ï¿½ï¿½Â¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¡ S/O No. ID ï¿½Ò¡ï¿½ï¿½ï¿½Ò§ï¿½ï¿½Ò¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ç¡ï¿½Ñºï¿½ï¿½ï¿½ï¿½ï¿½Í¡ï¿½ï¿½Ç¹ï¿½ï¿½ï¿½." & vbCrLf _
                         , "System Message", MessageBoxButtons.OK, MessageBoxIcon.Asterisk, MessageBoxDefaultButton.Button1)
                     End If
                 End If
@@ -1198,6 +1201,18 @@ Public Class frmDyingOrderV01
         Me.Cursor = Cursors.Default
     End Sub
 
+    Private Sub btnColorLookup_Click(sender As Object, e As EventArgs) Handles btnColorLookup.Click
+        If _dtColor Is Nothing Then Exit Sub
+        Dim frm As New frmLookup(_dtColor,
+            New List(Of String) From {"col", "custcol", "labdipno"},
+            New List(Of String) From {"Color", "Customer Color", "Lab Dip No."})
+        If frm.ShowDialog() = DialogResult.OK Then
+            _selectedColorRow = frm.SelectedRow
+            mltcboColor.SelectedValue = _selectedColorRow("col")
+        End If
+        frm.Dispose()
+    End Sub
+
     Private Sub btnPrintBlankSheet_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPrintBlankSheet.Click
         Dim frm As New frmBlankApvSheet
         frm.UserInfo = clsUser
@@ -1207,23 +1222,21 @@ Public Class frmDyingOrderV01
 
     Private Sub btnChangeColor_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnChangeColor.Click
         Dim config As New clsConfig
-        If config.IsNull(mltcboColor.SelectedValue, "").ToString.Trim.Length = 0 Then Exit Sub
-        If MessageBox.Show("Would you like to apply color '" & config.IsNull(mltcboColor.SelectedValue, "").ToString.Trim & "' to chosen item in grid below ?" & vbCrLf _
-         & "¤Ø³µéÍ§¡ÒÃà»ÅÕèÂ¹ÊÕ¢Í§ÃÒÂ¡ÒÃ·ÕèàÅ×Í¡´éÇÂà¤Ã×èÍ§ËÁÒÂ¶Ù¡ã¹µÒÃÒ§´éÒ¹ÅèÒ§ãËéà»ç¹ÊÕ '" & config.IsNull(mltcboColor.SelectedValue, "").ToString.Trim & "' ãªèËÃ×ÍäÁè ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.No Then Exit Sub
+        If _selectedColorRow Is Nothing OrElse config.IsNull(_selectedColorRow("col"), "").ToString.Trim.Length = 0 Then Exit Sub
+        Dim selectedCol As String = _selectedColorRow("col").ToString.Trim
+        If MessageBox.Show("Would you like to apply color '" & selectedCol & "' to chosen item in grid below ?" & vbCrLf _
+         & "ï¿½Ø³ï¿½ï¿½Í§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¹ï¿½Õ¢Í§ï¿½ï¿½Â¡ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½Í¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í§ï¿½ï¿½ï¿½Â¶Ù¡ã¹µï¿½ï¿½Ò§ï¿½ï¿½Ò¹ï¿½ï¿½Ò§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ '" & selectedCol & "' ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.No Then Exit Sub
 
         Dim dt As DataTable = grdDF.DataSource
         Dim dt2 As DataTable = dt.Copy()
-        Dim dtcbocoler As DataTable = mltcboColor.DataSource 'Sithana 08/06/2018
         Dim i As Integer = 0
 
         If dt2.Rows.Count > 0 Then
             For i = 0 To dt2.Rows.Count - 1
-                'If CBool(dt2.Rows(i)("sel")) Then 'Comment because will lock 1 DF = 1 Sonoid
-                dt2.Rows(i)("sonoid") = dtcbocoler.Rows(mltcboColor.SelectedIndex)("sonoid").ToString 'Sithana 08/06/2018
-                dt2.Rows(i)("col") = config.IsNull(mltcboColor.SelectedValue, "").ToString.Trim
-                dt2.Rows(i)("custcolor") = dtcbocoler.Rows(mltcboColor.SelectedIndex)("custcol").ToString 'Sithana 08/06/2018
-                dt2.Rows(i)("labdipno") = dtcbocoler.Rows(mltcboColor.SelectedIndex)("labdipno").ToString 'Sithana 08/06/2018
-                'End If 'Comment By Sithana 08/06/2018
+                dt2.Rows(i)("sonoid") = _selectedColorRow("sonoid").ToString
+                dt2.Rows(i)("col") = selectedCol
+                dt2.Rows(i)("custcolor") = _selectedColorRow("custcol").ToString
+                dt2.Rows(i)("labdipno") = _selectedColorRow("labdipno").ToString
             Next
         End If
 
@@ -1236,7 +1249,7 @@ Public Class frmDyingOrderV01
             For j = i + 1 To dt2.Rows.Count - 1
                 If dt2.Rows(j)("col").ToString.Trim = col _
                  And dt2.Rows(j)("roll_no").ToString.Trim = roll_no Then
-                    MessageBox.Show("After apply, Some Roll No. and Color are duplicated." & vbCrLf & "ËÅÑ§¨Ò¡à»ÅÕèÂ¹ÊÕáÅéÇÁÕºÒ§ÁéÇ¹«Öè§à»ç¹ÁéÇ¹à´ÕÂÇ¡Ñ¹ÁÕÊÕà´ÕÂÇ¡Ñ¹", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+                    MessageBox.Show("After apply, Some Roll No. and Color are duplicated." & vbCrLf & "ï¿½ï¿½Ñ§ï¿½Ò¡ï¿½ï¿½ï¿½ï¿½Â¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÕºÒ§ï¿½ï¿½Ç¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¹ï¿½ï¿½ï¿½Ç¡Ñ¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¡Ñ¹", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
                     Exit Sub
                 End If
             Next
@@ -1276,20 +1289,20 @@ Public Class frmDyingOrderV01
 
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
         If Not CheckGrdRollNo() Then Exit Sub
-        If MessageBox.Show("Would you like to add selected Roll No. from left grid to right grid ?" & vbCrLf & "¤Ø³µéÍ§¡ÒÃà¾ÔèÁÁéÇ¹·ÕèàÅ×Í¡äÇé´éÒ¹«éÒÂà¾×èÍ¹Óä»ÂéÍÁ´éÒ¹¢ÇÒãªèËÃ×ÍäÁè ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.No Then Exit Sub
+        If MessageBox.Show("Would you like to add selected Roll No. from left grid to right grid ?" & vbCrLf & "ï¿½Ø³ï¿½ï¿½Í§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¡ï¿½ï¿½ï¿½ï¿½Ò¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.No Then Exit Sub
         Call AddRollNo()
     End Sub
 
     Private Sub btnDel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDel.Click
         If Not CheckGrdDF() Then Exit Sub
-        If MessageBox.Show("Would you like to delete selected Roll No. in right grid ?" & vbCrLf & "¤Ø³µéÍ§¡ÒÃÅºÁéÇ¹·ÕèàÅ×Í¡äÇéà¾×èÍÂéÍÁã¹´éÒ¹¢ÇÒÍÍ¡ãªèËÃ×ÍäÁè ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.No Then Exit Sub
+        If MessageBox.Show("Would you like to delete selected Roll No. in right grid ?" & vbCrLf & "ï¿½Ø³ï¿½ï¿½Í§ï¿½ï¿½ï¿½Åºï¿½ï¿½Ç¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ã¹´ï¿½Ò¹ï¿½ï¿½ï¿½ï¿½Í¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.No Then Exit Sub
         If grdDF.CurrentRow.Index >= 0 Then Call DeleteRollNo("SOME")
     End Sub
 
     Private Sub btnDelAll_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDelAll.Click
         If lblCancelled.Visible Then Exit Sub
         If grdDF.Rows.Count = 0 Then Exit Sub
-        If MessageBox.Show("Would you like to delete all Roll No. in right grid ?" & vbCrLf & "¤Ø³µéÍ§¡ÒÃÅºÁéÇ¹ ·Ñé§ËÁ´ ·ÕèàµÃÕÂÁ¨ÐÂéÍÁã¹´éÒ¹¢ÇÒÍÍ¡ãªèËÃ×ÍäÁè ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.No Then Exit Sub
+        If MessageBox.Show("Would you like to delete all Roll No. in right grid ?" & vbCrLf & "ï¿½Ø³ï¿½ï¿½Í§ï¿½ï¿½ï¿½Åºï¿½ï¿½Ç¹ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ã¹´ï¿½Ò¹ï¿½ï¿½ï¿½ï¿½Í¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.No Then Exit Sub
         Call DeleteRollNo("ALL")
     End Sub
 
@@ -1341,7 +1354,7 @@ Public Class frmDyingOrderV01
 
     'Private Sub cboSoNo_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
     '    If Not (New classSalesOrder).ValidateSOFlowStatus(clsConfig.IsNull(txtsono.SelectedValue, "")) Then
-    '        MessageBox.Show("S/O µÔ´Ê¶Ò¹Ð ENT ÁÕ¡ÒÃá¡éä¢ S/O µéÍ§ CFM ¡èÍ¹", "System Message")
+    '        MessageBox.Show("S/O ï¿½Ô´Ê¶Ò¹ï¿½ ENT ï¿½Õ¡ï¿½ï¿½ï¿½ï¿½ï¿½ S/O ï¿½ï¿½Í§ CFM ï¿½ï¿½Í¹", "System Message")
     '        Call EnabledControl(False)
     '        Exit Sub
     '    End If
@@ -1648,7 +1661,7 @@ Public Class frmDyingOrderV01
             If grdDF.Columns(grdDF.SelectedCells(i).ColumnIndex).Name = "df_dhcol" Or
               grdDF.Columns(grdDF.SelectedCells(i).ColumnIndex).Name = "dhcoldt" Or
               grdDF.Columns(grdDF.SelectedCells(i).ColumnIndex).Name = "labdipno" Then
-                Dim strReplace As String = InputBox("ãÊè¢éÍÁÙÅ·ÕèµéÍ§¡ÒÃãËéãÊèÅ§µÒÃÒ§" & vbCrLf & "Input data into grid.", "System Message", "")
+                Dim strReplace As String = InputBox("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å·ï¿½ï¿½ï¿½Í§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å§ï¿½ï¿½ï¿½Ò§" & vbCrLf & "Input data into grid.", "System Message", "")
                 For i = 0 To grdDF.SelectedCells.Count - 1
                     If grdDF.Columns(grdDF.SelectedCells(i).ColumnIndex).Name = "df_dhcol" Or
                      grdDF.Columns(grdDF.SelectedCells(i).ColumnIndex).Name = "labdipno" Then
@@ -1914,19 +1927,19 @@ Public Class frmDyingOrderV01
     Private Function CheckDataOutno() As Boolean
 
         If clsConfig.IsNull(txtOutno.Text, "") = "" Then
-            MessageBox.Show("¤Ø³ÂÑ§äÁèä´éàÅ×Í¡ Out No.", "System Meassage", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+            MessageBox.Show("ï¿½Ø³ï¿½Ñ§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¡ Out No.", "System Meassage", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
             Return False
         End If
 
         Select Case cboDFType.SelectedValue
             Case "0"
-                MessageBox.Show("¤Ø³ÂÑ§äÁèä´éàÅ×Í¡ DF Process Type", "System Meassage", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+                MessageBox.Show("ï¿½Ø³ï¿½Ñ§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¡ DF Process Type", "System Meassage", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
                 Return False
         End Select
         If txtsono.Text.Trim = "" Then
             Select Case cboDFType.SelectedValue
                 Case DF, FINISH, PRESET, HOLOGRAM, PLEAT
-                    MessageBox.Show("¤Ø³ÂÑ§äÁèä´éàÅ×Í¡ S/O No.", "System Meassage", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+                    MessageBox.Show("ï¿½Ø³ï¿½Ñ§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¡ S/O No.", "System Meassage", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
                     Return False
             End Select
         End If

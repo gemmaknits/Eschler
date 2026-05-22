@@ -40,10 +40,10 @@ Partial Class frmGreigeIN
         Me.CboMcNo = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.txtCustCd = New System.Windows.Forms.TextBox()
-        Me.btnSelectCustomer = New System.Windows.Forms.Button()
         Me.txtCustName = New System.Windows.Forms.TextBox()
+        Me.btnSelectCustomer = New System.Windows.Forms.Button()
+        Me.txtCustCd = New System.Windows.Forms.TextBox()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.ToolStrip1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -105,29 +105,26 @@ Partial Class frmGreigeIN
         '
         'btnPrint
         '
-        Me.btnPrint.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.btnPrint.Image = CType(resources.GetObject("btnPrint.Image"), System.Drawing.Image)
         Me.btnPrint.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnPrint.Name = "btnPrint"
-        Me.btnPrint.Size = New System.Drawing.Size(23, 22)
+        Me.btnPrint.Size = New System.Drawing.Size(52, 22)
         Me.btnPrint.Text = "&Print"
         '
         'btnMinimized
         '
-        Me.btnMinimized.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.btnMinimized.Image = CType(resources.GetObject("btnMinimized.Image"), System.Drawing.Image)
         Me.btnMinimized.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnMinimized.Name = "btnMinimized"
-        Me.btnMinimized.Size = New System.Drawing.Size(23, 22)
+        Me.btnMinimized.Size = New System.Drawing.Size(83, 22)
         Me.btnMinimized.Text = "Minimized"
         '
         'btnExit
         '
-        Me.btnExit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.btnExit.Image = CType(resources.GetObject("btnExit.Image"), System.Drawing.Image)
         Me.btnExit.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnExit.Name = "btnExit"
-        Me.btnExit.Size = New System.Drawing.Size(23, 22)
+        Me.btnExit.Size = New System.Drawing.Size(45, 22)
         Me.btnExit.Text = "E&xit"
         '
         'Label2
@@ -221,22 +218,13 @@ Partial Class frmGreigeIN
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Conditions"
         '
-        'Label4
+        'txtCustName
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(26, 109)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(51, 13)
-        Me.Label4.TabIndex = 198
-        Me.Label4.Text = "Customer"
-        '
-        'txtCustCd
-        '
-        Me.txtCustCd.Location = New System.Drawing.Point(117, 106)
-        Me.txtCustCd.Name = "txtCustCd"
-        Me.txtCustCd.ReadOnly = True
-        Me.txtCustCd.Size = New System.Drawing.Size(51, 20)
-        Me.txtCustCd.TabIndex = 199
+        Me.txtCustName.Location = New System.Drawing.Point(117, 129)
+        Me.txtCustName.Name = "txtCustName"
+        Me.txtCustName.ReadOnly = True
+        Me.txtCustName.Size = New System.Drawing.Size(269, 20)
+        Me.txtCustName.TabIndex = 201
         '
         'btnSelectCustomer
         '
@@ -248,13 +236,22 @@ Partial Class frmGreigeIN
         Me.btnSelectCustomer.TabIndex = 200
         Me.btnSelectCustomer.UseVisualStyleBackColor = True
         '
-        'txtCustName
+        'txtCustCd
         '
-        Me.txtCustName.Location = New System.Drawing.Point(117, 129)
-        Me.txtCustName.Name = "txtCustName"
-        Me.txtCustName.ReadOnly = True
-        Me.txtCustName.Size = New System.Drawing.Size(269, 20)
-        Me.txtCustName.TabIndex = 201
+        Me.txtCustCd.Location = New System.Drawing.Point(117, 106)
+        Me.txtCustCd.Name = "txtCustCd"
+        Me.txtCustCd.ReadOnly = True
+        Me.txtCustCd.Size = New System.Drawing.Size(51, 20)
+        Me.txtCustCd.TabIndex = 199
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(26, 109)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(51, 13)
+        Me.Label4.TabIndex = 198
+        Me.Label4.Text = "Customer"
         '
         'frmGreigeIN
         '

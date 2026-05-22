@@ -101,6 +101,7 @@ Public Class classStockG
         Dim conn As New SqlConnection((New classConnection).connection)
         Dim comm As New SqlCommand("", conn)
         comm.CommandText = "p_greige_in_list_docno"
+        comm.Parameters.Clear()
         comm.Parameters.AddWithValue("@type", strDoctype)
         comm.Parameters.AddWithValue("@docno", StrDocno)
         Dim da As New SqlDataAdapter(comm)
@@ -114,6 +115,7 @@ Public Class classStockG
         Dim comm As New SqlCommand("", conn)
         comm.CommandType = CommandType.StoredProcedure
         comm.CommandText = "p_combo_gout_no"
+        comm.Parameters.Clear()
         Dim da As New SqlDataAdapter(comm)
         Dim dt As New DataTable
         da.Fill(dt)
@@ -125,6 +127,7 @@ Public Class classStockG
         Dim comm As New SqlCommand("", conn)
         comm.CommandType = CommandType.StoredProcedure
         comm.CommandText = "p_combo_gout_no2"
+        comm.Parameters.Clear()
         Dim da As New SqlDataAdapter(comm)
         Dim dt As New DataTable
         da.Fill(dt)
@@ -137,6 +140,7 @@ Public Class classStockG
         Dim comm As New SqlCommand("", conn)
         comm.CommandType = CommandType.StoredProcedure
         comm.CommandText = "p_combo_gin_return_no"
+        comm.Parameters.Clear()
         comm.Parameters.AddWithValue("@logempcd", logempcd)
         Dim da As New SqlDataAdapter(comm)
         Dim dt As New DataTable
@@ -150,6 +154,7 @@ Public Class classStockG
         Dim comm As New SqlCommand("", conn)
         comm.CommandType = CommandType.StoredProcedure
         comm.CommandText = "p_greige_do_from_df"
+        comm.Parameters.Clear()
         comm.Parameters.AddWithValue("@outno", strOutNo)
         comm.Parameters.AddWithValue("@dfno", strDFNo)
         comm.Parameters.AddWithValue("@logempcd", strEmpCD)
@@ -182,6 +187,7 @@ Public Class classStockG
         Dim comm As New SqlCommand("", conn)
         comm.CommandType = CommandType.StoredProcedure
         comm.CommandText = "p_greige_do_from_req"
+        comm.Parameters.Clear()
         comm.Parameters.AddWithValue("@outreqno", strReqNo)
         comm.Parameters.AddWithValue("@logempcd", strEmpCD)
         Dim da As New SqlDataAdapter(comm)
@@ -210,6 +216,7 @@ Public Class classStockG
         Dim comm As New SqlCommand("", conn)
         comm.CommandType = CommandType.StoredProcedure
         comm.CommandText = "p_greige_in_select2"
+        comm.Parameters.Clear()
         comm.Parameters.AddWithValue("@tran_no", strTranNo)
         comm.Parameters.AddWithValue("@logempcd", strEmpCD)
         Dim da As New SqlDataAdapter(comm)
@@ -224,6 +231,7 @@ Public Class classStockG
         Dim comm As New SqlCommand("", conn)
         comm.CommandType = CommandType.StoredProcedure
         comm.CommandText = "p_greige_in_select2"
+        comm.Parameters.Clear()
         comm.Parameters.AddWithValue("@tran_no", strTranNo)
         comm.Parameters.AddWithValue("@logempcd", strEmpCD)
         Dim da As New SqlDataAdapter(comm)
@@ -238,6 +246,7 @@ Public Class classStockG
         Dim comm As New SqlCommand("", conn)
         comm.CommandType = CommandType.StoredProcedure
         comm.CommandText = "p_greige_select_grade"
+        comm.Parameters.Clear()
         comm.Parameters.AddWithValue("@design_no", strDesign_no)
         Dim da As New SqlDataAdapter(comm)
         Dim dt As New DataTable
@@ -434,6 +443,7 @@ Public Class classStockG
         comm.Transaction = tran
         comm.CommandType = CommandType.StoredProcedure
         comm.CommandText = "p_greige_do_delete"
+        comm.Parameters.Clear()
         comm.Parameters.AddWithValue("@outno", outno)
         comm.Parameters.AddWithValue("@loginempcd", loginempcd)
         Dim da As New SqlDataAdapter(comm)
@@ -460,6 +470,7 @@ Public Class classStockG
         comm.Transaction = tran
         comm.CommandType = CommandType.StoredProcedure
         comm.CommandText = "p_greige_in_cancel"
+        comm.Parameters.Clear()
         comm.Parameters.AddWithValue("@tran_no", tran_no)
         comm.Parameters.AddWithValue("@log_empcd", logempcd)
         Dim da As New SqlDataAdapter(comm)
@@ -482,6 +493,7 @@ Public Class classStockG
         Dim comm As New SqlCommand("", conn)
         comm.CommandType = CommandType.StoredProcedure
         comm.CommandText = "p_greige_in_po_manual_select_cbo_gin"
+        comm.Parameters.Clear()
         comm.Parameters.AddWithValue("@tran_no", StrTran_no)
         comm.Parameters.AddWithValue("@logempcd", strEmpcd)
         Dim da As New SqlDataAdapter(comm)
@@ -497,7 +509,7 @@ Public Class classStockG
         comm.CommandType = CommandType.StoredProcedure
 
         comm.CommandText = "p_greige_in_po_manual_select_po"
-
+        comm.Parameters.Clear()
         comm.Parameters.AddWithValue("@jobno", strPOno)
         comm.Parameters.AddWithValue("@logempcd", strEmpCD)
         Dim da As New SqlDataAdapter(comm)
@@ -511,6 +523,7 @@ Public Class classStockG
         Dim comm As New SqlCommand("", conn)
         comm.CommandType = CommandType.StoredProcedure
         comm.CommandText = "p_greige_in_po_manual_select"
+        comm.Parameters.Clear()
         comm.Parameters.AddWithValue("@tran_no", StrTran_no)
         comm.Parameters.AddWithValue("@logempcd", strEmpcd)
         Dim da As New SqlDataAdapter(comm)

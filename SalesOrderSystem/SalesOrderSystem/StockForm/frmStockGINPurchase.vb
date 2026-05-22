@@ -1,10 +1,13 @@
 ﻿Public Class frmStockGINPurchase
     Dim clsUser As New classUserInfo
-    Dim clsConfig As New clsConfig
-    Dim DbStockG As New classStockG
-    Dim clsConn As New classConnection
+    Dim oConfig As New clsConfig
+    Dim oStockG As New classStockG
+    Dim clsConn As New ClassConnection
     Dim blnCancel As Boolean = False
     Dim jobID As Long = 0
+
+    Dim dtPO As New DataTable
+    Dim dtData As New DataTable
 
     Public Property UserInfo() As classUserInfo
         Get
@@ -26,73 +29,74 @@
         frm.Dispose()
     End Sub
     Private Function GetPO(ByVal StrPO As String) As Boolean
-        Dim dbStockG As New classStockG
-        Dim dt As DataTable = dbStockG.GetGINPOByPO(StrPO, clsUser.UserID)
+        ' Dim dbStockG As New classStockG
+        Dim dt As DataTable = oStockG.GetGINPOByPO(StrPO, clsUser.UserID)
         If dt.Rows.Count > 0 Then
-            Call BindData(dt)
+            Call addData(dt)
             Return True
         Else
             Return False
         End If
     End Function
-    Private Sub BindData(ByVal dt As DataTable)
+    Private Sub addData(ByVal dt As DataTable)
         Dim config As New clsConfig
         If txtPONo.Text = "" Then Exit Sub
         Dim k As Integer = 0
 
         grdData.AutoGenerateColumns = False
-        If dt.Rows.Count > 0 Then
-            Dim dt1 As DataTable = dt
-            Dim dt2 As DataTable = grdData.DataSource
+        ' grdData.DataSource = dt
 
-            Dim dr As DataRow
 
-            Dim msg As String = ""
-            Dim i As Integer = 0
-            Dim j As Integer = 0
-            For i = 0 To dt.Rows.Count - 1
+        'If dt.Rows.Count > 0 Then
+        '    Dim dt1 As DataTable = dt
+        '    Dim dt2 As DataTable = grdData.DataSource
 
-                'If dt1.Rows(i)("dfno") = dt2.Rows(i)("dfno") Then Exit Sub
+        '    Dim dr As DataRow
 
-                dr = dt2.NewRow
+        '    Dim msg As String = ""
+        '    Dim i As Integer = 0
+        '    Dim j As Integer = 0
+        '    For i = 0 To dt.Rows.Count - 1
 
-                For j = 0 To dt2.Columns.Count - 1
-                    dr("job_line_id") = dt1.Rows(i)("job_line_id")
-                    dr("suppcd") = dt1.Rows(i)("suppcd")
-                    dr("source_refno") = dt1.Rows(i)("source_refno")
-                    dr("dfno") = dt1.Rows(i)("dfno")
-                    dr("design_no") = dt1.Rows(i)("design_no")
-                    dr("gwth") = dt1.Rows(i)("gwth")
-                    'dr("fwth") = dt1.Rows(i)("fwth")
-                    dr("col") = dt1.Rows(i)("col")
-                    'dr("gr") = dt1.Rows(i)("gr")
-                    'dr("custcolor") = dt1.Rows(i)("custcolor")
-                    'dr("roll_no_d") = dt1.Rows(i)("roll_no_d")
-                    dr("roll_no_o") = dt1.Rows(i)("roll_no_o")
-                    dr("sonoid") = dt1.Rows(i)("sonoid")
-                    dr("kg") = dt1.Rows(i)("kg")
-                    dr("mts") = dt1.Rows(i)("mts")
-                    dr("yds") = dt1.Rows(i)("yds")
-                    dr("lot") = dt1.Rows(i)("lot")
-                    'dr("rem_qc") = dt1.Rows(i)("rem_qc") source_refno
-                    dr("roll_no_f") = dt1.Rows(i)("roll_no_f")
-                    dr("mcno") = dt1.Rows(i)("mcno")
-                    dr("kono") = dt1.Rows(i)("kono")
-                    dr("grade") = dt1.Rows(i)("grade")
-                    dr("ProdFinishDate") = dt1.Rows(i)("ProdFinishDate")
-                    dr("ProdFinishTime") = dt1.Rows(i)("ProdFinishTime")
-                    dr("purno") = dt1.Rows(i)("purno")
-                    dr("mtl_warehouse_id") = dt1.Rows(i)("mtl_warehouse_id")
-                    dr("mtl_subinventory_id") = dt1.Rows(i)("mtl_subinventory_id")
-                    dr("mtl_locations_id") = dt1.Rows(i)("mtl_locations_id")
-                Next
-                dt2.Rows.Add(dr)
+        '        'If dt1.Rows(i)("dfno") = dt2.Rows(i)("dfno") Then Exit Sub
 
-            Next
+        '        dr = dt2.NewRow
 
-        End If
+        '        For j = 0 To dt2.Columns.Count - 1
+        '            dr("job_line_id") = dt1.Rows(i)("job_line_id")
+        '            dr("suppcd") = dt1.Rows(i)("suppcd")
+        '            dr("source_refno") = dt1.Rows(i)("source_refno")
+        '            dr("dfno") = dt1.Rows(i)("dfno")
+        '            dr("design_no") = dt1.Rows(i)("design_no")
+        '            dr("gwth") = dt1.Rows(i)("gwth")
+        '            'dr("fwth") = dt1.Rows(i)("fwth")
+        '            dr("col") = dt1.Rows(i)("col")
+        '            'dr("gr") = dt1.Rows(i)("gr")
+        '            'dr("custcolor") = dt1.Rows(i)("custcolor")
+        '            'dr("roll_no_d") = dt1.Rows(i)("roll_no_d")
+        '            dr("roll_no_o") = dt1.Rows(i)("roll_no_o")
+        '            dr("sonoid") = dt1.Rows(i)("sonoid")
+        '            dr("kg") = dt1.Rows(i)("kg")
+        '            dr("mts") = dt1.Rows(i)("mts")
+        '            dr("yds") = dt1.Rows(i)("yds")
+        '            dr("lot") = dt1.Rows(i)("lot")
+        '            'dr("rem_qc") = dt1.Rows(i)("rem_qc") source_refno
+        '            dr("roll_no_f") = dt1.Rows(i)("roll_no_f")
+        '            dr("mcno") = dt1.Rows(i)("mcno")
+        '            dr("kono") = dt1.Rows(i)("kono")
+        '            dr("grade") = dt1.Rows(i)("grade")
+        '            dr("ProdFinishDate") = dt1.Rows(i)("ProdFinishDate")
+        '            dr("ProdFinishTime") = dt1.Rows(i)("ProdFinishTime")
+        '            dr("purno") = dt1.Rows(i)("purno")
+        '            dr("mtl_warehouse_id") = dt1.Rows(i)("mtl_warehouse_id")
+        '            dr("mtl_subinventory_id") = dt1.Rows(i)("mtl_subinventory_id")
+        '            dr("mtl_locations_id") = dt1.Rows(i)("mtl_locations_id")
+        '        Next
+        '        dt2.Rows.Add(dr)
 
-        'SumGrdData()
+        '    Next
+
+        'End If
 
 
 
@@ -106,18 +110,25 @@
         Call InitControl()
     End Sub
     Private Sub InitControl()
-        txtGINNo.Text = ""
+        txtGinno.Text = ""
         dtpGINDate.Value = Today
         txtPONo.Text = ""
         txtSuppInvNo.Text = ""
         txtSuppLot.Text = ""
         txtSuppRefNo.Text = ""
         Call GenCombo()
-        Call BindGrid(grdData, (New classStockG).GetGINPOmanual("", clsUser.UserID))
+        '   Call BindGrid(grdData, (New classStockG).GetGINPOmanual("", clsUser.UserID))
+
         grdPO.AutoGenerateColumns = False
         grdPO.DataSource = (New GetDataYarn).getJob("")
+
         ErrorProvider1.Clear()
         txtPONo.Enabled = True
+
+        dtData = oStockG.GetGINPOmanual("", clsUser.UserID)
+        grdData.AutoGenerateColumns = False
+        grdData.DataSource = dtData
+
         txtPONo.Select()
 
     End Sub
@@ -141,15 +152,15 @@
         cboGINNo.ComboBox.DisplayMember = "tran_no"
         cboGINNo.ComboBox.ValueMember = "tran_no"
 
-        cbomtl_warehouse.DataSource = (New classMaster).Combomtlwarehouse(clsUser.UserID)
-        cbomtl_warehouse.DisplayMember = "warehouse_code"
-        cbomtl_warehouse.ValueMember = "mtl_warehouse_id"
-        cbomtl_warehouse.SelectedIndex = -1
+        cboMtlWarehouse.DataSource = (New classMaster).Combomtlwarehouse(clsUser.UserID)
+        cboMtlWarehouse.DisplayMember = "warehouse_code"
+        cboMtlWarehouse.ValueMember = "mtl_warehouse_id"
+        cboMtlWarehouse.SelectedIndex = -1
 
-        cbomtl_subinventory.DataSource = Nothing
-        cbomtl_subinventory.SelectedIndex = -1
-        cbomtl_Location.DataSource = Nothing
-        cbomtl_Location.SelectedIndex = -1
+        cboMtlSubinventory.DataSource = Nothing
+        cboMtlSubinventory.SelectedIndex = -1
+        cboMtlLocation.DataSource = Nothing
+        cboMtlLocation.SelectedIndex = -1
 
         Call GetComboWarehouseinGrid()
         'Call GetcomboSubInventoryinGrid(Int64mtl_warehouse_id:=objdb.GetdefaultWarehouse(strUSerID:=clsUser.UserID))
@@ -181,7 +192,7 @@
     Private Sub GetCombomtl_locationInGrid(ByVal Int64mtl_warehouse_id As Int64, ByVal Int64mtl_subinventory_id As Int64)
         Dim objdb As New classMaster
         mtl_locations_id.DataSource = objdb.Combomtllocations(strUSerID:=clsUser.UserID _
-                             , Int64mtl_warehouse_id:=Int64mtl_warehouse_id _
+                             , INt64mtl_warehouse_id:=Int64mtl_warehouse_id _
                              , Int64mtl_subinventory_id:=Int64mtl_subinventory_id)
         mtl_locations_id.DisplayMember = "location_name"
         mtl_locations_id.ValueMember = "mtl_locations_id"
@@ -192,7 +203,7 @@
         expression = "subinventory_code like '%GREIGE%'"
         Dim foundRows() As DataRow
         foundRows = dt.Select(expression)
-        If foundRows.Length > 0 Then cbomtl_subinventory.SelectedValue = foundRows(0)("mtl_subinventory_id")
+        If foundRows.Length > 0 Then cboMtlSubinventory.SelectedValue = foundRows(0)("mtl_subinventory_id")
     End Sub
 
     Private Sub SetdefaultsubinventoryInGrid(ByVal Int64mtl_warehouse_id As Int64)
@@ -223,7 +234,7 @@
         Dim foundRows() As DataRow
         foundRows = dt.Select(expression)
 
-        If foundRows.Length > 0 Then cbomtl_Location.SelectedValue = foundRows(0)(0)
+        If foundRows.Length > 0 Then cboMtlLocation.SelectedValue = foundRows(0)(0)
 
     End Sub
 
@@ -303,97 +314,86 @@
 
     Private Sub cboGINNo_DropDownClosed(sender As Object, e As System.EventArgs) Handles cboGINNo.DropDownClosed
         Dim objDB As New classStockG
-        If clsConfig.IsNull(cboGINNo.SelectedItem, "").ToString.Length = 0 Then
+        If oConfig.IsNull(cboGINNo.SelectedItem, "").ToString.Length = 0 Then
             'Call GetcomboSubInventoryinGrid(Int64mtl_warehouse_id:=0)
             'Call GetCombomtl_locationInGrid(Int64mtl_warehouse_id:=0, Int64mtl_subinventory_id:=0)
-            Call GetGINPOmanual(clsConfig.IsNull(cboGINNo.ComboBox.SelectedValue, ""))
+            Call GetGINPOmanual(oConfig.IsNull(cboGINNo.ComboBox.SelectedValue, ""))
         End If
     End Sub
 
     Function GetGINPOmanual(ByRef strGINNO As String) As Boolean
-        Dim dbStockG As New classStockG
-        Dim dt As DataTable = dbStockG.GetGINPOmanual(strGINNO, clsUser.UserID)
-        If dt.Rows.Count > 0 Then
+
+        dtData = oStockG.GetGINPOmanual(strGINNO, clsUser.UserID)
+
+        grdData.AutoGenerateColumns = False
+        grdData.DataSource = dtData
+
+        If dtData.Rows.Count > 0 Then
             'Dev By Neung 26/03/2015
-            Call BindGINPOManual(dt)
+            Call BindGINPOManualText()
             Return True
         End If
         Return False
     End Function
 
-    Private Sub BindGINPOManual(ByVal dt As DataTable)
+    Private Sub BindGINPOManualText()
         Dim config As New clsConfig
         Dim i As Integer = 0
         Dim j As Integer = 0
 
-        grdData.AutoGenerateColumns = False
-        grdData.DataSource = dt
+        ' grdData.AutoGenerateColumns = False
+        '  grdData.DataSource = Me.dtData
 
 
-        txtGinno.Text = dt.Rows(0)("tran_no").ToString.Trim
-        dtpGINDate.Value = CDate(dt.Rows(0)("tran_dt").ToString)
+        txtGinno.Text = dtData.Rows(0)("tran_no").ToString.Trim
+        dtpGINDate.Value = CDate(dtData.Rows(0)("tran_dt").ToString)
 
-        txtPONo.Text = dt.Rows(0)("purno").ToString.Trim()
+        txtPONo.Text = dtData.Rows(0)("purno").ToString.Trim()
         txtPONo.Enabled = False
         Call LoadDataJOB(txtPONo.Text.Trim)
-        cboSupplier.SelectedValue = dt.Rows(0)("suppcd").ToString.Trim()
-        txtSuppInvNo.Text = (New clsConfig).IsNull(dt.Rows(0)("sinvno"), "").ToString.Trim()
+        cboSupplier.SelectedValue = dtData.Rows(0)("suppcd").ToString.Trim()
+        txtSuppInvNo.Text = (New clsConfig).IsNull(dtData.Rows(0)("sinvno"), "").ToString.Trim()
 
-        If (New clsConfig).IsNull(dt.Rows(0)("sinvdt"), CDate("01/01/1900")) = CDate("01/01/1900") Then
+        If (New clsConfig).IsNull(dtData.Rows(0)("sinvdt"), CDate("01/01/1900")) = CDate("01/01/1900") Then
             dtpsinvdt.Value = CDate("01/01/1900")
             dtpsinvdt.Checked = False
         Else
-            dtpsinvdt.Value = dt.Rows(0)("sinvdt")
+            dtpsinvdt.Value = dtData.Rows(0)("sinvdt")
             dtpsinvdt.Checked = True
         End If
 
 
-        txtSuppLot.Text = dt.Rows(0)("lotno_sup").ToString.Trim
-        txtSuppRefNo.Text = dt.Rows(0)("srefno").ToString.Trim
+        txtSuppLot.Text = dtData.Rows(0)("lotno_sup").ToString.Trim
+        txtSuppRefNo.Text = dtData.Rows(0)("srefno").ToString.Trim
 
-        If Not dt Is Nothing Then
-            If dt.Rows.Count > 0 Then
-                cbomtl_warehouse.SelectedValue = dt.Rows(0)("mtl_warehouse_id")
-                Call GetComboNewSubInventory(Int64mtl_warehouse_id:=dt.Rows(0)("mtl_warehouse_id"))
-                cbomtl_subinventory.SelectedValue = dt.Rows(0)("mtl_subinventory_id")
-                Call GetComboLocation(Int64mtl_warehouse_id:=dt.Rows(0)("mtl_warehouse_id"), Int64mtl_subinventory_id:=dt.Rows(0)("mtl_subinventory_id"))
+        If Not dtData Is Nothing Then
+            If dtData.Rows.Count > 0 Then
+                cboMtlWarehouse.SelectedValue = oConfig.IsNull(dtData.Rows(0)("mtl_warehouse_id"), Nothing)
+                Call setComboSubInventory(pMtlWarehouseId:=oConfig.IsNull(dtData.Rows(0)("mtl_warehouse_id"), Nothing))
+                cboMtlSubinventory.SelectedValue = oConfig.IsNull(dtData.Rows(0)("mtl_subinventory_id"), Nothing)
+                Call setComboLocation(pMtlWarehouseId:=dtData.Rows(0)("mtl_warehouse_id"), pMtlSubinventoryId:=oConfig.IsNull(dtData.Rows(0)("mtl_subinventory_id"), Nothing))
+                cboMtlLocation.SelectedValue = oConfig.IsNull(dtData.Rows(0)("mtl_locations_id"), Nothing)
             End If
         End If
-        'txtsource_refno.Text = dt.Rows(0)("source_refno").ToString.Trim()
-
-        'txtDINNo.Text = dt.Rows(0)("dinno").ToString.Trim()
-
-        ' txtLot.Text = dt.Rows(0)("lot").ToString.Trim()
-        'dtpDINDate.Value = CDate(dt.Rows(0)("dindt").ToString)
-        'dtpdodt.Value = config.IsNull(dt.Rows(0)("dodt"), Now)
-        ' txtRemark.Text = dt.Rows(0)("rem_qc")
-
-        'Dim dtt As DataTable = grdData.DataSource
-        ' txttest.DataBindings.Add("", dt, "lot")
-
-        'SumGrdData()
 
     End Sub
 
     Private Sub GetComboNewSubInventory(Optional ByVal Int64mtl_warehouse_id As Nullable(Of Int64) = Nothing)
         Dim objdb As New classMaster
 
-        cbomtl_subinventory.DataSource = objdb.ComboMtlsubinventory(Int64mtl_warehouse_id)
-        cbomtl_subinventory.DisplayMember = "subinventory_code"
-        cbomtl_subinventory.ValueMember = "mtl_subinventory_id"
+        cboMtlSubinventory.DataSource = objdb.ComboMtlsubinventory(Int64mtl_warehouse_id)
+        cboMtlSubinventory.DisplayMember = "subinventory_code"
+        cboMtlSubinventory.ValueMember = "mtl_subinventory_id"
         Dim clsconfig As New clsConfig
-        If clsconfig.IsNull(cbomtl_subinventory.SelectedValue, 0) = 0 Then Setdefaultsubinventory(cbomtl_subinventory.DataSource)
+        If clsconfig.IsNull(cboMtlSubinventory.SelectedValue, 0) = 0 Then Setdefaultsubinventory(cboMtlSubinventory.DataSource)
 
     End Sub
 
-    Private Sub GetComboLocation(Optional ByVal Int64mtl_warehouse_id As Nullable(Of Int64) = Nothing, Optional ByVal Int64mtl_subinventory_id As Nullable(Of Int64) = Nothing)
+    Private Sub setComboLocation(Optional ByVal pMtlWarehouseId As Nullable(Of Int64) = Nothing, Optional ByVal pMtlSubinventoryId As Nullable(Of Int64) = Nothing)
         Dim objdb As New classMaster
-        cbomtl_Location.DataSource = objdb.Combomtllocations(strUSerID:=clsUser.UserID, INt64mtl_warehouse_id:=Int64mtl_warehouse_id, Int64mtl_subinventory_id:=Int64mtl_subinventory_id)
-        cbomtl_Location.DisplayMember = "location_name"
-        cbomtl_Location.ValueMember = "mtl_locations_id"
-        Dim clsconfig As New clsConfig
-        If clsconfig.IsNull(cbomtl_Location.SelectedValue, 0) = 0 Then SetDefaultLocation(cbomtl_Location.DataSource)
-        'SetDefaultLocation(cbomtl_location.DataSource)
+        cboMtlLocation.DataSource = objdb.Combomtllocations(strUSerID:=clsUser.UserID, INt64mtl_warehouse_id:=pMtlWarehouseId, Int64mtl_subinventory_id:=pMtlSubinventoryId)
+        cboMtlLocation.DisplayMember = "location_name"
+        cboMtlLocation.ValueMember = "mtl_locations_id"
     End Sub
 
     Private Sub btnNew_Click(sender As System.Object, e As System.EventArgs) Handles btnNew.Click
@@ -421,23 +421,23 @@
     End Sub
 
     Private Function CheckData() As Boolean
-        If clsconfig.IsNull(cbomtl_warehouse.SelectedValue, 0) = 0 Then
+        If oConfig.IsNull(cboMtlWarehouse.SelectedValue, 0) = 0 Then
             MessageBox.Show("คุณยังไม่ไดเลือก WareHouse")
-            ErrorProvider1.SetError(cbomtl_warehouse, "คุณยังไม่ไดเลือก WareHouse")
+            ErrorProvider1.SetError(cboMtlWarehouse, "คุณยังไม่ไดเลือก WareHouse")
             CheckData = False
             Exit Function
         End If
 
-        If Val(cbomtl_subinventory.SelectedValue) = 0 Then
+        If Val(cboMtlSubinventory.SelectedValue) = 0 Then
             MessageBox.Show("คุณยังไม่ได้เลือก Subinventory")
-            ErrorProvider1.SetError(cbomtl_subinventory, "คุณยังไม่ได้เลือก Subinventory")
+            ErrorProvider1.SetError(cboMtlSubinventory, "คุณยังไม่ได้เลือก Subinventory")
             CheckData = False
             Exit Function
         End If
 
-        If clsconfig.IsNull(cbomtl_Location.SelectedValue, 0) = 0 Then
+        If oConfig.IsNull(cboMtlLocation.SelectedValue, 0) = 0 Then
             MessageBox.Show("คุณยังไม่ไดเลือก Location")
-            ErrorProvider1.SetError(cbomtl_Location, "คุณยังไม่ได้เลือก Locations")
+            ErrorProvider1.SetError(cboMtlLocation, "คุณยังไม่ได้เลือก Locations")
             CheckData = False
             Exit Function
         End If
@@ -466,7 +466,8 @@
         Dim Tran_no As String = strGINNO
 
 
-        Greige_Header.h01_suppcd = ""
+        Greige_Header.h01_suppcd = cboSupplier.SelectedValue
+
         Greige_Header.h02_source = ""
         Greige_Header.h03_source_refno = ""
         Greige_Header.h04_tran_no = txtGinno.Text
@@ -474,23 +475,34 @@
         Greige_Header.h71_purno = txtPONo.Text.Trim
         Greige_Header.h25_loc = "NEW"
         Greige_Header.h70_tran_type = "PURCHASE"
+        Greige_Header.h83_mtl_warehouse_id = oConfig.IsNull(cboMtlWarehouse.SelectedValue, Nothing)
+        Greige_Header.h86_mtl_subinventory_id = oConfig.IsNull(cboMtlSubinventory.SelectedValue, Nothing)
+        Greige_Header.h84_mtl_locations_id = oConfig.IsNull(cboMtlLocation.SelectedValue, Nothing)
+        Greige_Header.h25_loc = cboMtlLocation.Text
 
         Dim dtc As DataTable = grdData.DataSource
 
         For i = 0 To dtc.Rows.Count - 1
-            If dtc.Rows(i).RowState = DataRowState.Added Or dtc.Rows(i).RowState = DataRowState.Modified Then
+            If dtc.Rows(i).RowState <> DataRowState.Deleted Then
                 dtc.Rows(i)("suppcd") = cboSupplier.SelectedValue
                 dtc.Rows(i)("sinvno") = txtSuppInvNo.Text.Trim
                 dtc.Rows(i)("sinvdt") = IIf(dtpsinvdt.Checked, dtpsinvdt.Value, DBNull.Value)
                 dtc.Rows(i)("lotno_sup") = txtSuppLot.Text.Trim
                 dtc.Rows(i)("srefno") = txtSuppRefNo.Text.Trim
                 dtc.Rows(i)("purno") = txtPONo.Text.Trim
-                dtc.Rows(i)("mtl_warehouse_id") = cbomtl_warehouse.SelectedValue
-                dtc.Rows(i)("mtl_subinventory_id") = cbomtl_subinventory.SelectedValue
-                dtc.Rows(i)("mtl_locations_id") = cbomtl_Location.SelectedValue
-                dtc.Rows(i)("loc") = cbomtl_Location.Text
+                dtc.Rows(i)("mtl_warehouse_id") = oConfig.IsNull(cboMtlWarehouse.SelectedValue, Nothing)
+                dtc.Rows(i)("mtl_subinventory_id") = oConfig.IsNull(cboMtlSubinventory.SelectedValue, Nothing)
+                dtc.Rows(i)("mtl_locations_id") = oConfig.IsNull(cboMtlLocation.SelectedValue, Nothing)
+                dtc.Rows(i)("loc") = cboMtlLocation.Text
             End If
         Next
+
+        For Each dr As DataRow In dtc.Rows
+            If dr.RowState = DataRowState.Unchanged Then
+                dr.SetModified()
+            End If
+        Next
+
 
         Dim dv_dtc_add As New DataView(dtc, "", "", DataViewRowState.Added)
         Dim dv_dtc_upd As New DataView(dtc, "", "", DataViewRowState.ModifiedCurrent)
@@ -504,7 +516,7 @@
             Call GenCbo()
             Call GetcomboSubInventoryinGrid(Int64mtl_warehouse_id:=0)
             Call GetCombomtl_locationInGrid(Int64mtl_warehouse_id:=0, Int64mtl_subinventory_id:=0)
-            Call GetGINPOmanual(clsConfig.IsNull(txtGinno.Text.Trim, ""))
+            Call GetGINPOmanual(oConfig.IsNull(txtGinno.Text.Trim, ""))
             SaveGINPOManual = True
         Else
             MessageBox.Show(msgerr, "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
@@ -515,12 +527,12 @@
 
     Private Sub btnPrint_Click(sender As System.Object, e As System.EventArgs)
         'print
-        Dim clsconn As New classConnection
+        Dim clsconn As New ClassConnection
 
         If txtGinno.Text = "" Then Exit Sub
         Const rptFileName = "rptGIN.rpt"
         If clsUser.ReportPath = "" Then clsUser.ReportPath = clsUser.ReportPath
-        If Not clsConfig.CheckReport(clsUser.ReportPath, rptFileName) Then Exit Sub
+        If Not oConfig.CheckReport(clsUser.ReportPath, rptFileName) Then Exit Sub
         Dim frm As New frmReport
         Dim rpt As New CrystalDecisions.CrystalReports.Engine.ReportDocument
         Me.Cursor = Cursors.WaitCursor
@@ -659,7 +671,7 @@
         If dt.Rows.Count > 0 Then
             grdPO.AutoGenerateColumns = False
             grdPO.DataSource = dt
-            jobID = clsConfig.IsNull(dt.Rows(0).Item("id_jobdet"), 0)
+            jobID = oConfig.IsNull(dt.Rows(0).Item("id_jobdet"), 0)
             cboSupplier.SelectedValue = dt.Rows(0).Item("suppcd")
             txtPONo.Enabled = False
         End If
@@ -889,27 +901,36 @@
 
     End Sub
 
-    Private Sub cbomtl_warehouse_DropDownClosed(sender As Object, e As System.EventArgs) Handles cbomtl_warehouse.DropDownClosed
-        Call GetComboNewSubInventory(Int64mtl_warehouse_id:=(New clsConfig).IsNull(cbomtl_warehouse.SelectedValue, Nothing))
-        Call GetComboLocation(Int64mtl_warehouse_id:=(New clsConfig).IsNull(cbomtl_warehouse.SelectedValue, Nothing),
-                              Int64mtl_subinventory_id:=(New clsConfig).IsNull(cbomtl_subinventory.SelectedValue, Nothing))
+    Private Sub cbomtl_warehouse_DropDownClosed(sender As Object, e As System.EventArgs) Handles cboMtlWarehouse.DropDownClosed
+        Call GetComboNewSubInventory(Int64mtl_warehouse_id:=(New clsConfig).IsNull(cboMtlWarehouse.SelectedValue, Nothing))
+        Call setComboLocation(pMtlWarehouseId:=(New clsConfig).IsNull(cboMtlWarehouse.SelectedValue, Nothing),
+                              pMtlSubinventoryId:=(New clsConfig).IsNull(cboMtlSubinventory.SelectedValue, Nothing))
     End Sub
 
-    Private Sub cbomtl_subinventory_DropDownClosed(sender As Object, e As System.EventArgs) Handles cbomtl_subinventory.DropDownClosed
-        Call GetComboLocation(Int64mtl_warehouse_id:=(New clsConfig).IsNull(cbomtl_warehouse.SelectedValue, Nothing),
-                              Int64mtl_subinventory_id:=(New clsConfig).IsNull(cbomtl_subinventory.SelectedValue, Nothing))
+    Private Sub cbomtl_subinventory_DropDownClosed(sender As Object, e As System.EventArgs) Handles cboMtlSubinventory.DropDownClosed
+        Call setComboLocation(pMtlWarehouseId:=(New clsConfig).IsNull(cboMtlWarehouse.SelectedValue, Nothing),
+                              pMtlSubinventoryId:=(New clsConfig).IsNull(cboMtlSubinventory.SelectedValue, Nothing))
     End Sub
 
-    Private Sub cbomtl_warehouse_Enter(sender As Object, e As EventArgs) Handles cbomtl_warehouse.Enter
-
-    End Sub
-
-    Private Sub cbomtl_warehouse_HandleCreated(sender As Object, e As EventArgs) Handles cbomtl_warehouse.HandleCreated
+    Private Sub cbomtl_warehouse_Enter(sender As Object, e As EventArgs) Handles cboMtlWarehouse.Enter
 
     End Sub
 
-    Private Sub cbomtl_warehouse_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cbomtl_warehouse.SelectedIndexChanged
+    Private Sub cbomtl_warehouse_HandleCreated(sender As Object, e As EventArgs) Handles cboMtlWarehouse.HandleCreated
 
+    End Sub
+    Private Sub setComboSubInventory(ByVal pMtlWarehouseId As Nullable(Of Int64))
+        Dim objdb As New classMaster
+
+        cboMtlSubinventory.DataSource = objdb.ComboMtlsubinventory(oConfig.IsNull(cboMtlWarehouse.SelectedValue, Nothing))
+        cboMtlSubinventory.DisplayMember = "subinventory_code"
+        cboMtlSubinventory.ValueMember = "mtl_subinventory_id"
+
+    End Sub
+
+    Private Sub cbomtl_warehouse_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cboMtlWarehouse.SelectedIndexChanged
+        Call setComboSubInventory(oConfig.IsNull(cboMtlWarehouse.SelectedValue, Nothing))
+        Call setComboLocation(pMtlWarehouseId:=oConfig.IsNull(cboMtlWarehouse.SelectedValue, Nothing), pMtlSubinventoryId:=oConfig.IsNull(cboMtlSubinventory.SelectedValue, Nothing))
     End Sub
 
     Private Sub BtnCopyRoll_Click(sender As Object, e As EventArgs) Handles BtnCopyRoll.Click
@@ -952,7 +973,7 @@
         If txtGinno.Text = "" Then Exit Sub
         Const rptFileName = "rptGIN.rpt"
         If clsUser.ReportPath = "" Then clsUser.ReportPath = clsUser.ReportPath
-        If Not clsConfig.CheckReport(clsUser.ReportPath, rptFileName) Then Exit Sub
+        If Not oConfig.CheckReport(clsUser.ReportPath, rptFileName) Then Exit Sub
         Dim frm As New frmReport
         Dim rpt As New CrystalDecisions.CrystalReports.Engine.ReportDocument
         Me.Cursor = Cursors.WaitCursor

@@ -24,17 +24,17 @@ Partial Class frmStockGINPurchase
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmStockGINPurchase))
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.btnSave = New System.Windows.Forms.ToolStripButton()
-        Me.cbomtl_Location = New System.Windows.Forms.ComboBox()
+        Me.cboMtlLocation = New System.Windows.Forms.ComboBox()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.cbomtl_subinventory = New System.Windows.Forms.ComboBox()
+        Me.cboMtlSubinventory = New System.Windows.Forms.ComboBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
-        Me.cbomtl_warehouse = New System.Windows.Forms.ComboBox()
+        Me.cboMtlWarehouse = New System.Windows.Forms.ComboBox()
         Me.lblmtl_warehouse_id = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.btnDelRoll = New System.Windows.Forms.Button()
@@ -125,15 +125,15 @@ Partial Class frmStockGINPurchase
         Me.btnSave.Size = New System.Drawing.Size(51, 22)
         Me.btnSave.Text = "Save"
         '
-        'cbomtl_Location
+        'cboMtlLocation
         '
-        Me.cbomtl_Location.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.cbomtl_Location.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-        Me.cbomtl_Location.FormattingEnabled = True
-        Me.cbomtl_Location.Location = New System.Drawing.Point(96, 69)
-        Me.cbomtl_Location.Name = "cbomtl_Location"
-        Me.cbomtl_Location.Size = New System.Drawing.Size(121, 21)
-        Me.cbomtl_Location.TabIndex = 310
+        Me.cboMtlLocation.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.cboMtlLocation.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.cboMtlLocation.FormattingEnabled = True
+        Me.cboMtlLocation.Location = New System.Drawing.Point(96, 69)
+        Me.cboMtlLocation.Name = "cboMtlLocation"
+        Me.cboMtlLocation.Size = New System.Drawing.Size(121, 21)
+        Me.cboMtlLocation.TabIndex = 310
         '
         'Label7
         '
@@ -145,14 +145,14 @@ Partial Class frmStockGINPurchase
         Me.Label7.TabIndex = 309
         Me.Label7.Text = "Location :"
         '
-        'cbomtl_subinventory
+        'cboMtlSubinventory
         '
-        Me.cbomtl_subinventory.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.cbomtl_subinventory.FormattingEnabled = True
-        Me.cbomtl_subinventory.Location = New System.Drawing.Point(96, 45)
-        Me.cbomtl_subinventory.Name = "cbomtl_subinventory"
-        Me.cbomtl_subinventory.Size = New System.Drawing.Size(121, 21)
-        Me.cbomtl_subinventory.TabIndex = 308
+        Me.cboMtlSubinventory.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.cboMtlSubinventory.FormattingEnabled = True
+        Me.cboMtlSubinventory.Location = New System.Drawing.Point(96, 45)
+        Me.cboMtlSubinventory.Name = "cboMtlSubinventory"
+        Me.cboMtlSubinventory.Size = New System.Drawing.Size(121, 21)
+        Me.cboMtlSubinventory.TabIndex = 308
         '
         'Label12
         '
@@ -168,16 +168,16 @@ Partial Class frmStockGINPurchase
         '
         Me.ErrorProvider1.ContainerControl = Me
         '
-        'cbomtl_warehouse
+        'cboMtlWarehouse
         '
-        Me.cbomtl_warehouse.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.cbomtl_warehouse.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
-        Me.cbomtl_warehouse.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.cbomtl_warehouse.FormattingEnabled = True
-        Me.cbomtl_warehouse.Location = New System.Drawing.Point(96, 19)
-        Me.cbomtl_warehouse.Name = "cbomtl_warehouse"
-        Me.cbomtl_warehouse.Size = New System.Drawing.Size(121, 21)
-        Me.cbomtl_warehouse.TabIndex = 306
+        Me.cboMtlWarehouse.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.cboMtlWarehouse.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
+        Me.cboMtlWarehouse.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.cboMtlWarehouse.FormattingEnabled = True
+        Me.cboMtlWarehouse.Location = New System.Drawing.Point(96, 19)
+        Me.cboMtlWarehouse.Name = "cboMtlWarehouse"
+        Me.cboMtlWarehouse.Size = New System.Drawing.Size(121, 21)
+        Me.cboMtlWarehouse.TabIndex = 306
         '
         'lblmtl_warehouse_id
         '
@@ -192,11 +192,11 @@ Partial Class frmStockGINPurchase
         'GroupBox2
         '
         Me.GroupBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GroupBox2.Controls.Add(Me.cbomtl_Location)
+        Me.GroupBox2.Controls.Add(Me.cboMtlLocation)
         Me.GroupBox2.Controls.Add(Me.Label7)
-        Me.GroupBox2.Controls.Add(Me.cbomtl_subinventory)
+        Me.GroupBox2.Controls.Add(Me.cboMtlSubinventory)
         Me.GroupBox2.Controls.Add(Me.Label12)
-        Me.GroupBox2.Controls.Add(Me.cbomtl_warehouse)
+        Me.GroupBox2.Controls.Add(Me.cboMtlWarehouse)
         Me.GroupBox2.Controls.Add(Me.lblmtl_warehouse_id)
         Me.GroupBox2.Location = New System.Drawing.Point(818, 107)
         Me.GroupBox2.Name = "GroupBox2"
@@ -231,8 +231,8 @@ Partial Class frmStockGINPurchase
         '
         Me.grdPO.AllowUserToAddRows = False
         Me.grdPO.AllowUserToDeleteRows = False
-        DataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.grdPO.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle13
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.grdPO.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.grdPO.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grdPO.BackgroundColor = System.Drawing.Color.PeachPuff
@@ -652,9 +652,9 @@ Partial Class frmStockGINPurchase
         'kg
         '
         Me.kg.DataPropertyName = "kg"
-        DataGridViewCellStyle14.Format = "N2"
-        DataGridViewCellStyle14.NullValue = Nothing
-        Me.kg.DefaultCellStyle = DataGridViewCellStyle14
+        DataGridViewCellStyle2.Format = "N2"
+        DataGridViewCellStyle2.NullValue = Nothing
+        Me.kg.DefaultCellStyle = DataGridViewCellStyle2
         Me.kg.HeaderText = "Kg."
         Me.kg.Name = "kg"
         Me.kg.Width = 50
@@ -662,9 +662,9 @@ Partial Class frmStockGINPurchase
         'mts
         '
         Me.mts.DataPropertyName = "mts"
-        DataGridViewCellStyle15.Format = "N2"
-        DataGridViewCellStyle15.NullValue = Nothing
-        Me.mts.DefaultCellStyle = DataGridViewCellStyle15
+        DataGridViewCellStyle3.Format = "N2"
+        DataGridViewCellStyle3.NullValue = Nothing
+        Me.mts.DefaultCellStyle = DataGridViewCellStyle3
         Me.mts.HeaderText = "Mts."
         Me.mts.Name = "mts"
         Me.mts.Width = 50
@@ -672,9 +672,9 @@ Partial Class frmStockGINPurchase
         'yds
         '
         Me.yds.DataPropertyName = "yds"
-        DataGridViewCellStyle16.Format = "N2"
-        DataGridViewCellStyle16.NullValue = Nothing
-        Me.yds.DefaultCellStyle = DataGridViewCellStyle16
+        DataGridViewCellStyle4.Format = "N2"
+        DataGridViewCellStyle4.NullValue = Nothing
+        Me.yds.DefaultCellStyle = DataGridViewCellStyle4
         Me.yds.HeaderText = "Yds."
         Me.yds.Name = "yds"
         Me.yds.Width = 50
@@ -845,13 +845,13 @@ Partial Class frmStockGINPurchase
 
     End Sub
     Friend WithEvents btnSave As System.Windows.Forms.ToolStripButton
-    Friend WithEvents cbomtl_Location As System.Windows.Forms.ComboBox
+    Friend WithEvents cboMtlLocation As System.Windows.Forms.ComboBox
     Friend WithEvents Label7 As System.Windows.Forms.Label
-    Friend WithEvents cbomtl_subinventory As System.Windows.Forms.ComboBox
+    Friend WithEvents cboMtlSubinventory As System.Windows.Forms.ComboBox
     Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents ErrorProvider1 As System.Windows.Forms.ErrorProvider
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
-    Friend WithEvents cbomtl_warehouse As System.Windows.Forms.ComboBox
+    Friend WithEvents cboMtlWarehouse As System.Windows.Forms.ComboBox
     Friend WithEvents lblmtl_warehouse_id As System.Windows.Forms.Label
     Friend WithEvents btnDelRoll As System.Windows.Forms.Button
     Friend WithEvents btnAdd As System.Windows.Forms.Button

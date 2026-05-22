@@ -405,7 +405,7 @@ Public Class frmStockDINPurchase
                 cboMtlWarehouse.SelectedValue = oConfig.IsNull(dt.Rows(0)("mtl_warehouse_id"), Nothing)
                 Call setComboSubInventory(pMtlWarehouseId:=oConfig.IsNull(dt.Rows(0)("mtl_warehouse_id"), Nothing))
                 cboMtlSubinventory.SelectedValue = oConfig.IsNull(dt.Rows(0)("mtl_subinventory_id"), Nothing)
-                Call GetComboLocation(pMtlWarehouseId:=oConfig.IsNull(dt.Rows(0)("mtl_warehouse_id"), Nothing), pMtlSubinventoryId:=oConfig.IsNull(dt.Rows(0)("mtl_subinventory_id"), Nothing))
+                Call setComboLocation(pMtlWarehouseId:=oConfig.IsNull(dt.Rows(0)("mtl_warehouse_id"), Nothing), pMtlSubinventoryId:=oConfig.IsNull(dt.Rows(0)("mtl_subinventory_id"), Nothing))
                 cboMtlLocation.SelectedValue = oConfig.IsNull(dt.Rows(0)("mtl_locations_id"), Nothing)
             End If
         End If
@@ -436,7 +436,7 @@ Public Class frmStockDINPurchase
         'cbomtl_subinventory.SelectedValue = foundRows(0)("mtl_subinventory_id")
     End Sub
 
-    Private Sub GetComboLocation(ByVal pMtlWarehouseId As Int64, ByVal pMtlSubinventoryId As Nullable(Of Int64))
+    Private Sub setComboLocation(ByVal pMtlWarehouseId As Int64, ByVal pMtlSubinventoryId As Nullable(Of Int64))
         Dim objdb As New classMaster
         cboMtlLocation.DataSource = objdb.Combomtllocations(strUSerID:=clsUser.UserID, INt64mtl_warehouse_id:=pMtlWarehouseId, Int64mtl_subinventory_id:=pMtlSubinventoryId)
         cboMtlLocation.DisplayMember = "location_name"
@@ -1145,7 +1145,7 @@ Public Class frmStockDINPurchase
 
     Private Sub cboMtlWarehouse_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cboMtlWarehouse.SelectedIndexChanged
         Call setComboSubInventory(oConfig.IsNull(cboMtlWarehouse.SelectedValue, Nothing))
-        Call GetComboLocation(pMtlWarehouseId:=oConfig.IsNull(cboMtlWarehouse.SelectedValue, Nothing), pMtlSubinventoryId:=oConfig.IsNull(cboMtlSubinventory.SelectedValue, Nothing))
+        Call setComboLocation(pMtlWarehouseId:=oConfig.IsNull(cboMtlWarehouse.SelectedValue, Nothing), pMtlSubinventoryId:=oConfig.IsNull(cboMtlSubinventory.SelectedValue, Nothing))
     End Sub
 
     Private Sub cboMtlSubinventory_DropDownClosed(sender As Object, e As System.EventArgs) Handles cboMtlSubinventory.DropDownClosed
@@ -1154,7 +1154,7 @@ Public Class frmStockDINPurchase
     End Sub
 
     Private Sub cbomtl_subinventory_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cboMtlSubinventory.SelectedIndexChanged
-        Call GetComboLocation(pMtlWarehouseId:=oConfig.IsNull(cboMtlWarehouse.SelectedValue, Nothing), pMtlSubinventoryId:=oConfig.IsNull(cboMtlSubinventory.SelectedValue, Nothing))
+        Call setComboLocation(pMtlWarehouseId:=oConfig.IsNull(cboMtlWarehouse.SelectedValue, Nothing), pMtlSubinventoryId:=oConfig.IsNull(cboMtlSubinventory.SelectedValue, Nothing))
     End Sub
 
     Private Sub btnCopyRoll_Click(sender As Object, e As EventArgs) Handles btnCopyRoll.Click
@@ -1227,12 +1227,11 @@ Public Class frmStockDINPurchase
         'rpt.PrintOptions.PaperSource = CrystalDecisions.Shared.PaperSource.Auto
 
         If pStockType = "C" Then
-            rptFileName = "rptCIN.rpt"
+            frm.Title = "CIN Document"
         ElseIf pStockType = "D" Then
-            rptFileName = "rptDIN.rpt"
+            frm.Title = "DIN Document"
         End If
 
-        frm.Title = "DIN Document"
         frm.CRViewer.ReportSource = rpt
         frm.MdiParent = Me.ParentForm
         frm.Show()

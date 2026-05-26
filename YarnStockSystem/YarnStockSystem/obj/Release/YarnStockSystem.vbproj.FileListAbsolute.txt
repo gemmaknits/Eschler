@@ -1,0 +1,108 @@
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\bin\Release\Yarn Stock System (Eschler).exe.config
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\bin\Release\Yarn Stock System (Eschler).exe.manifest
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\bin\Release\Yarn Stock System (Eschler).application
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\bin\Release\Yarn Stock System (Eschler).exe
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\bin\Release\Yarn Stock System (Eschler).pdb
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\bin\Release\Yarn Stock System (Eschler).xml
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\bin\Release\Classes.dll
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\bin\Release\CrystalDecisions.CrystalReports.Engine.dll
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\bin\Release\CrystalDecisions.ReportSource.dll
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\bin\Release\CrystalDecisions.Shared.dll
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\bin\Release\CrystalDecisions.Windows.Forms.dll
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\bin\Release\myControls.dll
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\bin\Release\RestSharp.dll
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\bin\Release\CrystalDecisions.ReportAppServer.DataDefModel.dll
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\bin\Release\CrystalDecisions.ReportAppServer.ClientDoc.dll
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\bin\Release\CrystalDecisions.ReportAppServer.ReportDefModel.dll
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\bin\Release\CrystalDecisions.ReportAppServer.Controllers.dll
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\bin\Release\CrystalDecisions.ReportAppServer.CommLayer.dll
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\bin\Release\CrystalDecisions.ReportAppServer.DataSetConversion.dll
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\bin\Release\CrystalDecisions.ReportAppServer.Prompting.dll
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\bin\Release\CrystalDecisions.ReportAppServer.XmlSerialize.dll
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\bin\Release\CrystalDecisions.ReportAppServer.CubeDefModel.dll
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\bin\Release\CrystalDecisions.ReportAppServer.CommonObjectModel.dll
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\bin\Release\CrystalDecisions.ReportAppServer.ObjectFactory.dll
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\bin\Release\FlashControlV71.dll
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\bin\Release\CrystalDecisions.ReportAppServer.CommonControls.dll
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\bin\Release\stdole.dll
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\bin\Release\ShockwaveFlashObjects.dll
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\bin\Release\Classes.pdb
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\bin\Release\Classes.xml
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\bin\Release\myControls.pdb
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\bin\Release\myControls.xml
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\bin\Release\RestSharp.xml
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.Resources.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.formJobOrderYarnNewEditSelectProductionLine.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.formPrintKIConsumption2.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.formPrintWOConsumption.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.formPrintWOJobSummary.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.formPrintYarnScarp.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.formYarnInProcessReturn.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.formJobOrderYarnNewEdit.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.formJobOrderforYarnApprove.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.formJobOrderforYarnCancel.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.frmLogin.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.frmMainMenu.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.formPrintBarcode.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.formPrintKIConsumption.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.formPrintKIGreigeDeliveryControl.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.formPrintKIJobSummary.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.formPrintKIPending.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.formPrintYarnDemandForecast.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.formPrintYarnMoveByBox.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.formSearchItemcode.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.formSearchItemCodeFromBalance.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.formSearchJob.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.formSearchKO.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.formSearchYarn.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.formSearchYarnOut.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.formYarnInEdit.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.formYarnInPurchaseFromSupplier.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.formYarnInReturn.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.formYarnIn.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.frmYarnInPurchase.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.formYarnLocation.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.formYarnoutOld.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.formYarnOutCancel.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.formYarnOutEdit.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.formYarnout.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.formYarnScrap.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.frmEndingInventory.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.frmJobClose.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.frmJobOrderBarcode.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.frmReport.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.frmSearchYarnTransferLocationsGMK.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.frmStockYarnAging.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.frmYarnInCustomerYarn.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.frmYarnINFromGemmaknit.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.frmYarnINYarnLocationsGMK.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.frmYarnLostByKO.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.frmYarnOutBarcode.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.PrintJobOrderforYarn.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.PrintYarnInDocument.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.PrintYarnLatestPrice.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.PrintYarnOutDocument.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.DlgStockNonMovement.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.formCRViewer.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.FormRptBarcode.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.FormRptJobOrderforYarn.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.FormRptMachineUsage.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.formRptYarnBalance.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.FormRptYarnIn.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.FormRptYarnOut.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.FormRptYarnPurchase.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.FormRptYarnUsedByMonth.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.frmCompanySticker.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.frmDeadStockBalanceYarn.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.frmKIConsumptionAndLoss.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.frmRawBeamYarnCompareBalance.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.frmPrintWOClosed.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.frmPrintYarnInPurchased.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.frmYarnOnTime.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.frmYarnUsedByYear.resources
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\YarnStockSystem.vbproj.GenerateResource.Cache
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\Yarn Stock System (Eschler).exe.manifest
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\Yarn Stock System (Eschler).application
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\Yarn Stock System (Eschler).exe
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\Yarn Stock System (Eschler).xml
+D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Release\Yarn Stock System (Eschler).pdb

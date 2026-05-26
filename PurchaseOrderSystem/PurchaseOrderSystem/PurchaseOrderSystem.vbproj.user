@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PublishUrlHistory>\\srv-gemmaknits\eschler_programs\PurchaseOrderSystem\|E:\Eschler_System\ESCHLER_PROGRAMS\PurchaseOrderSystem\|D:\Program2017\PurchaseOrderSystem\|D:\Program2017\ProductionSystem\|D:\Program2017\\PurchaseOrderSystem\</PublishUrlHistory>
+    <InstallUrlHistory>\\srv-gemmaknits\eschler_programs\PurchaseOrderSystem\|\\172.16.3.2\eschler_programs\PurchaseOrderSystem\|\\172.16.3.11\Programs2017\PurchaseOrderSystem\|\\172.16.3.11\Setup\Programs2017\PurchaseOrderSystem\|\\172.16.9.4\Setup\Programs2014\PurchaseOrderSystem\</InstallUrlHistory>
+    <SupportUrlHistory />
+    <UpdateUrlHistory>\\172.16.9.4\Setup\Programs2014\PurchaseOrderSystem\|\\172.16.3.4\Setup\Programs2014\PurchaseOrderSystem\|\\192.168.1.5\Setup\Programs2014\PurchaseOrderSystem\|\\192.168.1.5\Setup\Programs2014\SalesOrderSystem\</UpdateUrlHistory>
+    <BootstrapperUrlHistory />
+    <ErrorReportUrlHistory />
+    <FallbackCulture>en-US</FallbackCulture>
+    <VerifyUploadedFiles>true</VerifyUploadedFiles>
+    <ProjectView>ShowAllFiles</ProjectView>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup>
+    <EnableSecurityDebugging>false</EnableSecurityDebugging>
+  </PropertyGroup>
+</Project>

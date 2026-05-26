@@ -1,0 +1,122 @@
+See the end of this message for details on invoking 
+just-in-time (JIT) debugging instead of this dialog box.
+
+************** Exception Text **************
+System.Deployment.Application.InvalidDeploymentException: Application identity is not set.
+   at System.Deployment.Application.ApplicationDeployment.get_CurrentDeployment()
+   at DyeStockSystem.frmMainmenu.formMainmenu_Load(Object sender, EventArgs e) in D:\Development\Project_GemmaKnits\DyeStockSystem\DyeStockSystem\GeneralForm\frmMainmenu.vb:line 53
+   at System.Windows.Forms.Form.OnLoad(EventArgs e)
+   at System.Windows.Forms.Control.CreateControl(Boolean fIgnoreVisible)
+   at System.Windows.Forms.Control.CreateControl()
+   at System.Windows.Forms.Control.WmShowWindow(Message& m)
+   at System.Windows.Forms.Control.WndProc(Message& m)
+   at System.Windows.Forms.Form.WndProc(Message& m)
+   at System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+
+
+************** Loaded Assemblies **************
+mscorlib
+    Assembly Version: 4.0.0.0
+    Win32 Version: 4.0.30319.34014 built by: FX45W81RTMGDR
+    CodeBase: file:///C:/Windows/Microsoft.NET/Framework64/v4.0.30319/mscorlib.dll
+----------------------------------------
+DyeStockSystem
+    Assembly Version: 1.0.0.0
+    Win32 Version: 1.0.0.0
+    CodeBase: file:///D:/Development/Project_GemmaKnits/DyeStockSystem/DyeStockSystem/bin/Debug/DyeStockSystem.exe
+----------------------------------------
+Microsoft.VisualBasic
+    Assembly Version: 10.0.0.0
+    Win32 Version: 12.0.20806.33440 built by: FX45W81RTMREL
+    CodeBase: file:///C:/Windows/Microsoft.Net/assembly/GAC_MSIL/Microsoft.VisualBasic/v4.0_10.0.0.0__b03f5f7f11d50a3a/Microsoft.VisualBasic.dll
+----------------------------------------
+System
+    Assembly Version: 4.0.0.0
+    Win32 Version: 4.0.30319.34003 built by: FX45W81RTMGDR
+    CodeBase: file:///C:/Windows/Microsoft.Net/assembly/GAC_MSIL/System/v4.0_4.0.0.0__b77a5c561934e089/System.dll
+----------------------------------------
+System.Core
+    Assembly Version: 4.0.0.0
+    Win32 Version: 4.0.30319.33440 built by: FX45W81RTMREL
+    CodeBase: file:///C:/Windows/Microsoft.Net/assembly/GAC_MSIL/System.Core/v4.0_4.0.0.0__b77a5c561934e089/System.Core.dll
+----------------------------------------
+System.Windows.Forms
+    Assembly Version: 4.0.0.0
+    Win32 Version: 4.0.30319.33440 built by: FX45W81RTMREL
+    CodeBase: file:///C:/Windows/Microsoft.Net/assembly/GAC_MSIL/System.Windows.Forms/v4.0_4.0.0.0__b77a5c561934e089/System.Windows.Forms.dll
+----------------------------------------
+System.Drawing
+    Assembly Version: 4.0.0.0
+    Win32 Version: 4.0.30319.33440 built by: FX45W81RTMREL
+    CodeBase: file:///C:/Windows/Microsoft.Net/assembly/GAC_MSIL/System.Drawing/v4.0_4.0.0.0__b03f5f7f11d50a3a/System.Drawing.dll
+----------------------------------------
+System.Configuration
+    Assembly Version: 4.0.0.0
+    Win32 Version: 4.0.30319.33440 built by: FX45W81RTMREL
+    CodeBase: file:///C:/Windows/Microsoft.Net/assembly/GAC_MSIL/System.Configuration/v4.0_4.0.0.0__b03f5f7f11d50a3a/System.Configuration.dll
+----------------------------------------
+System.Xml
+    Assembly Version: 4.0.0.0
+    Win32 Version: 4.0.30319.33440 built by: FX45W81RTMREL
+    CodeBase: file:///C:/Windows/Microsoft.Net/assembly/GAC_MSIL/System.Xml/v4.0_4.0.0.0__b77a5c561934e089/System.Xml.dll
+----------------------------------------
+System.Runtime.Remoting
+    Assembly Version: 4.0.0.0
+    Win32 Version: 4.0.30319.33440 built by: FX45W81RTMREL
+    CodeBase: file:///C:/Windows/Microsoft.Net/assembly/GAC_MSIL/System.Runtime.Remoting/v4.0_4.0.0.0__b77a5c561934e089/System.Runtime.Remoting.dll
+----------------------------------------
+System.Data
+    Assembly Version: 4.0.0.0
+    Win32 Version: 4.0.30319.33440 built by: FX45W81RTMREL
+    CodeBase: file:///C:/Windows/Microsoft.Net/assembly/GAC_64/System.Data/v4.0_4.0.0.0__b77a5c561934e089/System.Data.dll
+----------------------------------------
+System.Transactions
+    Assembly Version: 4.0.0.0
+    Win32 Version: 4.0.30319.33440 built by: FX45W81RTMREL
+    CodeBase: file:///C:/Windows/Microsoft.Net/assembly/GAC_64/System.Transactions/v4.0_4.0.0.0__b77a5c561934e089/System.Transactions.dll
+----------------------------------------
+System.EnterpriseServices
+    Assembly Version: 4.0.0.0
+    Win32 Version: 4.0.30319.33440 built by: FX45W81RTMREL
+    CodeBase: file:///C:/Windows/Microsoft.Net/assembly/GAC_64/System.EnterpriseServices/v4.0_4.0.0.0__b03f5f7f11d50a3a/System.EnterpriseServices.dll
+----------------------------------------
+System.Numerics
+    Assembly Version: 4.0.0.0
+    Win32 Version: 4.0.30319.33440 built by: FX45W81RTMREL
+    CodeBase: file:///C:/Windows/Microsoft.Net/assembly/GAC_MSIL/System.Numerics/v4.0_4.0.0.0__b77a5c561934e089/System.Numerics.dll
+----------------------------------------
+System.Deployment
+    Assembly Version: 4.0.0.0
+    Win32 Version: 4.0.30319.33440 built by: FX45W81RTMREL
+    CodeBase: file:///C:/Windows/Microsoft.Net/assembly/GAC_MSIL/System.Deployment/v4.0_4.0.0.0__b03f5f7f11d50a3a/System.Deployment.dll
+----------------------------------------
+
+************** JIT Debugging **************
+To enable just-in-time (JIT) debugging, the .config file for this
+application or computer (machine.config) must have the
+jitDebugging value set in the system.windows.forms section.
+The application must also be compiled with debugging
+enabled.
+
+For example:
+
+<configuration>
+    <system.windows.forms jitDebugging="true" />
+</configuration>
+
+-------------------------------------------------------------------------------
+When JIT debugging is enabled, any unhandled exception
+will be sent to the JIT debugger registered on the computer
+rather than be handled by this dialog box.
+
+This is a "first chance exception", which means the debugger is simply notifying you that an exception was thrown, rather than that one was unhandled.
+
+The .NET Framework is throwing and catching that exception internally—the debugger tells you that it occurs in some code in System.Deployment.dll. The exception is raised when an attempt is made to access user/network information, but the underlying code is catching the exception when it occurs and automatically resuming execution. There's nothing you can do about it, and it's relatively harmless.
+
+You are most likely attempting to retrieve the AppData path for the current user, in which case the Framework needs to determine if your application is a normal app or a ClickOnce app in order to return the correct path. If you are a ClickOnce app, the correct data is simply returned. Otherwise, an exception is thrown, which is caught by the Framework and the assumption is made that your application is not a ClickOnce app, causing the standard user path to be returned instead.
+
+There are a number of exceptions that are thrown and handled while an application is running. There's no harm unless they're unhandled. If this really bugs you, you can customize the exceptions about which the debugger informs you. For example:
+
+Open the Exceptions window from the Debug menu.
+Expand "Common Language Runtime Exceptions" -> "System.Deployment.Application".
+Uncheck the box next to "System.Deployment.Application.InvalidDeploymentException".

@@ -14,14 +14,14 @@
     <framework targetVersion="4.5.2" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="Production System (Eschler).exe.manifest" size="33034">
+    <dependentAssembly dependencyType="install" codebase="Production System (Eschler).exe.manifest" size="21753">
       <assemblyIdentity name="Production System (Eschler).exe" version="1.0.0.616" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>HfhI8+85lTrOw144clpeoBLtfIfjzsMvorIccGzbeAw=</dsig:DigestValue>
+        <dsig:DigestValue>j/RY/9f1gu0XolyymPZ2UMHWzal7dSAew5q3Fwy1wY4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

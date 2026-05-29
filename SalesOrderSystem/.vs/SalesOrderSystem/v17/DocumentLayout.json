@@ -1,14 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\SOURCECODE\\Eschler\\SalesOrderSystem\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|SalesOrderSystem||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{436B925F-DEA5-48D6-9B49-3A909588F7A9}|SalesOrderSystem\\SalesOrderSystem.vbproj|d:\\sourcecode\\eschler\\salesordersystem\\salesordersystem\\||{B270807C-D8C6-49EB-8EBE-8E8D566637A1}|cc4014f5-b18d-439c-9352-f99d984cca85"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -16,7 +9,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 14,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -73,18 +66,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "SalesOrderSystem",
-              "DocumentMoniker": "D:\\SOURCECODE\\Eschler\\SalesOrderSystem\\SalesOrderSystem\\SalesOrderSystem.vbproj",
-              "RelativeDocumentMoniker": "SalesOrderSystem\\SalesOrderSystem.vbproj",
-              "ToolTip": "D:\\SOURCECODE\\Eschler\\SalesOrderSystem\\SalesOrderSystem\\SalesOrderSystem.vbproj",
-              "RelativeToolTip": "SalesOrderSystem\\SalesOrderSystem.vbproj",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-05-29T04:17:20.43Z",
-              "EditorCaption": ""
             }
           ]
         }

@@ -603,9 +603,9 @@
 
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
         Me.Validate()
-        Dim result As Windows.Forms.DialogResult
+        Dim result As DialogResult
         result = MessageBox.Show("Would you like to save ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3)
-        If result <> Windows.Forms.DialogResult.Yes Then Exit Sub
+        If result <> DialogResult.Yes Then Exit Sub
 
         If Not CheckData() Then Exit Sub
 
@@ -829,9 +829,9 @@
     End Sub
 
     Private Sub btnDel_Click(sender As System.Object, e As System.EventArgs) Handles btnDel.Click
-        Dim result As Windows.Forms.DialogResult
+        Dim result As DialogResult
         result = MessageBox.Show("Would You Like To Delete Current Box ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3)
-        If result = Windows.Forms.DialogResult.No Then Exit Sub
+        If result = DialogResult.No Then Exit Sub
         Call RemoveNewBox()
         Call SumGrid(grdYarnINDet.DataSource)
     End Sub

@@ -187,9 +187,9 @@ Public Class formYarnInEdit
 
         If Not CheckData() Then Exit Sub
 
-        Dim result As Windows.Forms.DialogResult
+        Dim result As DialogResult
         result = MessageBox.Show("Would you like to save ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3)
-        If result <> Windows.Forms.DialogResult.Yes Then Exit Sub
+        If result <> DialogResult.Yes Then Exit Sub
 
         Dim config As New clsConfig
         config.ChangeCulture()

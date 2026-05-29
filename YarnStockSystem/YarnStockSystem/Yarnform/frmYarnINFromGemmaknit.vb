@@ -180,7 +180,7 @@
         'End If
 
         If Not CheckgrdTransfer() Then Exit Sub
-        If MessageBox.Show("Would you like to add selected Roll No. from left grid to right grid ?" & vbCrLf & "คุณต้องการเพิ่มกล่องที่เลือกไว้ด้านซ้ายเพื่อนำไปใส่ในเอกสารด้านขวาใช่หรือไม่ ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.No Then Exit Sub
+        If MessageBox.Show("Would you like to add selected Roll No. from left grid to right grid ?" & vbCrLf & "คุณต้องการเพิ่มกล่องที่เลือกไว้ด้านซ้ายเพื่อนำไปใส่ในเอกสารด้านขวาใช่หรือไม่ ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.No Then Exit Sub
         If cbomtl_warehouse.Text.Trim.Length = 0 Then
             MessageBox.Show("Please fill the new location to transfer." & vbCrLf & "คุณยังไม่ได้ใส่ Location ที่จะทำการย้ายไป", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
             cbomtl_warehouse.Focus()
@@ -294,7 +294,7 @@
 
     Private Sub btnDeselect_Click(sender As System.Object, e As System.EventArgs) Handles btnDeselect.Click
         If Not CheckGrdYarnIn() Then Exit Sub
-        If MessageBox.Show("Would you like to delete selected Roll No. in right grid ?" & vbCrLf & "คุณต้องการลบกล่องที่เลือกไว้ในเอกสารในด้านขวาออกใช่หรือไม่ ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.No Then Exit Sub
+        If MessageBox.Show("Would you like to delete selected Roll No. in right grid ?" & vbCrLf & "คุณต้องการลบกล่องที่เลือกไว้ในเอกสารในด้านขวาออกใช่หรือไม่ ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.No Then Exit Sub
 
         If grdYarnIN.CurrentRow.Index >= 0 Then Call DeleteRollNoGrdYarnIn()
         Call CompareTwoGrids()
@@ -394,10 +394,10 @@
         Dim dv_del As New DataView(dtYarnIn, "", "", DataViewRowState.Deleted)
 
 
-        Dim result As Windows.Forms.DialogResult
+        Dim result As DialogResult
         result = MessageBox.Show("Would you like to save ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3)
         'If result = Windows.Forms.DialogResult.Cancel Then blnCancel = True
-        If result <> Windows.Forms.DialogResult.Yes Then Exit Function
+        If result <> DialogResult.Yes Then Exit Function
 
         If objdb.SaveYarnIn(YarnIn:=yarnin, dv_add:=dv_add, dv_upd:=dv_upd, dv_del:=dv_del, clsuser:=clsUser) Then
             MessageBox.Show("Save is Complete! : บันทึกสำเร็จ! ", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)

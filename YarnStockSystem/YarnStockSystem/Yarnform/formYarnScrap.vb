@@ -74,10 +74,10 @@ Public Class formYarnScrap
         Dim classUpdateYarn As New UpdateYarn
         Dim msgErr As String
 
-        Dim resultSave As Windows.Forms.DialogResult
+        Dim resultSave As DialogResult
         resultSave = MessageBox.Show("Would you like to save ?", "System Message", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3)
-        If resultSave = Windows.Forms.DialogResult.Cancel Then Exit Sub
-        If resultSave <> Windows.Forms.DialogResult.Yes Then Exit Sub
+        If resultSave = DialogResult.Cancel Then Exit Sub
+        If resultSave <> DialogResult.Yes Then Exit Sub
 
         Dim result As Boolean
         scrap_uom = "KGS"

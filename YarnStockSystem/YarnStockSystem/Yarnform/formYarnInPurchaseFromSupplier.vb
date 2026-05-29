@@ -614,9 +614,9 @@ Public Class formYarnInPurchaseFromSupplier
         grdYarnIN.EndEdit(DataGridViewDataErrorContexts.Commit)
         grdYarnIN.CurrentCell = grdYarnIN.Rows(0).Cells(0)
 
-        Dim result As Windows.Forms.DialogResult
+        Dim result As DialogResult
         result = MessageBox.Show("Would you Like To save ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3)
-        If result <> Windows.Forms.DialogResult.Yes Then Exit Sub
+        If result <> DialogResult.Yes Then Exit Sub
 
         If Not CheckData() Then Exit Sub
 
@@ -775,9 +775,9 @@ Public Class formYarnInPurchaseFromSupplier
     End Sub
 
     Private Sub btnDel_Click(sender As System.Object, e As System.EventArgs) Handles btnDel.Click
-        Dim result As Windows.Forms.DialogResult
+        Dim result As DialogResult
         result = MessageBox.Show("Would You Like To Delete New Box ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3)
-        If result = Windows.Forms.DialogResult.No Then Exit Sub
+        If result = DialogResult.No Then Exit Sub
         RemoveNewBox()
     End Sub
     Private Sub RemoveNewBox()

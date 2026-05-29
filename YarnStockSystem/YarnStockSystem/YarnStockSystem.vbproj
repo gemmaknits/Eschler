@@ -12,7 +12,7 @@
     <RootNamespace>YarnStockSystem</RootNamespace>
     <AssemblyName>Yarn Stock System %28Eschler%29</AssemblyName>
     <MyType>WindowsForms</MyType>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
@@ -35,7 +35,7 @@
     <PublisherName>Eschler Knits Co., Ltd.</PublisherName>
     <SuiteName>Eschler Program Suite</SuiteName>
     <MinimumRequiredVersion>1.0.0.70</MinimumRequiredVersion>
-    <ApplicationRevision>526</ApplicationRevision>
+    <ApplicationRevision>527</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -53,7 +53,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <UseVSHostingProcess>true</UseVSHostingProcess>
-    <Prefer32Bit>false</Prefer32Bit>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -133,7 +133,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="classDb\classConfig\clsConfig.vb" />
-    <Compile Include="classDb\classConnection\classConnectionColomboDB.vb" />
+    <Compile Include="classDb\classConnection\classConnectionEschlerDB.vb" />
     <Compile Include="classDb\classDataGridViewCalendarcolumn\DataGridViewCalendarColumn.vb" />
     <Compile Include="classDb\classJobOrderBarcode\classJobOrderBarcode.vb" />
     <Compile Include="classDb\classJobOrderYarn\classJobOrderYarnSelectProductionLine.vb" />

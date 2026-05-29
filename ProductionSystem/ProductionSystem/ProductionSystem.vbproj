@@ -35,7 +35,8 @@
     <PublisherName>Eschler Knits Co., Ltd.</PublisherName>
     <SuiteName>Eschler Program Suite</SuiteName>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>617</ApplicationRevision>
+    <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
+    <ApplicationRevision>618</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>

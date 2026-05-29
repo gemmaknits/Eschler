@@ -36,7 +36,7 @@
     <SuiteName>Eschler Program Suite</SuiteName>
     <MinimumRequiredVersion>1.0.0.41</MinimumRequiredVersion>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>313</ApplicationRevision>
+    <ApplicationRevision>314</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -221,7 +221,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\classConfig\clsConfig.vb" />
-    <Compile Include="Classes\classConnection\classConnectionColomboDB.vb" />
+    <Compile Include="Classes\classConnection\classConnectionEschlerDB.vb" />
     <Compile Include="Classes\classDataGridViewCalendarcolumn\classDataGridViewCalendarcolumn.vb" />
     <Compile Include="Classes\classImage\classPhoto.vb" />
     <Compile Include="Classes\classItems\classItems.vb" />

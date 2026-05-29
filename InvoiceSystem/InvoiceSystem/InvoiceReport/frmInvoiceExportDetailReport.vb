@@ -103,7 +103,7 @@ Public Class frmInvoiceExportDetailReport
 
         SaveFileDialog1.ShowDialog()
 
-        If Windows.Forms.DialogResult.OK Then
+        If DialogResult.OK Then
             ' Get the file name.
             Dim path As String = SaveFileDialog1.FileName
             Try

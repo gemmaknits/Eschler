@@ -122,14 +122,14 @@ Public Class frmEndingYarnInventory
 
     Private Sub btnNew_Click(sender As System.Object, e As System.EventArgs) Handles btnNew.Click
 
-        If MessageBox.Show("Would you like to clear all data ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then grdData.DataSource = GetData("NEW")
+        If MessageBox.Show("Would you like to clear all data ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then grdData.DataSource = GetData("NEW")
         Call InitControl()
         txtBarcode.Focus()
     End Sub
 
     Private Sub InitControl()
 
-        'Me.FormBorderStyle = Windows.Forms.FormBorderStyle.None
+        'Me.FormBorderStyle = FormBorderStyle.None
         Me.WindowState = FormWindowState.Maximized
 
         Call GenCombo()
@@ -184,7 +184,7 @@ Public Class frmEndingYarnInventory
 
         If Not CheckData() Then Exit Sub
 
-        If MessageBox.Show("Would you like to Update Location and Dye Test Result ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
+        If MessageBox.Show("Would you like to Update Location and Dye Test Result ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
             'Call Updatetmp() 'Add By Neung 
             'grdData.DataSource = GetData("LOCATION " & cbomtl_Location.Text & " DYETEST " & IIf(optNone.Checked, "N", IIf(optPassed.Checked, "P", "F")) & " REMARK " & txtRemark.Text.Trim)
             'grdData.DataSource = SaveData()
@@ -298,7 +298,7 @@ Public Class frmEndingYarnInventory
     End Sub
 
     Private Sub btnExit_Click(sender As System.Object, e As System.EventArgs) Handles btnExit.Click
-        If MessageBox.Show("Would you like to exit ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then Me.Close()
+        If MessageBox.Show("Would you like to exit ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then Me.Close()
     End Sub
 
     Private Sub txtBarcode_KeyDown(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles txtBarcode.KeyDown
@@ -426,7 +426,7 @@ ExitSub:
         Dim dt As DataTable = grdData.DataSource
         If dt.Rows.Count > 0 Then
             If Val(grdData.CurrentRow.Cells("id").Value) > 0 Then
-                If MessageBox.Show("Would you like to remove item number " & grdData.CurrentRow.Cells("id").Value.ToString() & " ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
+                If MessageBox.Show("Would you like to remove item number " & grdData.CurrentRow.Cells("id").Value.ToString() & " ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
                     grdData.DataSource = GetData("DELETE " & grdData.CurrentRow.Cells("id").Value.ToString())
                 End If
             End If

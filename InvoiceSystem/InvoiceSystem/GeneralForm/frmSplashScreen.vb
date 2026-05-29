@@ -49,8 +49,8 @@ Public Class frmSplashScreen
 		Me.Opacity = 0
 		Me.BackgroundImage = bmp
 		Me.BackgroundImageLayout = ImageLayout.Center
-		Me.FormBorderStyle = Windows.Forms.FormBorderStyle.None
-		Me.ShowInTaskbar = False
+        Me.FormBorderStyle = FormBorderStyle.None
+        Me.ShowInTaskbar = False
 		Me.CenterToScreen()
 		With Screen.PrimaryScreen.WorkingArea
 			Me.SetBounds((.Width - bmp.Width) / 2 _

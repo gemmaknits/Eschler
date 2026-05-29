@@ -373,10 +373,10 @@ Public Class frmStockGIN_KOManual
         'Dim dv_dts_del As New DataView(dts, "", "", DataViewRowState.Deleted)
 
         blnCancel = False
-        Dim result As Windows.Forms.DialogResult
+        Dim result As DialogResult
         result = MessageBox.Show("Would you like to save ?", "System Message", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3)
-        If result = Windows.Forms.DialogResult.Cancel Then blnCancel = True
-        If result <> Windows.Forms.DialogResult.Yes Then Exit Function
+        If result = DialogResult.Cancel Then blnCancel = True
+        If result <> DialogResult.Yes Then Exit Function
 
         If objDB.GIN_KOManualsave(Greige_Header, Defect_Roll_Header, msgerr, dtc, dv_dtc_add, dv_dtc_upd, dv_dtc_del, clsUser.UserID, Tran_no, Roll_no) Then
             strGINNO = Tran_no

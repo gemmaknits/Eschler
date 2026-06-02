@@ -246,11 +246,13 @@ Public Class frmMainMenu
         Dim frm As New FormRptMachineUsage
         frm.MdiParent = Me
         frm.loginEmpcd = Me.loginEmpcd
+        frm.UserInfo = clsUser
         frm.Show()
     End Sub
 
     Private Sub CompanyStickerToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CompanyStickerToolStripMenuItem.Click
         Dim frm As New frmCompanySticker
+        frm.UserInfo = clsUser
         frm.MdiParent = Me
         frm.Show()
     End Sub

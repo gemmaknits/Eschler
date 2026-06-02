@@ -34,3 +34,11 @@
 /SalesOrderSystem/SalesOrderSystem/bin/Debug/Sales Order System (Eschler).exe.manifest
 /SalesOrderSystem/SalesOrderSystem/bin/Debug/Sales Order System (Eschler).pdb
 /SalesOrderSystem/SalesOrderSystem/bin/Debug/Sales Order System (Eschler).xml
+.vs/
+bin/
+obj/
+*.vsidx
+*.cache
+*.7z
+*.user
+*.suo

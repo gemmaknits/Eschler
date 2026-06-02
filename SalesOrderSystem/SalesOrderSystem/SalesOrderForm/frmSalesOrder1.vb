@@ -1,13 +1,13 @@
 Imports System.Drawing
 Imports System.Data.SqlClient
 Imports System.Windows.Forms
-Imports Syncfusion.Windows.Forms.Tools
+Imports SalesOrderSystem.Controls
 Imports System.Text.RegularExpressions
 Imports System.Linq
 
 Public Class frmSalesOrder
-    Dim clsConfig As New clsConfig
-    Dim clsConn As New classConnection
+    Dim oConfig As New clsConfig
+    Dim clsConn As New ClassConnection
     Dim clsUser As New classUserInfo
     Dim objSecurity As New clsConfig
     Private clsMaster As New classMaster
@@ -203,7 +203,7 @@ Public Class frmSalesOrder
         Me.cboPaymode.DisplayMember = "paymodeDesc"
         Me.cboPaymode.ValueMember = "paymodecd"
 
-        Me.ComboSaleOrderType1.populateData((New classConnection).getSQLConnection)
+        Me.ComboSaleOrderType1.populateData((New ClassConnection).getSQLConnection)
         ' Me.cboBank1.populateData((New classConnection).getSQLConnection)
 
         Me.cboMtl_warehouse.DataSource = objDB.Combomtlwarehouse(clsUser.UserID)
@@ -323,58 +323,54 @@ Public Class frmSalesOrder
         End With
     End Sub
 
-    Private Sub Model_QueryCellInfoCustomersBillToFlag(ByVal sender As Object, ByVal e As Syncfusion.Windows.Forms.Grid.GridQueryCellInfoEventArgs)
-        'To specify the row and colum index.
+    Private Sub Model_QueryCellInfoCustomersBillToFlag(ByVal sender As Object, ByVal e As GridQueryCellInfoEventArgs)
         If e.RowIndex = 0 AndAlso e.ColIndex = 3 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Code"
         ElseIf e.RowIndex = 0 AndAlso e.ColIndex = 4 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Name"
         ElseIf e.RowIndex = 0 AndAlso e.ColIndex = 5 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Address"
         End If
     End Sub
 
-    Private Sub Model_QueryCellInfo2CustomersShipToFlag(ByVal sender As Object, ByVal e As Syncfusion.Windows.Forms.Grid.GridQueryCellInfoEventArgs)
-        'To specify the row and colum index.
+    Private Sub Model_QueryCellInfo2CustomersShipToFlag(ByVal sender As Object, ByVal e As GridQueryCellInfoEventArgs)
         If e.RowIndex = 0 AndAlso e.ColIndex = 3 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Code"
         ElseIf e.RowIndex = 0 AndAlso e.ColIndex = 4 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Name"
         ElseIf e.RowIndex = 0 AndAlso e.ColIndex = 5 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Address"
         End If
     End Sub
 
-    Private Sub Model_QueryCellInfoBanks(ByVal sender As Object, ByVal e As Syncfusion.Windows.Forms.Grid.GridQueryCellInfoEventArgs)
-        'To specify the row and colum index.
+    Private Sub Model_QueryCellInfoBanks(ByVal sender As Object, ByVal e As GridQueryCellInfoEventArgs)
         If e.RowIndex = 0 AndAlso e.ColIndex = 2 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Code"
         ElseIf e.RowIndex = 0 AndAlso e.ColIndex = 3 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Name"
         ElseIf e.RowIndex = 0 AndAlso e.ColIndex = 4 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Address"
         ElseIf e.RowIndex = 0 AndAlso e.ColIndex = 5 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 11, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New GridFontInfo(New Font("Segoe UI", 11, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Swift Code"
         ElseIf e.RowIndex = 0 AndAlso e.ColIndex = 6 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Account No."
         ElseIf e.RowIndex = 0 AndAlso e.ColIndex = 7 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Currency"
         ElseIf e.RowIndex = 0 AndAlso e.ColIndex = 8 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Branch"
-
         End If
     End Sub
     'Private Sub GenComboSoNo()
@@ -500,10 +496,10 @@ Public Class frmSalesOrder
                 tsbConfirmOrder.Enabled = False
             End If
             lblCustomersActive.Visible = True
-            MessageBox.Show("ÅÙ¡¤éÒ·èÒ¹¹Õé ä´é¶Ù¡Â¡àÅÔ¡ä»áÅéÇ " & vbCr _
-                          & "   - ¤Ø³äÁèÊÒÁÒÃ¶á¡éä¢¢éÍÁÙÅä´é" & vbCr _
-                          & "   - ¤Ø³ÊÒÁÒÃ¶ Â¡àÅÔ¡ ËÃ×Í Unconfirm ä´éà·èÒ¹Ñé¹" _
-                          , "¢éÍ¤ÇÒÁàµ×Í¹", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBox.Show("ï¿½Ù¡ï¿½ï¿½Ò·ï¿½Ò¹ï¿½ï¿½ï¿½ ï¿½ï¿½Ù¡Â¡ï¿½ï¿½Ô¡ï¿½ï¿½ï¿½ï¿½ï¿½ " & vbCr _
+                          & "   - ï¿½Ø³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ä¢¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" & vbCr _
+                          & "   - ï¿½Ø³ï¿½ï¿½ï¿½ï¿½Ã¶ Â¡ï¿½ï¿½Ô¡ ï¿½ï¿½ï¿½ï¿½ Unconfirm ï¿½ï¿½ï¿½ï¿½Ò¹ï¿½ï¿½" _
+                          , "ï¿½ï¿½Í¤ï¿½ï¿½ï¿½ï¿½ï¿½Í¹", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
         'End  - Sitthana 19/09/2018
     End Sub
@@ -511,7 +507,7 @@ Public Class frmSalesOrder
     Private Sub BindGrid(ByVal dt As DataTable)
         grdSalesOrder.AutoGenerateColumns = False
         grdSalesOrder.DataSource = dt
-        hideColumns()
+        hidecolumns()
     End Sub
 
     Private Function IsDataChange() As Boolean
@@ -610,16 +606,16 @@ Public Class frmSalesOrder
         End If
         'Begin Check By Sitthana 12/09/2018
         If mcboCustomersBillToFlag.SelectedIndex = -1 Then
-            MessageBox.Show("¤Ø³ÂÑ§äÁèä´éàÅ×Í¡ Customer Bill To " & vbCr _
-                          & "  ãËé¤Ø³¡ÅÑºä»àÅ×Í¡¡èÍ¹¤ÃÑº" _
-                          , "¢éÍ¤ÇÒÁá¨é§àµ×Í¹", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("ï¿½Ø³ï¿½Ñ§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¡ Customer Bill To " & vbCr _
+                          & "  ï¿½ï¿½ï¿½Ø³ï¿½ï¿½Ñºï¿½ï¿½ï¿½ï¿½Í¡ï¿½ï¿½Í¹ï¿½ï¿½Ñº" _
+                          , "ï¿½ï¿½Í¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¹", MessageBoxButtons.OK, MessageBoxIcon.Error)
             CheckData = False
             Exit Function
         End If
         If mcboCustomersShipToFlag.SelectedIndex = -1 Then
-            MessageBox.Show("¤Ø³ÂÑ§äÁèä´éàÅ×Í¡ Delivery To " & vbCr _
-                          & "  ãËé¤Ø³¡ÅÑºä»àÅ×Í¡¡èÍ¹¤ÃÑº" _
-                          , "¢éÍ¤ÇÒÁá¨é§àµ×Í¹", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("ï¿½Ø³ï¿½Ñ§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¡ Delivery To " & vbCr _
+                          & "  ï¿½ï¿½ï¿½Ø³ï¿½ï¿½Ñºï¿½ï¿½ï¿½ï¿½Í¡ï¿½ï¿½Í¹ï¿½ï¿½Ñº" _
+                          , "ï¿½ï¿½Í¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¹", MessageBoxButtons.OK, MessageBoxIcon.Error)
             CheckData = False
             Exit Function
         End If
@@ -670,7 +666,7 @@ Public Class frmSalesOrder
             Exit Function
         End If
 
-        If clsConfig.IsNull(cbofulfilment_type.SelectedValue, 0) = 0 Then
+        If oConfig.IsNull(cbofulfilment_type.SelectedValue, 0) = 0 Then
             MessageBox.Show("Must be have Fulfilment Source", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
             CheckData = False
             cbofulfilment_type.Focus()
@@ -782,7 +778,7 @@ Public Class frmSalesOrder
         'header.h01_sono = strSoNo
         'header.h01_sono = IIf(strSoNo.Trim.Length = 0, txtSoNo.Text.Trim.ToUpper, strSoNo) 'Sitthana move to above
         'header.h02_sodt = dtpSoDate.Value.ToString("yyyyMMdd") 'Sittana move to above
-        header.h03_custcd = Me.mcboCustomersBillToFlag.ListBox.Grid.Model(Me.mcboCustomersBillToFlag.SelectedIndex + 1, 3).CellValue.ToString ' config.IsNull(mcboCustomersBillToFlag.SelectedValue, "").ToString.Trim
+        header.h03_custcd = oConfig.IsNull(Me.mcboCustomersBillToFlag.ListBox.Grid.Model(Me.mcboCustomersBillToFlag.SelectedIndex + 1, 3).CellValue, Nothing).ToString ' config.IsNull(mcboCustomersBillToFlag.SelectedValue, "").ToString.Trim
         header.h04_agcd = config.IsNull(cboAgent.SelectedValue, "").ToString.Trim
         header.h05_empcd = config.IsNull(cboSalesMan.SelectedValue, "").ToString.Trim
         header.h06_rem = txtRemark.Text.Trim
@@ -790,7 +786,7 @@ Public Class frmSalesOrder
         header.h08_discamt = 0
         header.h09_nt_soamt = FormatNumber(txtNetAmt.Text, 2, , TriState.False, TriState.False)
         header.h10_attn = ""
-        header.h11_shipcustcd = Me.mcboCustomersShipToFlag.ListBox.Grid.Model(Me.mcboCustomersShipToFlag.SelectedIndex + 1, 3).CellValue 'config.IsNull(cboDeliveryLoc.SelectedValue, "").ToString.Trim
+        header.h11_shipcustcd = oConfig.IsNull(Me.mcboCustomersShipToFlag.ListBox.Grid.Model(Me.mcboCustomersShipToFlag.SelectedIndex + 1, 3).CellValue, Nothing) 'config.IsNull(cboDeliveryLoc.SelectedValue, "").ToString.Trim
         header.h12_payterms = txtTermCondition.Text.Trim
         header.h13_credit = 0
         header.h14_crdays = Val(txtCreditDays.Text.Trim)
@@ -798,7 +794,7 @@ Public Class frmSalesOrder
         header.h15_custpo_unique = txtCustPoUnique.Text.Trim
         header.h15_custpo_suffix = txtCustPoSuffix.Text.Trim
         header.h16_deli = txtDeliveryTerm.Text.Trim
-        header.h17_delicd = Me.mcboCustomersShipToFlag.ListBox.Grid.Model(Me.mcboCustomersShipToFlag.SelectedIndex + 1, 3).CellValue  'config.IsNull(cboDeliveryLoc.SelectedValue, "").ToString.Trim
+        header.h17_delicd = oConfig.IsNull(Me.mcboCustomersShipToFlag.ListBox.Grid.Model(Me.mcboCustomersShipToFlag.SelectedIndex + 1, 3).CellValue, Nothing)  'config.IsNull(cboDeliveryLoc.SelectedValue, "").ToString.Trim
         'header.h18_ref = Me.txtRef.Text 'Sitthana move to above
         'header.h19_rev = Val(txtRevise.Text.Trim) 'Sitthana move to above
         header.h20_sono1 = strSoNo
@@ -835,7 +831,7 @@ Public Class frmSalesOrder
         'header.ship_from_warehouse_id = (New clsConfig).IsNull(cboMtl_warehouse.SelectedValue, Nothing)  'Sitthana move to above
         header.SO_FULFIL_SRC_ID = cbofulfilment_type.SelectedValue
         header.fulfilment_comment = txtFulfilmentComment.Text.Trim
-        header.mts_per_roll = clsConfig.IsNull(txtMtsPerRoll.Text, 0)
+        header.mts_per_roll = oConfig.IsNull(txtMtsPerRoll.Text, 0)
         header.h52_sr_type_id = (New clsConfig).IsNull(cbbSrTypeId.SelectedValue, Nothing) 'Sitthana 20240523
         'John 20/10/2025----------------
         header.h53_refjobno1 = txtRefJobNo1.Text.Trim
@@ -846,19 +842,19 @@ Public Class frmSalesOrder
         header.h58_jobnocomment2 = txtJobNoComment2.Text.Trim
         header.h59_jobnocomment3 = txtJobNoComment3.Text.Trim
         header.h60_jobnocomment4 = txtJobNoComment4.Text.Trim
-        header.h61_design_properties_id = clsConfig.IsNull(mcboDesignProperties.SelectedValue, Nothing) 'John 28/10/2025
+        header.h61_design_properties_id = oConfig.IsNull(mcboDesignProperties.SelectedValue, Nothing) 'John 28/10/2025
         '--------------------------------
         If Me.textBatches.Text = "" Then
             Me.textBatches.Text = 0
         End If
 
         If clsSO.SOSave(header, dv_add, dv_upd, dv_del, msgerr, sono) Then
-                strSoNo = sono
-                SaveData = True
-            Else
-                MessageBox.Show(msgerr, "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
-                SaveData = False
-            End If
+            strSoNo = sono
+            SaveData = True
+        Else
+            MessageBox.Show(msgerr, "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+            SaveData = False
+        End If
     End Function
     Private Sub getFulfilmentTypeCode()
         'Copy From Gemmaknits Sitthana 23/04/2018
@@ -918,7 +914,7 @@ Public Class frmSalesOrder
         Me.tabCustomer.Show()
         applyGridLayoutSettingsToGrid(grdSalesOrder) 'John 27/10/2025
 
-        Dim dbname = (New classConnection).database
+        Dim dbname = (New ClassConnection).database
         If dbname = "ColomboDB" OrElse dbname = "ColomboDBTest" Then
             btnCheckStock.Enabled = False
             btnCustomerItems.Enabled = False
@@ -970,7 +966,7 @@ Public Class frmSalesOrder
             tsbUnConfirmOrder.Enabled = False
             ComboSaleOrderType1.Enabled = True 'Sitthana 20241210
             'End 'Sitthana 20190624
-            MessageBox.Show("¤Ø³äÁèÁÕÊÔ·¸Ôì ÊÃéÒ§/á¡éä¢ Sales Order ¤ÃÑº", "¼Å¡ÒÃµÃÇ¨ÊÍºÊÔ·¸Ôì", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBox.Show("ï¿½Ø³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ò§/ï¿½ï¿½ï¿½ Sales Order ï¿½ï¿½Ñº", "ï¿½Å¡ï¿½Ãµï¿½Ç¨ï¿½Íºï¿½Ô·ï¿½ï¿½ï¿½", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
 
@@ -1023,7 +1019,7 @@ Public Class frmSalesOrder
         blnCancel = False
         Dim result As System.Windows.Forms.DialogResult
         result = MessageBox.Show("Would you like to save ?" & vbCrLf &
-        IIf(IIf(strSoNo.Trim.Length = 0, txtSoNo.Text.Trim, strSoNo).ToString.Trim.Length = 0, "** ¶éÒäÁèãÊè S/O No. ÃÐºº¨ÐÃÑ¹ãËéÍÑµÔâ¹ÁÑµÔ **", "S/O No. = '" & IIf(strSoNo.Trim.Length = 0, txtSoNo.Text.Trim, strSoNo) & "'"),
+        IIf(IIf(strSoNo.Trim.Length = 0, txtSoNo.Text.Trim, strSoNo).ToString.Trim.Length = 0, "** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ S/O No. ï¿½Ðºï¿½ï¿½ï¿½ï¿½Ñ¹ï¿½ï¿½ï¿½ï¿½Ñµï¿½ï¿½ï¿½Ñµï¿½ **", "S/O No. = '" & IIf(strSoNo.Trim.Length = 0, txtSoNo.Text.Trim, strSoNo) & "'"),
         "System Message", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3)
         If result = System.Windows.Forms.DialogResult.Cancel Then blnCancel = True
         If result <> System.Windows.Forms.DialogResult.Yes Then Exit Sub
@@ -1058,8 +1054,8 @@ Public Class frmSalesOrder
 
         End If
 
-        'If MessageBox.Show("¤Ø³Â×¹ÂÑ¹·Õè¨ÐÊÃéÒ§ So No ãËÁè " & vbCr & Space(3) & "â´Â¡ÒÃ¤Ñ´ÅÍ¡¢éÍÁÙÅ¨Ò¡ So No : " & txtSoNo.Text.Trim & " ãªèËÃ×ÍäÁè ?" _
-        '                 , "Â×¹ÂÑ¹¡ÒÃ ÊÃéÒ§ÃÒÂ¡ÒÃãËÁè â´Â¤Ñ´ÅÍ¡¢éÍÁÙÅ¨Ò¡ÃÒÂ¡ÒÃà´ÔÁ" _
+        'If MessageBox.Show("ï¿½Ø³ï¿½×¹ï¿½Ñ¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò§ So No ï¿½ï¿½ï¿½ï¿½ " & vbCr & Space(3) & "ï¿½Â¡ï¿½Ã¤Ñ´ï¿½Í¡ï¿½ï¿½ï¿½ï¿½ï¿½Å¨Ò¡ So No : " & txtSoNo.Text.Trim & " ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ?" _
+        '                 , "ï¿½×¹ï¿½Ñ¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ò§ï¿½ï¿½Â¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Â¤Ñ´ï¿½Í¡ï¿½ï¿½ï¿½ï¿½ï¿½Å¨Ò¡ï¿½ï¿½Â¡ï¿½ï¿½ï¿½ï¿½ï¿½" _
         '                 , MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2
         '                   ) = vbOK Then
         '    CaseCopy = True
@@ -1074,7 +1070,7 @@ Public Class frmSalesOrder
         '    'CreateOrUpdateSoNo()
         '    'CaseCopy = False
         'Else
-        '    MessageBox.Show("Â¡àÅÔ¡¡ÒÃÊÃéÒ§ So No ãºãËÁè", "á¨é§¼Å¡ÒÃÊÃéÒ§ÃÒÂ¡ÒÃãËÁè â´Â¤Ñ´ÅÍ¡¢éÍÁÙÅ¨Ò¡ÃÒÂ¡ÒÃà´ÔÁ", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        '    MessageBox.Show("Â¡ï¿½ï¿½Ô¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò§ So No ï¿½ï¿½ï¿½ï¿½ï¿½", "ï¿½é§¼Å¡ï¿½ï¿½ï¿½ï¿½ï¿½Ò§ï¿½ï¿½Â¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Â¤Ñ´ï¿½Í¡ï¿½ï¿½ï¿½ï¿½ï¿½Å¨Ò¡ï¿½ï¿½Â¡ï¿½ï¿½ï¿½ï¿½ï¿½", MessageBoxButtons.OK, MessageBoxIcon.Information)
         'End If
     End Sub
     Private Function CheckDataCopySo() As Boolean
@@ -1089,17 +1085,17 @@ Public Class frmSalesOrder
         ' Try
 
         Dim Sono As String = txtSoNo.Text.Trim
-            '========= Copy Data =========='
-            Dim dtCopy As DataTable = (New classSalesOrder).GetCopySoitm(strSoNo:=Sono)
-            '========= Clear Data ========='
-            Call btnNew_Click(sender:=sender, e:=e)
-            '========= Loop Copy Data ====='
-            Dim dtOld As DataTable = TryCast(grdSalesOrder.DataSource, DataTable)
+        '========= Copy Data =========='
+        Dim dtCopy As DataTable = (New classSalesOrder).GetCopySoitm(strSoNo:=Sono)
+        '========= Clear Data ========='
+        Call btnNew_Click(sender:=sender, e:=e)
+        '========= Loop Copy Data ====='
+        Dim dtOld As DataTable = TryCast(grdSalesOrder.DataSource, DataTable)
 
-            If dtOld Is Nothing Then
-                MessageBox.Show("Data source not found", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                Return False
-            End If
+        If dtOld Is Nothing Then
+            MessageBox.Show("Data source not found", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return False
+        End If
 
         ' Dim drOldNewRow As DataRow
         For Each drCopy As DataRow In dtCopy.Rows
@@ -1166,7 +1162,7 @@ Public Class frmSalesOrder
         'Const rptFileName = "rptSOConfirm.rpt"  'Comment by Sitthana 21/03/2018
 
         If clsUser.ReportPath = "" Then clsUser.ReportPath = clsUser.ReportPath
-        If Not clsConfig.CheckReport(clsUser.ReportPath, rptFileName, False) Then
+        If Not oConfig.CheckReport(clsUser.ReportPath, rptFileName, False) Then
             'Try
             '    Dim rpt As New rptSOConfirm
             '    printReport(rpt)
@@ -1200,7 +1196,7 @@ Public Class frmSalesOrder
         logonInfo.ConnectionInfo.UserID = clsConn.Userid
         logonInfo.ConnectionInfo.Password = clsConn.Password
 
-        If UCase((New classConnection).database) = "KARISMA" Then
+        If UCase((New ClassConnection).database) = "KARISMA" Then
             rpt.Subreports(0).Database.Tables(0).ApplyLogOnInfo(logonInfo)
             rpt.DataSourceConnections.Item(0).SetConnection(clsConn.servername, clsConn.database, False)
             rpt.DataSourceConnections.Item(0).SetLogon(clsConn.Userid, clsConn.Password)
@@ -1220,7 +1216,7 @@ Public Class frmSalesOrder
         rpt.SetParameterValue("@use_show_price", False)
         rpt.SetParameterValue("@print_yield", False)
 
-        If UCase((New classConnection).database) = "KARISMA" Then
+        If UCase((New ClassConnection).database) = "KARISMA" Then
             rpt.DataDefinition.ParameterFields("@sono", rpt.Subreports(0).Name).ApplyCurrentValues(rpt.ParameterFields("@sono").CurrentValues)
             rpt.DataDefinition.ParameterFields("@datefr", rpt.Subreports(0).Name).ApplyCurrentValues(rpt.ParameterFields("@datefr").CurrentValues)
             rpt.DataDefinition.ParameterFields("@dateto", rpt.Subreports(0).Name).ApplyCurrentValues(rpt.ParameterFields("@dateto").CurrentValues)
@@ -1236,7 +1232,7 @@ Public Class frmSalesOrder
             End If
         End If
 
-        If UCase((New classConnection).database) = "KARISMA" Then
+        If UCase((New ClassConnection).database) = "KARISMA" Then
             rpt.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.PaperLetter
             rpt.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Landscape
             rpt.PrintOptions.PaperSource = CrystalDecisions.Shared.PaperSource.Auto
@@ -1299,7 +1295,7 @@ Public Class frmSalesOrder
         If strSoNo.Length = 0 Then Exit Sub
         Const rptFileName = "rptSO.rpt"
         If clsUser.ReportPath = "" Then clsUser.ReportPath = clsUser.ReportPath
-        If Not clsConfig.CheckReport(clsUser.ReportPath, rptFileName) Then Exit Sub
+        If Not oConfig.CheckReport(clsUser.ReportPath, rptFileName) Then Exit Sub
         Dim frm As New frmReport
         Dim rpt As New CrystalDecisions.CrystalReports.Engine.ReportDocument
         Dim logonInfo As New CrystalDecisions.Shared.TableLogOnInfo
@@ -1456,15 +1452,15 @@ Public Class frmSalesOrder
         If grdSalesOrder.Columns(e.ColumnIndex).Name = "qty" Or
          grdSalesOrder.Columns(e.ColumnIndex).Name = "price" Or
          grdSalesOrder.Columns(e.ColumnIndex).Name = "discamt" Then
-            grdSalesOrder.Rows(e.RowIndex).Cells("gr_itamt").Value = Val(clsConfig.IsNull(grdSalesOrder.Rows(e.RowIndex).Cells("qty").Value, 0)) * Val(clsConfig.IsNull(grdSalesOrder.Rows(e.RowIndex).Cells("price").Value, 0))
-            grdSalesOrder.Rows(e.RowIndex).Cells("nt_itamt").Value = Val(clsConfig.IsNull(grdSalesOrder.Rows(e.RowIndex).Cells("gr_itamt").Value, 0)) - Val(clsConfig.IsNull(grdSalesOrder.Rows(e.RowIndex).Cells("discamt").Value, 0))
+            grdSalesOrder.Rows(e.RowIndex).Cells("gr_itamt").Value = Val(oConfig.IsNull(grdSalesOrder.Rows(e.RowIndex).Cells("qty").Value, 0)) * Val(oConfig.IsNull(grdSalesOrder.Rows(e.RowIndex).Cells("price").Value, 0))
+            grdSalesOrder.Rows(e.RowIndex).Cells("nt_itamt").Value = Val(oConfig.IsNull(grdSalesOrder.Rows(e.RowIndex).Cells("gr_itamt").Value, 0)) - Val(oConfig.IsNull(grdSalesOrder.Rows(e.RowIndex).Cells("discamt").Value, 0))
             Call SumGrid()
         End If
         If grdSalesOrder.Columns(e.ColumnIndex).Name = "curr" Then
             'If clsConfig.IsNull(grdSalesOrder.Rows(e.RowIndex).Cells("curr").Value, "") = "USD" Then grdSalesOrder.Rows(e.RowIndex).Cells("exrt").Value = FormatNumber(clsUser.ExchangeRate, 4)
             'If clsConfig.IsNull(grdSalesOrder.Rows(e.RowIndex).Cells("curr").Value, "") = "THB" Then grdSalesOrder.Rows(e.RowIndex).Cells("exrt").Value = FormatNumber(1, 4)
             With grdSalesOrder
-                Select Case clsConfig.IsNull(.Rows(e.RowIndex).Cells("curr").Value, "").ToString.ToUpper
+                Select Case oConfig.IsNull(.Rows(e.RowIndex).Cells("curr").Value, "").ToString.ToUpper
                     Case "USD"
                         .Rows(e.RowIndex).Cells("exrt").Value = FormatNumber(clsUser.ExchangeRate, 4)
                     Case "JPY"
@@ -1661,10 +1657,10 @@ Public Class frmSalesOrder
     '    bindCustomerShipToData()
     'End Sub
     Private Sub BindCustomerBillToAddr()
-        txtCustAddr.Text = Me.mcboCustomersBillToFlag.ListBox.Grid.Model(Me.mcboCustomersBillToFlag.SelectedIndex + 1, 5).CellValue.ToString
+        txtCustAddr.Text = oConfig.IsNull(Me.mcboCustomersBillToFlag.ListBox.Grid.Model(Me.mcboCustomersBillToFlag.SelectedIndex + 1, 5).CellValue, "").ToString
     End Sub
     Private Sub BindCustomerShipToAddr()
-        txtDeliAddr.Text = Me.mcboCustomersShipToFlag.ListBox.Grid.Model(Me.mcboCustomersShipToFlag.SelectedIndex + 1, 5).CellValue.ToString
+        txtDeliAddr.Text = oConfig.IsNull(Me.mcboCustomersShipToFlag.ListBox.Grid.Model(Me.mcboCustomersShipToFlag.SelectedIndex + 1, 5).CellValue, "").ToString
     End Sub
     Private Sub bindCustomerBillToData()
         Dim config As New clsConfig
@@ -1673,7 +1669,7 @@ Public Class frmSalesOrder
         Dim dt2 As New DataTable
         dt2 = dt.Copy()
         For i = 0 To dt2.Rows.Count - 1
-            If dt2.Rows(i)("custcd").ToString.Trim = config.IsNull(Me.mcboCustomersBillToFlag.ListBox.Grid.Model(Me.mcboCustomersBillToFlag.SelectedIndex + 1, 3).CellValue.ToString, "").ToString.Trim Then
+            If dt2.Rows(i)("custcd").ToString.Trim = config.IsNull(Me.mcboCustomersBillToFlag.ListBox.Grid.Model(Me.mcboCustomersBillToFlag.SelectedIndex + 1, 3).CellValue, "").ToString.Trim Then
 
                 cboAgent.SelectedValue = dt2.Rows(i)("new_agcd").ToString.Trim
                 txtTermCondition.Text = dt2.Rows(i)("new_payterms").ToString.Trim
@@ -1697,9 +1693,9 @@ Public Class frmSalesOrder
         'For i = 0 To dt2.Rows.Count - 1
         'If dt2.Rows(i)("custcd").ToString.Trim = config.IsNull(Me.mcboCustomersBillToFlag.ListBox.Grid.Model(Me.mcboCustomersBillToFlag.SelectedIndex + 1, 3).CellValue.ToString, "").ToString.Trim Then
         'txtDeliAddr.Text = dt2.Rows(i)("custaddr").ToString.Trim
-        txtTransportBy.Text = Me.mcboCustomersShipToFlag.ListBox.Grid.Model(Me.mcboCustomersShipToFlag.SelectedIndex + 1, 14).CellValue.ToString.Trim
-        txtAdditionalLabel.Text = Me.mcboCustomersShipToFlag.ListBox.Grid.Model(Me.mcboCustomersShipToFlag.SelectedIndex + 1, 15).CellValue.ToString.Trim
-        txtDeliAddr.Text = Me.mcboCustomersShipToFlag.ListBox.Grid.Model(Me.mcboCustomersShipToFlag.SelectedIndex + 1, 5).CellValue.ToString.Trim
+        txtTransportBy.Text = oConfig.IsNull(Me.mcboCustomersShipToFlag.ListBox.Grid.Model(Me.mcboCustomersShipToFlag.SelectedIndex + 1, 14).CellValue, "").ToString.Trim
+        txtAdditionalLabel.Text = oConfig.IsNull(Me.mcboCustomersShipToFlag.ListBox.Grid.Model(Me.mcboCustomersShipToFlag.SelectedIndex + 1, 15).CellValue, "").ToString.Trim
+        txtDeliAddr.Text = oConfig.IsNull(Me.mcboCustomersShipToFlag.ListBox.Grid.Model(Me.mcboCustomersShipToFlag.SelectedIndex + 1, 5).CellValue, "").ToString.Trim
 
         '          Exit For
         ' End If
@@ -1727,7 +1723,7 @@ Public Class frmSalesOrder
     End Sub
 
     Private Sub hidecolumns()
-        Dim classcn As New classConnection
+        Dim classcn As New ClassConnection
         If UCase(classcn.database) = "GEMMASOFT" Then
             colRefdesno.Visible = True
             colGmPerSqM.Visible = True
@@ -1766,7 +1762,7 @@ Public Class frmSalesOrder
         Dim dt As DataTable
         Try
             If Me.cboAgent.SelectedIndex = 0 Then Exit Sub
-            dt = (New classMaster).GetAgent(Me.cboAgent.SelectedValue.ToString.Trim)
+            dt = (New classMaster).GetAgent(oConfig.IsNull(Me.cboAgent.SelectedValue, "").ToString.Trim)
             If dt.Rows.Count = 0 Then Exit Sub
             Me.lblAgentCommPer.Text = "Std.Comm%: " + dt.Rows(0)("commPer").ToString
             Me.txtAgentCommPer.Text = dt.Rows(0)("commPer").ToString
@@ -1780,7 +1776,7 @@ Public Class frmSalesOrder
         Dim dt As DataTable
         Try
             If Me.cboSalesMan.Text.ToString.Trim Is Nothing Then Exit Sub
-            dt = (New classMaster).GetEmp(Me.cboSalesMan.SelectedValue.ToString.Trim)
+            dt = (New classMaster).GetEmp(oConfig.IsNull(Me.cboSalesMan.SelectedValue, "").ToString.Trim)
             If dt.Rows.Count = 0 Then Exit Sub
             Me.lblSalesCommPer.Text = "Std.Comm%: " + dt.Rows(0)("CommPer").ToString
             Me.txtSalesCommPer.Text = dt.Rows(0)("commPer").ToString
@@ -1815,14 +1811,14 @@ Public Class frmSalesOrder
     Private Sub btnCustomerItems_Click(sender As Object, e As EventArgs) Handles btnCustomerItems.Click
         'Sitthana 12/02/2018
         If mcboCustomersBillToFlag.SelectedIndex < 0 Or mcboCustomersBillToFlag.Text.ToString.Trim = "" Then
-            MsgBox("¤Ø³µéÍ§àÅ×Í¡ÅÙ¡¤éÒ¡èÍ¹¤ÃÑº", MsgBoxStyle.OkOnly, "¢éÍ¼Ô´¾ÅÒ´")
+            MsgBox("ï¿½Ø³ï¿½ï¿½Í§ï¿½ï¿½ï¿½Í¡ï¿½Ù¡ï¿½ï¿½Ò¡ï¿½Í¹ï¿½ï¿½Ñº", MsgBoxStyle.OkOnly, "ï¿½ï¿½Í¼Ô´ï¿½ï¿½Ò´")
             TabControl1.SelectTab(1)
             txtContact.Focus()
             Exit Sub
         End If
 
         'If grdSalesOrder.Then Then
-        '    MsgBox("¤Ø³µéÍ§»éÍ¹¢éÍÁÙÅ Design NO ËÃ×Í Customer Design NO ¡èÍ¹¤ÃÑº", MsgBoxStyle.OkOnly, "¢éÍ¼Ô´¾ÅÒ´")
+        '    MsgBox("ï¿½Ø³ï¿½ï¿½Í§ï¿½ï¿½Í¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Design NO ï¿½ï¿½ï¿½ï¿½ Customer Design NO ï¿½ï¿½Í¹ï¿½ï¿½Ñº", MsgBoxStyle.OkOnly, "ï¿½ï¿½Í¼Ô´ï¿½ï¿½Ò´")
         '    grdSalesOrder.Focus()
         '    txtContact.Focus()
         '    Exit Sub
@@ -1834,14 +1830,14 @@ Public Class frmSalesOrder
             objfrmSearchSOCustItem.CustomerNumber = Me.mcboCustomersBillToFlag.ListBox.Grid.Model(Me.mcboCustomersBillToFlag.SelectedIndex + 1, 3).CellValue  'cboCustomer.SelectedValue
             objfrmSearchSOCustItem.CustomerName = Me.mcboCustomersBillToFlag.ListBox.Grid.Model(Me.mcboCustomersBillToFlag.SelectedIndex + 1, 4).CellValue 'cboCustomer.Text
             If grdSalesOrder.Rows.Count > 1 Then
-                objfrmSearchSOCustItem.CustItemNumber = clsConfig.IsNull(grdSalesOrder.CurrentRow.Cells("Custdes").Value, "")
-                objfrmSearchSOCustItem.OurItemNumber = clsConfig.IsNull(grdSalesOrder.CurrentRow.Cells("design_no").Value, "")
+                objfrmSearchSOCustItem.CustItemNumber = oConfig.IsNull(grdSalesOrder.CurrentRow.Cells("Custdes").Value, "")
+                objfrmSearchSOCustItem.OurItemNumber = oConfig.IsNull(grdSalesOrder.CurrentRow.Cells("design_no").Value, "")
             Else
                 If grdSalesOrder.IsCurrentCellInEditMode = False Then
-                    MsgBox("ãËé¤Ø³ »éÍ¹¢éÍÁÙÅ Design No ËÃ×Í Customer Design ËÃ×ÍªèÍ§ÇèÒ§ ã¹ Grid ¡èÍ¹·Õè¨Ð¡´»ØèÁ Customer ¤ÃÑº" _
+                    MsgBox("ï¿½ï¿½ï¿½Ø³ ï¿½ï¿½Í¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Design No ï¿½ï¿½ï¿½ï¿½ Customer Design ï¿½ï¿½ï¿½Íªï¿½Í§ï¿½ï¿½Ò§ ï¿½ Grid ï¿½ï¿½Í¹ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½ Customer ï¿½ï¿½Ñº" _
                            & vbCr & "(Please enter the Design No. or Customer Design or space in the grid " _
                            & vbCr & "        before pressing the customer button.)" _
-                           , MsgBoxStyle.OkOnly, "¢éÍ¼Ô´¾ÅÒ´")
+                           , MsgBoxStyle.OkOnly, "ï¿½ï¿½Í¼Ô´ï¿½ï¿½Ò´")
                     Exit Sub
                 End If
             End If
@@ -1882,9 +1878,9 @@ Public Class frmSalesOrder
         If currentColName = "ref_stnoid" Then
 
             With grdSalesOrder
-                If clsConfig.IsNull(.Rows(.CurrentRow.Index).Cells("qty").Value, 0) = 0 Then
+                If oConfig.IsNull(.Rows(.CurrentRow.Index).Cells("qty").Value, 0) = 0 Then
                     MessageBox.Show("qty must greater than zero", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                ElseIf clsConfig.IsNull(.Rows(.CurrentRow.Index).Cells("uom").Value, "") = "" Then
+                ElseIf oConfig.IsNull(.Rows(.CurrentRow.Index).Cells("uom").Value, "") = "" Then
                     MessageBox.Show("uom must not blank", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 ElseIf currentGridDesignNo = "" Then
                     MessageBox.Show("Design must not blank", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -1898,11 +1894,11 @@ Public Class frmSalesOrder
 
                     ' frmSOSTListSelect.pConnection = conn 'Sitthana 21/08/2018
                     frmSOSTListSelect.DesignNo = currentGridDesignNo
-                    frmSOSTListSelect.DemandQty = clsConfig.IsNull(.Rows(.CurrentRow.Index).Cells("qty").Value, 0) 'Sitthana 20200806
-                    frmSOSTListSelect.DemandUom = clsConfig.IsNull(.Rows(.CurrentRow.Index).Cells("uom").Value, "") 'Sitthana 20200806
+                    frmSOSTListSelect.DemandQty = oConfig.IsNull(.Rows(.CurrentRow.Index).Cells("qty").Value, 0) 'Sitthana 20200806
+                    frmSOSTListSelect.DemandUom = oConfig.IsNull(.Rows(.CurrentRow.Index).Cells("uom").Value, "") 'Sitthana 20200806
                     frmSOSTListSelect.DemandKgWeight = clsMaster.GetDesignKg(currentGridDesignNo _
-                                                                          , clsConfig.IsNull(.Rows(.CurrentRow.Index).Cells("qty").Value, 1) _
-                                                                          , clsConfig.IsNull(.Rows(.CurrentRow.Index).Cells("uom").Value, "")
+                                                                          , oConfig.IsNull(.Rows(.CurrentRow.Index).Cells("qty").Value, 1) _
+                                                                          , oConfig.IsNull(.Rows(.CurrentRow.Index).Cells("uom").Value, "")
                                                                             ) 'Sitthana 20200806
                     frmSOSTListSelect.ShowDialog()
                     If frmSOSTListSelect.SONOID <> "" Then
@@ -2070,10 +2066,10 @@ Public Class frmSalesOrder
                     tsbConfirmOrder.Enabled = False
                 End If
                 lblCustomersActive.Visible = True
-                MessageBox.Show("ÅÙ¡¤éÒ·èÒ¹¹Õé ä´é¶Ù¡Â¡àÅÔ¡ä»áÅéÇ " & vbCr _
-                          & "   - ¤Ø³äÁèÊÒÁÒÃ¶ÊÃéÒ§ SO ä´é" & vbCr _
-                          & "   - ¤Ø³ÊÒÁÒÃ¶ Â¡àÅÔ¡ ËÃ×Í Unconfirm ä´éà·èÒ¹Ñé¹" _
-                          , "¢éÍ¤ÇÒÁàµ×Í¹", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                MessageBox.Show("ï¿½Ù¡ï¿½ï¿½Ò·ï¿½Ò¹ï¿½ï¿½ï¿½ ï¿½ï¿½Ù¡Â¡ï¿½ï¿½Ô¡ï¿½ï¿½ï¿½ï¿½ï¿½ " & vbCr _
+                          & "   - ï¿½Ø³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½Ò§ SO ï¿½ï¿½" & vbCr _
+                          & "   - ï¿½Ø³ï¿½ï¿½ï¿½ï¿½Ã¶ Â¡ï¿½ï¿½Ô¡ ï¿½ï¿½ï¿½ï¿½ Unconfirm ï¿½ï¿½ï¿½ï¿½Ò¹ï¿½ï¿½" _
+                          , "ï¿½ï¿½Í¤ï¿½ï¿½ï¿½ï¿½ï¿½Í¹", MessageBoxButtons.OK, MessageBoxIcon.Information)
             End If
         End With
         'End  - Sitthana 19/09/2018
@@ -2256,7 +2252,7 @@ Public Class frmSalesOrder
             If IsDBNull(qty) OrElse qty = 0 Then
                 grdSalesOrder.Rows(e.RowIndex).Cells("colProdLossPerc").Value = 0.0
             Else
-                grdSalesOrder.Rows(e.RowIndex).Cells("colQtyWithLoss").Value = Val(clsConfig.IsNull(qty, 0)) * (1 + Val(clsConfig.IsNull(lossPerc, 0)) / 100)
+                grdSalesOrder.Rows(e.RowIndex).Cells("colQtyWithLoss").Value = Val(oConfig.IsNull(qty, 0)) * (1 + Val(oConfig.IsNull(lossPerc, 0)) / 100)
             End If
         End If
 
@@ -2267,7 +2263,7 @@ Public Class frmSalesOrder
             If IsDBNull(qty) OrElse qty = 0 Then
                 grdSalesOrder.Rows(e.RowIndex).Cells("colProdLossPerc").Value = 0.0
             Else
-                grdSalesOrder.Rows(e.RowIndex).Cells("colQtyWithLoss").Value = Val(clsConfig.IsNull(qty, 0)) * (1 + Val(clsConfig.IsNull(lossPerc, 0)) / 100)
+                grdSalesOrder.Rows(e.RowIndex).Cells("colQtyWithLoss").Value = Val(oConfig.IsNull(qty, 0)) * (1 + Val(oConfig.IsNull(lossPerc, 0)) / 100)
             End If
         End If
     End Sub

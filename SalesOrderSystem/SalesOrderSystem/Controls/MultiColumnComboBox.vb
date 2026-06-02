@@ -472,19 +472,47 @@ Namespace Controls
                 End If
             Next
 
-            ' Position popup below the control
-            Dim screenPt As Point = Me.PointToScreen(New Point(0, Me.Height))
+            ' --- Measure popup size after DataGridView has processed columns ---
+            ' Show popup off-screen first so DGV can calculate column widths
+            _popup.Location = New Point(-9999, -9999)
+            _popup.Size = New Size(800, 400)
+            _popup.Show(Me.FindForm())
+
+            ' Force DGV to measure column widths with real data
+            _dgv.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells)
+
+            ' Sum visible column widths to get total content width
+            Dim totalColW As Integer = 0
+            For Each col As DataGridViewColumn In _dgv.Columns
+                If col.Visible Then totalColW += col.Width
+            Next
+            ' Add scrollbar width margin
+            totalColW += SystemInformation.VerticalScrollBarWidth + 4
+
+            ' Calculate height: header + data rows (max 12 visible rows) + scrollbar allowance
             Dim rowH As Integer = _dgv.RowTemplate.Height
             Dim headerH As Integer = _dgv.ColumnHeadersHeight
-            Dim dataH As Integer = Math.Min(_dataTable.Rows.Count * rowH, rowH * 12)
-            Dim visCount As Integer = 0
-            For Each col As DataGridViewColumn In _dgv.Columns
-                If col.Visible Then visCount += 1
-            Next
-            Dim popupW As Integer = Math.Max(Me.Width, visCount * 130)
-            Dim popupH As Integer = headerH + dataH + 4
+            Dim maxRows As Integer = Math.Min(_dataTable.Rows.Count, 12)
+            Dim dataH As Integer = maxRows * rowH
+            Dim hasScroll As Boolean = (_dataTable.Rows.Count > 12)
+            Dim scrollH As Integer = If(hasScroll, SystemInformation.HorizontalScrollBarHeight, 0)
+            Dim popupH As Integer = headerH + dataH + scrollH + 4
 
-            _popup.Location = screenPt
+            ' Width: at least as wide as the control, at most screen width - margin
+            Dim screenPt As Point = Me.PointToScreen(New Point(0, Me.Height))
+            Dim screenW As Integer = Screen.FromControl(Me).WorkingArea.Width
+            Dim screenH As Integer = Screen.FromControl(Me).WorkingArea.Bottom
+            Dim popupW As Integer = Math.Min(Math.Max(Me.Width, totalColW), screenW - screenPt.X - 4)
+
+            ' Flip up if not enough space below
+            Dim popupY As Integer = screenPt.Y
+            If popupY + popupH > screenH Then
+                Dim abovePt As Point = Me.PointToScreen(New Point(0, 0))
+                popupY = abovePt.Y - popupH
+                If popupY < 0 Then popupY = 0
+            End If
+
+            _popup.Location = New Point(screenPt.X, popupY)
             _popup.Size = New Size(popupW, popupH)
 
             ' Scroll to selected row
@@ -497,7 +525,6 @@ Namespace Controls
             AddHandler _dgv.KeyDown, AddressOf OnDgvKeyDown
             AddHandler _popup.Deactivate, AddressOf OnPopupDeactivate
 
-            _popup.Show(Me.FindForm())
             _dgv.Focus()
         End Sub
 

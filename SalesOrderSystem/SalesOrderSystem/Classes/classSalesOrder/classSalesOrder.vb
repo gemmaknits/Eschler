@@ -1,8 +1,10 @@
 Imports System.Data
 Imports System.Data.SqlClient
 Imports System.Text
+Imports Classes
 
 Public Class classSalesOrder
+    Dim oConfig As New clsConfig
     Public Structure SOHeader
         Dim h01_sono As String
         Dim h02_sodt As String
@@ -78,7 +80,7 @@ Public Class classSalesOrder
 
 
     Public Function SOSearch(Optional ByVal strSoNo As String = "", Optional ByVal strDateFr As String = "", Optional ByVal strDateTo As String = "", Optional ByVal strCustCD As String = "", Optional strUserID As String = "") As DataTable
-        Dim conn As New SqlConnection((New classConnection).connection)
+        Dim conn As New SqlConnection((New ClassConnection).connection)
         Dim comm As New SqlCommand("", conn)
         comm.CommandType = CommandType.StoredProcedure
         comm.CommandText = "p_so_search"
@@ -97,7 +99,7 @@ Public Class classSalesOrder
     Public Function SOLoad(Optional ByVal strSoNo As String = "", Optional ByVal strDateFr As String = "",
                            Optional ByVal strDateTo As String = "", Optional ByVal strCustCD As String = "",
                            Optional strUserID As String = "", Optional ByVal strOrder_Type As String = "") As DataTable
-        Dim conn As New SqlConnection((New classConnection).connection)
+        Dim conn As New SqlConnection((New ClassConnection).connection)
         Dim comm As New SqlCommand("", conn)
         comm.CommandType = CommandType.StoredProcedure
         'comm.CommandText = "p_so_combo_select"
@@ -117,7 +119,7 @@ Public Class classSalesOrder
     End Function
 
     Public Function SODetLoad(ByVal strSoNo As String) As DataTable
-        Dim conn As New SqlConnection((New classConnection).connection)
+        Dim conn As New SqlConnection((New ClassConnection).connection)
         Dim comm As New SqlCommand("", conn)
         comm.CommandType = CommandType.StoredProcedure
         comm.CommandText = "p_soitm_select"
@@ -131,7 +133,7 @@ Public Class classSalesOrder
     End Function
 
     Public Function GetCopySoitm(ByVal strSoNo As String) As DataTable
-        Dim conn As New SqlConnection((New classConnection).connection)
+        Dim conn As New SqlConnection((New ClassConnection).connection)
         Dim comm As New SqlCommand("", conn)
         comm.CommandType = CommandType.StoredProcedure
         comm.CommandText = "P_SO_PKG_select_soitm_copy"
@@ -145,7 +147,7 @@ Public Class classSalesOrder
     End Function
 
     Public Function GetSOFromPO(ByVal strPoNo As String) As DataTable
-        Dim conn As New SqlConnection((New classConnection).connection)
+        Dim conn As New SqlConnection((New ClassConnection).connection)
         Dim comm As New SqlCommand("", conn)
         comm.CommandType = CommandType.StoredProcedure
         comm.CommandText = "p_so_check_duplicate_po"
@@ -159,7 +161,7 @@ Public Class classSalesOrder
     End Function
 
     Public Function GetSOFromCustPOUnique(ByVal strPoNo As String) As DataTable
-        Dim conn As New SqlConnection((New classConnection).connection)
+        Dim conn As New SqlConnection((New ClassConnection).connection)
         Dim comm As New SqlCommand("", conn)
         comm.CommandType = CommandType.StoredProcedure
         comm.CommandText = "p_so_check_duplicate_custpo_unique"
@@ -173,7 +175,7 @@ Public Class classSalesOrder
     End Function
 
     Public Function Getfulfilment_typeFromSo_Type(ByVal StrSo_type As String) As DataTable
-        Dim conn As New SqlConnection((New classConnection).connection)
+        Dim conn As New SqlConnection((New ClassConnection).connection)
         Dim comm As New SqlCommand("", conn)
         comm.CommandType = CommandType.StoredProcedure
         comm.CommandText = "p_so_select_fulfilment_type_from_so_type"
@@ -187,7 +189,7 @@ Public Class classSalesOrder
     End Function
 
     Public Function GetSo_TypeFromUserId(ByVal Strentitytype As String, ByVal Struserid As String) As DataTable
-        Dim conn As New SqlConnection((New classConnection).connection)
+        Dim conn As New SqlConnection((New ClassConnection).connection)
         Dim comm As New SqlCommand("", conn)
         comm.CommandType = CommandType.StoredProcedure
         comm.CommandText = "p_so_select_so_type_from_userid"
@@ -203,7 +205,7 @@ Public Class classSalesOrder
 
     Public Function SOSave(ByVal SOH As SOHeader, ByVal SOD_ADD As DataView, ByVal SOD_UPD As DataView, ByVal SOD_DEL As DataView, ByRef msgerr As String, ByRef sono As String) As Boolean
         Dim config As New clsConfig
-        Dim conn As New SqlConnection((New classConnection).connection)
+        Dim conn As New SqlConnection((New ClassConnection).connection)
         conn.Open()
         Dim tran As SqlTransaction = conn.BeginTransaction
         Dim comm As New SqlCommand("", conn)
@@ -224,7 +226,7 @@ Public Class classSalesOrder
             comm.Parameters.AddWithValue("@discamt", .h08_discamt)
             comm.Parameters.AddWithValue("@nt_soamt", .h09_nt_soamt)
             comm.Parameters.AddWithValue("@attn", .h10_attn.Trim)
-            comm.Parameters.AddWithValue("@shipcustcd", .h11_shipcustcd.Trim)
+            comm.Parameters.AddWithValue("@shipcustcd", .h11_shipcustcd)
             comm.Parameters.AddWithValue("@payterms", .h12_payterms.Trim)
             comm.Parameters.AddWithValue("@credit", .h13_credit)
             comm.Parameters.AddWithValue("@crdays", .h14_crdays)
@@ -497,7 +499,7 @@ Public Class classSalesOrder
     End Function
 
     Public Function SOCancel(ByVal strSoNo As String, ByVal strEmpCD As String) As Boolean
-        Dim conn As New SqlConnection((New classConnection).connection)
+        Dim conn As New SqlConnection((New ClassConnection).connection)
         conn.Open()
         Dim tran As SqlTransaction = conn.BeginTransaction
         Dim comm As New SqlCommand("", conn)
@@ -517,7 +519,7 @@ Public Class classSalesOrder
         End If
     End Function
     Public Function SOUnCancelled(ByVal strSoNo As String, ByVal strEmpCD As String) As Boolean
-        Dim conn As New SqlConnection((New classConnection).connection)
+        Dim conn As New SqlConnection((New ClassConnection).connection)
         conn.Open()
         Dim tran As SqlTransaction = conn.BeginTransaction
         Dim comm As New SqlCommand("", conn)
@@ -539,7 +541,7 @@ Public Class classSalesOrder
     End Function
     Public Function SOClose(ByVal dt As DataTable, ByRef msgerr As String, ByVal strEmpCD As String) As Boolean
         Dim config As New clsConfig
-        Dim conn As New SqlConnection((New classConnection).connection)
+        Dim conn As New SqlConnection((New ClassConnection).connection)
         conn.Open()
         Dim tran As SqlTransaction = conn.BeginTransaction
         Dim comm As New SqlCommand("", conn)
@@ -573,7 +575,7 @@ Public Class classSalesOrder
     Public Sub SOConfirm(ByVal sono As String, ByVal log_empcd As String)
         Dim config As New clsConfig
         Dim msgErr As String
-        Dim conn As New SqlConnection((New classConnection).connection)
+        Dim conn As New SqlConnection((New ClassConnection).connection)
         conn.Open()
         Dim tran As SqlTransaction = conn.BeginTransaction
         Dim comm As New SqlCommand("", conn)
@@ -600,7 +602,7 @@ Public Class classSalesOrder
     Public Sub SOUnConfirm(ByVal sono As String, ByVal log_empcd As String)
         Dim config As New clsConfig
         Dim msgErr As String
-        Dim conn As New SqlConnection((New classConnection).connection)
+        Dim conn As New SqlConnection((New ClassConnection).connection)
         conn.Open()
         Dim tran As SqlTransaction = conn.BeginTransaction
         Dim comm As New SqlCommand("", conn)
@@ -627,7 +629,7 @@ Public Class classSalesOrder
 
     Public Function ValidateSOFlowStatus(ByVal StrSoNo As String) As Boolean
 
-        Dim conn As New SqlConnection((New classConnection).connection())
+        Dim conn As New SqlConnection((New ClassConnection).connection())
         conn.Open()
         Dim comm As New SqlCommand("", conn)
         comm.CommandType = CommandType.StoredProcedure
@@ -653,7 +655,7 @@ Public Class classSalesOrder
     End Function
     Public Function getSoData(ByVal pSoNo As String) As DataTable
         'Sitthana 15/08/2018
-        Dim conn As New SqlConnection((New classConnection).connection)
+        Dim conn As New SqlConnection((New ClassConnection).connection)
         Dim comm As New SqlCommand("", conn)
         comm.CommandType = CommandType.StoredProcedure
         comm.CommandText = "P_CMR_PKG_find_so"
@@ -669,7 +671,7 @@ Public Class classSalesOrder
 
     Public Function getCustomersBillToFlag() As DataTable
         'Sitthana 15/08/2018
-        Dim conn As New SqlConnection((New classConnection).connection)
+        Dim conn As New SqlConnection((New ClassConnection).connection)
         Dim comm As New SqlCommand("", conn)
         comm.CommandType = CommandType.StoredProcedure
         comm.CommandText = "P_SO_FORM_PKG_get_customers_bill_to_flag"
@@ -683,7 +685,7 @@ Public Class classSalesOrder
 
     Public Function getCustomersShipToFlag() As DataTable
         'Sitthana 15/08/2018
-        Dim conn As New SqlConnection((New classConnection).connection)
+        Dim conn As New SqlConnection((New ClassConnection).connection)
         Dim comm As New SqlCommand("", conn)
         comm.CommandType = CommandType.StoredProcedure
         comm.CommandText = "P_SO_FORM_PKG_get_customers_ship_to_flag"
@@ -701,7 +703,7 @@ Public Class classSalesOrder
                                  , PM_SortBy As String, PM_DateOf As String
                                    ) As DataTable
         'Sitthana 05/08/2024
-        Dim conn As New SqlConnection((New classConnection).connection)
+        Dim conn As New SqlConnection((New ClassConnection).connection)
         Dim comm As New SqlCommand("", conn)
         comm.CommandType = CommandType.StoredProcedure
         comm.CommandText = "p_so_not_closed_export_to_excel"
@@ -728,7 +730,7 @@ Public Class classSalesOrder
                                      , PM_SortBy As String, PM_DateOf As String
                                        ) As DataTable
         'Sitthana 05/08/2024
-        Dim conn As New SqlConnection((New classConnection).connection)
+        Dim conn As New SqlConnection((New ClassConnection).connection)
         Dim comm As New SqlCommand("", conn)
         comm.CommandType = CommandType.StoredProcedure
         comm.CommandText = "P_SO_PKG_so_not_closed_refer_gamma_rep"

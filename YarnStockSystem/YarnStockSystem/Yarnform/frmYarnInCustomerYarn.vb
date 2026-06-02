@@ -685,15 +685,16 @@
     End Sub
     Private Sub btnPrintBarcode_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPrintBarcode.Click
         If docno.Length = 0 Then Exit Sub
-        Dim K As New formPrintBarcode
+        Dim frm As New formPrintBarcode
 
-        K.loginEmpcd = clsUser.UserID
-        K.Show()
+        frm.loginEmpcd = clsUser.UserID
+        frm.UserInfo = clsUser
+        frm.Show()
 
-        K.txtYarn_in_no.Text = docno
+        frm.txtYarn_in_no.Text = docno
 
-        K.btnFindByYarnInClick()
-        K.SelectAll(sender, e)
+        frm.btnFindByYarnInClick()
+        frm.SelectAll(sender, e)
     End Sub
 
     Private Sub btnExit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExit.Click

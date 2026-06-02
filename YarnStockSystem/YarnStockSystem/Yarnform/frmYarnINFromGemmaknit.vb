@@ -470,15 +470,16 @@
 
     Private Sub btnPrintBarcode_Click(sender As System.Object, e As System.EventArgs) Handles btnPrintBarcode.Click
         If txtYINNo.Text.Length = 0 Then Exit Sub
-        Dim K As New formPrintBarcode
+        Dim frm As New formPrintBarcode
 
-        K.loginEmpcd = clsUser.UserID
-        K.Show()
+        frm.loginEmpcd = clsUser.UserID
+        frm.UserInfo = clsUser
+        frm.Show()
 
-        K.txtYarn_in_no.Text = txtYINNo.Text.Length
+        frm.txtYarn_in_no.Text = txtYINNo.Text.Length
 
-        K.btnFindByYarnInClick()
-        K.SelectAll(sender, e)
+        frm.btnFindByYarnInClick()
+        frm.SelectAll(sender, e)
     End Sub
 
     Private Sub btnPrint_Click(sender As System.Object, e As System.EventArgs) Handles btnPrint.Click

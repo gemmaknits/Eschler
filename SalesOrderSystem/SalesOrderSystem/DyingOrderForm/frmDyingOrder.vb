@@ -105,7 +105,7 @@ Public Class frmDyingOrder
         Me.cboDyedCase.DisplayMember = "dyedcase"
         Me.cboDyedCase.ValueMember = "dyedcase"
 
-        '¬—ß‰¡Ë‰¥È·°È‰¢ Greige Design
+        '‡∏¢‡∏±‡∏á‡πÑ‡∏°‡πà‡πÑ‡∏î‡πâ‡πÅ‡∏Å‡πâ‡πÑ‡∏Ç Greige Design
         'Me.cboDesignNo.DataSource = objDB.GetDesign
         'Me.cboDesignNo.DisplayMember = "design_no"
         'Me.cboDesignNo.ValueMember = "design_no"
@@ -619,7 +619,7 @@ Public Class frmDyingOrder
 
         If clsDF.DFSave(header, dv_add, dv_upd, dv_del, msgerr, dfno) Then
             strDFNo = dfno
-            MessageBox.Show("∫—π∑÷° ”‡√Á®!", "System Message", MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1)
+            MessageBox.Show("‡∏ö‡∏±‡∏ô‡∏ó‡∏∂‡∏Å‡∏™‡∏≥‡πÄ‡∏£‡πá‡∏à!", "System Message", MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1)
             SaveData = True
         Else
             MessageBox.Show(msgerr, "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
@@ -651,8 +651,8 @@ Public Class frmDyingOrder
         If grdDF.Rows.Count = 0 Then Return True
         If MessageBox.Show("Program must clear all Roll No. in right pane before change " & strChangeType & vbCrLf _
          & "Would you still like to change " & strChangeType & " ?" & vbCrLf _
-         & "‚ª√·°√¡®–‡§≈’¬√Ï¡È«π∑’Ë‡≈◊Õ°‰«È∑—ÈßÀ¡¥Õ—µ‘‚π¡—µ‘°ËÕπ‡ª≈’Ë¬π " & strChangeType & vbCrLf _
-         & "§ÿ≥¬—ßµÈÕß°“√®–‡ª≈’Ë¬π " & strChangeType & " Õ’°À√◊Õ‰¡Ë ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.No Then
+         & "‡πÇ‡∏õ‡∏£‡πÅ‡∏Å‡∏£‡∏°‡∏à‡∏∞‡πÄ‡∏Ñ‡∏•‡∏µ‡∏¢‡∏£‡πå‡∏°‡πâ‡∏ß‡∏ô‡∏ó‡∏µ‡πà‡πÄ‡∏•‡∏∑‡∏≠‡∏Å‡πÑ‡∏ß‡πâ‡∏ó‡∏±‡πâ‡∏á‡∏´‡∏°‡∏î‡∏≠‡∏±‡∏ï‡∏¥‡πÇ‡∏ô‡∏°‡∏±‡∏ï‡∏¥‡∏Å‡πà‡∏≠‡∏ô‡πÄ‡∏õ‡∏•‡∏µ‡πà‡∏¢‡∏ô " & strChangeType & vbCrLf _
+         & "‡∏Ñ‡∏∏‡∏ì‡∏¢‡∏±‡∏á‡∏ï‡πâ‡∏≠‡∏á‡∏Å‡∏≤‡∏£‡∏à‡∏∞‡πÄ‡∏õ‡∏•‡∏µ‡πà‡∏¢‡∏ô " & strChangeType & " ‡∏≠‡∏µ‡∏Å‡∏´‡∏£‡∏∑‡∏≠‡πÑ‡∏°‡πà ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.No Then
             Return False
         Else
             Return True
@@ -719,8 +719,8 @@ Public Class frmDyingOrder
                     Else
                         MessageBox.Show("Roll No. " & dt.Rows(i)("roll_no").ToString.Trim & " Color " & dt.Rows(i)("col").ToString.Trim & " is duplicated in right grid." & vbCrLf _
                         & "If you want to add same Roll No., Please change color by change S/O No. ID in Grid Above." & vbCrLf _
-                        & "‡≈¢¡È«π " & dt.Rows(i)("roll_no").ToString.Trim & "  ’ " & dt.Rows(i)("col").ToString.Trim & " ´È”°—∫∑’Ë‡≈◊Õ°‰«È·≈È«¥È“π¢«“" & vbCrLf _
-                        & "∂È“®–„™È‡≈¢¡È«π‡¥‘¡µÈÕß‡ª≈’Ë¬π ’ ∂È“®–‡ª≈’Ë¬π ’„ÀÈ‡≈◊Õ° S/O No. ID ®“°µ“√“ß¥È“π∫π„À¡Ë ·≈È«°≈—∫¡“‡≈◊Õ°¡È«π‡¥‘¡." & vbCrLf _
+                        & "‡πÄ‡∏•‡∏Ç‡∏°‡πâ‡∏ß‡∏ô " & dt.Rows(i)("roll_no").ToString.Trim & " ‡∏™‡∏µ " & dt.Rows(i)("col").ToString.Trim & " ‡∏ã‡πâ‡∏≥‡∏Å‡∏±‡∏ö‡∏ó‡∏µ‡πà‡πÄ‡∏•‡∏∑‡∏≠‡∏Å‡πÑ‡∏ß‡πâ‡πÅ‡∏•‡πâ‡∏ß‡∏î‡πâ‡∏≤‡∏ô‡∏Ç‡∏ß‡∏≤" & vbCrLf _
+                        & "‡∏ñ‡πâ‡∏≤‡∏à‡∏∞‡πÉ‡∏ä‡πâ‡πÄ‡∏•‡∏Ç‡∏°‡πâ‡∏ß‡∏ô‡πÄ‡∏î‡∏¥‡∏°‡∏ï‡πâ‡∏≠‡∏á‡πÄ‡∏õ‡∏•‡∏µ‡πà‡∏¢‡∏ô‡∏™‡∏µ ‡∏ñ‡πâ‡∏≤‡∏à‡∏∞‡πÄ‡∏õ‡∏•‡∏µ‡πà‡∏¢‡∏ô‡∏™‡∏µ‡πÉ‡∏´‡πâ‡πÄ‡∏•‡∏∑‡∏≠‡∏Å S/O No. ID ‡∏à‡∏≤‡∏Å‡∏ï‡∏≤‡∏£‡∏≤‡∏á‡∏î‡πâ‡∏≤‡∏ô‡∏ö‡∏ô‡πÉ‡∏´‡∏°‡πà ‡πÅ‡∏•‡πâ‡∏ß‡∏Å‡∏•‡∏±‡∏ö‡∏°‡∏≤‡πÄ‡∏•‡∏∑‡∏≠‡∏Å‡∏°‡πâ‡∏ß‡∏ô‡πÄ‡∏î‡∏¥‡∏°." & vbCrLf _
                         , "System Message", MessageBoxButtons.OK, MessageBoxIcon.Asterisk, MessageBoxDefaultButton.Button1)
                     End If
                 End If
@@ -889,7 +889,7 @@ Public Class frmDyingOrder
         Dim objDB As New classDFOrder
         Dim ErrorMessage As String = ""
         If objDB.DFCancel(strDFNo, clsUser.UserID, ErrorMessage) Then
-            MessageBox.Show("¬°‡≈‘°  ”‡√Á®", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
+            MessageBox.Show("‡∏¢‡∏Å‡πÄ‡∏•‡∏¥‡∏Å ‡∏™‡∏≥‡πÄ‡∏£‡πá‡∏à", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
             Call CreateNewDf()
         Else
             MessageBox.Show(ErrorMessage, "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
@@ -962,7 +962,7 @@ Public Class frmDyingOrder
         Dim config As New clsConfig
         If config.IsNull(cboColor.SelectedValue, "").ToString.Trim.Length = 0 Then Exit Sub
         If MessageBox.Show("Would you like to apply color '" & config.IsNull(cboColor.SelectedValue, "").ToString.Trim & "' to chosen item in grid below ?" & vbCrLf _
-         & "§ÿ≥µÈÕß°“√‡ª≈’Ë¬π ’¢Õß√“¬°“√∑’Ë‡≈◊Õ°¥È«¬‡§√◊ËÕßÀ¡“¬∂Ÿ°„πµ“√“ß¥È“π≈Ë“ß„ÀÈ‡ªÁπ ’ '" & config.IsNull(cboColor.SelectedValue, "").ToString.Trim & "' „™ËÀ√◊Õ‰¡Ë ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.No Then Exit Sub
+         & "‡∏Ñ‡∏∏‡∏ì‡∏ï‡πâ‡∏≠‡∏á‡∏Å‡∏≤‡∏£‡πÄ‡∏õ‡∏•‡∏µ‡πà‡∏¢‡∏ô‡∏™‡∏µ‡∏Ç‡∏≠‡∏á‡∏£‡∏≤‡∏¢‡∏Å‡∏≤‡∏£‡∏ó‡∏µ‡πà‡πÄ‡∏•‡∏∑‡∏≠‡∏Å‡∏î‡πâ‡∏ß‡∏¢‡πÄ‡∏Ñ‡∏£‡∏∑‡πà‡∏≠‡∏á‡∏´‡∏°‡∏≤‡∏¢‡∏ñ‡∏π‡∏Å‡πÉ‡∏ô‡∏ï‡∏≤‡∏£‡∏≤‡∏á‡∏î‡πâ‡∏≤‡∏ô‡∏•‡πà‡∏≤‡∏á‡πÉ‡∏´‡πâ‡πÄ‡∏õ‡πá‡∏ô‡∏™‡∏µ '" & config.IsNull(cboColor.SelectedValue, "").ToString.Trim & "' ‡πÉ‡∏ä‡πà‡∏´‡∏£‡∏∑‡∏≠‡πÑ‡∏°‡πà ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.No Then Exit Sub
         Dim dt As DataTable = grdDF.DataSource
         Dim dt2 As DataTable = dt.Copy()
         Dim i As Integer = 0
@@ -981,7 +981,7 @@ Public Class frmDyingOrder
             For j = i + 1 To dt2.Rows.Count - 1
                 If dt2.Rows(j)("col").ToString.Trim = col _
                  And dt2.Rows(j)("roll_no").ToString.Trim = roll_no Then
-                    MessageBox.Show("After apply, Some Roll No. and Color are duplicated." & vbCrLf & "À≈—ß®“°‡ª≈’Ë¬π ’·≈È«¡’∫“ß¡È«π´÷Ëß‡ªÁπ¡È«π‡¥’¬«°—π¡’ ’‡¥’¬«°—π", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+                    MessageBox.Show("After apply, Some Roll No. and Color are duplicated." & vbCrLf & "‡∏´‡∏•‡∏±‡∏á‡∏à‡∏≤‡∏Å‡πÄ‡∏õ‡∏•‡∏µ‡πà‡∏¢‡∏ô‡∏™‡∏µ‡πÅ‡∏•‡πâ‡∏ß‡∏°‡∏µ‡∏ö‡∏≤‡∏á‡∏°‡πâ‡∏ß‡∏ô‡∏ã‡∏∂‡πà‡∏á‡πÄ‡∏õ‡πá‡∏ô‡∏°‡πâ‡∏ß‡∏ô‡πÄ‡∏î‡∏µ‡∏¢‡∏ß‡∏Å‡∏±‡∏ô‡∏°‡∏µ‡∏™‡∏µ‡πÄ‡∏î‡∏µ‡∏¢‡∏ß‡∏Å‡∏±‡∏ô", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
                     Exit Sub
                 End If
             Next
@@ -1020,20 +1020,20 @@ Public Class frmDyingOrder
 
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
         If Not CheckGrdRollNo() Then Exit Sub
-        If MessageBox.Show("Would you like to add selected Roll No. from left grid to right grid ?" & vbCrLf & "§ÿ≥µÈÕß°“√‡æ‘Ë¡¡È«π∑’Ë‡≈◊Õ°‰«È¥È“π´È“¬‡æ◊ËÕπ”‰ª¬ÈÕ¡¥È“π¢«“„™ËÀ√◊Õ‰¡Ë ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.No Then Exit Sub
+        If MessageBox.Show("Would you like to add selected Roll No. from left grid to right grid ?" & vbCrLf & "‡∏Ñ‡∏∏‡∏ì‡∏ï‡πâ‡∏≠‡∏á‡∏Å‡∏≤‡∏£‡πÄ‡∏û‡∏¥‡πà‡∏°‡∏°‡πâ‡∏ß‡∏ô‡∏ó‡∏µ‡πà‡πÄ‡∏•‡∏∑‡∏≠‡∏Å‡πÑ‡∏ß‡πâ‡∏î‡πâ‡∏≤‡∏ô‡∏ã‡πâ‡∏≤‡∏¢‡πÄ‡∏û‡∏∑‡πà‡∏≠‡∏ô‡∏≥‡πÑ‡∏õ‡∏¢‡πâ‡∏≠‡∏°‡∏î‡πâ‡∏≤‡∏ô‡∏Ç‡∏ß‡∏≤‡πÉ‡∏ä‡πà‡∏´‡∏£‡∏∑‡∏≠‡πÑ‡∏°‡πà ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.No Then Exit Sub
         Call AddRollNo()
     End Sub
 
     Private Sub btnDel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDel.Click
         If Not CheckGrdDF() Then Exit Sub
-        If MessageBox.Show("Would you like to delete selected Roll No. in right grid ?" & vbCrLf & "§ÿ≥µÈÕß°“√≈∫¡È«π∑’Ë‡≈◊Õ°‰«È‡æ◊ËÕ¬ÈÕ¡„π¥È“π¢«“ÕÕ°„™ËÀ√◊Õ‰¡Ë ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.No Then Exit Sub
+        If MessageBox.Show("Would you like to delete selected Roll No. in right grid ?" & vbCrLf & "‡∏Ñ‡∏∏‡∏ì‡∏ï‡πâ‡∏≠‡∏á‡∏Å‡∏≤‡∏£‡∏•‡∏ö‡∏°‡πâ‡∏ß‡∏ô‡∏ó‡∏µ‡πà‡πÄ‡∏•‡∏∑‡∏≠‡∏Å‡πÑ‡∏ß‡πâ‡πÄ‡∏û‡∏∑‡πà‡∏≠‡∏¢‡πâ‡∏≠‡∏°‡πÉ‡∏ô‡∏î‡πâ‡∏≤‡∏ô‡∏Ç‡∏ß‡∏≤‡∏≠‡∏≠‡∏Å‡πÉ‡∏ä‡πà‡∏´‡∏£‡∏∑‡∏≠‡πÑ‡∏°‡πà ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.No Then Exit Sub
         If grdDF.CurrentRow.Index >= 0 Then Call DeleteRollNo("SOME")
     End Sub
 
     Private Sub btnDelAll_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDelAll.Click
         If lblCancelled.Visible Then Exit Sub
         If grdDF.Rows.Count = 0 Then Exit Sub
-        If MessageBox.Show("Would you like to delete all Roll No. in right grid ?" & vbCrLf & "§ÿ≥µÈÕß°“√≈∫¡È«π ∑—ÈßÀ¡¥ ∑’Ë‡µ√’¬¡®–¬ÈÕ¡„π¥È“π¢«“ÕÕ°„™ËÀ√◊Õ‰¡Ë ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.No Then Exit Sub
+        If MessageBox.Show("Would you like to delete all Roll No. in right grid ?" & vbCrLf & "‡∏Ñ‡∏∏‡∏ì‡∏ï‡πâ‡∏≠‡∏á‡∏Å‡∏≤‡∏£‡∏•‡∏ö‡∏°‡πâ‡∏ß‡∏ô ‡∏ó‡∏±‡πâ‡∏á‡∏´‡∏°‡∏î ‡∏ó‡∏µ‡πà‡πÄ‡∏ï‡∏£‡∏µ‡∏¢‡∏°‡∏à‡∏∞‡∏¢‡πâ‡∏≠‡∏°‡πÉ‡∏ô‡∏î‡πâ‡∏≤‡∏ô‡∏Ç‡∏ß‡∏≤‡∏≠‡∏≠‡∏Å‡πÉ‡∏ä‡πà‡∏´‡∏£‡∏∑‡∏≠‡πÑ‡∏°‡πà ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.No Then Exit Sub
         Call DeleteRollNo("ALL")
     End Sub
 
@@ -1111,7 +1111,7 @@ Public Class frmDyingOrder
         '===================================================================
         'Add By Neung Fix Error When Sale Not Enter Design No On S/O
         If clsConfig.IsNull(cboDesignNo.SelectedValue, "") = "" Then
-            MessageBox.Show("Sale ‰¡Ë‰¥È„ Ë Design No. „ÀÈ°≈—∫‰ª‡™Á§Õ’°§√—Èß (‰¡Ë “¡“√∂¥”‡π‘π°“√µËÕ‰¥È) ", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+            MessageBox.Show("Sale ‡πÑ‡∏°‡πà‡πÑ‡∏î‡πâ‡πÉ‡∏™‡πà Design No. ‡πÉ‡∏´‡πâ‡∏Å‡∏•‡∏±‡∏ö‡πÑ‡∏õ‡πÄ‡∏ä‡πá‡∏Ñ‡∏≠‡∏µ‡∏Å‡∏Ñ‡∏£‡∏±‡πâ‡∏á (‡πÑ‡∏°‡πà‡∏™‡∏≤‡∏°‡∏≤‡∏£‡∏ñ‡∏î‡∏≥‡πÄ‡∏ô‡∏¥‡∏ô‡∏Å‡∏≤‡∏£‡∏ï‡πà‡∏≠‡πÑ‡∏î‡πâ) ", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
             cboFinishedDesign.SelectedValue = cboDesignNo.SelectedValue
         Else
             cboFinishedDesign.SelectedValue = cboDesignNo.SelectedValue
@@ -1335,7 +1335,7 @@ Public Class frmDyingOrder
             If grdDF.Columns(grdDF.SelectedCells(i).ColumnIndex).Name = "df_dhcol" Or _
               grdDF.Columns(grdDF.SelectedCells(i).ColumnIndex).Name = "dhcoldt" Or _
               grdDF.Columns(grdDF.SelectedCells(i).ColumnIndex).Name = "labdipno" Then
-                Dim strReplace As String = InputBox("„ Ë¢ÈÕ¡Ÿ≈∑’ËµÈÕß°“√„ÀÈ„ Ë≈ßµ“√“ß" & vbCrLf & "Input data into grid.", "System Message", "")
+                Dim strReplace As String = InputBox("‡πÉ‡∏™‡πà‡∏Ç‡πâ‡∏≠‡∏°‡∏π‡∏•‡∏ó‡∏µ‡πà‡∏ï‡πâ‡∏≠‡∏á‡∏Å‡∏≤‡∏£‡πÉ‡∏´‡πâ‡πÉ‡∏™‡πà‡∏•‡∏á‡∏ï‡∏≤‡∏£‡∏≤‡∏á" & vbCrLf & "Input data into grid.", "System Message", "")
                 For i = 0 To grdDF.SelectedCells.Count - 1
                     If grdDF.Columns(grdDF.SelectedCells(i).ColumnIndex).Name = "df_dhcol" Or _
                      grdDF.Columns(grdDF.SelectedCells(i).ColumnIndex).Name = "labdipno" Then

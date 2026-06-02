@@ -899,7 +899,7 @@ Partial Class frmRequestC
         Me.optTube2.Name = "optTube2"
         Me.optTube2.Size = New System.Drawing.Size(161, 17)
         Me.optTube2.TabIndex = 1
-        Me.optTube2.Text = "Flat Board (��ǹἧ��д��)"
+        Me.optTube2.Text = "Flat Board (ม้วนแผงกระดาษ)"
         Me.optTube2.UseVisualStyleBackColor = True
         '
         'optTube1
@@ -911,7 +911,7 @@ Partial Class frmRequestC
         Me.optTube1.Size = New System.Drawing.Size(108, 17)
         Me.optTube1.TabIndex = 0
         Me.optTube1.TabStop = True
-        Me.optTube1.Text = "Spool (��ǹ��ʹ)"
+        Me.optTube1.Text = "Spool (ม้วนหลอด)"
         Me.optTube1.UseVisualStyleBackColor = True
         '
         'GroupBox2

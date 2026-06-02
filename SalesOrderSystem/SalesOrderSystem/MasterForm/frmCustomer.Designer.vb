@@ -377,7 +377,7 @@ Partial Class frmCustomer
         Me.chkActive.Name = "chkActive"
         Me.chkActive.Size = New System.Drawing.Size(121, 17)
         Me.chkActive.TabIndex = 17
-        Me.chkActive.Text = "Active (�ѧ��ҹ����)"
+        Me.chkActive.Text = "Active (ยังใช้งานอยู่)"
         Me.chkActive.UseVisualStyleBackColor = True
         '
         'Label14

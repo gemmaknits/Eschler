@@ -262,7 +262,7 @@ Public Class frmDesign
 
         'Auto Gen Design Family
         If txtdesign_family.Text.Trim.Length = 0 Then
-            MessageBox.Show("∂È“§ÿ≥‰¡Ë‰¥È„ Ë Design Family √–∫∫®– Gen „ÀÈÕ—µ‚π¡—µ‘! ", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
+            MessageBox.Show("‡∏ñ‡πâ‡∏≤‡∏Ñ‡∏∏‡∏ì‡πÑ‡∏°‡πà‡πÑ‡∏î‡πâ‡πÉ‡∏™‡πà Design Family ‡∏£‡∏∞‡∏ö‡∏ö‡∏à‡∏∞ Gen ‡πÉ‡∏´‡πâ‡∏≠‡∏±‡∏ï‡πÇ‡∏ô‡∏°‡∏±‡∏ï‡∏¥! ", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
             'CheckData = False
             'Exit Function
         End If

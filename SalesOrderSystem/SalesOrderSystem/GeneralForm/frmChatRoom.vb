@@ -69,7 +69,7 @@ Public Class frmChatRoom
 				MessageBox.Show(strMessage.Substring(strMessage.IndexOf(":") + 1), "System Message", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
 				txtSendMessage.Focus()
 			Case "&ABX:" 'Ask Before eXit
-				If MessageBox.Show("Do you want to exit application ?" & vbCrLf & "§ÿ≥µÈÕß°“√ÕÕ°®“°‚ª√·°√¡ SalesOrderSystem À√◊Õ‰¡Ë ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+				If MessageBox.Show("Do you want to exit application ?" & vbCrLf & "‡∏Ñ‡∏∏‡∏ì‡∏ï‡πâ‡∏≠‡∏á‡∏Å‡∏≤‡∏£‡∏≠‡∏≠‡∏Å‡∏à‡∏≤‡∏Å‡πÇ‡∏õ‡∏£‡πÅ‡∏Å‡∏£‡∏° SalesOrderSystem ‡∏´‡∏£‡∏∑‡∏≠‡πÑ‡∏°‡πà ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
 					Me.MdiParent.Close()
 					Exit Sub
 				Else
@@ -96,7 +96,7 @@ Public Class frmChatRoom
 				Call btnClear_Click(sender, e)
 				Exit Sub
 			Case "&EXIT:"
-				If MessageBox.Show("Do you want to exit application ?" & vbCrLf & "§ÿ≥µÈÕß°“√ÕÕ°®“°‚ª√·°√¡ SalesOrderSystem À√◊Õ‰¡Ë ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+				If MessageBox.Show("Do you want to exit application ?" & vbCrLf & "‡∏Ñ‡∏∏‡∏ì‡∏ï‡πâ‡∏≠‡∏á‡∏Å‡∏≤‡∏£‡∏≠‡∏≠‡∏Å‡∏à‡∏≤‡∏Å‡πÇ‡∏õ‡∏£‡πÅ‡∏Å‡∏£‡∏° SalesOrderSystem ‡∏´‡∏£‡∏∑‡∏≠‡πÑ‡∏°‡πà ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
 					Me.MdiParent.Close()
 					Exit Sub
 				Else
@@ -120,7 +120,7 @@ Public Class frmChatRoom
 				Call btnClear_Click(sender, e)
 				Exit Sub
 			Case "&EXIT:"
-				If MessageBox.Show("Do you want to exit application ?" & vbCrLf & "§ÿ≥µÈÕß°“√ÕÕ°®“°‚ª√·°√¡ SalesOrderSystem À√◊Õ‰¡Ë ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+				If MessageBox.Show("Do you want to exit application ?" & vbCrLf & "‡∏Ñ‡∏∏‡∏ì‡∏ï‡πâ‡∏≠‡∏á‡∏Å‡∏≤‡∏£‡∏≠‡∏≠‡∏Å‡∏à‡∏≤‡∏Å‡πÇ‡∏õ‡∏£‡πÅ‡∏Å‡∏£‡∏° SalesOrderSystem ‡∏´‡∏£‡∏∑‡∏≠‡πÑ‡∏°‡πà ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
 					Me.MdiParent.Close()
 				Else
 					Exit Sub
@@ -187,7 +187,7 @@ Public Class frmChatRoom
 		Dim obj As Form
 		For Each obj In Me.MdiParent.MdiChildren
 			If obj.Name = "frmChatRoomPrivate" Then
-				MessageBox.Show("Private Chat Room ‡ª‘¥Õ¬ŸË·≈È«", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
+				MessageBox.Show("Private Chat Room ‡πÄ‡∏õ‡∏¥‡∏î‡∏≠‡∏¢‡∏π‡πà‡πÅ‡∏•‡πâ‡∏ß", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
 				Exit Sub
 			End If
 		Next

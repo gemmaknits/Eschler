@@ -303,8 +303,8 @@ Public Class clsConfig
     End Sub
     Public Function ConfirmExitPrg(pFormName As String) As Boolean
         'Sitthana 19/09/2018
-        If MessageBox.Show("§ÿ≥¬◊π¬—π∑’Ë®–ÕÕ°®“°‚ª√·°√¡ " & pFormName & " „™ËÀ√◊Õ‰¡Ë ?" _
-                         , "¬◊π¬—π∑’Ë®–ÕÕ°®“°‚ª√·°√¡" _
+        If MessageBox.Show("‡∏Ñ‡∏∏‡∏ì‡∏¢‡∏∑‡∏ô‡∏¢‡∏±‡∏ô‡∏ó‡∏µ‡πà‡∏à‡∏∞‡∏≠‡∏≠‡∏Å‡∏à‡∏≤‡∏Å‡πÇ‡∏õ‡∏£‡πÅ‡∏Å‡∏£‡∏° " & pFormName & " ‡πÉ‡∏ä‡πà‡∏´‡∏£‡∏∑‡∏≠‡πÑ‡∏°‡πà ?" _
+                         , "‡∏¢‡∏∑‡∏ô‡∏¢‡∏±‡∏ô‡∏ó‡∏µ‡πà‡∏à‡∏∞‡∏≠‡∏≠‡∏Å‡∏à‡∏≤‡∏Å‡πÇ‡∏õ‡∏£‡πÅ‡∏Å‡∏£‡∏°" _
                          , MessageBoxButtons.OKCancel _
                          , MessageBoxIcon.Question
                            ) = vbOK Then

@@ -288,7 +288,7 @@ Partial Class frmDesign
         Me.ToolStripLabel2.ForeColor = System.Drawing.Color.Red
         Me.ToolStripLabel2.Name = "ToolStripLabel2"
         Me.ToolStripLabel2.Size = New System.Drawing.Size(347, 22)
-        Me.ToolStripLabel2.Text = "*** �ҡ��ͧ���ź Design Master ��ͧ�͡ Programmer ��ҹ��"
+        Me.ToolStripLabel2.Text = "*** หากต้องการลบ Design Master ต้องบอก Programmer เท่านั้น"
         '
         'Label18
         '

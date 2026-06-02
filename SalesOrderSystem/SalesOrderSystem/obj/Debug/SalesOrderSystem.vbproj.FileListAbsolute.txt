@@ -864,3 +864,4 @@ D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrd.14E3A
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\Sales Order System (Eschler).exe
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\Sales Order System (Eschler).xml
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\Sales Order System (Eschler).pdb
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.vbprojResolveAssemblyReference.cache

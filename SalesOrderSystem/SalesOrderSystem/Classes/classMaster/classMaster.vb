@@ -983,12 +983,12 @@ Public Class classMaster
     End Function
     Public Function GetExchangeRateAPIByDate(ByVal currency As String, ByVal SPeriod As DateTime, ByVal EPeriod As DateTime) As Decimal
         On Error Resume Next
-        '¥÷ß¢ÈÕ¡Ÿ≈®“° ∏π“§“√·ÀËßª√–‡∑»‰∑¬ ·∫∫ Realtime ∂È“¬—ß‡ªÁπ«—π„À¡ËÊ ∏π“§“√¬—ß‰¡ËÕ—æ‡¥∑„ÀÈ
+        '‡∏î‡∏∂‡∏á‡∏Ç‡πâ‡∏≠‡∏°‡∏π‡∏•‡∏à‡∏≤‡∏Å ‡∏ò‡∏ô‡∏≤‡∏Ñ‡∏≤‡∏£‡πÅ‡∏´‡πà‡∏á‡∏õ‡∏£‡∏∞‡πÄ‡∏ó‡∏®‡πÑ‡∏ó‡∏¢ ‡πÅ‡∏ö‡∏ö Realtime ‡∏ñ‡πâ‡∏≤‡∏¢‡∏±‡∏á‡πÄ‡∏õ‡πá‡∏ô‡∏ß‡∏±‡∏ô‡πÉ‡∏´‡∏°‡πà‡πÜ ‡∏ò‡∏ô‡∏≤‡∏Ñ‡∏≤‡∏£‡∏¢‡∏±‡∏á‡πÑ‡∏°‡πà‡∏≠‡∏±‡∏û‡πÄ‡∏î‡∏ó‡πÉ‡∏´‡πâ
         Dim ExchangeRate As Decimal = 0
         'If SPeriod.Date = Now.Date And (SPeriod.Hour > 0 And SPeriod.Hour < 18) Then GoTo EX
         If currency.Trim = "THB" Then
             ExchangeRate = 1
-            GoTo EX '°√≥Í∑’Ë‡ªÁπ‰∑¬∫“∑ 
+            GoTo EX '‡∏Å‡∏£‡∏ì‡πä‡∏ó‡∏µ‡πà‡πÄ‡∏õ‡πá‡∏ô‡πÑ‡∏ó‡∏¢‡∏ö‡∏≤‡∏ó 
         Else
             ExchangeRate = selectExchageRateRecord(currency, "THB", SPeriod)
             If ExchangeRate > 0 Then
@@ -1012,7 +1012,7 @@ BEGIN:
         Dim response As IRestResponse = client.Execute(request)
         If (response.StatusCode.Equals(HttpStatusCode.OK)) Then
             Console.WriteLine(response.Content)
-            ExchangeRate = response.Content.ToString.Substring(InStr(response.Content.ToString, "buying_sight") + 14, 8) 'Add By Neung 20151028 buying_sight §◊” µ”·ÀπËß + 14 π—∫®“° b ·≈– 10 §◊Õ¢ÈÕ¡Ÿ≈
+            ExchangeRate = response.Content.ToString.Substring(InStr(response.Content.ToString, "buying_sight") + 14, 8) 'Add By Neung 20151028 buying_sight ‡∏Ñ‡∏∑‡∏≥ ‡∏ï‡∏≥‡πÅ‡∏´‡∏ô‡πà‡∏á + 14 ‡∏ô‡∏±‡∏ö‡∏à‡∏≤‡∏Å b ‡πÅ‡∏•‡∏∞ 10 ‡∏Ñ‡∏∑‡∏≠‡∏Ç‡πâ‡∏≠‡∏°‡∏π‡∏•
             If ExchangeRate = 0 Then
                 SPeriod = SPeriod.AddDays(-1)
                 EPeriod = EPeriod.AddDays(-1)
@@ -1071,7 +1071,7 @@ EX:
         Dim response As IRestResponse = client.Execute(request)
         If (response.StatusCode.Equals(HttpStatusCode.OK)) Then
             Console.WriteLine(response.Content)
-            ExchangeRate = response.Content.ToString.Substring(InStr(response.Content.ToString, "buying_sight") + 14, 8) 'Add By Neung 20151028 buying_sight §◊” µ”·ÀπËß + 14 π—∫®“° b ·≈– 10 §◊Õ¢ÈÕ¡Ÿ≈
+            ExchangeRate = response.Content.ToString.Substring(InStr(response.Content.ToString, "buying_sight") + 14, 8) 'Add By Neung 20151028 buying_sight ‡∏Ñ‡∏∑‡∏≥ ‡∏ï‡∏≥‡πÅ‡∏´‡∏ô‡πà‡∏á + 14 ‡∏ô‡∏±‡∏ö‡∏à‡∏≤‡∏Å b ‡πÅ‡∏•‡∏∞ 10 ‡∏Ñ‡∏∑‡∏≠‡∏Ç‡πâ‡∏≠‡∏°‡∏π‡∏•
         End If
 
         '=========================================== Get Data From BOT Last Update If Exchange Rete still equals zero =======================================

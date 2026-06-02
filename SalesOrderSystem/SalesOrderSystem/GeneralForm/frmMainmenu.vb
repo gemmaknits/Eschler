@@ -947,7 +947,7 @@ Public Class frmMainmenu
             TrayIcon.Visible = True
             TrayIcon.BalloonTipIcon = ToolTipIcon.Info
             TrayIcon.BalloonTipTitle = "System Message"
-            TrayIcon.BalloonTipText = "Sales Order System Õ¬ŸË∑’Ëπ’Ë"
+            TrayIcon.BalloonTipText = "Sales Order System ‡∏≠‡∏¢‡∏π‡πà‡∏ó‡∏µ‡πà‡∏ô‡∏µ‡πà"
             TrayIcon.ShowBalloonTip(3)
         End If
     End Sub

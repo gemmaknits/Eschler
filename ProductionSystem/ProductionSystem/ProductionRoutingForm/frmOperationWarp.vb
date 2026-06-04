@@ -1,4 +1,5 @@
-﻿Imports Syncfusion.Windows.Forms.Tools
+﻿Imports ProductionSystem.Controls
+
 Public Class frmOperationWarp
        Dim clsuser As new classUserInfo
     Dim mfg_production_lots As mfg_production_lots

@@ -112,6 +112,70 @@ Production System (Eschler)
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
 </member>
+<member name="T:ProductionSystem.Controls.MouseClickCancelEventArgs">
+ <summary>Drop-in stub for Syncfusion.Windows.Forms.Tools.MouseClickCancelEventArgs</summary>
+</member>
+<member name="T:ProductionSystem.Controls.GridFontInfo">
+ <summary>Drop-in stub for Syncfusion.Windows.Forms.Grid.GridFontInfo</summary>
+</member>
+<member name="T:ProductionSystem.Controls.GridQueryCellInfoEventArgs">
+ <summary>Drop-in stub for Syncfusion.Windows.Forms.Grid.GridQueryCellInfoEventArgs</summary>
+</member>
+<member name="T:ProductionSystem.Controls.GridCellInfo">
+ <summary>Holds a single cell value. Used by Model(row, col).CellValue.</summary>
+</member>
+<member name="T:ProductionSystem.Controls.ColsAccessor">
+ <summary>Tracks which columns (1-based) are hidden in the dropdown grid.</summary>
+</member>
+<member name="P:ProductionSystem.Controls.ColsAccessor.HeaderCount">
+ <summary>No-op compatibility stub — mirrors Syncfusion Cols.HeaderCount</summary>
+</member>
+<member name="T:ProductionSystem.Controls.ItemsProxy">
+ <summary>Items proxy — exposes Count to mirror ComboBox.Items.Count</summary>
+</member>
+<member name="T:ProductionSystem.Controls.GridModelAccessor">
+ <summary>
+ Central model shared by both ListBox and GridListBox accessors.
+ </summary>
+</member>
+<member name="P:ProductionSystem.Controls.GridModelAccessor.Item(System.Int32,System.Int32)">
+ <summary>
+ 1-based row/col access. Row 1 = first data row.
+ Replicates: Model(SelectedIndex + 1, 3).CellValue
+ </summary>
+</member>
+<member name="T:ProductionSystem.Controls.GridAccessor">
+ <summary>Intermediate accessor: .Grid.Model</summary>
+</member>
+<member name="T:ProductionSystem.Controls.GridListBox">
+ <summary>
+ Drop-in replacement for Syncfusion GridListBox.
+ Accessed via: TryCast(mcbo.ListControl, GridListBox)
+ </summary>
+</member>
+<member name="T:ProductionSystem.Controls.ListBoxAccessor">
+ <summary>Accessor for mcbo.ListBox.Grid.Model</summary>
+</member>
+<member name="T:ProductionSystem.Controls.MultiColumnComboBox">
+ <summary>
+ Drop-in replacement for Syncfusion.Windows.Forms.Tools.MultiColumnComboBox.
+ Provides the same public API so existing code only needs to remove
+ Syncfusion imports and replace them with ProductionSystem.Controls.
+ </summary>
+</member>
+<member name="E:ProductionSystem.Controls.MultiColumnComboBox.DropDownCloseOnClick">
+ <summary>Fired when user selects an item (replaces Syncfusion DropDownCloseOnClick)</summary>
+</member>
+<member name="P:ProductionSystem.Controls.MultiColumnComboBox.Items">
+ <summary>Items proxy — mirrors ComboBox.Items.Count</summary>
+</member>
+<member name="P:ProductionSystem.Controls.MultiColumnComboBox.ListControl">
+ <summary>
+ Returns the shared GridListBox.
+ Usage (unchanged from Syncfusion):
+   TryCast(mcbo.ListControl, GridListBox).Grid.Model.QueryCellInfo
+ </summary>
+</member>
 <member name="M:ProductionSystem.frmMainmenu.KOSchedulePlanToolStripMenuItem_Click(System.Object,System.EventArgs)">
  <summary>
  

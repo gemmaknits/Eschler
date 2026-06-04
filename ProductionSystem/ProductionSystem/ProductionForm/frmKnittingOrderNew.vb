@@ -1,5 +1,5 @@
-﻿Imports System.Data.SqlClient
-Imports Syncfusion.Windows.Forms.Tools
+﻿Imports ProductionSystem.Controls
+Imports System.Data.SqlClient
 Imports System.Windows.Forms.DialogResult
 Imports System.Drawing
 
@@ -8,7 +8,7 @@ Public Class frmKnittingOrderNew
     Dim clsConn As New classConnection
     Dim clsUser As New classUserInfo
     'Dim kono As String = ""
-    Dim StrOldbom As String = "" 'For Ch5hkeck New BOM
+    Dim StrOldbom As Nullable(Of Int32)  'For Ch5hkeck New BOM
     Dim StrOldDesignNo As String = "" 'For Check New Design
     Dim SingleOldQty As Single ' For Check New Qty
     Dim ko As New KO
@@ -141,7 +141,7 @@ Public Class frmKnittingOrderNew
         Call BindGridProd(dt)
 
         StrOldDesignNo = oConfig.IsNull(cboDesignNo.SelectedValue, "")
-        StrOldbom = McboIDYarnChange.ListBox.Grid.Model(McboIDYarnChange.SelectedIndex + 1, 2).CellValue.ToString
+        StrOldbom = oConfig.IsNull(McboIDYarnChange.ListBox.Grid.Model(McboIDYarnChange.SelectedIndex + 1, 2).CellValue, Nothing)
         SingleOldQty = Val(txtQty.Text)
     End Sub
 
@@ -792,7 +792,7 @@ Public Class frmKnittingOrderNew
         AddHandler TryCast(McboIDYarnChange.ListControl, GridListBox).Grid.Model.QueryCellInfo, AddressOf McboIDYarnChange_Model_QueryCellinfo
 
     End Sub
-    Private Sub McboIDYarnChange_Model_QueryCellinfo(ByVal sender As Object, ByVal e As Syncfusion.Windows.Forms.Grid.GridQueryCellInfoEventArgs)
+    Private Sub McboIDYarnChange_Model_QueryCellinfo(ByVal sender As Object, ByVal e As GridQueryCellInfoEventArgs)
 
         If e.RowIndex = 0 AndAlso e.ColIndex = 1 Then
             e.Style.Text = "ID"

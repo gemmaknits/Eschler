@@ -1,4 +1,4 @@
-Imports Syncfusion.Windows.Forms.Tools
+Imports ProductionSystem.Controls
 
 Public Class frmDesignNew
     Private _AllowEdit As Boolean = True
@@ -241,19 +241,18 @@ Public Class frmDesignNew
 
     End Sub
 
-    Private Sub Model_QueryCellInMultiMachineGroup(ByVal sender As Object, ByVal e As Syncfusion.Windows.Forms.Grid.GridQueryCellInfoEventArgs)
-        'To specify the row and colum index.
+    Private Sub Model_QueryCellInMultiMachineGroup(ByVal sender As Object, ByVal e As GridQueryCellInfoEventArgs)
         If e.RowIndex = 0 AndAlso e.ColIndex = 1 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New GridFontInfo(New Font("Segoe UI", 9, FontStyle.Bold))
             e.Style.Text = "Machine Group Name"
         ElseIf e.RowIndex = 0 AndAlso e.ColIndex = 2 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New GridFontInfo(New Font("Segoe UI", 9, FontStyle.Bold))
             e.Style.Text = "Machine Guage"
         ElseIf e.RowIndex = 0 AndAlso e.ColIndex = 3 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New GridFontInfo(New Font("Segoe UI", 9, FontStyle.Bold))
             e.Style.Text = "Machine Diameter"
         ElseIf e.RowIndex = 0 AndAlso e.ColIndex = 5 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New GridFontInfo(New Font("Segoe UI", 9, FontStyle.Bold))
             e.Style.Text = "Machine Group Id"
         End If
     End Sub
@@ -489,9 +488,9 @@ Public Class frmDesignNew
             Exit Function
         End If
         If Trim(txtParentDesign.Text) = "" Then
-            MessageBox.Show("Knitting Design äÁèÊÒÁÒÃ¶»ÅèÍÂÇèÒ§ä´é" & vbCr _
-                            & Space(3) & "ãËé¤Ø³»éÍ¹¢éÍÁÙÅãËéàÃÕÂºÃéÍÂ¡èÍ¹ ¶Ö§¨ÐºÑ¹·Ö¡ä´é" _
-                            , "¢éÍ¼Ô´¾ÅÒ´", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Knitting Design ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò§ï¿½ï¿½" & vbCr _
+                            & Space(3) & "ï¿½ï¿½ï¿½Ø³ï¿½ï¿½Í¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Âºï¿½ï¿½ï¿½Â¡ï¿½Í¹ ï¿½Ö§ï¿½ÐºÑ¹ï¿½Ö¡ï¿½ï¿½" _
+                            , "ï¿½ï¿½Í¼Ô´ï¿½ï¿½Ò´", MessageBoxButtons.OK, MessageBoxIcon.Error)
             ErrorProvider1.SetError(Me.txtParentDesign, "Please fill Knitting Design !!")
             txtParentDesign.Focus()
             CheckData = False
@@ -503,7 +502,7 @@ Public Class frmDesignNew
         'Auto Gen Design Family
         '--- Begin Cancel by Sitthana 28/06/2018
         'If txtDesignFamily.Text.Trim.Length = 0 Then
-        '    MessageBox.Show("¶éÒ¤Ø³äÁèä´éãÊè Design Family ÃÐºº¨Ð Gen ãËéÍÑµâ¹ÁÑµÔ! ", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
+        '    MessageBox.Show("ï¿½ï¿½Ò¤Ø³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Design Family ï¿½Ðºï¿½ï¿½ï¿½ Gen ï¿½ï¿½ï¿½ï¿½Ñµï¿½ï¿½Ñµï¿½! ", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
         '    'CheckData = False
         '    'Exit Function
         'End If

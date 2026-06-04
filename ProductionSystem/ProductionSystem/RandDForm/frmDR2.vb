@@ -1,5 +1,6 @@
 ﻿'Imports WMPLib
 'Imports AxWMPLib
+Imports ProductionSystem.Controls
 Imports System.Data.SqlClient
 
 Public Class frmDR2
@@ -722,7 +723,7 @@ Public Class frmDR2
         End If
 
     End Sub
-    Private Sub cboMultiBomCode_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cboMultiBomCode.SelectionChangeCommitted
+    Private Sub cboMultiBomCode_SelectionChangeCommitted(sender As Object, e As EventArgs)
         '  If cboMultiBomCode.SelectedIndex >= 0 Then
         '  Call GetBom(cboMultiBomCode.Text) 'Edit By Neung .selectvalue to .text
         '  End If
@@ -902,7 +903,7 @@ Public Class frmDR2
 
     End Sub
 
-    Private Sub cboMultiBomCode_DropDownCloseOnClick(sender As Object, args As Syncfusion.Windows.Forms.Tools.MouseClickCancelEventArgs) Handles cboMultiBomCode.DropDownCloseOnClick
+    Private Sub cboMultiBomCode_DropDownCloseOnClick(sender As Object, args As MouseClickCancelEventArgs) Handles cboMultiBomCode.DropDownCloseOnClick
         Call GetBom(txtDesignNo.Text, (New clsConfig).IsNull(Me.cboMultiBomCode.ListBox.Grid.Model(Me.cboMultiBomCode.SelectedIndex + 1, 2).CellValue, String.Empty))
     End Sub
 

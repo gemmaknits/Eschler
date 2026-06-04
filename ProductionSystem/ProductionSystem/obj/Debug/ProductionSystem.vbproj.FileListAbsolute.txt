@@ -322,17 +322,7 @@ D:\SOURCECODE\Eschler\ProductionSystem\ProductionSystem\bin\Debug\Microsoft.Repo
 D:\SOURCECODE\Eschler\ProductionSystem\ProductionSystem\bin\Debug\Microsoft.ReportViewer.WinForms.dll
 D:\SOURCECODE\Eschler\ProductionSystem\ProductionSystem\bin\Debug\RestSharp.dll
 D:\SOURCECODE\Eschler\ProductionSystem\ProductionSystem\bin\Debug\STV.dll
-D:\SOURCECODE\Eschler\ProductionSystem\ProductionSystem\bin\Debug\EnvDTE.dll
 D:\SOURCECODE\Eschler\ProductionSystem\ProductionSystem\bin\Debug\RestSharp.xml
-D:\SOURCECODE\Eschler\ProductionSystem\ProductionSystem\bin\Debug\Syncfusion.Grid.Base.xml
-D:\SOURCECODE\Eschler\ProductionSystem\ProductionSystem\bin\Debug\Syncfusion.Grid.Windows.xml
-D:\SOURCECODE\Eschler\ProductionSystem\ProductionSystem\bin\Debug\Syncfusion.Shared.Base.xml
-D:\SOURCECODE\Eschler\ProductionSystem\ProductionSystem\bin\Debug\Syncfusion.Shared.Windows.xml
-D:\SOURCECODE\Eschler\ProductionSystem\ProductionSystem\bin\Debug\Syncfusion.SpellChecker.Base.xml
-D:\SOURCECODE\Eschler\ProductionSystem\ProductionSystem\bin\Debug\Syncfusion.Tools.Base.xml
-D:\SOURCECODE\Eschler\ProductionSystem\ProductionSystem\bin\Debug\Syncfusion.Tools.Windows.xml
-D:\SOURCECODE\Eschler\ProductionSystem\ProductionSystem\bin\Debug\EnvDTE.xml
-D:\SOURCECODE\Eschler\ProductionSystem\ProductionSystem\bin\Debug\Syncfusion.Grid.Windows.XmlSerializers.dll
 D:\SOURCECODE\Eschler\ProductionSystem\ProductionSystem\obj\Debug\ProductionSystem.vbproj.AssemblyReference.cache
 D:\SOURCECODE\Eschler\ProductionSystem\ProductionSystem\obj\Debug\ProductionSystem.formEnterNumber.resources
 D:\SOURCECODE\Eschler\ProductionSystem\ProductionSystem\obj\Debug\ProductionSystem.frmSelectItems.resources

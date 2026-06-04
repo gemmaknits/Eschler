@@ -22,7 +22,6 @@ Partial Class frmDR2
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim MetroColorTable1 As Syncfusion.Windows.Forms.MetroColorTable = New Syncfusion.Windows.Forms.MetroColorTable()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDR2))
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -85,7 +84,7 @@ Partial Class frmDR2
         Me.Label64 = New System.Windows.Forms.Label()
         Me.Label29 = New System.Windows.Forms.Label()
         Me.txtDesignNo = New System.Windows.Forms.TextBox()
-        Me.cboMultiBomCode = New Syncfusion.Windows.Forms.Tools.MultiColumnComboBox()
+        Me.cboMultiBomCode = New ProductionSystem.Controls.MultiColumnComboBox()
         Me.Label28 = New System.Windows.Forms.Label()
         Me.txtYarn6Percent = New System.Windows.Forms.TextBox()
         Me.txtNewDesignNo = New System.Windows.Forms.TextBox()
@@ -775,32 +774,8 @@ Partial Class frmDR2
         '
         'cboMultiBomCode
         '
-        Me.cboMultiBomCode.BeforeTouchSize = New System.Drawing.Size(67, 21)
-        Me.cboMultiBomCode.Border3DStyle = System.Windows.Forms.Border3DStyle.Flat
-        Me.cboMultiBomCode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboMultiBomCode.FlatStyle = Syncfusion.Windows.Forms.Tools.ComboFlatStyle.Flat
         Me.cboMultiBomCode.Location = New System.Drawing.Point(268, 22)
-        Me.cboMultiBomCode.MetroColor = System.Drawing.Color.FromArgb(CType(CType(22, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.cboMultiBomCode.Name = "cboMultiBomCode"
-        MetroColorTable1.ArrowChecked = System.Drawing.Color.FromArgb(CType(CType(147, Byte), Integer), CType(CType(149, Byte), Integer), CType(CType(152, Byte), Integer))
-        MetroColorTable1.ArrowCheckedBorderColor = System.Drawing.Color.Empty
-        MetroColorTable1.ArrowInActive = System.Drawing.Color.White
-        MetroColorTable1.ArrowNormal = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(198, Byte), Integer))
-        MetroColorTable1.ArrowNormalBackGround = System.Drawing.Color.Empty
-        MetroColorTable1.ArrowNormalBorderColor = System.Drawing.Color.Empty
-        MetroColorTable1.ArrowPushed = System.Drawing.Color.FromArgb(CType(CType(88, Byte), Integer), CType(CType(89, Byte), Integer), CType(CType(90, Byte), Integer))
-        MetroColorTable1.ArrowPushedBackGround = System.Drawing.Color.Empty
-        MetroColorTable1.ArrowPushedBorderColor = System.Drawing.Color.Empty
-        MetroColorTable1.ScrollerBackground = System.Drawing.Color.White
-        MetroColorTable1.ThumbChecked = System.Drawing.Color.FromArgb(CType(CType(147, Byte), Integer), CType(CType(149, Byte), Integer), CType(CType(152, Byte), Integer))
-        MetroColorTable1.ThumbCheckedBorderColor = System.Drawing.Color.Empty
-        MetroColorTable1.ThumbInActive = System.Drawing.Color.White
-        MetroColorTable1.ThumbNormal = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(198, Byte), Integer))
-        MetroColorTable1.ThumbNormalBorderColor = System.Drawing.Color.Empty
-        MetroColorTable1.ThumbPushed = System.Drawing.Color.FromArgb(CType(CType(88, Byte), Integer), CType(CType(89, Byte), Integer), CType(CType(90, Byte), Integer))
-        MetroColorTable1.ThumbPushedBorder = System.Drawing.Color.Empty
-        MetroColorTable1.ThumbPushedBorderColor = System.Drawing.Color.Empty
-        Me.cboMultiBomCode.ScrollMetroColorTable = MetroColorTable1
         Me.cboMultiBomCode.Size = New System.Drawing.Size(67, 21)
         Me.cboMultiBomCode.TabIndex = 103
         '
@@ -1696,7 +1671,7 @@ Partial Class frmDR2
     Friend WithEvents ChkdrClosed As System.Windows.Forms.CheckBox
     Friend WithEvents GroupBox6 As System.Windows.Forms.GroupBox
     Friend WithEvents Label28 As Label
-    Friend WithEvents cboMultiBomCode As Syncfusion.Windows.Forms.Tools.MultiColumnComboBox
+    Friend WithEvents cboMultiBomCode As ProductionSystem.Controls.MultiColumnComboBox
     Friend WithEvents Label29 As Label
     Friend WithEvents Label26 As Label
     Friend WithEvents txtDesignNo As TextBox

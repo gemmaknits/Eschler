@@ -590,34 +590,11 @@ D:\DOTNET\ESCHLER\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.f
 D:\DOTNET\ESCHLER\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmGammaDyePerformance.resources
 D:\DOTNET\ESCHLER\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmCINReturn.resources
 D:\DOTNET\ESCHLER\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.vbprojResolveAssemblyReference.cache
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Sales Order System (Eschler).exe.config
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Sales Order System (Eschler).exe.manifest
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Sales Order System (Eschler).application
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Sales Order System (Eschler).exe
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Sales Order System (Eschler).pdb
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Sales Order System (Eschler).xml
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Classes.dll
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\CrystalDecisions.CrystalReports.Engine.dll
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\CrystalDecisions.Shared.dll
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\CrystalDecisions.Windows.Forms.dll
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\EPPlus.dll
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\EPPlus.Interfaces.dll
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\EPPlus.System.Drawing.dll
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Interop.SHDocVw.dll
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\PPTC (Eschler).exe
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Production System (Eschler).exe
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\RestSharp.dll
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\STV.dll
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Syncfusion.Compression.Base.dll
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Syncfusion.Licensing.dll
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Classes.pdb
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Classes.xml
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\EPPlus.xml
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\RestSharp.xml
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\STV.pdb
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\STV.xml
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Syncfusion.Compression.Base.xml
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.vbproj.AssemblyReference.cache
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.vbprojResolveAssemblyReference.cache
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmCuttingIN.resources
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.formDFApvSheet.resources
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmBlankApvSheet.resources
@@ -855,13 +832,36 @@ D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSyst
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmStockOnhand.resources
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmStockOnHandSummaryYear.resources
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmStockOutSample.resources
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.vbproj.GenerateResource.cache
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.vbproj.CoreCompileInputs.cache
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.vbproj.GenerateResource.Cache
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Sales Order System (Eschler).exe.config
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Sales Order System (Eschler).exe.manifest
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Sales Order System (Eschler).application
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\EPPlus.dll
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\EPPlus.Interfaces.dll
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\EPPlus.System.Drawing.dll
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Interop.SHDocVw.dll
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\PPTC (Eschler).exe
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\RestSharp.dll
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Syncfusion.Compression.Base.dll
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Syncfusion.Licensing.dll
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Classes.pdb
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Classes.xml
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\EPPlus.xml
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\RestSharp.xml
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\STV.pdb
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\STV.xml
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Syncfusion.Compression.Base.xml
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\Sales Order System (Eschler).TrustInfo.xml
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\Sales Order System (Eschler).exe.manifest
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\Sales Order System (Eschler).application
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrd.14E3A24E.Up2Date
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\Sales Order System (Eschler).exe
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\Sales Order System (Eschler).xml
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\Sales Order System (Eschler).pdb
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.vbprojResolveAssemblyReference.cache
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Sales Order System (Eschler).pdb
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Sales Order System (Eschler).xml
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\CrystalDecisions.CrystalReports.Engine.dll
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\CrystalDecisions.Shared.dll
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\CrystalDecisions.Windows.Forms.dll
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.vbproj.AssemblyReference.cache
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.vbproj.CoreCompileInputs.cache
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrd.14E3A24E.Up2Date

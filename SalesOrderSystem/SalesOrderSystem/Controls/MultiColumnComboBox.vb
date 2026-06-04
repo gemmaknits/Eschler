@@ -204,7 +204,8 @@ Namespace Controls
         Private _popup As Form
         Private _dgv As DataGridView
 
-        Private _dataTable As DataTable
+        Private _dataTable As DataTable          ' underlying unfiltered table (for Model(r,c) access)
+        Private _originalDataSource As Object   ' BindingSource / DataView / DataTable as originally set
         Private _displayMember As String
         Private _valueMember As String
         Private _selectedIndex As Integer = -1
@@ -227,7 +228,11 @@ Namespace Controls
         Public Event DropDownCloseOnClick As EventHandler(Of MouseClickCancelEventArgs)
 
         Public Sub New()
-            _sharedModel = New GridModelAccessor(Function() If(_dataTable IsNot Nothing, _dataTable.DefaultView, Nothing))
+            ' Use New DataView(_dataTable) — NOT _dataTable.DefaultView — because
+            ' BindingSource.Filter modifies DefaultView.RowFilter in-place, which
+            ' would make Model(row, col) see a filtered (shorter) view and return
+            ' Nothing for rows that exist in the underlying table.
+            _sharedModel = New GridModelAccessor(Function() If(_dataTable IsNot Nothing, New DataView(_dataTable), Nothing))
             _listBoxAcc = New ListBoxAccessor(_sharedModel)
             _gridListBox = New GridListBox(_sharedModel)
             BuildUI()
@@ -271,9 +276,11 @@ Namespace Controls
 
         Public Property DataSource As Object
             Get
-                Return _dataTable
+                Return _originalDataSource
             End Get
             Set(value As Object)
+                _originalDataSource = value
+                ' Also extract the unfiltered DataTable for Model(row,col) index lookups
                 If TypeOf value Is DataTable Then
                     _dataTable = DirectCast(value, DataTable)
                 ElseIf TypeOf value Is DataView Then
@@ -450,8 +457,35 @@ Namespace Controls
             End With
             _popup.Controls.Add(_dgv)
 
-            ' Bind data
-            _dgv.DataSource = _dataTable.DefaultView
+            ' Build a DataView that respects the current BindingSource filter/sort
+            ' WITHOUT binding the DGV directly to the BindingSource (which would let
+            ' DGV manage currency on the shared BindingSource and corrupt _selectedIndex).
+            Dim bindView As DataView = Nothing
+            If TypeOf _originalDataSource Is BindingSource Then
+                Dim bs = DirectCast(_originalDataSource, BindingSource)
+                Dim srcTable As DataTable = Nothing
+                Dim baseFilter As String = ""
+                Dim baseSort As String = ""
+                If TypeOf bs.DataSource Is DataTable Then
+                    srcTable = DirectCast(bs.DataSource, DataTable)
+                    baseFilter = If(bs.Filter, "")
+                    baseSort = If(bs.Sort, "")
+                ElseIf TypeOf bs.DataSource Is DataView Then
+                    Dim dv2 = DirectCast(bs.DataSource, DataView)
+                    srcTable = dv2.Table
+                    baseFilter = If(Not String.IsNullOrEmpty(bs.Filter), bs.Filter, If(dv2.RowFilter, ""))
+                    baseSort = If(Not String.IsNullOrEmpty(bs.Sort), bs.Sort, If(dv2.Sort, ""))
+                End If
+                If srcTable IsNot Nothing Then
+                    bindView = New DataView(srcTable, baseFilter, baseSort, DataViewRowState.CurrentRows)
+                End If
+            ElseIf TypeOf _originalDataSource Is DataView Then
+                bindView = DirectCast(_originalDataSource, DataView)
+            End If
+            If bindView Is Nothing Then
+                bindView = If(_dataTable IsNot Nothing, _dataTable.DefaultView, Nothing)
+            End If
+            _dgv.DataSource = bindView
 
             ' Apply hidden columns (1-based index)
             For Each col As DataGridViewColumn In _dgv.Columns
@@ -515,10 +549,22 @@ Namespace Controls
             _popup.Location = New Point(screenPt.X, popupY)
             _popup.Size = New Size(popupW, popupH)
 
-            ' Scroll to selected row
-            If _selectedIndex >= 0 AndAlso _selectedIndex < _dgv.Rows.Count Then
-                _dgv.Rows(_selectedIndex).Selected = True
-                _dgv.FirstDisplayedScrollingRowIndex = _selectedIndex
+            ' Scroll to the currently selected row.
+            ' Because the DGV may be showing a filtered view, we match by ValueMember
+            ' rather than relying on _selectedIndex (which is the unfiltered row index).
+            If _selectedIndex >= 0 AndAlso _dataTable IsNot Nothing AndAlso Not String.IsNullOrEmpty(_valueMember) Then
+                Dim currentVal As String = _dataTable.Rows(_selectedIndex)(_valueMember).ToString().Trim()
+                Dim hasValCol As Boolean = _dgv.Columns.Contains(_valueMember)
+                For Each dgvRow As DataGridViewRow In _dgv.Rows
+                    If hasValCol Then
+                        Dim cellVal = dgvRow.Cells(_valueMember).Value
+                        If cellVal IsNot Nothing AndAlso cellVal.ToString().Trim() = currentVal Then
+                            dgvRow.Selected = True
+                            _dgv.FirstDisplayedScrollingRowIndex = dgvRow.Index
+                            Exit For
+                        End If
+                    End If
+                Next
             End If
 
             AddHandler _dgv.CellClick, AddressOf OnDgvCellClick
@@ -562,12 +608,35 @@ Namespace Controls
         End Sub
 
         Private Sub CommitSelection(rowIndex As Integer)
-            _selectedIndex = rowIndex
-            If _dataTable IsNot Nothing AndAlso rowIndex < _dataTable.Rows.Count Then
-                If Not String.IsNullOrEmpty(_displayMember) Then
-                    _txtDisplay.Text = _dataTable.Rows(rowIndex)(_displayMember).ToString()
-                End If
+            If _dgv Is Nothing OrElse rowIndex < 0 OrElse rowIndex >= _dgv.Rows.Count Then Return
+
+            ' Read display text and value directly from the DGV row.
+            Dim displayVal As String = ""
+            Dim valueVal As Object = Nothing
+
+            If Not String.IsNullOrEmpty(_displayMember) AndAlso _dgv.Columns.Contains(_displayMember) Then
+                Dim raw = _dgv.Rows(rowIndex).Cells(_displayMember).Value
+                If raw IsNot Nothing Then displayVal = raw.ToString()
             End If
+            If Not String.IsNullOrEmpty(_valueMember) AndAlso _dgv.Columns.Contains(_valueMember) Then
+                valueVal = _dgv.Rows(rowIndex).Cells(_valueMember).Value
+            End If
+
+            _txtDisplay.Text = displayVal
+
+            ' Map back to the row index in the unfiltered DataTable so that
+            ' Model(SelectedIndex + 1, col) lookups continue to work correctly.
+            _selectedIndex = -1
+            If _dataTable IsNot Nothing AndAlso valueVal IsNot Nothing AndAlso Not String.IsNullOrEmpty(_valueMember) Then
+                Dim searchStr As String = valueVal.ToString().Trim()
+                For i As Integer = 0 To _dataTable.Rows.Count - 1
+                    If _dataTable.Rows(i)(_valueMember).ToString().Trim() = searchStr Then
+                        _selectedIndex = i
+                        Exit For
+                    End If
+                Next
+            End If
+
             RaiseEvent SelectedIndexChanged(Me, EventArgs.Empty)
             RaiseEvent SelectedValueChanged(Me, EventArgs.Empty)
             RaiseEvent DropDownCloseOnClick(Me, New MouseClickCancelEventArgs())

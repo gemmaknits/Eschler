@@ -307,7 +307,7 @@
         Dim rollEsc As String = currentRollNoD.Replace("'", "''")
         bsCuttingIN.EndEdit()
         ' กรองตาม roll_no_p (roll no parent) ให้โชว์เฉพาะของ roll นี้
-        bsCuttingIN.Filter = $"roll_no_p = '{rollEsc}'"
+        bsCuttingIN.Filter = "roll_no_p = '" & rollEsc & "'"
         bsCuttingIN.ResetBindings(False)
         dgvCuttingIN.Refresh()
 

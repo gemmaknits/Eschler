@@ -540,7 +540,7 @@ Partial Class frmSalesOrder
         Me.Label7.AutoSize = True
         Me.Label7.Location = New System.Drawing.Point(20, 93)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(98, 13)
+        Me.Label7.Size = New System.Drawing.Size(97, 13)
         Me.Label7.TabIndex = 8
         Me.Label7.Text = "End Buyer / Cust.:"
         '
@@ -585,7 +585,7 @@ Partial Class frmSalesOrder
         Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(13, 87)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(90, 13)
+        Me.Label3.Size = New System.Drawing.Size(89, 13)
         Me.Label3.TabIndex = 0
         Me.Label3.Text = "Customer Bill To"
         '
@@ -615,10 +615,16 @@ Partial Class frmSalesOrder
         '
         'mcboDesignProperties
         '
+        Me.mcboDesignProperties.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.mcboDesignProperties.DataSource = Nothing
+        Me.mcboDesignProperties.DisplayMember = Nothing
         Me.mcboDesignProperties.Location = New System.Drawing.Point(34, 64)
         Me.mcboDesignProperties.Name = "mcboDesignProperties"
+        Me.mcboDesignProperties.SelectedIndex = -1
+        Me.mcboDesignProperties.SelectedValue = Nothing
         Me.mcboDesignProperties.Size = New System.Drawing.Size(212, 21)
         Me.mcboDesignProperties.TabIndex = 37
+        Me.mcboDesignProperties.ValueMember = Nothing
         '
         'Label45
         '
@@ -668,7 +674,7 @@ Partial Class frmSalesOrder
         Me.chkSpecial1.BackColor = System.Drawing.Color.Gold
         Me.chkSpecial1.Location = New System.Drawing.Point(11, 133)
         Me.chkSpecial1.Name = "chkSpecial1"
-        Me.chkSpecial1.Size = New System.Drawing.Size(159, 17)
+        Me.chkSpecial1.Size = New System.Drawing.Size(158, 17)
         Me.chkSpecial1.TabIndex = 0
         Me.chkSpecial1.Text = "Bulk approve by customer"
         Me.chkSpecial1.UseVisualStyleBackColor = False
@@ -687,7 +693,7 @@ Partial Class frmSalesOrder
         Me.Label14.AutoSize = True
         Me.Label14.Location = New System.Drawing.Point(14, 61)
         Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(71, 13)
+        Me.Label14.Size = New System.Drawing.Size(70, 13)
         Me.Label14.TabIndex = 16
         Me.Label14.Text = "Transport By"
         '
@@ -838,7 +844,7 @@ Partial Class frmSalesOrder
         Me.btnExit.Image = CType(resources.GetObject("btnExit.Image"), System.Drawing.Image)
         Me.btnExit.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnExit.Name = "btnExit"
-        Me.btnExit.Size = New System.Drawing.Size(45, 22)
+        Me.btnExit.Size = New System.Drawing.Size(46, 22)
         Me.btnExit.Text = "Exit"
         '
         'ToolStripLabel2
@@ -944,7 +950,7 @@ Partial Class frmSalesOrder
         Me.checkBulkAppInternal.BackColor = System.Drawing.Color.Gold
         Me.checkBulkAppInternal.Location = New System.Drawing.Point(7, -1)
         Me.checkBulkAppInternal.Name = "checkBulkAppInternal"
-        Me.checkBulkAppInternal.Size = New System.Drawing.Size(137, 17)
+        Me.checkBulkAppInternal.Size = New System.Drawing.Size(136, 17)
         Me.checkBulkAppInternal.TabIndex = 35
         Me.checkBulkAppInternal.Text = "Bulk approve internal"
         Me.checkBulkAppInternal.UseVisualStyleBackColor = False
@@ -1139,17 +1145,23 @@ Partial Class frmSalesOrder
         Me.lblCustomersActive.ForeColor = System.Drawing.Color.Red
         Me.lblCustomersActive.Location = New System.Drawing.Point(424, 58)
         Me.lblCustomersActive.Name = "lblCustomersActive"
-        Me.lblCustomersActive.Size = New System.Drawing.Size(265, 24)
+        Me.lblCustomersActive.Size = New System.Drawing.Size(320, 24)
         Me.lblCustomersActive.TabIndex = 36
-        Me.lblCustomersActive.Text = "�١��� ��ҹ��� ��١¡��ԡ����Ǥ�Ѻ"
+        Me.lblCustomersActive.Text = "ลูกค้า ท่านนี้ ถูกยกเลิกแล้วครับ"
         Me.lblCustomersActive.Visible = False
         '
         'mcboCustomersBillToFlag
         '
+        Me.mcboCustomersBillToFlag.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.mcboCustomersBillToFlag.DataSource = Nothing
+        Me.mcboCustomersBillToFlag.DisplayMember = Nothing
         Me.mcboCustomersBillToFlag.Location = New System.Drawing.Point(167, 84)
         Me.mcboCustomersBillToFlag.Name = "mcboCustomersBillToFlag"
+        Me.mcboCustomersBillToFlag.SelectedIndex = -1
+        Me.mcboCustomersBillToFlag.SelectedValue = Nothing
         Me.mcboCustomersBillToFlag.Size = New System.Drawing.Size(260, 21)
         Me.mcboCustomersBillToFlag.TabIndex = 35
+        Me.mcboCustomersBillToFlag.ValueMember = Nothing
         '
         'Label22
         '
@@ -1217,10 +1229,16 @@ Partial Class frmSalesOrder
         '
         'mcboCustomersShipToFlag
         '
+        Me.mcboCustomersShipToFlag.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.mcboCustomersShipToFlag.DataSource = Nothing
+        Me.mcboCustomersShipToFlag.DisplayMember = Nothing
         Me.mcboCustomersShipToFlag.Location = New System.Drawing.Point(110, 14)
         Me.mcboCustomersShipToFlag.Name = "mcboCustomersShipToFlag"
+        Me.mcboCustomersShipToFlag.SelectedIndex = -1
+        Me.mcboCustomersShipToFlag.SelectedValue = Nothing
         Me.mcboCustomersShipToFlag.Size = New System.Drawing.Size(231, 21)
         Me.mcboCustomersShipToFlag.TabIndex = 46
+        Me.mcboCustomersShipToFlag.ValueMember = Nothing
         '
         'cboMtl_warehouse
         '
@@ -1235,7 +1253,7 @@ Partial Class frmSalesOrder
         Me.Label34.AutoSize = True
         Me.Label34.Location = New System.Drawing.Point(3, 108)
         Me.Label34.Name = "Label34"
-        Me.Label34.Size = New System.Drawing.Size(108, 13)
+        Me.Label34.Size = New System.Drawing.Size(107, 13)
         Me.Label34.TabIndex = 44
         Me.Label34.Text = "Ship By WareHouse"
         '
@@ -1280,7 +1298,7 @@ Partial Class frmSalesOrder
         Me.Label25.AutoSize = True
         Me.Label25.Location = New System.Drawing.Point(356, 64)
         Me.Label25.Name = "Label25"
-        Me.Label25.Size = New System.Drawing.Size(264, 13)
+        Me.Label25.Size = New System.Drawing.Size(265, 13)
         Me.Label25.TabIndex = 37
         Me.Label25.Text = "(This data will be used to close s/o after shipment)"
         '
@@ -1331,17 +1349,23 @@ Partial Class frmSalesOrder
         '
         'mcboBanks
         '
+        Me.mcboBanks.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.mcboBanks.DataSource = Nothing
+        Me.mcboBanks.DisplayMember = Nothing
         Me.mcboBanks.Location = New System.Drawing.Point(112, 103)
         Me.mcboBanks.Name = "mcboBanks"
+        Me.mcboBanks.SelectedIndex = -1
+        Me.mcboBanks.SelectedValue = Nothing
         Me.mcboBanks.Size = New System.Drawing.Size(578, 21)
         Me.mcboBanks.TabIndex = 49
+        Me.mcboBanks.ValueMember = Nothing
         '
         'Label32
         '
         Me.Label32.AutoSize = True
         Me.Label32.Location = New System.Drawing.Point(16, 108)
         Me.Label32.Name = "Label32"
-        Me.Label32.Size = New System.Drawing.Size(36, 13)
+        Me.Label32.Size = New System.Drawing.Size(35, 13)
         Me.Label32.TabIndex = 21
         Me.Label32.Text = "Bank:"
         '
@@ -1494,7 +1518,7 @@ Partial Class frmSalesOrder
         Me.Label37.AutoSize = True
         Me.Label37.Location = New System.Drawing.Point(265, 194)
         Me.Label37.Name = "Label37"
-        Me.Label37.Size = New System.Drawing.Size(82, 13)
+        Me.Label37.Size = New System.Drawing.Size(83, 13)
         Me.Label37.TabIndex = 55
         Me.Label37.Text = "MTS PER ROLL:"
         '
@@ -1526,7 +1550,7 @@ Partial Class frmSalesOrder
         Me.Label31.AutoSize = True
         Me.Label31.Location = New System.Drawing.Point(232, 3)
         Me.Label31.Name = "Label31"
-        Me.Label31.Size = New System.Drawing.Size(109, 13)
+        Me.Label31.Size = New System.Drawing.Size(108, 13)
         Me.Label31.TabIndex = 50
         Me.Label31.Text = "Quality Special Req."
         '
@@ -1781,6 +1805,7 @@ Partial Class frmSalesOrder
         Me.design_gwth_nob.DataPropertyName = "design_gwth_nob"
         DataGridViewCellStyle1.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.design_gwth_nob.DefaultCellStyle = DataGridViewCellStyle1
+        Me.design_gwth_nob.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.[Nothing]
         Me.design_gwth_nob.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.design_gwth_nob.HeaderText = "Design/Gwth/Nob"
         Me.design_gwth_nob.Name = "design_gwth_nob"
@@ -1847,6 +1872,7 @@ Partial Class frmSalesOrder
         'cboWidth
         '
         Me.cboWidth.DataPropertyName = "sys_width_id"
+        Me.cboWidth.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.[Nothing]
         Me.cboWidth.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.cboWidth.HeaderText = "Width"
         Me.cboWidth.Name = "cboWidth"
@@ -1866,6 +1892,7 @@ Partial Class frmSalesOrder
         DataGridViewCellStyle6.BackColor = System.Drawing.Color.Gold
         DataGridViewCellStyle6.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.col.DefaultCellStyle = DataGridViewCellStyle6
+        Me.col.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.[Nothing]
         Me.col.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.col.HeaderText = "Color Code (Way)"
         Me.col.Name = "col"
@@ -2016,6 +2043,7 @@ Partial Class frmSalesOrder
         'uom
         '
         Me.uom.DataPropertyName = "uom"
+        Me.uom.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.[Nothing]
         Me.uom.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.uom.HeaderText = "UOM"
         Me.uom.Name = "uom"
@@ -2069,6 +2097,7 @@ Partial Class frmSalesOrder
         DataGridViewCellStyle20.BackColor = System.Drawing.Color.Gold
         DataGridViewCellStyle20.Format = "#.###0"
         Me.curr.DefaultCellStyle = DataGridViewCellStyle20
+        Me.curr.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.[Nothing]
         Me.curr.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.curr.HeaderText = "Currency"
         Me.curr.Name = "curr"

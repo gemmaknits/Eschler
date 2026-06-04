@@ -226,7 +226,7 @@ Public Class classSalesOrder
             comm.Parameters.AddWithValue("@discamt", .h08_discamt)
             comm.Parameters.AddWithValue("@nt_soamt", .h09_nt_soamt)
             comm.Parameters.AddWithValue("@attn", .h10_attn.Trim)
-            comm.Parameters.AddWithValue("@shipcustcd", .h11_shipcustcd)
+            comm.Parameters.AddWithValue("@shipcustcd", oConfig.IsNull(.h11_shipcustcd, DBNull.Value))
             comm.Parameters.AddWithValue("@payterms", .h12_payterms.Trim)
             comm.Parameters.AddWithValue("@credit", .h13_credit)
             comm.Parameters.AddWithValue("@crdays", .h14_crdays)
@@ -235,7 +235,7 @@ Public Class classSalesOrder
             comm.Parameters.AddWithValue("@custpo_suffix", .h15_custpo_suffix.Trim)
 
             comm.Parameters.AddWithValue("@deli", .h16_deli.Trim)
-            comm.Parameters.AddWithValue("@delicd", .h17_delicd.Trim)
+            comm.Parameters.AddWithValue("@delicd", oConfig.IsNull(.h17_delicd, DBNull.Value))
             comm.Parameters.AddWithValue("@ref", .h18_ref.Trim)
             comm.Parameters.AddWithValue("@rev", .h19_rev.ToString)
             comm.Parameters.AddWithValue("@sono1", .h20_sono1.Trim)

@@ -231,7 +231,7 @@ Public Class frmSalesOrder
 
         dtCustomersBillToFlag = (New classSalesOrder).getCustomersBillToFlag()
         bsCustomersBillToFlag.DataSource = dtCustomersBillToFlag
-        Me.mcboCustomersBillToFlag.DataSource = bsCustomersBillToFlag.DataSource
+        Me.mcboCustomersBillToFlag.DataSource = bsCustomersBillToFlag '.DataSource
         Me.mcboCustomersBillToFlag.DisplayMember = "name"
         Me.mcboCustomersBillToFlag.ValueMember = "custcd"
         Me.mcboCustomersBillToFlag.Text = ""
@@ -255,7 +255,7 @@ Public Class frmSalesOrder
 
         dtCustomersShipToFlag = (New classSalesOrder).getCustomersShipToFlag()
         bsCustomersShipToFlag.DataSource = dtCustomersShipToFlag
-        Me.mcboCustomersShipToFlag.DataSource = bsCustomersShipToFlag.DataSource
+        Me.mcboCustomersShipToFlag.DataSource = bsCustomersShipToFlag '.DataSource
         Me.mcboCustomersShipToFlag.DisplayMember = "name"
         Me.mcboCustomersShipToFlag.ValueMember = "custcd"
         Me.mcboCustomersShipToFlag.Text = ""
@@ -393,7 +393,7 @@ Public Class frmSalesOrder
         dtpPoDate.Value = CDate(dt.Rows(0)("podt2").ToString)
 
         mcboCustomersBillToFlag.SelectedValue = dt.Rows(0)("custcd").ToString.Trim
-        'bsCustomersShipToFlag.Filter = "parent_customer_id = " & Me.mcboCustomersBillToFlag.ListBox.Grid.Model(Me.mcboCustomersBillToFlag.SelectedIndex + 1, 1).CellValue & "" 'Disible By Neung K.Piew No Need to Filter Cust Deli
+        bsCustomersShipToFlag.Filter = "parent_customer_id = " & Me.mcboCustomersBillToFlag.ListBox.Grid.Model(Me.mcboCustomersBillToFlag.SelectedIndex + 1, 1).CellValue & "" 'Disible By Neung K.Piew No Need to Filter Cust Deli
 
         cboAgent.SelectedValue = dt.Rows(0)("agcd").ToString.Trim
         cboSalesMan.SelectedValue = dt.Rows(0)("empcd").ToString.Trim
@@ -496,10 +496,10 @@ Public Class frmSalesOrder
                 tsbConfirmOrder.Enabled = False
             End If
             lblCustomersActive.Visible = True
-            MessageBox.Show("�١��ҷ�ҹ��� ��١¡��ԡ����� " & vbCr _
-                          & "   - �س�������ö��䢢�������" & vbCr _
-                          & "   - �س����ö ¡��ԡ ���� Unconfirm ����ҹ��" _
-                          , "��ͤ�����͹", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBox.Show("ลูกค้าท่านนี้ ถูกยกเลิกแล้ว " & vbCr _
+                          & "   - คุณไม่สามารถแก้ไขข้อมูลได้" & vbCr _
+                          & "   - คุณสามารถ ยกเลิก แต่ Unconfirm ไม่ได้" _
+                          , "ข้อความเตือน", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
         'End  - Sitthana 19/09/2018
     End Sub
@@ -606,16 +606,16 @@ Public Class frmSalesOrder
         End If
         'Begin Check By Sitthana 12/09/2018
         If mcboCustomersBillToFlag.SelectedIndex = -1 Then
-            MessageBox.Show("�س�ѧ��������͡ Customer Bill To " & vbCr _
-                          & "  ���س��Ѻ����͡��͹��Ѻ" _
-                          , "��ͤ�������͹", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("คุณยังไม่ได้เลือก Customer Bill To " & vbCr _
+                          & "  กรุณาเลือกก่อนกลับ" _
+                          , "ข้อความเตือน", MessageBoxButtons.OK, MessageBoxIcon.Error)
             CheckData = False
             Exit Function
         End If
         If mcboCustomersShipToFlag.SelectedIndex = -1 Then
-            MessageBox.Show("�س�ѧ��������͡ Delivery To " & vbCr _
-                          & "  ���س��Ѻ����͡��͹��Ѻ" _
-                          , "��ͤ�������͹", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("คุณยังไม่ได้เลือก Delivery To " & vbCr _
+                          & "  กรุณาเลือกก่อนกลับ" _
+                          , "ข้อความเตือน", MessageBoxButtons.OK, MessageBoxIcon.Error)
             CheckData = False
             Exit Function
         End If
@@ -966,7 +966,7 @@ Public Class frmSalesOrder
             tsbUnConfirmOrder.Enabled = False
             ComboSaleOrderType1.Enabled = True 'Sitthana 20241210
             'End 'Sitthana 20190624
-            MessageBox.Show("�س������Է��� ���ҧ/��� Sales Order ��Ѻ", "�š�õ�Ǩ�ͺ�Է���", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBox.Show("คุณไม่มีสิทธิ์ สร้าง/แก้ไข Sales Order ครับ", "ผลการตรวจสอบสิทธิ์", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
 
@@ -1019,7 +1019,7 @@ Public Class frmSalesOrder
         blnCancel = False
         Dim result As System.Windows.Forms.DialogResult
         result = MessageBox.Show("Would you like to save ?" & vbCrLf &
-        IIf(IIf(strSoNo.Trim.Length = 0, txtSoNo.Text.Trim, strSoNo).ToString.Trim.Length = 0, "** ��������� S/O No. �к����ѹ����ѵ���ѵ� **", "S/O No. = '" & IIf(strSoNo.Trim.Length = 0, txtSoNo.Text.Trim, strSoNo) & "'"),
+        IIf(IIf(strSoNo.Trim.Length = 0, txtSoNo.Text.Trim, strSoNo).ToString.Trim.Length = 0, "** กรุณากรอก S/O No. ระบบจะสร้างอัตโนมัติ **", "S/O No. = '" & IIf(strSoNo.Trim.Length = 0, txtSoNo.Text.Trim, strSoNo) & "'"),
         "System Message", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3)
         If result = System.Windows.Forms.DialogResult.Cancel Then blnCancel = True
         If result <> System.Windows.Forms.DialogResult.Yes Then Exit Sub
@@ -1054,8 +1054,8 @@ Public Class frmSalesOrder
 
         End If
 
-        'If MessageBox.Show("�س�׹�ѹ�������ҧ So No ���� " & vbCr & Space(3) & "�¡�äѴ�͡�����Ũҡ So No : " & txtSoNo.Text.Trim & " ��������� ?" _
-        '                 , "�׹�ѹ��� ���ҧ��¡������ �¤Ѵ�͡�����Ũҡ��¡�����" _
+        'If MessageBox.Show("คุณยืนยันที่จะสร้าง So No ใหม่ " & vbCr & Space(3) & "โดยคัดลอกข้อมูลจาก So No : " & txtSoNo.Text.Trim & " ใช่ไหม ?" _
+        '                 , "ยืนยันการ สร้างใหม่โดยคัดลอกข้อมูลจากต้นแบบ" _
         '                 , MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2
         '                   ) = vbOK Then
         '    CaseCopy = True
@@ -1070,7 +1070,7 @@ Public Class frmSalesOrder
         '    'CreateOrUpdateSoNo()
         '    'CaseCopy = False
         'Else
-        '    MessageBox.Show("¡��ԡ������ҧ So No �����", "�駼š�����ҧ��¡������ �¤Ѵ�͡�����Ũҡ��¡�����", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        '    MessageBox.Show("ยกเลิกการสร้าง So No ใหม่แล้ว", "ตั้งผลการสร้างใหม่โดยคัดลอกข้อมูลจากต้นแบบ", MessageBoxButtons.OK, MessageBoxIcon.Information)
         'End If
     End Sub
     Private Function CheckDataCopySo() As Boolean
@@ -1811,14 +1811,14 @@ Public Class frmSalesOrder
     Private Sub btnCustomerItems_Click(sender As Object, e As EventArgs) Handles btnCustomerItems.Click
         'Sitthana 12/02/2018
         If mcboCustomersBillToFlag.SelectedIndex < 0 Or mcboCustomersBillToFlag.Text.ToString.Trim = "" Then
-            MsgBox("�س��ͧ���͡�١��ҡ�͹��Ѻ", MsgBoxStyle.OkOnly, "��ͼԴ��Ҵ")
+            MsgBox("คุณต้องเลือกลูกค้าก่อนครับ", MsgBoxStyle.OkOnly, "ข้อผิดพลาด")
             TabControl1.SelectTab(1)
             txtContact.Focus()
             Exit Sub
         End If
 
         'If grdSalesOrder.Then Then
-        '    MsgBox("�س��ͧ��͹������ Design NO ���� Customer Design NO ��͹��Ѻ", MsgBoxStyle.OkOnly, "��ͼԴ��Ҵ")
+        '    MsgBox("คุณต้องกรอกข้อมูล Design NO หรือ Customer Design NO ก่อนกลับ", MsgBoxStyle.OkOnly, "ข้อผิดพลาด")
         '    grdSalesOrder.Focus()
         '    txtContact.Focus()
         '    Exit Sub
@@ -1834,10 +1834,10 @@ Public Class frmSalesOrder
                 objfrmSearchSOCustItem.OurItemNumber = oConfig.IsNull(grdSalesOrder.CurrentRow.Cells("design_no").Value, "")
             Else
                 If grdSalesOrder.IsCurrentCellInEditMode = False Then
-                    MsgBox("���س ��͹������ Design No ���� Customer Design ���ͪ�ͧ��ҧ � Grid ��͹���С����� Customer ��Ѻ" _
+                    MsgBox("กรุณา กรอกข้อมูล Design No หรือ Customer Design ว่างที่ว่าง ๆ Grid ก่อนกดปุ่ม Customer ครับ" _
                            & vbCr & "(Please enter the Design No. or Customer Design or space in the grid " _
                            & vbCr & "        before pressing the customer button.)" _
-                           , MsgBoxStyle.OkOnly, "��ͼԴ��Ҵ")
+                           , MsgBoxStyle.OkOnly, "ข้อผิดพลาด")
                     Exit Sub
                 End If
             End If
@@ -2066,10 +2066,10 @@ Public Class frmSalesOrder
                     tsbConfirmOrder.Enabled = False
                 End If
                 lblCustomersActive.Visible = True
-                MessageBox.Show("�١��ҷ�ҹ��� ��١¡��ԡ����� " & vbCr _
-                          & "   - �س�������ö���ҧ SO ��" & vbCr _
-                          & "   - �س����ö ¡��ԡ ���� Unconfirm ����ҹ��" _
-                          , "��ͤ�����͹", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                MessageBox.Show("ลูกค้าท่านนี้ ถูกยกเลิกแล้ว " & vbCr _
+                          & "   - คุณไม่สามารถสร้าง SO ได้" & vbCr _
+                          & "   - คุณสามารถ ยกเลิก แต่ Unconfirm ไม่ได้" _
+                          , "ข้อความเตือน", MessageBoxButtons.OK, MessageBoxIcon.Information)
             End If
         End With
         'End  - Sitthana 19/09/2018

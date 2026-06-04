@@ -42,3 +42,4 @@ obj/
 *.7z
 *.user
 *.suo
+/ProductionSystem/ProductionSystem/bin/Debug/app.publish/Production System (Eschler).exe

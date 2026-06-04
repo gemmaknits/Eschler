@@ -8,7 +8,7 @@ Public Class frmKnittingOrderNew
     Dim clsConn As New classConnection
     Dim clsUser As New classUserInfo
     'Dim kono As String = ""
-    Dim StrOldbom As Nullable(Of Int32)  'For Ch5hkeck New BOM
+    Dim StrOldbom As String  'For Ch5hkeck New BOM
     Dim StrOldDesignNo As String = "" 'For Check New Design
     Dim SingleOldQty As Single ' For Check New Qty
     Dim ko As New KO
@@ -141,7 +141,7 @@ Public Class frmKnittingOrderNew
         Call BindGridProd(dt)
 
         StrOldDesignNo = oConfig.IsNull(cboDesignNo.SelectedValue, "")
-        StrOldbom = oConfig.IsNull(McboIDYarnChange.ListBox.Grid.Model(McboIDYarnChange.SelectedIndex + 1, 2).CellValue, Nothing)
+        StrOldbom = McboIDYarnChange.ListBox.Grid.Model(McboIDYarnChange.SelectedIndex + 1, 2).CellValue
         SingleOldQty = Val(txtQty.Text)
     End Sub
 

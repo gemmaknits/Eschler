@@ -1,39 +1,6 @@
 ﻿################################################################################
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
-
-/PurchaseOrderSystem/.vs/PurchaseOrderSystem/v17/.suo
-/SalesOrderSystem/.vs/SalesOrderSystem/v17/.suo
-/ProductionSystem/.vs/ProductionSystem/v17/.suo
-/YarnStockSystem/.vs/YarnStockSystem/v17/.suo
-/InvoiceSystem/.vs/InvoiceSystem/v17/.suo
-/YarnStockSystem/.vs/YarnStockSystem/FileContentIndex
-/YarnStockSystem/YarnStockSystem/obj/Debug/YarnStockSystem.vbproj.AssemblyReference.cache
-/YarnStockSystem/YarnStockSystem/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
-/ProductionSystem/ProductionSystem/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
-/ProductionSystem/ProductionSystem/obj/Debug/ProductionSystem.vbproj.AssemblyReference.cache
-/YarnStockSystem/.vs/YarnStockSystem/v17/DocumentLayout.json
-/YarnStockSystem/YarnStockSystem/obj/Debug/DesignTimeResolveAssemblyReferences.cache
-/YarnStockSystem/YarnStockSystem/bin/Debug/app.publish
-/SalesOrderSystem/SalesOrderSystem/.vs/SalesOrderSystem.vbproj.dtbcache.json
-/SalesOrderSystem/SalesOrderSystem/bin/Debug/app.publish/Sales Order System (Eschler).exe
-/SalesOrderSystem/SalesOrderSystem/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
-/SalesOrderSystem/SalesOrderSystem/obj/Debug/Sales Order System (Eschler).application
-/SalesOrderSystem/SalesOrderSystem/obj/Debug/Sales Order System (Eschler).exe
-/SalesOrderSystem/SalesOrderSystem/obj/Debug/Sales Order System (Eschler).exe.manifest
-/SalesOrderSystem/SalesOrderSystem/obj/Debug/Sales Order System (Eschler).pdb
-/SalesOrderSystem/SalesOrderSystem/obj/Debug/Sales Order System (Eschler).TrustInfo.xml
-/SalesOrderSystem/SalesOrderSystem/obj/Debug/Sales Order System (Eschler).xml
-/SalesOrderSystem/SalesOrderSystem/obj/Debug/SalesOrderSystem.vbproj.CoreCompileInputs.cache
-/SalesOrderSystem/SalesOrderSystem/obj/Debug/SalesOrderSystem.vbproj.GenerateResource.Cache
-/ProductionSystem/.claude
-/SalesOrderSystem/.vs/SalesOrderSystem/v17/DocumentLayout.json
-/SalesOrderSystem/.vs/SalesOrderSystem/v17/fileList.bin
-/SalesOrderSystem/SalesOrderSystem/bin/Debug/Sales Order System (Eschler).application
-/SalesOrderSystem/SalesOrderSystem/bin/Debug/Sales Order System (Eschler).exe
-/SalesOrderSystem/SalesOrderSystem/bin/Debug/Sales Order System (Eschler).exe.manifest
-/SalesOrderSystem/SalesOrderSystem/bin/Debug/Sales Order System (Eschler).pdb
-/SalesOrderSystem/SalesOrderSystem/bin/Debug/Sales Order System (Eschler).xml
 .vs/
 bin/
 obj/
@@ -42,4 +9,3 @@ obj/
 *.7z
 *.user
 *.suo
-/ProductionSystem/ProductionSystem/bin/Debug/app.publish/Production System (Eschler).exe

@@ -37,7 +37,7 @@
     <MinimumRequiredVersion>1.0.0.158</MinimumRequiredVersion>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>1018</ApplicationRevision>
+    <ApplicationRevision>1019</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -208,7 +208,7 @@
     <Compile Include="Classes\classCMR\ClassCMR.vb" />
     <Compile Include="Classes\classColors\classColors.vb" />
     <Compile Include="Classes\classConfig\clsConfig.vb" />
-    <Compile Include="Classes\classConnection\ClassConnectionColomboDB.vb" />
+    <Compile Include="Classes\classConnection\classConnectionEschlerDB.vb" />
     <Compile Include="Classes\classCustomers\classCustomers.vb" />
     <Compile Include="Classes\classCuttingIN\classCuttingIN.vb" />
     <Compile Include="Classes\classDFOrder\classDFOrder.vb" />

@@ -675,4 +675,10 @@ D:\SOURCECODE\Eschler\PurchaseOrderSystem\PurchaseOrderSystem\obj\Debug\Purchase
 D:\SOURCECODE\Eschler\PurchaseOrderSystem\PurchaseOrderSystem\obj\Debug\Purchase Order System (Eschler).exe
 D:\SOURCECODE\Eschler\PurchaseOrderSystem\PurchaseOrderSystem\obj\Debug\Purchase Order System (Eschler).xml
 D:\SOURCECODE\Eschler\PurchaseOrderSystem\PurchaseOrderSystem\obj\Debug\Purchase Order System (Eschler).pdb
-D:\SOURCECODE\Eschler\PurchaseOrderSystem\PurchaseOrderSystem\obj\Debug\PurchaseOrderSystem.vbprojResolveAssemblyReference.cache
+D:\SOURCECODE\Eschler\PurchaseOrderSystem\PurchaseOrderSystem\bin\Debug\CrystalDecisions.CrystalReports.Engine.dll
+D:\SOURCECODE\Eschler\PurchaseOrderSystem\PurchaseOrderSystem\bin\Debug\CrystalDecisions.ReportSource.dll
+D:\SOURCECODE\Eschler\PurchaseOrderSystem\PurchaseOrderSystem\bin\Debug\CrystalDecisions.Shared.dll
+D:\SOURCECODE\Eschler\PurchaseOrderSystem\PurchaseOrderSystem\bin\Debug\CrystalDecisions.Windows.Forms.dll
+D:\SOURCECODE\Eschler\PurchaseOrderSystem\PurchaseOrderSystem\obj\Debug\PurchaseOrderSystem.vbproj.AssemblyReference.cache
+D:\SOURCECODE\Eschler\PurchaseOrderSystem\PurchaseOrderSystem\obj\Debug\PurchaseOrderSystem.vbproj.CoreCompileInputs.cache
+D:\SOURCECODE\Eschler\PurchaseOrderSystem\PurchaseOrderSystem\obj\Debug\Purchase.71C1FC8F.Up2Date

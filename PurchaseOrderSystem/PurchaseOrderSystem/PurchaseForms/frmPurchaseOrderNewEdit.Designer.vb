@@ -22,7 +22,6 @@ Partial Class frmPurchaseOrderNewEdit
         Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim MetroColorTable1 As Syncfusion.Windows.Forms.MetroColorTable = New Syncfusion.Windows.Forms.MetroColorTable()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmPurchaseOrderNewEdit))
         Me.dgvJobDet = New System.Windows.Forms.DataGridView()
         Me.colIdJobdet = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -74,7 +73,7 @@ Partial Class frmPurchaseOrderNewEdit
         Me.comboItemNature = New System.Windows.Forms.ComboBox()
         Me.Label35 = New System.Windows.Forms.Label()
         Me.Label58 = New System.Windows.Forms.Label()
-        Me.mcboPoLineType = New Syncfusion.Windows.Forms.Tools.MultiColumnComboBox()
+        Me.mcboPoLineType = New PurchaseOrderSystem.Controls.MultiColumnComboBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.cbPriceIncudingVat = New System.Windows.Forms.CheckBox()
         Me.Label34 = New System.Windows.Forms.Label()
@@ -97,9 +96,9 @@ Partial Class frmPurchaseOrderNewEdit
         Me.txtTotalAmount = New System.Windows.Forms.TextBox()
         Me.txtVatAmount = New System.Windows.Forms.TextBox()
         Me.Label16 = New System.Windows.Forms.Label()
-        Me.dtpaDeliveryDate = New Syncfusion.Windows.Forms.Tools.DateTimePickerAdv()
-        Me.dtpaPayDate = New Syncfusion.Windows.Forms.Tools.DateTimePickerAdv()
-        Me.dtpaLCDate = New Syncfusion.Windows.Forms.Tools.DateTimePickerAdv()
+        Me.dtpaDeliveryDate = New PurchaseOrderSystem.Controls.NullableDateTimePicker()
+        Me.dtpaPayDate = New PurchaseOrderSystem.Controls.NullableDateTimePicker()
+        Me.dtpaLCDate = New PurchaseOrderSystem.Controls.NullableDateTimePicker()
         Me.Label45 = New System.Windows.Forms.Label()
         Me.txtLCNo = New System.Windows.Forms.TextBox()
         Me.Label43 = New System.Windows.Forms.Label()
@@ -121,18 +120,18 @@ Partial Class frmPurchaseOrderNewEdit
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txtAddress = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.dtpaArrival = New Syncfusion.Windows.Forms.Tools.DateTimePickerAdv()
-        Me.dtpaAWB_date = New Syncfusion.Windows.Forms.Tools.DateTimePickerAdv()
-        Me.dtpaBL_date = New Syncfusion.Windows.Forms.Tools.DateTimePickerAdv()
-        Me.dtpaInvoice_date = New Syncfusion.Windows.Forms.Tools.DateTimePickerAdv()
-        Me.dtpaPacking_date = New Syncfusion.Windows.Forms.Tools.DateTimePickerAdv()
-        Me.dtpaDeparture = New Syncfusion.Windows.Forms.Tools.DateTimePickerAdv()
-        Me.dtpaAWB_Received_date = New Syncfusion.Windows.Forms.Tools.DateTimePickerAdv()
+        Me.dtpaArrival = New PurchaseOrderSystem.Controls.NullableDateTimePicker()
+        Me.dtpaAWB_date = New PurchaseOrderSystem.Controls.NullableDateTimePicker()
+        Me.dtpaBL_date = New PurchaseOrderSystem.Controls.NullableDateTimePicker()
+        Me.dtpaInvoice_date = New PurchaseOrderSystem.Controls.NullableDateTimePicker()
+        Me.dtpaPacking_date = New PurchaseOrderSystem.Controls.NullableDateTimePicker()
+        Me.dtpaDeparture = New PurchaseOrderSystem.Controls.NullableDateTimePicker()
+        Me.dtpaAWB_Received_date = New PurchaseOrderSystem.Controls.NullableDateTimePicker()
         Me.txtPortName = New System.Windows.Forms.ComboBox()
         Me.txtVehicleName = New System.Windows.Forms.ComboBox()
         Me.txtBenefit = New System.Windows.Forms.ComboBox()
         Me.Label54 = New System.Windows.Forms.Label()
-        Me.dtpaQuotationDate = New Syncfusion.Windows.Forms.Tools.DateTimePickerAdv()
+        Me.dtpaQuotationDate = New PurchaseOrderSystem.Controls.NullableDateTimePicker()
         Me.txtBenefitKgs = New System.Windows.Forms.TextBox()
         Me.epcboCurrency = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.Label53 = New System.Windows.Forms.Label()
@@ -727,32 +726,9 @@ Partial Class frmPurchaseOrderNewEdit
         '
         'mcboPoLineType
         '
-        Me.mcboPoLineType.BeforeTouchSize = New System.Drawing.Size(147, 21)
-        Me.mcboPoLineType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.mcboPoLineType.FlatStyle = Syncfusion.Windows.Forms.Tools.ComboFlatStyle.Flat
         Me.mcboPoLineType.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.mcboPoLineType.Location = New System.Drawing.Point(558, 8)
-        Me.mcboPoLineType.MetroColor = System.Drawing.Color.FromArgb(CType(CType(22, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.mcboPoLineType.Name = "mcboPoLineType"
-        MetroColorTable1.ArrowChecked = System.Drawing.Color.FromArgb(CType(CType(147, Byte), Integer), CType(CType(149, Byte), Integer), CType(CType(152, Byte), Integer))
-        MetroColorTable1.ArrowCheckedBorderColor = System.Drawing.Color.Empty
-        MetroColorTable1.ArrowInActive = System.Drawing.Color.White
-        MetroColorTable1.ArrowNormal = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(198, Byte), Integer))
-        MetroColorTable1.ArrowNormalBackGround = System.Drawing.Color.Empty
-        MetroColorTable1.ArrowNormalBorderColor = System.Drawing.Color.Empty
-        MetroColorTable1.ArrowPushed = System.Drawing.Color.FromArgb(CType(CType(88, Byte), Integer), CType(CType(89, Byte), Integer), CType(CType(90, Byte), Integer))
-        MetroColorTable1.ArrowPushedBackGround = System.Drawing.Color.Empty
-        MetroColorTable1.ArrowPushedBorderColor = System.Drawing.Color.Empty
-        MetroColorTable1.ScrollerBackground = System.Drawing.Color.White
-        MetroColorTable1.ThumbChecked = System.Drawing.Color.FromArgb(CType(CType(147, Byte), Integer), CType(CType(149, Byte), Integer), CType(CType(152, Byte), Integer))
-        MetroColorTable1.ThumbCheckedBorderColor = System.Drawing.Color.Empty
-        MetroColorTable1.ThumbInActive = System.Drawing.Color.White
-        MetroColorTable1.ThumbNormal = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(198, Byte), Integer))
-        MetroColorTable1.ThumbNormalBorderColor = System.Drawing.Color.Empty
-        MetroColorTable1.ThumbPushed = System.Drawing.Color.FromArgb(CType(CType(88, Byte), Integer), CType(CType(89, Byte), Integer), CType(CType(90, Byte), Integer))
-        MetroColorTable1.ThumbPushedBorder = System.Drawing.Color.Empty
-        MetroColorTable1.ThumbPushedBorderColor = System.Drawing.Color.Empty
-        Me.mcboPoLineType.ScrollMetroColorTable = MetroColorTable1
         Me.mcboPoLineType.Size = New System.Drawing.Size(147, 21)
         Me.mcboPoLineType.TabIndex = 398
         '
@@ -2703,7 +2679,7 @@ Partial Class frmPurchaseOrderNewEdit
     'Friend WithEvents delidt As PurchaseOrderSystem.DataGridViewCalendarColumn
     'Friend WithEvents effective_date As PurchaseOrderSystem.DataGridViewCalendarColumn
     Friend WithEvents Label58 As Label
-    Friend WithEvents mcboPoLineType As Syncfusion.Windows.Forms.Tools.MultiColumnComboBox
+    Friend WithEvents mcboPoLineType As PurchaseOrderSystem.Controls.MultiColumnComboBox
     Friend WithEvents coltest As DataGridViewTextBoxColumn
     Friend WithEvents ErrormcboPoLineType As ErrorProvider
     Friend WithEvents DataGridViewCalendarColumn1 As DataGridViewCalendarColumn
@@ -2730,18 +2706,18 @@ Partial Class frmPurchaseOrderNewEdit
     Friend WithEvents cboForwarder As ComboBox
     Friend WithEvents txtFreight As TextBox
     Friend WithEvents btnGetBOMLine As Button
-    Friend WithEvents dtpaDeliveryDate As Syncfusion.Windows.Forms.Tools.DateTimePickerAdv
-    Friend WithEvents dtpaPayDate As Syncfusion.Windows.Forms.Tools.DateTimePickerAdv
-    Friend WithEvents dtpaLCDate As Syncfusion.Windows.Forms.Tools.DateTimePickerAdv
+    Friend WithEvents dtpaDeliveryDate As PurchaseOrderSystem.Controls.NullableDateTimePicker
+    Friend WithEvents dtpaPayDate As PurchaseOrderSystem.Controls.NullableDateTimePicker
+    Friend WithEvents dtpaLCDate As PurchaseOrderSystem.Controls.NullableDateTimePicker
     Friend WithEvents cboSupplier As ComboBox
-    Friend WithEvents dtpaArrival As Syncfusion.Windows.Forms.Tools.DateTimePickerAdv
-    Friend WithEvents dtpaAWB_date As Syncfusion.Windows.Forms.Tools.DateTimePickerAdv
-    Friend WithEvents dtpaBL_date As Syncfusion.Windows.Forms.Tools.DateTimePickerAdv
-    Friend WithEvents dtpaInvoice_date As Syncfusion.Windows.Forms.Tools.DateTimePickerAdv
-    Friend WithEvents dtpaPacking_date As Syncfusion.Windows.Forms.Tools.DateTimePickerAdv
-    Friend WithEvents dtpaDeparture As Syncfusion.Windows.Forms.Tools.DateTimePickerAdv
-    Friend WithEvents dtpaAWB_Received_date As Syncfusion.Windows.Forms.Tools.DateTimePickerAdv
-    Friend WithEvents dtpaQuotationDate As Syncfusion.Windows.Forms.Tools.DateTimePickerAdv
+    Friend WithEvents dtpaArrival As PurchaseOrderSystem.Controls.NullableDateTimePicker
+    Friend WithEvents dtpaAWB_date As PurchaseOrderSystem.Controls.NullableDateTimePicker
+    Friend WithEvents dtpaBL_date As PurchaseOrderSystem.Controls.NullableDateTimePicker
+    Friend WithEvents dtpaInvoice_date As PurchaseOrderSystem.Controls.NullableDateTimePicker
+    Friend WithEvents dtpaPacking_date As PurchaseOrderSystem.Controls.NullableDateTimePicker
+    Friend WithEvents dtpaDeparture As PurchaseOrderSystem.Controls.NullableDateTimePicker
+    Friend WithEvents dtpaAWB_Received_date As PurchaseOrderSystem.Controls.NullableDateTimePicker
+    Friend WithEvents dtpaQuotationDate As PurchaseOrderSystem.Controls.NullableDateTimePicker
     Friend WithEvents epcboCurrency As ErrorProvider
     Friend WithEvents btnApprove As ToolStripButton
     Friend WithEvents btnCancel As ToolStripButton
@@ -2809,5 +2785,4 @@ Partial Class frmPurchaseOrderNewEdit
     Friend WithEvents supplier_spec_rcvd_flag As DataGridViewCheckBoxColumn
     Friend WithEvents btnTransFile As DataGridViewButtonColumn
     Friend WithEvents btnYarnFile As DataGridViewButtonColumn
-    'Friend WithEvents MultiColumnComboBox1 As Syncfusion.Windows.Forms.Tools.MultiColumnComboBox
 End Class

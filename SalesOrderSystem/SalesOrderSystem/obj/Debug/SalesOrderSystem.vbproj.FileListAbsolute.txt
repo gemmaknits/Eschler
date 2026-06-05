@@ -594,7 +594,6 @@ D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Sales Order Sy
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Classes.dll
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Production System (Eschler).exe
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\STV.dll
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.vbprojResolveAssemblyReference.cache
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmCuttingIN.resources
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.formDFApvSheet.resources
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmBlankApvSheet.resources

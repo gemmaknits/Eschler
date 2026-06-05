@@ -10,6 +10,7 @@ Namespace Controls
     ''' </summary>
     Public Class NullableDateTimePicker
         Inherits DateTimePicker
+        Implements System.ComponentModel.ISupportInitialize
 
         Private _isNull As Boolean = False
         Private Shared ReadOnly _nullFormat As String = " "
@@ -96,6 +97,13 @@ Namespace Controls
                 Me.CustomFormat = "dd/MM/yyyy"
             End If
             MyBase.OnValueChanged(e)
+        End Sub
+
+        ' ISupportInitialize — required by Designer CType cast
+        Public Sub BeginInit() Implements System.ComponentModel.ISupportInitialize.BeginInit
+        End Sub
+
+        Public Sub EndInit() Implements System.ComponentModel.ISupportInitialize.EndInit
         End Sub
 
     End Class

@@ -1,5 +1,5 @@
-Imports System.Math
-Imports Syncfusion.Windows.Forms.Tools
+ï»¿Imports System.Math
+Imports InvoiceSystemESH.Controls
 
 Public Class frmInvoiceExport
     Public Property UserInfo() As classUserInfo
@@ -173,28 +173,28 @@ Public Class frmInvoiceExport
         Me.mcboBanks.ListBox.Grid.Model.Cols.Hidden(9) = True
         AddHandler TryCast(mcboBanks.ListControl, GridListBox).Grid.Model.QueryCellInfo, AddressOf Model_QueryCellInfoBanks
     End Sub
-    Private Sub Model_QueryCellInfoBanks(ByVal sender As Object, ByVal e As Syncfusion.Windows.Forms.Grid.GridQueryCellInfoEventArgs)
+    Private Sub Model_QueryCellInfoBanks(ByVal sender As Object, ByVal e As InvoiceSystemESH.Controls.GridQueryCellInfoEventArgs)
         'To specify the row and colum index.
         If e.RowIndex = 0 AndAlso e.ColIndex = 2 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New InvoiceSystemESH.Controls.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Code"
         ElseIf e.RowIndex = 0 AndAlso e.ColIndex = 3 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New InvoiceSystemESH.Controls.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Name"
         ElseIf e.RowIndex = 0 AndAlso e.ColIndex = 4 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New InvoiceSystemESH.Controls.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Address"
         ElseIf e.RowIndex = 0 AndAlso e.ColIndex = 5 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 11, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New InvoiceSystemESH.Controls.GridFontInfo(New Font("Segoe UI", 11, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Swift Code"
         ElseIf e.RowIndex = 0 AndAlso e.ColIndex = 6 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New InvoiceSystemESH.Controls.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Account No."
         ElseIf e.RowIndex = 0 AndAlso e.ColIndex = 7 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New InvoiceSystemESH.Controls.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Currency"
         ElseIf e.RowIndex = 0 AndAlso e.ColIndex = 8 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New InvoiceSystemESH.Controls.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Branch"
 
         End If
@@ -664,14 +664,14 @@ Public Class frmInvoiceExport
             For Each row As DataRow In dtInvDet.Rows
                 If row.RowState <> DataRowState.Deleted Then
                     If (New clsConfig).IsNull(row("packno"), "").ToString().Trim.Equals(pPackno) And (New clsConfig).IsNull(row("cartno"), "").ToString().Trim.Equals(pCartNo) Then
-                        MessageBox.Show("¤Ø³¡ÓÅÑ§¾ÂÒÂÒÁàÅ×Í¡«éÓ!!!", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
-                        Return True '«éÓ
+                        MessageBox.Show("ï¿½Ø³ï¿½ï¿½ï¿½Ñ§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¡ï¿½ï¿½ï¿½!!!", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+                        Return True 'ï¿½ï¿½ï¿½
                     End If
                 End If
             Next
         End If
 
-        Return False 'äÁè«éÓ
+        Return False 'ï¿½ï¿½ï¿½ï¿½ï¿½
     End Function
     Private Function CheckIsNotDuplicatePackCart(ByVal pPackno As String, ByVal pCartNo As String) As Boolean
         Dim result As Boolean = False
@@ -682,13 +682,13 @@ Public Class frmInvoiceExport
                 If row.RowState <> DataRowState.Deleted Then
                     If (New clsConfig).IsNull(row("packno"), "").ToString().Trim.Equals(pPackno) And (New clsConfig).IsNull(row("cartno"), "").ToString().Trim.Equals(pCartNo) Then
                         MessageBox.Show("Packno and Cartno is Already in Grid." & vbCrLf & "Do not get dupicate!!!", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
-                        Return False '«éÓ
+                        Return False 'ï¿½ï¿½ï¿½
                     End If
                 End If
             Next
         End If
 
-        Return True 'äÁè«éÓ
+        Return True 'ï¿½ï¿½ï¿½ï¿½ï¿½
     End Function
     Private Sub LoadPacking(pPacknoCartno As String)
         Dim config As New clsConfig
@@ -703,7 +703,7 @@ Public Class frmInvoiceExport
         If dtNew.Rows.Count > 0 Then
 
             If Not CheckDataPacking(dtNew) Then Exit Sub
-            'àªç¤ packno , cartno ·Õèà¤Â·Óä»áÅéÇ
+            'ï¿½ï¿½ packno , cartno ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             If Not CheckIsNotDuplicatePackCart(config.IsNull(dtNew.Rows(0)("packno"), "").ToString.Trim, config.IsNull(dtNew.Rows(i)("cartno"), "").ToString.Trim) Then Exit Sub
 
 
@@ -752,18 +752,18 @@ Public Class frmInvoiceExport
             For Each drInv As DataRow In dtInv.Rows
                 If drInv.RowState <> DataRowState.Deleted Then
                     If drInv.Item("currency").ToString.Trim <> dr.Item("currency").ToString.Trim Then
-                        MessageBox.Show("¤Ø³¡ÓÅÑ§ Load Packing List ·Õè µèÒ§Ê¡ØÅà§Ô¹¡Ñ¹ â»Ãá¡ÃÁäÁèÊÒÁÒÃ¶·ÓãËéä´é ¡ÃØ³ÒàÅ×Í¡ Packing Í×è¹ËÃ×Í·Ó¡ÒÃá¡éä¢¡èÍ¹", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+                        MessageBox.Show("ï¿½Ø³ï¿½ï¿½ï¿½Ñ§ Load Packing List ï¿½ï¿½ï¿½ ï¿½ï¿½Ò§Ê¡ï¿½ï¿½ï¿½Ô¹ï¿½Ñ¹ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ø³ï¿½ï¿½ï¿½ï¿½Í¡ Packing ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í·Ó¡ï¿½ï¿½ï¿½ï¿½ä¢¡ï¿½Í¹", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
                         Return False
                     End If
                 End If
                 'If drInv.Item("currency").ToString.Trim <> dr.Item("currency").ToString.Trim Then
-                '    MessageBox.Show("¤Ø³¡ÓÅÑ§ Load Packing List ·Õè µèÒ§Ê¡ØÅà§Ô¹¡Ñ¹ â»Ãá¡ÃÁäÁèÊÒÁÒÃ¶·ÓãËéä´é ¡ÃØ³ÒàÅ×Í¡ Packing Í×è¹ËÃ×Í·Ó¡ÒÃá¡éä¢¡èÍ¹", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+                '    MessageBox.Show("ï¿½Ø³ï¿½ï¿½ï¿½Ñ§ Load Packing List ï¿½ï¿½ï¿½ ï¿½ï¿½Ò§Ê¡ï¿½ï¿½ï¿½Ô¹ï¿½Ñ¹ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ø³ï¿½ï¿½ï¿½ï¿½Í¡ Packing ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í·Ó¡ï¿½ï¿½ï¿½ï¿½ä¢¡ï¿½Í¹", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
                 '    Return False
                 'End If
             Next
             'For Each row As DataGridViewRow In grdInv.Rows
             '    If row.Cells("currency").Value.ToString.Trim <> dr.Item("currency").ToString.Trim Then
-            '        MessageBox.Show("¤Ø³¡ÓÅÑ§ Packing ¢éÍÁÙÅ ·Õè µèÒ§Ê¡ØÅà§Ô¹¡Ñ¹", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+            '        MessageBox.Show("ï¿½Ø³ï¿½ï¿½ï¿½Ñ§ Packing ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½Ò§Ê¡ï¿½ï¿½ï¿½Ô¹ï¿½Ñ¹", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
             '        Return False
             '    End If
             'Next
@@ -1092,16 +1092,16 @@ Public Class frmInvoiceExport
         '967', 968, 1133   : Pressless
 
         'If InStr(1, cboCustomer.Text.Trim.ToUpper, "PRESSLESS") > 0 Then
-        '    MessageBox.Show("ÅÙ¡¤éÒ Pressless äÁèÊÒÁÒÃ¶¾ÔÁ¾ì Standard Invoice ä´é¤ÃÑº", "¢éÍ¼Ô´¾ÅÒ´", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        '    MessageBox.Show("ï¿½Ù¡ï¿½ï¿½ï¿½ Pressless ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ Standard Invoice ï¿½ï¿½ï¿½Ñº", "ï¿½ï¿½Í¼Ô´ï¿½ï¿½Ò´", MessageBoxButtons.OK, MessageBoxIcon.Error)
         'Else
         '    If InStr(1, cboCustomer.Text.Trim.ToUpper, "SCAVI") > 0 Then
-        '        MessageBox.Show("ÅÙ¡¤éÒ SCAVI äÁèÊÒÁÒÃ¶¾ÔÁ¾ì Standard Invoice ä´é¤ÃÑº", "¢éÍ¼Ô´¾ÅÒ´", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        '        MessageBox.Show("ï¿½Ù¡ï¿½ï¿½ï¿½ SCAVI ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ Standard Invoice ï¿½ï¿½ï¿½Ñº", "ï¿½ï¿½Í¼Ô´ï¿½ï¿½Ò´", MessageBoxButtons.OK, MessageBoxIcon.Error)
         '    Else
         '        Select Case cboCustomer.SelectedValue
         '            Case 967, 968, 1133
-        '                MessageBox.Show("ÅÙ¡¤éÒ Pressless äÁèÊÒÁÒÃ¶¾ÔÁ¾ì Standard Invoice ä´é¤ÃÑº", "¢éÍ¼Ô´¾ÅÒ´", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        '                MessageBox.Show("ï¿½Ù¡ï¿½ï¿½ï¿½ Pressless ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ Standard Invoice ï¿½ï¿½ï¿½Ñº", "ï¿½ï¿½Í¼Ô´ï¿½ï¿½Ò´", MessageBoxButtons.OK, MessageBoxIcon.Error)
         '            Case 768, 991
-        '                MessageBox.Show("ÅÙ¡¤éÒ SCAVI äÁèÊÒÁÒÃ¶¾ÔÁ¾ì Standard Invoice ä´é¤ÃÑº", "¢éÍ¼Ô´¾ÅÒ´", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        '                MessageBox.Show("ï¿½Ù¡ï¿½ï¿½ï¿½ SCAVI ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ Standard Invoice ï¿½ï¿½ï¿½Ñº", "ï¿½ï¿½Í¼Ô´ï¿½ï¿½Ò´", MessageBoxButtons.OK, MessageBoxIcon.Error)
         '            Case Else
         '                PrintInvoice("rptInvExport.rpt", "Export Invoice")
         '        End Select
@@ -1123,7 +1123,7 @@ Public Class frmInvoiceExport
         '        Case 768, 991, 1107
         '            PrintInvoice("rptInvExportScavi.rpt", "Export Invoice Scavi Format")
         '        Case Else
-        '            MessageBox.Show("ªÔéÍÅÙ¡¤éÒ µéÍ§ÁÕ¤ÓÇèÒ SCAVI ËÃ×Íà¤ÂÃÐºØ Customer Code ¶Ö§¨Ð¾ÔÁ¾ì Scavi Invoice ä´é¤ÃÑº", "¢éÍ¼Ô´¾ÅÒ´", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        '            MessageBox.Show("ï¿½ï¿½ï¿½ï¿½ï¿½Ù¡ï¿½ï¿½ï¿½ ï¿½ï¿½Í§ï¿½Õ¤ï¿½ï¿½ï¿½ï¿½ SCAVI ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðºï¿½ Customer Code ï¿½Ö§ï¿½Ð¾ï¿½ï¿½ï¿½ï¿½ Scavi Invoice ï¿½ï¿½ï¿½Ñº", "ï¿½ï¿½Í¼Ô´ï¿½ï¿½Ò´", MessageBoxButtons.OK, MessageBoxIcon.Error)
         '    End Select
         'End If 'Sitthana 20230504, 20231116 K.joom need to use for anthor customer
         PrintInvoice("rptInvExportScavi.rpt", "Export Invoice Scavi Format")
@@ -1145,7 +1145,7 @@ Public Class frmInvoiceExport
                 Case 967, 968, 1133
                     PrintInvoice("rptInvExportPressless.rpt", "Export Invoice Pressless Format")
                 Case Else
-                    MessageBox.Show("ªÔéÍÅÙ¡¤éÒ µéÍ§ÁÕ¤ÓÇèÒ Pressless ËÃ×Íà¤ÂÃÐºØ Customer Code ¶Ö§¨Ð¾ÔÁ¾ì Pressless Invoice ä´é¤ÃÑº", "¢éÍ¼Ô´¾ÅÒ´", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    MessageBox.Show("ï¿½ï¿½ï¿½ï¿½ï¿½Ù¡ï¿½ï¿½ï¿½ ï¿½ï¿½Í§ï¿½Õ¤ï¿½ï¿½ï¿½ï¿½ Pressless ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðºï¿½ Customer Code ï¿½Ö§ï¿½Ð¾ï¿½ï¿½ï¿½ï¿½ Pressless Invoice ï¿½ï¿½ï¿½Ñº", "ï¿½ï¿½Í¼Ô´ï¿½ï¿½Ò´", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Select
         End If 'Sitthana 20230504
     End Sub
@@ -1187,9 +1187,9 @@ Public Class frmInvoiceExport
         '968    : PREELESS GmbH
         ' Select Case cboCustomer.SelectedValue
         ' Case 768, 991
-        ' MessageBox.Show("ÅÙ¡¤éÒ Scavi ãËé¾ÔÁ¾ì Packing àÁ¹Ù¢Í§ Scavi à·èÒ¹Ñé¹", "¢éÍ¼Ô´¾ÅÒ´", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        ' MessageBox.Show("ï¿½Ù¡ï¿½ï¿½ï¿½ Scavi ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Packing ï¿½ï¿½ï¿½Ù¢Í§ Scavi ï¿½ï¿½Ò¹ï¿½ï¿½", "ï¿½ï¿½Í¼Ô´ï¿½ï¿½Ò´", MessageBoxButtons.OK, MessageBoxIcon.Error)
         ' Case 967, 968
-        'MessageBox.Show("ÅÙ¡¤éÒ Pressless ãËé¾ÔÁ¾ì Packing àÁ¹Ù¢Í§ Pressless à·èÒ¹Ñé¹", "¢éÍ¼Ô´¾ÅÒ´", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        'MessageBox.Show("ï¿½Ù¡ï¿½ï¿½ï¿½ Pressless ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Packing ï¿½ï¿½ï¿½Ù¢Í§ Pressless ï¿½ï¿½Ò¹ï¿½ï¿½", "ï¿½ï¿½Í¼Ô´ï¿½ï¿½Ò´", MessageBoxButtons.OK, MessageBoxIcon.Error)
         'Case Else
         PrintPacking("rptInvExportPacking.rpt", "Export Invoice Packing List (Standard Packing)")
         'End Select
@@ -1202,7 +1202,7 @@ Public Class frmInvoiceExport
         ' Case 768, 991
         PrintPacking("rptInvExportPackingScavi.rpt", "Export Invoice Packing List (Scavi Format)")
         '     Case Else
-        'MessageBox.Show("¾ÔÁ¾ì Packing à©¾ÒÐÅÙ¡¤éÒ Scavi à·èÒ¹Ñé¹", "¢éÍ¼Ô´¾ÅÒ´", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        'MessageBox.Show("ï¿½ï¿½ï¿½ï¿½ï¿½ Packing à©¾ï¿½ï¿½ï¿½Ù¡ï¿½ï¿½ï¿½ Scavi ï¿½ï¿½Ò¹ï¿½ï¿½", "ï¿½ï¿½Í¼Ô´ï¿½ï¿½Ò´", MessageBoxButtons.OK, MessageBoxIcon.Error)
         'End Select
     End Sub
 
@@ -1216,7 +1216,7 @@ Public Class frmInvoiceExport
         ' Case 967, 968
         PrintPacking("rptInvExportPackingPressless.rpt", "Export Invoice Packing List (Pressless Format)")
         '    Case Else
-        'MessageBox.Show("¾ÔÁ¾ì Packing à©¾ÒÐÅÙ¡¤éÒ Pressless à·èÒ¹Ñé¹", "¢éÍ¼Ô´¾ÅÒ´", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        'MessageBox.Show("ï¿½ï¿½ï¿½ï¿½ï¿½ Packing à©¾ï¿½ï¿½ï¿½Ù¡ï¿½ï¿½ï¿½ Pressless ï¿½ï¿½Ò¹ï¿½ï¿½", "ï¿½ï¿½Í¼Ô´ï¿½ï¿½Ò´", MessageBoxButtons.OK, MessageBoxIcon.Error)
         'End Select
     End Sub
 
@@ -1455,9 +1455,9 @@ Public Class frmInvoiceExport
         '            .Columns(0).HeaderText = "#"
         '        dgvSectionList.Rows(i).Cells(0).Value = i + 1
 
-        '        '.Columns(1).HeaderText = "àÅ¢·Õè¼ÅÔµ"
+        '        '.Columns(1).HeaderText = "ï¿½Å¢ï¿½ï¿½ï¿½ï¿½Ôµ"
 
-        '        .Columns(1).HeaderText = "Ë¹èÇÂ"
+        '        .Columns(1).HeaderText = "Ë¹ï¿½ï¿½ï¿½"
 
         '        .Columns(0).Width = 40
 
@@ -1486,7 +1486,7 @@ Public Class frmInvoiceExport
         Dim i As Integer = 0
         If grdInv.Rows.Count > 1 Then
             Try
-                Dim exrt As Double = InputBox("Input the exchange rate." & vbCrLf & "ãÊèÍÑµÃÒáÅ¡à»ÅÕèÂ¹à§Ô¹µÃÒ", "System Message", "0.00")
+                Dim exrt As Double = InputBox("Input the exchange rate." & vbCrLf & "ï¿½ï¿½ï¿½ï¿½Ñµï¿½ï¿½ï¿½Å¡ï¿½ï¿½ï¿½ï¿½Â¹ï¿½Ô¹ï¿½ï¿½ï¿½", "System Message", "0.00")
                 For i = 0 To grdInv.Rows.Count - 2
                     grdInv.Rows(i).Cells("exchange_rate").Value = exrt
                 Next
@@ -1928,7 +1928,7 @@ Public Class frmInvoiceExport
         With grdProduct
             Select Case .CurrentRow.Index
                 Case 0
-                    MessageBox.Show("ÃÒÂ¡ÒÃ¹Õéà»ç¹ÃÒÂ¡ÒÃáÃ¡ÊØ´áÅéÇ¤ÃÑº", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    MessageBox.Show("ï¿½ï¿½Â¡ï¿½Ã¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¡ï¿½ï¿½ï¿½Ã¡ï¿½Ø´ï¿½ï¿½ï¿½Ç¤ï¿½Ñº", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Case Else
                     Dim i As Integer
                     i = .CurrentRow.Index
@@ -1970,7 +1970,7 @@ Public Class frmInvoiceExport
         With grdProduct
             Select Case .CurrentRow.Index
                 Case .RowCount - 2
-                    MessageBox.Show("ÃÒÂ¡ÒÃ¹Õéà»ç¹ÃÒÂ¡ÒÃÊØ´·éÒÂáÅéÇ¤ÃÑº", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    MessageBox.Show("ï¿½ï¿½Â¡ï¿½Ã¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¡ï¿½ï¿½ï¿½Ø´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¤ï¿½Ñº", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Case Else
                     Dim i As Integer
                     i = .CurrentRow.Index

@@ -9,3 +9,5 @@ obj/
 *.7z
 *.user
 *.suo
+/ProductionSystem/.vs/ProductionSystem/CopilotIndices/17.12.38.29086/SemanticSymbols.db-shm
+/ProductionSystem/.vs/ProductionSystem/v17/DocumentLayout.json

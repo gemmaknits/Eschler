@@ -779,7 +779,7 @@ Public Class formJobOrderYarnNewEdit
             Call getProductionItem()
             If txtjobno.Text.Trim <> "" Then
                 If (New classJobOrderYarn).ValidateChangedKoNo(pJobNo:=txtjobno.Text.Trim, pKono:=txtKono.Text.Trim, logempcd:=clsUserInfo.UserID) Then
-                    Dim result As Windows.Forms.DialogResult
+                    Dim result As DialogResult
                     result = MessageBox.Show("คุณกำลัง เปลี่ยน K/O No. " & vbCrLf & "โปรแกรมจะดึง GB No. และ Production Order Line ID ตามบอมใน K/I ให้อัตโนมัติ ",
                        "System Message", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button3)
                     Me.ErrorProvider1.SetError(Me.txtKono, "คุณกำลังแก้ไข K/O No.")
@@ -797,7 +797,7 @@ Public Class formJobOrderYarnNewEdit
             Call getProductionItem()
             If txtjobno.Text.Trim <> "" Then
                 If (New classJobOrderYarn).ValidateChangedKoNo(pJobNo:=txtjobno.Text.Trim, pKono:=txtKono.Text.Trim, logempcd:=clsUserInfo.UserID) Then
-                    Dim result As Windows.Forms.DialogResult
+                    Dim result As DialogResult
                     result = MessageBox.Show("คุณกำลัง เปลี่ยน K/O No. " & vbCrLf & "โปรแกรมจะดึง GB No. และ Production Order Line ID ตามบอมใน K/I ให้อัตโนมัติ ",
                        "System Message", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button3)
                     Me.ErrorProvider1.SetError(Me.txtKono, "คุณกำลังแก้ไข K/O No.")
@@ -898,7 +898,7 @@ Public Class formJobOrderYarnNewEdit
             Call ValidateKono()
             Call getProductionItem()
             If (New classJobOrderYarn).ValidateChangedKoNo(pJobNo:=txtjobno.Text.Trim, pKono:=txtKono.Text.Trim, logempcd:=clsUserInfo.UserID) Then
-                Dim result As Windows.Forms.DialogResult
+                Dim result As DialogResult
                 result = MessageBox.Show("คุณกำลัง เปลี่ยน K/O No. " & vbCrLf & "โปรแกรมจะดึง GB No. และ Production Order Line ID ตามบอมใน K/I ให้อัตโนมัติ ",
                    "System Message", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button3)
                 Call ChangeProductionOrderLineID()
@@ -1822,11 +1822,11 @@ Public Class formJobOrderYarnNewEdit
         Me.Validate()
 
         blnCancel = False
-        Dim result As Windows.Forms.DialogResult
+        Dim result As DialogResult
         result = MessageBox.Show("Would you like to Save Job ?" & vbCrLf,
                        "System Message", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3)
-        If result = Windows.Forms.DialogResult.Cancel Then blnCancel = True
-        If result <> Windows.Forms.DialogResult.Yes Then Exit Sub
+        If result = DialogResult.Cancel Then blnCancel = True
+        If result <> DialogResult.Yes Then Exit Sub
 
         If Not CHECKDATA() Then Exit Sub
 

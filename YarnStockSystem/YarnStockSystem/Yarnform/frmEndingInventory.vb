@@ -126,7 +126,7 @@ Public Class frmEndingInventory
     End Sub
 
     Private Sub btnExit_Click(sender As System.Object, e As System.EventArgs) Handles btnExit.Click
-        If MessageBox.Show("Would you like to exit ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then Me.Close()
+        If MessageBox.Show("Would you like to exit ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then Me.Close()
     End Sub
 
     Private Sub txtBoxNo_KeyDown(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles txtBoxNo.KeyDown

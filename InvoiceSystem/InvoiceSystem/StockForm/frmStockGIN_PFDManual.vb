@@ -218,7 +218,7 @@
 
 
     Private Sub btnSave_Click(sender As System.Object, e As System.EventArgs) Handles btnSave.Click
-        'If MessageBox.Show("Would you like to save ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then Call SaveData(txtDFNo.Text.Trim)
+        'If MessageBox.Show("Would you like to save ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then Call SaveData(txtDFNo.Text.Trim)
         Call SaveData()
     End Sub
     Private Sub SaveData()
@@ -290,10 +290,10 @@
         'Dim dv_dts_del As New DataView(dts, "", "", DataViewRowState.Deleted)
 
         blnCancel = False
-        Dim result As Windows.Forms.DialogResult
+        Dim result As DialogResult
         result = MessageBox.Show("Would you like to save ?", "System Message", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3)
-        If result = Windows.Forms.DialogResult.Cancel Then blnCancel = True
-        If result <> Windows.Forms.DialogResult.Yes Then Exit Function
+        If result = DialogResult.Cancel Then blnCancel = True
+        If result <> DialogResult.Yes Then Exit Function
 
         If objDB.GinPFDsave(Greige_Header, msgerr, dtc, dv_dtc_add, dv_dtc_upd, dv_dtc_del, clsUser.UserID, Tran_no) Then
             strGINNO = Tran_no
@@ -315,7 +315,7 @@
     End Sub
     Private Sub Canceldata()
 
-        If CANCELGINPFD() Then
+        If CancelGINPFD() Then
             InitControl()
             GenCboGINPFDNo()
         Else
@@ -351,10 +351,10 @@
         'Dim dv_dts_del As New DataView(dts, "", "", DataViewRowState.Deleted)
 
         blnCancel = False
-        Dim result As Windows.Forms.DialogResult
+        Dim result As DialogResult
         result = MessageBox.Show("Would you like to cancel document no. " & txtGINNo.Text & " ?", "System Message", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3)
-        If result = Windows.Forms.DialogResult.Cancel Then blnCancel = True
-        If result <> Windows.Forms.DialogResult.Yes Then Exit Function
+        If result = DialogResult.Cancel Then blnCancel = True
+        If result <> DialogResult.Yes Then Exit Function
 
         If objDB.GINPFDcancel(Greige_Header, msgerr, dtc, dv_dtc_add, dv_dtc_upd, dv_dtc_del, clsUser.UserID, Tran_no) Then
             strGINNO = Tran_no
@@ -406,7 +406,7 @@
         Me.Close()
     End Sub
     Private Sub frmStockGIN_PFD_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        If MessageBox.Show("Would you like to close ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.No Then
+        If MessageBox.Show("Would you like to close ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.No Then
             e.Cancel = True
         End If
     End Sub

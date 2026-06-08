@@ -603,9 +603,9 @@
 
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
         Me.Validate()
-        Dim result As Windows.Forms.DialogResult
+        Dim result As DialogResult
         result = MessageBox.Show("Would you like to save ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3)
-        If result <> Windows.Forms.DialogResult.Yes Then Exit Sub
+        If result <> DialogResult.Yes Then Exit Sub
 
         If Not CheckData() Then Exit Sub
 
@@ -685,15 +685,16 @@
     End Sub
     Private Sub btnPrintBarcode_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPrintBarcode.Click
         If docno.Length = 0 Then Exit Sub
-        Dim K As New formPrintBarcode
+        Dim frm As New formPrintBarcode
 
-        K.loginEmpcd = clsUser.UserID
-        K.Show()
+        frm.loginEmpcd = clsUser.UserID
+        frm.UserInfo = clsUser
+        frm.Show()
 
-        K.txtYarn_in_no.Text = docno
+        frm.txtYarn_in_no.Text = docno
 
-        K.btnFindByYarnInClick()
-        K.SelectAll(sender, e)
+        frm.btnFindByYarnInClick()
+        frm.SelectAll(sender, e)
     End Sub
 
     Private Sub btnExit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExit.Click
@@ -829,9 +830,9 @@
     End Sub
 
     Private Sub btnDel_Click(sender As System.Object, e As System.EventArgs) Handles btnDel.Click
-        Dim result As Windows.Forms.DialogResult
+        Dim result As DialogResult
         result = MessageBox.Show("Would You Like To Delete Current Box ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3)
-        If result = Windows.Forms.DialogResult.No Then Exit Sub
+        If result = DialogResult.No Then Exit Sub
         Call RemoveNewBox()
         Call SumGrid(grdYarnINDet.DataSource)
     End Sub

@@ -204,7 +204,7 @@
         SelectAll = 2
     End Enum
     Private Sub btnSave_Click(sender As System.Object, e As System.EventArgs) Handles btnSave.Click
-        If MessageBox.Show("Would you like to save ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+        If MessageBox.Show("Would you like to save ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
             If CboDoc_type.Text = "" Then
                 MsgBox("Please select Fabric delivery", MsgBoxStyle.OkOnly)
                 Exit Sub
@@ -349,7 +349,7 @@
     Private Sub btnCancel_Click(sender As System.Object, e As System.EventArgs) Handles btnCancel.Click
         If txtOutNo.Text.Trim.Length = 0 Then Exit Sub
 
-        If MessageBox.Show("Would you like to cancel G-Out No." + txtOutNo.Text.Trim + " ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
+        If MessageBox.Show("Would you like to cancel G-Out No." + txtOutNo.Text.Trim + " ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
             If dbStockG.CancelGOut(txtOutNo.Text.Trim, clsuser.UserID) Then
                 MessageBox.Show(txtOutNo.Text.Trim + " is already cancelled.", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Information)
             End If

@@ -93,7 +93,7 @@ Partial Class frmChangePassword
 		Me.Label4.Name = "Label4"
 		Me.Label4.Size = New System.Drawing.Size(251, 13)
 		Me.Label4.TabIndex = 6
-		Me.Label4.Text = "***Case Insensitive (µ—«æ‘¡æÏ„À≠Ë·≈–‡≈Á°¡’§Ë“‡∑Ë“°—π)"
+		Me.Label4.Text = "***Case Insensitive (‡∏ï‡∏±‡∏ß‡∏û‡∏¥‡∏°‡∏û‡πå‡πÉ‡∏´‡∏ç‡πà‡πÅ‡∏•‡∏∞‡πÄ‡∏•‡πá‡∏Å‡∏°‡∏µ‡∏Ñ‡πà‡∏≤‡πÄ‡∏ó‡πà‡∏≤‡∏Å‡∏±‡∏ô)"
 		'
 		'Label5
 		'
@@ -104,7 +104,7 @@ Partial Class frmChangePassword
 		Me.Label5.Name = "Label5"
 		Me.Label5.Size = New System.Drawing.Size(261, 13)
 		Me.Label5.TabIndex = 7
-		Me.Label5.Text = "***Use English Only („™È¿“…“Õ—ß°ƒ…·≈–µ—«‡≈¢‡∑Ë“π—Èπ)"
+		Me.Label5.Text = "***Use English Only (‡πÉ‡∏ä‡πâ‡∏†‡∏≤‡∏©‡∏≤‡∏≠‡∏±‡∏á‡∏Å‡∏§‡∏©‡πÅ‡∏•‡∏∞‡∏ï‡∏±‡∏ß‡πÄ‡∏•‡∏Ç‡πÄ‡∏ó‡πà‡∏≤‡∏ô‡∏±‡πâ‡∏ô)"
 		'
 		'ToolStrip1
 		'

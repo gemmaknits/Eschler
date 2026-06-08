@@ -322,7 +322,7 @@ Public Class frmPackingListGreige
 
     Private Sub btnAdd_Click(sender As System.Object, e As System.EventArgs)
         If Not CheckgrdReqG() Then Exit Sub
-        If MessageBox.Show("Would you like to select roll no From Request G to Packing List G ?" & vbCrLf & "คุณต้องการเพิ่มผ้าดิบที่จองผ้าไว้ใช่หรือไม่?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.No Then Exit Sub
+        If MessageBox.Show("Would you like to select roll no From Request G to Packing List G ?" & vbCrLf & "คุณต้องการเพิ่มผ้าดิบที่จองผ้าไว้ใช่หรือไม่?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.No Then Exit Sub
 
 
         Call AddRollNoPackingList()
@@ -998,7 +998,7 @@ Public Class frmPackingListGreige
         '    MessageBox.Show("This document is already GOUT." & vbCrLf & "Can't cancel anymore.", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
         '    Exit Sub
         'End If
-        If MessageBox.Show("Would you like to cancel this document ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.No Then Exit Sub
+        If MessageBox.Show("Would you like to cancel this document ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.No Then Exit Sub
 
 
         If CancelPLG() Then
@@ -1111,10 +1111,10 @@ Public Class frmPackingListGreige
 
 
         blnCancel = False
-        Dim result As Windows.Forms.DialogResult
+        Dim result As DialogResult
         result = MessageBox.Show("Would you like to save Greige Out ?", "System Message", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3)
-        If result = Windows.Forms.DialogResult.Cancel Then blnCancel = True
-        If result <> Windows.Forms.DialogResult.Yes Then Exit Sub
+        If result = DialogResult.Cancel Then blnCancel = True
+        If result <> DialogResult.Yes Then Exit Sub
 
         If SaveGOUT() Then
             MessageBox.Show("Out No. : " & txtOutNo.Text.Trim & "บันทึกสำเร็จ ! ", "System Message", MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1)
@@ -1262,10 +1262,10 @@ Public Class frmPackingListGreige
         PLGHeader.h46_empcd = clsuser.UserID.Trim
 
         blnCancel = False
-        Dim result As Windows.Forms.DialogResult
+        Dim result As DialogResult
         result = MessageBox.Show("Would you like to save ?", "System Message", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3)
-        If result = Windows.Forms.DialogResult.Cancel Then blnCancel = True
-        If result <> Windows.Forms.DialogResult.Yes Then Exit Function
+        If result = DialogResult.Cancel Then blnCancel = True
+        If result <> DialogResult.Yes Then Exit Function
 
 
 
@@ -1338,7 +1338,7 @@ Public Class frmPackingListGreige
     End Sub
 
     Private Sub frmPackingListDyed_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        If MessageBox.Show("Would you like to close ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.No Then
+        If MessageBox.Show("Would you like to close ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.No Then
             e.Cancel = True
         End If
     End Sub

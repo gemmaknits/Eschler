@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -12,12 +12,13 @@
     <RootNamespace>InvoiceSystemESH</RootNamespace>
     <AssemblyName>Invoice System %28Eschler%29</AssemblyName>
     <MyType>WindowsForms</MyType>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
     <UpgradeBackupLocation />
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
     <PublishUrl>\\srv-gemmaknits\eschler_programs\InvoiceSystem\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Unc</InstallFrom>
@@ -34,7 +35,7 @@
     <SuiteName>Eschler Program Suite</SuiteName>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>725</ApplicationRevision>
+    <ApplicationRevision>727</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -52,6 +53,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <UseVSHostingProcess>true</UseVSHostingProcess>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -62,6 +64,7 @@
     <DocumentationFile>Invoice System %28Eschler%29.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <OptionExplicit>On</OptionExplicit>
@@ -91,10 +94,22 @@
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\CrystalDecisions.ReportSource.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\CrystalDecisions.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\CrystalDecisions.Windows.Forms.dll</HintPath>
+    </Reference>
     <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
@@ -104,13 +119,6 @@
       <HintPath>..\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Syncfusion.Grid.Base, Version=14.4400.0.20, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89" />
-    <Reference Include="Syncfusion.Grid.Windows, Version=14.4400.0.20, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89" />
-    <Reference Include="Syncfusion.Shared.Base, Version=14.4400.0.20, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89" />
-    <Reference Include="Syncfusion.Shared.Windows, Version=14.4400.0.20, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89" />
-    <Reference Include="Syncfusion.SpellChecker.Base, Version=14.4400.0.20, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89" />
-    <Reference Include="Syncfusion.Tools.Base, Version=14.4400.0.20, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89" />
-    <Reference Include="Syncfusion.Tools.Windows, Version=14.4400.0.20, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -131,41 +139,42 @@
     <Import Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\classConfig\clsConfig.vb" />
-    <Compile Include="Classes\classConnection\classConnectionEschlerDB.vb" />
-    <Compile Include="Classes\classCreditNoteAR\classCreditNoteAR.vb" />
-    <Compile Include="Classes\classCreditNoteAR\classCreditNoteARExport.vb" />
-    <Compile Include="Classes\classDebitNoteAR\classDebitNoteAR.vb" />
-    <Compile Include="Classes\classDebitNoteAR\classDebitNoteExport.vb" />
-    <Compile Include="Classes\classDFOrder\classDFOrder.vb" />
-    <Compile Include="Classes\classDIN\classDINManual.vb" />
-    <Compile Include="Classes\classEndingInventory\classEndingGreigeInventory.vb" />
-    <Compile Include="Classes\classEndingInventory\classEndingYarnInventory.vb" />
-    <Compile Include="Classes\classInvoiceLocalSearch\classInvoiceLocalSearch.vb" />
-    <Compile Include="Classes\classInvoice\classInvoice.vb" />
-    <Compile Include="Classes\classLocation\classStockTransferD.vb" />
-    <Compile Include="Classes\classLocation\classYarnLocation.vb" />
-    <Compile Include="Classes\classLogin\classLogin.vb" />
-    <Compile Include="Classes\classMaster\classMaster.vb" />
-    <Compile Include="Classes\classMaster\classMasterUpdate.vb" />
-    <Compile Include="Classes\classPackingListD\classPackingListD.vb" />
-    <Compile Include="Classes\classPackingListG\classPackingListG.vb" />
-    <Compile Include="Classes\classPackingList\classPackingList.vb" />
-    <Compile Include="Classes\classSearch\classInvoiceExportSearch.vb" />
-    <Compile Include="Classes\classSearch\classSeachPO.vb" />
-    <Compile Include="Classes\classSearch\classSearchCustomers.vb" />
-    <Compile Include="Classes\classSearch\classSearchDIN.vb" />
-    <Compile Include="Classes\classSearch\classSearchDOUT.vb" />
-    <Compile Include="Classes\classSearch\classSearchGIN.vb" />
-    <Compile Include="Classes\classSearch\classSearchREQD.vb" />
-    <Compile Include="Classes\classStock\classStockD.vb" />
-    <Compile Include="Classes\classStock\classStockDClearanceSale.vb" />
-    <Compile Include="Classes\classStock\classStockDINReturn.vb" />
-    <Compile Include="Classes\classStock\classStockDINPurchase.vb" />
-    <Compile Include="Classes\classStock\classStockDLocation.vb" />
-    <Compile Include="Classes\classStock\classStockG.vb" />
-    <Compile Include="Classes\classStock\classStockGIN_KOManual.vb" />
-    <Compile Include="Classes\classYarnSPNew\GetDataYarn.vb" />
+    <Compile Include="Controls\MultiColumnComboBox.vb" />
+        <Compile Include="Classes\classConfig\clsConfig.vb" />
+        <Compile Include="Classes\classConnection\classConnectionEschlerDB.vb" />
+        <Compile Include="Classes\classCreditNoteAR\classCreditNoteAR.vb" />
+        <Compile Include="Classes\classCreditNoteAR\classCreditNoteARExport.vb" />
+        <Compile Include="Classes\classDebitNoteAR\classDebitNoteAR.vb" />
+        <Compile Include="Classes\classDebitNoteAR\classDebitNoteExport.vb" />
+        <Compile Include="Classes\classDFOrder\classDFOrder.vb" />
+        <Compile Include="Classes\classDIN\classDINManual.vb" />
+        <Compile Include="Classes\classEndingInventory\classEndingGreigeInventory.vb" />
+        <Compile Include="Classes\classEndingInventory\classEndingYarnInventory.vb" />
+        <Compile Include="Classes\classInvoiceLocalSearch\classInvoiceLocalSearch.vb" />
+        <Compile Include="Classes\classInvoice\classInvoice.vb" />
+        <Compile Include="Classes\classLocation\classStockTransferD.vb" />
+        <Compile Include="Classes\classLocation\classYarnLocation.vb" />
+        <Compile Include="Classes\classLogin\classLogin.vb" />
+        <Compile Include="Classes\classMaster\classMaster.vb" />
+        <Compile Include="Classes\classMaster\classMasterUpdate.vb" />
+        <Compile Include="Classes\classPackingListD\classPackingListD.vb" />
+        <Compile Include="Classes\classPackingListG\classPackingListG.vb" />
+        <Compile Include="Classes\classPackingList\classPackingList.vb" />
+        <Compile Include="Classes\classSearch\classInvoiceExportSearch.vb" />
+        <Compile Include="Classes\classSearch\classSeachPO.vb" />
+        <Compile Include="Classes\classSearch\classSearchCustomers.vb" />
+        <Compile Include="Classes\classSearch\classSearchDIN.vb" />
+        <Compile Include="Classes\classSearch\classSearchDOUT.vb" />
+        <Compile Include="Classes\classSearch\classSearchGIN.vb" />
+        <Compile Include="Classes\classSearch\classSearchREQD.vb" />
+        <Compile Include="Classes\classStock\classStockD.vb" />
+        <Compile Include="Classes\classStock\classStockDClearanceSale.vb" />
+        <Compile Include="Classes\classStock\classStockDINReturn.vb" />
+        <Compile Include="Classes\classStock\classStockDINPurchase.vb" />
+        <Compile Include="Classes\classStock\classStockDLocation.vb" />
+        <Compile Include="Classes\classStock\classStockG.vb" />
+        <Compile Include="Classes\classStock\classStockGIN_KOManual.vb" />
+        <Compile Include="Classes\classYarnSPNew\GetDataYarn.vb" />
     <Compile Include="DebitNoteForm\frmDebitNoteExport.Designer.vb">
       <DependentUpon>frmDebitNoteExport.vb</DependentUpon>
     </Compile>
@@ -226,10 +235,10 @@
     <Compile Include="PackingList\frmPackingListDyed.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Classes\classRequest\classRequest.vb" />
-    <Compile Include="Classes\classSalesOrder\classSalesOrder.vb" />
-    <Compile Include="Classes\classStock\classStock.vb" />
-    <Compile Include="Classes\classUserInfo\classUserInfo.vb" />
+        <Compile Include="Classes\classRequest\classRequest.vb" />
+        <Compile Include="Classes\classSalesOrder\classSalesOrder.vb" />
+        <Compile Include="Classes\classStock\classStock.vb" />
+        <Compile Include="Classes\classUserInfo\classUserInfo.vb" />
     <Compile Include="DyingOrderReport\frmDyingOrderPending2.Designer.vb">
       <DependentUpon>frmDyingOrderPending2.vb</DependentUpon>
     </Compile>
@@ -446,7 +455,7 @@
     <Compile Include="SalesOrderReport\frmSalesOrderPrint.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Classes\classSearch\classSearchLOT.vb" />
+        <Compile Include="Classes\classSearch\classSearchLOT.vb" />
     <Compile Include="SearchForm\DlgGetMasterCode.designer.vb">
       <DependentUpon>DlgGetMasterCode.vb</DependentUpon>
     </Compile>
@@ -1140,334 +1149,214 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <PublishFile Include="CrystalDecisions.CrystalReports.Engine">
-      <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <FileType>Assembly</FileType>
-    </PublishFile>
     <PublishFile Include="CrystalDecisions.ReportAppServer.ClientDoc">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="CrystalDecisions.ReportAppServer.CommLayer">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="CrystalDecisions.ReportAppServer.CommonControls">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="CrystalDecisions.ReportAppServer.CommonObjectModel">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="CrystalDecisions.ReportAppServer.Controllers">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="CrystalDecisions.ReportAppServer.CubeDefModel">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="CrystalDecisions.ReportAppServer.DataDefModel">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="CrystalDecisions.ReportAppServer.DataSetConversion">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="CrystalDecisions.ReportAppServer.ObjectFactory">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="CrystalDecisions.ReportAppServer.Prompting">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="CrystalDecisions.ReportAppServer.ReportDefModel">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="CrystalDecisions.ReportAppServer.XmlSerialize">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <FileType>Assembly</FileType>
-    </PublishFile>
-    <PublishFile Include="CrystalDecisions.ReportSource">
-      <Visible>False</Visible>
       <PublishState>Include</PublishState>
       <IncludeHash>True</IncludeHash>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <FileType>Assembly</FileType>
-    </PublishFile>
-    <PublishFile Include="CrystalDecisions.Shared">
-      <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <FileType>Assembly</FileType>
-    </PublishFile>
-    <PublishFile Include="CrystalDecisions.Windows.Forms">
-      <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="FlashControlV71">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="gnome.ico">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
     <PublishFile Include="log4net">
       <Visible>False</Visible>
-      <PublishState>Exclude</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="Microsoft.ReportViewer.Common">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="Microsoft.ReportViewer.DataVisualization">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="Microsoft.ReportViewer.ProcessingObjectModel">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="Microsoft.ReportViewer.WinForms">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="ShockwaveFlashObjects">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="stdole">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <FileType>Assembly</FileType>
-    </PublishFile>
-    <PublishFile Include="Syncfusion.Grid.Base">
-      <Visible>False</Visible>
       <PublishState>Include</PublishState>
       <IncludeHash>True</IncludeHash>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <FileType>Assembly</FileType>
-    </PublishFile>
-    <PublishFile Include="Syncfusion.Grid.Windows">
-      <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <FileType>Assembly</FileType>
-    </PublishFile>
-    <PublishFile Include="Syncfusion.Grid.Windows.XmlSerializers">
-      <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <FileType>Assembly</FileType>
-    </PublishFile>
-    <PublishFile Include="Syncfusion.Shared.Base">
-      <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <FileType>Assembly</FileType>
-    </PublishFile>
-    <PublishFile Include="Syncfusion.Shared.Windows">
-      <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <FileType>Assembly</FileType>
-    </PublishFile>
-    <PublishFile Include="Syncfusion.SpellChecker.Base">
-      <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <FileType>Assembly</FileType>
-    </PublishFile>
-    <PublishFile Include="Syncfusion.Tools.Base">
-      <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <FileType>Assembly</FileType>
-    </PublishFile>
-    <PublishFile Include="Syncfusion.Tools.Windows">
-      <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
       <FileType>Assembly</FileType>
     </PublishFile>
   </ItemGroup>

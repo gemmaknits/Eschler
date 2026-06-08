@@ -23,7 +23,6 @@ Partial Class frmDesignNew
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDesignNew))
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim MetroColorTable2 As Syncfusion.Windows.Forms.MetroColorTable = New Syncfusion.Windows.Forms.MetroColorTable()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.btnNew = New System.Windows.Forms.ToolStripButton()
         Me.btnSave = New System.Windows.Forms.ToolStripButton()
@@ -158,7 +157,7 @@ Partial Class frmDesignNew
         Me.Label111 = New System.Windows.Forms.Label()
         Me.txtdesign_gauge = New System.Windows.Forms.TextBox()
         Me.txtNeedle = New Classes.textboxNumeric()
-        Me.cboMultiMachineGroup = New Syncfusion.Windows.Forms.Tools.MultiColumnComboBox()
+        Me.cboMultiMachineGroup = New ProductionSystem.Controls.MultiColumnComboBox()
         Me.txtRpm = New Classes.textboxNumeric()
         Me.txtCounterPerRoll = New Classes.textboxNumeric()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
@@ -1756,30 +1755,8 @@ Partial Class frmDesignNew
         '
         'cboMultiMachineGroup
         '
-        Me.cboMultiMachineGroup.BeforeTouchSize = New System.Drawing.Size(199, 21)
-        Me.cboMultiMachineGroup.Border3DStyle = System.Windows.Forms.Border3DStyle.Flat
         Me.cboMultiMachineGroup.Location = New System.Drawing.Point(122, 22)
-        Me.cboMultiMachineGroup.MetroColor = System.Drawing.Color.FromArgb(CType(CType(22, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.cboMultiMachineGroup.Name = "cboMultiMachineGroup"
-        MetroColorTable2.ArrowChecked = System.Drawing.Color.FromArgb(CType(CType(147, Byte), Integer), CType(CType(149, Byte), Integer), CType(CType(152, Byte), Integer))
-        MetroColorTable2.ArrowCheckedBorderColor = System.Drawing.Color.Empty
-        MetroColorTable2.ArrowInActive = System.Drawing.Color.White
-        MetroColorTable2.ArrowNormal = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(198, Byte), Integer))
-        MetroColorTable2.ArrowNormalBackGround = System.Drawing.Color.Empty
-        MetroColorTable2.ArrowNormalBorderColor = System.Drawing.Color.Empty
-        MetroColorTable2.ArrowPushed = System.Drawing.Color.FromArgb(CType(CType(88, Byte), Integer), CType(CType(89, Byte), Integer), CType(CType(90, Byte), Integer))
-        MetroColorTable2.ArrowPushedBackGround = System.Drawing.Color.Empty
-        MetroColorTable2.ArrowPushedBorderColor = System.Drawing.Color.Empty
-        MetroColorTable2.ScrollerBackground = System.Drawing.Color.White
-        MetroColorTable2.ThumbChecked = System.Drawing.Color.FromArgb(CType(CType(147, Byte), Integer), CType(CType(149, Byte), Integer), CType(CType(152, Byte), Integer))
-        MetroColorTable2.ThumbCheckedBorderColor = System.Drawing.Color.Empty
-        MetroColorTable2.ThumbInActive = System.Drawing.Color.White
-        MetroColorTable2.ThumbNormal = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(198, Byte), Integer))
-        MetroColorTable2.ThumbNormalBorderColor = System.Drawing.Color.Empty
-        MetroColorTable2.ThumbPushed = System.Drawing.Color.FromArgb(CType(CType(88, Byte), Integer), CType(CType(89, Byte), Integer), CType(CType(90, Byte), Integer))
-        MetroColorTable2.ThumbPushedBorder = System.Drawing.Color.Empty
-        MetroColorTable2.ThumbPushedBorderColor = System.Drawing.Color.Empty
-        Me.cboMultiMachineGroup.ScrollMetroColorTable = MetroColorTable2
         Me.cboMultiMachineGroup.Size = New System.Drawing.Size(199, 21)
         Me.cboMultiMachineGroup.TabIndex = 54
         '
@@ -3874,7 +3851,7 @@ Partial Class frmDesignNew
     Friend WithEvents txtThickness As TextBox
     Friend WithEvents Label42 As Label
     Friend WithEvents Label43 As Label
-    Friend WithEvents cboMultiMachineGroup As Syncfusion.Windows.Forms.Tools.MultiColumnComboBox
+    Friend WithEvents cboMultiMachineGroup As ProductionSystem.Controls.MultiColumnComboBox
     Friend WithEvents Label121 As Label
     Friend WithEvents txtCompositionForTag As TextBox
     Friend WithEvents GroupBox10 As GroupBox

@@ -117,10 +117,10 @@ Public Class frmDyingOrderSearch
     End Sub
 
     Private Sub Search(ByVal dtResult As DataTable)
-        Dim dvResult As DataView 'µ—«·ª√‡°Á∫º≈≈—æ∏Ï
-        Dim strFilter As String 'µ—«·ª√‡°Á∫‡ß◊ËÕπ‰¢§ÈπÀ“
+        Dim dvResult As DataView '‡∏ï‡∏±‡∏ß‡πÅ‡∏õ‡∏£‡πÄ‡∏Å‡πá‡∏ö‡∏ú‡∏•‡∏•‡∏±‡∏û‡∏ò‡πå
+        Dim strFilter As String '‡∏ï‡∏±‡∏ß‡πÅ‡∏õ‡∏£‡πÄ‡∏Å‡πá‡∏ö‡πÄ‡∏á‡∏∑‡πà‡∏≠‡∏ô‡πÑ‡∏Ç‡∏Ñ‡πâ‡∏ô‡∏´‡∏≤
 
-        dvResult = New DataView(dtResult) 'π”¢ÈÕ¡Ÿ≈®“° DataTable ∑’ËµÈÕß°“√§ÈπÀ“ ¡“‰«È„π DataView
+        dvResult = New DataView(dtResult) '‡∏ô‡∏≥‡∏Ç‡πâ‡∏≠‡∏°‡∏π‡∏•‡∏à‡∏≤‡∏Å DataTable ‡∏ó‡∏µ‡πà‡∏ï‡πâ‡∏≠‡∏á‡∏Å‡∏≤‡∏£‡∏Ñ‡πâ‡∏ô‡∏´‡∏≤ ‡∏°‡∏≤‡πÑ‡∏ß‡πâ‡πÉ‡∏ô DataView
         strFilter = "design_no like '%" & txtlookup.Text & "%'"
         strFilter &= " or design_no_fg like '%" & txtlookup.Text & "%'"
         strFilter &= " or sono like '%" & txtlookup.Text & "%'"
@@ -130,8 +130,8 @@ Public Class frmDyingOrderSearch
         strFilter &= " or dfdt2 like '%" & txtlookup.Text & "%'"
         strFilter &= " or empname like '%" & txtlookup.Text & "%'"
         strFilter &= " or outno like '%" & txtlookup.Text & "%'"
-        dvResult.RowFilter = strFilter '§ÈπÀ“
+        dvResult.RowFilter = strFilter '‡∏Ñ‡πâ‡∏ô‡∏´‡∏≤
 
-        grdDF.DataSource = dvResult 'π”º≈≈—æ∏Ï∑’Ë§ÈπÀ“§◊π ŸË DataGridView
+        grdDF.DataSource = dvResult '‡∏ô‡∏≥‡∏ú‡∏•‡∏•‡∏±‡∏û‡∏ò‡πå‡∏ó‡∏µ‡πà‡∏Ñ‡πâ‡∏ô‡∏´‡∏≤‡∏Ñ‡∏∑‡∏ô‡∏™‡∏π‡πà DataGridView
     End Sub
 End Class

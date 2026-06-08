@@ -597,3 +597,125 @@ D:\DOTNET\ESCHLER\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmNewY
 D:\DOTNET\ESCHLER\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmStockByBOI.resources
 D:\DOTNET\ESCHLER\InvoiceSystem\InvoiceSystem\bin\Debug\Invoice System (Eschler).exe.config
 D:\DOTNET\ESCHLER\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystem.vbprojResolveAssemblyReference.cache
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\Invoice System (Eschler).exe
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\Invoice System (Eschler).xml
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\Invoice System (Eschler).pdb
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystem.vbproj.AssemblyReference.cache
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\Interop.SHDocVw.dll
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystem.vbproj.ResolveComReference.cache
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmDebitNoteExport.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmCreditNoteExport.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmCargoDeliveryReceipt.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmInvoiceExportDetailReport.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.FrmInvoiceYarnLot.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmDyedTransfer.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmGreigeTransfer.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmYarnLocation.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmmtl_locations.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmPackingListDyed.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmDyingOrderPending2.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmChangePassword.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmLogin.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmMainmenu.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmReport.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmSplashScreen.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.TaskBarNotifier.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmDebitNoteProducts.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmDebitNoteCharge.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmCreditNoteLocal.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmInvoiceExport.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmInvoiceExportSearch.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmInvoiceLocal.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmInvoiceLocalSC.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmInvoiceLocalSearch.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmInvoiceSearchPacking.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmBillControl.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmCRNoteControl.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmInvoiceBOIControl.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmInvoiceDailySummary.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmInvoiceExportAnalysis.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmInvoiceExportControl.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmInvoiceExportDINBalance.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmInvoiceExportPrint.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmInvoiceExportReportWithNotes.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmInvoiceLocalControl.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmInvoiceLocalPrint.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.Resources.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmPackingListGreige.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmReportPLG.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmBOIFromDIN.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmBOIFromDOUT.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmBOIFromGIN.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmBOIFromGOUT.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmSalesOrderPrint.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.DlgGetMasterCode.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmDyingOrderSearch.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmSearchCustomers.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmSearchBill.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmSearchColNo.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmSearchDebitNote.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmSearchDIN.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmSearchGIN.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmSearchGOUT.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmSearchKO.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmSearchLOT.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmSearchPackingListD.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmSearchPLD.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmSearchPackingListG.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmSearchPO.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmSearchDFOrderPreset.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmSearchREQD.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmSearchREQG.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmSearchSaleOrder.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmSearchStock_D.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmSearchDOUT.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmDOUTDocument.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmDINRemark.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmStockDINPurchase.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmStockDINReturn.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmStockDINManual.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmStockDLocation.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmStockGIN_KOManual.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmStockGINManualKO.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmStockGINPurchase.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmStockGIN_PFD.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmEndingGreigeInventory.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmStockDClearanceSale.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmEndingDyedInventory.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmEndingYarnInventory.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmStockDIN.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmStockGClearanceSale.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmStockGIN_PFDManual.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmStockGOUTManual.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmStockGReturn.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmDOUTControl.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmGINDocument.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmCancelledOrderPending.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmDINControl.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmDINControl2.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmDINDocument.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmDINDyeCharge.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmGOUTControl.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmGOUTDFControl.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmGreigeLog.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmNewDesignNo.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmNewYarnCode.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystemESH.frmStockByBOI.resources
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystem.vbproj.GenerateResource.cache
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceSystem.vbproj.CoreCompileInputs.cache
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\bin\Debug\Invoice System (Eschler).exe.config
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\bin\Debug\Invoice System (Eschler).exe.manifest
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\bin\Debug\Invoice System (Eschler).application
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\bin\Debug\Invoice System (Eschler).exe
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\bin\Debug\Invoice System (Eschler).pdb
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\bin\Debug\Invoice System (Eschler).xml
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\bin\Debug\CrystalDecisions.CrystalReports.Engine.dll
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\bin\Debug\CrystalDecisions.ReportSource.dll
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\bin\Debug\CrystalDecisions.Shared.dll
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\bin\Debug\CrystalDecisions.Windows.Forms.dll
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\bin\Debug\RestSharp.dll
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\bin\Debug\Microsoft.ReportViewer.WinForms.xml
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\bin\Debug\RestSharp.xml
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\Invoice System (Eschler).exe.manifest
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\Invoice System (Eschler).application
+D:\SOURCECODE\Eschler\InvoiceSystem\InvoiceSystem\obj\Debug\InvoiceS.F7BB3AFD.Up2Date

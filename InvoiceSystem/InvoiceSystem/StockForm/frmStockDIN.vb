@@ -82,7 +82,7 @@
 
     Private Sub btnSave_Click(sender As System.Object, e As System.EventArgs) Handles btnSave.Click
         If txtBillNo.Text.Trim.Length = 0 Then Exit Sub
-        If MessageBox.Show("Would you like to save ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then Call SaveData(txtBillNo.Text.Trim)
+        If MessageBox.Show("Would you like to save ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then Call SaveData(txtBillNo.Text.Trim)
     End Sub
 
     Private Sub btnPrint_Click(sender As System.Object, e As System.EventArgs) Handles btnPrint.Click
@@ -118,7 +118,7 @@
 
     Private Sub btnCancel_Click(sender As System.Object, e As System.EventArgs) Handles btnCancel.Click
         If txtDINNo.Text.Trim.Length = 0 Then Exit Sub
-        If MessageBox.Show("Would you like to cancel document no. " & txtDINNo.Text & " ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
+        If MessageBox.Show("Would you like to cancel document no. " & txtDINNo.Text & " ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
             Call (New classStock).CancelDIN(txtDINNo.Text, clsUser.UserID)
             btnNew_Click(sender, e)
         End If

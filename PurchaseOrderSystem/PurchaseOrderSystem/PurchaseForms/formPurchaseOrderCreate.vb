@@ -2,7 +2,7 @@ Imports System.Data
 Imports System.Data.SqlClient
 Imports System.Text
 Imports System.Windows.Forms
-Imports Syncfusion.Windows.Forms.Tools
+Imports PurchaseOrderSystem.Controls
 
 Public Class formPurchaseOrderCreate
     Dim _AppConn As SqlConnection = (New classConnection).getSQLConnection
@@ -48,17 +48,17 @@ Public Class formPurchaseOrderCreate
         End Set
     End Property
 
-    Private Sub Model_QueryCellInfo(ByVal sender As Object, ByVal e As Syncfusion.Windows.Forms.Grid.GridQueryCellInfoEventArgs)
+    Private Sub Model_QueryCellInfo(ByVal sender As Object, ByVal e As PurchaseOrderSystem.Controls.GridQueryCellInfoEventArgs)
         'To specify the row and colum index.
         If e.RowIndex = 0 AndAlso e.ColIndex = 1 Then
             'To specify the font
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New PurchaseOrderSystem.Controls.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             'To specify the text
             e.Style.Text = "PO Line Type Description"
             'To specify the text color.
 
         ElseIf e.RowIndex = 0 AndAlso e.ColIndex = 2 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New PurchaseOrderSystem.Controls.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Outside Process"
         End If
 
@@ -328,7 +328,7 @@ Public Class formPurchaseOrderCreate
         Dim Address As String
 
         If Me.CbSupplier.SelectedIndex = -1 Then
-            MessageBox.Show("ãËé¤ÅÔ¡àÅ×Í¡ Supplier à·èÒ¹Ñé¹¤ÃÑº", "¢éÍ¼Ô´¾ÅÒ´", MessageBoxButtons.OK, MessageBoxIcon.Stop)
+            MessageBox.Show("ï¿½ï¿½ï¿½ï¿½Ô¡ï¿½ï¿½ï¿½Í¡ Supplier ï¿½ï¿½Ò¹ï¿½é¹¤ï¿½Ñº", "ï¿½ï¿½Í¼Ô´ï¿½ï¿½Ò´", MessageBoxButtons.OK, MessageBoxIcon.Stop)
             Exit Sub
         End If
 
@@ -469,9 +469,9 @@ Public Class formPurchaseOrderCreate
 
         'Sitthana 17/10/2018
         If txtPurNo.Text.Trim <> "" Then
-            MessageBox.Show("ÃÒÂ¡ÒÃ¹Õéä´éÊÃéÒ§àÃÕÂºÃéÍÂáÅéÇ¤ÃÑº ¤Ø³¨ÐäÁèÊÒÁÒÃ¶á¡éä¢ä´é" & vbCr _
-                          & Space(5) & "¶éÒ¤Ø³¨Ðá¡éä¢ ãËéãªéâ»Ãá¡ÃÁ Edit ¤ÃÑº" _
-                          , "¢éÍ¤ÇÒÁá¨é§àµ×Í¹", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            MessageBox.Show("ï¿½ï¿½Â¡ï¿½Ã¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò§ï¿½ï¿½ï¿½Âºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¤ï¿½Ñº ï¿½Ø³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½" & vbCr _
+                          & Space(5) & "ï¿½ï¿½Ò¤Ø³ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Edit ï¿½ï¿½Ñº" _
+                          , "ï¿½ï¿½Í¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¹", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Exit Sub
         End If
 
@@ -502,14 +502,14 @@ Public Class formPurchaseOrderCreate
 
         '-------------------------------------Start-----------------------------------------------------------'
         'If Not (clsUser.DeptCD = "PURCHASING" Or clsUser.DeptCD = "ITC" Or clsUser.DeptCD = "ACC") Then
-        '    MessageBox.Show("â»Ã´µÔ´µèÍ½èÒÂ¨Ñ´«×éÍ : Please Contact Purchasing ", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+        '    MessageBox.Show("ï¿½Ã´ï¿½Ô´ï¿½ï¿½Í½ï¿½ï¿½Â¨Ñ´ï¿½ï¿½ï¿½ï¿½ : Please Contact Purchasing ", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         '    Exit Sub
         'End If
         '--------------------------------------End----------------------------------------------------------'
         '------------  job ---- -----------------------
         'Sitthana 17/09/2018
         'If Me.CbSupplier.SelectedIndex = -1 Then
-        ' MessageBox.Show("ãËé¤ÅÔ¡àÅ×Í¡ Supplier à·èÒ¹Ñé¹¤ÃÑº", "¢éÍ¼Ô´¾ÅÒ´", MessageBoxButtons.OK, MessageBoxIcon.Stop)
+        ' MessageBox.Show("ï¿½ï¿½ï¿½ï¿½Ô¡ï¿½ï¿½ï¿½Í¡ Supplier ï¿½ï¿½Ò¹ï¿½é¹¤ï¿½Ñº", "ï¿½ï¿½Í¼Ô´ï¿½ï¿½Ò´", MessageBoxButtons.OK, MessageBoxIcon.Stop)
         ' Exit Sub
         ' End If
 
@@ -517,9 +517,9 @@ Public Class formPurchaseOrderCreate
         m_Msgerr = ""  'Sittana 20190705
 
         If cboCurrency.SelectedValue <> "THB" And oConfig.IsValidDouble(Me.txtrate.Text.Trim) = "1" Then
-            errorCurrency.SetError(Me.txtrate, "¶éÒÊ¡ØÅà§Ô¹à»ç¹Ê¡ØÅà§Ô¹µèÒ§»ÃÐà·È àÃ·à§Ô¹µéÍ§äÁèä´éà·èÒ¡Ñº 1..")
-            ' MessageBox.Show("¶éÒÊ¡ØÅà§Ô¹à»ç¹Ê¡ØÅà§Ô¹µèÒ§»ÃÐà·È àÃ·à§Ô¹µéÍ§äÁèä´éà·èÒ¡Ñº 1", "System Meassge", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
-            m_Msgerr = "¶éÒÊ¡ØÅà§Ô¹à»ç¹Ê¡ØÅà§Ô¹µèÒ§»ÃÐà·È àÃ·à§Ô¹µéÍ§äÁèä´éà·èÒ¡Ñº 1.."
+            errorCurrency.SetError(Me.txtrate, "ï¿½ï¿½ï¿½Ê¡ï¿½ï¿½ï¿½Ô¹ï¿½ï¿½Ê¡ï¿½ï¿½ï¿½Ô¹ï¿½ï¿½Ò§ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½Ô¹ï¿½ï¿½Í§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò¡Ñº 1..")
+            ' MessageBox.Show("ï¿½ï¿½ï¿½Ê¡ï¿½ï¿½ï¿½Ô¹ï¿½ï¿½Ê¡ï¿½ï¿½ï¿½Ô¹ï¿½ï¿½Ò§ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½Ô¹ï¿½ï¿½Í§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò¡Ñº 1", "System Meassge", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+            m_Msgerr = "ï¿½ï¿½ï¿½Ê¡ï¿½ï¿½ï¿½Ô¹ï¿½ï¿½Ê¡ï¿½ï¿½ï¿½Ô¹ï¿½ï¿½Ò§ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½Ô¹ï¿½ï¿½Í§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò¡Ñº 1.."
             m_HeaderHasErrors = True
         End If
 
@@ -582,18 +582,18 @@ Public Class formPurchaseOrderCreate
         Obj_tbl_job.exrt = oConfig.IsValidDouble(Me.txtrate.Text.Trim)         'As Double
         'End If
 
-        Obj_tbl_job.gross_amt = Me.txtGrossamount.Text 'ÃÇÁ·Ñé§ËÁ´ã¹ Line
-        Obj_tbl_job.line_discamt = Me.txtGrossLineDiscount.Text 'ÃÇÁÊèÇ¹Å´ã¹ Line
-        Obj_tbl_job.net_lineamt = Me.txtNetLineAmount.Text 'ÃÇÁÊØ·¸Ôã¹ Line
+        Obj_tbl_job.gross_amt = Me.txtGrossamount.Text 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Line
+        Obj_tbl_job.line_discamt = Me.txtGrossLineDiscount.Text 'ï¿½ï¿½ï¿½ï¿½ï¿½Ç¹Å´ï¿½ Line
+        Obj_tbl_job.net_lineamt = Me.txtNetLineAmount.Text 'ï¿½ï¿½ï¿½ï¿½Ø·ï¿½ï¿½ï¿½ Line
 
-        Obj_tbl_job.discper = (Me.txtDiscper.Text) 'As Double à»ÍÃìà«ç¹ÊèÇ¹Å´Í×è¹æ
-        Obj_tbl_job.discamt = (Me.txtDiscountamount.Text) 'As Double ÊèÇ¹Å´Í×è¹æ
-        Obj_tbl_job.vat = Me.txtVatPer.Text 'As Double à»ÍÃìà«ç¹ÀÒÉÕ
-        Obj_tbl_job.vatamt = Me.txtVatAmount.Text  'As Double ÀÒÉÕÊØ·¸Ô
+        Obj_tbl_job.discper = (Me.txtDiscper.Text) 'As Double ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¹Å´ï¿½ï¿½ï¿½ï¿½
+        Obj_tbl_job.discamt = (Me.txtDiscountamount.Text) 'As Double ï¿½ï¿½Ç¹Å´ï¿½ï¿½ï¿½ï¿½
+        Obj_tbl_job.vat = Me.txtVatPer.Text 'As Double ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        Obj_tbl_job.vatamt = Me.txtVatAmount.Text  'As Double ï¿½ï¿½ï¿½ï¿½ï¿½Ø·ï¿½ï¿½
         'Obj_tbl_job.total_discamt = (Me.txtNetOrderAmount.Text) 'total_discamt ?
-        Obj_tbl_job.taxamt = 0  'As Double 'äÁèä´éãªé
-        Obj_tbl_job.netamt = txtNetOrderAmount.Text 'ÃÇÁÊØ·¸Ô 
-        Obj_tbl_job.totamt = txtTotalAmount.Text 'ÃÇÁÊØ·¸Ô
+        Obj_tbl_job.taxamt = 0  'As Double 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        Obj_tbl_job.netamt = txtNetOrderAmount.Text 'ï¿½ï¿½ï¿½ï¿½Ø·ï¿½ï¿½ 
+        Obj_tbl_job.totamt = txtTotalAmount.Text 'ï¿½ï¿½ï¿½ï¿½Ø·ï¿½ï¿½
         Obj_tbl_job.shipvia = (Me.txtShipvia.Text) 'As Double
         Obj_tbl_job.deliaddr = Me.textDeliAddr.Text
         Obj_tbl_job.shipterms = Me.textShipterms.Text
@@ -660,7 +660,7 @@ Public Class formPurchaseOrderCreate
 
             If oConfig.IsNull(Me.dgvJobDet.Rows(i).Cells("rcv_warehouse_id").Value, 0) = 0 Then
                 ErrRunno += 1
-                m_errmess.Append("µéÍ§ÁÕ WareHouse")
+                m_errmess.Append("ï¿½ï¿½Í§ï¿½ï¿½ WareHouse")
                 m_Msgerr &= vbCrLf & ErrRunno.ToString & " ,Warehouse"
                 m_GridHasErrors = True
             End If
@@ -668,8 +668,8 @@ Public Class formPurchaseOrderCreate
             If oConfig.IsNull(Me.dgvJobDet.Rows(i).Cells("colItcd").Value, "").ToString.Substring(0, 3) = "YRA" And
                 oConfig.IsNull(Me.dgvJobDet.Rows(i).Cells("rcv_subinventory_id").Value, 0) = 0 Then
                 ErrRunno += 1
-                m_errmess.Append("µéÍ§ÁÕ SubInventory ·Ø¡¤ÃÑé§·ÕèÁÕ¡ÒÃ«×éÍ Bobbin YRA")
-                m_Msgerr &= vbCrLf & ErrRunno.ToString & " µéÍ§ÁÕ SubInventory ·Ø¡¤ÃÑé§·ÕèÁÕ¡ÒÃ«×éÍ Bobbin YRA"
+                m_errmess.Append("ï¿½ï¿½Í§ï¿½ï¿½ SubInventory ï¿½Ø¡ï¿½ï¿½ï¿½é§·ï¿½ï¿½ï¿½Õ¡ï¿½Ã«ï¿½ï¿½ï¿½ Bobbin YRA")
+                m_Msgerr &= vbCrLf & ErrRunno.ToString & " ï¿½ï¿½Í§ï¿½ï¿½ SubInventory ï¿½Ø¡ï¿½ï¿½ï¿½é§·ï¿½ï¿½ï¿½Õ¡ï¿½Ã«ï¿½ï¿½ï¿½ Bobbin YRA"
                 m_GridHasErrors = True
             End If
 
@@ -751,8 +751,8 @@ Public Class formPurchaseOrderCreate
         ' End If
 
         If cboCurrency.SelectedValue <> "THB" And oConfig.IsValidDouble(Me.txtrate.Text.Trim) = "1" Then
-            MessageBox.Show("¶éÒÊ¡ØÅà§Ô¹à»ç¹Ê¡ØÅà§Ô¹µèÒ§»ÃÐà·È àÃ·à§Ô¹µéÍ§äÁèä´éà·èÒ¡Ñº 1", "System Meassge", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
-            errorCurrency.SetError(Me.txtrate, "¶éÒÊ¡ØÅà§Ô¹à»ç¹Ê¡ØÅà§Ô¹µèÒ§»ÃÐà·È àÃ·à§Ô¹µéÍ§äÁèä´éà·èÒ¡Ñº 1..")
+            MessageBox.Show("ï¿½ï¿½ï¿½Ê¡ï¿½ï¿½ï¿½Ô¹ï¿½ï¿½Ê¡ï¿½ï¿½ï¿½Ô¹ï¿½ï¿½Ò§ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½Ô¹ï¿½ï¿½Í§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò¡Ñº 1", "System Meassge", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+            errorCurrency.SetError(Me.txtrate, "ï¿½ï¿½ï¿½Ê¡ï¿½ï¿½ï¿½Ô¹ï¿½ï¿½Ê¡ï¿½ï¿½ï¿½Ô¹ï¿½ï¿½Ò§ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½Ô¹ï¿½ï¿½Í§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò¡Ñº 1..")
             result = False
         End If
 
@@ -1423,16 +1423,16 @@ Public Class formPurchaseOrderCreate
         Dim currText As String = cboCurrency.Text.Trim()
         Dim currValue As String = ""
 
-        ' ¡Ñ¹ SelectedValue ÂÑ§äÁè¾ÃéÍÁ
+        ' ï¿½Ñ¹ SelectedValue ï¿½Ñ§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         If cboCurrency.SelectedValue IsNot Nothing Then
             currValue = cboCurrency.SelectedValue.ToString().Trim()
         End If
 
-        ' ãªé value ¡èÍ¹ ¶éÒÇèÒ§¤èÍÂãªé text
+        ' ï¿½ï¿½ value ï¿½ï¿½Í¹ ï¿½ï¿½ï¿½ï¿½ï¿½Ò§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ text
         Dim curr As String = If(currValue <> "", currValue, currText).ToUpper()
 
         If curr = "THB" Then
-            txtrate.Text = FormatNumber(1, 4) ' ä´é 1.0000
+            txtrate.Text = FormatNumber(1, 4) ' ï¿½ï¿½ 1.0000
             lblExechageDate.Text = ""
             Exit Sub
         End If

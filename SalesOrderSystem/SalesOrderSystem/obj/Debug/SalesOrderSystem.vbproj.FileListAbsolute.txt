@@ -590,34 +590,10 @@ D:\DOTNET\ESCHLER\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.f
 D:\DOTNET\ESCHLER\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmGammaDyePerformance.resources
 D:\DOTNET\ESCHLER\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmCINReturn.resources
 D:\DOTNET\ESCHLER\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.vbprojResolveAssemblyReference.cache
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Sales Order System (Eschler).exe.config
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Sales Order System (Eschler).exe.manifest
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Sales Order System (Eschler).application
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Sales Order System (Eschler).exe
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Sales Order System (Eschler).pdb
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Sales Order System (Eschler).xml
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Classes.dll
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\CrystalDecisions.CrystalReports.Engine.dll
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\CrystalDecisions.Shared.dll
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\CrystalDecisions.Windows.Forms.dll
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\EPPlus.dll
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\EPPlus.Interfaces.dll
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\EPPlus.System.Drawing.dll
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Interop.SHDocVw.dll
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\PPTC (Eschler).exe
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Production System (Eschler).exe
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\RestSharp.dll
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\STV.dll
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Syncfusion.Compression.Base.dll
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Syncfusion.Licensing.dll
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Classes.pdb
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Classes.xml
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\EPPlus.xml
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\RestSharp.xml
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\STV.pdb
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\STV.xml
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Syncfusion.Compression.Base.xml
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.vbproj.AssemblyReference.cache
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmCuttingIN.resources
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.formDFApvSheet.resources
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmBlankApvSheet.resources
@@ -855,12 +831,310 @@ D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSyst
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmStockOnhand.resources
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmStockOnHandSummaryYear.resources
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmStockOutSample.resources
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.vbproj.GenerateResource.cache
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.vbproj.CoreCompileInputs.cache
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.vbproj.GenerateResource.Cache
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Sales Order System (Eschler).exe.config
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Sales Order System (Eschler).exe.manifest
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Sales Order System (Eschler).application
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\EPPlus.dll
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\EPPlus.Interfaces.dll
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\EPPlus.System.Drawing.dll
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Interop.SHDocVw.dll
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\PPTC (Eschler).exe
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\RestSharp.dll
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Syncfusion.Compression.Base.dll
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Syncfusion.Licensing.dll
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Classes.pdb
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Classes.xml
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\EPPlus.xml
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\RestSharp.xml
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\STV.pdb
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\STV.xml
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Syncfusion.Compression.Base.xml
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\Sales Order System (Eschler).TrustInfo.xml
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\Sales Order System (Eschler).exe.manifest
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\Sales Order System (Eschler).application
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrd.14E3A24E.Up2Date
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\Sales Order System (Eschler).exe
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\Sales Order System (Eschler).xml
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\Sales Order System (Eschler).pdb
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Sales Order System (Eschler).pdb
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Sales Order System (Eschler).xml
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\CrystalDecisions.CrystalReports.Engine.dll
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\CrystalDecisions.Shared.dll
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\CrystalDecisions.Windows.Forms.dll
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.vbproj.AssemblyReference.cache
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.vbproj.CoreCompileInputs.cache
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrd.14E3A24E.Up2Date
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Sales Order System (Eschler).exe.config
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Sales Order System (Eschler).exe.manifest
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Sales Order System (Eschler).application
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Sales Order System (Eschler).exe
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Sales Order System (Eschler).pdb
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Sales Order System (Eschler).xml
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Classes.dll
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\CrystalDecisions.CrystalReports.Engine.dll
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\CrystalDecisions.Shared.dll
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\CrystalDecisions.Windows.Forms.dll
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\EPPlus.dll
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\EPPlus.Interfaces.dll
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\EPPlus.System.Drawing.dll
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Interop.SHDocVw.dll
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\PPTC (Eschler).exe
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Production System (Eschler).exe
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\RestSharp.dll
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\STV.dll
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Syncfusion.Compression.Base.dll
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Syncfusion.Licensing.dll
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Classes.pdb
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Classes.xml
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\EPPlus.xml
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\RestSharp.xml
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\STV.pdb
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\STV.xml
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Syncfusion.Compression.Base.xml
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.vbproj.AssemblyReference.cache
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmCuttingIN.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.formDFApvSheet.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmBlankApvSheet.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmDyingOrder.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmDyingOrderChange.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmDyingOrderClose.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmDyingOrderSearch.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmDyingOrderV01.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmDyingOrderClosing.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmDyingOrderSearchDesign.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmDyingOrderEvaluation.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmDyingOrderInvoiceControl.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmDyingOrderPending.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmDyingOrderPending2.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmDyingOrderPrint.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmDyingOrderSummary.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmDyingOrderWeight.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmDyingOrderWeight2.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmKOYarn.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmStockSampleAging.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmCMRLabStatus.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmGammaDyePerformance.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmGemmaKnitsCMRControl.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmGammaDFControl.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmGemmaKnitsSOControl.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmrptCMRList.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmChangePassword.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmGridLayoutSettings.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmLogin.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmMainmenu.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmReport.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSplashScreen.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.TaskBarNotifier.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmInvoiceExportControl.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmInvoiceExportControl2.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmInvoiceExportPrint.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmInvoiceLocalControl.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmInvoiceLocalPrint.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmInvoiceLocalTax.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmInvoiceSummaryYear.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmLab.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmLabApvSheet.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmLabClose.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmLabSearch.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmLabPending.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmLabPrint.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmDyedTransfer.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmYarnLocation.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmYarnTransfer.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmManagementSummaryReport.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmCustomerNew.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmCustomerSite.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmEndBuyers.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmMachineProductivity2Month.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmPackingListDyedRelateRequest.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmPackingListGreigeRelateRequest.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSalesOrderEnterCustPo.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSalesOrderEnterCustPoUnique.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmExpInvoiceCommision.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSOItemHadInvoice.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmStockOrderSummary.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.DlgGetMasterCode.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmAgent.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmCartons.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmColor.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmCompositionGroup.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmCustomer.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmDesign.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmDesignImage.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmDesignMasterReport.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmDesignSpec.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmMould.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmmtl_locations.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmPricelist.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSupplier.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.Resources.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmPackingListDyed.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmPackingListGreige.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmKOSchedulePlan.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmMachineCapacity.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmDesignNoBOM.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmGreigeDailyProduction.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmGreigeMonthlyProduction.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmKILossByMachine.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmKOClosed.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmKODesignHistory.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmKOOutsource.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmKOSchedulePlanDet.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmMachineProductivity.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmMachineProductivity2.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmYarnDemandForecast.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmYarnDemandForecastDaily.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmYarnDemandForecastSummary.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmYarnDemandHistory.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmYarnDemandMachine.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSONotHaveKO.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmYarnTestForm.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmPOControl.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmRequestGMColorMatch.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmRequestC.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmRequestCOnhand.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmRequestD.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmRequestDOnhand.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmRequestG.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmRequestGOnhand.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmRequestS.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmRequestSearch.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmRequestSOnhand.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmPDR.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmPreviewQuotation.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSalesOrder.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSalesOrderClose.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSalesOrderSearch.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSalesQuote.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmPriceHistory.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSalesAmountCompare.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSalesOrderByMonth.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSalesOrderDelivery.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSalesOrderDeliveryPlan.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSalesOrderInvoice.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSalesOrderPrint.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSalesOrderStatusByAgency.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSalesOrderStatusByCustomer.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSalesOrderStatusByEmp.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSalesOrderSummary.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSalesOrderTrace.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSalesPerformance.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSODeliveryCalendar.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSONotClosed.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSOSummaryByYear.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.dlgSearchItemsList.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmDyedOutSampleSearchPLS.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSearchCustomers.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSeachCustomersParent.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSearchDesign.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSearchDFOrderPreset.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSearchDIN.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSearchDOUT.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSearchDyedRoll.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSearchGIN.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSearchGOUT.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSearchGreigeIn.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSearchKO.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSearchLOT.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSearchPackingListD.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSearchPackingListG.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSearchPDF.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSearchPLD.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSearchPLG.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSearchPO.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSearchREQD.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSearchREQG.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSearchSOCustItem.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmDOUTDocument.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmEndingDyedInventory.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmEndingGreigeInventory.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmEndingYarnInventory.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmGOUTDocument.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmStockDClearanceSale.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmStockGClearanceSale.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmDyedOutFromPLD.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmDyedOutFromRequest.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmDyedOutSample.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmDyedOutSampleBarcode.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmGreigeInEditQcRemark.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmHangerINBarcode.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmHangerOutBarcode.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmHangerReturnBarcode.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmPLD.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmGreigeOutChangeDesign.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmGreigeINReturn.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmGreigeOut.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmPLG.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmGreigeOutFromRequest.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmGreigeTransfer.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmPrintSampleTag.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSampleGreigeStockIN.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmCINReturn.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmStockGIN_PFD_DefectRoll.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmStockDIN.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmStockDINManual.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmStockDINPurchase.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmStockDINReturn.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmStockDINReturnProduction.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmStockDLocation.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmStockGINPurchase.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmStockGIN_KOManual.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmStockGIN_KOManualIndex.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmStockGIN_PFD.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmStockGIN_PFDManual.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmStockGIN_PFD_EntryDefectRoll.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmStockGLocation.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmStockGOUTManual.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmStockSIN.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmCancelledOrderPending.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmDINControl.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmDINControl2.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmDINDocument.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmDINDyeCharge.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmDOUTControl.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmDyedIN.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmDyedINByMonth.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmGINDocument.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmGINGrade.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmGINLoss.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmGOUTControl.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmGOUTDFControl.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmGreigeBarcode.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmGreigeIN.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmGreigeLog.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmGreigeOnhandAging.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmGreigeOnhandByDesigns.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmGreigePDFOnhand.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmGreigeSummaryByDate.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmGreigeSummaryByMachine.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmHangerOutControl.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmHangerStockBalance.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmNewDesignNo.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmNewYarnCode.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSampleDesignHistory.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSampleOutControl.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSampleStockBalance.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSearchRollNoD.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmSearchRollNoG.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmStockByBOI.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmStockCancelled.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmStockCOnhand.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmStockDBarcode.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmStockDPendingCutting.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmStockGOnhand.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmStockGOnhand2.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmStockGOnhandLocation.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmStockGOnhandMovementStatus.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmStockMovement.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmStockOnhand.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmStockOnHandSummaryYear.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.frmStockOutSample.resources
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.vbproj.GenerateResource.cache
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.vbproj.CoreCompileInputs.cache
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\Sales Order System (Eschler).TrustInfo.xml
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\Sales Order System (Eschler).exe.manifest
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\Sales Order System (Eschler).application
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrd.14E3A24E.Up2Date
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\Sales Order System (Eschler).exe
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\Sales Order System (Eschler).xml
+C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\Sales Order System (Eschler).pdb

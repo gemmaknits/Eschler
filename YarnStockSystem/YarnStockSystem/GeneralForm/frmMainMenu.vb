@@ -187,9 +187,10 @@ Public Class frmMainMenu
     End Sub
 
     Private Sub menuStockinPrintStockin_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles menuStockinPrintStockin.Click
-        Dim aa As New frmPrintYarnInDocument
-        aa.MdiParent = Me
-        aa.Show()
+        Dim frm As New frmPrintYarnInDocument
+        frm.UserInfo = clsUser
+        frm.MdiParent = Me
+        frm.Show()
     End Sub
 
     Private Sub menuStockinPrintBarcode_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles menuStockinPrintBarcode.Click
@@ -245,11 +246,13 @@ Public Class frmMainMenu
         Dim frm As New FormRptMachineUsage
         frm.MdiParent = Me
         frm.loginEmpcd = Me.loginEmpcd
+        frm.UserInfo = clsUser
         frm.Show()
     End Sub
 
     Private Sub CompanyStickerToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CompanyStickerToolStripMenuItem.Click
         Dim frm As New frmCompanySticker
+        frm.UserInfo = clsUser
         frm.MdiParent = Me
         frm.Show()
     End Sub

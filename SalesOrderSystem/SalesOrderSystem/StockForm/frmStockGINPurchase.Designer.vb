@@ -109,6 +109,12 @@ Partial Class frmStockGINPurchase
         Me.chkAutoCalculate = New System.Windows.Forms.CheckBox()
         Me.BtnCopyRoll = New System.Windows.Forms.Button()
         Me.BtnPrintBarcode = New System.Windows.Forms.Button()
+        Me.lblTotalKg = New System.Windows.Forms.Label()
+        Me.txtTotalKg = New System.Windows.Forms.TextBox()
+        Me.lblTotalMts = New System.Windows.Forms.Label()
+        Me.txtTotalMts = New System.Windows.Forms.TextBox()
+        Me.lblTotalYds = New System.Windows.Forms.Label()
+        Me.txtTotalYds = New System.Windows.Forms.TextBox()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
         CType(Me.grdPO, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -555,7 +561,7 @@ Partial Class frmStockGINPurchase
         Me.grdData.BackgroundColor = System.Drawing.Color.PeachPuff
         Me.grdData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.grdData.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colIDJobDet, Me.job_line_id, Me.Design_no, Me.colydkg, Me.roll_no_g, Me.roll_no, Me.roll_no_o, Me.col, Me.grade_bdt, Me.grade_adt, Me.grade, Me.Lot, Me.gwth, Me.kg, Me.mts, Me.yds, Me.preseted, Me.mtl_warehouse_id, Me.mtl_subinventory_id, Me.mtl_locations_id, Me.loc, Me.roll_no_f, Me.source_refno, Me.sono, Me.sonoid, Me.suppcd, Me.dfno, Me.mcno, Me.kono, Me.purno})
-        Me.grdData.Location = New System.Drawing.Point(17, 216)
+        Me.grdData.Location = New System.Drawing.Point(17, 240)
         Me.grdData.Name = "grdData"
         Me.grdData.Size = New System.Drawing.Size(1024, 246)
         Me.grdData.TabIndex = 361
@@ -809,11 +815,71 @@ Partial Class frmStockGINPurchase
         Me.BtnPrintBarcode.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.BtnPrintBarcode.UseVisualStyleBackColor = False
         '
+        'lblTotalKg
+        '
+        Me.lblTotalKg.AutoSize = True
+        Me.lblTotalKg.Location = New System.Drawing.Point(17, 218)
+        Me.lblTotalKg.Name = "lblTotalKg"
+        Me.lblTotalKg.Size = New System.Drawing.Size(57, 13)
+        Me.lblTotalKg.TabIndex = 380
+        Me.lblTotalKg.Text = "Total Kgs:"
+        '
+        'txtTotalKg
+        '
+        Me.txtTotalKg.Location = New System.Drawing.Point(78, 215)
+        Me.txtTotalKg.Name = "txtTotalKg"
+        Me.txtTotalKg.ReadOnly = True
+        Me.txtTotalKg.Size = New System.Drawing.Size(80, 22)
+        Me.txtTotalKg.TabIndex = 381
+        Me.txtTotalKg.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'lblTotalMts
+        '
+        Me.lblTotalMts.AutoSize = True
+        Me.lblTotalMts.Location = New System.Drawing.Point(170, 218)
+        Me.lblTotalMts.Name = "lblTotalMts"
+        Me.lblTotalMts.Size = New System.Drawing.Size(57, 13)
+        Me.lblTotalMts.TabIndex = 382
+        Me.lblTotalMts.Text = "Total Mts:"
+        '
+        'txtTotalMts
+        '
+        Me.txtTotalMts.Location = New System.Drawing.Point(231, 215)
+        Me.txtTotalMts.Name = "txtTotalMts"
+        Me.txtTotalMts.ReadOnly = True
+        Me.txtTotalMts.Size = New System.Drawing.Size(80, 22)
+        Me.txtTotalMts.TabIndex = 383
+        Me.txtTotalMts.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'lblTotalYds
+        '
+        Me.lblTotalYds.AutoSize = True
+        Me.lblTotalYds.Location = New System.Drawing.Point(323, 218)
+        Me.lblTotalYds.Name = "lblTotalYds"
+        Me.lblTotalYds.Size = New System.Drawing.Size(57, 13)
+        Me.lblTotalYds.TabIndex = 384
+        Me.lblTotalYds.Text = "Total Yds:"
+        '
+        'txtTotalYds
+        '
+        Me.txtTotalYds.Location = New System.Drawing.Point(384, 215)
+        Me.txtTotalYds.Name = "txtTotalYds"
+        Me.txtTotalYds.ReadOnly = True
+        Me.txtTotalYds.Size = New System.Drawing.Size(80, 22)
+        Me.txtTotalYds.TabIndex = 385
+        Me.txtTotalYds.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
         'frmStockGINPurchase
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1062, 465)
+        Me.Controls.Add(Me.txtTotalYds)
+        Me.Controls.Add(Me.lblTotalYds)
+        Me.Controls.Add(Me.txtTotalMts)
+        Me.Controls.Add(Me.lblTotalMts)
+        Me.Controls.Add(Me.txtTotalKg)
+        Me.Controls.Add(Me.lblTotalKg)
         Me.Controls.Add(Me.BtnPrintBarcode)
         Me.Controls.Add(Me.BtnCopyRoll)
         Me.Controls.Add(Me.GroupBox2)
@@ -925,4 +991,10 @@ Partial Class frmStockGINPurchase
     Friend WithEvents ToolStripDropDownButton1 As ToolStripDropDownButton
     Friend WithEvents tsbGInDocument As ToolStripMenuItem
     Friend WithEvents tsbGInTag As ToolStripMenuItem
+    Friend WithEvents lblTotalKg As System.Windows.Forms.Label
+    Friend WithEvents txtTotalKg As System.Windows.Forms.TextBox
+    Friend WithEvents lblTotalMts As System.Windows.Forms.Label
+    Friend WithEvents txtTotalMts As System.Windows.Forms.TextBox
+    Friend WithEvents lblTotalYds As System.Windows.Forms.Label
+    Friend WithEvents txtTotalYds As System.Windows.Forms.TextBox
 End Class

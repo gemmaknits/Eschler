@@ -24,10 +24,10 @@ Public Class frmChangePassword
 
 	Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
 		If txtOldPassword.Text <> clsUser.Password Then
-			MessageBox.Show("��� Password �Դ !!!", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+			MessageBox.Show("ใส่ Password ผิด !!!", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
 			txtOldPassword.Focus()
 		ElseIf txtNewPassword.Text <> txtConfirmPassword.Text Then
-			MessageBox.Show("�׹�ѹ Password ���ç�ѹ", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+			MessageBox.Show("ยืนยัน Password ไม่ตรงกัน", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
 			txtConfirmPassword.Focus()
 		Else
 			clsConfig.ChangePassword(clsUser.UserName, txtNewPassword.Text)

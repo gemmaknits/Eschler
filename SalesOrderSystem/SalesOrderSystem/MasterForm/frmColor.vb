@@ -98,13 +98,13 @@ Public Class frmColor
 	End Sub
 
 	Private Sub btnNew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNew.Click
-		Dim strCol As String = InputBox("จะใส่สีใหม่ให้ดูสีเก่าก่อนว่ามีหรือไม่" & vbCrLf & "ถ้าไม่มีก็ใส่รหัสสีลงช่องข้างล่างเลย" & vbCrLf & "รหัสสีมีได้สูงสุด 10 ตัวเท่านั้น" & vbCrLf & "( ให้ใช้เครื่องหมาย + แทน / )", "System Message", "").Trim.ToUpper
+		Dim strCol As String = InputBox("เธเธฐเนเธชเนเธชเธตเนเธซเธกเนเนเธซเนเธ”เธนเธชเธตเน€เธเนเธฒเธเนเธญเธเธงเนเธฒเธกเธตเธซเธฃเธทเธญเนเธกเน" & vbCrLf & "เธ–เนเธฒเนเธกเนเธกเธตเธเนเนเธชเนเธฃเธซเธฑเธชเธชเธตเธฅเธเธเนเธญเธเธเนเธฒเธเธฅเนเธฒเธเน€เธฅเธข" & vbCrLf & "เธฃเธซเธฑเธชเธชเธตเธกเธตเนเธ”เนเธชเธนเธเธชเธธเธ” 10 เธ•เธฑเธงเน€เธ—เนเธฒเธเธฑเนเธ" & vbCrLf & "( เนเธซเนเนเธเนเน€เธเธฃเธทเนเธญเธเธซเธกเธฒเธข + เนเธ—เธ / )", "System Message", "").Trim.ToUpper
 		If strCol.Trim.Length = 0 Then Exit Sub
 		Dim dt As DataTable = grdColor.DataSource
 		Dim i As Integer = 0
 		For i = 0 To dt.Rows.Count - 1
 			If dt.Rows(i)("col").ToString.Trim.ToUpper = strCol Then
-				MessageBox.Show("รหัสสี " & strCol.Trim & " มีอยู่แล้วในระบบ", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+				MessageBox.Show("เธฃเธซเธฑเธชเธชเธต " & strCol.Trim & " เธกเธตเธญเธขเธนเนเนเธฅเนเธงเนเธเธฃเธฐเธเธ", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
 				Exit Sub
 			End If
 		Next
@@ -117,7 +117,7 @@ Public Class frmColor
 	End Sub
 
 	Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
-		Dim strCol As String = InputBox("What color would you like to find ?" & vbCrLf & "คุณต้องการหาสีอะไร ?", "System Message", "").Trim.ToUpper
+		Dim strCol As String = InputBox("What color would you like to find ?" & vbCrLf & "เธเธธเธ“เธ•เนเธญเธเธเธฒเธฃเธซเธฒเธชเธตเธญเธฐเนเธฃ ?", "System Message", "").Trim.ToUpper
 		If strCol.Trim.Length = 0 Then Exit Sub
 		Dim i As Integer = 0
 		For i = 0 To grdColor.Rows.Count - 1

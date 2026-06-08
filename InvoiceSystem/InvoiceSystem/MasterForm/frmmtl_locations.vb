@@ -186,9 +186,9 @@
         Dim dv_upd As New DataView(grdmtl_Locations.DataSource, "", "", DataViewRowState.ModifiedCurrent)
         Dim dv_del As New DataView(grdmtl_Locations.DataSource, "", "", DataViewRowState.Deleted)
 
-        Dim result As Windows.Forms.DialogResult
+        Dim result As DialogResult
         result = MessageBox.Show("คุณต้องการจะบันทึก ?", "System Message", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3)
-        If result <> Windows.Forms.DialogResult.Yes Then Exit Function
+        If result <> DialogResult.Yes Then Exit Function
         Me.Cursor = Cursors.WaitCursor
 
 

@@ -249,7 +249,7 @@
 
         If Not CheckData() Then Exit Sub
 
-        If MessageBox.Show("Would you like to save ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+        If MessageBox.Show("Would you like to save ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
             Dim findResult As SelectedRollNo = FindMissingBoxNo()
 
             If findResult <> SelectedRollNo.SelectAll Then
@@ -366,7 +366,7 @@
     Private Sub btnCancel_Click(sender As System.Object, e As System.EventArgs) Handles btnCancel.Click
         If txtOutNo.Text.Trim.Length = 0 Then Exit Sub
 
-        If MessageBox.Show("Would you like to cancel G-Out No." + txtOutNo.Text.Trim + " ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
+        If MessageBox.Show("Would you like to cancel G-Out No." + txtOutNo.Text.Trim + " ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
             If dbStockY.CancelYOut(txtOutNo.Text.Trim, clsUser.UserID) Then
                 MessageBox.Show(txtOutNo.Text.Trim + " is already cancelled.", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Call InitControl()
@@ -375,7 +375,7 @@
     End Sub
 
     Private Sub btnExit_Click(sender As System.Object, e As System.EventArgs) Handles btnExit.Click
-        If MessageBox.Show("Would you like to exit ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then Me.Close()
+        If MessageBox.Show("Would you like to exit ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then Me.Close()
     End Sub
 
     Private Sub cboDocNo_DropDownClosed(sender As System.Object, e As System.EventArgs) Handles cboDocNo.DropDownClosed

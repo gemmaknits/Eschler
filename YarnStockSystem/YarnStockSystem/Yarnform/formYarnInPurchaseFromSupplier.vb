@@ -614,9 +614,9 @@ Public Class formYarnInPurchaseFromSupplier
         grdYarnIN.EndEdit(DataGridViewDataErrorContexts.Commit)
         grdYarnIN.CurrentCell = grdYarnIN.Rows(0).Cells(0)
 
-        Dim result As Windows.Forms.DialogResult
+        Dim result As DialogResult
         result = MessageBox.Show("Would you Like To save ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3)
-        If result <> Windows.Forms.DialogResult.Yes Then Exit Sub
+        If result <> DialogResult.Yes Then Exit Sub
 
         If Not CheckData() Then Exit Sub
 
@@ -651,15 +651,16 @@ Public Class formYarnInPurchaseFromSupplier
 
     Private Sub btnPrintBarcode_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPrintBarcode.Click
         If docno.Length = 0 Then Exit Sub
-        Dim K As New formPrintBarcode
+        Dim frm As New formPrintBarcode
 
-        K.loginEmpcd = clsUser.UserID
-        K.Show()
+        frm.loginEmpcd = clsUser.UserID
+        frm.UserInfo = clsUser
+        frm.Show()
 
-        K.txtYarn_in_no.Text = docno
+        frm.txtYarn_in_no.Text = docno
 
-        K.btnFindByYarnInClick()
-        K.SelectAll(sender, e)
+        frm.btnFindByYarnInClick()
+        frm.SelectAll(sender, e)
     End Sub
 
     Private Sub btnExit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExit.Click
@@ -775,9 +776,9 @@ Public Class formYarnInPurchaseFromSupplier
     End Sub
 
     Private Sub btnDel_Click(sender As System.Object, e As System.EventArgs) Handles btnDel.Click
-        Dim result As Windows.Forms.DialogResult
+        Dim result As DialogResult
         result = MessageBox.Show("Would You Like To Delete New Box ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3)
-        If result = Windows.Forms.DialogResult.No Then Exit Sub
+        If result = DialogResult.No Then Exit Sub
         RemoveNewBox()
     End Sub
     Private Sub RemoveNewBox()

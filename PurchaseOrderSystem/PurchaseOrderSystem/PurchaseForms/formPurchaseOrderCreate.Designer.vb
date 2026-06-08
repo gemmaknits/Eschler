@@ -22,7 +22,6 @@ Partial Class formPurchaseOrderCreate
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(formPurchaseOrderCreate))
         Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim MetroColorTable1 As Syncfusion.Windows.Forms.MetroColorTable = New Syncfusion.Windows.Forms.MetroColorTable()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -177,7 +176,7 @@ Partial Class formPurchaseOrderCreate
         Me.btnPrintTH = New System.Windows.Forms.Button()
         Me.ClassDataGridViewCalendarColumn1 = New PurchaseOrderSystem.DataGridViewCalendarColumn()
         Me.ClassDataGridViewCalendarColumn2 = New PurchaseOrderSystem.DataGridViewCalendarColumn()
-        Me.mcboPoLineType = New Syncfusion.Windows.Forms.Tools.MultiColumnComboBox()
+        Me.mcboPoLineType = New PurchaseOrderSystem.Controls.MultiColumnComboBox()
         Me.Label59 = New System.Windows.Forms.Label()
         Me.ErrormcboPoLineType = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.lblExechageDate = New System.Windows.Forms.Label()
@@ -1668,7 +1667,7 @@ Partial Class formPurchaseOrderCreate
         Me.Label36.Name = "Label36"
         Me.Label36.Size = New System.Drawing.Size(76, 13)
         Me.Label36.TabIndex = 164
-        Me.Label36.Text = "(»ÃÐàÀ·ÊÔ¹¤éÒ)"
+        Me.Label36.Text = "(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¹ï¿½ï¿½ï¿½)"
         '
         'comboItemNature
         '
@@ -1698,7 +1697,7 @@ Partial Class formPurchaseOrderCreate
         Me.Label55.Name = "Label55"
         Me.Label55.Size = New System.Drawing.Size(299, 13)
         Me.Label55.TabIndex = 165
-        Me.Label55.Text = "***¡Ã³Õ·ÕèÁÕËÅÒÂ»ÃÐàÀ·ÊÔ¹¤éÒ ãËéàÅ×Í¡·Õè»ÃÐàÀ·ÊÔ¹¤éÒ·ÕèÇèÒ§à»ÅèÒ"
+        Me.Label55.Text = "***ï¿½Ã³Õ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¹ï¿½ï¿½Ò·ï¿½ï¿½ï¿½ï¿½Ò§ï¿½ï¿½ï¿½ï¿½"
         '
         'errordept
         '
@@ -1739,29 +1738,8 @@ Partial Class formPurchaseOrderCreate
         '
         'mcboPoLineType
         '
-        Me.mcboPoLineType.BeforeTouchSize = New System.Drawing.Size(195, 21)
         Me.mcboPoLineType.Location = New System.Drawing.Point(472, 58)
-        Me.mcboPoLineType.MetroColor = System.Drawing.Color.FromArgb(CType(CType(22, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.mcboPoLineType.Name = "mcboPoLineType"
-        MetroColorTable1.ArrowChecked = System.Drawing.Color.FromArgb(CType(CType(147, Byte), Integer), CType(CType(149, Byte), Integer), CType(CType(152, Byte), Integer))
-        MetroColorTable1.ArrowCheckedBorderColor = System.Drawing.Color.Empty
-        MetroColorTable1.ArrowInActive = System.Drawing.Color.White
-        MetroColorTable1.ArrowNormal = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(198, Byte), Integer))
-        MetroColorTable1.ArrowNormalBackGround = System.Drawing.Color.Empty
-        MetroColorTable1.ArrowNormalBorderColor = System.Drawing.Color.Empty
-        MetroColorTable1.ArrowPushed = System.Drawing.Color.FromArgb(CType(CType(88, Byte), Integer), CType(CType(89, Byte), Integer), CType(CType(90, Byte), Integer))
-        MetroColorTable1.ArrowPushedBackGround = System.Drawing.Color.Empty
-        MetroColorTable1.ArrowPushedBorderColor = System.Drawing.Color.Empty
-        MetroColorTable1.ScrollerBackground = System.Drawing.Color.White
-        MetroColorTable1.ThumbChecked = System.Drawing.Color.FromArgb(CType(CType(147, Byte), Integer), CType(CType(149, Byte), Integer), CType(CType(152, Byte), Integer))
-        MetroColorTable1.ThumbCheckedBorderColor = System.Drawing.Color.Empty
-        MetroColorTable1.ThumbInActive = System.Drawing.Color.White
-        MetroColorTable1.ThumbNormal = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(198, Byte), Integer))
-        MetroColorTable1.ThumbNormalBorderColor = System.Drawing.Color.Empty
-        MetroColorTable1.ThumbPushed = System.Drawing.Color.FromArgb(CType(CType(88, Byte), Integer), CType(CType(89, Byte), Integer), CType(CType(90, Byte), Integer))
-        MetroColorTable1.ThumbPushedBorder = System.Drawing.Color.Empty
-        MetroColorTable1.ThumbPushedBorderColor = System.Drawing.Color.Empty
-        Me.mcboPoLineType.ScrollMetroColorTable = MetroColorTable1
         Me.mcboPoLineType.Size = New System.Drawing.Size(195, 21)
         Me.mcboPoLineType.TabIndex = 169
         '
@@ -2166,7 +2144,7 @@ Partial Class formPurchaseOrderCreate
     Friend WithEvents chksell_back_to_vendor As System.Windows.Forms.CheckBox
     Friend WithEvents ClassDataGridViewCalendarColumn1 As PurchaseOrderSystem.DataGridViewCalendarColumn
     Friend WithEvents ClassDataGridViewCalendarColumn2 As PurchaseOrderSystem.DataGridViewCalendarColumn
-    Friend WithEvents mcboPoLineType As Syncfusion.Windows.Forms.Tools.MultiColumnComboBox
+    Friend WithEvents mcboPoLineType As PurchaseOrderSystem.Controls.MultiColumnComboBox
     Friend WithEvents Label59 As Label
     Friend WithEvents ErrormcboPoLineType As ErrorProvider
     Friend WithEvents lblExechageDate As Label

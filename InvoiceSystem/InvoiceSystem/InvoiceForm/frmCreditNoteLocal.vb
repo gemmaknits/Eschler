@@ -1,4 +1,4 @@
-Imports Syncfusion.Windows.Forms.Tools
+ï»¿Imports InvoiceSystemESH.Controls
 Public Class frmCreditNoteLocal
 
 #Region "Variables"
@@ -420,16 +420,16 @@ Public Class frmCreditNoteLocal
     End Sub
 
     Private Function CanChange() As Boolean
-        Dim result As DialogResult = Windows.Forms.DialogResult.No
+        Dim result As DialogResult = DialogResult.No
         If IsDataChange(grdDetails.DataSource) Then
             result = MessageBox.Show("Would you like to save ?", "System Message", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
             Select Case result
-                Case Windows.Forms.DialogResult.Yes
+                Case DialogResult.Yes
                     Call SaveData()
                     Return True
-                Case Windows.Forms.DialogResult.Cancel
+                Case DialogResult.Cancel
                     Return False
-                Case Windows.Forms.DialogResult.No
+                Case DialogResult.No
                     Return True
             End Select
         Else
@@ -483,7 +483,7 @@ Public Class frmCreditNoteLocal
 
     Public Overridable Function SaveData() As Boolean
         If Not CanSave() Then Return False
-        If MessageBox.Show("Would you like to save ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.No Then Return False
+        If MessageBox.Show("Would you like to save ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.No Then Return False
         Dim clsCRNote As New classCreditNoteAR
         Dim header As classCreditNoteAR.CreditNoteARHeader
         Dim msgerr As String = ""
@@ -557,13 +557,13 @@ Public Class frmCreditNoteLocal
 
     Public Overridable Sub ApproveData()
         If Not CanSave() Then Exit Sub
-        If MessageBox.Show("Would you like to approve ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then Call (New classCreditNoteAR).Approve(Me.DocID, Me.UserInfo.UserID)
+        If MessageBox.Show("Would you like to approve ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.Yes Then Call (New classCreditNoteAR).Approve(Me.DocID, Me.UserInfo.UserID)
         txtStatus.Text = "APPROVED"
     End Sub
 
     Public Overridable Sub CancelData()
         If Not CanSave() Then Exit Sub
-        If MessageBox.Show("Would you like to cancel ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then Call (New classCreditNoteAR).Cancel(Me.DocID, Me.UserInfo.UserID)
+        If MessageBox.Show("Would you like to cancel ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.Yes Then Call (New classCreditNoteAR).Cancel(Me.DocID, Me.UserInfo.UserID)
         txtStatus.Text = "CANCELLED"
     End Sub
 
@@ -684,16 +684,16 @@ Public Class frmCreditNoteLocal
         For Each dr As DataRow In dt.Rows
             If dr.RowState <> DataRowState.Deleted Then
                 If (New clsConfig).IsNull(dr("Currency"), "").ToString = "" Then
-                    MessageBox.Show("ÂÑ§äÁèä´éàÅ×Í¡Ê¡ØÅà§Ô¹", "System Meassge", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+                    MessageBox.Show("ï¿½Ñ§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¡Ê¡ï¿½ï¿½ï¿½Ô¹", "System Meassge", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
                     Return False
                 End If
                 If (New clsConfig).IsNull(dr("exchange_rate"), 0) = 0 Then
-                    MessageBox.Show("Exchange Rate µéÍ§äÁèà·èÒ¡Ñº 0", "System Meassge", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+                    MessageBox.Show("Exchange Rate ï¿½ï¿½Í§ï¿½ï¿½ï¿½ï¿½ï¿½Ò¡Ñº 0", "System Meassge", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
                     Return False
                 End If
                 If (New clsConfig).IsNull(dr("currency"), "").ToString.Trim <> "THB" Then
                     If (New clsConfig).IsNull(dr("exchange_rate"), 0) = 1 Then
-                        MessageBox.Show("¶éÒÊ¡ØÅà§Ô¹à»ç¹Ê¡ØÅà§Ô¹µèÒ§»ÃÐà·È àÃ·à§Ô¹µéÍ§äÁèä´éà·èÒ¡Ñº 1", "System Meassge", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+                        MessageBox.Show("ï¿½ï¿½ï¿½Ê¡ï¿½ï¿½ï¿½Ô¹ï¿½ï¿½Ê¡ï¿½ï¿½ï¿½Ô¹ï¿½ï¿½Ò§ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½Ô¹ï¿½ï¿½Í§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò¡Ñº 1", "System Meassge", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
                         Return False
                     End If
                 End If
@@ -905,7 +905,7 @@ Public Class frmCreditNoteLocal
 
     End Sub
 
-    Private Sub McboFreight_Model_QueryCellinfo(ByVal sender As Object, ByVal e As Syncfusion.Windows.Forms.Grid.GridQueryCellInfoEventArgs)
+    Private Sub McboFreight_Model_QueryCellinfo(ByVal sender As Object, ByVal e As InvoiceSystemESH.Controls.GridQueryCellInfoEventArgs)
 
         If e.RowIndex = 0 AndAlso e.ColIndex = 3 Then
             e.Style.Text = "Invoice No"
@@ -949,7 +949,7 @@ Public Class frmCreditNoteLocal
         If grdDetails.EditMode Then grdDetails.EndEdit()
         Dim i As Integer = 0
         If grdDetails.Rows.Count = 0 Then Exit Sub
-        Dim exrt As Double = InputBox("Input the exchange rate." & vbCrLf & "ãÊèÍÑµÃÒáÅ¡à»ÅÕèÂ¹à§Ô¹µÃÒ", "System Message", "0.00")
+        Dim exrt As Double = InputBox("Input the exchange rate." & vbCrLf & "ï¿½ï¿½ï¿½ï¿½Ñµï¿½ï¿½ï¿½Å¡ï¿½ï¿½ï¿½ï¿½Â¹ï¿½Ô¹ï¿½ï¿½ï¿½", "System Message", "0.00")
         Dim dt As DataTable = grdDetails.DataSource
         For Each dr As DataRow In dt.Rows
             If dr.RowState <> DataRowState.Deleted Then

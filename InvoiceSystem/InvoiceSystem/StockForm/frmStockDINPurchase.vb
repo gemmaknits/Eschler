@@ -455,10 +455,10 @@ Public Class frmStockDINPurchase
         If Not CheckData() Then Exit Sub
 
         blnCancel = False
-        Dim result As Windows.Forms.DialogResult
+        Dim result As DialogResult
         result = MessageBox.Show("Would you like to save ?", "System Message", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3)
-        If result = Windows.Forms.DialogResult.Cancel Then blnCancel = True
-        If result <> Windows.Forms.DialogResult.Yes Then Exit Sub
+        If result = DialogResult.Cancel Then blnCancel = True
+        If result <> DialogResult.Yes Then Exit Sub
 
         Call SaveDINPurchase()
         'If SaveDINPurchase() Then
@@ -734,7 +734,7 @@ Public Class frmStockDINPurchase
 
         If blnCancel Then Exit Sub
 
-        If MessageBox.Show("Would you like to cancel this document ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.No Then Exit Sub
+        If MessageBox.Show("Would you like to cancel this document ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.No Then Exit Sub
 
 
         If CancelDIN() Then
@@ -822,7 +822,7 @@ Public Class frmStockDINPurchase
         Me.Close()
     End Sub
     Private Sub frmStockDINPurchase_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        If MessageBox.Show("Would you like to close ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.No Then
+        If MessageBox.Show("Would you like to close ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.No Then
             e.Cancel = True
         End If
     End Sub

@@ -1,6 +1,6 @@
-Option Explicit On
+ï»¿Option Explicit On
 Imports System.Math
-Imports Syncfusion.Windows.Forms.Tools
+Imports InvoiceSystemESH.Controls
 Public Class frmInvoiceLocal
 	Dim clsConfig As New clsConfig
 	Dim clsConn As New classConnection
@@ -218,56 +218,56 @@ Public Class frmInvoiceLocal
         Me.currency.ValueMember = "curr"
     End Sub
 
-    Private Sub Model_QueryCellInfoCustomersBillToFlag(ByVal sender As Object, ByVal e As Syncfusion.Windows.Forms.Grid.GridQueryCellInfoEventArgs)
+    Private Sub Model_QueryCellInfoCustomersBillToFlag(ByVal sender As Object, ByVal e As InvoiceSystemESH.Controls.GridQueryCellInfoEventArgs)
         'To specify the row and colum index.
         If e.RowIndex = 0 AndAlso e.ColIndex = 3 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New InvoiceSystemESH.Controls.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Code"
         ElseIf e.RowIndex = 0 AndAlso e.ColIndex = 4 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New InvoiceSystemESH.Controls.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Name"
         ElseIf e.RowIndex = 0 AndAlso e.ColIndex = 5 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New InvoiceSystemESH.Controls.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Address"
         End If
     End Sub
 
-    Private Sub Model_QueryCellInfo2CustomersShipToFlag(ByVal sender As Object, ByVal e As Syncfusion.Windows.Forms.Grid.GridQueryCellInfoEventArgs)
+    Private Sub Model_QueryCellInfo2CustomersShipToFlag(ByVal sender As Object, ByVal e As InvoiceSystemESH.Controls.GridQueryCellInfoEventArgs)
         'To specify the row and colum index.
         If e.RowIndex = 0 AndAlso e.ColIndex = 3 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New InvoiceSystemESH.Controls.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Code"
         ElseIf e.RowIndex = 0 AndAlso e.ColIndex = 4 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New InvoiceSystemESH.Controls.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Name"
         ElseIf e.RowIndex = 0 AndAlso e.ColIndex = 5 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New InvoiceSystemESH.Controls.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Address"
         End If
     End Sub
 
-    Private Sub Model_QueryCellInfoBanks(ByVal sender As Object, ByVal e As Syncfusion.Windows.Forms.Grid.GridQueryCellInfoEventArgs)
+    Private Sub Model_QueryCellInfoBanks(ByVal sender As Object, ByVal e As InvoiceSystemESH.Controls.GridQueryCellInfoEventArgs)
         'To specify the row and colum index.
         If e.RowIndex = 0 AndAlso e.ColIndex = 2 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New InvoiceSystemESH.Controls.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Code"
         ElseIf e.RowIndex = 0 AndAlso e.ColIndex = 3 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New InvoiceSystemESH.Controls.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Name"
         ElseIf e.RowIndex = 0 AndAlso e.ColIndex = 4 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New InvoiceSystemESH.Controls.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Address"
         ElseIf e.RowIndex = 0 AndAlso e.ColIndex = 5 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 11, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New InvoiceSystemESH.Controls.GridFontInfo(New Font("Segoe UI", 11, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Swift Code"
         ElseIf e.RowIndex = 0 AndAlso e.ColIndex = 6 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New InvoiceSystemESH.Controls.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Account No."
         ElseIf e.RowIndex = 0 AndAlso e.ColIndex = 7 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New InvoiceSystemESH.Controls.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Currency"
         ElseIf e.RowIndex = 0 AndAlso e.ColIndex = 8 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New InvoiceSystemESH.Controls.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Branch"
 
         End If
@@ -443,14 +443,14 @@ Public Class frmInvoiceLocal
             For Each row As DataRow In dtInvDet.Rows
                 If row.RowState <> DataRowState.Deleted Then
                     If (New clsConfig).IsNull(row("packno"), "").ToString().Trim.Equals(pPackno) And (New clsConfig).IsNull(row("cartno"), "").ToString().Trim.Equals(pCartNo) Then
-                        MessageBox.Show("¤Ø³¡ÓÅÑ§¾ÂÒÂÒÁàÅ×Í¡«éÓ!!!", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
-                        Return True '«éÓ
+                        MessageBox.Show("ï¿½Ø³ï¿½ï¿½ï¿½Ñ§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¡ï¿½ï¿½ï¿½!!!", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+                        Return True 'ï¿½ï¿½ï¿½
                     End If
                 End If
             Next
         End If
 
-        Return False 'äÁè«éÓ
+        Return False 'ï¿½ï¿½ï¿½ï¿½ï¿½
     End Function
     Private Function CheckIsNotDuplicatePackCart(ByVal pPackno As String, ByVal pCartNo As String) As Boolean
         Dim result As Boolean = False
@@ -461,13 +461,13 @@ Public Class frmInvoiceLocal
                 If row.RowState <> DataRowState.Deleted Then
                     If (New clsConfig).IsNull(row("packno"), "").ToString().Trim.Equals(pPackno) And (New clsConfig).IsNull(row("cartno"), "").ToString().Trim.Equals(pCartNo) Then
                         MessageBox.Show("Packno and Cartno is Already in Grid." & vbCrLf & "Do not get dupicate!!!", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
-                        Return False '«éÓ
+                        Return False 'ï¿½ï¿½ï¿½
                     End If
                 End If
             Next
         End If
 
-        Return True 'äÁè«éÓ
+        Return True 'ï¿½ï¿½ï¿½ï¿½ï¿½
     End Function
     Private Sub LoadPacking()
         'On Error Resume Next
@@ -482,7 +482,7 @@ Public Class frmInvoiceLocal
         If dtNew.Rows.Count > 0 Then
 
             If Not CheckDataPacking(dtNew) Then Exit Sub
-            'àªç¤ packno , cartno ·Õèà¤Â·Óä»áÅéÇ
+            'ï¿½ï¿½ packno , cartno ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             If Not CheckIsNotDuplicatePackCart(config.IsNull(dtNew.Rows(0)("packno"), "").ToString.Trim, config.IsNull(dtNew.Rows(i)("cartno"), "").ToString.Trim) Then Exit Sub
 
             If config.IsNull(mcboCustomersBillToFlag.SelectedValue, "") = "" Then
@@ -530,7 +530,7 @@ Public Class frmInvoiceLocal
             For Each drInv As DataRow In dtInv.Rows
                 If drInv.RowState <> DataRowState.Deleted Then
                     If drInv.Item("currency").ToString.Trim <> dr.Item("currency").ToString.Trim Then
-                        MessageBox.Show("¤Ø³¡ÓÅÑ§ Load Packing List ·Õè µèÒ§Ê¡ØÅà§Ô¹¡Ñ¹ â»Ãá¡ÃÁäÁèÊÒÁÒÃ¶·ÓãËéä´é ¡ÃØ³ÒàÅ×Í¡ Packing Í×è¹ËÃ×Í·Ó¡ÒÃá¡éä¢¡èÍ¹", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+                        MessageBox.Show("ï¿½Ø³ï¿½ï¿½ï¿½Ñ§ Load Packing List ï¿½ï¿½ï¿½ ï¿½ï¿½Ò§Ê¡ï¿½ï¿½ï¿½Ô¹ï¿½Ñ¹ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ø³ï¿½ï¿½ï¿½ï¿½Í¡ Packing ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í·Ó¡ï¿½ï¿½ï¿½ï¿½ä¢¡ï¿½Í¹", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
                         Return False
                     End If
                 End If
@@ -780,10 +780,10 @@ Public Class frmInvoiceLocal
         Call SumGrid()
         blnCancel = False
         'If Not IsDataChange() Then Exit Sub
-        Dim result As Windows.Forms.DialogResult
+        Dim result As DialogResult
         result = MessageBox.Show("Would you like to save ?", "System Message", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3)
-        If result = Windows.Forms.DialogResult.Cancel Then blnCancel = True
-        If result <> Windows.Forms.DialogResult.Yes Then Exit Sub
+        If result = DialogResult.Cancel Then blnCancel = True
+        If result <> DialogResult.Yes Then Exit Sub
         If Not CheckData() Then Exit Sub
         Me.Cursor = Cursors.WaitCursor
         If SaveData() Then
@@ -801,12 +801,12 @@ Public Class frmInvoiceLocal
             MessageBox.Show("This document is already cancelled." & vbCrLf & "Can't cancel anymore.", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
             Exit Sub
         End If
-        If MessageBox.Show("Would you like to cancel this document ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.No Then Exit Sub
+        If MessageBox.Show("Would you like to cancel this document ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.No Then Exit Sub
         Dim inv As New classInvoice
         If inv.InvLocCancel(lngInvID, clsUser.UserID, message) Then
-            MessageBox.Show("Â¡àÅÔ¡ÊÓàÃç¨", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
+            MessageBox.Show("Â¡ï¿½ï¿½Ô¡ï¿½ï¿½ï¿½ï¿½ï¿½", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
         Else
-            MessageBox.Show("Â¡àÅÔ¡ äÁèÊÓàÃç¨ : " + message, "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+            MessageBox.Show("Â¡ï¿½ï¿½Ô¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ : " + message, "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
         End If
         Call btnNew_Click(sender, e)
     End Sub
@@ -924,12 +924,12 @@ Public Class frmInvoiceLocal
     Private Function CheckDataLoadCharge() As Boolean
 
         If txtItdesc.Text.Trim = "" Then
-            MessageBox.Show("µéÍ§ÁÕ ¢éÍ¤ÇÒÁ Issue " & vbCrLf & "Qty Should be More then 0", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("ï¿½ï¿½Í§ï¿½ï¿½ ï¿½ï¿½Í¤ï¿½ï¿½ï¿½ Issue " & vbCrLf & "Qty Should be More then 0", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return False
         End If
 
         If Val(txtqty.Text) = 0 Then
-            MessageBox.Show("Qty µéÍ§ÁÒ¡¡ÇèÒ 0" & vbCrLf & "Qty Should be More then 0", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Qty ï¿½ï¿½Í§ï¿½Ò¡ï¿½ï¿½ï¿½ï¿½ 0" & vbCrLf & "Qty Should be More then 0", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return False
         End If
 

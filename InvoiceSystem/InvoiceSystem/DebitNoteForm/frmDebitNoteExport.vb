@@ -366,7 +366,7 @@
     End Function
 
     Private Function SaveData() As Boolean
-        If MessageBox.Show("Would you like to save ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.No Then Return False
+        If MessageBox.Show("Would you like to save ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.No Then Return False
         Dim clsdbnote As New classDebitNoteExport
 
         Dim msgerr As String = ""
@@ -507,7 +507,7 @@
 
     Public Overridable Sub ApproveData()
         'If Not CanSave() Then Exit Sub
-        If MessageBox.Show("Would you like to approve ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then Call (New classDebitNoteExport).Approve(header.h01_id_dbnote, Me.UserInfo.UserID)
+        If MessageBox.Show("Would you like to approve ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.Yes Then Call (New classDebitNoteExport).Approve(header.h01_id_dbnote, Me.UserInfo.UserID)
         txtpresent_status.Text = "APPROVED"
     End Sub
 
@@ -516,7 +516,7 @@
     End Sub
     Private Sub CancelData()
         'If Not CanSave() Then Exit Sub
-        If MessageBox.Show("Would you like to cancel ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then Call (New classDebitNoteExport).Cancel(header.h01_id_dbnote, Me.UserInfo.UserID)
+        If MessageBox.Show("Would you like to cancel ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.Yes Then Call (New classDebitNoteExport).Cancel(header.h01_id_dbnote, Me.UserInfo.UserID)
         txtpresent_status.Text = "CANCELLED"
     End Sub
 

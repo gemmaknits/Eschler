@@ -41,7 +41,7 @@ Public Class frmLogin
         'Neung 20/02/2025 for Check Connention
         Dim mssger As String = ""
         If Not oLogin.CheckConnection(mssger) Then
-            MessageBox.Show("ไม่สามารถเชื่อมต่อกับ Server ได้ โปรดลองใหม่อีกครั้ง ", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("เนเธกเนเธชเธฒเธกเธฒเธฃเธ–เน€เธเธทเนเธญเธกเธ•เนเธญเธเธฑเธ Server เนเธ”เน เนเธเธฃเธ”เธฅเธญเธเนเธซเธกเนเธญเธตเธเธเธฃเธฑเนเธ ", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Me.Close()
             Exit Sub
         End If
@@ -62,7 +62,7 @@ Public Class frmLogin
         '	If obj.GetPropertyValue("name").ToString = "SalesOrderSystem.exe" Then i += 1
         'Next
         'If i = 2 Then
-        '	MessageBox.Show("SalesOrderSystem is already open. See the tray icon in the right bottom of your screen and click it." & vbCrLf & "โปรแกรม SalesOrderSystem เปิดอยู่แล้ว กรุณาดูที่ Tray Icon ด้านขวาล่าง", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+        '	MessageBox.Show("SalesOrderSystem is already open. See the tray icon in the right bottom of your screen and click it." & vbCrLf & "เนเธเธฃเนเธเธฃเธก SalesOrderSystem เน€เธเธดเธ”เธญเธขเธนเนเนเธฅเนเธง เธเธฃเธธเธ“เธฒเธ”เธนเธ—เธตเน Tray Icon เธ”เนเธฒเธเธเธงเธฒเธฅเนเธฒเธ", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         '	Me.Close()
         'End If
     End Sub
@@ -74,7 +74,7 @@ Public Class frmLogin
     Private Sub btnLogin_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLogin.Click
         If checkCanLoginAndKeepGlbValue() = False Then
             MsgBox("Incorrect username or password, please verify.." & vbCr _
-                   & "(ชื่อผู้ใช้ หรือ รหัสผ่าน  ไม่ถูกต้อง, ให้ตรวจสอบอีกครั้งหนึ่ง)" _
+                   & "(เธเธทเนเธญเธเธนเนเนเธเน เธซเธฃเธทเธญ เธฃเธซเธฑเธชเธเนเธฒเธ  เนเธกเนเธ–เธนเธเธ•เนเธญเธ, เนเธซเนเธ•เธฃเธงเธเธชเธญเธเธญเธตเธเธเธฃเธฑเนเธเธซเธเธถเนเธ)" _
                    , MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "Access denied")
             txtPassword.Text = ""
             txtPassword.Focus()
@@ -214,9 +214,9 @@ Public Class frmLogin
         If pwd_expire_days = 0 Then      ' If user had pwd_expire_days = 0 -> No need change password
             PasswordExpired = False
         ElseIf Today >= pwd_reset_date Then
-            MessageBox.Show("Your Password is Expired (รหัสผ่านหมดอายุการใช้งาน)" & vbCr _
+            MessageBox.Show("Your Password is Expired (เธฃเธซเธฑเธชเธเนเธฒเธเธซเธกเธ”เธญเธฒเธขเธธเธเธฒเธฃเนเธเนเธเธฒเธ)" & vbCr _
                              & Space(9) & "You much change it before use program " & vbCr _
-                             & Space(9) & "(ให้คุณเปลี่ยนรหัสผ่านก่อน ถึงจะเริ่มใช้งานโปรแกรมได้)" _
+                             & Space(9) & "(เนเธซเนเธเธธเธ“เน€เธเธฅเธตเนเธขเธเธฃเธซเธฑเธชเธเนเธฒเธเธเนเธญเธ เธ–เธถเธเธเธฐเน€เธฃเธดเนเธกเนเธเนเธเธฒเธเนเธเธฃเนเธเธฃเธกเนเธ”เน)" _
                              , "Password Expire", MessageBoxButtons.OK)
             grbChangePassword.Visible = True
             PasswordExpired = True
@@ -301,7 +301,7 @@ Public Class frmLogin
 
     '    If ds.Tables("tableEmp").Rows.Count = 0 Then
     '        MsgBox("Incorrect username or password, please verify.." & vbCr _
-    '               & "(ชื่อผู้ใช้ หรือ รหัสผ่าน  ไม่ถูกต้อง, ให้ตรวจสอบอีกครั้งหนึ่ง)" _
+    '               & "(เธเธทเนเธญเธเธนเนเนเธเน เธซเธฃเธทเธญ เธฃเธซเธฑเธชเธเนเธฒเธ  เนเธกเนเธ–เธนเธเธ•เนเธญเธ, เนเธซเนเธ•เธฃเธงเธเธชเธญเธเธญเธตเธเธเธฃเธฑเนเธเธซเธเธถเนเธ)" _
     '               , MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "Access denied")
     '        txtPassword.Text = ""
     '        txtPassword.Focus()
@@ -330,7 +330,7 @@ Public Class frmLogin
     '        If clsConfig.IsNull(ds.Tables("tableEmp").Rows(0)("exchange_rate"), 0) = 0 Then
     '            'Sitthana 08/02/2018 Comment Message 
     '            'MessageBox.Show("You are the lucky one, Please take a seat and rest while program automatically receive data from Bank Of Thailand." &
-    '            'vbCrLf & "คุณคือผู้โชคดี.. กรุณานั่งพักแล้วรอสักครู่โปรแกรมกำลังทำการดึงข้อมูลจากธนาคารแห่งประเทศไทย" _
+    '            'vbCrLf & "เธเธธเธ“เธเธทเธญเธเธนเนเนเธเธเธ”เธต.. เธเธฃเธธเธ“เธฒเธเธฑเนเธเธเธฑเธเนเธฅเนเธงเธฃเธญเธชเธฑเธเธเธฃเธนเนเนเธเธฃเนเธเธฃเธกเธเธณเธฅเธฑเธเธ—เธณเธเธฒเธฃเธ”เธถเธเธเนเธญเธกเธนเธฅเธเธฒเธเธเธเธฒเธเธฒเธฃเนเธซเนเธเธเธฃเธฐเน€เธ—เธจเนเธ—เธข" _
     '            ', "System Message", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
     '            clsUser.ExchangeRate = clsMaster.GetUSExchnageRate
     '            If ds.Tables("tableEmp").Rows(0)("curr_time").ToString.Trim >= "09" Then 'Bank Of Thailand Update Data After 9 O'Clock Everyday
@@ -374,7 +374,7 @@ Public Class frmLogin
                 txtPasswordNew.Focus()
                 btnLogin.Enabled = False
             Else
-                MessageBox.Show("คุณต้องป้อน ชื่อผู้ใช้และรหัสผ่าน ให้ถูกต้อง" & vbCr & "ก่อนที่จะทำการเปลี่ยนแปลงรหัสผ่านใหม่", "ข้อผิดพลาด (Error)", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessageBox.Show("เธเธธเธ“เธ•เนเธญเธเธเนเธญเธ เธเธทเนเธญเธเธนเนเนเธเนเนเธฅเธฐเธฃเธซเธฑเธชเธเนเธฒเธ เนเธซเนเธ–เธนเธเธ•เนเธญเธ" & vbCr & "เธเนเธญเธเธ—เธตเนเธเธฐเธ—เธณเธเธฒเธฃเน€เธเธฅเธตเนเธขเธเนเธเธฅเธเธฃเธซเธฑเธชเธเนเธฒเธเนเธซเธกเน", "เธเนเธญเธเธดเธ”เธเธฅเธฒเธ” (Error)", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 chbChangePassword.Checked = False
                 txtPassword.Focus()
             End If
@@ -405,25 +405,25 @@ Public Class frmLogin
 
         If txtUserName.Text.Trim = "" Then
             i += 1
-            ErrorMsg = i & ". User Name don't empty" & vbCr & "(ชื่อผู้ใช้ ห้ามปล่อยว่าง)"
+            ErrorMsg = i & ". User Name don't empty" & vbCr & "(เธเธทเนเธญเธเธนเนเนเธเน เธซเนเธฒเธกเธเธฅเนเธญเธขเธงเนเธฒเธ)"
             ErrorFlag = True
         End If
         If txtPassword.Text.Trim = "" Then
             i += 1
             If ErrorMsg <> "" Then ErrorMsg &= vbCr
-            ErrorMsg &= i & ". Password don't empty" & vbCr & "(รหัสผ่าน ของผู้ใช้ ห้ามปล่อยว่าง)"
+            ErrorMsg &= i & ". Password don't empty" & vbCr & "(เธฃเธซเธฑเธชเธเนเธฒเธ เธเธญเธเธเธนเนเนเธเน เธซเนเธฒเธกเธเธฅเนเธญเธขเธงเนเธฒเธ)"
             ErrorFlag = True
         End If
         If txtPasswordNew.Text.Trim = "" Then
             i += 1
             If ErrorMsg <> "" Then ErrorMsg &= vbCr
-            ErrorMsg &= i & ". New password don't empty" & vbCr & "(รหัสผ่านใหม่ ของผู้ใช้ ห้ามปล่อยว่าง)"
+            ErrorMsg &= i & ". New password don't empty" & vbCr & "(เธฃเธซเธฑเธชเธเนเธฒเธเนเธซเธกเน เธเธญเธเธเธนเนเนเธเน เธซเนเธฒเธกเธเธฅเนเธญเธขเธงเนเธฒเธ)"
             ErrorFlag = True
         End If
         If txtPasswordConfirm.Text.Trim = "" Then
             i += 1
             If ErrorMsg <> "" Then ErrorMsg &= vbCr
-            ErrorMsg &= i & ". Confirm Password don't empty" & vbCr & "(ยืนยันรหัสผ่านใหม่ ของผู้ใช้ ห้ามปล่อยว่าง)"
+            ErrorMsg &= i & ". Confirm Password don't empty" & vbCr & "(เธขเธทเธเธขเธฑเธเธฃเธซเธฑเธชเธเนเธฒเธเนเธซเธกเน เธเธญเธเธเธนเนเนเธเน เธซเนเธฒเธกเธเธฅเนเธญเธขเธงเนเธฒเธ)"
             ErrorFlag = True
         End If
 
@@ -431,12 +431,12 @@ Public Class frmLogin
             i += 1
             If ErrorMsg <> "" Then ErrorMsg &= vbCr
             ErrorMsg &= i & ". Passwords are not the same, Re-enter" & vbCr _
-                           & "(รหัสผ่านใหม่ กับ ยืนยันรหัสผ่าน ไม่ตรงกัน, ให้คุณป้อนใหม่อีกครั้งหนึ่ง"
+                           & "(เธฃเธซเธฑเธชเธเนเธฒเธเนเธซเธกเน เธเธฑเธ เธขเธทเธเธขเธฑเธเธฃเธซเธฑเธชเธเนเธฒเธ เนเธกเนเธ•เธฃเธเธเธฑเธ, เนเธซเนเธเธธเธ“เธเนเธญเธเนเธซเธกเนเธญเธตเธเธเธฃเธฑเนเธเธซเธเธถเนเธ"
             ErrorFlag = True
         ElseIf txtPassword.Text.Trim = txtPasswordNew.Text.Trim Then
             i += 1
             If ErrorMsg <> "" Then ErrorMsg &= vbCr
-            ErrorMsg &= i & ". New password must different old password " & vbCr & "(รหัสผ่านใหม่ของผู้ใช้ ต้องแตกต่างจากรหัสผ่านเดิม)"
+            ErrorMsg &= i & ". New password must different old password " & vbCr & "(เธฃเธซเธฑเธชเธเนเธฒเธเนเธซเธกเนเธเธญเธเธเธนเนเนเธเน เธ•เนเธญเธเนเธ•เธเธ•เนเธฒเธเธเธฒเธเธฃเธซเธฑเธชเธเนเธฒเธเน€เธ”เธดเธก)"
             ErrorFlag = True
         End If
 
@@ -447,14 +447,14 @@ Public Class frmLogin
             If checkCanLoginAndKeepGlbValue() Then
                 oConfig.UpdatePassword(txtUserName.Text.Trim, txtPasswordNew.Text.Trim)
                 MessageBox.Show("Changed Password Complete" & vbCr _
-                            & "(เปลี่ยนรหัสผ่านสำเร็จแล้วครับ  ต่อไปให้คุณใช้รหัสผ่านนี้ ในการเข้าใช้งานโปรแกรม)" _
+                            & "(เน€เธเธฅเธตเนเธขเธเธฃเธซเธฑเธชเธเนเธฒเธเธชเธณเน€เธฃเนเธเนเธฅเนเธงเธเธฃเธฑเธ  เธ•เนเธญเนเธเนเธซเนเธเธธเธ“เนเธเนเธฃเธซเธฑเธชเธเนเธฒเธเธเธตเน เนเธเธเธฒเธฃเน€เธเนเธฒเนเธเนเธเธฒเธเนเธเธฃเนเธเธฃเธก)" _
                                 , "Result", MessageBoxButtons.OK)
                 'txtPassword.Text = txtPasswordNew.Text.Trim
                 LoginToSystem()
             Else
                 MsgBox("Incorrect username or password, please verify.." _
-                      & vbCr & "คุณจะเปลี่ยนรหัสผ่านได้ ก็ต่อเมื่อ ชื่อผู้ใช้ หรือ รหัสผ่าน ถูกต้อง" _
-                      & vbCr & "  ให้คุณตรวจสอบอีกครั้งหนึ่ง)" _
+                      & vbCr & "เธเธธเธ“เธเธฐเน€เธเธฅเธตเนเธขเธเธฃเธซเธฑเธชเธเนเธฒเธเนเธ”เน เธเนเธ•เนเธญเน€เธกเธทเนเธญ เธเธทเนเธญเธเธนเนเนเธเน เธซเธฃเธทเธญ เธฃเธซเธฑเธชเธเนเธฒเธ เธ–เธนเธเธ•เนเธญเธ" _
+                      & vbCr & "  เนเธซเนเธเธธเธ“เธ•เธฃเธงเธเธชเธญเธเธญเธตเธเธเธฃเธฑเนเธเธซเธเธถเนเธ)" _
                        , MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "Access denied")
             End If
         End If
@@ -483,7 +483,7 @@ Public Class frmLogin
         If e.KeyChar = vbCr Then
             If txtPassword.Text.Trim = txtPasswordNew.Text.Trim Then
                 MessageBox.Show("New password must different old password" & vbCr _
-                                & "(รหัสผ่านใหม่ ต้องแตกต่างจากรหัสผ่านเดิม)" _
+                                & "(เธฃเธซเธฑเธชเธเนเธฒเธเนเธซเธกเน เธ•เนเธญเธเนเธ•เธเธ•เนเธฒเธเธเธฒเธเธฃเธซเธฑเธชเธเนเธฒเธเน€เธ”เธดเธก)" _
                 , "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Else
                 txtPasswordConfirm.Focus()
@@ -509,7 +509,7 @@ Public Class frmLogin
             'Neung 20/02/2025 for Check Connention
             Dim mssger As String = ""
             If Not oLogin.CheckConnection(mssger) Then
-                MessageBox.Show("ไม่สามารถเชื่อมต่อกับ Server ได้ โปรดลองใหม่อีกครั้ง ", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessageBox.Show("เนเธกเนเธชเธฒเธกเธฒเธฃเธ–เน€เธเธทเนเธญเธกเธ•เนเธญเธเธฑเธ Server เนเธ”เน เนเธเธฃเธ”เธฅเธญเธเนเธซเธกเนเธญเธตเธเธเธฃเธฑเนเธ ", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Me.Close()
                 Exit Sub
             End If
@@ -523,7 +523,7 @@ Public Class frmLogin
         If e.KeyChar = vbCr Then
             If txtPasswordNew.Text.Trim <> txtPasswordConfirm.Text.Trim Then
                 MessageBox.Show("New password and Confirm password not same" & vbCr _
-                                & "(รหัสผ่านใหม่ กับรหัสยืนยันรหัสผ่านใหม่ ไม่เหมือนกัน)" _
+                                & "(เธฃเธซเธฑเธชเธเนเธฒเธเนเธซเธกเน เธเธฑเธเธฃเธซเธฑเธชเธขเธทเธเธขเธฑเธเธฃเธซเธฑเธชเธเนเธฒเธเนเธซเธกเน เนเธกเนเน€เธซเธกเธทเธญเธเธเธฑเธ)" _
                                 , "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Else
                 btnChangePassword_Click(Nothing, Nothing)

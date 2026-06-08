@@ -646,7 +646,7 @@ Partial Class frmStockOnhand
         Me.txtGradePrintOnly.Name = "txtGradePrintOnly"
         Me.txtGradePrintOnly.Size = New System.Drawing.Size(87, 22)
         Me.txtGradePrintOnly.TabIndex = 173
-        Me.ToolTip1.SetToolTip(Me.txtGradePrintOnly, "„ Ë ‡°√¥∑’ËµÈÕß°“√ ∂È“¡’¡“°°«Ë“ 1 „ÀÈ„ Ë≈Ÿ°πÈ”µ“¡¥È«¬ ‡°√¥Õ◊Ëπ ‡™Ëπ ex. A,B,C..")
+        Me.ToolTip1.SetToolTip(Me.txtGradePrintOnly, "‡πÉ‡∏™‡πà ‡πÄ‡∏Å‡∏£‡∏î‡∏ó‡∏µ‡πà‡∏ï‡πâ‡∏≠‡∏á‡∏Å‡∏≤‡∏£ ‡∏ñ‡πâ‡∏≤‡∏°‡∏µ‡∏°‡∏≤‡∏Å‡∏Å‡∏ß‡πà‡∏≤ 1 ‡πÉ‡∏´‡πâ‡πÉ‡∏™‡πà‡∏•‡∏π‡∏Å‡∏ô‡πâ‡∏≥‡∏ï‡∏≤‡∏°‡∏î‡πâ‡∏ß‡∏¢ ‡πÄ‡∏Å‡∏£‡∏î‡∏≠‡∏∑‡πà‡∏ô ‡πÄ‡∏ä‡πà‡∏ô ex. A,B,C..")
         '
         'txtGradePrintExcept
         '
@@ -654,7 +654,7 @@ Partial Class frmStockOnhand
         Me.txtGradePrintExcept.Name = "txtGradePrintExcept"
         Me.txtGradePrintExcept.Size = New System.Drawing.Size(87, 22)
         Me.txtGradePrintExcept.TabIndex = 175
-        Me.ToolTip1.SetToolTip(Me.txtGradePrintExcept, "„ Ë ‡°√¥∑’ËµÈÕß°“√ ∂È“¡’¡“°°«Ë“ 1 „ÀÈ„ Ë≈Ÿ°πÈ”µ“¡¥È«¬ ‡°√¥Õ◊Ëπ ‡™Ëπ ex. A,B,C..")
+        Me.ToolTip1.SetToolTip(Me.txtGradePrintExcept, "‡πÉ‡∏™‡πà ‡πÄ‡∏Å‡∏£‡∏î‡∏ó‡∏µ‡πà‡∏ï‡πâ‡∏≠‡∏á‡∏Å‡∏≤‡∏£ ‡∏ñ‡πâ‡∏≤‡∏°‡∏µ‡∏°‡∏≤‡∏Å‡∏Å‡∏ß‡πà‡∏≤ 1 ‡πÉ‡∏´‡πâ‡πÉ‡∏™‡πà‡∏•‡∏π‡∏Å‡∏ô‡πâ‡∏≥‡∏ï‡∏≤‡∏°‡∏î‡πâ‡∏ß‡∏¢ ‡πÄ‡∏Å‡∏£‡∏î‡∏≠‡∏∑‡πà‡∏ô ‡πÄ‡∏ä‡πà‡∏ô ex. A,B,C..")
         '
         'gbStockLocations
         '

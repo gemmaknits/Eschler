@@ -23,13 +23,12 @@ Partial Class frmKnittingOrderNew
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim MetroColorTable1 As Syncfusion.Windows.Forms.MetroColorTable = New Syncfusion.Windows.Forms.MetroColorTable()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmKnittingOrderNew))
         Me.GroupBox9 = New System.Windows.Forms.GroupBox()
         Me.btnDeleteBomLine = New System.Windows.Forms.Button()
         Me.btnAddBomHeader = New System.Windows.Forms.Button()
         Me.btnAddBomLine = New System.Windows.Forms.Button()
-        Me.McboIDYarnChange = New Syncfusion.Windows.Forms.Tools.MultiColumnComboBox()
+        Me.McboIDYarnChange = New ProductionSystem.Controls.MultiColumnComboBox()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.cboko_mtl_warehouse_id = New System.Windows.Forms.ComboBox()
         Me.Label14 = New System.Windows.Forms.Label()
@@ -212,30 +211,8 @@ Partial Class frmKnittingOrderNew
         'McboIDYarnChange
         '
         Me.McboIDYarnChange.BackColor = System.Drawing.Color.Khaki
-        Me.McboIDYarnChange.BeforeTouchSize = New System.Drawing.Size(150, 21)
-        Me.McboIDYarnChange.FlatStyle = Syncfusion.Windows.Forms.Tools.ComboFlatStyle.Flat
         Me.McboIDYarnChange.Location = New System.Drawing.Point(534, 21)
-        Me.McboIDYarnChange.MetroColor = System.Drawing.Color.FromArgb(CType(CType(22, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.McboIDYarnChange.Name = "McboIDYarnChange"
-        MetroColorTable1.ArrowChecked = System.Drawing.Color.FromArgb(CType(CType(147, Byte), Integer), CType(CType(149, Byte), Integer), CType(CType(152, Byte), Integer))
-        MetroColorTable1.ArrowCheckedBorderColor = System.Drawing.Color.Empty
-        MetroColorTable1.ArrowInActive = System.Drawing.Color.White
-        MetroColorTable1.ArrowNormal = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(198, Byte), Integer))
-        MetroColorTable1.ArrowNormalBackGround = System.Drawing.Color.Empty
-        MetroColorTable1.ArrowNormalBorderColor = System.Drawing.Color.Empty
-        MetroColorTable1.ArrowPushed = System.Drawing.Color.FromArgb(CType(CType(88, Byte), Integer), CType(CType(89, Byte), Integer), CType(CType(90, Byte), Integer))
-        MetroColorTable1.ArrowPushedBackGround = System.Drawing.Color.Empty
-        MetroColorTable1.ArrowPushedBorderColor = System.Drawing.Color.Empty
-        MetroColorTable1.ScrollerBackground = System.Drawing.Color.White
-        MetroColorTable1.ThumbChecked = System.Drawing.Color.FromArgb(CType(CType(147, Byte), Integer), CType(CType(149, Byte), Integer), CType(CType(152, Byte), Integer))
-        MetroColorTable1.ThumbCheckedBorderColor = System.Drawing.Color.Empty
-        MetroColorTable1.ThumbInActive = System.Drawing.Color.White
-        MetroColorTable1.ThumbNormal = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(198, Byte), Integer))
-        MetroColorTable1.ThumbNormalBorderColor = System.Drawing.Color.Empty
-        MetroColorTable1.ThumbPushed = System.Drawing.Color.FromArgb(CType(CType(88, Byte), Integer), CType(CType(89, Byte), Integer), CType(CType(90, Byte), Integer))
-        MetroColorTable1.ThumbPushedBorder = System.Drawing.Color.Empty
-        MetroColorTable1.ThumbPushedBorderColor = System.Drawing.Color.Empty
-        Me.McboIDYarnChange.ScrollMetroColorTable = MetroColorTable1
         Me.McboIDYarnChange.Size = New System.Drawing.Size(150, 21)
         Me.McboIDYarnChange.TabIndex = 275
         '
@@ -1454,7 +1431,7 @@ Partial Class frmKnittingOrderNew
     Friend WithEvents BtnDelivered As Button
     Friend WithEvents btnSeacthKoNo As Button
     Friend WithEvents btnAddBomLine As Button
-    Friend WithEvents McboIDYarnChange As Syncfusion.Windows.Forms.Tools.MultiColumnComboBox
+    Friend WithEvents McboIDYarnChange As ProductionSystem.Controls.MultiColumnComboBox
     Friend WithEvents btnDeleteBomLine As Button
     Friend WithEvents btnAddBomHeader As Button
     Friend WithEvents ErrorProvider1 As ErrorProvider

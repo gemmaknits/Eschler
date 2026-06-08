@@ -223,7 +223,7 @@ Partial Class frmStockSIN
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(510, 17)
         Me.Label16.TabIndex = 268
-        Me.Label16.Text = "*** ˹�ҹ����੾�Сóշ���ͧ��ùӼ�ҷ���ҷ���������������к� (Scrap Return)"
+        Me.Label16.Text = "*** หน้านี้ใช้เฉพาะกรณีที่ต้องการนำผ้าที่หาที่มาไม่ได้มาเข้าระบบ (Scrap Return)"
         '
         'optGre
         '

@@ -230,7 +230,7 @@ Public Class frmSalesOrderSummary
             If saveFileDialog1.ShowDialog() = DialogResult.OK Then
                 If saveFileDialog1.FileName <> "" Then
                     workbook.SaveAs(saveFileDialog1.FileName)
-                    MessageBox.Show("�ѹ�֡�����", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
+                    MessageBox.Show("บันทึกสำเร็จ", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
                 End If
             End If
 

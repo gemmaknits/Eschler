@@ -78,7 +78,7 @@
 
     Private Sub btnSave_Click(sender As System.Object, e As System.EventArgs) Handles btnSave.Click
         If txtBillNo.Text.Trim.Length = 0 Then Exit Sub
-        If MessageBox.Show("Would you like to save ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then Call SaveData(txtBillNo.Text.Trim)
+        If MessageBox.Show("Would you like to save ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then Call SaveData(txtBillNo.Text.Trim)
     End Sub
 
     Private Sub btnPrint_Click(sender As System.Object, e As System.EventArgs) Handles btnPrint.Click
@@ -112,7 +112,7 @@
 
     Private Sub btnCancel_Click(sender As System.Object, e As System.EventArgs) Handles btnCancel.Click
         If txtGINNo.Text.Trim.Length = 0 Then Exit Sub
-        If MessageBox.Show("Would you like to cancel document no. " & txtGINNo.Text & " ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
+        If MessageBox.Show("Would you like to cancel document no. " & txtGINNo.Text & " ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
             Call (New classStock).CancelGIN(txtGINNo.Text, clsUser.UserID)
             btnNew_Click(sender, e)
         End If
@@ -137,7 +137,7 @@
     End Sub
 
     Private Sub frmStockGIN_PFD_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        If MessageBox.Show("Would you like to close ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.No Then
+        If MessageBox.Show("Would you like to close ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.No Then
             e.Cancel = True
         End If
     End Sub

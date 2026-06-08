@@ -35,7 +35,8 @@
     <PublisherName>Eschler Knits Co., Ltd.</PublisherName>
     <SuiteName>Eschler Program Suite</SuiteName>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>616</ApplicationRevision>
+    <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
+    <ApplicationRevision>618</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -122,10 +123,22 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Dll\Classes.dll</HintPath>
     </Reference>
-    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\CrystalDecisions.ReportSource.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\CrystalDecisions.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\CrystalDecisions.Windows.Forms.dll</HintPath>
+    </Reference>
     <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
     <Reference Include="Interop.AcroPDFLib">
       <HintPath>DLL\Interop.AcroPDFLib.dll</HintPath>
@@ -153,34 +166,6 @@
     <Reference Include="STV, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Dll\STV.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.Grid.Base, Version=14.4400.0.20, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files (x86)\Syncfusion\Essential Studio\14.4.0.20\Assemblies\3.5\Syncfusion.Grid.Base.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.Grid.Windows, Version=14.4400.0.20, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files (x86)\Syncfusion\Essential Studio\14.4.0.20\Assemblies\3.5\Syncfusion.Grid.Windows.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.Shared.Base, Version=14.4400.0.20, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files (x86)\Syncfusion\Essential Studio\14.4.0.20\Assemblies\3.5\Syncfusion.Shared.Base.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.Shared.Windows, Version=14.4400.0.20, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files (x86)\Syncfusion\Essential Studio\14.4.0.20\Assemblies\3.5\Syncfusion.Shared.Windows.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.SpellChecker.Base, Version=14.4400.0.20, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files (x86)\Syncfusion\Essential Studio\14.4.0.20\Assemblies\3.5\Syncfusion.SpellChecker.Base.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.Tools.Base, Version=14.4400.0.20, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files (x86)\Syncfusion\Essential Studio\14.4.0.20\Assemblies\3.5\Syncfusion.Tools.Base.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.Tools.Windows, Version=14.4400.0.20, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files (x86)\Syncfusion\Essential Studio\14.4.0.20\Assemblies\3.5\Syncfusion.Tools.Windows.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -254,6 +239,7 @@
     <Compile Include="Classes\classStock\classOperationKnitting.vb" />
     <Compile Include="Classes\classStock\classStockGreigeLoss.vb" />
     <Compile Include="Classes\classUserInfo\classUserInfo.vb" />
+    <Compile Include="Controls\MultiColumnComboBox.vb" />
     <Compile Include="Component\ComponentCalendarEditingControl\componentCalendarEditingControl.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -1258,86 +1244,6 @@
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="STV">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>Assembly</FileType>
-    </PublishFile>
-    <PublishFile Include="Syncfusion.Grid.Base">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>Assembly</FileType>
-    </PublishFile>
-    <PublishFile Include="Syncfusion.Grid.Windows">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>Assembly</FileType>
-    </PublishFile>
-    <PublishFile Include="Syncfusion.Grid.Windows.XmlSerializers">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>Assembly</FileType>
-    </PublishFile>
-    <PublishFile Include="Syncfusion.Shared.Base">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>Assembly</FileType>
-    </PublishFile>
-    <PublishFile Include="Syncfusion.Shared.Windows">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>Assembly</FileType>
-    </PublishFile>
-    <PublishFile Include="Syncfusion.SpellChecker.Base">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>Assembly</FileType>
-    </PublishFile>
-    <PublishFile Include="Syncfusion.Tools.Base">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>Assembly</FileType>
-    </PublishFile>
-    <PublishFile Include="Syncfusion.Tools.Windows">
       <Visible>False</Visible>
       <Group>
       </Group>

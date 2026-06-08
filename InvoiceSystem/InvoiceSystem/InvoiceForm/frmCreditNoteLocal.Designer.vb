@@ -1,4 +1,4 @@
-<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+ï»¿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class frmCreditNoteLocal
     Inherits System.Windows.Forms.Form
 
@@ -27,7 +27,6 @@ Partial Class frmCreditNoteLocal
         Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim MetroColorTable2 As Syncfusion.Windows.Forms.MetroColorTable = New Syncfusion.Windows.Forms.MetroColorTable()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
         Me.cboDocNo = New System.Windows.Forms.ToolStripComboBox()
@@ -105,7 +104,7 @@ Partial Class frmCreditNoteLocal
         Me.txtDifferentAmt = New System.Windows.Forms.TextBox()
         Me.BtnLoadFreight = New System.Windows.Forms.Button()
         Me.Label18 = New System.Windows.Forms.Label()
-        Me.mcboFreight = New Syncfusion.Windows.Forms.Tools.MultiColumnComboBox()
+        Me.mcboFreight = New InvoiceSystemESH.Controls.MultiColumnComboBox()
         Me.Label45 = New System.Windows.Forms.Label()
         Me.btnExchangeRate = New System.Windows.Forms.Button()
         Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
@@ -207,7 +206,7 @@ Partial Class frmCreditNoteLocal
         Me.ToolStripLabel2.ForeColor = System.Drawing.Color.Red
         Me.ToolStripLabel2.Name = "ToolStripLabel2"
         Me.ToolStripLabel2.Size = New System.Drawing.Size(78, 22)
-        Me.ToolStripLabel2.Text = "¶éÒ  .5 »Ñ´¢Öé¹"
+        Me.ToolStripLabel2.Text = "ï¿½ï¿½ï¿½  .5 ï¿½Ñ´ï¿½ï¿½ï¿½"
         '
         'dtpDocDate
         '
@@ -899,25 +898,6 @@ Partial Class frmCreditNoteLocal
         Me.mcboFreight.Location = New System.Drawing.Point(80, 53)
         Me.mcboFreight.MetroColor = System.Drawing.Color.FromArgb(CType(CType(22, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.mcboFreight.Name = "mcboFreight"
-        MetroColorTable2.ArrowChecked = System.Drawing.Color.FromArgb(CType(CType(147, Byte), Integer), CType(CType(149, Byte), Integer), CType(CType(152, Byte), Integer))
-        MetroColorTable2.ArrowCheckedBorderColor = System.Drawing.Color.Empty
-        MetroColorTable2.ArrowInActive = System.Drawing.Color.White
-        MetroColorTable2.ArrowNormal = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(198, Byte), Integer))
-        MetroColorTable2.ArrowNormalBackGround = System.Drawing.Color.Empty
-        MetroColorTable2.ArrowNormalBorderColor = System.Drawing.Color.Empty
-        MetroColorTable2.ArrowPushed = System.Drawing.Color.FromArgb(CType(CType(88, Byte), Integer), CType(CType(89, Byte), Integer), CType(CType(90, Byte), Integer))
-        MetroColorTable2.ArrowPushedBackGround = System.Drawing.Color.Empty
-        MetroColorTable2.ArrowPushedBorderColor = System.Drawing.Color.Empty
-        MetroColorTable2.ScrollerBackground = System.Drawing.Color.White
-        MetroColorTable2.ThumbChecked = System.Drawing.Color.FromArgb(CType(CType(147, Byte), Integer), CType(CType(149, Byte), Integer), CType(CType(152, Byte), Integer))
-        MetroColorTable2.ThumbCheckedBorderColor = System.Drawing.Color.Empty
-        MetroColorTable2.ThumbInActive = System.Drawing.Color.White
-        MetroColorTable2.ThumbNormal = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(198, Byte), Integer))
-        MetroColorTable2.ThumbNormalBorderColor = System.Drawing.Color.Empty
-        MetroColorTable2.ThumbPushed = System.Drawing.Color.FromArgb(CType(CType(88, Byte), Integer), CType(CType(89, Byte), Integer), CType(CType(90, Byte), Integer))
-        MetroColorTable2.ThumbPushedBorder = System.Drawing.Color.Empty
-        MetroColorTable2.ThumbPushedBorderColor = System.Drawing.Color.Empty
-        Me.mcboFreight.ScrollMetroColorTable = MetroColorTable2
         Me.mcboFreight.Size = New System.Drawing.Size(114, 21)
         Me.mcboFreight.TabIndex = 123
         '
@@ -1115,7 +1095,7 @@ Partial Class frmCreditNoteLocal
     Friend WithEvents ToolStripLabel2 As System.Windows.Forms.ToolStripLabel
     Friend WithEvents BtnLoadFreight As Button
     Friend WithEvents Label18 As Label
-    Friend WithEvents mcboFreight As Syncfusion.Windows.Forms.Tools.MultiColumnComboBox
+    Friend WithEvents mcboFreight As InvoiceSystemESH.Controls.MultiColumnComboBox
     Friend WithEvents Label45 As Label
     Friend WithEvents btnExchangeRate As Button
     Friend WithEvents ErrorProvider1 As ErrorProvider

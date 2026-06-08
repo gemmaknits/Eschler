@@ -604,3 +604,99 @@ D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.frmP
 D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.frmPrintYarnLatestPrice.resources
 D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.frmPrintYarnOutDocument.resources
 D:\DOTNET\ESCHLER\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.vbprojResolveAssemblyReference.cache
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\bin\Debug\Yarn Stock System (Eschler).exe.config
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\bin\Debug\Yarn Stock System (Eschler).exe.manifest
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\bin\Debug\Yarn Stock System (Eschler).application
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\bin\Debug\Yarn Stock System (Eschler).exe
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\bin\Debug\Yarn Stock System (Eschler).pdb
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\bin\Debug\Yarn Stock System (Eschler).xml
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\bin\Debug\Classes.dll
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\bin\Debug\CrystalDecisions.CrystalReports.Engine.dll
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\bin\Debug\CrystalDecisions.ReportSource.dll
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\bin\Debug\CrystalDecisions.Shared.dll
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\bin\Debug\CrystalDecisions.Windows.Forms.dll
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\bin\Debug\myControls.dll
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\bin\Debug\RestSharp.dll
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\bin\Debug\Classes.pdb
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\bin\Debug\Classes.xml
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\bin\Debug\myControls.pdb
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\bin\Debug\myControls.xml
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\bin\Debug\RestSharp.xml
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.vbproj.AssemblyReference.cache
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.Resources.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.formJobOrderYarnNewEditSelectProductionLine.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.formPrintKIConsumption2.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.formPrintWOConsumption.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.formPrintWOJobSummary.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.formPrintYarnScarp.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.formYarnInProcessReturn.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.formJobOrderYarnNewEdit.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.formJobOrderforYarnApprove.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.formJobOrderforYarnCancel.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.frmLogin.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.frmMainMenu.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.formPrintBarcode.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.formPrintKIConsumption.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.formPrintKIGreigeDeliveryControl.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.formPrintKIJobSummary.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.formPrintKIPending.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.formPrintYarnDemandForecast.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.formPrintYarnMoveByBox.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.formSearchItemcode.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.formSearchItemCodeFromBalance.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.formSearchJob.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.formSearchKO.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.formSearchYarn.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.formSearchYarnOut.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.formYarnInEdit.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.formYarnInPurchaseFromSupplier.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.formYarnInReturn.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.formYarnIn.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.frmYarnInPurchase.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.formYarnLocation.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.formYarnoutOld.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.formYarnOutCancel.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.formYarnOutEdit.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.formYarnout.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.formYarnScrap.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.frmEndingInventory.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.frmJobClose.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.frmJobOrderBarcode.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.frmReport.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.frmSearchYarnTransferLocationsGMK.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.frmStockYarnAging.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.frmYarnInCustomerYarn.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.frmYarnINFromGemmaknit.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.frmYarnINYarnLocationsGMK.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.frmYarnLostByKO.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.frmYarnOutBarcode.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.frmPrintJobOrderforYarn.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.frmPrintYarnInDocument.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.frmPrintYarnLatestPrice.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.frmPrintYarnOutDocument.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.DlgStockNonMovement.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.formCRViewer.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.FormRptBarcode.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.FormRptJobOrderforYarn.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.FormRptMachineUsage.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.formRptYarnBalance.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.FormRptYarnIn.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.FormRptYarnOut.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.FormRptYarnPurchase.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.FormRptYarnUsedByMonth.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.frmCompanySticker.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.frmDeadStockBalanceYarn.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.frmKIConsumptionAndLoss.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.frmRawBeamYarnCompareBalance.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.frmPrintWOClosed.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.frmPrintYarnInPurchased.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.frmYarnOnTime.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.frmYarnUsedByYear.resources
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.vbproj.GenerateResource.cache
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStockSystem.vbproj.CoreCompileInputs.cache
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\Yarn Stock System (Eschler).exe.manifest
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\Yarn Stock System (Eschler).application
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\YarnStoc.FEDA8BE0.Up2Date
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\Yarn Stock System (Eschler).exe
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\Yarn Stock System (Eschler).xml
+D:\SOURCECODE\Eschler\YarnStockSystem\YarnStockSystem\obj\Debug\Yarn Stock System (Eschler).pdb

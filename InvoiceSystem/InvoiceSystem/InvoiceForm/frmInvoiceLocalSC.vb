@@ -1,6 +1,6 @@
 ﻿Option Explicit On
 Imports System.Math
-Imports Syncfusion.Windows.Forms.Tools
+Imports InvoiceSystemESH.Controls
 Public Class frmInvoiceLocalSC
     Dim clsConfig As New clsConfig
     Dim clsConn As New classConnection
@@ -229,55 +229,55 @@ Public Class frmInvoiceLocalSC
         Me.currency.ValueMember = "curr"
 
     End Sub
-    Private Sub Model_QueryCellInfoCustomersBillToFlag(ByVal sender As Object, ByVal e As Syncfusion.Windows.Forms.Grid.GridQueryCellInfoEventArgs)
+    Private Sub Model_QueryCellInfoCustomersBillToFlag(ByVal sender As Object, ByVal e As InvoiceSystemESH.Controls.GridQueryCellInfoEventArgs)
         'To specify the row and colum index.
         If e.RowIndex = 0 AndAlso e.ColIndex = 3 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New InvoiceSystemESH.Controls.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Code"
         ElseIf e.RowIndex = 0 AndAlso e.ColIndex = 4 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New InvoiceSystemESH.Controls.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Name"
         ElseIf e.RowIndex = 0 AndAlso e.ColIndex = 5 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New InvoiceSystemESH.Controls.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Address"
         End If
     End Sub
 
-    Private Sub Model_QueryCellInfo2CustomersShipToFlag(ByVal sender As Object, ByVal e As Syncfusion.Windows.Forms.Grid.GridQueryCellInfoEventArgs)
+    Private Sub Model_QueryCellInfo2CustomersShipToFlag(ByVal sender As Object, ByVal e As InvoiceSystemESH.Controls.GridQueryCellInfoEventArgs)
         'To specify the row and colum index.
         If e.RowIndex = 0 AndAlso e.ColIndex = 3 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New InvoiceSystemESH.Controls.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Code"
         ElseIf e.RowIndex = 0 AndAlso e.ColIndex = 4 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New InvoiceSystemESH.Controls.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Name"
         ElseIf e.RowIndex = 0 AndAlso e.ColIndex = 5 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New InvoiceSystemESH.Controls.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Address"
         End If
     End Sub
-    Private Sub Model_QueryCellInfoBanks(ByVal sender As Object, ByVal e As Syncfusion.Windows.Forms.Grid.GridQueryCellInfoEventArgs)
+    Private Sub Model_QueryCellInfoBanks(ByVal sender As Object, ByVal e As InvoiceSystemESH.Controls.GridQueryCellInfoEventArgs)
         'To specify the row and colum index.
         If e.RowIndex = 0 AndAlso e.ColIndex = 2 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New InvoiceSystemESH.Controls.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Code"
         ElseIf e.RowIndex = 0 AndAlso e.ColIndex = 3 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New InvoiceSystemESH.Controls.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Name"
         ElseIf e.RowIndex = 0 AndAlso e.ColIndex = 4 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New InvoiceSystemESH.Controls.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Address"
         ElseIf e.RowIndex = 0 AndAlso e.ColIndex = 5 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 11, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New InvoiceSystemESH.Controls.GridFontInfo(New Font("Segoe UI", 11, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Swift Code"
         ElseIf e.RowIndex = 0 AndAlso e.ColIndex = 6 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New InvoiceSystemESH.Controls.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Account No."
         ElseIf e.RowIndex = 0 AndAlso e.ColIndex = 7 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New InvoiceSystemESH.Controls.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Currency"
         ElseIf e.RowIndex = 0 AndAlso e.ColIndex = 8 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New InvoiceSystemESH.Controls.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Branch"
 
         End If
@@ -622,10 +622,10 @@ Public Class frmInvoiceLocalSC
         Call SumGrid()
         blnCancel = False
         'If Not IsDataChange() Then Exit Sub
-        Dim result As Windows.Forms.DialogResult
+        Dim result As DialogResult
         result = MessageBox.Show("Would you like to save ?", "System Message", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3)
-        If result = Windows.Forms.DialogResult.Cancel Then blnCancel = True
-        If result <> Windows.Forms.DialogResult.Yes Then Exit Sub
+        If result = DialogResult.Cancel Then blnCancel = True
+        If result <> DialogResult.Yes Then Exit Sub
         If Not CheckData() Then Exit Sub
         Me.Cursor = Cursors.WaitCursor
         If SaveData() Then
@@ -679,7 +679,7 @@ Public Class frmInvoiceLocalSC
             MessageBox.Show("This document is already cancelled." & vbCrLf & "Can't cancel anymore.", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
             Exit Sub
         End If
-        If MessageBox.Show("Would you like to cancel this document ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.No Then Exit Sub
+        If MessageBox.Show("Would you like to cancel this document ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.No Then Exit Sub
         Dim inv As New classInvoice
         If inv.InvLocCancel(lngInvID, clsUser.UserID, message) Then
             MessageBox.Show("ยกเลิกสำเร็จ", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)

@@ -20,11 +20,7 @@ Partial Class frmSalesOrder
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim MetroColorTable1 As Syncfusion.Windows.Forms.MetroColorTable = New Syncfusion.Windows.Forms.MetroColorTable()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmSalesOrder))
-        Dim MetroColorTable2 As Syncfusion.Windows.Forms.MetroColorTable = New Syncfusion.Windows.Forms.MetroColorTable()
-        Dim MetroColorTable3 As Syncfusion.Windows.Forms.MetroColorTable = New Syncfusion.Windows.Forms.MetroColorTable()
-        Dim MetroColorTable4 As Syncfusion.Windows.Forms.MetroColorTable = New Syncfusion.Windows.Forms.MetroColorTable()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -84,7 +80,7 @@ Partial Class frmSalesOrder
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.mcboDesignProperties = New Syncfusion.Windows.Forms.Tools.MultiColumnComboBox()
+        Me.mcboDesignProperties = New SalesOrderSystem.Controls.MultiColumnComboBox()
         Me.Label45 = New System.Windows.Forms.Label()
         Me.ComboSaleOrderType1 = New Classes.comboSaleOrderType()
         Me.chkClearOrder = New System.Windows.Forms.CheckBox()
@@ -138,13 +134,13 @@ Partial Class frmSalesOrder
         Me.Label38 = New System.Windows.Forms.Label()
         Me.txtCustPoSuffix = New System.Windows.Forms.TextBox()
         Me.lblCustomersActive = New System.Windows.Forms.Label()
-        Me.mcboCustomersBillToFlag = New Syncfusion.Windows.Forms.Tools.MultiColumnComboBox()
+        Me.mcboCustomersBillToFlag = New SalesOrderSystem.Controls.MultiColumnComboBox()
         Me.Label22 = New System.Windows.Forms.Label()
         Me.txtContact = New System.Windows.Forms.TextBox()
         Me.txtCustAddr = New System.Windows.Forms.TextBox()
         Me.btnCustPoUnique = New System.Windows.Forms.Button()
         Me.tabDelivery = New System.Windows.Forms.TabPage()
-        Me.mcboCustomersShipToFlag = New Syncfusion.Windows.Forms.Tools.MultiColumnComboBox()
+        Me.mcboCustomersShipToFlag = New SalesOrderSystem.Controls.MultiColumnComboBox()
         Me.cboMtl_warehouse = New System.Windows.Forms.ComboBox()
         Me.Label34 = New System.Windows.Forms.Label()
         Me.txtShipQty_Tolerance_high = New System.Windows.Forms.TextBox()
@@ -156,7 +152,7 @@ Partial Class frmSalesOrder
         Me.Label23 = New System.Windows.Forms.Label()
         Me.txtDeliAddr = New System.Windows.Forms.TextBox()
         Me.tabTerms = New System.Windows.Forms.TabPage()
-        Me.mcboBanks = New Syncfusion.Windows.Forms.Tools.MultiColumnComboBox()
+        Me.mcboBanks = New SalesOrderSystem.Controls.MultiColumnComboBox()
         Me.Label32 = New System.Windows.Forms.Label()
         Me.Label26 = New System.Windows.Forms.Label()
         Me.cboPaymode = New System.Windows.Forms.ComboBox()
@@ -544,7 +540,7 @@ Partial Class frmSalesOrder
         Me.Label7.AutoSize = True
         Me.Label7.Location = New System.Drawing.Point(20, 93)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(98, 13)
+        Me.Label7.Size = New System.Drawing.Size(97, 13)
         Me.Label7.TabIndex = 8
         Me.Label7.Text = "End Buyer / Cust.:"
         '
@@ -589,7 +585,7 @@ Partial Class frmSalesOrder
         Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(13, 87)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(90, 13)
+        Me.Label3.Size = New System.Drawing.Size(89, 13)
         Me.Label3.TabIndex = 0
         Me.Label3.Text = "Customer Bill To"
         '
@@ -619,31 +615,16 @@ Partial Class frmSalesOrder
         '
         'mcboDesignProperties
         '
-        Me.mcboDesignProperties.BeforeTouchSize = New System.Drawing.Size(212, 21)
+        Me.mcboDesignProperties.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.mcboDesignProperties.DataSource = Nothing
+        Me.mcboDesignProperties.DisplayMember = Nothing
         Me.mcboDesignProperties.Location = New System.Drawing.Point(34, 64)
-        Me.mcboDesignProperties.MetroColor = System.Drawing.Color.FromArgb(CType(CType(22, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.mcboDesignProperties.Name = "mcboDesignProperties"
-        MetroColorTable1.ArrowChecked = System.Drawing.Color.FromArgb(CType(CType(147, Byte), Integer), CType(CType(149, Byte), Integer), CType(CType(152, Byte), Integer))
-        MetroColorTable1.ArrowCheckedBorderColor = System.Drawing.Color.Empty
-        MetroColorTable1.ArrowInActive = System.Drawing.Color.White
-        MetroColorTable1.ArrowNormal = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(198, Byte), Integer))
-        MetroColorTable1.ArrowNormalBackGround = System.Drawing.Color.Empty
-        MetroColorTable1.ArrowNormalBorderColor = System.Drawing.Color.Empty
-        MetroColorTable1.ArrowPushed = System.Drawing.Color.FromArgb(CType(CType(88, Byte), Integer), CType(CType(89, Byte), Integer), CType(CType(90, Byte), Integer))
-        MetroColorTable1.ArrowPushedBackGround = System.Drawing.Color.Empty
-        MetroColorTable1.ArrowPushedBorderColor = System.Drawing.Color.Empty
-        MetroColorTable1.ScrollerBackground = System.Drawing.Color.White
-        MetroColorTable1.ThumbChecked = System.Drawing.Color.FromArgb(CType(CType(147, Byte), Integer), CType(CType(149, Byte), Integer), CType(CType(152, Byte), Integer))
-        MetroColorTable1.ThumbCheckedBorderColor = System.Drawing.Color.Empty
-        MetroColorTable1.ThumbInActive = System.Drawing.Color.White
-        MetroColorTable1.ThumbNormal = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(198, Byte), Integer))
-        MetroColorTable1.ThumbNormalBorderColor = System.Drawing.Color.Empty
-        MetroColorTable1.ThumbPushed = System.Drawing.Color.FromArgb(CType(CType(88, Byte), Integer), CType(CType(89, Byte), Integer), CType(CType(90, Byte), Integer))
-        MetroColorTable1.ThumbPushedBorder = System.Drawing.Color.Empty
-        MetroColorTable1.ThumbPushedBorderColor = System.Drawing.Color.Empty
-        Me.mcboDesignProperties.ScrollMetroColorTable = MetroColorTable1
+        Me.mcboDesignProperties.SelectedIndex = -1
+        Me.mcboDesignProperties.SelectedValue = Nothing
         Me.mcboDesignProperties.Size = New System.Drawing.Size(212, 21)
         Me.mcboDesignProperties.TabIndex = 37
+        Me.mcboDesignProperties.ValueMember = Nothing
         '
         'Label45
         '
@@ -693,7 +674,7 @@ Partial Class frmSalesOrder
         Me.chkSpecial1.BackColor = System.Drawing.Color.Gold
         Me.chkSpecial1.Location = New System.Drawing.Point(11, 133)
         Me.chkSpecial1.Name = "chkSpecial1"
-        Me.chkSpecial1.Size = New System.Drawing.Size(159, 17)
+        Me.chkSpecial1.Size = New System.Drawing.Size(158, 17)
         Me.chkSpecial1.TabIndex = 0
         Me.chkSpecial1.Text = "Bulk approve by customer"
         Me.chkSpecial1.UseVisualStyleBackColor = False
@@ -712,7 +693,7 @@ Partial Class frmSalesOrder
         Me.Label14.AutoSize = True
         Me.Label14.Location = New System.Drawing.Point(14, 61)
         Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(71, 13)
+        Me.Label14.Size = New System.Drawing.Size(70, 13)
         Me.Label14.TabIndex = 16
         Me.Label14.Text = "Transport By"
         '
@@ -863,7 +844,7 @@ Partial Class frmSalesOrder
         Me.btnExit.Image = CType(resources.GetObject("btnExit.Image"), System.Drawing.Image)
         Me.btnExit.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnExit.Name = "btnExit"
-        Me.btnExit.Size = New System.Drawing.Size(45, 22)
+        Me.btnExit.Size = New System.Drawing.Size(46, 22)
         Me.btnExit.Text = "Exit"
         '
         'ToolStripLabel2
@@ -969,7 +950,7 @@ Partial Class frmSalesOrder
         Me.checkBulkAppInternal.BackColor = System.Drawing.Color.Gold
         Me.checkBulkAppInternal.Location = New System.Drawing.Point(7, -1)
         Me.checkBulkAppInternal.Name = "checkBulkAppInternal"
-        Me.checkBulkAppInternal.Size = New System.Drawing.Size(137, 17)
+        Me.checkBulkAppInternal.Size = New System.Drawing.Size(136, 17)
         Me.checkBulkAppInternal.TabIndex = 35
         Me.checkBulkAppInternal.Text = "Bulk approve internal"
         Me.checkBulkAppInternal.UseVisualStyleBackColor = False
@@ -1164,38 +1145,23 @@ Partial Class frmSalesOrder
         Me.lblCustomersActive.ForeColor = System.Drawing.Color.Red
         Me.lblCustomersActive.Location = New System.Drawing.Point(424, 58)
         Me.lblCustomersActive.Name = "lblCustomersActive"
-        Me.lblCustomersActive.Size = New System.Drawing.Size(265, 24)
+        Me.lblCustomersActive.Size = New System.Drawing.Size(320, 24)
         Me.lblCustomersActive.TabIndex = 36
-        Me.lblCustomersActive.Text = "�١��� ��ҹ��� ��١¡��ԡ����Ǥ�Ѻ"
+        Me.lblCustomersActive.Text = "ลูกค้า ท่านนี้ ถูกยกเลิกแล้วครับ"
         Me.lblCustomersActive.Visible = False
         '
         'mcboCustomersBillToFlag
         '
-        Me.mcboCustomersBillToFlag.BeforeTouchSize = New System.Drawing.Size(260, 21)
+        Me.mcboCustomersBillToFlag.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.mcboCustomersBillToFlag.DataSource = Nothing
+        Me.mcboCustomersBillToFlag.DisplayMember = Nothing
         Me.mcboCustomersBillToFlag.Location = New System.Drawing.Point(167, 84)
-        Me.mcboCustomersBillToFlag.MetroColor = System.Drawing.Color.FromArgb(CType(CType(22, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.mcboCustomersBillToFlag.Name = "mcboCustomersBillToFlag"
-        MetroColorTable2.ArrowChecked = System.Drawing.Color.FromArgb(CType(CType(147, Byte), Integer), CType(CType(149, Byte), Integer), CType(CType(152, Byte), Integer))
-        MetroColorTable2.ArrowCheckedBorderColor = System.Drawing.Color.Empty
-        MetroColorTable2.ArrowInActive = System.Drawing.Color.White
-        MetroColorTable2.ArrowNormal = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(198, Byte), Integer))
-        MetroColorTable2.ArrowNormalBackGround = System.Drawing.Color.Empty
-        MetroColorTable2.ArrowNormalBorderColor = System.Drawing.Color.Empty
-        MetroColorTable2.ArrowPushed = System.Drawing.Color.FromArgb(CType(CType(88, Byte), Integer), CType(CType(89, Byte), Integer), CType(CType(90, Byte), Integer))
-        MetroColorTable2.ArrowPushedBackGround = System.Drawing.Color.Empty
-        MetroColorTable2.ArrowPushedBorderColor = System.Drawing.Color.Empty
-        MetroColorTable2.ScrollerBackground = System.Drawing.Color.White
-        MetroColorTable2.ThumbChecked = System.Drawing.Color.FromArgb(CType(CType(147, Byte), Integer), CType(CType(149, Byte), Integer), CType(CType(152, Byte), Integer))
-        MetroColorTable2.ThumbCheckedBorderColor = System.Drawing.Color.Empty
-        MetroColorTable2.ThumbInActive = System.Drawing.Color.White
-        MetroColorTable2.ThumbNormal = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(198, Byte), Integer))
-        MetroColorTable2.ThumbNormalBorderColor = System.Drawing.Color.Empty
-        MetroColorTable2.ThumbPushed = System.Drawing.Color.FromArgb(CType(CType(88, Byte), Integer), CType(CType(89, Byte), Integer), CType(CType(90, Byte), Integer))
-        MetroColorTable2.ThumbPushedBorder = System.Drawing.Color.Empty
-        MetroColorTable2.ThumbPushedBorderColor = System.Drawing.Color.Empty
-        Me.mcboCustomersBillToFlag.ScrollMetroColorTable = MetroColorTable2
+        Me.mcboCustomersBillToFlag.SelectedIndex = -1
+        Me.mcboCustomersBillToFlag.SelectedValue = Nothing
         Me.mcboCustomersBillToFlag.Size = New System.Drawing.Size(260, 21)
         Me.mcboCustomersBillToFlag.TabIndex = 35
+        Me.mcboCustomersBillToFlag.ValueMember = Nothing
         '
         'Label22
         '
@@ -1263,31 +1229,16 @@ Partial Class frmSalesOrder
         '
         'mcboCustomersShipToFlag
         '
-        Me.mcboCustomersShipToFlag.BeforeTouchSize = New System.Drawing.Size(231, 21)
+        Me.mcboCustomersShipToFlag.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.mcboCustomersShipToFlag.DataSource = Nothing
+        Me.mcboCustomersShipToFlag.DisplayMember = Nothing
         Me.mcboCustomersShipToFlag.Location = New System.Drawing.Point(110, 14)
-        Me.mcboCustomersShipToFlag.MetroColor = System.Drawing.Color.FromArgb(CType(CType(22, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.mcboCustomersShipToFlag.Name = "mcboCustomersShipToFlag"
-        MetroColorTable3.ArrowChecked = System.Drawing.Color.FromArgb(CType(CType(147, Byte), Integer), CType(CType(149, Byte), Integer), CType(CType(152, Byte), Integer))
-        MetroColorTable3.ArrowCheckedBorderColor = System.Drawing.Color.Empty
-        MetroColorTable3.ArrowInActive = System.Drawing.Color.White
-        MetroColorTable3.ArrowNormal = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(198, Byte), Integer))
-        MetroColorTable3.ArrowNormalBackGround = System.Drawing.Color.Empty
-        MetroColorTable3.ArrowNormalBorderColor = System.Drawing.Color.Empty
-        MetroColorTable3.ArrowPushed = System.Drawing.Color.FromArgb(CType(CType(88, Byte), Integer), CType(CType(89, Byte), Integer), CType(CType(90, Byte), Integer))
-        MetroColorTable3.ArrowPushedBackGround = System.Drawing.Color.Empty
-        MetroColorTable3.ArrowPushedBorderColor = System.Drawing.Color.Empty
-        MetroColorTable3.ScrollerBackground = System.Drawing.Color.White
-        MetroColorTable3.ThumbChecked = System.Drawing.Color.FromArgb(CType(CType(147, Byte), Integer), CType(CType(149, Byte), Integer), CType(CType(152, Byte), Integer))
-        MetroColorTable3.ThumbCheckedBorderColor = System.Drawing.Color.Empty
-        MetroColorTable3.ThumbInActive = System.Drawing.Color.White
-        MetroColorTable3.ThumbNormal = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(198, Byte), Integer))
-        MetroColorTable3.ThumbNormalBorderColor = System.Drawing.Color.Empty
-        MetroColorTable3.ThumbPushed = System.Drawing.Color.FromArgb(CType(CType(88, Byte), Integer), CType(CType(89, Byte), Integer), CType(CType(90, Byte), Integer))
-        MetroColorTable3.ThumbPushedBorder = System.Drawing.Color.Empty
-        MetroColorTable3.ThumbPushedBorderColor = System.Drawing.Color.Empty
-        Me.mcboCustomersShipToFlag.ScrollMetroColorTable = MetroColorTable3
+        Me.mcboCustomersShipToFlag.SelectedIndex = -1
+        Me.mcboCustomersShipToFlag.SelectedValue = Nothing
         Me.mcboCustomersShipToFlag.Size = New System.Drawing.Size(231, 21)
         Me.mcboCustomersShipToFlag.TabIndex = 46
+        Me.mcboCustomersShipToFlag.ValueMember = Nothing
         '
         'cboMtl_warehouse
         '
@@ -1302,7 +1253,7 @@ Partial Class frmSalesOrder
         Me.Label34.AutoSize = True
         Me.Label34.Location = New System.Drawing.Point(3, 108)
         Me.Label34.Name = "Label34"
-        Me.Label34.Size = New System.Drawing.Size(108, 13)
+        Me.Label34.Size = New System.Drawing.Size(107, 13)
         Me.Label34.TabIndex = 44
         Me.Label34.Text = "Ship By WareHouse"
         '
@@ -1347,7 +1298,7 @@ Partial Class frmSalesOrder
         Me.Label25.AutoSize = True
         Me.Label25.Location = New System.Drawing.Point(356, 64)
         Me.Label25.Name = "Label25"
-        Me.Label25.Size = New System.Drawing.Size(264, 13)
+        Me.Label25.Size = New System.Drawing.Size(265, 13)
         Me.Label25.TabIndex = 37
         Me.Label25.Text = "(This data will be used to close s/o after shipment)"
         '
@@ -1398,38 +1349,23 @@ Partial Class frmSalesOrder
         '
         'mcboBanks
         '
-        Me.mcboBanks.BeforeTouchSize = New System.Drawing.Size(578, 21)
+        Me.mcboBanks.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.mcboBanks.DataSource = Nothing
+        Me.mcboBanks.DisplayMember = Nothing
         Me.mcboBanks.Location = New System.Drawing.Point(112, 103)
-        Me.mcboBanks.MetroColor = System.Drawing.Color.FromArgb(CType(CType(22, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.mcboBanks.Name = "mcboBanks"
-        MetroColorTable4.ArrowChecked = System.Drawing.Color.FromArgb(CType(CType(147, Byte), Integer), CType(CType(149, Byte), Integer), CType(CType(152, Byte), Integer))
-        MetroColorTable4.ArrowCheckedBorderColor = System.Drawing.Color.Empty
-        MetroColorTable4.ArrowInActive = System.Drawing.Color.White
-        MetroColorTable4.ArrowNormal = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(198, Byte), Integer))
-        MetroColorTable4.ArrowNormalBackGround = System.Drawing.Color.Empty
-        MetroColorTable4.ArrowNormalBorderColor = System.Drawing.Color.Empty
-        MetroColorTable4.ArrowPushed = System.Drawing.Color.FromArgb(CType(CType(88, Byte), Integer), CType(CType(89, Byte), Integer), CType(CType(90, Byte), Integer))
-        MetroColorTable4.ArrowPushedBackGround = System.Drawing.Color.Empty
-        MetroColorTable4.ArrowPushedBorderColor = System.Drawing.Color.Empty
-        MetroColorTable4.ScrollerBackground = System.Drawing.Color.White
-        MetroColorTable4.ThumbChecked = System.Drawing.Color.FromArgb(CType(CType(147, Byte), Integer), CType(CType(149, Byte), Integer), CType(CType(152, Byte), Integer))
-        MetroColorTable4.ThumbCheckedBorderColor = System.Drawing.Color.Empty
-        MetroColorTable4.ThumbInActive = System.Drawing.Color.White
-        MetroColorTable4.ThumbNormal = System.Drawing.Color.FromArgb(CType(CType(198, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(198, Byte), Integer))
-        MetroColorTable4.ThumbNormalBorderColor = System.Drawing.Color.Empty
-        MetroColorTable4.ThumbPushed = System.Drawing.Color.FromArgb(CType(CType(88, Byte), Integer), CType(CType(89, Byte), Integer), CType(CType(90, Byte), Integer))
-        MetroColorTable4.ThumbPushedBorder = System.Drawing.Color.Empty
-        MetroColorTable4.ThumbPushedBorderColor = System.Drawing.Color.Empty
-        Me.mcboBanks.ScrollMetroColorTable = MetroColorTable4
+        Me.mcboBanks.SelectedIndex = -1
+        Me.mcboBanks.SelectedValue = Nothing
         Me.mcboBanks.Size = New System.Drawing.Size(578, 21)
         Me.mcboBanks.TabIndex = 49
+        Me.mcboBanks.ValueMember = Nothing
         '
         'Label32
         '
         Me.Label32.AutoSize = True
         Me.Label32.Location = New System.Drawing.Point(16, 108)
         Me.Label32.Name = "Label32"
-        Me.Label32.Size = New System.Drawing.Size(36, 13)
+        Me.Label32.Size = New System.Drawing.Size(35, 13)
         Me.Label32.TabIndex = 21
         Me.Label32.Text = "Bank:"
         '
@@ -1582,7 +1518,7 @@ Partial Class frmSalesOrder
         Me.Label37.AutoSize = True
         Me.Label37.Location = New System.Drawing.Point(265, 194)
         Me.Label37.Name = "Label37"
-        Me.Label37.Size = New System.Drawing.Size(82, 13)
+        Me.Label37.Size = New System.Drawing.Size(83, 13)
         Me.Label37.TabIndex = 55
         Me.Label37.Text = "MTS PER ROLL:"
         '
@@ -1614,7 +1550,7 @@ Partial Class frmSalesOrder
         Me.Label31.AutoSize = True
         Me.Label31.Location = New System.Drawing.Point(232, 3)
         Me.Label31.Name = "Label31"
-        Me.Label31.Size = New System.Drawing.Size(109, 13)
+        Me.Label31.Size = New System.Drawing.Size(108, 13)
         Me.Label31.TabIndex = 50
         Me.Label31.Text = "Quality Special Req."
         '
@@ -1869,6 +1805,7 @@ Partial Class frmSalesOrder
         Me.design_gwth_nob.DataPropertyName = "design_gwth_nob"
         DataGridViewCellStyle1.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.design_gwth_nob.DefaultCellStyle = DataGridViewCellStyle1
+        Me.design_gwth_nob.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.[Nothing]
         Me.design_gwth_nob.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.design_gwth_nob.HeaderText = "Design/Gwth/Nob"
         Me.design_gwth_nob.Name = "design_gwth_nob"
@@ -1935,6 +1872,7 @@ Partial Class frmSalesOrder
         'cboWidth
         '
         Me.cboWidth.DataPropertyName = "sys_width_id"
+        Me.cboWidth.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.[Nothing]
         Me.cboWidth.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.cboWidth.HeaderText = "Width"
         Me.cboWidth.Name = "cboWidth"
@@ -1954,6 +1892,7 @@ Partial Class frmSalesOrder
         DataGridViewCellStyle6.BackColor = System.Drawing.Color.Gold
         DataGridViewCellStyle6.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.col.DefaultCellStyle = DataGridViewCellStyle6
+        Me.col.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.[Nothing]
         Me.col.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.col.HeaderText = "Color Code (Way)"
         Me.col.Name = "col"
@@ -2104,6 +2043,7 @@ Partial Class frmSalesOrder
         'uom
         '
         Me.uom.DataPropertyName = "uom"
+        Me.uom.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.[Nothing]
         Me.uom.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.uom.HeaderText = "UOM"
         Me.uom.Name = "uom"
@@ -2157,6 +2097,7 @@ Partial Class frmSalesOrder
         DataGridViewCellStyle20.BackColor = System.Drawing.Color.Gold
         DataGridViewCellStyle20.Format = "#.###0"
         Me.curr.DefaultCellStyle = DataGridViewCellStyle20
+        Me.curr.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.[Nothing]
         Me.curr.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.curr.HeaderText = "Currency"
         Me.curr.Name = "curr"
@@ -2446,8 +2387,8 @@ Partial Class frmSalesOrder
     Friend WithEvents ToolStripLabel2 As ToolStripLabel
     Friend WithEvents tsbConfirmOrder As ToolStripButton
     Friend WithEvents tsbUnConfirmOrder As ToolStripButton
-    Friend WithEvents mcboCustomersBillToFlag As Syncfusion.Windows.Forms.Tools.MultiColumnComboBox
-    Friend WithEvents mcboCustomersShipToFlag As Syncfusion.Windows.Forms.Tools.MultiColumnComboBox
+    Friend WithEvents mcboCustomersBillToFlag As SalesOrderSystem.Controls.MultiColumnComboBox
+    Friend WithEvents mcboCustomersShipToFlag As SalesOrderSystem.Controls.MultiColumnComboBox
     Friend WithEvents lblCustomersActive As Label
     Friend WithEvents tsbtnCopySO As ToolStripButton
     Friend WithEvents Label38 As Label
@@ -2456,7 +2397,7 @@ Partial Class frmSalesOrder
     Friend WithEvents Label39 As Label
     Friend WithEvents txtCustPoUnique As TextBox
     Friend WithEvents btnGetSoNo As Button
-    Friend WithEvents mcboBanks As Syncfusion.Windows.Forms.Tools.MultiColumnComboBox
+    Friend WithEvents mcboBanks As SalesOrderSystem.Controls.MultiColumnComboBox
     Friend WithEvents grpSampleRequest As GroupBox
     Friend WithEvents cbbSrTypeId As ComboBox
     Friend WithEvents Label40 As Label
@@ -2479,7 +2420,7 @@ Partial Class frmSalesOrder
     Friend WithEvents Label41 As Label
     Friend WithEvents btnSaveSettings As Button
     Friend WithEvents btnGridLayoutSettings As Button
-    Friend WithEvents mcboDesignProperties As Syncfusion.Windows.Forms.Tools.MultiColumnComboBox
+    Friend WithEvents mcboDesignProperties As SalesOrderSystem.Controls.MultiColumnComboBox
     Friend WithEvents Label45 As Label
     Friend WithEvents sonoid As DataGridViewTextBoxColumn
     Friend WithEvents ref_stnoid As DataGridViewTextBoxColumn

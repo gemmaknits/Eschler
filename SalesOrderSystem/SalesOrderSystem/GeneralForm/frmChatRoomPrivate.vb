@@ -102,7 +102,7 @@ Public Class frmChatRoomPrivate
 		cboOnlineUser.SelectedValue = strIP
 		If cboOnlineUser.SelectedIndex < 0 Then
 			cboOnlineUser.SelectedIndex = 0
-			MessageBox.Show("¤ÙèÊ¹·¹Ò·Õè·èÒ¹àÅ×Í¡ä´éÍÍ¡¨Ò¡ÃÐººÊèÇ¹µÑÇä»áÅéÇ", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Hand, MessageBoxDefaultButton.Button1)
+			MessageBox.Show("à¸„à¸¹à¹ˆà¸ªà¸™à¸—à¸™à¸²à¸—à¸µà¹ˆà¸—à¹ˆà¸²à¸™à¹€à¸¥à¸·à¸­à¸à¹„à¸”à¹‰à¸­à¸­à¸à¸ˆà¸²à¸à¸£à¸°à¸šà¸šà¸ªà¹ˆà¸§à¸™à¸•à¸±à¸§à¹„à¸›à¹à¸¥à¹‰à¸§", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Hand, MessageBoxDefaultButton.Button1)
 			Exit Sub
 		End If
 		If clsConfig.IsNull(cboOnlineUser.Text, "") = clsUser.UserName Then Exit Sub
@@ -124,7 +124,7 @@ Public Class frmChatRoomPrivate
 				Call btnClear_Click(sender, e)
 				Exit Sub
 			Case "&EXIT:"
-				If MessageBox.Show("Do you want to exit application ?" & vbCrLf & "¤Ø³µéÍ§¡ÒÃÍÍ¡¨Ò¡â»Ãá¡ÃÁ SalesOrderSystem ËÃ×ÍäÁè ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+				If MessageBox.Show("Do you want to exit application ?" & vbCrLf & "à¸„à¸¸à¸“à¸•à¹‰à¸­à¸‡à¸à¸²à¸£à¸­à¸­à¸à¸ˆà¸²à¸à¹‚à¸›à¸£à¹à¸à¸£à¸¡ SalesOrderSystem à¸«à¸£à¸·à¸­à¹„à¸¡à¹ˆ ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
 					Me.MdiParent.Close()
 				Else
 					Exit Sub

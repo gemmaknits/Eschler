@@ -813,7 +813,8 @@ Public Class frmRequestGMColorMatch
                     grdCmrLines.ReadOnly = False
                     lblGammaTransferAlready.Text = ""
                 Else
-                    grdCmrLines.ReadOnly = True
+                    grdCmrLines.ReadOnly = True 'lock
+                    'grdCmrLines.ReadOnly = False 'unlock
                     lblGammaTransferAlready.Text = "Gamma Transfer Data Already"
                 End If 'Sitthana 20230801
             Case ModeReadOnly

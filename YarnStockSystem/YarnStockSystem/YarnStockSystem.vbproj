@@ -12,7 +12,7 @@
     <RootNamespace>YarnStockSystem</RootNamespace>
     <AssemblyName>Yarn Stock System %28Eschler%29</AssemblyName>
     <MyType>WindowsForms</MyType>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
@@ -35,7 +35,7 @@
     <PublisherName>Eschler Knits Co., Ltd.</PublisherName>
     <SuiteName>Eschler Program Suite</SuiteName>
     <MinimumRequiredVersion>1.0.0.70</MinimumRequiredVersion>
-    <ApplicationRevision>526</ApplicationRevision>
+    <ApplicationRevision>529</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -53,7 +53,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <UseVSHostingProcess>true</UseVSHostingProcess>
-    <Prefer32Bit>false</Prefer32Bit>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -101,10 +101,22 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>DLL\Classes.dll</HintPath>
     </Reference>
-    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\CrystalDecisions.ReportSource.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\CrystalDecisions.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\CrystalDecisions.Windows.Forms.dll</HintPath>
+    </Reference>
     <Reference Include="myControls">
       <HintPath>DLL\myControls.dll</HintPath>
     </Reference>
@@ -133,7 +145,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="classDb\classConfig\clsConfig.vb" />
-    <Compile Include="classDb\classConnection\classConnectionColomboDB.vb" />
+    <Compile Include="classDb\classConnection\classConnectionEschlerDB.vb" />
     <Compile Include="classDb\classDataGridViewCalendarcolumn\DataGridViewCalendarColumn.vb" />
     <Compile Include="classDb\classJobOrderBarcode\classJobOrderBarcode.vb" />
     <Compile Include="classDb\classJobOrderYarn\classJobOrderYarnSelectProductionLine.vb" />
@@ -877,16 +889,6 @@
     <None Include="Resources\Search_16x.png" />
   </ItemGroup>
   <ItemGroup>
-    <PublishFile Include="CrystalDecisions.CrystalReports.Engine">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>Assembly</FileType>
-    </PublishFile>
     <PublishFile Include="CrystalDecisions.ReportAppServer.ClientDoc">
       <Visible>False</Visible>
       <Group>
@@ -998,36 +1000,6 @@
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="CrystalDecisions.ReportAppServer.XmlSerialize">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>Assembly</FileType>
-    </PublishFile>
-    <PublishFile Include="CrystalDecisions.ReportSource">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>Assembly</FileType>
-    </PublishFile>
-    <PublishFile Include="CrystalDecisions.Shared">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>Assembly</FileType>
-    </PublishFile>
-    <PublishFile Include="CrystalDecisions.Windows.Forms">
       <Visible>False</Visible>
       <Group>
       </Group>

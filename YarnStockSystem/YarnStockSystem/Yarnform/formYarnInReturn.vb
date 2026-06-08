@@ -237,9 +237,9 @@ Public Class formYarnInReturn
 
     Private Sub BtnYarnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnYarnSave.Click
         Me.Validate()
-        Dim result As Windows.Forms.DialogResult
+        Dim result As DialogResult
         result = MessageBox.Show("Would you like to save ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3)
-        If result <> Windows.Forms.DialogResult.Yes Then Exit Sub
+        If result <> DialogResult.Yes Then Exit Sub
 
         If Not CheckData() Then Exit Sub
 
@@ -1033,15 +1033,16 @@ Public Class formYarnInReturn
 
     Private Sub BtnYarnPrintBar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnYarnPrintBar.Click
         If Me.txtDocno.Text.Length > 5 Then
-            Dim K As New formPrintBarcode
+            Dim frm As New formPrintBarcode
             Dim stryarnin As String
             stryarnin = Me.txtDocno.Text.Trim
-            K.loginEmpcd = clsUser.UserID
-            K.txtYarn_in_no.Text = stryarnin.ToString.Trim
-            K.btnFindByYarnInClick()
-            K.SelectAll(sender, e)
-            K.MdiParent = Me.ParentForm
-            K.Show()
+            frm.loginEmpcd = clsUser.UserID
+            frm.txtYarn_in_no.Text = stryarnin.ToString.Trim
+            frm.btnFindByYarnInClick()
+            frm.SelectAll(sender, e)
+            frm.UserInfo = UserInfo
+            frm.MdiParent = Me.ParentForm
+            frm.Show()
         End If
     End Sub
 

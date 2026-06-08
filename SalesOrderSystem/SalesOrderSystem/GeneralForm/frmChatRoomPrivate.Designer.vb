@@ -112,7 +112,7 @@ Partial Class frmChatRoomPrivate
 		Me.Label5.Name = "Label5"
 		Me.Label5.Size = New System.Drawing.Size(91, 13)
 		Me.Label5.TabIndex = 24
-		Me.Label5.Text = "‡≈◊Õ°ºŸÈ√Ë«¡ π∑π“"
+		Me.Label5.Text = "‡πÄ‡∏•‡∏∑‡∏≠‡∏Å‡∏ú‡∏π‡πâ‡∏£‡πà‡∏ß‡∏°‡∏™‡∏ô‡∏ó‡∏ô‡∏≤"
 		'
 		'grdOnlineUser
 		'
@@ -139,7 +139,7 @@ Partial Class frmChatRoomPrivate
 		'username
 		'
 		Me.username.DataPropertyName = "username"
-		Me.username.HeaderText = "ºŸÈ√Ë«¡ π∑π“"
+		Me.username.HeaderText = "‡∏ú‡∏π‡πâ‡∏£‡πà‡∏ß‡∏°‡∏™‡∏ô‡∏ó‡∏ô‡∏≤"
 		Me.username.Name = "username"
 		Me.username.ReadOnly = True
 		Me.username.Resizable = System.Windows.Forms.DataGridViewTriState.[False]

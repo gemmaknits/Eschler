@@ -265,17 +265,17 @@ Public Class frmRequestS
 		'			End If
 		'		Next
 		'		If Kgs > AllKgs Then
-		'			MessageBox.Show("Roll No. " & strRollNo & " can't choose over " & AllKgs & " Kgs." & vbCrLf & "¡È«πºÈ“‡≈¢∑’Ë " & strRollNo & " ∑’Ë‡≈◊Õ°µÈÕßÀπ—°√«¡°—π‰¡Ë‡°‘π " & AllKgs & " Kgs.", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+		'			MessageBox.Show("Roll No. " & strRollNo & " can't choose over " & AllKgs & " Kgs." & vbCrLf & "‡∏°‡πâ‡∏ß‡∏ô‡∏ú‡πâ‡∏≤‡πÄ‡∏•‡∏Ç‡∏ó‡∏µ‡πà " & strRollNo & " ‡∏ó‡∏µ‡πà‡πÄ‡∏•‡∏∑‡∏≠‡∏Å‡∏ï‡πâ‡∏≠‡∏á‡∏´‡∏ô‡∏±‡∏Å‡∏£‡∏ß‡∏°‡∏Å‡∏±‡∏ô‡πÑ‡∏°‡πà‡πÄ‡∏Å‡∏¥‡∏ô " & AllKgs & " Kgs.", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
 		'			CheckData = False
 		'			Exit Function
 		'		End If
 		'		If Yds > AllYds Then
-		'			MessageBox.Show("Roll No. " & strRollNo & " can't choose over " & AllYds & " Yds." & vbCrLf & "¡È«πºÈ“‡≈¢∑’Ë " & strRollNo & " ∑’Ë‡≈◊Õ°µÈÕß¬“«√«¡°—π‰¡Ë‡°‘π " & AllYds & " Yds.", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+		'			MessageBox.Show("Roll No. " & strRollNo & " can't choose over " & AllYds & " Yds." & vbCrLf & "‡∏°‡πâ‡∏ß‡∏ô‡∏ú‡πâ‡∏≤‡πÄ‡∏•‡∏Ç‡∏ó‡∏µ‡πà " & strRollNo & " ‡∏ó‡∏µ‡πà‡πÄ‡∏•‡∏∑‡∏≠‡∏Å‡∏ï‡πâ‡∏≠‡∏á‡∏¢‡∏≤‡∏ß‡∏£‡∏ß‡∏°‡∏Å‡∏±‡∏ô‡πÑ‡∏°‡πà‡πÄ‡∏Å‡∏¥‡∏ô " & AllYds & " Yds.", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
 		'			CheckData = False
 		'			Exit Function
 		'		End If
 		'		If Mts > AllMts Then
-		'			MessageBox.Show("Roll No. " & strRollNo & " can't choose over " & AllMts & " Mts." & vbCrLf & "¡È«πºÈ“‡≈¢∑’Ë " & strRollNo & " ∑’Ë‡≈◊Õ°µÈÕß¬“«√«¡°—π‰¡Ë‡°‘π " & AllMts & " mts.", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+		'			MessageBox.Show("Roll No. " & strRollNo & " can't choose over " & AllMts & " Mts." & vbCrLf & "‡∏°‡πâ‡∏ß‡∏ô‡∏ú‡πâ‡∏≤‡πÄ‡∏•‡∏Ç‡∏ó‡∏µ‡πà " & strRollNo & " ‡∏ó‡∏µ‡πà‡πÄ‡∏•‡∏∑‡∏≠‡∏Å‡∏ï‡πâ‡∏≠‡∏á‡∏¢‡∏≤‡∏ß‡∏£‡∏ß‡∏°‡∏Å‡∏±‡∏ô‡πÑ‡∏°‡πà‡πÄ‡∏Å‡∏¥‡∏ô " & AllMts & " mts.", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
 		'			CheckData = False
 		'			Exit Function
 		'		End If
@@ -400,8 +400,8 @@ Public Class frmRequestS
 		If grdReqDetD.Rows.Count = 0 Then Return True
         If MessageBox.Show("Program must clear all Roll No. in right pane before change " & strChangeType & vbCrLf _
          & "Would you still like to change " & strChangeType & " ?" & vbCrLf _
-         & "‚ª√·°√¡®–‡§≈’¬√Ï¡È«π∑’Ë‡≈◊Õ°‰«È∑—ÈßÀ¡¥Õ—µ‘‚π¡—µ‘°ËÕπ‡ª≈’Ë¬π " & strChangeType & vbCrLf _
-         & "§ÿ≥¬—ßµÈÕß°“√®–‡ª≈’Ë¬π " & strChangeType & " Õ’°À√◊Õ‰¡Ë ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.No Then
+         & "‡πÇ‡∏õ‡∏£‡πÅ‡∏Å‡∏£‡∏°‡∏à‡∏∞‡πÄ‡∏Ñ‡∏•‡∏µ‡∏¢‡∏£‡πå‡∏°‡πâ‡∏ß‡∏ô‡∏ó‡∏µ‡πà‡πÄ‡∏•‡∏∑‡∏≠‡∏Å‡πÑ‡∏ß‡πâ‡∏ó‡∏±‡πâ‡∏á‡∏´‡∏°‡∏î‡∏≠‡∏±‡∏ï‡∏¥‡πÇ‡∏ô‡∏°‡∏±‡∏ï‡∏¥‡∏Å‡πà‡∏≠‡∏ô‡πÄ‡∏õ‡∏•‡∏µ‡πà‡∏¢‡∏ô " & strChangeType & vbCrLf _
+         & "‡∏Ñ‡∏∏‡∏ì‡∏¢‡∏±‡∏á‡∏ï‡πâ‡∏≠‡∏á‡∏Å‡∏≤‡∏£‡∏à‡∏∞‡πÄ‡∏õ‡∏•‡∏µ‡πà‡∏¢‡∏ô " & strChangeType & " ‡∏≠‡∏µ‡∏Å‡∏´‡∏£‡∏∑‡∏≠‡πÑ‡∏°‡πà ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.No Then
             Return False
         Else
             Return True
@@ -459,8 +459,8 @@ Public Class frmRequestS
 					Else
 						MessageBox.Show("Roll No. " & dt.Rows(i)("roll_no").ToString.Trim & " Color " & dt.Rows(i)("col").ToString.Trim & " is duplicated in right grid." & vbCrLf _
 						& "If you want to add same Roll No., Please change color by change S/O No. ID in Grid Above." & vbCrLf _
-						& "‡≈¢¡È«π " & dt.Rows(i)("roll_no").ToString.Trim & "  ’ " & dt.Rows(i)("col").ToString.Trim & " ´È”°—∫∑’Ë‡≈◊Õ°‰«È·≈È«¥È“π¢«“" & vbCrLf _
-						& "∂È“®–„™È‡≈¢¡È«π‡¥‘¡µÈÕß‡ª≈’Ë¬π ’ ∂È“®–‡ª≈’Ë¬π ’„ÀÈ‡≈◊Õ° S/O No. ID ®“°µ“√“ß¥È“π∫π„À¡Ë ·≈È«°≈—∫¡“‡≈◊Õ°¡È«π‡¥‘¡." & vbCrLf _
+						& "‡πÄ‡∏•‡∏Ç‡∏°‡πâ‡∏ß‡∏ô " & dt.Rows(i)("roll_no").ToString.Trim & " ‡∏™‡∏µ " & dt.Rows(i)("col").ToString.Trim & " ‡∏ã‡πâ‡∏≥‡∏Å‡∏±‡∏ö‡∏ó‡∏µ‡πà‡πÄ‡∏•‡∏∑‡∏≠‡∏Å‡πÑ‡∏ß‡πâ‡πÅ‡∏•‡πâ‡∏ß‡∏î‡πâ‡∏≤‡∏ô‡∏Ç‡∏ß‡∏≤" & vbCrLf _
+						& "‡∏ñ‡πâ‡∏≤‡∏à‡∏∞‡πÉ‡∏ä‡πâ‡πÄ‡∏•‡∏Ç‡∏°‡πâ‡∏ß‡∏ô‡πÄ‡∏î‡∏¥‡∏°‡∏ï‡πâ‡∏≠‡∏á‡πÄ‡∏õ‡∏•‡∏µ‡πà‡∏¢‡∏ô‡∏™‡∏µ ‡∏ñ‡πâ‡∏≤‡∏à‡∏∞‡πÄ‡∏õ‡∏•‡∏µ‡πà‡∏¢‡∏ô‡∏™‡∏µ‡πÉ‡∏´‡πâ‡πÄ‡∏•‡∏∑‡∏≠‡∏Å S/O No. ID ‡∏à‡∏≤‡∏Å‡∏ï‡∏≤‡∏£‡∏≤‡∏á‡∏î‡πâ‡∏≤‡∏ô‡∏ö‡∏ô‡πÉ‡∏´‡∏°‡πà ‡πÅ‡∏•‡πâ‡∏ß‡∏Å‡∏•‡∏±‡∏ö‡∏°‡∏≤‡πÄ‡∏•‡∏∑‡∏≠‡∏Å‡∏°‡πâ‡∏ß‡∏ô‡πÄ‡∏î‡∏¥‡∏°." & vbCrLf _
 						, "System Message", MessageBoxButtons.OK, MessageBoxIcon.Asterisk, MessageBoxDefaultButton.Button1)
 					End If
 				End If
@@ -600,7 +600,7 @@ Public Class frmRequestS
 				If Not blnCancel Then LoadData(ReqNo)
 			End If
 		Else
-			MessageBox.Show("This Form Can Request Only Sample Stock." & vbCrLf & "ÀπÈ“®Õπ’È„™È‡©æ“– Request Stock D ‡∑Ë“π—Èπ", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
+			MessageBox.Show("This Form Can Request Only Sample Stock." & vbCrLf & "‡∏´‡∏ô‡πâ‡∏≤‡∏à‡∏≠‡∏ô‡∏µ‡πâ‡πÉ‡∏ä‡πâ‡πÄ‡∏â‡∏û‡∏≤‡∏∞ Request Stock D ‡πÄ‡∏ó‡πà‡∏≤‡∏ô‡∏±‡πâ‡∏ô", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
 		End If
 	End Sub
 
@@ -615,7 +615,7 @@ Public Class frmRequestS
 				Call btnNew_Click(sender, e)
 				If Not blnCancel Then LoadData(ReqNo)
 			Else
-				MessageBox.Show("This Form Can Request Only Sample Stock." & vbCrLf & "ÀπÈ“®Õπ’È„™È‡©æ“– Request Stock D ‡∑Ë“π—Èπ", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
+				MessageBox.Show("This Form Can Request Only Sample Stock." & vbCrLf & "‡∏´‡∏ô‡πâ‡∏≤‡∏à‡∏≠‡∏ô‡∏µ‡πâ‡πÉ‡∏ä‡πâ‡πÄ‡∏â‡∏û‡∏≤‡∏∞ Request Stock D ‡πÄ‡∏ó‡πà‡∏≤‡∏ô‡∏±‡πâ‡∏ô", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
 			End If
 		End If
 	End Sub
@@ -648,20 +648,20 @@ Public Class frmRequestS
 
 	Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
 		If Not CheckGrdStock() Then Exit Sub
-        If MessageBox.Show("Would you like to add selected Roll No. from left grid to right grid ?" & vbCrLf & "§ÿ≥µÈÕß°“√‡æ‘Ë¡¡È«π∑’Ë‡≈◊Õ°‰«È¥È“π´È“¬‡æ◊ËÕπ”‰ª¬ÈÕ¡¥È“π¢«“„™ËÀ√◊Õ‰¡Ë ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.No Then Exit Sub
+        If MessageBox.Show("Would you like to add selected Roll No. from left grid to right grid ?" & vbCrLf & "‡∏Ñ‡∏∏‡∏ì‡∏ï‡πâ‡∏≠‡∏á‡∏Å‡∏≤‡∏£‡πÄ‡∏û‡∏¥‡πà‡∏°‡∏°‡πâ‡∏ß‡∏ô‡∏ó‡∏µ‡πà‡πÄ‡∏•‡∏∑‡∏≠‡∏Å‡πÑ‡∏ß‡πâ‡∏î‡πâ‡∏≤‡∏ô‡∏ã‡πâ‡∏≤‡∏¢‡πÄ‡∏û‡∏∑‡πà‡∏≠‡∏ô‡∏≥‡πÑ‡∏õ‡∏¢‡πâ‡∏≠‡∏°‡∏î‡πâ‡∏≤‡∏ô‡∏Ç‡∏ß‡∏≤‡πÉ‡∏ä‡πà‡∏´‡∏£‡∏∑‡∏≠‡πÑ‡∏°‡πà ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.No Then Exit Sub
         Call AddRollNo()
 	End Sub
 
 	Private Sub btnDel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDel.Click
 		If Not CheckGrdReq() Then Exit Sub
-        If MessageBox.Show("Would you like to delete selected Roll No. in right grid ?" & vbCrLf & "§ÿ≥µÈÕß°“√≈∫¡È«π∑’Ë‡≈◊Õ°‰«È‡æ◊ËÕ¬ÈÕ¡„π¥È“π¢«“ÕÕ°„™ËÀ√◊Õ‰¡Ë ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.No Then Exit Sub
+        If MessageBox.Show("Would you like to delete selected Roll No. in right grid ?" & vbCrLf & "‡∏Ñ‡∏∏‡∏ì‡∏ï‡πâ‡∏≠‡∏á‡∏Å‡∏≤‡∏£‡∏•‡∏ö‡∏°‡πâ‡∏ß‡∏ô‡∏ó‡∏µ‡πà‡πÄ‡∏•‡∏∑‡∏≠‡∏Å‡πÑ‡∏ß‡πâ‡πÄ‡∏û‡∏∑‡πà‡∏≠‡∏¢‡πâ‡∏≠‡∏°‡πÉ‡∏ô‡∏î‡πâ‡∏≤‡∏ô‡∏Ç‡∏ß‡∏≤‡∏≠‡∏≠‡∏Å‡πÉ‡∏ä‡πà‡∏´‡∏£‡∏∑‡∏≠‡πÑ‡∏°‡πà ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.No Then Exit Sub
         If grdReqDetD.CurrentRow.Index >= 0 Then Call DeleteRollNo("SOME")
 	End Sub
 
 	Private Sub btnDelAll_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDelAll.Click
 		If lblCancelled.Visible Then Exit Sub
 		If grdReqDetD.Rows.Count = 0 Then Exit Sub
-        If MessageBox.Show("Would you like to delete all Roll No. in right grid ?" & vbCrLf & "§ÿ≥µÈÕß°“√≈∫¡È«π ∑—ÈßÀ¡¥ ∑’Ë‡µ√’¬¡®–¬ÈÕ¡„π¥È“π¢«“ÕÕ°„™ËÀ√◊Õ‰¡Ë ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.No Then Exit Sub
+        If MessageBox.Show("Would you like to delete all Roll No. in right grid ?" & vbCrLf & "‡∏Ñ‡∏∏‡∏ì‡∏ï‡πâ‡∏≠‡∏á‡∏Å‡∏≤‡∏£‡∏•‡∏ö‡∏°‡πâ‡∏ß‡∏ô ‡∏ó‡∏±‡πâ‡∏á‡∏´‡∏°‡∏î ‡∏ó‡∏µ‡πà‡πÄ‡∏ï‡∏£‡∏µ‡∏¢‡∏°‡∏à‡∏∞‡∏¢‡πâ‡∏≠‡∏°‡πÉ‡∏ô‡∏î‡πâ‡∏≤‡∏ô‡∏Ç‡∏ß‡∏≤‡∏≠‡∏≠‡∏Å‡πÉ‡∏ä‡πà‡∏´‡∏£‡∏∑‡∏≠‡πÑ‡∏°‡πà ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.No Then Exit Sub
         Call DeleteRollNo("ALL")
 	End Sub
 

@@ -139,42 +139,42 @@
     <Import Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\classConnection\ClassConnectionColomboDB.vb" />
     <Compile Include="Controls\MultiColumnComboBox.vb" />
-        <Compile Include="Classes\classConfig\clsConfig.vb" />
-        <Compile Include="Classes\classConnection\classConnectionEschlerDB.vb" />
-        <Compile Include="Classes\classCreditNoteAR\classCreditNoteAR.vb" />
-        <Compile Include="Classes\classCreditNoteAR\classCreditNoteARExport.vb" />
-        <Compile Include="Classes\classDebitNoteAR\classDebitNoteAR.vb" />
-        <Compile Include="Classes\classDebitNoteAR\classDebitNoteExport.vb" />
-        <Compile Include="Classes\classDFOrder\classDFOrder.vb" />
-        <Compile Include="Classes\classDIN\classDINManual.vb" />
-        <Compile Include="Classes\classEndingInventory\classEndingGreigeInventory.vb" />
-        <Compile Include="Classes\classEndingInventory\classEndingYarnInventory.vb" />
-        <Compile Include="Classes\classInvoiceLocalSearch\classInvoiceLocalSearch.vb" />
-        <Compile Include="Classes\classInvoice\classInvoice.vb" />
-        <Compile Include="Classes\classLocation\classStockTransferD.vb" />
-        <Compile Include="Classes\classLocation\classYarnLocation.vb" />
-        <Compile Include="Classes\classLogin\classLogin.vb" />
-        <Compile Include="Classes\classMaster\classMaster.vb" />
-        <Compile Include="Classes\classMaster\classMasterUpdate.vb" />
-        <Compile Include="Classes\classPackingListD\classPackingListD.vb" />
-        <Compile Include="Classes\classPackingListG\classPackingListG.vb" />
-        <Compile Include="Classes\classPackingList\classPackingList.vb" />
-        <Compile Include="Classes\classSearch\classInvoiceExportSearch.vb" />
-        <Compile Include="Classes\classSearch\classSeachPO.vb" />
-        <Compile Include="Classes\classSearch\classSearchCustomers.vb" />
-        <Compile Include="Classes\classSearch\classSearchDIN.vb" />
-        <Compile Include="Classes\classSearch\classSearchDOUT.vb" />
-        <Compile Include="Classes\classSearch\classSearchGIN.vb" />
-        <Compile Include="Classes\classSearch\classSearchREQD.vb" />
-        <Compile Include="Classes\classStock\classStockD.vb" />
-        <Compile Include="Classes\classStock\classStockDClearanceSale.vb" />
-        <Compile Include="Classes\classStock\classStockDINReturn.vb" />
-        <Compile Include="Classes\classStock\classStockDINPurchase.vb" />
-        <Compile Include="Classes\classStock\classStockDLocation.vb" />
-        <Compile Include="Classes\classStock\classStockG.vb" />
-        <Compile Include="Classes\classStock\classStockGIN_KOManual.vb" />
-        <Compile Include="Classes\classYarnSPNew\GetDataYarn.vb" />
+    <Compile Include="Classes\classConfig\clsConfig.vb" />
+    <Compile Include="Classes\classCreditNoteAR\classCreditNoteAR.vb" />
+    <Compile Include="Classes\classCreditNoteAR\classCreditNoteARExport.vb" />
+    <Compile Include="Classes\classDebitNoteAR\classDebitNoteAR.vb" />
+    <Compile Include="Classes\classDebitNoteAR\classDebitNoteExport.vb" />
+    <Compile Include="Classes\classDFOrder\classDFOrder.vb" />
+    <Compile Include="Classes\classDIN\classDINManual.vb" />
+    <Compile Include="Classes\classEndingInventory\classEndingGreigeInventory.vb" />
+    <Compile Include="Classes\classEndingInventory\classEndingYarnInventory.vb" />
+    <Compile Include="Classes\classInvoiceLocalSearch\classInvoiceLocalSearch.vb" />
+    <Compile Include="Classes\classInvoice\classInvoice.vb" />
+    <Compile Include="Classes\classLocation\classStockTransferD.vb" />
+    <Compile Include="Classes\classLocation\classYarnLocation.vb" />
+    <Compile Include="Classes\classLogin\classLogin.vb" />
+    <Compile Include="Classes\classMaster\classMaster.vb" />
+    <Compile Include="Classes\classMaster\classMasterUpdate.vb" />
+    <Compile Include="Classes\classPackingListD\classPackingListD.vb" />
+    <Compile Include="Classes\classPackingListG\classPackingListG.vb" />
+    <Compile Include="Classes\classPackingList\classPackingList.vb" />
+    <Compile Include="Classes\classSearch\classInvoiceExportSearch.vb" />
+    <Compile Include="Classes\classSearch\classSeachPO.vb" />
+    <Compile Include="Classes\classSearch\classSearchCustomers.vb" />
+    <Compile Include="Classes\classSearch\classSearchDIN.vb" />
+    <Compile Include="Classes\classSearch\classSearchDOUT.vb" />
+    <Compile Include="Classes\classSearch\classSearchGIN.vb" />
+    <Compile Include="Classes\classSearch\classSearchREQD.vb" />
+    <Compile Include="Classes\classStock\classStockD.vb" />
+    <Compile Include="Classes\classStock\classStockDClearanceSale.vb" />
+    <Compile Include="Classes\classStock\classStockDINReturn.vb" />
+    <Compile Include="Classes\classStock\classStockDINPurchase.vb" />
+    <Compile Include="Classes\classStock\classStockDLocation.vb" />
+    <Compile Include="Classes\classStock\classStockG.vb" />
+    <Compile Include="Classes\classStock\classStockGIN_KOManual.vb" />
+    <Compile Include="Classes\classYarnSPNew\GetDataYarn.vb" />
     <Compile Include="DebitNoteForm\frmDebitNoteExport.Designer.vb">
       <DependentUpon>frmDebitNoteExport.vb</DependentUpon>
     </Compile>
@@ -235,10 +235,10 @@
     <Compile Include="PackingList\frmPackingListDyed.vb">
       <SubType>Form</SubType>
     </Compile>
-        <Compile Include="Classes\classRequest\classRequest.vb" />
-        <Compile Include="Classes\classSalesOrder\classSalesOrder.vb" />
-        <Compile Include="Classes\classStock\classStock.vb" />
-        <Compile Include="Classes\classUserInfo\classUserInfo.vb" />
+    <Compile Include="Classes\classRequest\classRequest.vb" />
+    <Compile Include="Classes\classSalesOrder\classSalesOrder.vb" />
+    <Compile Include="Classes\classStock\classStock.vb" />
+    <Compile Include="Classes\classUserInfo\classUserInfo.vb" />
     <Compile Include="DyingOrderReport\frmDyingOrderPending2.Designer.vb">
       <DependentUpon>frmDyingOrderPending2.vb</DependentUpon>
     </Compile>
@@ -455,7 +455,7 @@
     <Compile Include="SalesOrderReport\frmSalesOrderPrint.vb">
       <SubType>Form</SubType>
     </Compile>
-        <Compile Include="Classes\classSearch\classSearchLOT.vb" />
+    <Compile Include="Classes\classSearch\classSearchLOT.vb" />
     <Compile Include="SearchForm\DlgGetMasterCode.designer.vb">
       <DependentUpon>DlgGetMasterCode.vb</DependentUpon>
     </Compile>

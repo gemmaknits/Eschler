@@ -6,6 +6,7 @@ Public Class classUserInfo
 	Public DeptCD As String
 	Public CurrentDate As String
     Public ExchangeRate As Decimal '
+    Public ExchangeRateTHB As Decimal
     Public ExchangeRateUSD As Decimal '
     Public ExchangeRateJPY As Decimal '
     Public ExchangeRateAUD As Decimal '

@@ -146,7 +146,7 @@ Partial Class frmMainmenu
         '
         Me.DomesticInvoiceToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EditToolStripMenuItem, Me.EditInvoiceToolStripMenuItem1, Me.PrintInvoiceToolStripMenuItem, Me.PrintControlToolStripMenuItem})
         Me.DomesticInvoiceToolStripMenuItem.Name = "DomesticInvoiceToolStripMenuItem"
-        Me.DomesticInvoiceToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.DomesticInvoiceToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.DomesticInvoiceToolStripMenuItem.Text = "Local Invoice"
         '
         'EditToolStripMenuItem
@@ -177,7 +177,7 @@ Partial Class frmMainmenu
         '
         Me.ExportInvoiceToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EditInvoiceToolStripMenuItem, Me.PrintInvoiceToolStripMenuItem1, Me.PrintControlToolStripMenuItem1, Me.PrintBOIAnalysisToolStripMenuItem, Me.PrintInvoiceWithNotesToolStripMenuItem, Me.PrintCargoDeliveryReceiptToolStripMenuItem})
         Me.ExportInvoiceToolStripMenuItem.Name = "ExportInvoiceToolStripMenuItem"
-        Me.ExportInvoiceToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ExportInvoiceToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ExportInvoiceToolStripMenuItem.Text = "Export Invoice"
         '
         'EditInvoiceToolStripMenuItem
@@ -220,43 +220,43 @@ Partial Class frmMainmenu
         '
         Me.ReportToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GammaBillControlToolStripMenuItem, Me.InvoiceBOIControlToolStripMenuItem, Me.DailyInvoiceSummaryToolStripMenuItem, Me.ExportInvoiceDINBalanceToolStripMenuItem, Me.ExportInvoiceDeailToolStripMenuItem, Me.tsmnInvoiceYarnLot})
         Me.ReportToolStripMenuItem1.Name = "ReportToolStripMenuItem1"
-        Me.ReportToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
+        Me.ReportToolStripMenuItem1.Size = New System.Drawing.Size(180, 22)
         Me.ReportToolStripMenuItem1.Text = "Report"
         '
         'GammaBillControlToolStripMenuItem
         '
         Me.GammaBillControlToolStripMenuItem.Name = "GammaBillControlToolStripMenuItem"
-        Me.GammaBillControlToolStripMenuItem.Size = New System.Drawing.Size(220, 22)
+        Me.GammaBillControlToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
         Me.GammaBillControlToolStripMenuItem.Text = "Gamma Bill Control"
         '
         'InvoiceBOIControlToolStripMenuItem
         '
         Me.InvoiceBOIControlToolStripMenuItem.Name = "InvoiceBOIControlToolStripMenuItem"
-        Me.InvoiceBOIControlToolStripMenuItem.Size = New System.Drawing.Size(220, 22)
+        Me.InvoiceBOIControlToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
         Me.InvoiceBOIControlToolStripMenuItem.Text = "Invoice BOI Control"
         '
         'DailyInvoiceSummaryToolStripMenuItem
         '
         Me.DailyInvoiceSummaryToolStripMenuItem.Name = "DailyInvoiceSummaryToolStripMenuItem"
-        Me.DailyInvoiceSummaryToolStripMenuItem.Size = New System.Drawing.Size(220, 22)
+        Me.DailyInvoiceSummaryToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
         Me.DailyInvoiceSummaryToolStripMenuItem.Text = "Daily Invoice Summary"
         '
         'ExportInvoiceDINBalanceToolStripMenuItem
         '
         Me.ExportInvoiceDINBalanceToolStripMenuItem.Name = "ExportInvoiceDINBalanceToolStripMenuItem"
-        Me.ExportInvoiceDINBalanceToolStripMenuItem.Size = New System.Drawing.Size(220, 22)
+        Me.ExportInvoiceDINBalanceToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
         Me.ExportInvoiceDINBalanceToolStripMenuItem.Text = "Export Invoice D-IN Balance"
         '
         'ExportInvoiceDeailToolStripMenuItem
         '
         Me.ExportInvoiceDeailToolStripMenuItem.Name = "ExportInvoiceDeailToolStripMenuItem"
-        Me.ExportInvoiceDeailToolStripMenuItem.Size = New System.Drawing.Size(220, 22)
+        Me.ExportInvoiceDeailToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
         Me.ExportInvoiceDeailToolStripMenuItem.Text = "Export Invoice Deail"
         '
         'tsmnInvoiceYarnLot
         '
         Me.tsmnInvoiceYarnLot.Name = "tsmnInvoiceYarnLot"
-        Me.tsmnInvoiceYarnLot.Size = New System.Drawing.Size(220, 22)
+        Me.tsmnInvoiceYarnLot.Size = New System.Drawing.Size(221, 22)
         Me.tsmnInvoiceYarnLot.Text = "Invoice Yarn Lot"
         '
         'DebitCreditNotesToolStripMenuItem
@@ -308,13 +308,13 @@ Partial Class frmMainmenu
         'DebitNotesExportChargeToolStripMenuItem
         '
         Me.DebitNotesExportChargeToolStripMenuItem.Name = "DebitNotesExportChargeToolStripMenuItem"
-        Me.DebitNotesExportChargeToolStripMenuItem.Size = New System.Drawing.Size(196, 22)
+        Me.DebitNotesExportChargeToolStripMenuItem.Size = New System.Drawing.Size(197, 22)
         Me.DebitNotesExportChargeToolStripMenuItem.Text = "Debit Notes For Export"
         '
         'CreditNotesForExportToolStripMenuItem
         '
         Me.CreditNotesForExportToolStripMenuItem.Name = "CreditNotesForExportToolStripMenuItem"
-        Me.CreditNotesForExportToolStripMenuItem.Size = New System.Drawing.Size(196, 22)
+        Me.CreditNotesForExportToolStripMenuItem.Size = New System.Drawing.Size(197, 22)
         Me.CreditNotesForExportToolStripMenuItem.Text = "Credit Notes For Export"
         '
         'CreditNotesControlToolStripMenuItem
@@ -346,130 +346,130 @@ Partial Class frmMainmenu
         'DINToolStripMenuItem
         '
         Me.DINToolStripMenuItem.Name = "DINToolStripMenuItem"
-        Me.DINToolStripMenuItem.Size = New System.Drawing.Size(238, 22)
+        Me.DINToolStripMenuItem.Size = New System.Drawing.Size(236, 22)
         Me.DINToolStripMenuItem.Text = "DIN"
         Me.DINToolStripMenuItem.Visible = False
         '
         'DINManualMenuItem
         '
         Me.DINManualMenuItem.Name = "DINManualMenuItem"
-        Me.DINManualMenuItem.Size = New System.Drawing.Size(238, 22)
+        Me.DINManualMenuItem.Size = New System.Drawing.Size(236, 22)
         Me.DINManualMenuItem.Text = "DIN Manual"
         Me.DINManualMenuItem.Visible = False
         '
         'DINFromDyedingNoDFToolStripMenuItem
         '
         Me.DINFromDyedingNoDFToolStripMenuItem.Name = "DINFromDyedingNoDFToolStripMenuItem"
-        Me.DINFromDyedingNoDFToolStripMenuItem.Size = New System.Drawing.Size(238, 22)
+        Me.DINFromDyedingNoDFToolStripMenuItem.Size = New System.Drawing.Size(236, 22)
         Me.DINFromDyedingNoDFToolStripMenuItem.Text = "DIN Purchase"
         Me.DINFromDyedingNoDFToolStripMenuItem.Visible = False
         '
         'DINReturnToolStripMenuItem
         '
         Me.DINReturnToolStripMenuItem.Name = "DINReturnToolStripMenuItem"
-        Me.DINReturnToolStripMenuItem.Size = New System.Drawing.Size(238, 22)
+        Me.DINReturnToolStripMenuItem.Size = New System.Drawing.Size(236, 22)
         Me.DINReturnToolStripMenuItem.Text = "DIN Return"
         Me.DINReturnToolStripMenuItem.Visible = False
         '
         'StockDLocationToolStripMenuItem
         '
         Me.StockDLocationToolStripMenuItem.Name = "StockDLocationToolStripMenuItem"
-        Me.StockDLocationToolStripMenuItem.Size = New System.Drawing.Size(238, 22)
+        Me.StockDLocationToolStripMenuItem.Size = New System.Drawing.Size(236, 22)
         Me.StockDLocationToolStripMenuItem.Text = "DIN Location"
         Me.StockDLocationToolStripMenuItem.Visible = False
         '
         'ToolStripSeparator7
         '
         Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
-        Me.ToolStripSeparator7.Size = New System.Drawing.Size(235, 6)
+        Me.ToolStripSeparator7.Size = New System.Drawing.Size(233, 6)
         Me.ToolStripSeparator7.Visible = False
         '
         'PrintGINDocumentToolStripMenuItem
         '
         Me.PrintGINDocumentToolStripMenuItem.Name = "PrintGINDocumentToolStripMenuItem"
-        Me.PrintGINDocumentToolStripMenuItem.Size = New System.Drawing.Size(238, 22)
+        Me.PrintGINDocumentToolStripMenuItem.Size = New System.Drawing.Size(236, 22)
         Me.PrintGINDocumentToolStripMenuItem.Text = "Print GIN Document"
         Me.PrintGINDocumentToolStripMenuItem.Visible = False
         '
         'PrintDINDocumentToolStripMenuItem
         '
         Me.PrintDINDocumentToolStripMenuItem.Name = "PrintDINDocumentToolStripMenuItem"
-        Me.PrintDINDocumentToolStripMenuItem.Size = New System.Drawing.Size(238, 22)
+        Me.PrintDINDocumentToolStripMenuItem.Size = New System.Drawing.Size(236, 22)
         Me.PrintDINDocumentToolStripMenuItem.Text = "Print DIN Document"
         Me.PrintDINDocumentToolStripMenuItem.Visible = False
         '
         'PrintDOUTDocumentToolStripMenuItem
         '
         Me.PrintDOUTDocumentToolStripMenuItem.Name = "PrintDOUTDocumentToolStripMenuItem"
-        Me.PrintDOUTDocumentToolStripMenuItem.Size = New System.Drawing.Size(238, 22)
+        Me.PrintDOUTDocumentToolStripMenuItem.Size = New System.Drawing.Size(236, 22)
         Me.PrintDOUTDocumentToolStripMenuItem.Text = "Print DOUT Document"
         Me.PrintDOUTDocumentToolStripMenuItem.Visible = False
         '
         'ToolStripSeparator6
         '
         Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
-        Me.ToolStripSeparator6.Size = New System.Drawing.Size(235, 6)
+        Me.ToolStripSeparator6.Size = New System.Drawing.Size(233, 6)
         Me.ToolStripSeparator6.Visible = False
         '
         'GINManualToolStripMenuItem
         '
         Me.GINManualToolStripMenuItem.Name = "GINManualToolStripMenuItem"
-        Me.GINManualToolStripMenuItem.Size = New System.Drawing.Size(238, 22)
+        Me.GINManualToolStripMenuItem.Size = New System.Drawing.Size(236, 22)
         Me.GINManualToolStripMenuItem.Text = "GIN Manual"
         Me.GINManualToolStripMenuItem.Visible = False
         '
         'GINPurchaseToolStripMenuItem
         '
         Me.GINPurchaseToolStripMenuItem.Name = "GINPurchaseToolStripMenuItem"
-        Me.GINPurchaseToolStripMenuItem.Size = New System.Drawing.Size(238, 22)
+        Me.GINPurchaseToolStripMenuItem.Size = New System.Drawing.Size(236, 22)
         Me.GINPurchaseToolStripMenuItem.Text = "GIN Purchase"
         Me.GINPurchaseToolStripMenuItem.Visible = False
         '
         'GINPFDToolStripMenuItem
         '
         Me.GINPFDToolStripMenuItem.Name = "GINPFDToolStripMenuItem"
-        Me.GINPFDToolStripMenuItem.Size = New System.Drawing.Size(238, 22)
+        Me.GINPFDToolStripMenuItem.Size = New System.Drawing.Size(236, 22)
         Me.GINPFDToolStripMenuItem.Text = "GIN PFD"
         Me.GINPFDToolStripMenuItem.Visible = False
         '
         'GINPFDManualToolStripMenuItem
         '
         Me.GINPFDManualToolStripMenuItem.Name = "GINPFDManualToolStripMenuItem"
-        Me.GINPFDManualToolStripMenuItem.Size = New System.Drawing.Size(238, 22)
+        Me.GINPFDManualToolStripMenuItem.Size = New System.Drawing.Size(236, 22)
         Me.GINPFDManualToolStripMenuItem.Text = "GIN PFD Manual"
         Me.GINPFDManualToolStripMenuItem.Visible = False
         '
         'GINReturnToolStripMenuItem
         '
         Me.GINReturnToolStripMenuItem.Name = "GINReturnToolStripMenuItem"
-        Me.GINReturnToolStripMenuItem.Size = New System.Drawing.Size(238, 22)
+        Me.GINReturnToolStripMenuItem.Size = New System.Drawing.Size(236, 22)
         Me.GINReturnToolStripMenuItem.Text = "GIN Return (NOT USED)"
         Me.GINReturnToolStripMenuItem.Visible = False
         '
         'ToolStripSeparator8
         '
         Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
-        Me.ToolStripSeparator8.Size = New System.Drawing.Size(235, 6)
+        Me.ToolStripSeparator8.Size = New System.Drawing.Size(233, 6)
         Me.ToolStripSeparator8.Visible = False
         '
         'GOUTManualToolStripMenuItem
         '
         Me.GOUTManualToolStripMenuItem.Name = "GOUTManualToolStripMenuItem"
-        Me.GOUTManualToolStripMenuItem.Size = New System.Drawing.Size(238, 22)
+        Me.GOUTManualToolStripMenuItem.Size = New System.Drawing.Size(236, 22)
         Me.GOUTManualToolStripMenuItem.Text = "GOUT Manual"
         Me.GOUTManualToolStripMenuItem.Visible = False
         '
         'ToolStripSeparator9
         '
         Me.ToolStripSeparator9.Name = "ToolStripSeparator9"
-        Me.ToolStripSeparator9.Size = New System.Drawing.Size(235, 6)
+        Me.ToolStripSeparator9.Size = New System.Drawing.Size(233, 6)
         Me.ToolStripSeparator9.Visible = False
         '
         'ClearanceSaleToolStripMenuItem
         '
         Me.ClearanceSaleToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StockGToolStripMenuItem, Me.StockDToolStripMenuItem})
         Me.ClearanceSaleToolStripMenuItem.Name = "ClearanceSaleToolStripMenuItem"
-        Me.ClearanceSaleToolStripMenuItem.Size = New System.Drawing.Size(238, 22)
+        Me.ClearanceSaleToolStripMenuItem.Size = New System.Drawing.Size(236, 22)
         Me.ClearanceSaleToolStripMenuItem.Text = "Clearance Sale"
         Me.ClearanceSaleToolStripMenuItem.Visible = False
         '
@@ -489,7 +489,7 @@ Partial Class frmMainmenu
         '
         Me.EndingInventoryToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.YarnStockToolStripMenuItem, Me.GreigeStockToolStripMenuItem, Me.DyedStockToolStripMenuItem})
         Me.EndingInventoryToolStripMenuItem.Name = "EndingInventoryToolStripMenuItem"
-        Me.EndingInventoryToolStripMenuItem.Size = New System.Drawing.Size(238, 22)
+        Me.EndingInventoryToolStripMenuItem.Size = New System.Drawing.Size(236, 22)
         Me.EndingInventoryToolStripMenuItem.Text = "Ending Inventory"
         Me.EndingInventoryToolStripMenuItem.Visible = False
         '
@@ -515,7 +515,7 @@ Partial Class frmMainmenu
         '
         Me.ReportToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DINControlToolStripMenuItem, Me.DINControl2ToolStripMenuItem, Me.DINDyeChargeToolStripMenuItem, Me.StockByBOIToolStripMenuItem, Me.GOUTControlToolStripMenuItem, Me.GOUTAndDFControlToolStripMenuItem, Me.NewYarnCodeToolStripMenuItem, Me.NewDesignNoToolStripMenuItem, Me.GreigeLogToolStripMenuItem, Me.CancelledOrderPendingToolStripMenuItem, Me.DOUTControlToolStripMenuItem})
         Me.ReportToolStripMenuItem.Name = "ReportToolStripMenuItem"
-        Me.ReportToolStripMenuItem.Size = New System.Drawing.Size(238, 22)
+        Me.ReportToolStripMenuItem.Size = New System.Drawing.Size(236, 22)
         Me.ReportToolStripMenuItem.Text = "Report"
         '
         'DINControlToolStripMenuItem
@@ -588,7 +588,7 @@ Partial Class frmMainmenu
         '
         Me.TransferLocationNewArrivalToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.YarnStockLocationToolStripMenuItem1, Me.GreigeStockToolStripMenuItem1, Me.DyedStockToolStripMenuItem1})
         Me.TransferLocationNewArrivalToolStripMenuItem.Name = "TransferLocationNewArrivalToolStripMenuItem"
-        Me.TransferLocationNewArrivalToolStripMenuItem.Size = New System.Drawing.Size(238, 22)
+        Me.TransferLocationNewArrivalToolStripMenuItem.Size = New System.Drawing.Size(236, 22)
         Me.TransferLocationNewArrivalToolStripMenuItem.Text = "Transfer Location (New Arrival)"
         Me.TransferLocationNewArrivalToolStripMenuItem.Visible = False
         '
@@ -660,31 +660,31 @@ Partial Class frmMainmenu
         '
         Me.BOIToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BOIFromGINToolStripMenuItem, Me.BOIFromGOUTToolStripMenuItem, Me.BOIFromDINToolStripMenuItem, Me.BOIFromDOUTToolStripMenuItem})
         Me.BOIToolStripMenuItem.Name = "BOIToolStripMenuItem"
-        Me.BOIToolStripMenuItem.Size = New System.Drawing.Size(93, 22)
+        Me.BOIToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.BOIToolStripMenuItem.Text = "BOI"
         '
         'BOIFromGINToolStripMenuItem
         '
         Me.BOIFromGINToolStripMenuItem.Name = "BOIFromGINToolStripMenuItem"
-        Me.BOIFromGINToolStripMenuItem.Size = New System.Drawing.Size(159, 22)
+        Me.BOIFromGINToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.BOIFromGINToolStripMenuItem.Text = "BOI From GIN"
         '
         'BOIFromGOUTToolStripMenuItem
         '
         Me.BOIFromGOUTToolStripMenuItem.Name = "BOIFromGOUTToolStripMenuItem"
-        Me.BOIFromGOUTToolStripMenuItem.Size = New System.Drawing.Size(159, 22)
+        Me.BOIFromGOUTToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.BOIFromGOUTToolStripMenuItem.Text = "BOI From GOUT"
         '
         'BOIFromDINToolStripMenuItem
         '
         Me.BOIFromDINToolStripMenuItem.Name = "BOIFromDINToolStripMenuItem"
-        Me.BOIFromDINToolStripMenuItem.Size = New System.Drawing.Size(159, 22)
+        Me.BOIFromDINToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.BOIFromDINToolStripMenuItem.Text = "BOI From DIN"
         '
         'BOIFromDOUTToolStripMenuItem
         '
         Me.BOIFromDOUTToolStripMenuItem.Name = "BOIFromDOUTToolStripMenuItem"
-        Me.BOIFromDOUTToolStripMenuItem.Size = New System.Drawing.Size(159, 22)
+        Me.BOIFromDOUTToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.BOIFromDOUTToolStripMenuItem.Text = "BOI From DOUT"
         '
         'menuExit
@@ -704,19 +704,19 @@ Partial Class frmMainmenu
         'CascadeToolStripMenuItem1
         '
         Me.CascadeToolStripMenuItem1.Name = "CascadeToolStripMenuItem1"
-        Me.CascadeToolStripMenuItem1.Size = New System.Drawing.Size(151, 22)
+        Me.CascadeToolStripMenuItem1.Size = New System.Drawing.Size(150, 22)
         Me.CascadeToolStripMenuItem1.Text = "Cascade"
         '
         'TileHorizontalToolStripMenuItem
         '
         Me.TileHorizontalToolStripMenuItem.Name = "TileHorizontalToolStripMenuItem"
-        Me.TileHorizontalToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
+        Me.TileHorizontalToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
         Me.TileHorizontalToolStripMenuItem.Text = "Tile Horizontal"
         '
         'TileVerticalToolStripMenuItem
         '
         Me.TileVerticalToolStripMenuItem.Name = "TileVerticalToolStripMenuItem"
-        Me.TileVerticalToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
+        Me.TileVerticalToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
         Me.TileVerticalToolStripMenuItem.Text = "Tile Vertical"
         '
         'ChangePasswordToolStripMenuItem
@@ -742,6 +742,7 @@ Partial Class frmMainmenu
         'txtExchangeRate
         '
         Me.txtExchangeRate.Enabled = False
+        Me.txtExchangeRate.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.txtExchangeRate.Name = "txtExchangeRate"
         Me.txtExchangeRate.Size = New System.Drawing.Size(50, 23)
         Me.txtExchangeRate.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Right

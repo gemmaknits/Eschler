@@ -11,3 +11,5 @@ obj/
 *.suo
 /ProductionSystem/.vs/ProductionSystem/CopilotIndices/17.12.38.29086/SemanticSymbols.db-shm
 /ProductionSystem/.vs/ProductionSystem/v17/DocumentLayout.json
+/SalesOrderSystem/.vs/SalesOrderSystem/v17/.suo
+/SalesOrderSystem/SalesOrderSystem/obj/Debug/SalesOrderSystem.vbproj.AssemblyReference.cache

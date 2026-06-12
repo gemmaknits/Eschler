@@ -203,6 +203,7 @@
     <Import Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationEvents.vb" />
     <Compile Include="Classes\classCheckBox\classCheckbox.vb" />
     <Compile Include="Classes\classCMR\ClassCMR.vb" />
     <Compile Include="Classes\classColors\classColors.vb" />

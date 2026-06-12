@@ -194,7 +194,7 @@
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="Classes\classConfig\clsConfig.vb" />
-    <Compile Include="Classes\classConnection\ClassConnectionEschlerDB.vb" />
+    <Compile Include="Classes\classConnection\ClassConnectionColomboDB.vb" />
     <Compile Include="Classes\classDataGridViewCalendarcolumn\DataGridViewCalendarColumn.vb" />
     <Compile Include="Classes\classDFOrder\classDFOrder.vb" />
     <Compile Include="Classes\classImage\classPhoto.vb" />

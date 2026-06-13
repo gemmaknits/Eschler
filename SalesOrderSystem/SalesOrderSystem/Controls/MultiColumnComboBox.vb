@@ -221,6 +221,8 @@ Namespace Controls
         Public Property MetroColor As Color
         <Browsable(False), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
         Public Property ScrollMetroColorTable As Object
+        <Browsable(False), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
+        Public Property MultiColumn As Boolean
 
         Public Event SelectedIndexChanged As EventHandler
         Public Event SelectedValueChanged As EventHandler

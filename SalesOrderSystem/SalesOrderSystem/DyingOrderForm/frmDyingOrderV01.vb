@@ -1213,7 +1213,7 @@ Public Class frmDyingOrderV01
 
         Dim dt As DataTable = grdDF.DataSource
         Dim dt2 As DataTable = dt.Copy()
-        Dim dtcbocoler As DataTable = mltcboColor.DataSource 'Sithana 08/06/2018
+        Dim dtcbocoler As DataTable = TryCast(mltcboColor.DataSource, DataTable) 'Sithana 08/06/2018
         Dim i As Integer = 0
 
         If dt2.Rows.Count > 0 Then

@@ -858,12 +858,6 @@ D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\Sales Order Sy
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\Sales Order System (Eschler).pdb
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Sales Order System (Eschler).pdb
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Sales Order System (Eschler).xml
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\CrystalDecisions.CrystalReports.Engine.dll
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\CrystalDecisions.Shared.dll
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\CrystalDecisions.Windows.Forms.dll
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.vbproj.AssemblyReference.cache
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.vbproj.CoreCompileInputs.cache
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrd.14E3A24E.Up2Date
 C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Sales Order System (Eschler).exe.config
 C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Sales Order System (Eschler).exe.manifest
 C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\Sales Order System (Eschler).application
@@ -1138,4 +1132,4 @@ C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debu
 C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\Sales Order System (Eschler).exe
 C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\Sales Order System (Eschler).xml
 C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\Sales Order System (Eschler).pdb
-D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\CrystalDecisions.ReportSource.dll
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.vbprojResolveAssemblyReference.cache

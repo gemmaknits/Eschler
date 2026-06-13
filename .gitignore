@@ -1,57 +1,37 @@
 ﻿################################################################################
-# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+# Visual Studio
 ################################################################################
-.vs/
-bin/
-obj/
-*.vsidx
-*.cache
-*.7z
+
+**/bin/
+**/obj/
+**/.vs/
+
+# User-specific files
 *.user
 *.suo
-/SalesOrderSystem/.vs/
-/SalesOrderSystem/bin/
-/SalesOrderSystem/obj/
-/ProductionSystem/.vs/
-/ProductionSystem/bin/
-/ProductionSystem/obj/
-/PurchaseOrderSystem/.vs/
-/PurchaseOrderSystem/bin/
-/PurchaseOrderSystem/obj/
-/InvoiceSystem/.vs/
-/InvoiceSystem/bin/
-/InvoiceSystem/obj/
-/YarnStockSystem/.vs/
-/YarnStockSystem/bin/
-/YarnStockSystem/obj/
-/ProductionSystem/.vs/ProductionSystem/CopilotIndices/17.12.38.29086/SemanticSymbols.db-shm
-/ProductionSystem/.vs/ProductionSystem/v17/DocumentLayout.json
-/SalesOrderSystem/.vs/SalesOrderSystem/v17/.suo
-/SalesOrderSystem/SalesOrderSystem/obj/Debug/SalesOrderSystem.vbproj.AssemblyReference.cache
-/YarnStockSystem/YarnStockSystem/bin/Debug/app.publish/Yarn Stock System (Eschler).exe
-/YarnStockSystem/YarnStockSystem/bin/Debug/Yarn Stock System (Eschler).application
-/YarnStockSystem/YarnStockSystem/bin/Debug/Yarn Stock System (Eschler).exe
-/YarnStockSystem/YarnStockSystem/bin/Debug/Yarn Stock System (Eschler).exe.manifest
-/YarnStockSystem/YarnStockSystem/bin/Debug/Yarn Stock System (Eschler).pdb
-/YarnStockSystem/YarnStockSystem/obj/Debug/Yarn Stock System (Eschler).application
-/YarnStockSystem/YarnStockSystem/obj/Debug/Yarn Stock System (Eschler).exe
-/YarnStockSystem/YarnStockSystem/obj/Debug/Yarn Stock System (Eschler).exe.manifest
-/YarnStockSystem/YarnStockSystem/obj/Debug/Yarn Stock System (Eschler).pdb
-/InvoiceSystem/InvoiceSystem/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
-/InvoiceSystem/.vs/InvoiceSystem/v17/DocumentLayout.json
-/InvoiceSystem/InvoiceSystem/.vs/InvoiceSystem.vbproj.dtbcache.json
-/InvoiceSystem/InvoiceSystem/bin/Debug/app.publish/Invoice System (Eschler).exe
-/InvoiceSystem/InvoiceSystem/bin/Debug/Invoice System (Eschler).application
-/InvoiceSystem/InvoiceSystem/bin/Debug/Invoice System (Eschler).exe
-/InvoiceSystem/InvoiceSystem/bin/Debug/Invoice System (Eschler).exe.manifest
-/InvoiceSystem/InvoiceSystem/bin/Debug/Invoice System (Eschler).pdb
-/InvoiceSystem/InvoiceSystem/obj/Debug/DesignTimeResolveAssemblyReferences.cache
-/InvoiceSystem/InvoiceSystem/obj/Debug/Interop.SHDocVw.dll
-/InvoiceSystem/InvoiceSystem/obj/Debug/Invoice System (Eschler).application
-/InvoiceSystem/InvoiceSystem/obj/Debug/Invoice System (Eschler).exe
-/InvoiceSystem/InvoiceSystem/obj/Debug/Invoice System (Eschler).exe.manifest
-/InvoiceSystem/InvoiceSystem/obj/Debug/Invoice System (Eschler).pdb
-/InvoiceSystem/InvoiceSystem/obj/Debug/InvoiceSystem.vbproj.FileListAbsolute.txt
-/InvoiceSystem/InvoiceSystem/obj/Debug/InvoiceSystem.vbproj.GenerateResource.Cache
-/InvoiceSystem/InvoiceSystem/obj/Debug/InvoiceSystem.vbproj.ResolveComReference.cache
-/InvoiceSystem/InvoiceSystem/obj/Debug/TempPE/My Project.Resources.Designer.vb.dll
+*.userosscache
+*.sln.docstates
+
+# Visual Studio cache
+*.vsidx
+*.cache
+
+# ClickOnce
+publish/
+app.publish/
+**/app.publish/
+
+# NuGet
+packages/
+!packages/build/
+
+# ReSharper
+_ReSharper*/
+*.DotSettings.user
+
+# Logs
+*.log
+
+# Compressed files
+*.7z
+*.zip

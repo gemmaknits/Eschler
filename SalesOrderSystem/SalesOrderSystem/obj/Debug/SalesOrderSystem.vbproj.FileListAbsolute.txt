@@ -1138,3 +1138,4 @@ C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debu
 C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\Sales Order System (Eschler).exe
 C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\Sales Order System (Eschler).xml
 C:\Users\it\Desktop\workspace\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\Sales Order System (Eschler).pdb
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\CrystalDecisions.ReportSource.dll

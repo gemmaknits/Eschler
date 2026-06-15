@@ -427,3 +427,5 @@ D:\SOURCECODE\Eschler\ProductionSystem\ProductionSystem\obj\Debug\Producti.16BDA
 D:\SOURCECODE\Eschler\ProductionSystem\ProductionSystem\obj\Debug\Production System (Eschler).exe
 D:\SOURCECODE\Eschler\ProductionSystem\ProductionSystem\obj\Debug\Production System (Eschler).xml
 D:\SOURCECODE\Eschler\ProductionSystem\ProductionSystem\obj\Debug\Production System (Eschler).pdb
+D:\SOURCECODE\Eschler\ProductionSystem\ProductionSystem\bin\Debug\Microsoft.ReportViewer.Common.dll
+D:\SOURCECODE\Eschler\ProductionSystem\ProductionSystem\bin\Debug\Microsoft.ReportViewer.WinForms.dll

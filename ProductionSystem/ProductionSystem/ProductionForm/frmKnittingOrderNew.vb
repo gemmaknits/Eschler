@@ -444,7 +444,7 @@ Public Class frmKnittingOrderNew
         objKO.custcd = cboCustomer.SelectedValue
         objKO.kstartdt = dtpStartDate.Value.ToString("yyyyMMdd")
         objKO.kenddt = dtpEndDate.Value.ToString("yyyyMMdd")
-        objKO.ynchgcd = McboIDYarnChange.ListBox.Grid.Model(McboIDYarnChange.SelectedIndex + 1, 2).CellValue.ToString
+        objKO.ynchgcd = If(McboIDYarnChange.ListBox.Grid.Model(McboIDYarnChange.SelectedIndex + 1, 2).CellValue IsNot Nothing, McboIDYarnChange.ListBox.Grid.Model(McboIDYarnChange.SelectedIndex + 1, 2).CellValue.ToString(), "")
         objKO.id_yarnchange = (New clsConfig).IsNull(McboIDYarnChange.SelectedValue, Nothing)
         objKO.koclosed = lblKOClosed.Visible
         objKO.koclosedt = dtpClosed.Value.ToString("yyyyMMdd")
@@ -788,8 +788,11 @@ Public Class frmKnittingOrderNew
         Me.McboIDYarnChange.DataSource = (New classProduction).GetDesignBOM(strDesignNo, clsUser.UserID)
         Me.McboIDYarnChange.DisplayMember = "ynchgcd_col"
         Me.McboIDYarnChange.ValueMember = "id_yarnchange"
-        'Me.McboIDYarnChange.SelectedIndex = -1
-        AddHandler TryCast(McboIDYarnChange.ListControl, GridListBox).Grid.Model.QueryCellInfo, AddressOf McboIDYarnChange_Model_QueryCellinfo
+        Dim glb As GridListBox = TryCast(McboIDYarnChange.ListControl, GridListBox)
+        If glb IsNot Nothing Then
+            RemoveHandler glb.Grid.Model.QueryCellInfo, AddressOf McboIDYarnChange_Model_QueryCellinfo
+            AddHandler glb.Grid.Model.QueryCellInfo, AddressOf McboIDYarnChange_Model_QueryCellinfo
+        End If
 
     End Sub
     Private Sub McboIDYarnChange_Model_QueryCellinfo(ByVal sender As Object, ByVal e As GridQueryCellInfoEventArgs)
@@ -868,7 +871,7 @@ Public Class frmKnittingOrderNew
         Call BindGridProd(dt)
 
         StrOldDesignNo = oConfig.IsNull(cboDesignNo.SelectedValue, "")
-        StrOldbom = McboIDYarnChange.ListBox.Grid.Model(McboIDYarnChange.SelectedIndex + 1, 2).CellValue.ToString
+        StrOldbom = If(McboIDYarnChange.ListBox.Grid.Model(McboIDYarnChange.SelectedIndex + 1, 2).CellValue IsNot Nothing, McboIDYarnChange.ListBox.Grid.Model(McboIDYarnChange.SelectedIndex + 1, 2).CellValue.ToString(), "")
         SingleOldQty = Val(txtQty.Text)
 
     End Sub

@@ -324,6 +324,11 @@ Namespace Controls
                 Else
                     _dataTable = Nothing
                 End If
+                ' Reset selection so stale _selectedIndex from previous DataSource
+                ' does not cause IndexOutOfRangeException in OpenPopup when the
+                ' new DataTable has fewer rows.
+                _selectedIndex = -1
+                _txtDisplay.Text = ""
             End Set
         End Property
 

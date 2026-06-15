@@ -187,14 +187,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Production System (Eschler).exe" size="2960896">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Production System (Eschler).exe" size="2961408">
       <assemblyIdentity name="Production System (Eschler)" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>I9Na8uHQgbd9inXrTsdYzr6iWkle2h/t5tnDkW3gUd0=</dsig:DigestValue>
+        <dsig:DigestValue>Wx+yeuHKpVJpuvzzECDlID8J8fhtfe4crPTu4itZEcs=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

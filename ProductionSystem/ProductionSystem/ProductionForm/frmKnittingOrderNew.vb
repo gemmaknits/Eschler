@@ -871,7 +871,7 @@ Public Class frmKnittingOrderNew
         Call BindGridProd(dt)
 
         StrOldDesignNo = oConfig.IsNull(cboDesignNo.SelectedValue, "")
-        StrOldbom = McboIDYarnChange.ListBox.Grid.Model(McboIDYarnChange.SelectedIndex + 1, 2).CellValue.ToString
+        StrOldbom = If(McboIDYarnChange.ListBox.Grid.Model(McboIDYarnChange.SelectedIndex + 1, 2).CellValue IsNot Nothing, McboIDYarnChange.ListBox.Grid.Model(McboIDYarnChange.SelectedIndex + 1, 2).CellValue.ToString(), "")
         SingleOldQty = Val(txtQty.Text)
 
     End Sub

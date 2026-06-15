@@ -429,3 +429,4 @@ D:\SOURCECODE\Eschler\ProductionSystem\ProductionSystem\obj\Debug\Production Sys
 D:\SOURCECODE\Eschler\ProductionSystem\ProductionSystem\obj\Debug\Production System (Eschler).pdb
 D:\SOURCECODE\Eschler\ProductionSystem\ProductionSystem\bin\Debug\Microsoft.ReportViewer.Common.dll
 D:\SOURCECODE\Eschler\ProductionSystem\ProductionSystem\bin\Debug\Microsoft.ReportViewer.WinForms.dll
+D:\SOURCECODE\Eschler\ProductionSystem\ProductionSystem\bin\Debug\Microsoft.SqlServer.Types.dll

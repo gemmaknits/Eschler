@@ -788,6 +788,7 @@ Public Class frmKnittingOrderNew
         Me.McboIDYarnChange.DataSource = (New classProduction).GetDesignBOM(strDesignNo, clsUser.UserID)
         Me.McboIDYarnChange.DisplayMember = "ynchgcd_col"
         Me.McboIDYarnChange.ValueMember = "id_yarnchange"
+        Me.McboIDYarnChange.SelectedIndex = -1
         Dim glb As GridListBox = TryCast(McboIDYarnChange.ListControl, GridListBox)
         If glb IsNot Nothing Then
             RemoveHandler glb.Grid.Model.QueryCellInfo, AddressOf McboIDYarnChange_Model_QueryCellinfo
@@ -929,7 +930,7 @@ Public Class frmKnittingOrderNew
         ko.design_no = cboDesignNo.SelectedValue.ToString
         ko.qty = txtQty.Text
         'KO.ynchgcd = cboBOM.Text
-        ko.ynchgcd = McboIDYarnChange.ListBox.Grid.Model(McboIDYarnChange.SelectedIndex + 1, 2).CellValue.ToString
+        ko.ynchgcd = If(McboIDYarnChange.ListBox.Grid.Model(McboIDYarnChange.SelectedIndex + 1, 2).CellValue IsNot Nothing, McboIDYarnChange.ListBox.Grid.Model(McboIDYarnChange.SelectedIndex + 1, 2).CellValue.ToString(), "")
         ko.daily_capacity_kg = txtDailyCapacity.Text
         ko.roll_kgs_std = txtStandardRollKgs.Text
         ko.kstartdt = dtpStartDate.Value.ToString

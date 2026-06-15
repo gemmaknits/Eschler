@@ -1138,3 +1138,4 @@ D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\CrystalDecisio
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.vbproj.AssemblyReference.cache
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrderSystem.vbproj.CoreCompileInputs.cache
 D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\obj\Debug\SalesOrd.14E3A24E.Up2Date
+D:\SOURCECODE\Eschler\SalesOrderSystem\SalesOrderSystem\bin\Debug\CrystalDecisions.ReportSource.dll

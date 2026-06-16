@@ -17,9 +17,14 @@ Public Class frmInvoiceExportControl
 		Dim objDB2 As New classInvoice
 		Dim dt As DataTable
 		dt = objDB.GetCustomer
+		Dim rowAll As DataRow = dt.NewRow()
+		rowAll("custcd") = ""
+		rowAll("name") = "ทั้งหมด"
+		dt.Rows.InsertAt(rowAll, 0)
 		Me.cboCustomer.DataSource = dt
 		Me.cboCustomer.DisplayMember = "name"
 		Me.cboCustomer.ValueMember = "custcd"
+		Me.cboCustomer.SelectedIndex = 0
 
 		dt = objDB.GetAgent
 		Me.cboAgent.DataSource = dt

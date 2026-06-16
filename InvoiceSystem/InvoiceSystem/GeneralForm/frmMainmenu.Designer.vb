@@ -660,31 +660,31 @@ Partial Class frmMainmenu
         '
         Me.BOIToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BOIFromGINToolStripMenuItem, Me.BOIFromGOUTToolStripMenuItem, Me.BOIFromDINToolStripMenuItem, Me.BOIFromDOUTToolStripMenuItem})
         Me.BOIToolStripMenuItem.Name = "BOIToolStripMenuItem"
-        Me.BOIToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.BOIToolStripMenuItem.Size = New System.Drawing.Size(93, 22)
         Me.BOIToolStripMenuItem.Text = "BOI"
         '
         'BOIFromGINToolStripMenuItem
         '
         Me.BOIFromGINToolStripMenuItem.Name = "BOIFromGINToolStripMenuItem"
-        Me.BOIFromGINToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.BOIFromGINToolStripMenuItem.Size = New System.Drawing.Size(158, 22)
         Me.BOIFromGINToolStripMenuItem.Text = "BOI From GIN"
         '
         'BOIFromGOUTToolStripMenuItem
         '
         Me.BOIFromGOUTToolStripMenuItem.Name = "BOIFromGOUTToolStripMenuItem"
-        Me.BOIFromGOUTToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.BOIFromGOUTToolStripMenuItem.Size = New System.Drawing.Size(158, 22)
         Me.BOIFromGOUTToolStripMenuItem.Text = "BOI From GOUT"
         '
         'BOIFromDINToolStripMenuItem
         '
         Me.BOIFromDINToolStripMenuItem.Name = "BOIFromDINToolStripMenuItem"
-        Me.BOIFromDINToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.BOIFromDINToolStripMenuItem.Size = New System.Drawing.Size(158, 22)
         Me.BOIFromDINToolStripMenuItem.Text = "BOI From DIN"
         '
         'BOIFromDOUTToolStripMenuItem
         '
         Me.BOIFromDOUTToolStripMenuItem.Name = "BOIFromDOUTToolStripMenuItem"
-        Me.BOIFromDOUTToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.BOIFromDOUTToolStripMenuItem.Size = New System.Drawing.Size(158, 22)
         Me.BOIFromDOUTToolStripMenuItem.Text = "BOI From DOUT"
         '
         'menuExit

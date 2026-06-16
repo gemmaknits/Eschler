@@ -137,7 +137,7 @@ Partial Class frmMainmenu
         'tsmnYarnMasterReport
         '
         Me.tsmnYarnMasterReport.Name = "tsmnYarnMasterReport"
-        Me.tsmnYarnMasterReport.Size = New System.Drawing.Size(175, 22)
+        Me.tsmnYarnMasterReport.Size = New System.Drawing.Size(174, 22)
         Me.tsmnYarnMasterReport.Text = "Yarn Master Report"
         '
         'MenuPurchase
@@ -150,122 +150,122 @@ Partial Class frmMainmenu
         'menuPurchaseNewedit
         '
         Me.menuPurchaseNewedit.Name = "menuPurchaseNewedit"
-        Me.menuPurchaseNewedit.Size = New System.Drawing.Size(152, 22)
+        Me.menuPurchaseNewedit.Size = New System.Drawing.Size(180, 22)
         Me.menuPurchaseNewedit.Text = "New / Edit"
         '
         'menuPurchaseNew
         '
         Me.menuPurchaseNew.Name = "menuPurchaseNew"
-        Me.menuPurchaseNew.Size = New System.Drawing.Size(152, 22)
+        Me.menuPurchaseNew.Size = New System.Drawing.Size(180, 22)
         Me.menuPurchaseNew.Text = "New"
         '
         'menuPurchaseEdit
         '
         Me.menuPurchaseEdit.Name = "menuPurchaseEdit"
-        Me.menuPurchaseEdit.Size = New System.Drawing.Size(152, 22)
+        Me.menuPurchaseEdit.Size = New System.Drawing.Size(180, 22)
         Me.menuPurchaseEdit.Text = "Edit"
         '
         'menuPurchaseEditBOI
         '
         Me.menuPurchaseEditBOI.Name = "menuPurchaseEditBOI"
-        Me.menuPurchaseEditBOI.Size = New System.Drawing.Size(152, 22)
+        Me.menuPurchaseEditBOI.Size = New System.Drawing.Size(180, 22)
         Me.menuPurchaseEditBOI.Text = "EditBOI"
         '
         'menuPurchaseApprove
         '
         Me.menuPurchaseApprove.Name = "menuPurchaseApprove"
-        Me.menuPurchaseApprove.Size = New System.Drawing.Size(152, 22)
+        Me.menuPurchaseApprove.Size = New System.Drawing.Size(180, 22)
         Me.menuPurchaseApprove.Text = "Approve"
         '
         'menuPurchaseCancel
         '
         Me.menuPurchaseCancel.Name = "menuPurchaseCancel"
-        Me.menuPurchaseCancel.Size = New System.Drawing.Size(152, 22)
+        Me.menuPurchaseCancel.Size = New System.Drawing.Size(180, 22)
         Me.menuPurchaseCancel.Text = "Cancel"
         '
         'PaidPOToolStripMenuItem
         '
         Me.PaidPOToolStripMenuItem.Name = "PaidPOToolStripMenuItem"
-        Me.PaidPOToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.PaidPOToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.PaidPOToolStripMenuItem.Text = "Paid P/O"
         '
         'menuClosePO
         '
         Me.menuClosePO.Name = "menuClosePO"
-        Me.menuClosePO.Size = New System.Drawing.Size(152, 22)
+        Me.menuClosePO.Size = New System.Drawing.Size(180, 22)
         Me.menuClosePO.Text = "Close P/O"
         '
         'menuPrintPO
         '
         Me.menuPrintPO.Name = "menuPrintPO"
-        Me.menuPrintPO.Size = New System.Drawing.Size(152, 22)
+        Me.menuPrintPO.Size = New System.Drawing.Size(180, 22)
         Me.menuPrintPO.Text = "Print P/O"
         '
         'ReportsToolStripMenuItem
         '
         Me.ReportsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.menuReportsPOHistory, Me.menuReportsYarnLatestPrice, Me.POYarnPendingToolStripMenuItem, Me.POAllPendingToolStripMenuItem, Me.YarnInventorySpecificCostToolStripMenuItem, Me.POCalendarToolStripMenuItem, Me.POOntimeToolStripMenuItem, Me.POOntimeByYearToolStripMenuItem, Me.POImportAnalysisToolStripMenuItem, Me.POYarnTestReportToolStripMenuItem})
         Me.ReportsToolStripMenuItem.Name = "ReportsToolStripMenuItem"
-        Me.ReportsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ReportsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ReportsToolStripMenuItem.Text = "Reports"
         '
         'menuReportsPOHistory
         '
         Me.menuReportsPOHistory.Name = "menuReportsPOHistory"
-        Me.menuReportsPOHistory.Size = New System.Drawing.Size(222, 22)
+        Me.menuReportsPOHistory.Size = New System.Drawing.Size(221, 22)
         Me.menuReportsPOHistory.Text = "P/O History report"
         '
         'menuReportsYarnLatestPrice
         '
         Me.menuReportsYarnLatestPrice.Name = "menuReportsYarnLatestPrice"
-        Me.menuReportsYarnLatestPrice.Size = New System.Drawing.Size(222, 22)
+        Me.menuReportsYarnLatestPrice.Size = New System.Drawing.Size(221, 22)
         Me.menuReportsYarnLatestPrice.Text = "Yarn Latest Price"
         '
         'POYarnPendingToolStripMenuItem
         '
         Me.POYarnPendingToolStripMenuItem.Name = "POYarnPendingToolStripMenuItem"
-        Me.POYarnPendingToolStripMenuItem.Size = New System.Drawing.Size(222, 22)
+        Me.POYarnPendingToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
         Me.POYarnPendingToolStripMenuItem.Text = "P/O Yarn Pending"
         '
         'POAllPendingToolStripMenuItem
         '
         Me.POAllPendingToolStripMenuItem.Name = "POAllPendingToolStripMenuItem"
-        Me.POAllPendingToolStripMenuItem.Size = New System.Drawing.Size(222, 22)
+        Me.POAllPendingToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
         Me.POAllPendingToolStripMenuItem.Text = "P/O All Pending"
         '
         'YarnInventorySpecificCostToolStripMenuItem
         '
         Me.YarnInventorySpecificCostToolStripMenuItem.Name = "YarnInventorySpecificCostToolStripMenuItem"
-        Me.YarnInventorySpecificCostToolStripMenuItem.Size = New System.Drawing.Size(222, 22)
+        Me.YarnInventorySpecificCostToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
         Me.YarnInventorySpecificCostToolStripMenuItem.Text = "Yarn Inventory Specific Cost"
         '
         'POCalendarToolStripMenuItem
         '
         Me.POCalendarToolStripMenuItem.Name = "POCalendarToolStripMenuItem"
-        Me.POCalendarToolStripMenuItem.Size = New System.Drawing.Size(222, 22)
+        Me.POCalendarToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
         Me.POCalendarToolStripMenuItem.Text = "P/O Calendar"
         '
         'POOntimeToolStripMenuItem
         '
         Me.POOntimeToolStripMenuItem.Name = "POOntimeToolStripMenuItem"
-        Me.POOntimeToolStripMenuItem.Size = New System.Drawing.Size(222, 22)
+        Me.POOntimeToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
         Me.POOntimeToolStripMenuItem.Text = "P/O Ontime"
         '
         'POOntimeByYearToolStripMenuItem
         '
         Me.POOntimeByYearToolStripMenuItem.Name = "POOntimeByYearToolStripMenuItem"
-        Me.POOntimeByYearToolStripMenuItem.Size = New System.Drawing.Size(222, 22)
+        Me.POOntimeByYearToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
         Me.POOntimeByYearToolStripMenuItem.Text = "P/O Ontime By Year"
         '
         'POImportAnalysisToolStripMenuItem
         '
         Me.POImportAnalysisToolStripMenuItem.Name = "POImportAnalysisToolStripMenuItem"
-        Me.POImportAnalysisToolStripMenuItem.Size = New System.Drawing.Size(222, 22)
+        Me.POImportAnalysisToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
         Me.POImportAnalysisToolStripMenuItem.Text = "P/O Import Analysis"
         '
         'POYarnTestReportToolStripMenuItem
         '
         Me.POYarnTestReportToolStripMenuItem.Name = "POYarnTestReportToolStripMenuItem"
-        Me.POYarnTestReportToolStripMenuItem.Size = New System.Drawing.Size(222, 22)
+        Me.POYarnTestReportToolStripMenuItem.Size = New System.Drawing.Size(221, 22)
         Me.POYarnTestReportToolStripMenuItem.Text = "P/O Yarn Test Report"
         '
         'menuJoborder
@@ -355,19 +355,19 @@ Partial Class frmMainmenu
         'CascadeToolStripMenuItem1
         '
         Me.CascadeToolStripMenuItem1.Name = "CascadeToolStripMenuItem1"
-        Me.CascadeToolStripMenuItem1.Size = New System.Drawing.Size(151, 22)
+        Me.CascadeToolStripMenuItem1.Size = New System.Drawing.Size(150, 22)
         Me.CascadeToolStripMenuItem1.Text = "Cascade"
         '
         'TileHorizontalToolStripMenuItem
         '
         Me.TileHorizontalToolStripMenuItem.Name = "TileHorizontalToolStripMenuItem"
-        Me.TileHorizontalToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
+        Me.TileHorizontalToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
         Me.TileHorizontalToolStripMenuItem.Text = "Tile Horizontal"
         '
         'TileVerticalToolStripMenuItem
         '
         Me.TileVerticalToolStripMenuItem.Name = "TileVerticalToolStripMenuItem"
-        Me.TileVerticalToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
+        Me.TileVerticalToolStripMenuItem.Size = New System.Drawing.Size(150, 22)
         Me.TileVerticalToolStripMenuItem.Text = "Tile Vertical"
         '
         'ChangePasswordToolStripMenuItem
@@ -393,6 +393,7 @@ Partial Class frmMainmenu
         'txtExchangeRate
         '
         Me.txtExchangeRate.Enabled = False
+        Me.txtExchangeRate.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.txtExchangeRate.Name = "txtExchangeRate"
         Me.txtExchangeRate.Size = New System.Drawing.Size(50, 23)
         Me.txtExchangeRate.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Right

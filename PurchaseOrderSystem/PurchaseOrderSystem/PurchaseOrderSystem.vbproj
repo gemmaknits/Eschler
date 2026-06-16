@@ -159,7 +159,7 @@
     <Import Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\classConnection\classConnectionColomboDB.vb" />
+    <Compile Include="Classes\classConnection\classConnectionEschlerDB.vb" />
     <Compile Include="Controls\MultiColumnComboBox.vb" />
     <Compile Include="Controls\NullableDateTimePicker.vb" />
     <Compile Include="Classes\classConfig\clsConfig.vb" />

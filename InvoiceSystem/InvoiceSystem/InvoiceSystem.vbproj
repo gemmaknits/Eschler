@@ -419,12 +419,6 @@
     <Compile Include="PackingList\frmPackingListGreige.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PackingList\frmReportPLG.Designer.vb">
-      <DependentUpon>frmReportPLG.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PackingList\frmReportPLG.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Report\frmBOIFromDIN.Designer.vb">
       <DependentUpon>frmBOIFromDIN.vb</DependentUpon>
     </Compile>
@@ -895,9 +889,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PackingList\frmPackingListGreige.resx">
       <DependentUpon>frmPackingListGreige.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PackingList\frmReportPLG.resx">
-      <DependentUpon>frmReportPLG.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\frmBOIFromDIN.resx">
       <DependentUpon>frmBOIFromDIN.vb</DependentUpon>

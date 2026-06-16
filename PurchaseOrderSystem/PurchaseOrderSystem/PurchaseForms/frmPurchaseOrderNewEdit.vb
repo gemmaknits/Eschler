@@ -565,7 +565,7 @@ Public Class frmPurchaseOrderNewEdit
         Dim Address As String
 
         If Me.CbSupplier.SelectedIndex = -1 Then
-            MessageBox.Show("����ԡ���͡ Supplier ��ҹ�鹤�Ѻ", "��ͼԴ��Ҵ", MessageBoxButtons.OK, MessageBoxIcon.Stop)
+            MessageBox.Show("กรุณาเลือก Supplier ก่อนนะครับ", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Stop)
             Exit Sub
         End If
 
@@ -587,17 +587,17 @@ Public Class frmPurchaseOrderNewEdit
 
         drvJob = CType(bsJob.Current, DataRowView)
         If (New clsConfig).IsNull(drvJob.Row("curr"), "").ToString.Trim <> "THB" And oConfig.IsNull(drvJob.Row("exrt"), 0) = 1 Then
-            MessageError &= "���ʡ���Թ��ʡ���Թ��ҧ����� �÷�Թ��ͧ�������ҡѺ 1" & vbCrLf
-            'MessageBox.Show("���ʡ���Թ��ʡ���Թ��ҧ����� �÷�Թ��ͧ�������ҡѺ 1" & vbCrLf &
+            MessageError &= "ถ้าสกุลเงินเป็นสกุลเงินต่างประเทศ อัตราแลกเปลี่ยนต้องไม่เท่ากับ 1" & vbCrLf
+            'MessageBox.Show("ถ้าสกุลเงินเป็นสกุลเงินต่างประเทศ อัตราแลกเปลี่ยนต้องไม่เท่ากับ 1" & vbCrLf &
             '               "If Currency equals foreigner then exchange rate not equals one", "System Meassge", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
-            eptxtrate.SetError(Me.txtrate, "���ʡ���Թ��ʡ���Թ��ҧ����� �÷�Թ��ͧ�������ҡѺ 1" & vbCrLf & "If Currency equals foreigner then exchange rate not equals one")
+            eptxtrate.SetError(Me.txtrate, "ถ้าสกุลเงินเป็นสกุลเงินต่างประเทศ อัตราแลกเปลี่ยนต้องไม่เท่ากับ 1" & vbCrLf & "If Currency equals foreigner then exchange rate not equals one")
             result = False
         Else
             eptxtrate.Clear()
         End If
 
         If oConfig.IsNull(drvJob.Row("suppcd"), "") = "" Then
-            MessageError &= "�ѧ��������͡ supplier" & vbCrLf
+            MessageError &= "ยังไม่ได้เลือก supplier" & vbCrLf
             'MessageBox.Show("��ͧ�� supplier", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
             Me.epcboSupplier.SetError(Me.cboSupplier, "Select a valid supplier")
             Me.TabControl1.SelectedTab = TabPage1
@@ -607,7 +607,7 @@ Public Class frmPurchaseOrderNewEdit
         End If
 
         If oConfig.IsNull(drvJob.Row("empcd"), "") = "" Then
-            MessageError &= "�ѧ��������͡ Person Request" & vbCrLf
+            MessageError &= "ยังไม่ได้เลือก Person Request" & vbCrLf
             'MessageBox.Show("��ͧ�� Person Request", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
             epcomboEmp.SetError(Me.comboEmp, "Select person who made the request..")
             result = False
@@ -616,7 +616,7 @@ Public Class frmPurchaseOrderNewEdit
         End If
 
         If oConfig.IsNull(drvJob.Row("curr"), "") = "" Then 'As String
-            MessageError &= "�ѧ��������͡ currency" & vbCrLf
+            MessageError &= "ยังไม่ได้เลือก currency" & vbCrLf
             'MessageBox.Show("��ͧ�� currency", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
             epcboCurrency.SetError(Me.cboCurrency, "Select currency..")
             result = False
@@ -625,7 +625,7 @@ Public Class frmPurchaseOrderNewEdit
         End If
 
         If oConfig.IsNull(drvJob.Row("deptcd"), "") = "" Then
-            MessageError &= "�ѧ��������͡ Department" & vbCrLf
+            MessageError &= "ยังไม่ได้เลือก Department" & vbCrLf
             ' MessageBox.Show("��ͧ�� Dept", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
             epcboDept.SetError(Me.cboDept, "Select Dept..")
             result = False
@@ -634,7 +634,7 @@ Public Class frmPurchaseOrderNewEdit
         End If
 
         If (New clsConfig).IsNull(drvJob.Row("ap_payment_term_id"), 0) = 0 Then
-            MessageError &= "�ѧ��������͡ Payment Term" & vbCrLf
+            MessageError &= "ยังไม่ได้เลือก Payment Term" & vbCrLf
             'MessageBox.Show("��ͧ�� Payment Term", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
             epcboPaymentTerm.SetError(Me.cboPaymentTerm, "Select Payment Term")
             result = False
@@ -643,7 +643,7 @@ Public Class frmPurchaseOrderNewEdit
         End If
 
         If oConfig.IsNull(drvJob.Row("po_line_types_id"), 0) = 0 Then
-            MessageError &= "�ѧ��������͡ Line Type" & vbCrLf
+            MessageError &= "ยังไม่ได้เลือก Line Type" & vbCrLf
             'MessageBox.Show("��ͧ�� Line Type", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
             epmcboPoLineType.SetError(Me.mcboPoLineType, "Select Line Type")
             result = False
@@ -655,20 +655,20 @@ Public Class frmPurchaseOrderNewEdit
             If dr.RowState <> DataRowState.Deleted Then
 
                 If Not (New classPurchaseNewEdit).ValidateItcd(StrItcd:=oConfig.IsNull(dr("itcd"), "")) Then
-                    MessageError &= "��¡�÷�� " & (dtJobDet.Rows.IndexOf(dr) + 1).ToString.Trim & " " & "Item No ���١��ͧ" & vbCrLf
+                    MessageError &= "แถวที่ " & (dtJobDet.Rows.IndexOf(dr) + 1).ToString.Trim & " " & "Item No ไม่ถูกต้อง" & vbCrLf
                     ' MessageBox.Show("��辺 Item Master ��к�", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
                     result = False
                 End If
 
                 If oConfig.IsNull(dr("uom_id"), 0) = 0 Then
-                    MessageError &= "��¡�÷�� " & (dtJobDet.Rows.IndexOf(dr) + 1).ToString.Trim & " " & " ��ͧ�� UOM" & vbCrLf
+                    MessageError &= "แถวที่ " & (dtJobDet.Rows.IndexOf(dr) + 1).ToString.Trim & " " & " ต้องระบุ UOM" & vbCrLf
 
                     'MessageBox.Show("��ͧ�� UOM", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
                     result = False
                 End If
 
                 If oConfig.IsNull(dr("rcv_warehouse_id"), 0) = 0 Then
-                    MessageError &= "��¡�÷�� " & (dtJobDet.Rows.IndexOf(dr) + 1).ToString.Trim & " " & " ��ͧ�� W/H" & vbCrLf
+                    MessageError &= "แถวที่ " & (dtJobDet.Rows.IndexOf(dr) + 1).ToString.Trim & " " & " ต้องระบุ W/H" & vbCrLf
 
                     ' MessageBox.Show("��ͧ�� W/H", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
                     result = False
@@ -685,7 +685,7 @@ Public Class frmPurchaseOrderNewEdit
                 'End If
 
                 If oConfig.IsNull(dr("qty"), 0) = 0 Then
-                    MessageError &= "��¡�÷�� " & (dtJobDet.Rows.IndexOf(dr) + 1).ToString.Trim & " " & "��ͧ�� Qty �ҡ���� 0" & vbCrLf
+                    MessageError &= "แถวที่ " & (dtJobDet.Rows.IndexOf(dr) + 1).ToString.Trim & " " & "ต้องระบุ Qty มากกว่า 0" & vbCrLf
 
                     ' MessageBox.Show("��ͧ�� Qty �ҡ���� 0", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
                     result = False
@@ -1192,7 +1192,7 @@ Public Class frmPurchaseOrderNewEdit
 
         If (New classPurchaseNewEdit).SavePurchaseOrder(drvJob, dtJobDet, msgerr, clsUser.UserID) Then
             txtPurNo.Text = drvJob.Row("jobno")
-            MessageBox.Show("�ѹ�֡�����" & txtPurNo.Text.Trim, "System Message", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
+            MessageBox.Show("บันทึกสำเร็จ " & txtPurNo.Text.Trim, "System Message", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
 
             SaveData = True
         Else
@@ -1208,7 +1208,7 @@ Public Class frmPurchaseOrderNewEdit
         blnCancel = False
         Dim result As System.Windows.Forms.DialogResult
         result = MessageBox.Show("Would you Like To save ?" & vbCrLf &
-        IIf(IIf(txtPurNo.Text.Trim.Length = 0, txtPurNo.Text.Trim, txtPurNo.Text.Trim).ToString.Trim.Length = 0, "** ��������� P/O No. �к����ѹ����ѵ���ѵ� **", "P/O No. = '" & IIf(txtPurNo.Text.Trim.Length = 0, txtPurNo.Text.Trim, txtPurNo.Text.Trim) & "'"),
+        IIf(IIf(txtPurNo.Text.Trim.Length = 0, txtPurNo.Text.Trim, txtPurNo.Text.Trim).ToString.Trim.Length = 0, "** ระบบจะออก P/O No. ให้อัตโนมัติ **", "P/O No. = '" & IIf(txtPurNo.Text.Trim.Length = 0, txtPurNo.Text.Trim, txtPurNo.Text.Trim) & "'"),
         "System Message", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3)
 
         If result = System.Windows.Forms.DialogResult.Cancel Then blnCancel = True
@@ -1230,7 +1230,7 @@ Public Class frmPurchaseOrderNewEdit
         blnCancel = False
         Dim result As System.Windows.Forms.DialogResult
         result = MessageBox.Show("Would you like to save ?" & vbCrLf &
-        IIf(IIf(txtPurNo.Text.Trim.Length = 0, txtPurNo.Text.Trim, txtPurNo.Text.Trim).ToString.Trim.Length = 0, "** ��������� P/O No. �к����ѹ����ѵ���ѵ� **", "P/O No. = '" & IIf(txtPurNo.Text.Trim.Length = 0, txtPurNo.Text.Trim, txtPurNo.Text.Trim) & "'"),
+        IIf(IIf(txtPurNo.Text.Trim.Length = 0, txtPurNo.Text.Trim, txtPurNo.Text.Trim).ToString.Trim.Length = 0, "** ระบบจะออก P/O No. ให้อัตโนมัติ **", "P/O No. = '" & IIf(txtPurNo.Text.Trim.Length = 0, txtPurNo.Text.Trim, txtPurNo.Text.Trim) & "'"),
         "System Message", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3)
 
         If result = System.Windows.Forms.DialogResult.Cancel Then blnCancel = True
@@ -1335,7 +1335,7 @@ Public Class frmPurchaseOrderNewEdit
 
         If (New classPurchaseNewEdit).ApprovePurchaseOrder(drvJob.Row("jobno"), pRemApp, msgerr, clsUser.UserID) Then
             txtPurNo.Text = drvJob.Row("jobno")
-            MessageBox.Show("Approve �����" & txtPurNo.Text.Trim, "System Message", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
+            MessageBox.Show("Approve สำเร็จ " & txtPurNo.Text.Trim, "System Message", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
 
             ApproveData = True
         Else
@@ -1369,7 +1369,7 @@ Public Class frmPurchaseOrderNewEdit
 
         If (New classPurchaseNewEdit).CancelPurchaseOrder(drvJob.Row("jobno"), pRemCancel, msgerr, clsUser.UserID) Then
             txtPurNo.Text = drvJob.Row("jobno")
-            MessageBox.Show("Cancel �����" & txtPurNo.Text.Trim, "System Message", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
+            MessageBox.Show("Cancel สำเร็จ " & txtPurNo.Text.Trim, "System Message", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
 
             CancelData = True
         Else
@@ -1385,7 +1385,7 @@ Public Class frmPurchaseOrderNewEdit
         drvJob = CType(bsJob.Current, DataRowView)
 
         If txtPresentStatus.Text = "CANCELLED" Then
-            MessageBox.Show("P/O ��ʶҹ�¡��ԡ����� �������ö ¡��ԡ���ա" & vbCrLf &
+            MessageBox.Show("P/O นี้สถานะถูกยกเลิกแล้ว ไม่สามารถยกเลิกอีก" & vbCrLf &
                             "This P/O is already cancelled", "System Meassge", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
             'epPresentStatus.SetError(Me.txtPresentStatus, "P/O ��ʶҹ�¡��ԡ����� �������ö ¡��ԡ���ա" & vbCrLf & "If Currency equals foreigner then exchange rate not equals one")
             result = False
@@ -1437,7 +1437,7 @@ Public Class frmPurchaseOrderNewEdit
 
         If (New classPurchaseNewEdit).ClosePurchaseOrder(drvJob.Row("jobno"), pRemApp, msgerr, clsUser.UserID) Then
             txtPurNo.Text = drvJob.Row("jobno")
-            MessageBox.Show("Close �����" & txtPurNo.Text.Trim, "System Message", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
+            MessageBox.Show("Close สำเร็จ " & txtPurNo.Text.Trim, "System Message", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
             CloseData = True
         Else
             MessageBox.Show(msgerr, "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)

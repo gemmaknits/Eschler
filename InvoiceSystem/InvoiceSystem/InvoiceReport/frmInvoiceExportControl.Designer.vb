@@ -36,6 +36,9 @@ Partial Class frmInvoiceExportControl
         Me.btnExit = New System.Windows.Forms.ToolStripButton()
         Me.cboDesignNo = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblPeriod = New System.Windows.Forms.Label()
+        Me.cboPeriodMonth = New System.Windows.Forms.ComboBox()
+        Me.cboPeriodYear = New System.Windows.Forms.ComboBox()
         Me.GroupBox1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -78,7 +81,7 @@ Partial Class frmInvoiceExportControl
         'Label6
         '
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label6.Location = New System.Drawing.Point(13, 168)
+        Me.Label6.Location = New System.Drawing.Point(13, 198)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(328, 32)
         Me.Label6.TabIndex = 21
@@ -95,6 +98,9 @@ Partial Class frmInvoiceExportControl
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.lblPeriod)
+        Me.GroupBox1.Controls.Add(Me.cboPeriodMonth)
+        Me.GroupBox1.Controls.Add(Me.cboPeriodYear)
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Controls.Add(Me.cboDesignNo)
         Me.GroupBox1.Controls.Add(Me.Label5)
@@ -107,7 +113,7 @@ Partial Class frmInvoiceExportControl
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Location = New System.Drawing.Point(8, 32)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(336, 133)
+        Me.GroupBox1.Size = New System.Drawing.Size(336, 160)
         Me.GroupBox1.TabIndex = 20
         Me.GroupBox1.TabStop = False
         '
@@ -189,11 +195,38 @@ Partial Class frmInvoiceExportControl
         Me.Label1.TabIndex = 11
         Me.Label1.Text = "Design No."
         '
+        'lblPeriod
+        '
+        Me.lblPeriod.AutoSize = True
+        Me.lblPeriod.Location = New System.Drawing.Point(8, 116)
+        Me.lblPeriod.Name = "lblPeriod"
+        Me.lblPeriod.Size = New System.Drawing.Size(32, 13)
+        Me.lblPeriod.TabIndex = 12
+        Me.lblPeriod.Text = "งวด"
+        '
+        'cboPeriodMonth
+        '
+        Me.cboPeriodMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboPeriodMonth.FormattingEnabled = True
+        Me.cboPeriodMonth.Location = New System.Drawing.Point(112, 113)
+        Me.cboPeriodMonth.Name = "cboPeriodMonth"
+        Me.cboPeriodMonth.Size = New System.Drawing.Size(130, 21)
+        Me.cboPeriodMonth.TabIndex = 13
+        '
+        'cboPeriodYear
+        '
+        Me.cboPeriodYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboPeriodYear.FormattingEnabled = True
+        Me.cboPeriodYear.Location = New System.Drawing.Point(248, 113)
+        Me.cboPeriodYear.Name = "cboPeriodYear"
+        Me.cboPeriodYear.Size = New System.Drawing.Size(80, 21)
+        Me.cboPeriodYear.TabIndex = 14
+        '
         'frmInvoiceExportControl
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(353, 209)
+        Me.ClientSize = New System.Drawing.Size(353, 236)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.ToolStrip1)
@@ -226,4 +259,7 @@ Partial Class frmInvoiceExportControl
     Friend WithEvents btnExit As System.Windows.Forms.ToolStripButton
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents cboDesignNo As System.Windows.Forms.ComboBox
+    Friend WithEvents lblPeriod As System.Windows.Forms.Label
+    Friend WithEvents cboPeriodMonth As System.Windows.Forms.ComboBox
+    Friend WithEvents cboPeriodYear As System.Windows.Forms.ComboBox
 End Class

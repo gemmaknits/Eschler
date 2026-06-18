@@ -29,6 +29,9 @@
     Private Const COL_WAREHOUSE As String = "colCuttingINMtlWarehouse"
     Private Const COL_SUBINV As String = "colCuttingINMtlSubInventory"
     Private Const COL_LOCATION As String = "colCuttingINMtlLocation"
+    Private Const COL_MTS As String = "colCuttingINMts"
+    Private Const COL_YDS As String = "colCuttingINYds"
+    Private Const MTS_TO_YDS As Double = 1.09361
 
     Public Sub InitMtlCascading()
         ' _mtlSvc = New MtlLookupService(My.Settings.ConnStr)
@@ -166,7 +169,7 @@
     Private Sub dgvCuttingIn_CurrentCellDirtyStateChanged(sender As Object, e As EventArgs)
         If dgvCuttingIN.IsCurrentCellDirty Then
             Dim colName = dgvCuttingIN.Columns(dgvCuttingIN.CurrentCell.ColumnIndex).Name
-            If colName = COL_WAREHOUSE OrElse colName = COL_SUBINV OrElse colName = COL_LOCATION Then
+            If colName = COL_WAREHOUSE OrElse colName = COL_SUBINV OrElse colName = COL_LOCATION OrElse colName = COL_MTS Then
                 dgvCuttingIN.CommitEdit(DataGridViewDataErrorContexts.Commit)
             End If
         End If
@@ -184,6 +187,9 @@
 
         ElseIf colName = COL_SUBINV Then
             HandleSubInvChanged(e.RowIndex)
+
+        ElseIf colName = COL_MTS Then
+            HandleMtsChanged(e.RowIndex)
 
         End If
     End Sub
@@ -216,6 +222,14 @@
 
         _suppress = False
     End Sub
+    Private Sub HandleMtsChanged(rowIndex As Integer)
+        Dim mtsObj = dgvCuttingIN.Rows(rowIndex).Cells(COL_MTS).Value
+        If IsDBNull(mtsObj) OrElse mtsObj Is Nothing Then Exit Sub
+        Dim mtsVal As Double
+        If Not Double.TryParse(mtsObj.ToString, mtsVal) Then Exit Sub
+        dgvCuttingIN.Rows(rowIndex).Cells(COL_YDS).Value = Math.Round(mtsVal * MTS_TO_YDS, 2)
+    End Sub
+
     Private Sub BindSubInventoryForRow(rowIndex As Integer, warehouseId As Integer)
 
         Dim cell = TryCast(dgvCuttingIN.Rows(rowIndex).Cells(COL_SUBINV), DataGridViewComboBoxCell)

@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(Get-ChildItem -Recurse -Filter \"*.csproj\")",
-      "Bash(Select-Object FullName)"
-    ]
-  }
-}

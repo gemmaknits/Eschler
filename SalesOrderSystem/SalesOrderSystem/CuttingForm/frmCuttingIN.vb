@@ -78,8 +78,18 @@
     Private Sub setDefaultValuesFordtCuttingINRecord()
         For Each dc As DataColumn In dtCuttingIN.Columns
             Select Case dc.ColumnName
+                Case "dinno"
+                    ' EDIT mode: ม้วนใหม่รับ CIN No. จาก document เดิม
+                    If pUserEvents = "EDIT" AndAlso dtCuttingIN.Rows.Count > 0 Then
+                        dc.DefaultValue = oConfig.IsNull(dtCuttingIN.Rows(0)("dinno"), "")
+                    End If
                 Case "dindt"
-                    dc.DefaultValue = Now
+                    ' EDIT mode: ม้วนใหม่รับ CIN Date จาก document เดิม (ไม่ใช้ Now)
+                    If pUserEvents = "EDIT" AndAlso dtCuttingIN.Rows.Count > 0 Then
+                        dc.DefaultValue = dtCuttingIN.Rows(0)("dindt")
+                    Else
+                        dc.DefaultValue = Now
+                    End If
                 Case "mtl_warehouse_id"
                     dc.DefaultValue = Userinfo.MtlWareHouseID
                 Case "warehouse_code"
@@ -92,6 +102,8 @@
                     dc.DefaultValue = oCuttingIN.selectdefaultLocationId(Userinfo.MtlWareHouseID) '61
                 Case "location_name"
                     dc.DefaultValue = "N/A"
+                Case "doctyp"
+                    dc.DefaultValue = "C"
             End Select
         Next
     End Sub
@@ -285,6 +297,7 @@
     Private Sub txtCInNo_KeyDown(sender As Object, e As KeyEventArgs) Handles txtCInNo.KeyDown
         If e.KeyCode = Keys.Enter Then
             Dim pCinNo As String = txtCInNo.Text.Trim
+            pUserEvents = "EDIT"
             initDataBindingCuttingIN(pCinNo)
         End If
     End Sub
@@ -477,6 +490,7 @@
             bsCuttingIN.DataSource = dtCuttingIN.DefaultView
             dgvCuttingIN.DataSource = bsCuttingIN
             MessageBox.Show("บันทึกสำเร็จ", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
+            pUserEvents = "EDIT"
             SaveCuttingIN = True
         Else
             MessageBox.Show(msgerr, "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)

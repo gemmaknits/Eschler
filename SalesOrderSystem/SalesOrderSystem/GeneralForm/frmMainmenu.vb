@@ -1509,7 +1509,7 @@ Public Class frmMainmenu
         'MessageBox.Show("Construction" & vbCrLf & ".", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
         Dim frm As New frmPackingListDyed
         frm.Userinfo = clsUser
-        frm.Text = "Packing List Cutting"
+        frm.Text = "Packing List Dyed"
         frm.pStockType = "D"
         frm.MdiParent = Me
         frm.Show()

@@ -287,7 +287,7 @@
 
         InitControl()
         initDataBindingCuttingIN("")
-        ' InitMtlCascading()
+        InitMtlCascading()
     End Sub
 
     Private Sub btnSearchPLS_Click(sender As Object, e As EventArgs) Handles btnSearchCIN.Click

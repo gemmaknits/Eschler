@@ -75,6 +75,7 @@ Public Class classSalesOrder
         Dim h59_jobnocomment3 As String
         Dim h60_jobnocomment4 As String
         Dim h61_design_properties_id As Nullable(Of Int64)
+        Dim h62_cust_addl_info As String
         '-------------------------
     End Structure
 
@@ -288,6 +289,8 @@ Public Class classSalesOrder
             comm.Parameters.AddWithValue("@p_ref_job_no_comment3", .h59_jobnocomment3.Trim)
             comm.Parameters.AddWithValue("@p_ref_job_no_comment4", .h60_jobnocomment4.Trim)
             comm.Parameters.AddWithValue("@p_design_properties_id", .h61_design_properties_id)
+            '----------------------
+            comm.Parameters.AddWithValue("@p_cust_addl_info", .h62_cust_addl_info.Trim)
 
 
             '-----------------------------------

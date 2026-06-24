@@ -1,7 +1,6 @@
 ﻿Imports System.Data
 Imports System.Data.SqlClient
 Imports System.Text
-Imports Syncfusion.Windows.Forms.Tools
 
 Public Class frmPurchaseOrderEditBOI
     Private config As New clsConfig

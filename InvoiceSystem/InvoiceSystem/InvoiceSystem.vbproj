@@ -119,13 +119,6 @@
       <HintPath>..\packages\RestSharp.104.4.0\lib\net4\RestSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Syncfusion.Grid.Base, Version=14.4400.0.20, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89" />
-    <Reference Include="Syncfusion.Grid.Windows, Version=14.4400.0.20, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89" />
-    <Reference Include="Syncfusion.Shared.Base, Version=14.4400.0.20, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89" />
-    <Reference Include="Syncfusion.Shared.Windows, Version=14.4400.0.20, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89" />
-    <Reference Include="Syncfusion.SpellChecker.Base, Version=14.4400.0.20, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89" />
-    <Reference Include="Syncfusion.Tools.Base, Version=14.4400.0.20, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89" />
-    <Reference Include="Syncfusion.Tools.Windows, Version=14.4400.0.20, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -146,8 +139,9 @@
     <Import Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\classConnection\ClassConnectionColomboDB.vb" />
+    <Compile Include="Controls\MultiColumnComboBox.vb" />
     <Compile Include="Classes\classConfig\clsConfig.vb" />
-    <Compile Include="Classes\classConnection\classConnectionEschlerDB.vb" />
     <Compile Include="Classes\classCreditNoteAR\classCreditNoteAR.vb" />
     <Compile Include="Classes\classCreditNoteAR\classCreditNoteARExport.vb" />
     <Compile Include="Classes\classDebitNoteAR\classDebitNoteAR.vb" />
@@ -423,12 +417,6 @@
       <DependentUpon>frmPackingListGreige.vb</DependentUpon>
     </Compile>
     <Compile Include="PackingList\frmPackingListGreige.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PackingList\frmReportPLG.Designer.vb">
-      <DependentUpon>frmReportPLG.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PackingList\frmReportPLG.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Report\frmBOIFromDIN.Designer.vb">
@@ -902,9 +890,6 @@
     <EmbeddedResource Include="PackingList\frmPackingListGreige.resx">
       <DependentUpon>frmPackingListGreige.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PackingList\frmReportPLG.resx">
-      <DependentUpon>frmReportPLG.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Report\frmBOIFromDIN.resx">
       <DependentUpon>frmBOIFromDIN.vb</DependentUpon>
     </EmbeddedResource>
@@ -1356,86 +1341,6 @@
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="stdole">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>Assembly</FileType>
-    </PublishFile>
-    <PublishFile Include="Syncfusion.Grid.Base">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>Assembly</FileType>
-    </PublishFile>
-    <PublishFile Include="Syncfusion.Grid.Windows">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>Assembly</FileType>
-    </PublishFile>
-    <PublishFile Include="Syncfusion.Grid.Windows.XmlSerializers">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>Assembly</FileType>
-    </PublishFile>
-    <PublishFile Include="Syncfusion.Shared.Base">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>Assembly</FileType>
-    </PublishFile>
-    <PublishFile Include="Syncfusion.Shared.Windows">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>Assembly</FileType>
-    </PublishFile>
-    <PublishFile Include="Syncfusion.SpellChecker.Base">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>Assembly</FileType>
-    </PublishFile>
-    <PublishFile Include="Syncfusion.Tools.Base">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>Assembly</FileType>
-    </PublishFile>
-    <PublishFile Include="Syncfusion.Tools.Windows">
       <Visible>False</Visible>
       <Group>
       </Group>

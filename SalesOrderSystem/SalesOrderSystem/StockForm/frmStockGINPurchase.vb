@@ -129,6 +129,8 @@
         grdData.AutoGenerateColumns = False
         grdData.DataSource = dtData
 
+        Call SumGrid()
+
         txtPONo.Select()
 
     End Sub
@@ -327,6 +329,8 @@
 
         grdData.AutoGenerateColumns = False
         grdData.DataSource = dtData
+
+        Call SumGrid()
 
         If dtData.Rows.Count > 0 Then
             'Dev By Neung 26/03/2015
@@ -745,6 +749,8 @@
 
         End If
 
+        Call SumGrid()
+
         If grdData.Columns(e.ColumnIndex).Name = "grade_bdt" Or
          grdData.Columns(e.ColumnIndex).Name = "grade_adt" Then
             grdData.Rows(e.RowIndex).Cells("grade").Value = grdData.Rows(e.RowIndex).Cells("grade_bdt").Value.ToString.ToUpper.Trim + grdData.Rows(e.RowIndex).Cells("grade_adt").Value.ToString.ToUpper.Trim
@@ -827,6 +833,29 @@
         End If
     End Sub
 
+    Private Sub SumGrid()
+        Dim dt As DataTable = grdData.DataSource
+        If dt Is Nothing Then
+            txtTotalKg.Text = ""
+            txtTotalMts.Text = ""
+            txtTotalYds.Text = ""
+            Exit Sub
+        End If
+        Dim totalKg As Decimal = 0
+        Dim totalMts As Decimal = 0
+        Dim totalYds As Decimal = 0
+        For Each dr As DataRow In dt.Rows
+            If dr.RowState <> DataRowState.Deleted Then
+                totalKg += (New clsConfig).IsNull(dr("kg"), 0D)
+                totalMts += (New clsConfig).IsNull(dr("mts"), 0D)
+                totalYds += (New clsConfig).IsNull(dr("yds"), 0D)
+            End If
+        Next
+        txtTotalKg.Text = FormatNumber(totalKg, 2, TriState.False, TriState.False, TriState.False)
+        txtTotalMts.Text = FormatNumber(totalMts, 2, TriState.False, TriState.False, TriState.False)
+        txtTotalYds.Text = FormatNumber(totalYds, 2, TriState.False, TriState.False, TriState.False)
+    End Sub
+
     Private Function CheckDelRow(ByVal dt As DataTable) As Integer 'Add By Neung 20151222
         Dim i As Integer = 0
         Dim j As Integer = 0
@@ -891,9 +920,7 @@
 
         dtc.Rows.Add(newRow)
 
-
-        'SumGrid(grdYarnIN.DataSource)
-
+        Call SumGrid()
 
     End Function
 

@@ -29,6 +29,9 @@
     Private Const COL_WAREHOUSE As String = "colCuttingINMtlWarehouse"
     Private Const COL_SUBINV As String = "colCuttingINMtlSubInventory"
     Private Const COL_LOCATION As String = "colCuttingINMtlLocation"
+    Private Const COL_MTS As String = "colCuttingINMts"
+    Private Const COL_YDS As String = "colCuttingINYds"
+    Private Const MTS_TO_YDS As Double = 1.09361
 
     Public Sub InitMtlCascading()
         ' _mtlSvc = New MtlLookupService(My.Settings.ConnStr)
@@ -75,8 +78,18 @@
     Private Sub setDefaultValuesFordtCuttingINRecord()
         For Each dc As DataColumn In dtCuttingIN.Columns
             Select Case dc.ColumnName
+                Case "dinno"
+                    ' EDIT mode: ม้วนใหม่รับ CIN No. จาก document เดิม
+                    If pUserEvents = "EDIT" AndAlso dtCuttingIN.Rows.Count > 0 Then
+                        dc.DefaultValue = oConfig.IsNull(dtCuttingIN.Rows(0)("dinno"), "")
+                    End If
                 Case "dindt"
-                    dc.DefaultValue = Now
+                    ' EDIT mode: ม้วนใหม่รับ CIN Date จาก document เดิม (ไม่ใช้ Now)
+                    If pUserEvents = "EDIT" AndAlso dtCuttingIN.Rows.Count > 0 Then
+                        dc.DefaultValue = dtCuttingIN.Rows(0)("dindt")
+                    Else
+                        dc.DefaultValue = Now
+                    End If
                 Case "mtl_warehouse_id"
                     dc.DefaultValue = Userinfo.MtlWareHouseID
                 Case "warehouse_code"
@@ -89,6 +102,8 @@
                     dc.DefaultValue = oCuttingIN.selectdefaultLocationId(Userinfo.MtlWareHouseID) '61
                 Case "location_name"
                     dc.DefaultValue = "N/A"
+                Case "doctyp"
+                    dc.DefaultValue = "C"
             End Select
         Next
     End Sub
@@ -166,7 +181,7 @@
     Private Sub dgvCuttingIn_CurrentCellDirtyStateChanged(sender As Object, e As EventArgs)
         If dgvCuttingIN.IsCurrentCellDirty Then
             Dim colName = dgvCuttingIN.Columns(dgvCuttingIN.CurrentCell.ColumnIndex).Name
-            If colName = COL_WAREHOUSE OrElse colName = COL_SUBINV OrElse colName = COL_LOCATION Then
+            If colName = COL_WAREHOUSE OrElse colName = COL_SUBINV OrElse colName = COL_LOCATION OrElse colName = COL_MTS Then
                 dgvCuttingIN.CommitEdit(DataGridViewDataErrorContexts.Commit)
             End If
         End If
@@ -184,6 +199,9 @@
 
         ElseIf colName = COL_SUBINV Then
             HandleSubInvChanged(e.RowIndex)
+
+        ElseIf colName = COL_MTS Then
+            HandleMtsChanged(e.RowIndex)
 
         End If
     End Sub
@@ -216,6 +234,14 @@
 
         _suppress = False
     End Sub
+    Private Sub HandleMtsChanged(rowIndex As Integer)
+        Dim mtsObj = dgvCuttingIN.Rows(rowIndex).Cells(COL_MTS).Value
+        If IsDBNull(mtsObj) OrElse mtsObj Is Nothing Then Exit Sub
+        Dim mtsVal As Double
+        If Not Double.TryParse(mtsObj.ToString, mtsVal) Then Exit Sub
+        dgvCuttingIN.Rows(rowIndex).Cells(COL_YDS).Value = Math.Round(mtsVal * MTS_TO_YDS, 2)
+    End Sub
+
     Private Sub BindSubInventoryForRow(rowIndex As Integer, warehouseId As Integer)
 
         Dim cell = TryCast(dgvCuttingIN.Rows(rowIndex).Cells(COL_SUBINV), DataGridViewComboBoxCell)
@@ -261,7 +287,7 @@
 
         InitControl()
         initDataBindingCuttingIN("")
-        ' InitMtlCascading()
+        InitMtlCascading()
     End Sub
 
     Private Sub btnSearchPLS_Click(sender As Object, e As EventArgs) Handles btnSearchCIN.Click
@@ -271,6 +297,7 @@
     Private Sub txtCInNo_KeyDown(sender As Object, e As KeyEventArgs) Handles txtCInNo.KeyDown
         If e.KeyCode = Keys.Enter Then
             Dim pCinNo As String = txtCInNo.Text.Trim
+            pUserEvents = "EDIT"
             initDataBindingCuttingIN(pCinNo)
         End If
     End Sub
@@ -463,6 +490,7 @@
             bsCuttingIN.DataSource = dtCuttingIN.DefaultView
             dgvCuttingIN.DataSource = bsCuttingIN
             MessageBox.Show("บันทึกสำเร็จ", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
+            pUserEvents = "EDIT"
             SaveCuttingIN = True
         Else
             MessageBox.Show(msgerr, "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)

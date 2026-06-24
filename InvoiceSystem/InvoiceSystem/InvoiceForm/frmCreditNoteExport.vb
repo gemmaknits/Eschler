@@ -1,5 +1,5 @@
 ﻿Imports System.Data.SqlClient
-Imports Syncfusion.Windows.Forms.Tools
+Imports InvoiceSystemESH.Controls
 
 Public Class frmCreditNoteExport
 
@@ -926,7 +926,7 @@ Public Class frmCreditNoteExport
 
 
 
-    Private Sub McboFreight_Model_QueryCellinfo(ByVal sender As Object, ByVal e As Syncfusion.Windows.Forms.Grid.GridQueryCellInfoEventArgs)
+    Private Sub McboFreight_Model_QueryCellinfo(ByVal sender As Object, ByVal e As InvoiceSystemESH.Controls.GridQueryCellInfoEventArgs)
 
         If e.RowIndex = 0 AndAlso e.ColIndex = 3 Then
             e.Style.Text = "Invoice No"

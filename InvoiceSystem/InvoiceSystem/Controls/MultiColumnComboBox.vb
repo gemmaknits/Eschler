@@ -222,7 +222,9 @@ Namespace Controls
         <Browsable(False), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
         Public Property ScrollMetroColorTable As Object
         <Browsable(False), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
-        Public Property MultiColumn As Boolean
+        Public Property AlphaBlendSelectionColor As Color
+        <Browsable(False), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
+        Public Property DropDownStyle As ComboBoxStyle
 
         Public Event SelectedIndexChanged As EventHandler
         Public Event SelectedValueChanged As EventHandler

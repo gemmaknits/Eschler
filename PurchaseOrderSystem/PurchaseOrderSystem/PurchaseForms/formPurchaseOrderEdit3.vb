@@ -1,7 +1,7 @@
 Imports System.Data
 Imports System.Data.SqlClient
 Imports System.Text
-Imports Syncfusion.Windows.Forms.Tools
+Imports PurchaseOrderSystem.Controls
 Public Class formPurchaseOrderEdit3
     Dim _AppConn As SqlConnection = (New classConnection).getSQLConnection
 
@@ -208,17 +208,17 @@ Public Class formPurchaseOrderEdit3
         GetSoNoId()
 
     End Sub
-    Private Sub Model_QueryCellInfo(ByVal sender As Object, ByVal e As Syncfusion.Windows.Forms.Grid.GridQueryCellInfoEventArgs)
+    Private Sub Model_QueryCellInfo(ByVal sender As Object, ByVal e As PurchaseOrderSystem.Controls.GridQueryCellInfoEventArgs)
         'To specify the row and colum index.
         If e.RowIndex = 0 AndAlso e.ColIndex = 1 Then
             'To specify the font
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New PurchaseOrderSystem.Controls.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             'To specify the text
             e.Style.Text = "PO Line Type Description"
             'To specify the text color.
 
         ElseIf e.RowIndex = 0 AndAlso e.ColIndex = 2 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New PurchaseOrderSystem.Controls.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             e.Style.Text = "Outside Process"
         End If
 
@@ -367,10 +367,10 @@ Public Class formPurchaseOrderEdit3
         m_Msgerr = ""  'Sittana 20190705
 
         If cboCurrency.SelectedValue <> "THB" And oConfig.IsValidDouble(Me.txtrate.Text.Trim) = "1" Then
-            errorCurrency.SetError(Me.txtrate, "¶éÒÊ¡ØÅà§Ô¹à»ç¹Ê¡ØÅà§Ô¹µèÒ§»ÃÐà·È àÃ·à§Ô¹µéÍ§äÁèä´éà·èÒ¡Ñº 1..")
-            ' MessageBox.Show("¶éÒÊ¡ØÅà§Ô¹à»ç¹Ê¡ØÅà§Ô¹µèÒ§»ÃÐà·È àÃ·à§Ô¹µéÍ§äÁèä´éà·èÒ¡Ñº 1", "System Meassge", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+            errorCurrency.SetError(Me.txtrate, "ï¿½ï¿½ï¿½Ê¡ï¿½ï¿½ï¿½Ô¹ï¿½ï¿½Ê¡ï¿½ï¿½ï¿½Ô¹ï¿½ï¿½Ò§ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½Ô¹ï¿½ï¿½Í§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò¡Ñº 1..")
+            ' MessageBox.Show("ï¿½ï¿½ï¿½Ê¡ï¿½ï¿½ï¿½Ô¹ï¿½ï¿½Ê¡ï¿½ï¿½ï¿½Ô¹ï¿½ï¿½Ò§ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½Ô¹ï¿½ï¿½Í§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò¡Ñº 1", "System Meassge", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
             ErrRunno += 1
-            m_Msgerr &= vbCr & ErrRunno.ToString & "¶éÒÊ¡ØÅà§Ô¹à»ç¹Ê¡ØÅà§Ô¹µèÒ§»ÃÐà·È àÃ·à§Ô¹µéÍ§äÁèä´éà·èÒ¡Ñº 1.."
+            m_Msgerr &= vbCr & ErrRunno.ToString & "ï¿½ï¿½ï¿½Ê¡ï¿½ï¿½ï¿½Ô¹ï¿½ï¿½Ê¡ï¿½ï¿½ï¿½Ô¹ï¿½ï¿½Ò§ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½Ô¹ï¿½ï¿½Í§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò¡Ñº 1.."
             m_HeaderHasErrors = True
         End If
 
@@ -428,18 +428,18 @@ Public Class formPurchaseOrderEdit3
         Obj_tbl_job.curr = Me.cboCurrency.SelectedValue 'As String
         Obj_tbl_job.exrt = (Me.txtrate.Text) 'As Double
 
-        Obj_tbl_job.gross_amt = Me.txtGrossamount.Text 'ÃÇÁ·Ñé§ËÁ´ã¹ Line
-        Obj_tbl_job.line_discamt = Me.txtGrossLineDiscount.Text 'ÃÇÁÊèÇ¹Å´ã¹ Line
-        Obj_tbl_job.net_lineamt = Me.txtNetLineAmount.Text 'ÃÇÁÊØ·¸Ôã¹ Line
+        Obj_tbl_job.gross_amt = Me.txtGrossamount.Text 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Line
+        Obj_tbl_job.line_discamt = Me.txtGrossLineDiscount.Text 'ï¿½ï¿½ï¿½ï¿½ï¿½Ç¹Å´ï¿½ Line
+        Obj_tbl_job.net_lineamt = Me.txtNetLineAmount.Text 'ï¿½ï¿½ï¿½ï¿½Ø·ï¿½ï¿½ï¿½ Line
 
-        Obj_tbl_job.discper = (Me.txtDiscper.Text) 'As Double à»ÍÃìà«ç¹ÊèÇ¹Å´Í×è¹æ
-        Obj_tbl_job.discamt = (Me.txtDiscountamount.Text) 'As Double ÊèÇ¹Å´Í×è¹æ
-        Obj_tbl_job.vat = Me.txtVatPer.Text 'As Double à»ÍÃìà«ç¹ÀÒÉÕ
-        Obj_tbl_job.vatamt = Me.txtVatAmount.Text  'As Double ÀÒÉÕÊØ·¸Ô
+        Obj_tbl_job.discper = (Me.txtDiscper.Text) 'As Double ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¹Å´ï¿½ï¿½ï¿½ï¿½
+        Obj_tbl_job.discamt = (Me.txtDiscountamount.Text) 'As Double ï¿½ï¿½Ç¹Å´ï¿½ï¿½ï¿½ï¿½
+        Obj_tbl_job.vat = Me.txtVatPer.Text 'As Double ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        Obj_tbl_job.vatamt = Me.txtVatAmount.Text  'As Double ï¿½ï¿½ï¿½ï¿½ï¿½Ø·ï¿½ï¿½
         'Obj_tbl_job.total_discamt = (Me.txtNetOrderAmount.Text) 'total_discamt ?
-        Obj_tbl_job.taxamt = 0  'As Double 'äÁèä´éãªé
-        Obj_tbl_job.netamt = txtNetOrderAmount.Text 'ÃÇÁÊØ·¸Ô 
-        Obj_tbl_job.totamt = txtTotalAmount.Text 'ÃÇÁÊØ·¸Ô
+        Obj_tbl_job.taxamt = 0  'As Double 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        Obj_tbl_job.netamt = txtNetOrderAmount.Text 'ï¿½ï¿½ï¿½ï¿½Ø·ï¿½ï¿½ 
+        Obj_tbl_job.totamt = txtTotalAmount.Text 'ï¿½ï¿½ï¿½ï¿½Ø·ï¿½ï¿½
 
         'Me.txtNetOrderAmount.Text = ds.Tables("v_pur").Rows(0).Item("totamt")
         ' Me.txtVatAmount.Text = ds.Tables("v_pur").Rows(0).Item("vatamt")
@@ -493,7 +493,7 @@ Public Class formPurchaseOrderEdit3
                 m_errmess.Append("Item code")
                 'Sittana 20190705
                 ErrRunno += 1
-                m_Msgerr &= vbCr & ErrRunno.ToString & ") Row " & (i + 1).ToString & " Item code µéÍ§äÁè»ÅèÍÂÇèÒ§"
+                m_Msgerr &= vbCr & ErrRunno.ToString & ") Row " & (i + 1).ToString & " Item code ï¿½ï¿½Í§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò§"
                 m_GridHasErrors = True
             End If
             If Me.dgvJobDet.Rows(i).Cells("colUom").Value.ToString = "" Then
@@ -501,14 +501,14 @@ Public Class formPurchaseOrderEdit3
                 m_errmess.Append(",Unit")
                 'Sittana 20190705
                 ErrRunno += 1
-                m_Msgerr &= vbCr & ErrRunno.ToString & ") Row " & (i + 1).ToString & "Unit µéÍ§äÁè»ÅèÍÂÇèÒ§"
+                m_Msgerr &= vbCr & ErrRunno.ToString & ") Row " & (i + 1).ToString & "Unit ï¿½ï¿½Í§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò§"
                 m_GridHasErrors = True
             End If
             If Me.dgvJobDet.Rows(i).Cells("colPrice").Value.ToString = "" Then
                 errorSaved.SetError(Me.dgvJobDet, "Price")
                 m_errmess.Append(",Price")
                 ErrRunno += 1
-                m_Msgerr &= vbCr & ErrRunno.ToString & ") Row " & (i + 1).ToString & " Price µéÍ§äÁè»ÅèÍÂÇèÒ§"
+                m_Msgerr &= vbCr & ErrRunno.ToString & ") Row " & (i + 1).ToString & " Price ï¿½ï¿½Í§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò§"
                 m_GridHasErrors = True
             End If
             If Me.dgvJobDet.Rows(i).Cells("colQty").Value.ToString = "" Then
@@ -516,26 +516,26 @@ Public Class formPurchaseOrderEdit3
                 m_errmess.Append(",Qty")
                 'Sittana 20190705
                 ErrRunno += 1
-                m_Msgerr &= vbCr & ErrRunno.ToString & ") Row " & (i + 1).ToString & " Qty µéÍ§äÁè»ÅèÍÂÇèÒ§"
+                m_Msgerr &= vbCr & ErrRunno.ToString & ") Row " & (i + 1).ToString & " Qty ï¿½ï¿½Í§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò§"
                 m_GridHasErrors = True
             End If
 
             If Clsconfig.IsNull(Me.dgvJobDet.Rows(i).Cells("rcv_warehouse_id").Value, 0) = 0 Then
                 errorSaved.SetError(Me.dgvJobDet, "WareHouse")
-                m_errmess.Append("¤Ø³ÊØàÃªá¨é§ãËéÁÕ WareHouse")
+                m_errmess.Append("ï¿½Ø³ï¿½ï¿½ï¿½Ãªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ WareHouse")
                 'Begin Sittana 20190705
                 ErrRunno += 1
-                m_Msgerr &= vbCr & ErrRunno.ToString & ") Row " & (i + 1).ToString & " ¤Ø³µéÍ§àÅ×Í¡ WareHouse ã¹ Data Grid ´éÇÂ¤ÃÑº"
+                m_Msgerr &= vbCr & ErrRunno.ToString & ") Row " & (i + 1).ToString & " ï¿½Ø³ï¿½ï¿½Í§ï¿½ï¿½ï¿½Í¡ WareHouse ï¿½ Data Grid ï¿½ï¿½ï¿½Â¤ï¿½Ñº"
                 m_GridHasErrors = True
             End If
 
             If Me.dgvJobDet.Rows(i).Cells("colItcd").Value.ToString.Substring(0, 3) = "YRA" And
                 Clsconfig.IsNull(Me.dgvJobDet.Rows(i).Cells("rcv_subinventory_id").Value, 0) = 0 Then
                 errorSaved.SetError(Me.dgvJobDet, "SubInventory")
-                m_errmess.Append("¤Ø³ÊØàÃªá¨é§ãËéÁÕ SubInventory ·Ø¡¤ÃÑé§·ÕèÁÕ¡ÒÃ«×éÍ Bobbin YRA")
+                m_errmess.Append("ï¿½Ø³ï¿½ï¿½ï¿½Ãªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ SubInventory ï¿½Ø¡ï¿½ï¿½ï¿½é§·ï¿½ï¿½ï¿½Õ¡ï¿½Ã«ï¿½ï¿½ï¿½ Bobbin YRA")
                 'Sittana 20190705
                 ErrRunno += 1
-                m_Msgerr &= vbCr & ErrRunno.ToString & ") Row " & (i + 1).ToString & " ãËéÁÕ SubInventory ·Ø¡¤ÃÑé§·ÕèÁÕ¡ÒÃ«×éÍ Bobbin YRA"
+                m_Msgerr &= vbCr & ErrRunno.ToString & ") Row " & (i + 1).ToString & " ï¿½ï¿½ï¿½ï¿½ï¿½ SubInventory ï¿½Ø¡ï¿½ï¿½ï¿½é§·ï¿½ï¿½ï¿½Õ¡ï¿½Ã«ï¿½ï¿½ï¿½ Bobbin YRA"
                 'End Edit
                 m_GridHasErrors = True
             End If
@@ -591,7 +591,7 @@ Public Class formPurchaseOrderEdit3
         If m_GridHasErrors Or m_HeaderHasErrors Then
             'Sittana 20190705
             If m_Msgerr.Trim <> "" Then
-                MessageBox.Show("ºÑ¹·Ö¡äÁèÊÓàÃç¨à¾ÃÒÐ " & vbCr & m_Msgerr, "¢éÍ¼Ô´¾ÅÒ´", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessageBox.Show("ï¿½Ñ¹ï¿½Ö¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ " & vbCr & m_Msgerr, "ï¿½ï¿½Í¼Ô´ï¿½ï¿½Ò´", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
             'MsgBox("Some required values are missing, please check..", MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, "Data incomplete") 'Sittana 20190705
             Exit Sub
@@ -632,8 +632,8 @@ Public Class formPurchaseOrderEdit3
         ' End If
 
         If cboCurrency.SelectedValue <> "THB" And Clsconfig.IsValidDouble(Me.txtrate.Text.Trim) = "1" Then
-            MessageBox.Show("¶éÒÊ¡ØÅà§Ô¹à»ç¹Ê¡ØÅà§Ô¹µèÒ§»ÃÐà·È àÃ·à§Ô¹µéÍ§äÁèä´éà·èÒ¡Ñº 1", "System Meassge", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
-            errorCurrency.SetError(Me.txtrate, "¶éÒÊ¡ØÅà§Ô¹à»ç¹Ê¡ØÅà§Ô¹µèÒ§»ÃÐà·È àÃ·à§Ô¹µéÍ§äÁèä´éà·èÒ¡Ñº 1..")
+            MessageBox.Show("ï¿½ï¿½ï¿½Ê¡ï¿½ï¿½ï¿½Ô¹ï¿½ï¿½Ê¡ï¿½ï¿½ï¿½Ô¹ï¿½ï¿½Ò§ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½Ô¹ï¿½ï¿½Í§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò¡Ñº 1", "System Meassge", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+            errorCurrency.SetError(Me.txtrate, "ï¿½ï¿½ï¿½Ê¡ï¿½ï¿½ï¿½Ô¹ï¿½ï¿½Ê¡ï¿½ï¿½ï¿½Ô¹ï¿½ï¿½Ò§ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½Ô¹ï¿½ï¿½Í§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò¡Ñº 1..")
             result = False
         End If
 
@@ -1156,7 +1156,7 @@ Public Class formPurchaseOrderEdit3
                 DiscPerc = dgvJobDet.Rows(i).Cells("colDiscper").Value
                 Discamt = Me.dgvJobDet.Rows(i).Cells("colDiscamt").Value
 
-                '¶éÒá¡é Discount Amount ãËé¤Ó¹Ç³ % ¡ÅÑº
+                'ï¿½ï¿½ï¿½ï¿½ï¿½ Discount Amount ï¿½ï¿½ï¿½Ó¹Ç³ % ï¿½ï¿½Ñº
                 If DiscPerc > 0 Then
                     Discamt = ((Qty * UnitPrice) * DiscPerc) / 100
                 Else
@@ -1254,12 +1254,12 @@ Public Class formPurchaseOrderEdit3
             Me.txtrate.Text = Clsconfig.IsNull(ds.Tables("v_pur").Rows(0).Item("exrt"), "")
             Me.txtVatPer.Text = ds.Tables("v_pur").Rows(0).Item("vat")
 
-            Me.txtGrossamount.Text = ds.Tables("v_pur").Rows(0).Item("gross_amt") 'New 'ÃÇÁ
+            Me.txtGrossamount.Text = ds.Tables("v_pur").Rows(0).Item("gross_amt") 'New 'ï¿½ï¿½ï¿½
             Me.txtGrossLineDiscount.Text = ds.Tables("v_pur").Rows(0).Item("line_discamt") 'New
-            Me.txtNetLineAmount.Text = ds.Tables("v_pur").Rows(0).Item("net_lineamt") 'New ÃÇÁã¹äÍà·çÁ
+            Me.txtNetLineAmount.Text = ds.Tables("v_pur").Rows(0).Item("net_lineamt") 'New ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             Me.txtDiscper.Text = ds.Tables("v_pur").Rows(0).Item("discper")
             Me.txtDiscountamount.Text = ds.Tables("v_pur").Rows(0).Item("discamt")
-            Me.txtNetOrderAmount.Text = ds.Tables("v_pur").Rows(0).Item("net_amt") 'ËÅÑ§ËÑ¡ÊèÇ¹Å´'
+            Me.txtNetOrderAmount.Text = ds.Tables("v_pur").Rows(0).Item("net_amt") 'ï¿½ï¿½Ñ§ï¿½Ñ¡ï¿½ï¿½Ç¹Å´'
             'Me.txtNetOrderAmount.Text = ds.Tables("v_pur").Rows(0).Item("totamt")
             Me.txtVatAmount.Text = ds.Tables("v_pur").Rows(0).Item("vatamt")
             Me.txtTotalAmount.Text = ds.Tables("v_pur").Rows(0).Item("totamt")
@@ -1312,7 +1312,7 @@ Public Class formPurchaseOrderEdit3
             End If 'Sitthana 20201001
         Else
 
-            'MsgBox("data not found kap pom !", MsgBoxStyle.Critical, "¡ÃØ³ÒµÃÇ¨ÊÍºËÁÒÂàÅ¢ PO no :")
+            'MsgBox("data not found kap pom !", MsgBoxStyle.Critical, "ï¿½ï¿½Ø³Òµï¿½Ç¨ï¿½Íºï¿½ï¿½ï¿½ï¿½ï¿½Å¢ PO no :")
 
         End If
 

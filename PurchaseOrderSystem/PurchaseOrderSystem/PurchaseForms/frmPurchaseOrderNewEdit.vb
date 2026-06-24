@@ -2,7 +2,7 @@ Imports System.Data
 Imports System.Data.SqlClient
 Imports System.Text
 Imports System.Windows.Forms
-Imports Syncfusion.Windows.Forms.Tools
+Imports PurchaseOrderSystem.Controls
 
 
 Public Class frmPurchaseOrderNewEdit
@@ -68,17 +68,17 @@ Public Class frmPurchaseOrderNewEdit
         End Set
     End Property
 
-    Private Sub Model_QueryCellInfo(ByVal sender As Object, ByVal e As Syncfusion.Windows.Forms.Grid.GridQueryCellInfoEventArgs)
+    Private Sub Model_QueryCellInfo(ByVal sender As Object, ByVal e As PurchaseOrderSystem.Controls.GridQueryCellInfoEventArgs)
         'To specify the row and colum index.
         If e.RowIndex = 0 AndAlso e.ColIndex = 1 Then
             'To specify the font
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New PurchaseOrderSystem.Controls.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             'To specify the text
             e.Style.Text = "PO Line Type Description"
             'To specify the text color.
             'e.Style.TextColor = Color.Red
         ElseIf e.RowIndex = 0 AndAlso e.ColIndex = 2 Then
-            e.Style.Font = New Syncfusion.Windows.Forms.Grid.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+            e.Style.Font = New PurchaseOrderSystem.Controls.GridFontInfo(New Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
             'To specify the text
             e.Style.Text = "Outside Process"
             'To specify the text color.
@@ -149,7 +149,7 @@ Public Class frmPurchaseOrderNewEdit
             drNew("rcv_warehouse_id") = clsUser.MtlWareHouseID
             drNew("import") = False
             drNew("present_status") = "UN-APP"
-            drNew("deliaddr") = (New classPurchaseNewEdit).GetDefaultDeliaddr(clsUser.UserID) '"∫√‘…—∑ ‚°≈‡¥Èπ∑Ï ‚¡≈¥Ï ·¡ππŸ·ø§‡®Õ√‘Ëß ®”°—¥ " + vbCrLf + "1/92 À¡ŸË∑’Ë 2  µ”∫≈∑Ë“∑√“¬  Õ”‡¿Õ‡¡◊Õß ¡ÿ∑√ “§√  ®—ßÀ«—¥ ¡ÿ∑√ “§√  74000" '(New classPurchase).GetDeliaddr((New clsConfig).IsNull(clsUser.MtlWarehouseID, 1)) '"1 / 92 Moo.2 ,Rama II ,Road, Thasai, Muang, Samutsakorn. 74000"
+            drNew("deliaddr") = (New classPurchaseNewEdit).GetDefaultDeliaddr(clsUser.UserID) '"ÔøΩÔøΩÔøΩÔøΩ—∑ ÔøΩÔøΩÔøΩÈπ∑ÔøΩ ÔøΩÔøΩ≈¥ÔøΩ ÔøΩÔøΩÔøΩÔøΩÔøΩ·ø§ÔøΩÔøΩÔøΩÔøΩÔøΩ ÔøΩ”°—¥ " + vbCrLf + "1/92 ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ 2  ÔøΩ”∫≈∑ÔøΩ“∑ÔøΩÔøΩÔøΩ  ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÕßÔøΩÔøΩÿ∑ÔøΩÔøΩ“§ÔøΩ  ÔøΩ—ßÔøΩÔøΩ—¥ÔøΩÔøΩÿ∑ÔøΩÔøΩ“§ÔøΩ  74000" '(New classPurchase).GetDeliaddr((New clsConfig).IsNull(clsUser.MtlWarehouseID, 1)) '"1 / 92 Moo.2 ,Rama II ,Road, Thasai, Muang, Samutsakorn. 74000"
             drNew("curr") = "THB"
             drNew("exrt") = 1
 
@@ -376,8 +376,8 @@ Public Class frmPurchaseOrderNewEdit
             dtp.Value = Now
             dtp.Checked = False
         End If
-        If TypeOf Obj Is DateTimePickerAdv Then
-            Dim dtp As DateTimePickerAdv = Obj
+        If TypeOf Obj Is NullableDateTimePicker Then
+            Dim dtp As NullableDateTimePicker = Obj
             dtp.BindableValue = DBNull.Value
             dtp.IsNullDate = True
         End If
@@ -565,7 +565,7 @@ Public Class frmPurchaseOrderNewEdit
         Dim Address As String
 
         If Me.CbSupplier.SelectedIndex = -1 Then
-            MessageBox.Show("„ÀÈ§≈‘°‡≈◊Õ° Supplier ‡∑Ë“π—Èπ§√—∫", "¢ÈÕº‘¥æ≈“¥", MessageBoxButtons.OK, MessageBoxIcon.Stop)
+            MessageBox.Show("‡∏Å‡∏£‡∏∏‡∏ì‡∏≤‡πÄ‡∏•‡∏∑‡∏≠‡∏Å Supplier ‡∏Å‡πà‡∏≠‡∏ô‡∏ô‡∏∞‡∏Ñ‡∏£‡∏±‡∏ö", "‡∏Ç‡πâ‡∏≠‡∏ú‡∏¥‡∏î‡∏û‡∏•‡∏≤‡∏î", MessageBoxButtons.OK, MessageBoxIcon.Stop)
             Exit Sub
         End If
 
@@ -587,18 +587,18 @@ Public Class frmPurchaseOrderNewEdit
 
         drvJob = CType(bsJob.Current, DataRowView)
         If (New clsConfig).IsNull(drvJob.Row("curr"), "").ToString.Trim <> "THB" And oConfig.IsNull(drvJob.Row("exrt"), 0) = 1 Then
-            MessageError &= "∂È“ °ÿ≈‡ß‘π‡ªÁπ °ÿ≈‡ß‘πµË“ßª√–‡∑» ‡√∑‡ß‘πµÈÕß‰¡Ë‰¥È‡∑Ë“°—∫ 1" & vbCrLf
-            'MessageBox.Show("∂È“ °ÿ≈‡ß‘π‡ªÁπ °ÿ≈‡ß‘πµË“ßª√–‡∑» ‡√∑‡ß‘πµÈÕß‰¡Ë‰¥È‡∑Ë“°—∫ 1" & vbCrLf &
+            MessageError &= "‡∏ñ‡πâ‡∏≤‡∏™‡∏Å‡∏∏‡∏•‡πÄ‡∏á‡∏¥‡∏ô‡πÄ‡∏õ‡πá‡∏ô‡∏™‡∏Å‡∏∏‡∏•‡πÄ‡∏á‡∏¥‡∏ô‡∏ï‡πà‡∏≤‡∏á‡∏õ‡∏£‡∏∞‡πÄ‡∏ó‡∏® ‡∏≠‡∏±‡∏ï‡∏£‡∏≤‡πÅ‡∏•‡∏Å‡πÄ‡∏õ‡∏•‡∏µ‡πà‡∏¢‡∏ô‡∏ï‡πâ‡∏≠‡∏á‡πÑ‡∏°‡πà‡πÄ‡∏ó‡πà‡∏≤‡∏Å‡∏±‡∏ö 1" & vbCrLf
+            'MessageBox.Show("‡∏ñ‡πâ‡∏≤‡∏™‡∏Å‡∏∏‡∏•‡πÄ‡∏á‡∏¥‡∏ô‡πÄ‡∏õ‡πá‡∏ô‡∏™‡∏Å‡∏∏‡∏•‡πÄ‡∏á‡∏¥‡∏ô‡∏ï‡πà‡∏≤‡∏á‡∏õ‡∏£‡∏∞‡πÄ‡∏ó‡∏® ‡∏≠‡∏±‡∏ï‡∏£‡∏≤‡πÅ‡∏•‡∏Å‡πÄ‡∏õ‡∏•‡∏µ‡πà‡∏¢‡∏ô‡∏ï‡πâ‡∏≠‡∏á‡πÑ‡∏°‡πà‡πÄ‡∏ó‡πà‡∏≤‡∏Å‡∏±‡∏ö 1" & vbCrLf &
             '               "If Currency equals foreigner then exchange rate not equals one", "System Meassge", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
-            eptxtrate.SetError(Me.txtrate, "∂È“ °ÿ≈‡ß‘π‡ªÁπ °ÿ≈‡ß‘πµË“ßª√–‡∑» ‡√∑‡ß‘πµÈÕß‰¡Ë‰¥È‡∑Ë“°—∫ 1" & vbCrLf & "If Currency equals foreigner then exchange rate not equals one")
+            eptxtrate.SetError(Me.txtrate, "‡∏ñ‡πâ‡∏≤‡∏™‡∏Å‡∏∏‡∏•‡πÄ‡∏á‡∏¥‡∏ô‡πÄ‡∏õ‡πá‡∏ô‡∏™‡∏Å‡∏∏‡∏•‡πÄ‡∏á‡∏¥‡∏ô‡∏ï‡πà‡∏≤‡∏á‡∏õ‡∏£‡∏∞‡πÄ‡∏ó‡∏® ‡∏≠‡∏±‡∏ï‡∏£‡∏≤‡πÅ‡∏•‡∏Å‡πÄ‡∏õ‡∏•‡∏µ‡πà‡∏¢‡∏ô‡∏ï‡πâ‡∏≠‡∏á‡πÑ‡∏°‡πà‡πÄ‡∏ó‡πà‡∏≤‡∏Å‡∏±‡∏ö 1" & vbCrLf & "If Currency equals foreigner then exchange rate not equals one")
             result = False
         Else
             eptxtrate.Clear()
         End If
 
         If oConfig.IsNull(drvJob.Row("suppcd"), "") = "" Then
-            MessageError &= "¬—ß‰¡Ë‰¥È‡≈◊Õ° supplier" & vbCrLf
-            'MessageBox.Show("µÈÕß¡’ supplier", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+            MessageError &= "‡∏¢‡∏±‡∏á‡πÑ‡∏°‡πà‡πÑ‡∏î‡πâ‡πÄ‡∏•‡∏∑‡∏≠‡∏Å supplier" & vbCrLf
+            'MessageBox.Show("ÔøΩÔøΩÕßÔøΩÔøΩ supplier", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
             Me.epcboSupplier.SetError(Me.cboSupplier, "Select a valid supplier")
             Me.TabControl1.SelectedTab = TabPage1
             result = False
@@ -607,8 +607,8 @@ Public Class frmPurchaseOrderNewEdit
         End If
 
         If oConfig.IsNull(drvJob.Row("empcd"), "") = "" Then
-            MessageError &= "¬—ß‰¡Ë‰¥È‡≈◊Õ° Person Request" & vbCrLf
-            'MessageBox.Show("µÈÕß¡’ Person Request", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+            MessageError &= "‡∏¢‡∏±‡∏á‡πÑ‡∏°‡πà‡πÑ‡∏î‡πâ‡πÄ‡∏•‡∏∑‡∏≠‡∏Å Person Request" & vbCrLf
+            'MessageBox.Show("ÔøΩÔøΩÕßÔøΩÔøΩ Person Request", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
             epcomboEmp.SetError(Me.comboEmp, "Select person who made the request..")
             result = False
         Else
@@ -616,8 +616,8 @@ Public Class frmPurchaseOrderNewEdit
         End If
 
         If oConfig.IsNull(drvJob.Row("curr"), "") = "" Then 'As String
-            MessageError &= "¬—ß‰¡Ë‰¥È‡≈◊Õ° currency" & vbCrLf
-            'MessageBox.Show("µÈÕß¡’ currency", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+            MessageError &= "‡∏¢‡∏±‡∏á‡πÑ‡∏°‡πà‡πÑ‡∏î‡πâ‡πÄ‡∏•‡∏∑‡∏≠‡∏Å currency" & vbCrLf
+            'MessageBox.Show("ÔøΩÔøΩÕßÔøΩÔøΩ currency", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
             epcboCurrency.SetError(Me.cboCurrency, "Select currency..")
             result = False
         Else
@@ -625,8 +625,8 @@ Public Class frmPurchaseOrderNewEdit
         End If
 
         If oConfig.IsNull(drvJob.Row("deptcd"), "") = "" Then
-            MessageError &= "¬—ß‰¡Ë‰¥È‡≈◊Õ° Department" & vbCrLf
-            ' MessageBox.Show("µÈÕß¡’ Dept", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+            MessageError &= "‡∏¢‡∏±‡∏á‡πÑ‡∏°‡πà‡πÑ‡∏î‡πâ‡πÄ‡∏•‡∏∑‡∏≠‡∏Å Department" & vbCrLf
+            ' MessageBox.Show("ÔøΩÔøΩÕßÔøΩÔøΩ Dept", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
             epcboDept.SetError(Me.cboDept, "Select Dept..")
             result = False
         Else
@@ -634,8 +634,8 @@ Public Class frmPurchaseOrderNewEdit
         End If
 
         If (New clsConfig).IsNull(drvJob.Row("ap_payment_term_id"), 0) = 0 Then
-            MessageError &= "¬—ß‰¡Ë‰¥È‡≈◊Õ° Payment Term" & vbCrLf
-            'MessageBox.Show("µÈÕß¡’ Payment Term", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+            MessageError &= "‡∏¢‡∏±‡∏á‡πÑ‡∏°‡πà‡πÑ‡∏î‡πâ‡πÄ‡∏•‡∏∑‡∏≠‡∏Å Payment Term" & vbCrLf
+            'MessageBox.Show("ÔøΩÔøΩÕßÔøΩÔøΩ Payment Term", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
             epcboPaymentTerm.SetError(Me.cboPaymentTerm, "Select Payment Term")
             result = False
         Else
@@ -643,8 +643,8 @@ Public Class frmPurchaseOrderNewEdit
         End If
 
         If oConfig.IsNull(drvJob.Row("po_line_types_id"), 0) = 0 Then
-            MessageError &= "¬—ß‰¡Ë‰¥È‡≈◊Õ° Line Type" & vbCrLf
-            'MessageBox.Show("µÈÕß¡’ Line Type", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+            MessageError &= "‡∏¢‡∏±‡∏á‡πÑ‡∏°‡πà‡πÑ‡∏î‡πâ‡πÄ‡∏•‡∏∑‡∏≠‡∏Å Line Type" & vbCrLf
+            'MessageBox.Show("ÔøΩÔøΩÕßÔøΩÔøΩ Line Type", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
             epmcboPoLineType.SetError(Me.mcboPoLineType, "Select Line Type")
             result = False
         Else
@@ -655,39 +655,39 @@ Public Class frmPurchaseOrderNewEdit
             If dr.RowState <> DataRowState.Deleted Then
 
                 If Not (New classPurchaseNewEdit).ValidateItcd(StrItcd:=oConfig.IsNull(dr("itcd"), "")) Then
-                    MessageError &= "√“¬°“√∑’Ë " & (dtJobDet.Rows.IndexOf(dr) + 1).ToString.Trim & " " & "Item No ‰¡Ë∂Ÿ°µÈÕß" & vbCrLf
-                    ' MessageBox.Show("‰¡Ëæ∫ Item Master „π√–∫∫", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+                    MessageError &= "‡πÅ‡∏ñ‡∏ß‡∏ó‡∏µ‡πà " & (dtJobDet.Rows.IndexOf(dr) + 1).ToString.Trim & " " & "Item No ‡πÑ‡∏°‡πà‡∏ñ‡∏π‡∏Å‡∏ï‡πâ‡∏≠‡∏á" & vbCrLf
+                    ' MessageBox.Show("ÔøΩÔøΩËæ∫ Item Master ÔøΩÔøΩ–∫ÔøΩ", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
                     result = False
                 End If
 
                 If oConfig.IsNull(dr("uom_id"), 0) = 0 Then
-                    MessageError &= "√“¬°“√∑’Ë " & (dtJobDet.Rows.IndexOf(dr) + 1).ToString.Trim & " " & " µÈÕß¡’ UOM" & vbCrLf
+                    MessageError &= "‡πÅ‡∏ñ‡∏ß‡∏ó‡∏µ‡πà " & (dtJobDet.Rows.IndexOf(dr) + 1).ToString.Trim & " " & " ‡∏ï‡πâ‡∏≠‡∏á‡∏£‡∏∞‡∏ö‡∏∏ UOM" & vbCrLf
 
-                    'MessageBox.Show("µÈÕß¡’ UOM", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+                    'MessageBox.Show("ÔøΩÔøΩÕßÔøΩÔøΩ UOM", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
                     result = False
                 End If
 
                 If oConfig.IsNull(dr("rcv_warehouse_id"), 0) = 0 Then
-                    MessageError &= "√“¬°“√∑’Ë " & (dtJobDet.Rows.IndexOf(dr) + 1).ToString.Trim & " " & " µÈÕß¡’ W/H" & vbCrLf
+                    MessageError &= "‡πÅ‡∏ñ‡∏ß‡∏ó‡∏µ‡πà " & (dtJobDet.Rows.IndexOf(dr) + 1).ToString.Trim & " " & " ‡∏ï‡πâ‡∏≠‡∏á‡∏£‡∏∞‡∏ö‡∏∏ W/H" & vbCrLf
 
-                    ' MessageBox.Show("µÈÕß¡’ W/H", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+                    ' MessageBox.Show("ÔøΩÔøΩÕßÔøΩÔøΩ W/H", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
                     result = False
                 End If
 
                 'If clsConfig.IsNull(dr("rcv_subinventory_id"), 0) = 0 Then
-                'MessageBox.Show("µÈÕß¡’ Sub Inventory", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+                'MessageBox.Show("ÔøΩÔøΩÕßÔøΩÔøΩ Sub Inventory", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
                 'result = False
                 'End If
 
                 'If clsConfig.IsNull(dr("price"), 0) = 0 Then
-                '    MessageBox.Show("µÈÕß¡’ Price ¡“°°«Ë“ 0", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+                '    MessageBox.Show("ÔøΩÔøΩÕßÔøΩÔøΩ Price ÔøΩ“°ÔøΩÔøΩÔøΩÔøΩ 0", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
                 '    result = False
                 'End If
 
                 If oConfig.IsNull(dr("qty"), 0) = 0 Then
-                    MessageError &= "√“¬°“√∑’Ë " & (dtJobDet.Rows.IndexOf(dr) + 1).ToString.Trim & " " & "µÈÕß¡’ Qty ¡“°°«Ë“ 0" & vbCrLf
+                    MessageError &= "‡πÅ‡∏ñ‡∏ß‡∏ó‡∏µ‡πà " & (dtJobDet.Rows.IndexOf(dr) + 1).ToString.Trim & " " & "‡∏ï‡πâ‡∏≠‡∏á‡∏£‡∏∞‡∏ö‡∏∏ Qty ‡∏°‡∏≤‡∏Å‡∏Å‡∏ß‡πà‡∏≤ 0" & vbCrLf
 
-                    ' MessageBox.Show("µÈÕß¡’ Qty ¡“°°«Ë“ 0", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+                    ' MessageBox.Show("ÔøΩÔøΩÕßÔøΩÔøΩ Qty ÔøΩ“°ÔøΩÔøΩÔøΩÔøΩ 0", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
                     result = False
                 End If
             End If
@@ -1192,7 +1192,7 @@ Public Class frmPurchaseOrderNewEdit
 
         If (New classPurchaseNewEdit).SavePurchaseOrder(drvJob, dtJobDet, msgerr, clsUser.UserID) Then
             txtPurNo.Text = drvJob.Row("jobno")
-            MessageBox.Show("∫—π∑÷° ”‡√Á®" & txtPurNo.Text.Trim, "System Message", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
+            MessageBox.Show("‡∏ö‡∏±‡∏ô‡∏ó‡∏∂‡∏Å‡∏™‡∏≥‡πÄ‡∏£‡πá‡∏à " & txtPurNo.Text.Trim, "System Message", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
 
             SaveData = True
         Else
@@ -1208,7 +1208,7 @@ Public Class frmPurchaseOrderNewEdit
         blnCancel = False
         Dim result As System.Windows.Forms.DialogResult
         result = MessageBox.Show("Would you Like To save ?" & vbCrLf &
-        IIf(IIf(txtPurNo.Text.Trim.Length = 0, txtPurNo.Text.Trim, txtPurNo.Text.Trim).ToString.Trim.Length = 0, "** ∂È“‰¡Ë„ Ë P/O No. √–∫∫®–√—π„ÀÈÕ—µ‘‚π¡—µ‘ **", "P/O No. = '" & IIf(txtPurNo.Text.Trim.Length = 0, txtPurNo.Text.Trim, txtPurNo.Text.Trim) & "'"),
+        IIf(IIf(txtPurNo.Text.Trim.Length = 0, txtPurNo.Text.Trim, txtPurNo.Text.Trim).ToString.Trim.Length = 0, "** ‡∏£‡∏∞‡∏ö‡∏ö‡∏à‡∏∞‡∏≠‡∏≠‡∏Å P/O No. ‡πÉ‡∏´‡πâ‡∏≠‡∏±‡∏ï‡πÇ‡∏ô‡∏°‡∏±‡∏ï‡∏¥ **", "P/O No. = '" & IIf(txtPurNo.Text.Trim.Length = 0, txtPurNo.Text.Trim, txtPurNo.Text.Trim) & "'"),
         "System Message", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3)
 
         If result = System.Windows.Forms.DialogResult.Cancel Then blnCancel = True
@@ -1230,7 +1230,7 @@ Public Class frmPurchaseOrderNewEdit
         blnCancel = False
         Dim result As System.Windows.Forms.DialogResult
         result = MessageBox.Show("Would you like to save ?" & vbCrLf &
-        IIf(IIf(txtPurNo.Text.Trim.Length = 0, txtPurNo.Text.Trim, txtPurNo.Text.Trim).ToString.Trim.Length = 0, "** ∂È“‰¡Ë„ Ë P/O No. √–∫∫®–√—π„ÀÈÕ—µ‘‚π¡—µ‘ **", "P/O No. = '" & IIf(txtPurNo.Text.Trim.Length = 0, txtPurNo.Text.Trim, txtPurNo.Text.Trim) & "'"),
+        IIf(IIf(txtPurNo.Text.Trim.Length = 0, txtPurNo.Text.Trim, txtPurNo.Text.Trim).ToString.Trim.Length = 0, "** ‡∏£‡∏∞‡∏ö‡∏ö‡∏à‡∏∞‡∏≠‡∏≠‡∏Å P/O No. ‡πÉ‡∏´‡πâ‡∏≠‡∏±‡∏ï‡πÇ‡∏ô‡∏°‡∏±‡∏ï‡∏¥ **", "P/O No. = '" & IIf(txtPurNo.Text.Trim.Length = 0, txtPurNo.Text.Trim, txtPurNo.Text.Trim) & "'"),
         "System Message", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3)
 
         If result = System.Windows.Forms.DialogResult.Cancel Then blnCancel = True
@@ -1335,7 +1335,7 @@ Public Class frmPurchaseOrderNewEdit
 
         If (New classPurchaseNewEdit).ApprovePurchaseOrder(drvJob.Row("jobno"), pRemApp, msgerr, clsUser.UserID) Then
             txtPurNo.Text = drvJob.Row("jobno")
-            MessageBox.Show("Approve  ”‡√Á®" & txtPurNo.Text.Trim, "System Message", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
+            MessageBox.Show("Approve ‡∏™‡∏≥‡πÄ‡∏£‡πá‡∏à " & txtPurNo.Text.Trim, "System Message", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
 
             ApproveData = True
         Else
@@ -1369,7 +1369,7 @@ Public Class frmPurchaseOrderNewEdit
 
         If (New classPurchaseNewEdit).CancelPurchaseOrder(drvJob.Row("jobno"), pRemCancel, msgerr, clsUser.UserID) Then
             txtPurNo.Text = drvJob.Row("jobno")
-            MessageBox.Show("Cancel  ”‡√Á®" & txtPurNo.Text.Trim, "System Message", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
+            MessageBox.Show("Cancel ‡∏™‡∏≥‡πÄ‡∏£‡πá‡∏à " & txtPurNo.Text.Trim, "System Message", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
 
             CancelData = True
         Else
@@ -1385,9 +1385,9 @@ Public Class frmPurchaseOrderNewEdit
         drvJob = CType(bsJob.Current, DataRowView)
 
         If txtPresentStatus.Text = "CANCELLED" Then
-            MessageBox.Show("P/O ¡’ ∂“π–¬°‡≈‘°‰ª·≈È« ‰¡Ë “¡“√∂ ¬°‡≈‘°‰¥ÈÕ’°" & vbCrLf &
+            MessageBox.Show("P/O ‡∏ô‡∏µ‡πâ‡∏™‡∏ñ‡∏≤‡∏ô‡∏∞‡∏ñ‡∏π‡∏Å‡∏¢‡∏Å‡πÄ‡∏•‡∏¥‡∏Å‡πÅ‡∏•‡πâ‡∏ß ‡πÑ‡∏°‡πà‡∏™‡∏≤‡∏°‡∏≤‡∏£‡∏ñ‡∏¢‡∏Å‡πÄ‡∏•‡∏¥‡∏Å‡∏≠‡∏µ‡∏Å" & vbCrLf &
                             "This P/O is already cancelled", "System Meassge", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
-            'epPresentStatus.SetError(Me.txtPresentStatus, "P/O ¡’ ∂“π–¬°‡≈‘°‰ª·≈È« ‰¡Ë “¡“√∂ ¬°‡≈‘°‰¥ÈÕ’°" & vbCrLf & "If Currency equals foreigner then exchange rate not equals one")
+            'epPresentStatus.SetError(Me.txtPresentStatus, "P/O ÔøΩÔøΩ ∂“πÔøΩ¬°ÔøΩÔøΩ‘°ÔøΩÔøΩÔøΩÔøΩÔøΩ ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ√∂ ¬°ÔøΩÔøΩ‘°ÔøΩÔøΩÔøΩ’°" & vbCrLf & "If Currency equals foreigner then exchange rate not equals one")
             result = False
         Else
             'epPresentStatus.Clear()
@@ -1437,7 +1437,7 @@ Public Class frmPurchaseOrderNewEdit
 
         If (New classPurchaseNewEdit).ClosePurchaseOrder(drvJob.Row("jobno"), pRemApp, msgerr, clsUser.UserID) Then
             txtPurNo.Text = drvJob.Row("jobno")
-            MessageBox.Show("Close  ”‡√Á®" & txtPurNo.Text.Trim, "System Message", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
+            MessageBox.Show("Close ‡∏™‡∏≥‡πÄ‡∏£‡πá‡∏à " & txtPurNo.Text.Trim, "System Message", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
             CloseData = True
         Else
             MessageBox.Show(msgerr, "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)

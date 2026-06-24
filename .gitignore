@@ -1,11 +1,41 @@
 ﻿################################################################################
-# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+# Visual Studio
 ################################################################################
-.vs/
-bin/
-obj/
-*.vsidx
-*.cache
-*.7z
+
+**/bin/
+**/obj/
+**/.vs/
+
+# User-specific files
 *.user
 *.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio cache
+*.vsidx
+*.cache
+
+# ClickOnce
+publish/
+app.publish/
+**/app.publish/
+
+# NuGet
+packages/
+!packages/build/
+
+# ReSharper
+_ReSharper*/
+*.DotSettings.user
+
+# Logs
+*.log
+
+# Compressed files
+*.7z
+*.zip
+
+# Claude Code
+.claude/
+**/.claude/

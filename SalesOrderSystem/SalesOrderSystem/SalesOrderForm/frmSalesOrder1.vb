@@ -389,6 +389,7 @@ Public Class frmSalesOrder
         txtPoNo.Text = dt.Rows(0)("custpo").ToString.Trim
         txtCustPoUnique.Text = dt.Rows(0)("custpo_unique").ToString.Trim
         txtCustPoSuffix.Text = dt.Rows(0)("custpo_suffix").ToString.Trim
+        txtCustAddlInfo.Text = dt.Rows(0)("cust_addl_info").ToString.Trim
 
         dtpPoDate.Value = CDate(dt.Rows(0)("podt2").ToString)
 
@@ -843,6 +844,7 @@ Public Class frmSalesOrder
         header.h59_jobnocomment3 = txtJobNoComment3.Text.Trim
         header.h60_jobnocomment4 = txtJobNoComment4.Text.Trim
         header.h61_design_properties_id = oConfig.IsNull(mcboDesignProperties.SelectedValue, Nothing) 'John 28/10/2025
+        header.h62_cust_addl_info = txtCustAddlInfo.Text.Trim
         '--------------------------------
         If Me.textBatches.Text = "" Then
             Me.textBatches.Text = 0

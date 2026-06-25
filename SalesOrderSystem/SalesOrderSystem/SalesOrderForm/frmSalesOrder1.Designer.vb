@@ -111,6 +111,54 @@ Partial Class frmSalesOrder
         Me.txtRemark = New System.Windows.Forms.TextBox()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.grdSalesOrder = New System.Windows.Forms.DataGridView()
+        Me.sonoid = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ref_stnoid = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.design_gwth_nob = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.design_no = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.labeldes = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colRefdesno = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.labelarticle = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colGmPerSqM = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Custdes = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.fwth = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cboWidth = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.gwth = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.custcol = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.labdipno = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.labdip_comment = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.labelcolor = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.labeldata1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.labeldata2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colCustDelidt = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.shipdt = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.confirmed_shipdt = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.knit_begin_date = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.knit_end_date = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.dye_end_date = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.yarn_available_date = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.confirmed_appointment = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.qty = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.uom = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.price = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colProdLossPerc = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colQtyWithLoss = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.show_price = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.curr = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.exrt = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.gr_itamt = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.discamt = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.nt_itamt = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.closed2 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.cboid_so_routing = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.so_line_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.mtl_customer_items_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.mtl_customer_items_xref_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.qtyship = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.qtybal = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.jobno = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.sent_to = New System.Windows.Forms.DataGridViewComboBoxColumn()
         Me.txtNetAmt = New System.Windows.Forms.TextBox()
         Me.Label21 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
@@ -196,54 +244,8 @@ Partial Class frmSalesOrder
         Me.btnPrintSR = New System.Windows.Forms.Button()
         Me.cbbSrTypeId = New System.Windows.Forms.ComboBox()
         Me.Label40 = New System.Windows.Forms.Label()
-        Me.sonoid = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ref_stnoid = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.design_gwth_nob = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.design_no = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.labeldes = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colRefdesno = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.labelarticle = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colGmPerSqM = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Custdes = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.fwth = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cboWidth = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.gwth = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.custcol = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.labdipno = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.labdip_comment = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.labelcolor = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.labeldata1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.labeldata2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colCustDelidt = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.shipdt = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.confirmed_shipdt = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.knit_begin_date = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.knit_end_date = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.dye_end_date = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.yarn_available_date = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.confirmed_appointment = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.qty = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.uom = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.price = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colProdLossPerc = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colQtyWithLoss = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.show_price = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.curr = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.exrt = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.gr_itamt = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.discamt = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.nt_itamt = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.closed2 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.cboid_so_routing = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.so_line_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.mtl_customer_items_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.mtl_customer_items_xref_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.qtyship = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.qtybal = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.jobno = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.sent_to = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.Label46 = New System.Windows.Forms.Label()
+        Me.txtCustAddlInfo = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         CType(Me.mcboDesignProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -540,7 +542,7 @@ Partial Class frmSalesOrder
         Me.Label7.AutoSize = True
         Me.Label7.Location = New System.Drawing.Point(20, 93)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(97, 13)
+        Me.Label7.Size = New System.Drawing.Size(98, 13)
         Me.Label7.TabIndex = 8
         Me.Label7.Text = "End Buyer / Cust.:"
         '
@@ -594,7 +596,7 @@ Partial Class frmSalesOrder
         Me.Label6.AutoSize = True
         Me.Label6.Location = New System.Drawing.Point(14, 14)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(62, 13)
+        Me.Label6.Size = New System.Drawing.Size(61, 13)
         Me.Label6.TabIndex = 6
         Me.Label6.Text = "Delivery To"
         '
@@ -674,7 +676,7 @@ Partial Class frmSalesOrder
         Me.chkSpecial1.BackColor = System.Drawing.Color.Gold
         Me.chkSpecial1.Location = New System.Drawing.Point(11, 133)
         Me.chkSpecial1.Name = "chkSpecial1"
-        Me.chkSpecial1.Size = New System.Drawing.Size(158, 17)
+        Me.chkSpecial1.Size = New System.Drawing.Size(159, 17)
         Me.chkSpecial1.TabIndex = 0
         Me.chkSpecial1.Text = "Bulk approve by customer"
         Me.chkSpecial1.UseVisualStyleBackColor = False
@@ -728,7 +730,7 @@ Partial Class frmSalesOrder
         Me.Label9.AutoSize = True
         Me.Label9.Location = New System.Drawing.Point(14, 37)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(79, 13)
+        Me.Label9.Size = New System.Drawing.Size(78, 13)
         Me.Label9.TabIndex = 12
         Me.Label9.Text = "Delivery Terms"
         '
@@ -844,7 +846,7 @@ Partial Class frmSalesOrder
         Me.btnExit.Image = CType(resources.GetObject("btnExit.Image"), System.Drawing.Image)
         Me.btnExit.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnExit.Name = "btnExit"
-        Me.btnExit.Size = New System.Drawing.Size(46, 22)
+        Me.btnExit.Size = New System.Drawing.Size(45, 22)
         Me.btnExit.Text = "Exit"
         '
         'ToolStripLabel2
@@ -885,904 +887,6 @@ Partial Class frmSalesOrder
         Me.grdSalesOrder.Name = "grdSalesOrder"
         Me.grdSalesOrder.Size = New System.Drawing.Size(1183, 207)
         Me.grdSalesOrder.TabIndex = 1
-        '
-        'txtNetAmt
-        '
-        Me.txtNetAmt.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.txtNetAmt.Location = New System.Drawing.Point(1074, 566)
-        Me.txtNetAmt.Name = "txtNetAmt"
-        Me.txtNetAmt.ReadOnly = True
-        Me.txtNetAmt.Size = New System.Drawing.Size(128, 20)
-        Me.txtNetAmt.TabIndex = 27
-        Me.txtNetAmt.Tag = "int"
-        Me.txtNetAmt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'Label21
-        '
-        Me.Label21.AutoSize = True
-        Me.Label21.Location = New System.Drawing.Point(977, 573)
-        Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(91, 13)
-        Me.Label21.TabIndex = 28
-        Me.Label21.Text = "Net S/O Amount"
-        '
-        'Label18
-        '
-        Me.Label18.AutoSize = True
-        Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.Label18.ForeColor = System.Drawing.Color.Blue
-        Me.Label18.Location = New System.Drawing.Point(9, 573)
-        Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(441, 13)
-        Me.Label18.TabIndex = 18
-        Me.Label18.Text = "* S/O No. ID, Item Amount and Net Item Amount will calculate automatically."
-        '
-        'chkSubmitAllBatches
-        '
-        Me.chkSubmitAllBatches.AutoSize = True
-        Me.chkSubmitAllBatches.Location = New System.Drawing.Point(11, 157)
-        Me.chkSubmitAllBatches.Name = "chkSubmitAllBatches"
-        Me.chkSubmitAllBatches.Size = New System.Drawing.Size(165, 17)
-        Me.chkSubmitAllBatches.TabIndex = 30
-        Me.chkSubmitAllBatches.Text = "Submit every batch or only "
-        Me.chkSubmitAllBatches.UseVisualStyleBackColor = True
-        '
-        'textBatches
-        '
-        Me.textBatches.Location = New System.Drawing.Point(177, 154)
-        Me.textBatches.Name = "textBatches"
-        Me.textBatches.Size = New System.Drawing.Size(32, 22)
-        Me.textBatches.TabIndex = 34
-        Me.textBatches.Tag = "int"
-        '
-        'Label20
-        '
-        Me.Label20.AutoSize = True
-        Me.Label20.Location = New System.Drawing.Point(212, 157)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(53, 13)
-        Me.Label20.TabIndex = 34
-        Me.Label20.Text = "batche(s)"
-        '
-        'checkBulkAppInternal
-        '
-        Me.checkBulkAppInternal.AutoSize = True
-        Me.checkBulkAppInternal.BackColor = System.Drawing.Color.Gold
-        Me.checkBulkAppInternal.Location = New System.Drawing.Point(7, -1)
-        Me.checkBulkAppInternal.Name = "checkBulkAppInternal"
-        Me.checkBulkAppInternal.Size = New System.Drawing.Size(136, 17)
-        Me.checkBulkAppInternal.TabIndex = 35
-        Me.checkBulkAppInternal.Text = "Bulk approve internal"
-        Me.checkBulkAppInternal.UseVisualStyleBackColor = False
-        '
-        'TabControl1
-        '
-        Me.TabControl1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TabControl1.Controls.Add(Me.tabSales)
-        Me.TabControl1.Controls.Add(Me.tabCustomer)
-        Me.TabControl1.Controls.Add(Me.tabDelivery)
-        Me.TabControl1.Controls.Add(Me.tabTerms)
-        Me.TabControl1.Controls.Add(Me.tabOther)
-        Me.TabControl1.HotTrack = True
-        Me.TabControl1.Location = New System.Drawing.Point(8, 32)
-        Me.TabControl1.Multiline = True
-        Me.TabControl1.Name = "TabControl1"
-        Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(716, 252)
-        Me.TabControl1.TabIndex = 0
-        '
-        'tabSales
-        '
-        Me.tabSales.Controls.Add(Me.txtDyeStandard)
-        Me.tabSales.Controls.Add(Me.Label24)
-        Me.tabSales.Controls.Add(Me.lblSalesCommPer)
-        Me.tabSales.Controls.Add(Me.lblAgentCommPer)
-        Me.tabSales.Controls.Add(Me.Label30)
-        Me.tabSales.Controls.Add(Me.txtSalesCommPer)
-        Me.tabSales.Controls.Add(Me.Label29)
-        Me.tabSales.Controls.Add(Me.txtAgentCommPer)
-        Me.tabSales.Controls.Add(Me.txtRef)
-        Me.tabSales.Controls.Add(Me.cboAgent)
-        Me.tabSales.Controls.Add(Me.cboSalesMan)
-        Me.tabSales.Controls.Add(Me.Label19)
-        Me.tabSales.Controls.Add(Me.Label7)
-        Me.tabSales.Controls.Add(Me.Label5)
-        Me.tabSales.Controls.Add(Me.Label4)
-        Me.tabSales.Controls.Add(Me.cboFinalCustomer)
-        Me.tabSales.Location = New System.Drawing.Point(4, 22)
-        Me.tabSales.Name = "tabSales"
-        Me.tabSales.Size = New System.Drawing.Size(708, 226)
-        Me.tabSales.TabIndex = 1
-        Me.tabSales.Text = "Sales/Agency"
-        Me.tabSales.UseVisualStyleBackColor = True
-        '
-        'txtDyeStandard
-        '
-        Me.txtDyeStandard.Location = New System.Drawing.Point(176, 116)
-        Me.txtDyeStandard.Name = "txtDyeStandard"
-        Me.txtDyeStandard.Size = New System.Drawing.Size(232, 22)
-        Me.txtDyeStandard.TabIndex = 47
-        '
-        'Label24
-        '
-        Me.Label24.AutoSize = True
-        Me.Label24.Location = New System.Drawing.Point(20, 119)
-        Me.Label24.Name = "Label24"
-        Me.Label24.Size = New System.Drawing.Size(76, 13)
-        Me.Label24.TabIndex = 46
-        Me.Label24.Text = "Dye Standard"
-        '
-        'lblSalesCommPer
-        '
-        Me.lblSalesCommPer.AutoSize = True
-        Me.lblSalesCommPer.Location = New System.Drawing.Point(20, 173)
-        Me.lblSalesCommPer.Name = "lblSalesCommPer"
-        Me.lblSalesCommPer.Size = New System.Drawing.Size(72, 13)
-        Me.lblSalesCommPer.TabIndex = 45
-        Me.lblSalesCommPer.Text = "Commission:"
-        '
-        'lblAgentCommPer
-        '
-        Me.lblAgentCommPer.AutoSize = True
-        Me.lblAgentCommPer.Location = New System.Drawing.Point(20, 145)
-        Me.lblAgentCommPer.Name = "lblAgentCommPer"
-        Me.lblAgentCommPer.Size = New System.Drawing.Size(72, 13)
-        Me.lblAgentCommPer.TabIndex = 44
-        Me.lblAgentCommPer.Text = "Commission:"
-        '
-        'Label30
-        '
-        Me.Label30.AutoSize = True
-        Me.Label30.Location = New System.Drawing.Point(240, 170)
-        Me.Label30.Name = "Label30"
-        Me.Label30.Size = New System.Drawing.Size(16, 13)
-        Me.Label30.TabIndex = 39
-        Me.Label30.Text = "%"
-        '
-        'txtSalesCommPer
-        '
-        Me.txtSalesCommPer.AllowSpace = False
-        Me.txtSalesCommPer.DataPropertyName = Nothing
-        Me.txtSalesCommPer.Location = New System.Drawing.Point(176, 170)
-        Me.txtSalesCommPer.Name = "txtSalesCommPer"
-        Me.txtSalesCommPer.NoOfDecimalsToDisplay = 2
-        Me.txtSalesCommPer.Size = New System.Drawing.Size(58, 22)
-        Me.txtSalesCommPer.TabIndex = 37
-        Me.txtSalesCommPer.Tag = "int"
-        Me.txtSalesCommPer.Text = "0.00"
-        Me.txtSalesCommPer.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'Label29
-        '
-        Me.Label29.AutoSize = True
-        Me.Label29.Location = New System.Drawing.Point(240, 142)
-        Me.Label29.Name = "Label29"
-        Me.Label29.Size = New System.Drawing.Size(16, 13)
-        Me.Label29.TabIndex = 36
-        Me.Label29.Text = "%"
-        '
-        'txtAgentCommPer
-        '
-        Me.txtAgentCommPer.AllowSpace = False
-        Me.txtAgentCommPer.DataPropertyName = Nothing
-        Me.txtAgentCommPer.Location = New System.Drawing.Point(176, 142)
-        Me.txtAgentCommPer.Name = "txtAgentCommPer"
-        Me.txtAgentCommPer.NoOfDecimalsToDisplay = 2
-        Me.txtAgentCommPer.Size = New System.Drawing.Size(58, 22)
-        Me.txtAgentCommPer.TabIndex = 34
-        Me.txtAgentCommPer.Tag = "int"
-        Me.txtAgentCommPer.Text = "0.00"
-        Me.txtAgentCommPer.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'tabCustomer
-        '
-        Me.tabCustomer.Controls.Add(Me.Label39)
-        Me.tabCustomer.Controls.Add(Me.txtCustPoUnique)
-        Me.tabCustomer.Controls.Add(Me.Label38)
-        Me.tabCustomer.Controls.Add(Me.txtCustPoSuffix)
-        Me.tabCustomer.Controls.Add(Me.lblCustomersActive)
-        Me.tabCustomer.Controls.Add(Me.mcboCustomersBillToFlag)
-        Me.tabCustomer.Controls.Add(Me.Label22)
-        Me.tabCustomer.Controls.Add(Me.txtContact)
-        Me.tabCustomer.Controls.Add(Me.txtCustAddr)
-        Me.tabCustomer.Controls.Add(Me.chkSpecial3)
-        Me.tabCustomer.Controls.Add(Me.Label8)
-        Me.tabCustomer.Controls.Add(Me.Label3)
-        Me.tabCustomer.Controls.Add(Me.dtpPoDate)
-        Me.tabCustomer.Controls.Add(Me.txtPoNo)
-        Me.tabCustomer.Controls.Add(Me.chkExport)
-        Me.tabCustomer.Controls.Add(Me.Label15)
-        Me.tabCustomer.Controls.Add(Me.btnCustPoUnique)
-        Me.tabCustomer.Location = New System.Drawing.Point(4, 22)
-        Me.tabCustomer.Name = "tabCustomer"
-        Me.tabCustomer.Size = New System.Drawing.Size(708, 226)
-        Me.tabCustomer.TabIndex = 0
-        Me.tabCustomer.Text = "Customer details"
-        Me.tabCustomer.UseVisualStyleBackColor = True
-        '
-        'Label39
-        '
-        Me.Label39.AutoSize = True
-        Me.Label39.Location = New System.Drawing.Point(13, 39)
-        Me.Label39.Name = "Label39"
-        Me.Label39.Size = New System.Drawing.Size(149, 13)
-        Me.Label39.TabIndex = 43
-        Me.Label39.Text = "Customer P/O No. (Unique.)"
-        '
-        'txtCustPoUnique
-        '
-        Me.txtCustPoUnique.BackColor = System.Drawing.Color.Gold
-        Me.txtCustPoUnique.Location = New System.Drawing.Point(167, 36)
-        Me.txtCustPoUnique.Name = "txtCustPoUnique"
-        Me.txtCustPoUnique.ReadOnly = True
-        Me.txtCustPoUnique.Size = New System.Drawing.Size(229, 22)
-        Me.txtCustPoUnique.TabIndex = 42
-        Me.txtCustPoUnique.Tag = "str"
-        '
-        'Label38
-        '
-        Me.Label38.AutoSize = True
-        Me.Label38.Location = New System.Drawing.Point(13, 63)
-        Me.Label38.Name = "Label38"
-        Me.Label38.Size = New System.Drawing.Size(116, 13)
-        Me.Label38.TabIndex = 40
-        Me.Label38.Text = "Customer P/O (Suffix)"
-        '
-        'txtCustPoSuffix
-        '
-        Me.txtCustPoSuffix.Location = New System.Drawing.Point(167, 60)
-        Me.txtCustPoSuffix.MaxLength = 20
-        Me.txtCustPoSuffix.Name = "txtCustPoSuffix"
-        Me.txtCustPoSuffix.Size = New System.Drawing.Size(259, 22)
-        Me.txtCustPoSuffix.TabIndex = 39
-        Me.txtCustPoSuffix.Tag = "str"
-        '
-        'lblCustomersActive
-        '
-        Me.lblCustomersActive.AutoSize = True
-        Me.lblCustomersActive.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.lblCustomersActive.ForeColor = System.Drawing.Color.Red
-        Me.lblCustomersActive.Location = New System.Drawing.Point(424, 58)
-        Me.lblCustomersActive.Name = "lblCustomersActive"
-        Me.lblCustomersActive.Size = New System.Drawing.Size(320, 24)
-        Me.lblCustomersActive.TabIndex = 36
-        Me.lblCustomersActive.Text = "ลูกค้า ท่านนี้ ถูกยกเลิกแล้วครับ"
-        Me.lblCustomersActive.Visible = False
-        '
-        'mcboCustomersBillToFlag
-        '
-        Me.mcboCustomersBillToFlag.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.mcboCustomersBillToFlag.DataSource = Nothing
-        Me.mcboCustomersBillToFlag.DisplayMember = Nothing
-        Me.mcboCustomersBillToFlag.Location = New System.Drawing.Point(167, 84)
-        Me.mcboCustomersBillToFlag.Name = "mcboCustomersBillToFlag"
-        Me.mcboCustomersBillToFlag.SelectedIndex = -1
-        Me.mcboCustomersBillToFlag.SelectedValue = Nothing
-        Me.mcboCustomersBillToFlag.Size = New System.Drawing.Size(260, 21)
-        Me.mcboCustomersBillToFlag.TabIndex = 35
-        Me.mcboCustomersBillToFlag.ValueMember = Nothing
-        '
-        'Label22
-        '
-        Me.Label22.AutoSize = True
-        Me.Label22.Location = New System.Drawing.Point(13, 111)
-        Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(89, 13)
-        Me.Label22.TabIndex = 34
-        Me.Label22.Text = "Contact person:"
-        '
-        'txtContact
-        '
-        Me.txtContact.Location = New System.Drawing.Point(167, 109)
-        Me.txtContact.Name = "txtContact"
-        Me.txtContact.Size = New System.Drawing.Size(260, 22)
-        Me.txtContact.TabIndex = 33
-        Me.txtContact.Tag = "str"
-        '
-        'txtCustAddr
-        '
-        Me.txtCustAddr.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtCustAddr.Location = New System.Drawing.Point(16, 138)
-        Me.txtCustAddr.Multiline = True
-        Me.txtCustAddr.Name = "txtCustAddr"
-        Me.txtCustAddr.ReadOnly = True
-        Me.txtCustAddr.Size = New System.Drawing.Size(676, 62)
-        Me.txtCustAddr.TabIndex = 32
-        '
-        'btnCustPoUnique
-        '
-        Me.btnCustPoUnique.Image = Global.SalesOrderSystem.My.Resources.Resources.WriteToHistory_16x
-        Me.btnCustPoUnique.Location = New System.Drawing.Point(397, 35)
-        Me.btnCustPoUnique.Name = "btnCustPoUnique"
-        Me.btnCustPoUnique.Size = New System.Drawing.Size(25, 24)
-        Me.btnCustPoUnique.TabIndex = 41
-        Me.btnCustPoUnique.UseVisualStyleBackColor = True
-        '
-        'tabDelivery
-        '
-        Me.tabDelivery.Controls.Add(Me.mcboCustomersShipToFlag)
-        Me.tabDelivery.Controls.Add(Me.cboMtl_warehouse)
-        Me.tabDelivery.Controls.Add(Me.Label34)
-        Me.tabDelivery.Controls.Add(Me.txtShipQty_Tolerance_high)
-        Me.tabDelivery.Controls.Add(Me.Label28)
-        Me.tabDelivery.Controls.Add(Me.Label27)
-        Me.tabDelivery.Controls.Add(Me.txtShipQty_Tolerance_low)
-        Me.tabDelivery.Controls.Add(Me.Label25)
-        Me.tabDelivery.Controls.Add(Me.txtShipQty_tolerance)
-        Me.tabDelivery.Controls.Add(Me.Label23)
-        Me.tabDelivery.Controls.Add(Me.txtDeliAddr)
-        Me.tabDelivery.Controls.Add(Me.txtTransportBy)
-        Me.tabDelivery.Controls.Add(Me.Label6)
-        Me.tabDelivery.Controls.Add(Me.Label14)
-        Me.tabDelivery.Controls.Add(Me.Label9)
-        Me.tabDelivery.Controls.Add(Me.txtDeliveryTerm)
-        Me.tabDelivery.Controls.Add(Me.txtAdditionalLabel)
-        Me.tabDelivery.Controls.Add(Me.Label13)
-        Me.tabDelivery.Location = New System.Drawing.Point(4, 22)
-        Me.tabDelivery.Name = "tabDelivery"
-        Me.tabDelivery.Size = New System.Drawing.Size(708, 226)
-        Me.tabDelivery.TabIndex = 0
-        Me.tabDelivery.Text = "Delivery details"
-        Me.tabDelivery.UseVisualStyleBackColor = True
-        '
-        'mcboCustomersShipToFlag
-        '
-        Me.mcboCustomersShipToFlag.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.mcboCustomersShipToFlag.DataSource = Nothing
-        Me.mcboCustomersShipToFlag.DisplayMember = Nothing
-        Me.mcboCustomersShipToFlag.Location = New System.Drawing.Point(110, 14)
-        Me.mcboCustomersShipToFlag.Name = "mcboCustomersShipToFlag"
-        Me.mcboCustomersShipToFlag.SelectedIndex = -1
-        Me.mcboCustomersShipToFlag.SelectedValue = Nothing
-        Me.mcboCustomersShipToFlag.Size = New System.Drawing.Size(231, 21)
-        Me.mcboCustomersShipToFlag.TabIndex = 46
-        Me.mcboCustomersShipToFlag.ValueMember = Nothing
-        '
-        'cboMtl_warehouse
-        '
-        Me.cboMtl_warehouse.FormattingEnabled = True
-        Me.cboMtl_warehouse.Location = New System.Drawing.Point(110, 111)
-        Me.cboMtl_warehouse.Name = "cboMtl_warehouse"
-        Me.cboMtl_warehouse.Size = New System.Drawing.Size(231, 21)
-        Me.cboMtl_warehouse.TabIndex = 45
-        '
-        'Label34
-        '
-        Me.Label34.AutoSize = True
-        Me.Label34.Location = New System.Drawing.Point(3, 108)
-        Me.Label34.Name = "Label34"
-        Me.Label34.Size = New System.Drawing.Size(107, 13)
-        Me.Label34.TabIndex = 44
-        Me.Label34.Text = "Ship By WareHouse"
-        '
-        'txtShipQty_Tolerance_high
-        '
-        Me.txtShipQty_Tolerance_high.Location = New System.Drawing.Point(479, 37)
-        Me.txtShipQty_Tolerance_high.Name = "txtShipQty_Tolerance_high"
-        Me.txtShipQty_Tolerance_high.Size = New System.Drawing.Size(30, 22)
-        Me.txtShipQty_Tolerance_high.TabIndex = 41
-        Me.txtShipQty_Tolerance_high.Tag = "str"
-        '
-        'Label28
-        '
-        Me.Label28.AutoSize = True
-        Me.Label28.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label28.Location = New System.Drawing.Point(478, 19)
-        Me.Label28.Name = "Label28"
-        Me.Label28.Size = New System.Drawing.Size(30, 13)
-        Me.Label28.TabIndex = 40
-        Me.Label28.Text = "Over"
-        '
-        'Label27
-        '
-        Me.Label27.AutoSize = True
-        Me.Label27.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label27.Location = New System.Drawing.Point(433, 20)
-        Me.Label27.Name = "Label27"
-        Me.Label27.Size = New System.Drawing.Size(32, 13)
-        Me.Label27.TabIndex = 39
-        Me.Label27.Text = "Short"
-        '
-        'txtShipQty_Tolerance_low
-        '
-        Me.txtShipQty_Tolerance_low.Location = New System.Drawing.Point(436, 37)
-        Me.txtShipQty_Tolerance_low.Name = "txtShipQty_Tolerance_low"
-        Me.txtShipQty_Tolerance_low.Size = New System.Drawing.Size(30, 22)
-        Me.txtShipQty_Tolerance_low.TabIndex = 38
-        Me.txtShipQty_Tolerance_low.Tag = "str"
-        '
-        'Label25
-        '
-        Me.Label25.AutoSize = True
-        Me.Label25.Location = New System.Drawing.Point(356, 64)
-        Me.Label25.Name = "Label25"
-        Me.Label25.Size = New System.Drawing.Size(265, 13)
-        Me.Label25.TabIndex = 37
-        Me.Label25.Text = "(This data will be used to close s/o after shipment)"
-        '
-        'txtShipQty_tolerance
-        '
-        Me.txtShipQty_tolerance.Location = New System.Drawing.Point(526, 37)
-        Me.txtShipQty_tolerance.Name = "txtShipQty_tolerance"
-        Me.txtShipQty_tolerance.Size = New System.Drawing.Size(30, 22)
-        Me.txtShipQty_tolerance.TabIndex = 34
-        Me.txtShipQty_tolerance.Tag = "str"
-        Me.txtShipQty_tolerance.Visible = False
-        '
-        'Label23
-        '
-        Me.Label23.AutoSize = True
-        Me.Label23.Location = New System.Drawing.Point(352, 40)
-        Me.Label23.Name = "Label23"
-        Me.Label23.Size = New System.Drawing.Size(80, 13)
-        Me.Label23.TabIndex = 35
-        Me.Label23.Text = "Tolerance (%) :"
-        '
-        'txtDeliAddr
-        '
-        Me.txtDeliAddr.Location = New System.Drawing.Point(355, 111)
-        Me.txtDeliAddr.Multiline = True
-        Me.txtDeliAddr.Name = "txtDeliAddr"
-        Me.txtDeliAddr.ReadOnly = True
-        Me.txtDeliAddr.Size = New System.Drawing.Size(328, 73)
-        Me.txtDeliAddr.TabIndex = 33
-        '
-        'tabTerms
-        '
-        Me.tabTerms.Controls.Add(Me.mcboBanks)
-        Me.tabTerms.Controls.Add(Me.Label32)
-        Me.tabTerms.Controls.Add(Me.Label26)
-        Me.tabTerms.Controls.Add(Me.cboPaymode)
-        Me.tabTerms.Controls.Add(Me.Label10)
-        Me.tabTerms.Controls.Add(Me.txtTermCondition)
-        Me.tabTerms.Controls.Add(Me.Label11)
-        Me.tabTerms.Controls.Add(Me.txtCreditDays)
-        Me.tabTerms.Controls.Add(Me.Label12)
-        Me.tabTerms.Location = New System.Drawing.Point(4, 22)
-        Me.tabTerms.Name = "tabTerms"
-        Me.tabTerms.Size = New System.Drawing.Size(708, 226)
-        Me.tabTerms.TabIndex = 2
-        Me.tabTerms.Text = "Payment terms"
-        Me.tabTerms.UseVisualStyleBackColor = True
-        '
-        'mcboBanks
-        '
-        Me.mcboBanks.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.mcboBanks.DataSource = Nothing
-        Me.mcboBanks.DisplayMember = Nothing
-        Me.mcboBanks.Location = New System.Drawing.Point(112, 103)
-        Me.mcboBanks.Name = "mcboBanks"
-        Me.mcboBanks.SelectedIndex = -1
-        Me.mcboBanks.SelectedValue = Nothing
-        Me.mcboBanks.Size = New System.Drawing.Size(578, 21)
-        Me.mcboBanks.TabIndex = 49
-        Me.mcboBanks.ValueMember = Nothing
-        '
-        'Label32
-        '
-        Me.Label32.AutoSize = True
-        Me.Label32.Location = New System.Drawing.Point(16, 108)
-        Me.Label32.Name = "Label32"
-        Me.Label32.Size = New System.Drawing.Size(35, 13)
-        Me.Label32.TabIndex = 21
-        Me.Label32.Text = "Bank:"
-        '
-        'Label26
-        '
-        Me.Label26.AutoSize = True
-        Me.Label26.Location = New System.Drawing.Point(16, 79)
-        Me.Label26.Name = "Label26"
-        Me.Label26.Size = New System.Drawing.Size(85, 13)
-        Me.Label26.TabIndex = 18
-        Me.Label26.Text = "Payment mode:"
-        '
-        'cboPaymode
-        '
-        Me.cboPaymode.BackColor = System.Drawing.Color.Gold
-        Me.cboPaymode.FormattingEnabled = True
-        Me.cboPaymode.Location = New System.Drawing.Point(112, 76)
-        Me.cboPaymode.Name = "cboPaymode"
-        Me.cboPaymode.Size = New System.Drawing.Size(231, 21)
-        Me.cboPaymode.TabIndex = 17
-        '
-        'tabOther
-        '
-        Me.tabOther.Controls.Add(Me.txtJobNoComment4)
-        Me.tabOther.Controls.Add(Me.txtRefJobNo4)
-        Me.tabOther.Controls.Add(Me.Label44)
-        Me.tabOther.Controls.Add(Me.txtJobNoComment3)
-        Me.tabOther.Controls.Add(Me.txtRefJobNo3)
-        Me.tabOther.Controls.Add(Me.Label43)
-        Me.tabOther.Controls.Add(Me.txtJobNoComment2)
-        Me.tabOther.Controls.Add(Me.txtRefJobNo2)
-        Me.tabOther.Controls.Add(Me.Label42)
-        Me.tabOther.Controls.Add(Me.txtJobNoComment1)
-        Me.tabOther.Controls.Add(Me.txtRefJobNo1)
-        Me.tabOther.Controls.Add(Me.Label41)
-        Me.tabOther.Controls.Add(Me.Label37)
-        Me.tabOther.Controls.Add(Me.txtMtsPerRoll)
-        Me.tabOther.Controls.Add(Me.txtQualitySpecialReq)
-        Me.tabOther.Controls.Add(Me.Label31)
-        Me.tabOther.Controls.Add(Me.cboPackAfterBulkApp)
-        Me.tabOther.Controls.Add(Me.Label33)
-        Me.tabOther.Controls.Add(Me.GroupBox2)
-        Me.tabOther.Controls.Add(Me.Label16)
-        Me.tabOther.Controls.Add(Me.txtRemark)
-        Me.tabOther.Controls.Add(Me.textBatches)
-        Me.tabOther.Controls.Add(Me.chkSubmitAllBatches)
-        Me.tabOther.Controls.Add(Me.Label20)
-        Me.tabOther.Controls.Add(Me.chkSpecial1)
-        Me.tabOther.Location = New System.Drawing.Point(4, 22)
-        Me.tabOther.Name = "tabOther"
-        Me.tabOther.Size = New System.Drawing.Size(708, 226)
-        Me.tabOther.TabIndex = 3
-        Me.tabOther.Text = "Other details"
-        Me.tabOther.UseVisualStyleBackColor = True
-        '
-        'txtJobNoComment4
-        '
-        Me.txtJobNoComment4.Location = New System.Drawing.Point(431, 198)
-        Me.txtJobNoComment4.Name = "txtJobNoComment4"
-        Me.txtJobNoComment4.Size = New System.Drawing.Size(274, 22)
-        Me.txtJobNoComment4.TabIndex = 68
-        '
-        'txtRefJobNo4
-        '
-        Me.txtRefJobNo4.Location = New System.Drawing.Point(571, 170)
-        Me.txtRefJobNo4.Name = "txtRefJobNo4"
-        Me.txtRefJobNo4.Size = New System.Drawing.Size(134, 22)
-        Me.txtRefJobNo4.TabIndex = 67
-        '
-        'Label44
-        '
-        Me.Label44.AutoSize = True
-        Me.Label44.Location = New System.Drawing.Point(428, 173)
-        Me.Label44.Name = "Label44"
-        Me.Label44.Size = New System.Drawing.Size(137, 13)
-        Me.Label44.TabIndex = 66
-        Me.Label44.Text = "Ref. Job No. 4 / Comment"
-        '
-        'txtJobNoComment3
-        '
-        Me.txtJobNoComment3.Location = New System.Drawing.Point(431, 143)
-        Me.txtJobNoComment3.Name = "txtJobNoComment3"
-        Me.txtJobNoComment3.Size = New System.Drawing.Size(274, 22)
-        Me.txtJobNoComment3.TabIndex = 65
-        '
-        'txtRefJobNo3
-        '
-        Me.txtRefJobNo3.Location = New System.Drawing.Point(571, 115)
-        Me.txtRefJobNo3.Name = "txtRefJobNo3"
-        Me.txtRefJobNo3.Size = New System.Drawing.Size(134, 22)
-        Me.txtRefJobNo3.TabIndex = 64
-        '
-        'Label43
-        '
-        Me.Label43.AutoSize = True
-        Me.Label43.Location = New System.Drawing.Point(428, 118)
-        Me.Label43.Name = "Label43"
-        Me.Label43.Size = New System.Drawing.Size(137, 13)
-        Me.Label43.TabIndex = 63
-        Me.Label43.Text = "Ref. Job No. 3 / Comment"
-        '
-        'txtJobNoComment2
-        '
-        Me.txtJobNoComment2.Location = New System.Drawing.Point(431, 87)
-        Me.txtJobNoComment2.Name = "txtJobNoComment2"
-        Me.txtJobNoComment2.Size = New System.Drawing.Size(274, 22)
-        Me.txtJobNoComment2.TabIndex = 62
-        '
-        'txtRefJobNo2
-        '
-        Me.txtRefJobNo2.Location = New System.Drawing.Point(571, 59)
-        Me.txtRefJobNo2.Name = "txtRefJobNo2"
-        Me.txtRefJobNo2.Size = New System.Drawing.Size(134, 22)
-        Me.txtRefJobNo2.TabIndex = 61
-        '
-        'Label42
-        '
-        Me.Label42.AutoSize = True
-        Me.Label42.Location = New System.Drawing.Point(428, 62)
-        Me.Label42.Name = "Label42"
-        Me.Label42.Size = New System.Drawing.Size(137, 13)
-        Me.Label42.TabIndex = 60
-        Me.Label42.Text = "Ref. Job No. 2 / Comment"
-        '
-        'txtJobNoComment1
-        '
-        Me.txtJobNoComment1.Location = New System.Drawing.Point(431, 31)
-        Me.txtJobNoComment1.Name = "txtJobNoComment1"
-        Me.txtJobNoComment1.Size = New System.Drawing.Size(274, 22)
-        Me.txtJobNoComment1.TabIndex = 59
-        '
-        'txtRefJobNo1
-        '
-        Me.txtRefJobNo1.Location = New System.Drawing.Point(571, 3)
-        Me.txtRefJobNo1.Name = "txtRefJobNo1"
-        Me.txtRefJobNo1.Size = New System.Drawing.Size(134, 22)
-        Me.txtRefJobNo1.TabIndex = 57
-        '
-        'Label41
-        '
-        Me.Label41.AutoSize = True
-        Me.Label41.Location = New System.Drawing.Point(428, 6)
-        Me.Label41.Name = "Label41"
-        Me.Label41.Size = New System.Drawing.Size(137, 13)
-        Me.Label41.TabIndex = 56
-        Me.Label41.Text = "Ref. Job No. 1 / Comment"
-        '
-        'Label37
-        '
-        Me.Label37.AutoSize = True
-        Me.Label37.Location = New System.Drawing.Point(265, 194)
-        Me.Label37.Name = "Label37"
-        Me.Label37.Size = New System.Drawing.Size(83, 13)
-        Me.Label37.TabIndex = 55
-        Me.Label37.Text = "MTS PER ROLL:"
-        '
-        'txtMtsPerRoll
-        '
-        Me.txtMtsPerRoll.AllowSpace = False
-        Me.txtMtsPerRoll.DataPropertyName = Nothing
-        Me.txtMtsPerRoll.Location = New System.Drawing.Point(353, 191)
-        Me.txtMtsPerRoll.Name = "txtMtsPerRoll"
-        Me.txtMtsPerRoll.NoOfDecimalsToDisplay = 2
-        Me.txtMtsPerRoll.Size = New System.Drawing.Size(58, 22)
-        Me.txtMtsPerRoll.TabIndex = 54
-        Me.txtMtsPerRoll.Tag = "int"
-        Me.txtMtsPerRoll.Text = "0.00"
-        Me.txtMtsPerRoll.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'txtQualitySpecialReq
-        '
-        Me.txtQualitySpecialReq.Location = New System.Drawing.Point(235, 17)
-        Me.txtQualitySpecialReq.Multiline = True
-        Me.txtQualitySpecialReq.Name = "txtQualitySpecialReq"
-        Me.txtQualitySpecialReq.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtQualitySpecialReq.Size = New System.Drawing.Size(187, 109)
-        Me.txtQualitySpecialReq.TabIndex = 51
-        Me.txtQualitySpecialReq.Tag = "str"
-        '
-        'Label31
-        '
-        Me.Label31.AutoSize = True
-        Me.Label31.Location = New System.Drawing.Point(232, 3)
-        Me.Label31.Name = "Label31"
-        Me.Label31.Size = New System.Drawing.Size(108, 13)
-        Me.Label31.TabIndex = 50
-        Me.Label31.Text = "Quality Special Req."
-        '
-        'cboPackAfterBulkApp
-        '
-        Me.cboPackAfterBulkApp.FormattingEnabled = True
-        Me.cboPackAfterBulkApp.Location = New System.Drawing.Point(10, 200)
-        Me.cboPackAfterBulkApp.Name = "cboPackAfterBulkApp"
-        Me.cboPackAfterBulkApp.Size = New System.Drawing.Size(227, 21)
-        Me.cboPackAfterBulkApp.TabIndex = 40
-        '
-        'Label33
-        '
-        Me.Label33.AutoSize = True
-        Me.Label33.Location = New System.Drawing.Point(7, 183)
-        Me.Label33.Name = "Label33"
-        Me.Label33.Size = New System.Drawing.Size(151, 13)
-        Me.Label33.TabIndex = 39
-        Me.Label33.Text = "Packing after bulk approval:"
-        '
-        'GroupBox2
-        '
-        Me.GroupBox2.Controls.Add(Me.optAppByDH)
-        Me.GroupBox2.Controls.Add(Me.optAppByMK)
-        Me.GroupBox2.Controls.Add(Me.checkBulkAppInternal)
-        Me.GroupBox2.Location = New System.Drawing.Point(268, 132)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(154, 56)
-        Me.GroupBox2.TabIndex = 38
-        Me.GroupBox2.TabStop = False
-        '
-        'optAppByDH
-        '
-        Me.optAppByDH.AutoSize = True
-        Me.optAppByDH.Location = New System.Drawing.Point(14, 19)
-        Me.optAppByDH.Name = "optAppByDH"
-        Me.optAppByDH.Size = New System.Drawing.Size(136, 17)
-        Me.optAppByDH.TabIndex = 36
-        Me.optAppByDH.TabStop = True
-        Me.optAppByDH.Text = "Approve by dyehouse"
-        Me.optAppByDH.UseVisualStyleBackColor = True
-        '
-        'optAppByMK
-        '
-        Me.optAppByMK.AutoSize = True
-        Me.optAppByMK.Location = New System.Drawing.Point(14, 35)
-        Me.optAppByMK.Name = "optAppByMK"
-        Me.optAppByMK.Size = New System.Drawing.Size(138, 17)
-        Me.optAppByMK.TabIndex = 37
-        Me.optAppByMK.TabStop = True
-        Me.optAppByMK.Text = "Approve by marketing"
-        Me.optAppByMK.UseVisualStyleBackColor = True
-        '
-        'TabControl2
-        '
-        Me.TabControl2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TabControl2.Controls.Add(Me.tabItems)
-        Me.TabControl2.Controls.Add(Me.tabOthers)
-        Me.TabControl2.Location = New System.Drawing.Point(7, 290)
-        Me.TabControl2.Name = "TabControl2"
-        Me.TabControl2.SelectedIndex = 0
-        Me.TabControl2.Size = New System.Drawing.Size(1200, 270)
-        Me.TabControl2.TabIndex = 30
-        '
-        'tabItems
-        '
-        Me.tabItems.Controls.Add(Me.btnSaveSettings)
-        Me.tabItems.Controls.Add(Me.btnGridLayoutSettings)
-        Me.tabItems.Controls.Add(Me.grdSalesOrder)
-        Me.tabItems.Location = New System.Drawing.Point(4, 22)
-        Me.tabItems.Name = "tabItems"
-        Me.tabItems.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabItems.Size = New System.Drawing.Size(1192, 244)
-        Me.tabItems.TabIndex = 0
-        Me.tabItems.Text = "Order Items"
-        Me.tabItems.UseVisualStyleBackColor = True
-        '
-        'btnSaveSettings
-        '
-        Me.btnSaveSettings.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSaveSettings.Location = New System.Drawing.Point(1095, 3)
-        Me.btnSaveSettings.Name = "btnSaveSettings"
-        Me.btnSaveSettings.Size = New System.Drawing.Size(94, 23)
-        Me.btnSaveSettings.TabIndex = 3
-        Me.btnSaveSettings.Text = "Save Settings"
-        Me.btnSaveSettings.UseVisualStyleBackColor = True
-        '
-        'btnGridLayoutSettings
-        '
-        Me.btnGridLayoutSettings.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnGridLayoutSettings.Location = New System.Drawing.Point(963, 3)
-        Me.btnGridLayoutSettings.Name = "btnGridLayoutSettings"
-        Me.btnGridLayoutSettings.Size = New System.Drawing.Size(126, 23)
-        Me.btnGridLayoutSettings.TabIndex = 2
-        Me.btnGridLayoutSettings.Text = "Grid Layout Settings"
-        Me.btnGridLayoutSettings.UseVisualStyleBackColor = True
-        '
-        'tabOthers
-        '
-        Me.tabOthers.Location = New System.Drawing.Point(4, 22)
-        Me.tabOthers.Name = "tabOthers"
-        Me.tabOthers.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabOthers.Size = New System.Drawing.Size(1192, 244)
-        Me.tabOthers.TabIndex = 1
-        Me.tabOthers.Text = "Others"
-        Me.tabOthers.UseVisualStyleBackColor = True
-        '
-        'cbofulfilment_type
-        '
-        Me.cbofulfilment_type.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbofulfilment_type.FormattingEnabled = True
-        Me.cbofulfilment_type.Location = New System.Drawing.Point(6, 18)
-        Me.cbofulfilment_type.Name = "cbofulfilment_type"
-        Me.cbofulfilment_type.Size = New System.Drawing.Size(189, 21)
-        Me.cbofulfilment_type.TabIndex = 31
-        '
-        'ErrorProvider1
-        '
-        Me.ErrorProvider1.ContainerControl = Me
-        '
-        'btnCustomerItems
-        '
-        Me.btnCustomerItems.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnCustomerItems.Location = New System.Drawing.Point(837, 224)
-        Me.btnCustomerItems.Name = "btnCustomerItems"
-        Me.btnCustomerItems.Size = New System.Drawing.Size(97, 27)
-        Me.btnCustomerItems.TabIndex = 34
-        Me.btnCustomerItems.Text = "Customer Items"
-        Me.btnCustomerItems.UseVisualStyleBackColor = True
-        '
-        'btnCheckStock
-        '
-        Me.btnCheckStock.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnCheckStock.Location = New System.Drawing.Point(731, 224)
-        Me.btnCheckStock.Name = "btnCheckStock"
-        Me.btnCheckStock.Size = New System.Drawing.Size(97, 27)
-        Me.btnCheckStock.TabIndex = 35
-        Me.btnCheckStock.Text = "Check Stock"
-        Me.btnCheckStock.UseVisualStyleBackColor = True
-        '
-        'btnAltItems
-        '
-        Me.btnAltItems.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnAltItems.Location = New System.Drawing.Point(837, 257)
-        Me.btnAltItems.Name = "btnAltItems"
-        Me.btnAltItems.Size = New System.Drawing.Size(97, 27)
-        Me.btnAltItems.TabIndex = 53
-        Me.btnAltItems.Text = "Alternate Items (ST)"
-        Me.btnAltItems.UseVisualStyleBackColor = True
-        '
-        'btnSpecialCharges
-        '
-        Me.btnSpecialCharges.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSpecialCharges.Location = New System.Drawing.Point(731, 257)
-        Me.btnSpecialCharges.Name = "btnSpecialCharges"
-        Me.btnSpecialCharges.Size = New System.Drawing.Size(97, 27)
-        Me.btnSpecialCharges.TabIndex = 54
-        Me.btnSpecialCharges.Text = "Special Charges"
-        Me.btnSpecialCharges.UseVisualStyleBackColor = True
-        '
-        'Label35
-        '
-        Me.Label35.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label35.AutoSize = True
-        Me.Label35.Location = New System.Drawing.Point(727, 87)
-        Me.Label35.Name = "Label35"
-        Me.Label35.Size = New System.Drawing.Size(111, 13)
-        Me.Label35.TabIndex = 57
-        Me.Label35.Text = "Fulfilment Comment"
-        '
-        'txtFulfilmentComment
-        '
-        Me.txtFulfilmentComment.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtFulfilmentComment.Location = New System.Drawing.Point(729, 106)
-        Me.txtFulfilmentComment.MaxLength = 500
-        Me.txtFulfilmentComment.Multiline = True
-        Me.txtFulfilmentComment.Name = "txtFulfilmentComment"
-        Me.txtFulfilmentComment.Size = New System.Drawing.Size(205, 103)
-        Me.txtFulfilmentComment.TabIndex = 56
-        Me.txtFulfilmentComment.Tag = "str"
-        '
-        'GroupBox5
-        '
-        Me.GroupBox5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GroupBox5.Controls.Add(Me.cbofulfilment_type)
-        Me.GroupBox5.Location = New System.Drawing.Point(729, 32)
-        Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(205, 48)
-        Me.GroupBox5.TabIndex = 55
-        Me.GroupBox5.TabStop = False
-        Me.GroupBox5.Text = "Fulfilment Source"
-        '
-        'grpSampleRequest
-        '
-        Me.grpSampleRequest.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.grpSampleRequest.Controls.Add(Me.btnPrintSR)
-        Me.grpSampleRequest.Controls.Add(Me.cbbSrTypeId)
-        Me.grpSampleRequest.Controls.Add(Me.Label40)
-        Me.grpSampleRequest.Location = New System.Drawing.Point(943, 233)
-        Me.grpSampleRequest.Name = "grpSampleRequest"
-        Me.grpSampleRequest.Size = New System.Drawing.Size(265, 51)
-        Me.grpSampleRequest.TabIndex = 58
-        Me.grpSampleRequest.TabStop = False
-        Me.grpSampleRequest.Text = "Samle Request (SR)"
-        '
-        'btnPrintSR
-        '
-        Me.btnPrintSR.Location = New System.Drawing.Point(196, 21)
-        Me.btnPrintSR.Name = "btnPrintSR"
-        Me.btnPrintSR.Size = New System.Drawing.Size(64, 23)
-        Me.btnPrintSR.TabIndex = 5
-        Me.btnPrintSR.Text = "Print SR"
-        Me.btnPrintSR.UseVisualStyleBackColor = True
-        '
-        'cbbSrTypeId
-        '
-        Me.cbbSrTypeId.FormattingEnabled = True
-        Me.cbbSrTypeId.Location = New System.Drawing.Point(69, 23)
-        Me.cbbSrTypeId.Name = "cbbSrTypeId"
-        Me.cbbSrTypeId.Size = New System.Drawing.Size(121, 21)
-        Me.cbbSrTypeId.TabIndex = 4
-        '
-        'Label40
-        '
-        Me.Label40.AutoSize = True
-        Me.Label40.Location = New System.Drawing.Point(8, 26)
-        Me.Label40.Name = "Label40"
-        Me.Label40.Size = New System.Drawing.Size(55, 13)
-        Me.Label40.TabIndex = 3
-        Me.Label40.Text = "Objective"
         '
         'sonoid
         '
@@ -2211,6 +1315,923 @@ Partial Class frmSalesOrder
         Me.sent_to.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.sent_to.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         '
+        'txtNetAmt
+        '
+        Me.txtNetAmt.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.txtNetAmt.Location = New System.Drawing.Point(1074, 566)
+        Me.txtNetAmt.Name = "txtNetAmt"
+        Me.txtNetAmt.ReadOnly = True
+        Me.txtNetAmt.Size = New System.Drawing.Size(128, 20)
+        Me.txtNetAmt.TabIndex = 27
+        Me.txtNetAmt.Tag = "int"
+        Me.txtNetAmt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label21
+        '
+        Me.Label21.AutoSize = True
+        Me.Label21.Location = New System.Drawing.Point(977, 573)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(91, 13)
+        Me.Label21.TabIndex = 28
+        Me.Label21.Text = "Net S/O Amount"
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.Label18.ForeColor = System.Drawing.Color.Blue
+        Me.Label18.Location = New System.Drawing.Point(9, 573)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(441, 13)
+        Me.Label18.TabIndex = 18
+        Me.Label18.Text = "* S/O No. ID, Item Amount and Net Item Amount will calculate automatically."
+        '
+        'chkSubmitAllBatches
+        '
+        Me.chkSubmitAllBatches.AutoSize = True
+        Me.chkSubmitAllBatches.Location = New System.Drawing.Point(11, 157)
+        Me.chkSubmitAllBatches.Name = "chkSubmitAllBatches"
+        Me.chkSubmitAllBatches.Size = New System.Drawing.Size(165, 17)
+        Me.chkSubmitAllBatches.TabIndex = 30
+        Me.chkSubmitAllBatches.Text = "Submit every batch or only "
+        Me.chkSubmitAllBatches.UseVisualStyleBackColor = True
+        '
+        'textBatches
+        '
+        Me.textBatches.Location = New System.Drawing.Point(177, 154)
+        Me.textBatches.Name = "textBatches"
+        Me.textBatches.Size = New System.Drawing.Size(32, 22)
+        Me.textBatches.TabIndex = 34
+        Me.textBatches.Tag = "int"
+        '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.Location = New System.Drawing.Point(212, 157)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(53, 13)
+        Me.Label20.TabIndex = 34
+        Me.Label20.Text = "batche(s)"
+        '
+        'checkBulkAppInternal
+        '
+        Me.checkBulkAppInternal.AutoSize = True
+        Me.checkBulkAppInternal.BackColor = System.Drawing.Color.Gold
+        Me.checkBulkAppInternal.Location = New System.Drawing.Point(7, -1)
+        Me.checkBulkAppInternal.Name = "checkBulkAppInternal"
+        Me.checkBulkAppInternal.Size = New System.Drawing.Size(137, 17)
+        Me.checkBulkAppInternal.TabIndex = 35
+        Me.checkBulkAppInternal.Text = "Bulk approve internal"
+        Me.checkBulkAppInternal.UseVisualStyleBackColor = False
+        '
+        'TabControl1
+        '
+        Me.TabControl1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TabControl1.Controls.Add(Me.tabSales)
+        Me.TabControl1.Controls.Add(Me.tabCustomer)
+        Me.TabControl1.Controls.Add(Me.tabDelivery)
+        Me.TabControl1.Controls.Add(Me.tabTerms)
+        Me.TabControl1.Controls.Add(Me.tabOther)
+        Me.TabControl1.HotTrack = True
+        Me.TabControl1.Location = New System.Drawing.Point(8, 32)
+        Me.TabControl1.Multiline = True
+        Me.TabControl1.Name = "TabControl1"
+        Me.TabControl1.SelectedIndex = 0
+        Me.TabControl1.Size = New System.Drawing.Size(716, 252)
+        Me.TabControl1.TabIndex = 0
+        '
+        'tabSales
+        '
+        Me.tabSales.Controls.Add(Me.txtDyeStandard)
+        Me.tabSales.Controls.Add(Me.Label24)
+        Me.tabSales.Controls.Add(Me.lblSalesCommPer)
+        Me.tabSales.Controls.Add(Me.lblAgentCommPer)
+        Me.tabSales.Controls.Add(Me.Label30)
+        Me.tabSales.Controls.Add(Me.txtSalesCommPer)
+        Me.tabSales.Controls.Add(Me.Label29)
+        Me.tabSales.Controls.Add(Me.txtAgentCommPer)
+        Me.tabSales.Controls.Add(Me.txtRef)
+        Me.tabSales.Controls.Add(Me.cboAgent)
+        Me.tabSales.Controls.Add(Me.cboSalesMan)
+        Me.tabSales.Controls.Add(Me.Label19)
+        Me.tabSales.Controls.Add(Me.Label7)
+        Me.tabSales.Controls.Add(Me.Label5)
+        Me.tabSales.Controls.Add(Me.Label4)
+        Me.tabSales.Controls.Add(Me.cboFinalCustomer)
+        Me.tabSales.Location = New System.Drawing.Point(4, 22)
+        Me.tabSales.Name = "tabSales"
+        Me.tabSales.Size = New System.Drawing.Size(708, 226)
+        Me.tabSales.TabIndex = 1
+        Me.tabSales.Text = "Sales/Agency"
+        Me.tabSales.UseVisualStyleBackColor = True
+        '
+        'txtDyeStandard
+        '
+        Me.txtDyeStandard.Location = New System.Drawing.Point(176, 116)
+        Me.txtDyeStandard.Name = "txtDyeStandard"
+        Me.txtDyeStandard.Size = New System.Drawing.Size(232, 22)
+        Me.txtDyeStandard.TabIndex = 47
+        '
+        'Label24
+        '
+        Me.Label24.AutoSize = True
+        Me.Label24.Location = New System.Drawing.Point(20, 119)
+        Me.Label24.Name = "Label24"
+        Me.Label24.Size = New System.Drawing.Size(76, 13)
+        Me.Label24.TabIndex = 46
+        Me.Label24.Text = "Dye Standard"
+        '
+        'lblSalesCommPer
+        '
+        Me.lblSalesCommPer.AutoSize = True
+        Me.lblSalesCommPer.Location = New System.Drawing.Point(20, 173)
+        Me.lblSalesCommPer.Name = "lblSalesCommPer"
+        Me.lblSalesCommPer.Size = New System.Drawing.Size(72, 13)
+        Me.lblSalesCommPer.TabIndex = 45
+        Me.lblSalesCommPer.Text = "Commission:"
+        '
+        'lblAgentCommPer
+        '
+        Me.lblAgentCommPer.AutoSize = True
+        Me.lblAgentCommPer.Location = New System.Drawing.Point(20, 145)
+        Me.lblAgentCommPer.Name = "lblAgentCommPer"
+        Me.lblAgentCommPer.Size = New System.Drawing.Size(72, 13)
+        Me.lblAgentCommPer.TabIndex = 44
+        Me.lblAgentCommPer.Text = "Commission:"
+        '
+        'Label30
+        '
+        Me.Label30.AutoSize = True
+        Me.Label30.Location = New System.Drawing.Point(240, 170)
+        Me.Label30.Name = "Label30"
+        Me.Label30.Size = New System.Drawing.Size(16, 13)
+        Me.Label30.TabIndex = 39
+        Me.Label30.Text = "%"
+        '
+        'txtSalesCommPer
+        '
+        Me.txtSalesCommPer.AllowSpace = False
+        Me.txtSalesCommPer.DataPropertyName = Nothing
+        Me.txtSalesCommPer.Location = New System.Drawing.Point(176, 170)
+        Me.txtSalesCommPer.Name = "txtSalesCommPer"
+        Me.txtSalesCommPer.NoOfDecimalsToDisplay = 2
+        Me.txtSalesCommPer.Size = New System.Drawing.Size(58, 22)
+        Me.txtSalesCommPer.TabIndex = 37
+        Me.txtSalesCommPer.Tag = "int"
+        Me.txtSalesCommPer.Text = "0.00"
+        Me.txtSalesCommPer.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label29
+        '
+        Me.Label29.AutoSize = True
+        Me.Label29.Location = New System.Drawing.Point(240, 142)
+        Me.Label29.Name = "Label29"
+        Me.Label29.Size = New System.Drawing.Size(16, 13)
+        Me.Label29.TabIndex = 36
+        Me.Label29.Text = "%"
+        '
+        'txtAgentCommPer
+        '
+        Me.txtAgentCommPer.AllowSpace = False
+        Me.txtAgentCommPer.DataPropertyName = Nothing
+        Me.txtAgentCommPer.Location = New System.Drawing.Point(176, 142)
+        Me.txtAgentCommPer.Name = "txtAgentCommPer"
+        Me.txtAgentCommPer.NoOfDecimalsToDisplay = 2
+        Me.txtAgentCommPer.Size = New System.Drawing.Size(58, 22)
+        Me.txtAgentCommPer.TabIndex = 34
+        Me.txtAgentCommPer.Tag = "int"
+        Me.txtAgentCommPer.Text = "0.00"
+        Me.txtAgentCommPer.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'tabCustomer
+        '
+        Me.tabCustomer.Controls.Add(Me.Label46)
+        Me.tabCustomer.Controls.Add(Me.txtCustAddlInfo)
+        Me.tabCustomer.Controls.Add(Me.Label39)
+        Me.tabCustomer.Controls.Add(Me.txtCustPoUnique)
+        Me.tabCustomer.Controls.Add(Me.Label38)
+        Me.tabCustomer.Controls.Add(Me.txtCustPoSuffix)
+        Me.tabCustomer.Controls.Add(Me.lblCustomersActive)
+        Me.tabCustomer.Controls.Add(Me.mcboCustomersBillToFlag)
+        Me.tabCustomer.Controls.Add(Me.Label22)
+        Me.tabCustomer.Controls.Add(Me.txtContact)
+        Me.tabCustomer.Controls.Add(Me.txtCustAddr)
+        Me.tabCustomer.Controls.Add(Me.chkSpecial3)
+        Me.tabCustomer.Controls.Add(Me.Label8)
+        Me.tabCustomer.Controls.Add(Me.Label3)
+        Me.tabCustomer.Controls.Add(Me.dtpPoDate)
+        Me.tabCustomer.Controls.Add(Me.txtPoNo)
+        Me.tabCustomer.Controls.Add(Me.chkExport)
+        Me.tabCustomer.Controls.Add(Me.Label15)
+        Me.tabCustomer.Controls.Add(Me.btnCustPoUnique)
+        Me.tabCustomer.Location = New System.Drawing.Point(4, 22)
+        Me.tabCustomer.Name = "tabCustomer"
+        Me.tabCustomer.Size = New System.Drawing.Size(708, 226)
+        Me.tabCustomer.TabIndex = 0
+        Me.tabCustomer.Text = "Customer details"
+        Me.tabCustomer.UseVisualStyleBackColor = True
+        '
+        'Label39
+        '
+        Me.Label39.AutoSize = True
+        Me.Label39.Location = New System.Drawing.Point(13, 39)
+        Me.Label39.Name = "Label39"
+        Me.Label39.Size = New System.Drawing.Size(149, 13)
+        Me.Label39.TabIndex = 43
+        Me.Label39.Text = "Customer P/O No. (Unique.)"
+        '
+        'txtCustPoUnique
+        '
+        Me.txtCustPoUnique.BackColor = System.Drawing.Color.Gold
+        Me.txtCustPoUnique.Location = New System.Drawing.Point(167, 36)
+        Me.txtCustPoUnique.Name = "txtCustPoUnique"
+        Me.txtCustPoUnique.ReadOnly = True
+        Me.txtCustPoUnique.Size = New System.Drawing.Size(229, 22)
+        Me.txtCustPoUnique.TabIndex = 42
+        Me.txtCustPoUnique.Tag = "str"
+        '
+        'Label38
+        '
+        Me.Label38.AutoSize = True
+        Me.Label38.Location = New System.Drawing.Point(13, 63)
+        Me.Label38.Name = "Label38"
+        Me.Label38.Size = New System.Drawing.Size(116, 13)
+        Me.Label38.TabIndex = 40
+        Me.Label38.Text = "Customer P/O (Suffix)"
+        '
+        'txtCustPoSuffix
+        '
+        Me.txtCustPoSuffix.Location = New System.Drawing.Point(167, 60)
+        Me.txtCustPoSuffix.MaxLength = 20
+        Me.txtCustPoSuffix.Name = "txtCustPoSuffix"
+        Me.txtCustPoSuffix.Size = New System.Drawing.Size(259, 22)
+        Me.txtCustPoSuffix.TabIndex = 39
+        Me.txtCustPoSuffix.Tag = "str"
+        '
+        'lblCustomersActive
+        '
+        Me.lblCustomersActive.AutoSize = True
+        Me.lblCustomersActive.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.lblCustomersActive.ForeColor = System.Drawing.Color.Red
+        Me.lblCustomersActive.Location = New System.Drawing.Point(424, 58)
+        Me.lblCustomersActive.Name = "lblCustomersActive"
+        Me.lblCustomersActive.Size = New System.Drawing.Size(225, 24)
+        Me.lblCustomersActive.TabIndex = 36
+        Me.lblCustomersActive.Text = "ลูกค้า ท่านนี้ ถูกยกเลิกแล้วครับ"
+        Me.lblCustomersActive.Visible = False
+        '
+        'mcboCustomersBillToFlag
+        '
+        Me.mcboCustomersBillToFlag.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.mcboCustomersBillToFlag.DataSource = Nothing
+        Me.mcboCustomersBillToFlag.DisplayMember = Nothing
+        Me.mcboCustomersBillToFlag.Location = New System.Drawing.Point(167, 84)
+        Me.mcboCustomersBillToFlag.Name = "mcboCustomersBillToFlag"
+        Me.mcboCustomersBillToFlag.SelectedIndex = -1
+        Me.mcboCustomersBillToFlag.SelectedValue = Nothing
+        Me.mcboCustomersBillToFlag.Size = New System.Drawing.Size(260, 21)
+        Me.mcboCustomersBillToFlag.TabIndex = 35
+        Me.mcboCustomersBillToFlag.ValueMember = Nothing
+        '
+        'Label22
+        '
+        Me.Label22.AutoSize = True
+        Me.Label22.Location = New System.Drawing.Point(13, 134)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(89, 13)
+        Me.Label22.TabIndex = 34
+        Me.Label22.Text = "Contact person:"
+        '
+        'txtContact
+        '
+        Me.txtContact.Location = New System.Drawing.Point(167, 132)
+        Me.txtContact.Name = "txtContact"
+        Me.txtContact.Size = New System.Drawing.Size(260, 22)
+        Me.txtContact.TabIndex = 33
+        Me.txtContact.Tag = "str"
+        '
+        'txtCustAddr
+        '
+        Me.txtCustAddr.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtCustAddr.Location = New System.Drawing.Point(16, 161)
+        Me.txtCustAddr.Multiline = True
+        Me.txtCustAddr.Name = "txtCustAddr"
+        Me.txtCustAddr.ReadOnly = True
+        Me.txtCustAddr.Size = New System.Drawing.Size(676, 62)
+        Me.txtCustAddr.TabIndex = 32
+        '
+        'btnCustPoUnique
+        '
+        Me.btnCustPoUnique.Image = Global.SalesOrderSystem.My.Resources.Resources.WriteToHistory_16x
+        Me.btnCustPoUnique.Location = New System.Drawing.Point(397, 35)
+        Me.btnCustPoUnique.Name = "btnCustPoUnique"
+        Me.btnCustPoUnique.Size = New System.Drawing.Size(25, 24)
+        Me.btnCustPoUnique.TabIndex = 41
+        Me.btnCustPoUnique.UseVisualStyleBackColor = True
+        '
+        'tabDelivery
+        '
+        Me.tabDelivery.Controls.Add(Me.mcboCustomersShipToFlag)
+        Me.tabDelivery.Controls.Add(Me.cboMtl_warehouse)
+        Me.tabDelivery.Controls.Add(Me.Label34)
+        Me.tabDelivery.Controls.Add(Me.txtShipQty_Tolerance_high)
+        Me.tabDelivery.Controls.Add(Me.Label28)
+        Me.tabDelivery.Controls.Add(Me.Label27)
+        Me.tabDelivery.Controls.Add(Me.txtShipQty_Tolerance_low)
+        Me.tabDelivery.Controls.Add(Me.Label25)
+        Me.tabDelivery.Controls.Add(Me.txtShipQty_tolerance)
+        Me.tabDelivery.Controls.Add(Me.Label23)
+        Me.tabDelivery.Controls.Add(Me.txtDeliAddr)
+        Me.tabDelivery.Controls.Add(Me.txtTransportBy)
+        Me.tabDelivery.Controls.Add(Me.Label6)
+        Me.tabDelivery.Controls.Add(Me.Label14)
+        Me.tabDelivery.Controls.Add(Me.Label9)
+        Me.tabDelivery.Controls.Add(Me.txtDeliveryTerm)
+        Me.tabDelivery.Controls.Add(Me.txtAdditionalLabel)
+        Me.tabDelivery.Controls.Add(Me.Label13)
+        Me.tabDelivery.Location = New System.Drawing.Point(4, 22)
+        Me.tabDelivery.Name = "tabDelivery"
+        Me.tabDelivery.Size = New System.Drawing.Size(708, 226)
+        Me.tabDelivery.TabIndex = 0
+        Me.tabDelivery.Text = "Delivery details"
+        Me.tabDelivery.UseVisualStyleBackColor = True
+        '
+        'mcboCustomersShipToFlag
+        '
+        Me.mcboCustomersShipToFlag.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.mcboCustomersShipToFlag.DataSource = Nothing
+        Me.mcboCustomersShipToFlag.DisplayMember = Nothing
+        Me.mcboCustomersShipToFlag.Location = New System.Drawing.Point(110, 14)
+        Me.mcboCustomersShipToFlag.Name = "mcboCustomersShipToFlag"
+        Me.mcboCustomersShipToFlag.SelectedIndex = -1
+        Me.mcboCustomersShipToFlag.SelectedValue = Nothing
+        Me.mcboCustomersShipToFlag.Size = New System.Drawing.Size(231, 21)
+        Me.mcboCustomersShipToFlag.TabIndex = 46
+        Me.mcboCustomersShipToFlag.ValueMember = Nothing
+        '
+        'cboMtl_warehouse
+        '
+        Me.cboMtl_warehouse.FormattingEnabled = True
+        Me.cboMtl_warehouse.Location = New System.Drawing.Point(110, 111)
+        Me.cboMtl_warehouse.Name = "cboMtl_warehouse"
+        Me.cboMtl_warehouse.Size = New System.Drawing.Size(231, 21)
+        Me.cboMtl_warehouse.TabIndex = 45
+        '
+        'Label34
+        '
+        Me.Label34.AutoSize = True
+        Me.Label34.Location = New System.Drawing.Point(3, 108)
+        Me.Label34.Name = "Label34"
+        Me.Label34.Size = New System.Drawing.Size(108, 13)
+        Me.Label34.TabIndex = 44
+        Me.Label34.Text = "Ship By WareHouse"
+        '
+        'txtShipQty_Tolerance_high
+        '
+        Me.txtShipQty_Tolerance_high.Location = New System.Drawing.Point(479, 37)
+        Me.txtShipQty_Tolerance_high.Name = "txtShipQty_Tolerance_high"
+        Me.txtShipQty_Tolerance_high.Size = New System.Drawing.Size(30, 22)
+        Me.txtShipQty_Tolerance_high.TabIndex = 41
+        Me.txtShipQty_Tolerance_high.Tag = "str"
+        '
+        'Label28
+        '
+        Me.Label28.AutoSize = True
+        Me.Label28.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label28.Location = New System.Drawing.Point(478, 19)
+        Me.Label28.Name = "Label28"
+        Me.Label28.Size = New System.Drawing.Size(30, 13)
+        Me.Label28.TabIndex = 40
+        Me.Label28.Text = "Over"
+        '
+        'Label27
+        '
+        Me.Label27.AutoSize = True
+        Me.Label27.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label27.Location = New System.Drawing.Point(433, 20)
+        Me.Label27.Name = "Label27"
+        Me.Label27.Size = New System.Drawing.Size(32, 13)
+        Me.Label27.TabIndex = 39
+        Me.Label27.Text = "Short"
+        '
+        'txtShipQty_Tolerance_low
+        '
+        Me.txtShipQty_Tolerance_low.Location = New System.Drawing.Point(436, 37)
+        Me.txtShipQty_Tolerance_low.Name = "txtShipQty_Tolerance_low"
+        Me.txtShipQty_Tolerance_low.Size = New System.Drawing.Size(30, 22)
+        Me.txtShipQty_Tolerance_low.TabIndex = 38
+        Me.txtShipQty_Tolerance_low.Tag = "str"
+        '
+        'Label25
+        '
+        Me.Label25.AutoSize = True
+        Me.Label25.Location = New System.Drawing.Point(356, 64)
+        Me.Label25.Name = "Label25"
+        Me.Label25.Size = New System.Drawing.Size(264, 13)
+        Me.Label25.TabIndex = 37
+        Me.Label25.Text = "(This data will be used to close s/o after shipment)"
+        '
+        'txtShipQty_tolerance
+        '
+        Me.txtShipQty_tolerance.Location = New System.Drawing.Point(526, 37)
+        Me.txtShipQty_tolerance.Name = "txtShipQty_tolerance"
+        Me.txtShipQty_tolerance.Size = New System.Drawing.Size(30, 22)
+        Me.txtShipQty_tolerance.TabIndex = 34
+        Me.txtShipQty_tolerance.Tag = "str"
+        Me.txtShipQty_tolerance.Visible = False
+        '
+        'Label23
+        '
+        Me.Label23.AutoSize = True
+        Me.Label23.Location = New System.Drawing.Point(352, 40)
+        Me.Label23.Name = "Label23"
+        Me.Label23.Size = New System.Drawing.Size(79, 13)
+        Me.Label23.TabIndex = 35
+        Me.Label23.Text = "Tolerance (%) :"
+        '
+        'txtDeliAddr
+        '
+        Me.txtDeliAddr.Location = New System.Drawing.Point(355, 111)
+        Me.txtDeliAddr.Multiline = True
+        Me.txtDeliAddr.Name = "txtDeliAddr"
+        Me.txtDeliAddr.ReadOnly = True
+        Me.txtDeliAddr.Size = New System.Drawing.Size(328, 73)
+        Me.txtDeliAddr.TabIndex = 33
+        '
+        'tabTerms
+        '
+        Me.tabTerms.Controls.Add(Me.mcboBanks)
+        Me.tabTerms.Controls.Add(Me.Label32)
+        Me.tabTerms.Controls.Add(Me.Label26)
+        Me.tabTerms.Controls.Add(Me.cboPaymode)
+        Me.tabTerms.Controls.Add(Me.Label10)
+        Me.tabTerms.Controls.Add(Me.txtTermCondition)
+        Me.tabTerms.Controls.Add(Me.Label11)
+        Me.tabTerms.Controls.Add(Me.txtCreditDays)
+        Me.tabTerms.Controls.Add(Me.Label12)
+        Me.tabTerms.Location = New System.Drawing.Point(4, 22)
+        Me.tabTerms.Name = "tabTerms"
+        Me.tabTerms.Size = New System.Drawing.Size(708, 226)
+        Me.tabTerms.TabIndex = 2
+        Me.tabTerms.Text = "Payment terms"
+        Me.tabTerms.UseVisualStyleBackColor = True
+        '
+        'mcboBanks
+        '
+        Me.mcboBanks.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.mcboBanks.DataSource = Nothing
+        Me.mcboBanks.DisplayMember = Nothing
+        Me.mcboBanks.Location = New System.Drawing.Point(112, 103)
+        Me.mcboBanks.Name = "mcboBanks"
+        Me.mcboBanks.SelectedIndex = -1
+        Me.mcboBanks.SelectedValue = Nothing
+        Me.mcboBanks.Size = New System.Drawing.Size(578, 21)
+        Me.mcboBanks.TabIndex = 49
+        Me.mcboBanks.ValueMember = Nothing
+        '
+        'Label32
+        '
+        Me.Label32.AutoSize = True
+        Me.Label32.Location = New System.Drawing.Point(16, 108)
+        Me.Label32.Name = "Label32"
+        Me.Label32.Size = New System.Drawing.Size(36, 13)
+        Me.Label32.TabIndex = 21
+        Me.Label32.Text = "Bank:"
+        '
+        'Label26
+        '
+        Me.Label26.AutoSize = True
+        Me.Label26.Location = New System.Drawing.Point(16, 79)
+        Me.Label26.Name = "Label26"
+        Me.Label26.Size = New System.Drawing.Size(85, 13)
+        Me.Label26.TabIndex = 18
+        Me.Label26.Text = "Payment mode:"
+        '
+        'cboPaymode
+        '
+        Me.cboPaymode.BackColor = System.Drawing.Color.Gold
+        Me.cboPaymode.FormattingEnabled = True
+        Me.cboPaymode.Location = New System.Drawing.Point(112, 76)
+        Me.cboPaymode.Name = "cboPaymode"
+        Me.cboPaymode.Size = New System.Drawing.Size(231, 21)
+        Me.cboPaymode.TabIndex = 17
+        '
+        'tabOther
+        '
+        Me.tabOther.Controls.Add(Me.txtJobNoComment4)
+        Me.tabOther.Controls.Add(Me.txtRefJobNo4)
+        Me.tabOther.Controls.Add(Me.Label44)
+        Me.tabOther.Controls.Add(Me.txtJobNoComment3)
+        Me.tabOther.Controls.Add(Me.txtRefJobNo3)
+        Me.tabOther.Controls.Add(Me.Label43)
+        Me.tabOther.Controls.Add(Me.txtJobNoComment2)
+        Me.tabOther.Controls.Add(Me.txtRefJobNo2)
+        Me.tabOther.Controls.Add(Me.Label42)
+        Me.tabOther.Controls.Add(Me.txtJobNoComment1)
+        Me.tabOther.Controls.Add(Me.txtRefJobNo1)
+        Me.tabOther.Controls.Add(Me.Label41)
+        Me.tabOther.Controls.Add(Me.Label37)
+        Me.tabOther.Controls.Add(Me.txtMtsPerRoll)
+        Me.tabOther.Controls.Add(Me.txtQualitySpecialReq)
+        Me.tabOther.Controls.Add(Me.Label31)
+        Me.tabOther.Controls.Add(Me.cboPackAfterBulkApp)
+        Me.tabOther.Controls.Add(Me.Label33)
+        Me.tabOther.Controls.Add(Me.GroupBox2)
+        Me.tabOther.Controls.Add(Me.Label16)
+        Me.tabOther.Controls.Add(Me.txtRemark)
+        Me.tabOther.Controls.Add(Me.textBatches)
+        Me.tabOther.Controls.Add(Me.chkSubmitAllBatches)
+        Me.tabOther.Controls.Add(Me.Label20)
+        Me.tabOther.Controls.Add(Me.chkSpecial1)
+        Me.tabOther.Location = New System.Drawing.Point(4, 22)
+        Me.tabOther.Name = "tabOther"
+        Me.tabOther.Size = New System.Drawing.Size(708, 226)
+        Me.tabOther.TabIndex = 3
+        Me.tabOther.Text = "Other details"
+        Me.tabOther.UseVisualStyleBackColor = True
+        '
+        'txtJobNoComment4
+        '
+        Me.txtJobNoComment4.Location = New System.Drawing.Point(431, 198)
+        Me.txtJobNoComment4.Name = "txtJobNoComment4"
+        Me.txtJobNoComment4.Size = New System.Drawing.Size(274, 22)
+        Me.txtJobNoComment4.TabIndex = 68
+        '
+        'txtRefJobNo4
+        '
+        Me.txtRefJobNo4.Location = New System.Drawing.Point(571, 170)
+        Me.txtRefJobNo4.Name = "txtRefJobNo4"
+        Me.txtRefJobNo4.Size = New System.Drawing.Size(134, 22)
+        Me.txtRefJobNo4.TabIndex = 67
+        '
+        'Label44
+        '
+        Me.Label44.AutoSize = True
+        Me.Label44.Location = New System.Drawing.Point(428, 173)
+        Me.Label44.Name = "Label44"
+        Me.Label44.Size = New System.Drawing.Size(137, 13)
+        Me.Label44.TabIndex = 66
+        Me.Label44.Text = "Ref. Job No. 4 / Comment"
+        '
+        'txtJobNoComment3
+        '
+        Me.txtJobNoComment3.Location = New System.Drawing.Point(431, 143)
+        Me.txtJobNoComment3.Name = "txtJobNoComment3"
+        Me.txtJobNoComment3.Size = New System.Drawing.Size(274, 22)
+        Me.txtJobNoComment3.TabIndex = 65
+        '
+        'txtRefJobNo3
+        '
+        Me.txtRefJobNo3.Location = New System.Drawing.Point(571, 115)
+        Me.txtRefJobNo3.Name = "txtRefJobNo3"
+        Me.txtRefJobNo3.Size = New System.Drawing.Size(134, 22)
+        Me.txtRefJobNo3.TabIndex = 64
+        '
+        'Label43
+        '
+        Me.Label43.AutoSize = True
+        Me.Label43.Location = New System.Drawing.Point(428, 118)
+        Me.Label43.Name = "Label43"
+        Me.Label43.Size = New System.Drawing.Size(137, 13)
+        Me.Label43.TabIndex = 63
+        Me.Label43.Text = "Ref. Job No. 3 / Comment"
+        '
+        'txtJobNoComment2
+        '
+        Me.txtJobNoComment2.Location = New System.Drawing.Point(431, 87)
+        Me.txtJobNoComment2.Name = "txtJobNoComment2"
+        Me.txtJobNoComment2.Size = New System.Drawing.Size(274, 22)
+        Me.txtJobNoComment2.TabIndex = 62
+        '
+        'txtRefJobNo2
+        '
+        Me.txtRefJobNo2.Location = New System.Drawing.Point(571, 59)
+        Me.txtRefJobNo2.Name = "txtRefJobNo2"
+        Me.txtRefJobNo2.Size = New System.Drawing.Size(134, 22)
+        Me.txtRefJobNo2.TabIndex = 61
+        '
+        'Label42
+        '
+        Me.Label42.AutoSize = True
+        Me.Label42.Location = New System.Drawing.Point(428, 62)
+        Me.Label42.Name = "Label42"
+        Me.Label42.Size = New System.Drawing.Size(137, 13)
+        Me.Label42.TabIndex = 60
+        Me.Label42.Text = "Ref. Job No. 2 / Comment"
+        '
+        'txtJobNoComment1
+        '
+        Me.txtJobNoComment1.Location = New System.Drawing.Point(431, 31)
+        Me.txtJobNoComment1.Name = "txtJobNoComment1"
+        Me.txtJobNoComment1.Size = New System.Drawing.Size(274, 22)
+        Me.txtJobNoComment1.TabIndex = 59
+        '
+        'txtRefJobNo1
+        '
+        Me.txtRefJobNo1.Location = New System.Drawing.Point(571, 3)
+        Me.txtRefJobNo1.Name = "txtRefJobNo1"
+        Me.txtRefJobNo1.Size = New System.Drawing.Size(134, 22)
+        Me.txtRefJobNo1.TabIndex = 57
+        '
+        'Label41
+        '
+        Me.Label41.AutoSize = True
+        Me.Label41.Location = New System.Drawing.Point(428, 6)
+        Me.Label41.Name = "Label41"
+        Me.Label41.Size = New System.Drawing.Size(137, 13)
+        Me.Label41.TabIndex = 56
+        Me.Label41.Text = "Ref. Job No. 1 / Comment"
+        '
+        'Label37
+        '
+        Me.Label37.AutoSize = True
+        Me.Label37.Location = New System.Drawing.Point(265, 194)
+        Me.Label37.Name = "Label37"
+        Me.Label37.Size = New System.Drawing.Size(82, 13)
+        Me.Label37.TabIndex = 55
+        Me.Label37.Text = "MTS PER ROLL:"
+        '
+        'txtMtsPerRoll
+        '
+        Me.txtMtsPerRoll.AllowSpace = False
+        Me.txtMtsPerRoll.DataPropertyName = Nothing
+        Me.txtMtsPerRoll.Location = New System.Drawing.Point(353, 191)
+        Me.txtMtsPerRoll.Name = "txtMtsPerRoll"
+        Me.txtMtsPerRoll.NoOfDecimalsToDisplay = 2
+        Me.txtMtsPerRoll.Size = New System.Drawing.Size(58, 22)
+        Me.txtMtsPerRoll.TabIndex = 54
+        Me.txtMtsPerRoll.Tag = "int"
+        Me.txtMtsPerRoll.Text = "0.00"
+        Me.txtMtsPerRoll.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtQualitySpecialReq
+        '
+        Me.txtQualitySpecialReq.Location = New System.Drawing.Point(235, 17)
+        Me.txtQualitySpecialReq.Multiline = True
+        Me.txtQualitySpecialReq.Name = "txtQualitySpecialReq"
+        Me.txtQualitySpecialReq.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.txtQualitySpecialReq.Size = New System.Drawing.Size(187, 109)
+        Me.txtQualitySpecialReq.TabIndex = 51
+        Me.txtQualitySpecialReq.Tag = "str"
+        '
+        'Label31
+        '
+        Me.Label31.AutoSize = True
+        Me.Label31.Location = New System.Drawing.Point(232, 3)
+        Me.Label31.Name = "Label31"
+        Me.Label31.Size = New System.Drawing.Size(108, 13)
+        Me.Label31.TabIndex = 50
+        Me.Label31.Text = "Quality Special Req."
+        '
+        'cboPackAfterBulkApp
+        '
+        Me.cboPackAfterBulkApp.FormattingEnabled = True
+        Me.cboPackAfterBulkApp.Location = New System.Drawing.Point(10, 200)
+        Me.cboPackAfterBulkApp.Name = "cboPackAfterBulkApp"
+        Me.cboPackAfterBulkApp.Size = New System.Drawing.Size(227, 21)
+        Me.cboPackAfterBulkApp.TabIndex = 40
+        '
+        'Label33
+        '
+        Me.Label33.AutoSize = True
+        Me.Label33.Location = New System.Drawing.Point(7, 183)
+        Me.Label33.Name = "Label33"
+        Me.Label33.Size = New System.Drawing.Size(151, 13)
+        Me.Label33.TabIndex = 39
+        Me.Label33.Text = "Packing after bulk approval:"
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.optAppByDH)
+        Me.GroupBox2.Controls.Add(Me.optAppByMK)
+        Me.GroupBox2.Controls.Add(Me.checkBulkAppInternal)
+        Me.GroupBox2.Location = New System.Drawing.Point(268, 132)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(154, 56)
+        Me.GroupBox2.TabIndex = 38
+        Me.GroupBox2.TabStop = False
+        '
+        'optAppByDH
+        '
+        Me.optAppByDH.AutoSize = True
+        Me.optAppByDH.Location = New System.Drawing.Point(14, 19)
+        Me.optAppByDH.Name = "optAppByDH"
+        Me.optAppByDH.Size = New System.Drawing.Size(136, 17)
+        Me.optAppByDH.TabIndex = 36
+        Me.optAppByDH.TabStop = True
+        Me.optAppByDH.Text = "Approve by dyehouse"
+        Me.optAppByDH.UseVisualStyleBackColor = True
+        '
+        'optAppByMK
+        '
+        Me.optAppByMK.AutoSize = True
+        Me.optAppByMK.Location = New System.Drawing.Point(14, 35)
+        Me.optAppByMK.Name = "optAppByMK"
+        Me.optAppByMK.Size = New System.Drawing.Size(138, 17)
+        Me.optAppByMK.TabIndex = 37
+        Me.optAppByMK.TabStop = True
+        Me.optAppByMK.Text = "Approve by marketing"
+        Me.optAppByMK.UseVisualStyleBackColor = True
+        '
+        'TabControl2
+        '
+        Me.TabControl2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TabControl2.Controls.Add(Me.tabItems)
+        Me.TabControl2.Controls.Add(Me.tabOthers)
+        Me.TabControl2.Location = New System.Drawing.Point(7, 290)
+        Me.TabControl2.Name = "TabControl2"
+        Me.TabControl2.SelectedIndex = 0
+        Me.TabControl2.Size = New System.Drawing.Size(1200, 270)
+        Me.TabControl2.TabIndex = 30
+        '
+        'tabItems
+        '
+        Me.tabItems.Controls.Add(Me.btnSaveSettings)
+        Me.tabItems.Controls.Add(Me.btnGridLayoutSettings)
+        Me.tabItems.Controls.Add(Me.grdSalesOrder)
+        Me.tabItems.Location = New System.Drawing.Point(4, 22)
+        Me.tabItems.Name = "tabItems"
+        Me.tabItems.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabItems.Size = New System.Drawing.Size(1192, 244)
+        Me.tabItems.TabIndex = 0
+        Me.tabItems.Text = "Order Items"
+        Me.tabItems.UseVisualStyleBackColor = True
+        '
+        'btnSaveSettings
+        '
+        Me.btnSaveSettings.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSaveSettings.Location = New System.Drawing.Point(1095, 3)
+        Me.btnSaveSettings.Name = "btnSaveSettings"
+        Me.btnSaveSettings.Size = New System.Drawing.Size(94, 23)
+        Me.btnSaveSettings.TabIndex = 3
+        Me.btnSaveSettings.Text = "Save Settings"
+        Me.btnSaveSettings.UseVisualStyleBackColor = True
+        '
+        'btnGridLayoutSettings
+        '
+        Me.btnGridLayoutSettings.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnGridLayoutSettings.Location = New System.Drawing.Point(963, 3)
+        Me.btnGridLayoutSettings.Name = "btnGridLayoutSettings"
+        Me.btnGridLayoutSettings.Size = New System.Drawing.Size(126, 23)
+        Me.btnGridLayoutSettings.TabIndex = 2
+        Me.btnGridLayoutSettings.Text = "Grid Layout Settings"
+        Me.btnGridLayoutSettings.UseVisualStyleBackColor = True
+        '
+        'tabOthers
+        '
+        Me.tabOthers.Location = New System.Drawing.Point(4, 22)
+        Me.tabOthers.Name = "tabOthers"
+        Me.tabOthers.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabOthers.Size = New System.Drawing.Size(1192, 244)
+        Me.tabOthers.TabIndex = 1
+        Me.tabOthers.Text = "Others"
+        Me.tabOthers.UseVisualStyleBackColor = True
+        '
+        'cbofulfilment_type
+        '
+        Me.cbofulfilment_type.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbofulfilment_type.FormattingEnabled = True
+        Me.cbofulfilment_type.Location = New System.Drawing.Point(6, 18)
+        Me.cbofulfilment_type.Name = "cbofulfilment_type"
+        Me.cbofulfilment_type.Size = New System.Drawing.Size(189, 21)
+        Me.cbofulfilment_type.TabIndex = 31
+        '
+        'ErrorProvider1
+        '
+        Me.ErrorProvider1.ContainerControl = Me
+        '
+        'btnCustomerItems
+        '
+        Me.btnCustomerItems.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnCustomerItems.Location = New System.Drawing.Point(837, 224)
+        Me.btnCustomerItems.Name = "btnCustomerItems"
+        Me.btnCustomerItems.Size = New System.Drawing.Size(97, 27)
+        Me.btnCustomerItems.TabIndex = 34
+        Me.btnCustomerItems.Text = "Customer Items"
+        Me.btnCustomerItems.UseVisualStyleBackColor = True
+        '
+        'btnCheckStock
+        '
+        Me.btnCheckStock.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnCheckStock.Location = New System.Drawing.Point(731, 224)
+        Me.btnCheckStock.Name = "btnCheckStock"
+        Me.btnCheckStock.Size = New System.Drawing.Size(97, 27)
+        Me.btnCheckStock.TabIndex = 35
+        Me.btnCheckStock.Text = "Check Stock"
+        Me.btnCheckStock.UseVisualStyleBackColor = True
+        '
+        'btnAltItems
+        '
+        Me.btnAltItems.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnAltItems.Location = New System.Drawing.Point(837, 257)
+        Me.btnAltItems.Name = "btnAltItems"
+        Me.btnAltItems.Size = New System.Drawing.Size(97, 27)
+        Me.btnAltItems.TabIndex = 53
+        Me.btnAltItems.Text = "Alternate Items (ST)"
+        Me.btnAltItems.UseVisualStyleBackColor = True
+        '
+        'btnSpecialCharges
+        '
+        Me.btnSpecialCharges.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSpecialCharges.Location = New System.Drawing.Point(731, 257)
+        Me.btnSpecialCharges.Name = "btnSpecialCharges"
+        Me.btnSpecialCharges.Size = New System.Drawing.Size(97, 27)
+        Me.btnSpecialCharges.TabIndex = 54
+        Me.btnSpecialCharges.Text = "Special Charges"
+        Me.btnSpecialCharges.UseVisualStyleBackColor = True
+        '
+        'Label35
+        '
+        Me.Label35.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label35.AutoSize = True
+        Me.Label35.Location = New System.Drawing.Point(727, 87)
+        Me.Label35.Name = "Label35"
+        Me.Label35.Size = New System.Drawing.Size(111, 13)
+        Me.Label35.TabIndex = 57
+        Me.Label35.Text = "Fulfilment Comment"
+        '
+        'txtFulfilmentComment
+        '
+        Me.txtFulfilmentComment.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtFulfilmentComment.Location = New System.Drawing.Point(729, 106)
+        Me.txtFulfilmentComment.MaxLength = 500
+        Me.txtFulfilmentComment.Multiline = True
+        Me.txtFulfilmentComment.Name = "txtFulfilmentComment"
+        Me.txtFulfilmentComment.Size = New System.Drawing.Size(205, 103)
+        Me.txtFulfilmentComment.TabIndex = 56
+        Me.txtFulfilmentComment.Tag = "str"
+        '
+        'GroupBox5
+        '
+        Me.GroupBox5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox5.Controls.Add(Me.cbofulfilment_type)
+        Me.GroupBox5.Location = New System.Drawing.Point(729, 32)
+        Me.GroupBox5.Name = "GroupBox5"
+        Me.GroupBox5.Size = New System.Drawing.Size(205, 48)
+        Me.GroupBox5.TabIndex = 55
+        Me.GroupBox5.TabStop = False
+        Me.GroupBox5.Text = "Fulfilment Source"
+        '
+        'grpSampleRequest
+        '
+        Me.grpSampleRequest.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.grpSampleRequest.Controls.Add(Me.btnPrintSR)
+        Me.grpSampleRequest.Controls.Add(Me.cbbSrTypeId)
+        Me.grpSampleRequest.Controls.Add(Me.Label40)
+        Me.grpSampleRequest.Location = New System.Drawing.Point(943, 233)
+        Me.grpSampleRequest.Name = "grpSampleRequest"
+        Me.grpSampleRequest.Size = New System.Drawing.Size(265, 51)
+        Me.grpSampleRequest.TabIndex = 58
+        Me.grpSampleRequest.TabStop = False
+        Me.grpSampleRequest.Text = "Samle Request (SR)"
+        '
+        'btnPrintSR
+        '
+        Me.btnPrintSR.Location = New System.Drawing.Point(196, 21)
+        Me.btnPrintSR.Name = "btnPrintSR"
+        Me.btnPrintSR.Size = New System.Drawing.Size(64, 23)
+        Me.btnPrintSR.TabIndex = 5
+        Me.btnPrintSR.Text = "Print SR"
+        Me.btnPrintSR.UseVisualStyleBackColor = True
+        '
+        'cbbSrTypeId
+        '
+        Me.cbbSrTypeId.FormattingEnabled = True
+        Me.cbbSrTypeId.Location = New System.Drawing.Point(69, 23)
+        Me.cbbSrTypeId.Name = "cbbSrTypeId"
+        Me.cbbSrTypeId.Size = New System.Drawing.Size(121, 21)
+        Me.cbbSrTypeId.TabIndex = 4
+        '
+        'Label40
+        '
+        Me.Label40.AutoSize = True
+        Me.Label40.Location = New System.Drawing.Point(8, 26)
+        Me.Label40.Name = "Label40"
+        Me.Label40.Size = New System.Drawing.Size(55, 13)
+        Me.Label40.TabIndex = 3
+        Me.Label40.Text = "Objective"
+        '
+        'Label46
+        '
+        Me.Label46.AutoSize = True
+        Me.Label46.Location = New System.Drawing.Point(13, 111)
+        Me.Label46.Name = "Label46"
+        Me.Label46.Size = New System.Drawing.Size(84, 13)
+        Me.Label46.TabIndex = 45
+        Me.Label46.Text = "Cust Addl. Info"
+        '
+        'txtCustAddlInfo
+        '
+        Me.txtCustAddlInfo.Location = New System.Drawing.Point(167, 108)
+        Me.txtCustAddlInfo.Name = "txtCustAddlInfo"
+        Me.txtCustAddlInfo.Size = New System.Drawing.Size(505, 22)
+        Me.txtCustAddlInfo.TabIndex = 44
+        Me.txtCustAddlInfo.Tag = "str"
+        '
         'frmSalesOrder
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2470,4 +2491,6 @@ Partial Class frmSalesOrder
     Friend WithEvents qtybal As DataGridViewTextBoxColumn
     Friend WithEvents jobno As DataGridViewTextBoxColumn
     Friend WithEvents sent_to As DataGridViewComboBoxColumn
+    Friend WithEvents Label46 As Label
+    Friend WithEvents txtCustAddlInfo As TextBox
 End Class

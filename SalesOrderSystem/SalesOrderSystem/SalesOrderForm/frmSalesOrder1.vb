@@ -1887,6 +1887,8 @@ Public Class frmSalesOrder
                 ElseIf currentGridDesignNo = "" Then
                     MessageBox.Show("Design must not blank", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Else
+
+
                     frmSOSTListSelect = New STV.frmSTBOOKINGSelection
 
                     Dim dbname = (New ClassConnection).database

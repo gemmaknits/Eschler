@@ -237,7 +237,7 @@ Partial Class frmCuttingIN
         Me.dgvCuttingIN.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colCuttingINIdStrollsDO, Me.colCuttingINSoNo, Me.colCuttingINSoNoId, Me.colCuttingINDfNo, Me.colRollNoP, Me.colCuttingINDesignNo, Me.colCuttingRollNoD, Me.colRollNoO, Me.colGr, Me.colCuttingINKg, Me.colCuttingINMts, Me.colCuttingINYds, Me.colCuttingINMtlWarehouse, Me.colCuttingINMtlSubInventory, Me.colCuttingINMtlLocation})
         Me.dgvCuttingIN.Location = New System.Drawing.Point(12, 274)
         Me.dgvCuttingIN.Name = "dgvCuttingIN"
-        Me.dgvCuttingIN.Size = New System.Drawing.Size(917, 178)
+        Me.dgvCuttingIN.Size = New System.Drawing.Size(917, 208)
         Me.dgvCuttingIN.TabIndex = 7
         '
         'lblOutReqNo
@@ -355,9 +355,9 @@ Partial Class frmCuttingIN
         '
         'lblTotalKg
         '
-        Me.lblTotalKg.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblTotalKg.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblTotalKg.AutoSize = True
-        Me.lblTotalKg.Location = New System.Drawing.Point(482, 468)
+        Me.lblTotalKg.Location = New System.Drawing.Point(482, 255)
         Me.lblTotalKg.Name = "lblTotalKg"
         Me.lblTotalKg.Size = New System.Drawing.Size(47, 13)
         Me.lblTotalKg.TabIndex = 340
@@ -365,8 +365,8 @@ Partial Class frmCuttingIN
         '
         'txtTotalKg
         '
-        Me.txtTotalKg.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtTotalKg.Location = New System.Drawing.Point(535, 464)
+        Me.txtTotalKg.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtTotalKg.Location = New System.Drawing.Point(535, 251)
         Me.txtTotalKg.Name = "txtTotalKg"
         Me.txtTotalKg.ReadOnly = True
         Me.txtTotalKg.Size = New System.Drawing.Size(100, 22)
@@ -376,9 +376,9 @@ Partial Class frmCuttingIN
         '
         'lblTotalMts
         '
-        Me.lblTotalMts.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblTotalMts.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblTotalMts.AutoSize = True
-        Me.lblTotalMts.Location = New System.Drawing.Point(641, 468)
+        Me.lblTotalMts.Location = New System.Drawing.Point(641, 255)
         Me.lblTotalMts.Name = "lblTotalMts"
         Me.lblTotalMts.Size = New System.Drawing.Size(52, 13)
         Me.lblTotalMts.TabIndex = 342
@@ -386,8 +386,8 @@ Partial Class frmCuttingIN
         '
         'txtTotalMts
         '
-        Me.txtTotalMts.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtTotalMts.Location = New System.Drawing.Point(699, 464)
+        Me.txtTotalMts.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtTotalMts.Location = New System.Drawing.Point(699, 251)
         Me.txtTotalMts.Name = "txtTotalMts"
         Me.txtTotalMts.ReadOnly = True
         Me.txtTotalMts.Size = New System.Drawing.Size(100, 22)
@@ -397,9 +397,9 @@ Partial Class frmCuttingIN
         '
         'lblTotalYds
         '
-        Me.lblTotalYds.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblTotalYds.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblTotalYds.AutoSize = True
-        Me.lblTotalYds.Location = New System.Drawing.Point(805, 468)
+        Me.lblTotalYds.Location = New System.Drawing.Point(805, 255)
         Me.lblTotalYds.Name = "lblTotalYds"
         Me.lblTotalYds.Size = New System.Drawing.Size(51, 13)
         Me.lblTotalYds.TabIndex = 344
@@ -407,8 +407,8 @@ Partial Class frmCuttingIN
         '
         'txtTotalYds
         '
-        Me.txtTotalYds.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtTotalYds.Location = New System.Drawing.Point(862, 464)
+        Me.txtTotalYds.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtTotalYds.Location = New System.Drawing.Point(862, 251)
         Me.txtTotalYds.Name = "txtTotalYds"
         Me.txtTotalYds.ReadOnly = True
         Me.txtTotalYds.Size = New System.Drawing.Size(67, 22)

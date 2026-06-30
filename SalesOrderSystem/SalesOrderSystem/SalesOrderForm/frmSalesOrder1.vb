@@ -1887,27 +1887,33 @@ Public Class frmSalesOrder
                 ElseIf currentGridDesignNo = "" Then
                     MessageBox.Show("Design must not blank", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Else
+                    ' Open ST Booking Web Page
+                    Dim url As String = "http://172.16.3.2:3001/STBook/st-booking/" &
+    "?so_line_id=" & currentGridSoLineID &
+    "&dbname=" & clsConn.database &
+    "&logempcd=" & clsUser.UserID &
+    "&username=" & Uri.EscapeDataString(clsUser.UserName)
+                    Process.Start(url)
 
+                    'frmSOSTListSelect = New STV.frmSTBOOKINGSelection
 
-                    frmSOSTListSelect = New STV.frmSTBOOKINGSelection
+                    'Dim dbname = (New ClassConnection).database
+                    'If dbname = "ColomboDB" OrElse dbname = "ColomboDBTest" Then
+                    '    Exit Sub
+                    'End If
 
-                    Dim dbname = (New ClassConnection).database
-                    If dbname = "ColomboDB" OrElse dbname = "ColomboDBTest" Then
-                        Exit Sub
-                    End If
-
-                    ' frmSOSTListSelect.pConnection = conn 'Sitthana 21/08/2018
-                    frmSOSTListSelect.DesignNo = currentGridDesignNo
-                    frmSOSTListSelect.DemandQty = oConfig.IsNull(.Rows(.CurrentRow.Index).Cells("qty").Value, 0) 'Sitthana 20200806
-                    frmSOSTListSelect.DemandUom = oConfig.IsNull(.Rows(.CurrentRow.Index).Cells("uom").Value, "") 'Sitthana 20200806
-                    frmSOSTListSelect.DemandKgWeight = clsMaster.GetDesignKg(currentGridDesignNo _
-                                                                          , oConfig.IsNull(.Rows(.CurrentRow.Index).Cells("qty").Value, 1) _
-                                                                          , oConfig.IsNull(.Rows(.CurrentRow.Index).Cells("uom").Value, "")
-                                                                            ) 'Sitthana 20200806
-                    frmSOSTListSelect.ShowDialog()
-                    If frmSOSTListSelect.SONOID <> "" Then
-                        dgr.Cells("ref_stnoid").Value = frmSOSTListSelect.SONOID
-                    End If
+                    '' frmSOSTListSelect.pConnection = conn 'Sitthana 21/08/2018
+                    'frmSOSTListSelect.DesignNo = currentGridDesignNo
+                    'frmSOSTListSelect.DemandQty = oConfig.IsNull(.Rows(.CurrentRow.Index).Cells("qty").Value, 0) 'Sitthana 20200806
+                    'frmSOSTListSelect.DemandUom = oConfig.IsNull(.Rows(.CurrentRow.Index).Cells("uom").Value, "") 'Sitthana 20200806
+                    'frmSOSTListSelect.DemandKgWeight = clsMaster.GetDesignKg(currentGridDesignNo _
+                    '                                                      , oConfig.IsNull(.Rows(.CurrentRow.Index).Cells("qty").Value, 1) _
+                    '                                                      , oConfig.IsNull(.Rows(.CurrentRow.Index).Cells("uom").Value, "")
+                    '                                                        ) 'Sitthana 20200806
+                    'frmSOSTListSelect.ShowDialog()
+                    'If frmSOSTListSelect.SONOID <> "" Then
+                    '    dgr.Cells("ref_stnoid").Value = frmSOSTListSelect.SONOID
+                    'End If
                 End If 'Sitthana 20200806
             End With
         End If

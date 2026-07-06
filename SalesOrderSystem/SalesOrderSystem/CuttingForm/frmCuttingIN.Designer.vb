@@ -55,6 +55,8 @@ Partial Class frmCuttingIN
         Me.btnSearchCIN = New System.Windows.Forms.Button()
         Me.lblDyedOut = New System.Windows.Forms.Label()
         Me.lblCuttingIN = New System.Windows.Forms.Label()
+        Me.lblTotalRolls = New System.Windows.Forms.Label()
+        Me.txtTotalRolls = New System.Windows.Forms.TextBox()
         Me.lblTotalKg = New System.Windows.Forms.Label()
         Me.txtTotalKg = New System.Windows.Forms.TextBox()
         Me.lblTotalMts = New System.Windows.Forms.Label()
@@ -353,6 +355,27 @@ Partial Class frmCuttingIN
         Me.lblCuttingIN.TabIndex = 339
         Me.lblCuttingIN.Text = "Cutting IN"
         '
+        'lblTotalRolls
+        '
+        Me.lblTotalRolls.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblTotalRolls.AutoSize = True
+        Me.lblTotalRolls.Location = New System.Drawing.Point(315, 255)
+        Me.lblTotalRolls.Name = "lblTotalRolls"
+        Me.lblTotalRolls.Size = New System.Drawing.Size(61, 13)
+        Me.lblTotalRolls.TabIndex = 346
+        Me.lblTotalRolls.Text = "Total Rolls"
+        '
+        'txtTotalRolls
+        '
+        Me.txtTotalRolls.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtTotalRolls.Location = New System.Drawing.Point(382, 251)
+        Me.txtTotalRolls.Name = "txtTotalRolls"
+        Me.txtTotalRolls.ReadOnly = True
+        Me.txtTotalRolls.Size = New System.Drawing.Size(88, 22)
+        Me.txtTotalRolls.TabIndex = 347
+        Me.txtTotalRolls.Text = "0"
+        Me.txtTotalRolls.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
         'lblTotalKg
         '
         Me.lblTotalKg.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -539,6 +562,8 @@ Partial Class frmCuttingIN
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(941, 504)
+        Me.Controls.Add(Me.txtTotalRolls)
+        Me.Controls.Add(Me.lblTotalRolls)
         Me.Controls.Add(Me.txtTotalYds)
         Me.Controls.Add(Me.lblTotalYds)
         Me.Controls.Add(Me.txtTotalMts)
@@ -590,6 +615,8 @@ Partial Class frmCuttingIN
     Friend WithEvents btnSearchCIN As Button
     Friend WithEvents lblDyedOut As Label
     Friend WithEvents lblCuttingIN As Label
+    Friend WithEvents lblTotalRolls As Label
+    Friend WithEvents txtTotalRolls As TextBox
     Friend WithEvents lblTotalKg As Label
     Friend WithEvents txtTotalKg As TextBox
     Friend WithEvents lblTotalMts As Label

@@ -485,6 +485,7 @@
     End Sub
 
     Private Sub SumCuttingIN()
+        Dim totalRolls As Integer = 0
         Dim totalKg As Decimal = 0D
         Dim totalMts As Decimal = 0D
         Dim totalYds As Decimal = 0D
@@ -492,11 +493,13 @@
         For Each row As DataGridViewRow In dgvCuttingIN.Rows
             If row.IsNewRow OrElse Not row.Visible Then Continue For
 
+            totalRolls += 1
             totalKg += GetDecimalValue(row.Cells("colCuttingINKg").Value)
             totalMts += GetDecimalValue(row.Cells(COL_MTS).Value)
             totalYds += GetDecimalValue(row.Cells(COL_YDS).Value)
         Next
 
+        txtTotalRolls.Text = totalRolls.ToString("#,##0")
         txtTotalKg.Text = totalKg.ToString("#,##0.00")
         txtTotalMts.Text = totalMts.ToString("#,##0.00")
         txtTotalYds.Text = totalYds.ToString("#,##0.00")

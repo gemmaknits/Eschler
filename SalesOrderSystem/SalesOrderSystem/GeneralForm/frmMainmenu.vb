@@ -211,11 +211,11 @@ Public Class frmMainmenu
         Cursor = Cursors.Default
     End Sub
     Private Sub menuSTOrder_Click(sender As Object, e As EventArgs) Handles menuSTOrder_Close.Click
-        Dim frmSTOrderClosing As New STV.frmSTOrderClosing
+        Dim frmSTOrderClosing As New frmSTOrderClosing
         Cursor = Cursors.WaitCursor
-        Dim conn As New SqlConnection((New ClassConnection).connection) 'Sitthana 21/08/2018
-        frmSTOrderClosing.pUserID = clsUser.UserID
-        frmSTOrderClosing.pConnection = conn 'Sitthana 21/08/2018
+        Dim conn As New SqlConnection((New ClassConnection).connection)
+        frmSTOrderClosing.UserInfo = clsUser
+        frmSTOrderClosing.setConnectionString(conn)
         frmSTOrderClosing.MdiParent = Me
         frmSTOrderClosing.Show()
         Cursor = Cursors.Default

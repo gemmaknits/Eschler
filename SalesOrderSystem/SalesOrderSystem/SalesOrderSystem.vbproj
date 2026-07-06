@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -209,6 +209,7 @@
     <Compile Include="Classes\classColors\classColors.vb" />
     <Compile Include="Classes\classConfig\clsConfig.vb" />
     <Compile Include="Classes\classConnection\classConnectionEschlerDB.vb" />
+    <Compile Include="Classes\classSTOrderClosing\classSTOrderClosingBLL.vb" />
     <Compile Include="Classes\classCustomers\classCustomers.vb" />
     <Compile Include="Classes\classCuttingIN\classCuttingIN.vb" />
     <Compile Include="Classes\classDFOrder\classDFOrder.vb" />
@@ -950,6 +951,12 @@
       <DependentUpon>frmSalesOrderClose.vb</DependentUpon>
     </Compile>
     <Compile Include="SalesOrderForm\frmSalesOrderClose.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SalesOrderForm\frmSTOrderClosing.Designer.vb">
+      <DependentUpon>frmSTOrderClosing.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SalesOrderForm\frmSTOrderClosing.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="SalesOrderForm\frmSalesOrderSearch.Designer.vb">
@@ -2043,6 +2050,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SalesOrderForm\frmSalesOrderClose.resx">
       <DependentUpon>frmSalesOrderClose.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SalesOrderForm\frmSTOrderClosing.resx">
+      <DependentUpon>frmSTOrderClosing.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SalesOrderForm\frmSalesOrderSearch.resx">
       <DependentUpon>frmSalesOrderSearch.vb</DependentUpon>

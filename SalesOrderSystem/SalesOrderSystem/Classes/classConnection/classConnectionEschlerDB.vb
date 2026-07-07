@@ -3,20 +3,23 @@ Public Class classConnection
     Public Shared database As String = "Gemmasoft"
     Public Userid As String = "sa"
     Public Password As String = "sql@min"
-    '-------------Gemma server
-    Dim connstr As String = "Data Source=" & servername & ";Initial Catalog=" & database & ";User ID=" & Userid & ";pwd=" & Password
 
     Public Function connection() As String
-        '-------------Gemmaknits server
-        Dim connStr As String = "Data Source=" & servername & ";Initial Catalog=" & database & ";User ID=" & Userid & ";pwd=" & Password
+        'Build from the current values every time.  The selected database or
+        'credentials may change after the class is instantiated.
+        Dim builder As New System.Data.SqlClient.SqlConnectionStringBuilder
+        builder.DataSource = servername
+        builder.InitialCatalog = database
+        builder.UserID = Userid
+        builder.Password = Password
+        builder.IntegratedSecurity = False
 
-        Return connStr
+        Return builder.ConnectionString
     End Function
     Public Function getSQLConnection() As System.Data.SqlClient.SqlConnection
-        Dim cn As New System.Data.SqlClient.SqlConnection
-        cn.ConnectionString = connstr
-        getSQLConnection = cn
+        Return New System.Data.SqlClient.SqlConnection(connection())
     End Function
+
     Public Function ComboDatabase(Optional ByVal strUSerID As String = "") As DataTable
         Dim dt As New DataTable
         dt.Columns.Add("short_name", System.Type.GetType("System.String"))

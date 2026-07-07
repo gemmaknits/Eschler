@@ -1,4 +1,5 @@
-Imports System.globalization
+Imports System.Globalization
+Imports System.Threading
 Imports System
 Imports System.Text
 Imports System.Data.Sqlclient
@@ -52,14 +53,25 @@ Public Class frmMainmenu
         ProductionSystem.classConnection.servername = ClassConnection.servername 'Add By Neung 20260217
         ProductionSystem.classConnection.database = ClassConnection.database 'Add By Neung 20260217
 
-        Dim culture As CultureInfo
-        culture = CultureInfo.CurrentCulture
-        If UCase(culture.DisplayName) <> "ENGLISH (UNITED KINGDOM)" Then
-            'MsgBox("Select change your regional settings to English United Kingdom")
-            'Me.Close()
-            My.Application.ChangeCulture("en-GB")
-            My.Application.ChangeUICulture("en-GB")
-        End If
+        'Neung 12/06/2026 fix bug 
+        Dim culture As New CultureInfo("en-GB")
+
+        Thread.CurrentThread.CurrentCulture = culture
+        Thread.CurrentThread.CurrentUICulture = culture
+        CultureInfo.DefaultThreadCurrentCulture = culture
+        CultureInfo.DefaultThreadCurrentUICulture = culture
+
+        My.Application.ChangeCulture("en-GB")
+        My.Application.ChangeUICulture("en-GB")
+
+        'Dim culture As CultureInfo
+        'culture = CultureInfo.CurrentCulture
+        'If UCase(culture.DisplayName) <> "ENGLISH (UNITED KINGDOM)" Then
+        '    'MsgBox("Select change your regional settings to English United Kingdom")
+        '    'Me.Close()
+        '    My.Application.ChangeCulture("en-GB")
+        '    My.Application.ChangeUICulture("en-GB")
+        'End If
 
         If Not System.Diagnostics.Debugger.IsAttached Then
             Me.Text = Me.Text & " Version " & My.Application.Deployment.CurrentVersion.ToString
@@ -199,11 +211,11 @@ Public Class frmMainmenu
         Cursor = Cursors.Default
     End Sub
     Private Sub menuSTOrder_Click(sender As Object, e As EventArgs) Handles menuSTOrder_Close.Click
-        Dim frmSTOrderClosing As New STV.frmSTOrderClosing
+        Dim frmSTOrderClosing As New frmSTOrderClosing
         Cursor = Cursors.WaitCursor
-        Dim conn As New SqlConnection((New ClassConnection).connection) 'Sitthana 21/08/2018
-        frmSTOrderClosing.pUserID = clsUser.UserID
-        frmSTOrderClosing.pConnection = conn 'Sitthana 21/08/2018
+        Dim conn As New SqlConnection((New ClassConnection).connection)
+        frmSTOrderClosing.UserInfo = clsUser
+        frmSTOrderClosing.setConnectionString(conn)
         frmSTOrderClosing.MdiParent = Me
         frmSTOrderClosing.Show()
         Cursor = Cursors.Default

@@ -32,12 +32,19 @@
     Private Const COL_MTS As String = "colCuttingINMts"
     Private Const COL_YDS As String = "colCuttingINYds"
     Private Const MTS_TO_YDS As Double = 1.09361
+    Private _summaryEventsInitialized As Boolean = False
 
     Public Sub InitMtlCascading()
         ' _mtlSvc = New MtlLookupService(My.Settings.ConnStr)
 
         AddHandler dgvCuttingIN.CurrentCellDirtyStateChanged, AddressOf dgvCuttingIn_CurrentCellDirtyStateChanged
         AddHandler dgvCuttingIN.CellValueChanged, AddressOf dgvCuttingIn_CellValueChanged
+
+        If Not _summaryEventsInitialized Then
+            AddHandler dgvCuttingIN.RowsAdded, AddressOf dgvCuttingIN_RowsAdded
+            AddHandler dgvCuttingIN.RowsRemoved, AddressOf dgvCuttingIN_RowsRemoved
+            _summaryEventsInitialized = True
+        End If
     End Sub
 
 
@@ -95,7 +102,7 @@
                 Case "warehouse_code"
                     dc.DefaultValue = "COLOMBO"
                 Case "mtl_subinventory_id"
-                    dc.DefaultValue = oCuttingIN.selectdefaultSubInventoryID(Userinfo.MtlWareHouseID) '61
+                    dc.DefaultValue = oCuttingIN.selectdefaultSubInventoryId(Userinfo.MtlWareHouseID) '61
                 Case "subinventory_code"
                     dc.DefaultValue = "STKC"
                 Case "mtl_location_id"
@@ -165,6 +172,7 @@
 
         dgvCuttingIN.AutoGenerateColumns = False
         dgvCuttingIN.DataSource = bsCuttingIN
+        SumCuttingIN()
 
     End Sub
     Private Sub GenCombo()
@@ -203,6 +211,10 @@
         ElseIf colName = COL_MTS Then
             HandleMtsChanged(e.RowIndex)
 
+        End If
+
+        If colName = "colCuttingINKg" OrElse colName = COL_MTS OrElse colName = COL_YDS Then
+            SumCuttingIN()
         End If
     End Sub
     Private Sub HandleWarehouseChanged(rowIndex As Integer)
@@ -339,6 +351,7 @@
         dgvCuttingIN.Refresh()
 
         RebindMtlCombosForVisibleRows()
+        SumCuttingIN()
 
         ' ใส่ค่า default ให้แถวใหม่
         RemoveHandler dgvCuttingIN.DefaultValuesNeeded, AddressOf dgvCuttingIN_DefaultValuesNeeded
@@ -463,6 +476,44 @@
         End If
     End Sub
 
+    Private Sub dgvCuttingIN_RowsAdded(sender As Object, e As DataGridViewRowsAddedEventArgs)
+        SumCuttingIN()
+    End Sub
+
+    Private Sub dgvCuttingIN_RowsRemoved(sender As Object, e As DataGridViewRowsRemovedEventArgs)
+        SumCuttingIN()
+    End Sub
+
+    Private Sub SumCuttingIN()
+        Dim totalRolls As Integer = 0
+        Dim totalKg As Decimal = 0D
+        Dim totalMts As Decimal = 0D
+        Dim totalYds As Decimal = 0D
+
+        For Each row As DataGridViewRow In dgvCuttingIN.Rows
+            If row.IsNewRow OrElse Not row.Visible Then Continue For
+
+            totalRolls += 1
+            totalKg += GetDecimalValue(row.Cells("colCuttingINKg").Value)
+            totalMts += GetDecimalValue(row.Cells(COL_MTS).Value)
+            totalYds += GetDecimalValue(row.Cells(COL_YDS).Value)
+        Next
+
+        txtTotalRolls.Text = totalRolls.ToString("#,##0")
+        txtTotalKg.Text = totalKg.ToString("#,##0.00")
+        txtTotalMts.Text = totalMts.ToString("#,##0.00")
+        txtTotalYds.Text = totalYds.ToString("#,##0.00")
+    End Sub
+
+    Private Function GetDecimalValue(value As Object) As Decimal
+        If value Is Nothing OrElse value Is DBNull.Value Then Return 0D
+
+        Dim result As Decimal
+        If Decimal.TryParse(value.ToString(), result) Then Return result
+
+        Return 0D
+    End Function
+
     Private Function SaveCuttingIN() As Boolean
 
         bsCuttingIN.EndEdit()
@@ -489,6 +540,7 @@
             dtCuttingIN = oCuttingIN.selectCuttingINRecord(_DinNo)
             bsCuttingIN.DataSource = dtCuttingIN.DefaultView
             dgvCuttingIN.DataSource = bsCuttingIN
+            SumCuttingIN()
             MessageBox.Show("บันทึกสำเร็จ", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
             pUserEvents = "EDIT"
             SaveCuttingIN = True

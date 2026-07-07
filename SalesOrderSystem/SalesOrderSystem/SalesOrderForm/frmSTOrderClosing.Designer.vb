@@ -905,7 +905,7 @@ Partial Class frmSTOrderClosing
         'SOQTYKG
         '
         Me.SOQTYKG.DataPropertyName = "SO_QTY_KG"
-        Me.SOQTYKG.HeaderText = "SO Qty KG"
+        Me.SOQTYKG.HeaderText = "ALLOC KG"
         Me.SOQTYKG.Name = "SOQTYKG"
         Me.SOQTYKG.Width = 84
         '

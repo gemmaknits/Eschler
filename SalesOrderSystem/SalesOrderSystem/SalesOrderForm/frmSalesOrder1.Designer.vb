@@ -177,6 +177,8 @@ Partial Class frmSalesOrder
         Me.Label29 = New System.Windows.Forms.Label()
         Me.txtAgentCommPer = New Classes.textboxNumeric()
         Me.tabCustomer = New System.Windows.Forms.TabPage()
+        Me.Label46 = New System.Windows.Forms.Label()
+        Me.txtCustAddlInfo = New System.Windows.Forms.TextBox()
         Me.Label39 = New System.Windows.Forms.Label()
         Me.txtCustPoUnique = New System.Windows.Forms.TextBox()
         Me.Label38 = New System.Windows.Forms.Label()
@@ -228,6 +230,7 @@ Partial Class frmSalesOrder
         Me.optAppByMK = New System.Windows.Forms.RadioButton()
         Me.TabControl2 = New System.Windows.Forms.TabControl()
         Me.tabItems = New System.Windows.Forms.TabPage()
+        Me.btnViewSTTracking = New System.Windows.Forms.Button()
         Me.btnSaveSettings = New System.Windows.Forms.Button()
         Me.btnGridLayoutSettings = New System.Windows.Forms.Button()
         Me.tabOthers = New System.Windows.Forms.TabPage()
@@ -244,8 +247,6 @@ Partial Class frmSalesOrder
         Me.btnPrintSR = New System.Windows.Forms.Button()
         Me.cbbSrTypeId = New System.Windows.Forms.ComboBox()
         Me.Label40 = New System.Windows.Forms.Label()
-        Me.Label46 = New System.Windows.Forms.Label()
-        Me.txtCustAddlInfo = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         CType(Me.mcboDesignProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1532,6 +1533,23 @@ Partial Class frmSalesOrder
         Me.tabCustomer.Text = "Customer details"
         Me.tabCustomer.UseVisualStyleBackColor = True
         '
+        'Label46
+        '
+        Me.Label46.AutoSize = True
+        Me.Label46.Location = New System.Drawing.Point(13, 111)
+        Me.Label46.Name = "Label46"
+        Me.Label46.Size = New System.Drawing.Size(84, 13)
+        Me.Label46.TabIndex = 45
+        Me.Label46.Text = "Cust Addl. Info"
+        '
+        'txtCustAddlInfo
+        '
+        Me.txtCustAddlInfo.Location = New System.Drawing.Point(167, 108)
+        Me.txtCustAddlInfo.Name = "txtCustAddlInfo"
+        Me.txtCustAddlInfo.Size = New System.Drawing.Size(505, 22)
+        Me.txtCustAddlInfo.TabIndex = 44
+        Me.txtCustAddlInfo.Tag = "str"
+        '
         'Label39
         '
         Me.Label39.AutoSize = True
@@ -2050,6 +2068,7 @@ Partial Class frmSalesOrder
         '
         'tabItems
         '
+        Me.tabItems.Controls.Add(Me.btnViewSTTracking)
         Me.tabItems.Controls.Add(Me.btnSaveSettings)
         Me.tabItems.Controls.Add(Me.btnGridLayoutSettings)
         Me.tabItems.Controls.Add(Me.grdSalesOrder)
@@ -2060,6 +2079,16 @@ Partial Class frmSalesOrder
         Me.tabItems.TabIndex = 0
         Me.tabItems.Text = "Order Items"
         Me.tabItems.UseVisualStyleBackColor = True
+        '
+        'btnViewSTTracking
+        '
+        Me.btnViewSTTracking.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnViewSTTracking.Location = New System.Drawing.Point(6, 3)
+        Me.btnViewSTTracking.Name = "btnViewSTTracking"
+        Me.btnViewSTTracking.Size = New System.Drawing.Size(113, 23)
+        Me.btnViewSTTracking.TabIndex = 4
+        Me.btnViewSTTracking.Text = "View ST Tracking"
+        Me.btnViewSTTracking.UseVisualStyleBackColor = True
         '
         'btnSaveSettings
         '
@@ -2214,23 +2243,6 @@ Partial Class frmSalesOrder
         Me.Label40.Size = New System.Drawing.Size(55, 13)
         Me.Label40.TabIndex = 3
         Me.Label40.Text = "Objective"
-        '
-        'Label46
-        '
-        Me.Label46.AutoSize = True
-        Me.Label46.Location = New System.Drawing.Point(13, 111)
-        Me.Label46.Name = "Label46"
-        Me.Label46.Size = New System.Drawing.Size(84, 13)
-        Me.Label46.TabIndex = 45
-        Me.Label46.Text = "Cust Addl. Info"
-        '
-        'txtCustAddlInfo
-        '
-        Me.txtCustAddlInfo.Location = New System.Drawing.Point(167, 108)
-        Me.txtCustAddlInfo.Name = "txtCustAddlInfo"
-        Me.txtCustAddlInfo.Size = New System.Drawing.Size(505, 22)
-        Me.txtCustAddlInfo.TabIndex = 44
-        Me.txtCustAddlInfo.Tag = "str"
         '
         'frmSalesOrder
         '
@@ -2493,4 +2505,5 @@ Partial Class frmSalesOrder
     Friend WithEvents sent_to As DataGridViewComboBoxColumn
     Friend WithEvents Label46 As Label
     Friend WithEvents txtCustAddlInfo As TextBox
+    Friend WithEvents btnViewSTTracking As Button
 End Class

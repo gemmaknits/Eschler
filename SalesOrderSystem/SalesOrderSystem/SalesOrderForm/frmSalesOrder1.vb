@@ -2277,4 +2277,17 @@ Public Class frmSalesOrder
             End If
         End If
     End Sub
+
+    Private Sub btnViewSTTracking_Click(sender As Object, e As EventArgs) Handles btnViewSTTracking.Click 'John 07/07/2026
+        Dim soNo As String = txtSoNo.Text.Trim()
+
+        Dim url As String
+        If soNo = "" Then
+            url = "http://172.16.3.2:3001/STTracking/"
+        Else
+            url = "http://172.16.3.2:3001/STTracking/?ocno=" & Uri.EscapeDataString(soNo)
+        End If
+
+        Process.Start(New ProcessStartInfo(url) With {.UseShellExecute = True})
+    End Sub
 End Class

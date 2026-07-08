@@ -107,11 +107,23 @@ BEGIN
          so.sonoid
         ,so.so_line_id
         ,so.sono
+        ,st.sono AS st_sono
+        ,CAST(ISNULL(st.so_qty, 0) AS NUMERIC(15,2)) AS st_so_qty
+        ,st.closed AS st_closed
+        ,d.finished_yield
         ,so.customer_name
         ,so.design_no
         ,so.so_qty
         ,so.so_uom
         ,CAST(ISNULL(a.alloc_kg, 0) AS NUMERIC(15,2)) AS so_qty_kg
+        ,CAST(CASE
+            WHEN RTRIM(st.so_uom) IN ('KG', 'KGS') THEN st.so_qty
+            WHEN RTRIM(st.so_uom) = 'MTS' AND ISNULL(d.finished_yield, 0) > 0
+                THEN st.so_qty / d.finished_yield
+            WHEN RTRIM(st.so_uom) = 'YDS' AND ISNULL(d.finished_yield, 0) > 0
+                THEN st.so_qty / d.finished_yield * 0.9144
+            ELSE 0
+         END AS NUMERIC(15,2)) AS st_so_qty_kg
         ,df.df_qty_kg
         ,so.color_code
         ,clr.color_name
@@ -125,8 +137,10 @@ BEGIN
     FROM dbo.st_order_alloc a
     INNER JOIN dbo.poc_sales_order_v so
         ON so.so_line_id = a.so_line_id
+    INNER JOIN dbo.poc_sales_order_v st
+        ON st.so_line_id = a.st_line_id
     INNER JOIN dbo.poc_design_master_v d
-        ON d.design_no = so.design_no COLLATE thai_ci_ai
+        ON d.design_no = st.design_no COLLATE thai_ci_ai
     LEFT JOIN dbo.poc_color_master_v clr
         ON clr.color_code = so.color_code COLLATE thai_ci_ai
     LEFT JOIN (

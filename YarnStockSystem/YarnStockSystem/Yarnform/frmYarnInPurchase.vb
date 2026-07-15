@@ -740,18 +740,18 @@ Public Class frmYarnInPurchase
         Dim _JobLineId As String
         Dim strItcd As String
 
-        Int32id_jobdet = dgvPO.CurrentRow.Cells("colID").Value
-        _JobLineId = dgvPO.CurrentRow.Cells("colJobLineId").Value
-        strItcd = dgvPO.CurrentRow.Cells("itcd").Value
+        Int32id_jobdet = oConfig.IsNull(dgvPO.CurrentRow.Cells("colID").Value, Nothing)
+        _JobLineId = oConfig.IsNull(dgvPO.CurrentRow.Cells("colJobLineId").Value, String.Empty)
+        strItcd = oConfig.IsNull(dgvPO.CurrentRow.Cells("itcd").Value, String.Empty)
 
         'grdPO.CurrentRow.Cells("colID").Value
         Dim clsGetDatYarn As New GetDataYarn
         newRow = dtc.NewRow
 
         If dgvPO.Rows.Count > 0 Then
-            newRow.Item("id_jobdet") = Int32id_jobdet
-            newRow.Item("job_line_id") = _JobLineId
-            newRow.Item("itcd") = strItcd
+            newRow.Item("id_jobdet") = oConfig.IsNull(Int32id_jobdet, DBNull.Value)
+            newRow.Item("job_line_id") = oConfig.IsNull(_JobLineId, DBNull.Value)
+            newRow.Item("itcd") = oConfig.IsNull(strItcd, DBNull.Value)
 
             'newRow.Item("mtl_warehouse_id") = grdPO.CurrentRow.Cells("rcv_warehouse_id").Value 'clsGetDatYarn.GetdefaultWarehouse(clsUser.UserID) '4 Set Defaulf Again
             'Call GetcomboSubInventoryinGrid(Int64mtl_warehouse_id:=grdPO.CurrentRow.Cells("rcv_warehouse_id").Value)

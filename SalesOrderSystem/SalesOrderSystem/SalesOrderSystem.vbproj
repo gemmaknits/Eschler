@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -37,7 +37,7 @@
     <MinimumRequiredVersion>1.0.0.158</MinimumRequiredVersion>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>1024</ApplicationRevision>
+    <ApplicationRevision>1025</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -953,10 +953,10 @@
     <Compile Include="SalesOrderForm\frmSalesOrderClose.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SalesOrderForm\frmSTOrderClosing.Designer.vb">
+    <Compile Include="STOrderClosingForm\frmSTOrderClosing.Designer.vb">
       <DependentUpon>frmSTOrderClosing.vb</DependentUpon>
     </Compile>
-    <Compile Include="SalesOrderForm\frmSTOrderClosing.vb">
+    <Compile Include="STOrderClosingForm\frmSTOrderClosing.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="SalesOrderForm\frmSalesOrderSearch.Designer.vb">
@@ -2051,7 +2051,7 @@
     <EmbeddedResource Include="SalesOrderForm\frmSalesOrderClose.resx">
       <DependentUpon>frmSalesOrderClose.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SalesOrderForm\frmSTOrderClosing.resx">
+    <EmbeddedResource Include="STOrderClosingForm\frmSTOrderClosing.resx">
       <DependentUpon>frmSTOrderClosing.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SalesOrderForm\frmSalesOrderSearch.resx">

@@ -259,6 +259,7 @@ Partial Class frmSalesOrder
         Me.btnPrintSR = New System.Windows.Forms.Button()
         Me.cbbSrTypeId = New System.Windows.Forms.ComboBox()
         Me.Label40 = New System.Windows.Forms.Label()
+        Me.Label48 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         CType(Me.mcboDesignProperties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -558,7 +559,7 @@ Partial Class frmSalesOrder
         Me.Label7.AutoSize = True
         Me.Label7.Location = New System.Drawing.Point(20, 93)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(98, 13)
+        Me.Label7.Size = New System.Drawing.Size(97, 13)
         Me.Label7.TabIndex = 8
         Me.Label7.Text = "End Buyer / Cust.:"
         '
@@ -612,7 +613,7 @@ Partial Class frmSalesOrder
         Me.Label6.AutoSize = True
         Me.Label6.Location = New System.Drawing.Point(14, 14)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(61, 13)
+        Me.Label6.Size = New System.Drawing.Size(62, 13)
         Me.Label6.TabIndex = 6
         Me.Label6.Text = "Delivery To"
         '
@@ -692,7 +693,7 @@ Partial Class frmSalesOrder
         Me.chkSpecial1.BackColor = System.Drawing.Color.Gold
         Me.chkSpecial1.Location = New System.Drawing.Point(11, 133)
         Me.chkSpecial1.Name = "chkSpecial1"
-        Me.chkSpecial1.Size = New System.Drawing.Size(159, 17)
+        Me.chkSpecial1.Size = New System.Drawing.Size(158, 17)
         Me.chkSpecial1.TabIndex = 0
         Me.chkSpecial1.Text = "Bulk approve by customer"
         Me.chkSpecial1.UseVisualStyleBackColor = False
@@ -746,7 +747,7 @@ Partial Class frmSalesOrder
         Me.Label9.AutoSize = True
         Me.Label9.Location = New System.Drawing.Point(14, 37)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(78, 13)
+        Me.Label9.Size = New System.Drawing.Size(79, 13)
         Me.Label9.TabIndex = 12
         Me.Label9.Text = "Delivery Terms"
         '
@@ -862,7 +863,7 @@ Partial Class frmSalesOrder
         Me.btnExit.Image = CType(resources.GetObject("btnExit.Image"), System.Drawing.Image)
         Me.btnExit.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnExit.Name = "btnExit"
-        Me.btnExit.Size = New System.Drawing.Size(45, 22)
+        Me.btnExit.Size = New System.Drawing.Size(46, 22)
         Me.btnExit.Text = "Exit"
         '
         'ToolStripLabel2
@@ -1409,7 +1410,7 @@ Partial Class frmSalesOrder
         Me.checkBulkAppInternal.BackColor = System.Drawing.Color.Gold
         Me.checkBulkAppInternal.Location = New System.Drawing.Point(7, -1)
         Me.checkBulkAppInternal.Name = "checkBulkAppInternal"
-        Me.checkBulkAppInternal.Size = New System.Drawing.Size(137, 17)
+        Me.checkBulkAppInternal.Size = New System.Drawing.Size(136, 17)
         Me.checkBulkAppInternal.TabIndex = 35
         Me.checkBulkAppInternal.Text = "Bulk approve internal"
         Me.checkBulkAppInternal.UseVisualStyleBackColor = False
@@ -1537,6 +1538,7 @@ Partial Class frmSalesOrder
         '
         'tabCustomer
         '
+        Me.tabCustomer.Controls.Add(Me.Label48)
         Me.tabCustomer.Controls.Add(Me.Label46)
         Me.tabCustomer.Controls.Add(Me.txtCustAddlInfo)
         Me.tabCustomer.Controls.Add(Me.Label47)
@@ -1587,7 +1589,7 @@ Partial Class frmSalesOrder
         Me.Label47.AutoSize = True
         Me.Label47.Location = New System.Drawing.Point(13, 87)
         Me.Label47.Name = "Label47"
-        Me.Label47.Size = New System.Drawing.Size(92, 13)
+        Me.Label47.Size = New System.Drawing.Size(95, 13)
         Me.Label47.TabIndex = 47
         Me.Label47.Text = "Contract Number"
         '
@@ -1752,7 +1754,7 @@ Partial Class frmSalesOrder
         Me.Label34.AutoSize = True
         Me.Label34.Location = New System.Drawing.Point(3, 108)
         Me.Label34.Name = "Label34"
-        Me.Label34.Size = New System.Drawing.Size(108, 13)
+        Me.Label34.Size = New System.Drawing.Size(107, 13)
         Me.Label34.TabIndex = 44
         Me.Label34.Text = "Ship By WareHouse"
         '
@@ -1797,7 +1799,7 @@ Partial Class frmSalesOrder
         Me.Label25.AutoSize = True
         Me.Label25.Location = New System.Drawing.Point(356, 64)
         Me.Label25.Name = "Label25"
-        Me.Label25.Size = New System.Drawing.Size(264, 13)
+        Me.Label25.Size = New System.Drawing.Size(265, 13)
         Me.Label25.TabIndex = 37
         Me.Label25.Text = "(This data will be used to close s/o after shipment)"
         '
@@ -1815,7 +1817,7 @@ Partial Class frmSalesOrder
         Me.Label23.AutoSize = True
         Me.Label23.Location = New System.Drawing.Point(352, 40)
         Me.Label23.Name = "Label23"
-        Me.Label23.Size = New System.Drawing.Size(79, 13)
+        Me.Label23.Size = New System.Drawing.Size(80, 13)
         Me.Label23.TabIndex = 35
         Me.Label23.Text = "Tolerance (%) :"
         '
@@ -1864,7 +1866,7 @@ Partial Class frmSalesOrder
         Me.Label32.AutoSize = True
         Me.Label32.Location = New System.Drawing.Point(16, 108)
         Me.Label32.Name = "Label32"
-        Me.Label32.Size = New System.Drawing.Size(36, 13)
+        Me.Label32.Size = New System.Drawing.Size(35, 13)
         Me.Label32.TabIndex = 21
         Me.Label32.Text = "Bank:"
         '
@@ -2017,7 +2019,7 @@ Partial Class frmSalesOrder
         Me.Label37.AutoSize = True
         Me.Label37.Location = New System.Drawing.Point(265, 194)
         Me.Label37.Name = "Label37"
-        Me.Label37.Size = New System.Drawing.Size(82, 13)
+        Me.Label37.Size = New System.Drawing.Size(83, 13)
         Me.Label37.TabIndex = 55
         Me.Label37.Text = "MTS PER ROLL:"
         '
@@ -2371,6 +2373,15 @@ Partial Class frmSalesOrder
         Me.Label40.TabIndex = 3
         Me.Label40.Text = "Objective"
         '
+        'Label48
+        '
+        Me.Label48.AutoSize = True
+        Me.Label48.Location = New System.Drawing.Point(13, 111)
+        Me.Label48.Name = "Label48"
+        Me.Label48.Size = New System.Drawing.Size(94, 13)
+        Me.Label48.TabIndex = 48
+        Me.Label48.Text = "Customer (Bill to)"
+        '
         'frmSalesOrder
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2649,4 +2660,5 @@ Partial Class frmSalesOrder
     Friend WithEvents Label47 As Label
     Friend WithEvents txtContractNumber As TextBox
     Friend WithEvents btnViewSTTracking As Button
+    Friend WithEvents Label48 As Label
 End Class

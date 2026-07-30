@@ -123,6 +123,8 @@ Partial Class frmSalesOrder
         Me.fwth = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.cboWidth = New System.Windows.Forms.DataGridViewComboBoxColumn()
         Me.gwth = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.sample_fabric_qty = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.sample_bulk_qty = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.col = New System.Windows.Forms.DataGridViewComboBoxColumn()
         Me.custcol = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -230,6 +232,14 @@ Partial Class frmSalesOrder
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.optAppByDH = New System.Windows.Forms.RadioButton()
         Me.optAppByMK = New System.Windows.Forms.RadioButton()
+        Me.TabSample = New System.Windows.Forms.TabPage()
+        Me.grpSampleInfo = New System.Windows.Forms.GroupBox()
+        Me.grpSampleQty = New System.Windows.Forms.GroupBox()
+        Me.btnApplySampleToGrid = New System.Windows.Forms.Button()
+        Me.lblSampleBulkQty = New System.Windows.Forms.Label()
+        Me.txtSampleBulkQty = New System.Windows.Forms.TextBox()
+        Me.lblSampleFabricQty = New System.Windows.Forms.Label()
+        Me.txtSampleFabricQty = New System.Windows.Forms.TextBox()
         Me.TabControl2 = New System.Windows.Forms.TabControl()
         Me.tabItems = New System.Windows.Forms.TabPage()
         Me.btnViewSTTracking = New System.Windows.Forms.Button()
@@ -264,6 +274,9 @@ Partial Class frmSalesOrder
         CType(Me.mcboBanks, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabOther.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
+        Me.TabSample.SuspendLayout()
+        Me.grpSampleInfo.SuspendLayout()
+        Me.grpSampleQty.SuspendLayout()
         Me.TabControl2.SuspendLayout()
         Me.tabItems.SuspendLayout()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -885,7 +898,7 @@ Partial Class frmSalesOrder
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grdSalesOrder.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grdSalesOrder.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.sonoid, Me.ref_stnoid, Me.design_gwth_nob, Me.design_no, Me.labeldes, Me.colRefdesno, Me.labelarticle, Me.colGmPerSqM, Me.Custdes, Me.fwth, Me.cboWidth, Me.gwth, Me.col, Me.custcol, Me.Column1, Me.labdipno, Me.labdip_comment, Me.labelcolor, Me.labeldata1, Me.labeldata2, Me.colCustDelidt, Me.shipdt, Me.confirmed_shipdt, Me.knit_begin_date, Me.knit_end_date, Me.dye_end_date, Me.yarn_available_date, Me.confirmed_appointment, Me.qty, Me.uom, Me.price, Me.colProdLossPerc, Me.colQtyWithLoss, Me.show_price, Me.curr, Me.exrt, Me.gr_itamt, Me.discamt, Me.nt_itamt, Me.closed2, Me.cboid_so_routing, Me.so_line_id, Me.mtl_customer_items_id, Me.mtl_customer_items_xref_id, Me.qtyship, Me.qtybal, Me.jobno, Me.sent_to})
+        Me.grdSalesOrder.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.sonoid, Me.ref_stnoid, Me.design_gwth_nob, Me.design_no, Me.labeldes, Me.colRefdesno, Me.labelarticle, Me.colGmPerSqM, Me.Custdes, Me.fwth, Me.cboWidth, Me.gwth, Me.sample_fabric_qty, Me.sample_bulk_qty, Me.col, Me.custcol, Me.Column1, Me.labdipno, Me.labdip_comment, Me.labelcolor, Me.labeldata1, Me.labeldata2, Me.colCustDelidt, Me.shipdt, Me.confirmed_shipdt, Me.knit_begin_date, Me.knit_end_date, Me.dye_end_date, Me.yarn_available_date, Me.confirmed_appointment, Me.qty, Me.uom, Me.price, Me.colProdLossPerc, Me.colQtyWithLoss, Me.show_price, Me.curr, Me.exrt, Me.gr_itamt, Me.discamt, Me.nt_itamt, Me.closed2, Me.cboid_so_routing, Me.so_line_id, Me.mtl_customer_items_id, Me.mtl_customer_items_xref_id, Me.qtyship, Me.qtybal, Me.jobno, Me.sent_to})
         Me.grdSalesOrder.Location = New System.Drawing.Point(3, 31)
         Me.grdSalesOrder.Name = "grdSalesOrder"
         Me.grdSalesOrder.Size = New System.Drawing.Size(1183, 207)
@@ -992,6 +1005,20 @@ Partial Class frmSalesOrder
         Me.gwth.Name = "gwth"
         Me.gwth.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.gwth.Width = 50
+        '
+        'sample_fabric_qty
+        '
+        Me.sample_fabric_qty.DataPropertyName = "sample_fabric_qty"
+        Me.sample_fabric_qty.HeaderText = "Sample Fabric Qty"
+        Me.sample_fabric_qty.Name = "sample_fabric_qty"
+        Me.sample_fabric_qty.Width = 80
+        '
+        'sample_bulk_qty
+        '
+        Me.sample_bulk_qty.DataPropertyName = "sample_bulk_qty"
+        Me.sample_bulk_qty.HeaderText = "Sample Bulk Qty"
+        Me.sample_bulk_qty.Name = "sample_bulk_qty"
+        Me.sample_bulk_qty.Width = 80
         '
         'col
         '
@@ -1396,6 +1423,7 @@ Partial Class frmSalesOrder
         Me.TabControl1.Controls.Add(Me.tabDelivery)
         Me.TabControl1.Controls.Add(Me.tabTerms)
         Me.TabControl1.Controls.Add(Me.tabOther)
+        Me.TabControl1.Controls.Add(Me.TabSample)
         Me.TabControl1.HotTrack = True
         Me.TabControl1.Location = New System.Drawing.Point(8, 32)
         Me.TabControl1.Multiline = True
@@ -2075,6 +2103,83 @@ Partial Class frmSalesOrder
         Me.optAppByMK.Text = "Approve by marketing"
         Me.optAppByMK.UseVisualStyleBackColor = True
         '
+        'TabSample
+        '
+        Me.TabSample.Controls.Add(Me.grpSampleInfo)
+        Me.TabSample.Location = New System.Drawing.Point(4, 22)
+        Me.TabSample.Name = "TabSample"
+        Me.TabSample.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabSample.Size = New System.Drawing.Size(708, 226)
+        Me.TabSample.TabIndex = 5
+        Me.TabSample.Text = "Sample Info"
+        Me.TabSample.UseVisualStyleBackColor = True
+        '
+        'grpSampleInfo
+        '
+        Me.grpSampleInfo.Controls.Add(Me.grpSampleQty)
+        Me.grpSampleInfo.Location = New System.Drawing.Point(13, 9)
+        Me.grpSampleInfo.Name = "grpSampleInfo"
+        Me.grpSampleInfo.Size = New System.Drawing.Size(677, 174)
+        Me.grpSampleInfo.TabIndex = 0
+        Me.grpSampleInfo.TabStop = False
+        '
+        'grpSampleQty
+        '
+        Me.grpSampleQty.Controls.Add(Me.btnApplySampleToGrid)
+        Me.grpSampleQty.Controls.Add(Me.lblSampleBulkQty)
+        Me.grpSampleQty.Controls.Add(Me.txtSampleBulkQty)
+        Me.grpSampleQty.Controls.Add(Me.lblSampleFabricQty)
+        Me.grpSampleQty.Controls.Add(Me.txtSampleFabricQty)
+        Me.grpSampleQty.Location = New System.Drawing.Point(14, 16)
+        Me.grpSampleQty.Name = "grpSampleQty"
+        Me.grpSampleQty.Size = New System.Drawing.Size(268, 134)
+        Me.grpSampleQty.TabIndex = 0
+        Me.grpSampleQty.TabStop = False
+        Me.grpSampleQty.Text = "Sample Qty"
+        '
+        'btnApplySampleToGrid
+        '
+        Me.btnApplySampleToGrid.Location = New System.Drawing.Point(150, 82)
+        Me.btnApplySampleToGrid.Name = "btnApplySampleToGrid"
+        Me.btnApplySampleToGrid.Size = New System.Drawing.Size(87, 40)
+        Me.btnApplySampleToGrid.TabIndex = 16
+        Me.btnApplySampleToGrid.Text = "Apply Sample Qty To Grid"
+        Me.btnApplySampleToGrid.UseVisualStyleBackColor = True
+        '
+        'lblSampleBulkQty
+        '
+        Me.lblSampleBulkQty.AutoSize = True
+        Me.lblSampleBulkQty.Location = New System.Drawing.Point(28, 55)
+        Me.lblSampleBulkQty.Name = "lblSampleBulkQty"
+        Me.lblSampleBulkQty.Size = New System.Drawing.Size(90, 13)
+        Me.lblSampleBulkQty.TabIndex = 15
+        Me.lblSampleBulkQty.Text = "Sample Bulk Qty"
+        '
+        'txtSampleBulkQty
+        '
+        Me.txtSampleBulkQty.Location = New System.Drawing.Point(150, 51)
+        Me.txtSampleBulkQty.Name = "txtSampleBulkQty"
+        Me.txtSampleBulkQty.Size = New System.Drawing.Size(87, 22)
+        Me.txtSampleBulkQty.TabIndex = 14
+        Me.txtSampleBulkQty.Tag = "str"
+        '
+        'lblSampleFabricQty
+        '
+        Me.lblSampleFabricQty.AutoSize = True
+        Me.lblSampleFabricQty.Location = New System.Drawing.Point(28, 27)
+        Me.lblSampleFabricQty.Name = "lblSampleFabricQty"
+        Me.lblSampleFabricQty.Size = New System.Drawing.Size(98, 13)
+        Me.lblSampleFabricQty.TabIndex = 13
+        Me.lblSampleFabricQty.Text = "Sample Fabric Qty"
+        '
+        'txtSampleFabricQty
+        '
+        Me.txtSampleFabricQty.Location = New System.Drawing.Point(150, 23)
+        Me.txtSampleFabricQty.Name = "txtSampleFabricQty"
+        Me.txtSampleFabricQty.Size = New System.Drawing.Size(87, 22)
+        Me.txtSampleFabricQty.TabIndex = 12
+        Me.txtSampleFabricQty.Tag = "str"
+        '
         'TabControl2
         '
         Me.TabControl2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -2315,6 +2420,10 @@ Partial Class frmSalesOrder
         Me.tabOther.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
+        Me.TabSample.ResumeLayout(False)
+        Me.grpSampleInfo.ResumeLayout(False)
+        Me.grpSampleQty.ResumeLayout(False)
+        Me.grpSampleQty.PerformLayout()
         Me.TabControl2.ResumeLayout(False)
         Me.tabItems.ResumeLayout(False)
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -2434,6 +2543,14 @@ Partial Class frmSalesOrder
     Friend WithEvents btnAltItems As Button
     Friend WithEvents Label37 As Label
     Friend WithEvents txtMtsPerRoll As Classes.textboxNumeric
+    Friend WithEvents TabSample As TabPage
+    Friend WithEvents grpSampleInfo As GroupBox
+    Friend WithEvents grpSampleQty As GroupBox
+    Friend WithEvents btnApplySampleToGrid As Button
+    Friend WithEvents lblSampleBulkQty As Label
+    Friend WithEvents txtSampleBulkQty As TextBox
+    Friend WithEvents lblSampleFabricQty As Label
+    Friend WithEvents txtSampleFabricQty As TextBox
     Friend WithEvents Label35 As Label
     Friend WithEvents txtFulfilmentComment As TextBox
     Friend WithEvents GroupBox5 As GroupBox
@@ -2489,6 +2606,8 @@ Partial Class frmSalesOrder
     Friend WithEvents fwth As DataGridViewTextBoxColumn
     Friend WithEvents cboWidth As DataGridViewComboBoxColumn
     Friend WithEvents gwth As DataGridViewTextBoxColumn
+    Friend WithEvents sample_fabric_qty As DataGridViewTextBoxColumn
+    Friend WithEvents sample_bulk_qty As DataGridViewTextBoxColumn
     Friend WithEvents col As DataGridViewComboBoxColumn
     Friend WithEvents custcol As DataGridViewTextBoxColumn
     Friend WithEvents Column1 As DataGridViewTextBoxColumn

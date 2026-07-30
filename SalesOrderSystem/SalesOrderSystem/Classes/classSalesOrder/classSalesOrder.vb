@@ -77,6 +77,8 @@ Public Class classSalesOrder
         Dim h60_jobnocomment4 As String
         Dim h61_design_properties_id As Nullable(Of Int64)
         Dim h62_cust_addl_info As String
+        Dim h63_sample_fabric_qty As Double
+        Dim h64_sample_bulk_qty As Double
         '-------------------------
     End Structure
 
@@ -293,6 +295,8 @@ Public Class classSalesOrder
             comm.Parameters.AddWithValue("@p_design_properties_id", .h61_design_properties_id)
             '----------------------
             comm.Parameters.AddWithValue("@p_cust_addl_info", .h62_cust_addl_info.Trim)
+            comm.Parameters.AddWithValue("@p_sample_fabric_qty", .h63_sample_fabric_qty)
+            comm.Parameters.AddWithValue("@p_sample_bulk_qty", .h64_sample_bulk_qty)
 
 
             '-----------------------------------
@@ -380,6 +384,8 @@ Public Class classSalesOrder
                 comm.Parameters.AddWithValue("@p_prod_loss_perc", config.IsNull(.Item(i)("prod_loss_perc"), 0)) 'John 26/03/2026
                 comm.Parameters.AddWithValue("@p_qty_with_loss", config.IsNull(.Item(i)("qty_with_loss"), 0)) 'John 26/03/2026
                 comm.Parameters.AddWithValue("@p_hs_code", config.IsNull(.Item(i)("hs_code"), Nothing)) 'John 18/05/2026
+                comm.Parameters.AddWithValue("@p_sample_fabric_qty", config.IsNull(.Item(i)("sample_fabric_qty"), 0))
+                comm.Parameters.AddWithValue("@p_sample_bulk_qty", config.IsNull(.Item(i)("sample_bulk_qty"), 0))
             End With
             Dim sql As String = config.BuildSQL(comm)
             da = New SqlDataAdapter(comm)
@@ -462,6 +468,8 @@ Public Class classSalesOrder
                 comm.Parameters.AddWithValue("@p_prod_loss_perc", config.IsNull(.Item(i)("prod_loss_perc"), 0)) 'John 26/03/2026
                 comm.Parameters.AddWithValue("@p_qty_with_loss", config.IsNull(.Item(i)("qty_with_loss"), 0)) 'John 26/03/2026
                 comm.Parameters.AddWithValue("@p_hs_code", config.IsNull(.Item(i)("hs_code"), Nothing)) 'John 18/05/2026
+                comm.Parameters.AddWithValue("@p_sample_fabric_qty", config.IsNull(.Item(i)("sample_fabric_qty"), 0))
+                comm.Parameters.AddWithValue("@p_sample_bulk_qty", config.IsNull(.Item(i)("sample_bulk_qty"), 0))
             End With
             da = New SqlDataAdapter(comm)
             dt = New DataTable

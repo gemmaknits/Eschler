@@ -465,6 +465,8 @@ Public Class frmSalesOrder
         txtFulfilmentComment.Text = dt.Rows(0)("fulfilment_comment") 'Sitthana 19/09/2018
         cbbSrTypeId.SelectedValue = dt.Rows(0)("sr_type_id") 'Sitthana 20240523
         mcboDesignProperties.SelectedValue = dt.Rows(0)("design_properties_id") 'John 28/10/2025
+        txtSampleFabricQty.Text = If(dt.Columns.Contains("so_sample_fabric_qty"), dt.Rows(0)("so_sample_fabric_qty").ToString, "0")
+        txtSampleBulkQty.Text = If(dt.Columns.Contains("so_sample_bulk_qty"), dt.Rows(0)("so_sample_bulk_qty").ToString, "0")
 
         If Not IsDBNull(dt.Rows(0)("flow_status_code")) Then
             txtFlowStatusCode.Text = dt.Rows(0)("flow_status_code")
@@ -547,6 +549,8 @@ Public Class frmSalesOrder
             If txtJobNoComment3.Text <> "" Then result = True
             If txtJobNoComment4.Text <> "" Then result = True
             '---------------------------
+            If txtSampleFabricQty.Text.Trim <> "" AndAlso Val(txtSampleFabricQty.Text.Trim) <> 0 Then result = True
+            If txtSampleBulkQty.Text.Trim <> "" AndAlso Val(txtSampleBulkQty.Text.Trim) <> 0 Then result = True
             If chkExport.Checked = True Then result = True
 
             If chkSpecial1.Checked = True Then result = False
@@ -578,6 +582,8 @@ Public Class frmSalesOrder
             If txtJobNoComment3.Text <> dt.Rows(0)("ref_job_comment3").ToString.Trim Then result = True
             If txtJobNoComment4.Text <> dt.Rows(0)("ref_job_comment4").ToString.Trim Then result = True
             '-------------------------
+            If dt.Columns.Contains("so_sample_fabric_qty") AndAlso Val(txtSampleFabricQty.Text) <> Val(dt.Rows(0)("so_sample_fabric_qty").ToString) Then result = True
+            If dt.Columns.Contains("so_sample_bulk_qty") AndAlso Val(txtSampleBulkQty.Text) <> Val(dt.Rows(0)("so_sample_bulk_qty").ToString) Then result = True
             If chkExport.Checked <> CBool(dt.Rows(0)("exploc")) Then result = True
 
             If chkSpecial1.Checked <> CBool(dt.Rows(0)("submit_bulk")) Then result = True
@@ -847,6 +853,8 @@ Public Class frmSalesOrder
         header.h60_jobnocomment4 = txtJobNoComment4.Text.Trim
         header.h61_design_properties_id = oConfig.IsNull(mcboDesignProperties.SelectedValue, Nothing) 'John 28/10/2025
         header.h62_cust_addl_info = txtCustAddlInfo.Text.Trim
+        header.h63_sample_fabric_qty = Val(txtSampleFabricQty.Text)
+        header.h64_sample_bulk_qty = Val(txtSampleBulkQty.Text)
         '--------------------------------
         If Me.textBatches.Text = "" Then
             Me.textBatches.Text = 0
@@ -2291,5 +2299,45 @@ Public Class frmSalesOrder
         End If
 
         Process.Start(New ProcessStartInfo(url) With {.UseShellExecute = True})
+    End Sub
+
+    Private Sub txtSampleFabricQty_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtSampleFabricQty.KeyPress
+        If Not Char.IsNumber(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) AndAlso Not (Asc(e.KeyChar) = Asc(".")) Then
+            MessageBox.Show("You must entry numeric only", "User Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            e.KeyChar = Nothing
+        End If
+    End Sub
+
+    Private Sub txtSampleBulkQty_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtSampleBulkQty.KeyPress
+        If Not Char.IsNumber(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) AndAlso Not (Asc(e.KeyChar) = Asc(".")) Then
+            MessageBox.Show("You must entry numeric only", "User Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            e.KeyChar = Nothing
+        End If
+    End Sub
+
+    Private Sub btnApplySampleToGrid_Click(sender As Object, e As EventArgs) Handles btnApplySampleToGrid.Click
+        With grdSalesOrder
+            If .Rows.Count > 0 Then
+                Dim SampleFabricQty As Double = 0
+                Dim SampleBulkQty As Double = 0
+
+                For i As Integer = 0 To .Rows.Count - 2
+                    If txtSampleFabricQty.Text.Trim = "" Then
+                        SampleFabricQty = 0
+                    Else
+                        SampleFabricQty = Convert.ToDouble(txtSampleFabricQty.Text)
+                    End If
+
+                    If txtSampleBulkQty.Text.Trim = "" Then
+                        SampleBulkQty = 0
+                    Else
+                        SampleBulkQty = Convert.ToDouble(txtSampleBulkQty.Text)
+                    End If
+
+                    .Rows(i).Cells("sample_fabric_qty").Value = SampleFabricQty
+                    .Rows(i).Cells("sample_bulk_qty").Value = SampleBulkQty
+                Next
+            End If
+        End With
     End Sub
 End Class

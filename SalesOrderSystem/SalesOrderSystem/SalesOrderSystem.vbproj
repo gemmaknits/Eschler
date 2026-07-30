@@ -940,11 +940,11 @@
     <Compile Include="SalesOrderForm\frmPreviewQuotation.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SalesOrderForm\frmSalesOrder1.Designer.vb">
+    <Compile Include="Resources\frmSalesOrder1.Designer.vb">
       <DependentUpon>frmSalesOrder1.vb</DependentUpon>
     </Compile>
     <Compile Include="Controls\MultiColumnComboBox.vb" />
-    <Compile Include="SalesOrderForm\frmSalesOrder1.vb">
+    <Compile Include="Resources\frmSalesOrder1.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="SalesOrderForm\frmSalesOrderClose.Designer.vb">
@@ -2045,7 +2045,7 @@
     <EmbeddedResource Include="SalesOrderForm\frmPreviewQuotation.resx">
       <DependentUpon>frmPreviewQuotation.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SalesOrderForm\frmSalesOrder1.resx">
+    <EmbeddedResource Include="Resources\frmSalesOrder1.resx">
       <DependentUpon>frmSalesOrder1.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SalesOrderForm\frmSalesOrderClose.resx">

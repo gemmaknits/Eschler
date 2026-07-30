@@ -179,6 +179,8 @@ Partial Class frmSalesOrder
         Me.tabCustomer = New System.Windows.Forms.TabPage()
         Me.Label46 = New System.Windows.Forms.Label()
         Me.txtCustAddlInfo = New System.Windows.Forms.TextBox()
+        Me.Label47 = New System.Windows.Forms.Label()
+        Me.txtContractNumber = New System.Windows.Forms.TextBox()
         Me.Label39 = New System.Windows.Forms.Label()
         Me.txtCustPoUnique = New System.Windows.Forms.TextBox()
         Me.Label38 = New System.Windows.Forms.Label()
@@ -1509,6 +1511,8 @@ Partial Class frmSalesOrder
         '
         Me.tabCustomer.Controls.Add(Me.Label46)
         Me.tabCustomer.Controls.Add(Me.txtCustAddlInfo)
+        Me.tabCustomer.Controls.Add(Me.Label47)
+        Me.tabCustomer.Controls.Add(Me.txtContractNumber)
         Me.tabCustomer.Controls.Add(Me.Label39)
         Me.tabCustomer.Controls.Add(Me.txtCustPoUnique)
         Me.tabCustomer.Controls.Add(Me.Label38)
@@ -1536,7 +1540,7 @@ Partial Class frmSalesOrder
         'Label46
         '
         Me.Label46.AutoSize = True
-        Me.Label46.Location = New System.Drawing.Point(13, 111)
+        Me.Label46.Location = New System.Drawing.Point(13, 135)
         Me.Label46.Name = "Label46"
         Me.Label46.Size = New System.Drawing.Size(84, 13)
         Me.Label46.TabIndex = 45
@@ -1544,11 +1548,29 @@ Partial Class frmSalesOrder
         '
         'txtCustAddlInfo
         '
-        Me.txtCustAddlInfo.Location = New System.Drawing.Point(167, 108)
+        Me.txtCustAddlInfo.Location = New System.Drawing.Point(167, 132)
         Me.txtCustAddlInfo.Name = "txtCustAddlInfo"
         Me.txtCustAddlInfo.Size = New System.Drawing.Size(505, 22)
         Me.txtCustAddlInfo.TabIndex = 44
         Me.txtCustAddlInfo.Tag = "str"
+        '
+        'Label47
+        '
+        Me.Label47.AutoSize = True
+        Me.Label47.Location = New System.Drawing.Point(13, 87)
+        Me.Label47.Name = "Label47"
+        Me.Label47.Size = New System.Drawing.Size(92, 13)
+        Me.Label47.TabIndex = 47
+        Me.Label47.Text = "Contract Number"
+        '
+        'txtContractNumber
+        '
+        Me.txtContractNumber.Location = New System.Drawing.Point(167, 84)
+        Me.txtContractNumber.MaxLength = 100
+        Me.txtContractNumber.Name = "txtContractNumber"
+        Me.txtContractNumber.Size = New System.Drawing.Size(259, 22)
+        Me.txtContractNumber.TabIndex = 46
+        Me.txtContractNumber.Tag = "str"
         '
         'Label39
         '
@@ -1592,7 +1614,7 @@ Partial Class frmSalesOrder
         Me.lblCustomersActive.AutoSize = True
         Me.lblCustomersActive.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.lblCustomersActive.ForeColor = System.Drawing.Color.Red
-        Me.lblCustomersActive.Location = New System.Drawing.Point(424, 58)
+        Me.lblCustomersActive.Location = New System.Drawing.Point(424, 82)
         Me.lblCustomersActive.Name = "lblCustomersActive"
         Me.lblCustomersActive.Size = New System.Drawing.Size(225, 24)
         Me.lblCustomersActive.TabIndex = 36
@@ -1604,7 +1626,7 @@ Partial Class frmSalesOrder
         Me.mcboCustomersBillToFlag.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.mcboCustomersBillToFlag.DataSource = Nothing
         Me.mcboCustomersBillToFlag.DisplayMember = Nothing
-        Me.mcboCustomersBillToFlag.Location = New System.Drawing.Point(167, 84)
+        Me.mcboCustomersBillToFlag.Location = New System.Drawing.Point(167, 108)
         Me.mcboCustomersBillToFlag.Name = "mcboCustomersBillToFlag"
         Me.mcboCustomersBillToFlag.SelectedIndex = -1
         Me.mcboCustomersBillToFlag.SelectedValue = Nothing
@@ -1615,7 +1637,7 @@ Partial Class frmSalesOrder
         'Label22
         '
         Me.Label22.AutoSize = True
-        Me.Label22.Location = New System.Drawing.Point(13, 134)
+        Me.Label22.Location = New System.Drawing.Point(13, 158)
         Me.Label22.Name = "Label22"
         Me.Label22.Size = New System.Drawing.Size(89, 13)
         Me.Label22.TabIndex = 34
@@ -1623,7 +1645,7 @@ Partial Class frmSalesOrder
         '
         'txtContact
         '
-        Me.txtContact.Location = New System.Drawing.Point(167, 132)
+        Me.txtContact.Location = New System.Drawing.Point(167, 156)
         Me.txtContact.Name = "txtContact"
         Me.txtContact.Size = New System.Drawing.Size(260, 22)
         Me.txtContact.TabIndex = 33
@@ -1633,11 +1655,11 @@ Partial Class frmSalesOrder
         '
         Me.txtCustAddr.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtCustAddr.Location = New System.Drawing.Point(16, 161)
+        Me.txtCustAddr.Location = New System.Drawing.Point(16, 185)
         Me.txtCustAddr.Multiline = True
         Me.txtCustAddr.Name = "txtCustAddr"
         Me.txtCustAddr.ReadOnly = True
-        Me.txtCustAddr.Size = New System.Drawing.Size(676, 62)
+        Me.txtCustAddr.Size = New System.Drawing.Size(676, 38)
         Me.txtCustAddr.TabIndex = 32
         '
         'btnCustPoUnique
@@ -2505,5 +2527,7 @@ Partial Class frmSalesOrder
     Friend WithEvents sent_to As DataGridViewComboBoxColumn
     Friend WithEvents Label46 As Label
     Friend WithEvents txtCustAddlInfo As TextBox
+    Friend WithEvents Label47 As Label
+    Friend WithEvents txtContractNumber As TextBox
     Friend WithEvents btnViewSTTracking As Button
 End Class

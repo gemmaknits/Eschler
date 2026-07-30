@@ -22,6 +22,7 @@ Public Class classSalesOrder
         Dim h14_crdays As Double
         Dim h15_custpo As String
         Dim h15_custpo_unique As String
+        Dim h15_contract_number As String
         Dim h15_custpo_suffix As String
         Dim h16_deli As String
         Dim h17_delicd As String
@@ -233,6 +234,7 @@ Public Class classSalesOrder
             comm.Parameters.AddWithValue("@crdays", .h14_crdays)
             comm.Parameters.AddWithValue("@custpo", .h15_custpo.Trim)
             comm.Parameters.AddWithValue("@custpo_unique", .h15_custpo_unique.Trim)
+            comm.Parameters.AddWithValue("@p_contract_number", .h15_contract_number.Trim)
             comm.Parameters.AddWithValue("@custpo_suffix", .h15_custpo_suffix.Trim)
 
             comm.Parameters.AddWithValue("@deli", .h16_deli.Trim)

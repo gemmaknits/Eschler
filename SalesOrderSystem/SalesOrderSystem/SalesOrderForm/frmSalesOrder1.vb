@@ -388,6 +388,7 @@ Public Class frmSalesOrder
 
         txtPoNo.Text = dt.Rows(0)("custpo").ToString.Trim
         txtCustPoUnique.Text = dt.Rows(0)("custpo_unique").ToString.Trim
+        txtContractNumber.Text = If(dt.Columns.Contains("contract_number"), dt.Rows(0)("contract_number").ToString.Trim, "")
         txtCustPoSuffix.Text = dt.Rows(0)("custpo_suffix").ToString.Trim
         txtCustAddlInfo.Text = dt.Rows(0)("cust_addl_info").ToString.Trim
 
@@ -793,6 +794,7 @@ Public Class frmSalesOrder
         header.h14_crdays = Val(txtCreditDays.Text.Trim)
         header.h15_custpo = txtPoNo.Text.Trim
         header.h15_custpo_unique = txtCustPoUnique.Text.Trim
+        header.h15_contract_number = txtContractNumber.Text.Trim
         header.h15_custpo_suffix = txtCustPoSuffix.Text.Trim
         header.h16_deli = txtDeliveryTerm.Text.Trim
         header.h17_delicd = oConfig.IsNull(Me.mcboCustomersShipToFlag.ListBox.Grid.Model(Me.mcboCustomersShipToFlag.SelectedIndex + 1, 3).CellValue, Nothing)  'config.IsNull(cboDeliveryLoc.SelectedValue, "").ToString.Trim

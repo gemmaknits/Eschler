@@ -211,13 +211,13 @@ Public Class frmMainmenu
         Cursor = Cursors.Default
     End Sub
     Private Sub menuSTOrder_Click(sender As Object, e As EventArgs) Handles menuSTOrder_Close.Click
-        Dim frmSTOrderClosing As New frmSTOrderClosing
+        Dim frm As New frmSTOrderClosing
         Cursor = Cursors.WaitCursor
-        Dim conn As New SqlConnection((New ClassConnection).connection)
-        frmSTOrderClosing.UserInfo = clsUser
-        frmSTOrderClosing.setConnectionString(conn)
-        frmSTOrderClosing.MdiParent = Me
-        frmSTOrderClosing.Show()
+        Dim conn As New SqlConnection((New classConnection).connection)
+        frm.UserInfo = clsUser
+        frm.setConnectionString(conn)
+        frm.MdiParent = Me
+        frm.Show()
         Cursor = Cursors.Default
     End Sub
     Private Sub SOInvControlSheetToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles menuSalesOrder_Other_SOInvControl.Click

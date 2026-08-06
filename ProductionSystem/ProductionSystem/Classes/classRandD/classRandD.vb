@@ -735,7 +735,10 @@ Public Class classRandD
             With drvUpd
                 comm.Parameters.Clear()
                 comm.Parameters.AddWithValue("@p_so_line_id", .Item("so_line_id"))
-                comm.Parameters.AddWithValue("@p_approved_jobno", .Item("approved_jobno"))
+                comm.Parameters.AddWithValue("@p_approved_jobno", config.IsNull(.Item("approved_jobno"), DBNull.Value))
+                comm.Parameters.AddWithValue("@p_reject_jobno", config.IsNull(.Item("reject_jobno"), DBNull.Value))
+                comm.Parameters.AddWithValue("@p_reject_job_date", config.IsNull(.Item("reject_job_date"), DBNull.Value))
+                comm.Parameters.AddWithValue("@p_reject_job_reason", config.IsNull(.Item("reject_job_reason"), DBNull.Value))
 
                 Dim da2 As New SqlDataAdapter(comm)
                 Dim dt2 As New DataTable

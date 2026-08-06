@@ -2,6 +2,8 @@
 'Imports AxWMPLib
 Imports ProductionSystem.Controls
 Imports System.Data.SqlClient
+Imports System.Net.Mail
+Imports System.Text
 
 Public Class frmDR2
 
@@ -339,6 +341,8 @@ Public Class frmDR2
         Dim errmsg As String = ""
         Dim clsConfig As New clsConfig
 
+        dgvSoitm.EndEdit()
+        bsSoitm.EndEdit()
 
         obj.id = id
         obj.dr_no = txtDRNo.Text.Trim
@@ -924,8 +928,114 @@ Public Class frmDR2
         dtSoitm = objdb.DevelopmentRequirementSelectSoitm(StrSono:=StrSono)
         bsSoitm.DataSource = dtSoitm
         dgvSoitm.AutoGenerateColumns = False
-        dgvSoitm.DataSource = dtSoitm
-        drvSoitm = CType(bsSoitm.Current, DataRowView)
+        dgvSoitm.DataSource = bsSoitm
+
+        If bsSoitm.Current IsNot Nothing Then
+            drvSoitm = CType(bsSoitm.Current, DataRowView)
+        Else
+            drvSoitm = Nothing
+        End If
+    End Sub
+
+    Private Function GetCurrentUserMailInfo() As DataTable
+        Dim conn As New SqlConnection((New classConnection).connection)
+        Dim comm As New SqlCommand("", conn)
+        comm.CommandType = CommandType.Text
+        comm.CommandText = "SELECT TOP 1 email, SMTPServer FROM emp WHERE empcd = @empcd"
+        comm.Parameters.AddWithValue("@empcd", clsUser.UserID)
+
+        Dim da As New SqlDataAdapter(comm)
+        Dim dt As New DataTable
+        da.Fill(dt)
+        conn.Close()
+        Return dt
+    End Function
+
+    Private Function GetCurrentSoitmRow() As DataRowView
+        If dgvSoitm.CurrentRow Is Nothing Then Return Nothing
+        Return TryCast(dgvSoitm.CurrentRow.DataBoundItem, DataRowView)
+    End Function
+
+    Private Function GetFieldText(ByVal row As DataRowView, ByVal fieldName As String) As String
+        If row Is Nothing OrElse Not row.DataView.Table.Columns.Contains(fieldName) Then Return ""
+        Return (New clsConfig).IsNull(row.Item(fieldName), "").ToString.Trim
+    End Function
+
+    Private Function GetFieldDateText(ByVal row As DataRowView, ByVal fieldName As String) As String
+        If row Is Nothing OrElse Not row.DataView.Table.Columns.Contains(fieldName) Then Return ""
+        If IsDBNull(row.Item(fieldName)) OrElse row.Item(fieldName) Is Nothing Then Return ""
+        Return Convert.ToDateTime(row.Item(fieldName)).ToString("dd/MM/yyyy")
+    End Function
+
+    Private Sub AddMailAddresses(ByVal addresses As String, ByVal mailAddresses As MailAddressCollection)
+        For Each address As String In addresses.Split(New Char() {";"c, ","c}, StringSplitOptions.RemoveEmptyEntries)
+            If address.Trim <> "" Then mailAddresses.Add(address.Trim)
+        Next
+    End Sub
+
+    Private Function BuildRejectJobMailBody(ByVal row As DataRowView) As String
+        Dim body As New StringBuilder
+
+        body.AppendLine("Development Requirement Reject Job")
+        body.AppendLine()
+        body.AppendLine("DR No.: " & txtDRNo.Text.Trim)
+        body.AppendLine("S/O No.: " & GetFieldText(row, "sono"))
+        body.AppendLine("Slno: " & GetFieldText(row, "slno"))
+        body.AppendLine("Design No.: " & GetFieldText(row, "design_no"))
+        body.AppendLine("Color: " & GetFieldText(row, "col"))
+        body.AppendLine("Approved Job No.: " & GetFieldText(row, "approved_jobno"))
+        body.AppendLine("Reject Job No.: " & GetFieldText(row, "reject_jobno"))
+        body.AppendLine("Reject Job Date: " & GetFieldDateText(row, "reject_job_date"))
+        body.AppendLine("Reject Job Reason: " & GetFieldText(row, "reject_job_reason"))
+        body.AppendLine()
+        body.AppendLine("Send By: " & clsUser.UserID)
+
+        Return body.ToString
+    End Function
+
+    Private Sub btnSendMail_Click(sender As Object, e As EventArgs) Handles btnSendMail.Click
+        dgvSoitm.EndEdit()
+        bsSoitm.EndEdit()
+
+        Dim row As DataRowView = GetCurrentSoitmRow()
+        If row Is Nothing Then
+            MessageBox.Show("Please select S/O item first.", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+        End If
+
+        Dim mailInfo As DataTable = GetCurrentUserMailInfo()
+        Dim fromEmail As String = "noreply@gemmaknits.com"
+        Dim smtpServer As String = "mail.gemmaknits.com"
+
+        If mailInfo.Rows.Count > 0 Then
+            fromEmail = (New clsConfig).IsNull(mailInfo.Rows(0)("email"), fromEmail).ToString.Trim
+            smtpServer = (New clsConfig).IsNull(mailInfo.Rows(0)("SMTPServer"), smtpServer).ToString.Trim
+        End If
+
+        If fromEmail = "" Then fromEmail = "noreply@gemmaknits.com"
+        If smtpServer = "" Then smtpServer = "mail.gemmaknits.com"
+
+        Dim toEmail As String = InputBox("Send reject job mail to:", "Send Mail")
+        If toEmail.Trim = "" Then Exit Sub
+
+        Try
+            Dim eMail As New MailMessage()
+            eMail.From = New MailAddress(fromEmail)
+            AddMailAddresses(toEmail, eMail.To)
+            eMail.Subject = "Reject Job: " & GetFieldText(row, "reject_jobno") & " / DR " & txtDRNo.Text.Trim
+            eMail.IsBodyHtml = False
+            eMail.Body = BuildRejectJobMailBody(row)
+
+            Dim smtp As New SmtpClient
+            smtp.Host = smtpServer
+            smtp.Port = 25
+            smtp.EnableSsl = False
+            smtp.Send(eMail)
+
+            MessageBox.Show("Send mail completed", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Catch ex As Exception
+            MessageBox.Show(ex.Message, "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub tsDrNo_KeyPress(sender As Object, e As KeyPressEventArgs) Handles tsDrNo.KeyPress '21/10/2025 John

@@ -463,4 +463,8 @@ Public Class frmMainmenu
         frm.UserInfo = clsUser
         frm.Show()
     End Sub
+
+    Private Sub menuMastemnuMasterSupplier_Click_1()
+
+    End Sub
 End Class

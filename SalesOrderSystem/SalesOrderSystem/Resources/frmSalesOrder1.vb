@@ -1884,15 +1884,20 @@ Public Class frmSalesOrder
         Dim currentColName As String
         Dim dgr As DataGridViewRow
         Dim frmSOSTListSelect As STV.frmSTBOOKINGSelection
-        currentColIndex = grdSalesOrder.CurrentCell.ColumnIndex
+        If e.RowIndex < 0 OrElse e.ColumnIndex < 0 Then Exit Sub
+
+        currentColIndex = e.ColumnIndex
         currentColName = grdSalesOrder.Columns(currentColIndex).Name
-        dgr = grdSalesOrder.CurrentRow
+        dgr = grdSalesOrder.Rows(e.RowIndex)
+        If dgr Is Nothing OrElse dgr.IsNewRow Then Exit Sub
+
+        setOrderLineValue(dgr)
         If currentColName = "ref_stnoid" Then
 
             With grdSalesOrder
-                If oConfig.IsNull(.Rows(.CurrentRow.Index).Cells("qty").Value, 0) = 0 Then
+                If oConfig.IsNull(dgr.Cells("qty").Value, 0) = 0 Then
                     MessageBox.Show("qty must greater than zero", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                ElseIf oConfig.IsNull(.Rows(.CurrentRow.Index).Cells("uom").Value, "") = "" Then
+                ElseIf oConfig.IsNull(dgr.Cells("uom").Value, "") = "" Then
                     MessageBox.Show("uom must not blank", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 ElseIf currentGridDesignNo = "" Then
                     MessageBox.Show("Design must not blank", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -1937,32 +1942,36 @@ Public Class frmSalesOrder
     End Sub
     Private Sub setOrderLineValue(r As DataGridViewRow)
         'Sitthana Copy From Gemmaknit Site 23/04/2018
-        If IsDBNull(r.Cells("design_no").Value) Then
+        If r Is Nothing Then Exit Sub
+
+        If r.Cells("design_no").Value Is Nothing OrElse IsDBNull(r.Cells("design_no").Value) Then
             currentGridDesignNo = ""
         Else
             currentGridDesignNo = r.Cells("design_no").Value.ToString
         End If
-        If IsDBNull(r.Cells("col").Value) Then
+        If r.Cells("col").Value Is Nothing OrElse IsDBNull(r.Cells("col").Value) Then
             currentGridColorCode = ""
         Else
             currentGridColorCode = r.Cells("col").Value.ToString
         End If
         currentGridQty = 0
         currentGridUom = "KGS"
-        If Not IsDBNull(r.Cells("qty").Value) Then
+        currentGridSonoID = ""
+        currentGridSoLineID = 0
+        If r.Cells("qty").Value IsNot Nothing AndAlso Not IsDBNull(r.Cells("qty").Value) Then
             currentGridQty = r.Cells("Qty").Value.ToString
         End If
-        If Not IsDBNull(r.Cells("uom").Value) Then
+        If r.Cells("uom").Value IsNot Nothing AndAlso Not IsDBNull(r.Cells("uom").Value) Then
             currentGridUom = r.Cells("Uom").Value.ToString
         End If
-        If Not IsDBNull(r.Cells("sonoid").Value) Then
+        If r.Cells("sonoid").Value IsNot Nothing AndAlso Not IsDBNull(r.Cells("sonoid").Value) Then
             currentGridSonoID = r.Cells("sonoid").Value.ToString
         End If
         If txtSoNo.Text <> "" Then
             currentGridSono = txtSoNo.Text
         End If
-        If Not IsDBNull(r.Cells("so_line_id").Value) Then
-            currentGridSoLineID = r.Cells("so_line_id").Value
+        If r.Cells("so_line_id").Value IsNot Nothing AndAlso Not IsDBNull(r.Cells("so_line_id").Value) Then
+            Integer.TryParse(r.Cells("so_line_id").Value.ToString, currentGridSoLineID)
         End If
     End Sub
 

@@ -23,6 +23,7 @@ Partial Class frmDR2
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDR2))
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -155,12 +156,16 @@ Partial Class frmDR2
         Me.btnMinimized = New System.Windows.Forms.ToolStripButton()
         Me.btnExit = New System.Windows.Forms.ToolStripButton()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.btnSendMail = New System.Windows.Forms.Button()
         Me.dgvSoitm = New System.Windows.Forms.DataGridView()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.tsDrNo = New System.Windows.Forms.ToolStripTextBox()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -1478,11 +1483,20 @@ Partial Class frmDR2
         Me.ToolStrip1.Size = New System.Drawing.Size(1250, 25)
         Me.ToolStrip1.TabIndex = 62
         '
+        'btnSendMail
+        '
+        Me.btnSendMail.Location = New System.Drawing.Point(1138, 359)
+        Me.btnSendMail.Name = "btnSendMail"
+        Me.btnSendMail.Size = New System.Drawing.Size(100, 24)
+        Me.btnSendMail.TabIndex = 77
+        Me.btnSendMail.Text = "Reject Mail"
+        Me.btnSendMail.UseVisualStyleBackColor = True
+        '
         'dgvSoitm
         '
         Me.dgvSoitm.AllowUserToAddRows = False
         Me.dgvSoitm.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvSoitm.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4, Me.Column5})
+        Me.dgvSoitm.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4, Me.Column5, Me.Column6, Me.Column7, Me.Column8})
         Me.dgvSoitm.Location = New System.Drawing.Point(665, 387)
         Me.dgvSoitm.Name = "dgvSoitm"
         Me.dgvSoitm.Size = New System.Drawing.Size(573, 225)
@@ -1526,6 +1540,28 @@ Partial Class frmDR2
         Me.Column5.Name = "Column5"
         Me.Column5.Width = 150
         '
+        'Column6
+        '
+        Me.Column6.DataPropertyName = "reject_jobno"
+        Me.Column6.HeaderText = "Reject Job No."
+        Me.Column6.Name = "Column6"
+        Me.Column6.Width = 120
+        '
+        'Column7
+        '
+        Me.Column7.DataPropertyName = "reject_job_date"
+        DataGridViewCellStyle1.Format = "dd/MM/yyyy"
+        Me.Column7.DefaultCellStyle = DataGridViewCellStyle1
+        Me.Column7.HeaderText = "Reject Job Date"
+        Me.Column7.Name = "Column7"
+        '
+        'Column8
+        '
+        Me.Column8.DataPropertyName = "reject_job_reason"
+        Me.Column8.HeaderText = "Reject Job Reason"
+        Me.Column8.Name = "Column8"
+        Me.Column8.Width = 200
+        '
         'tsDrNo
         '
         Me.tsDrNo.Name = "tsDrNo"
@@ -1536,6 +1572,7 @@ Partial Class frmDR2
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1250, 847)
+        Me.Controls.Add(Me.btnSendMail)
         Me.Controls.Add(Me.dgvSoitm)
         Me.Controls.Add(Me.GroupBox7)
         Me.Controls.Add(Me.GroupBox6)
@@ -1711,11 +1748,15 @@ Partial Class frmDR2
     Friend WithEvents btnMinimized As ToolStripButton
     Friend WithEvents btnExit As ToolStripButton
     Friend WithEvents ToolStrip1 As ToolStrip
+    Friend WithEvents btnSendMail As Button
     Friend WithEvents dgvSoitm As DataGridView
     Friend WithEvents Column1 As DataGridViewTextBoxColumn
     Friend WithEvents Column2 As DataGridViewTextBoxColumn
     Friend WithEvents Column3 As DataGridViewTextBoxColumn
     Friend WithEvents Column4 As DataGridViewTextBoxColumn
     Friend WithEvents Column5 As DataGridViewTextBoxColumn
+    Friend WithEvents Column6 As DataGridViewTextBoxColumn
+    Friend WithEvents Column7 As DataGridViewTextBoxColumn
+    Friend WithEvents Column8 As DataGridViewTextBoxColumn
     Friend WithEvents tsDrNo As ToolStripTextBox
 End Class

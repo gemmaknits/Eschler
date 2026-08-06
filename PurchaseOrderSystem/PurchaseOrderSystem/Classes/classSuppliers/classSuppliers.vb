@@ -33,7 +33,12 @@ Public Class classSuppliers
         '    comm.CommandText = "p_suppliers_update"
         'End If
         With drvSuppliers
-            comm.Parameters.AddWithValue("@p_suppcd", .Item("suppcd"))
+            Dim suppcdValue As Object = .Item("suppcd")
+            If suppcdValue Is DBNull.Value OrElse suppcdValue.ToString.Trim = "" Then
+                comm.Parameters.Add("@p_suppcd", SqlDbType.Char, 10).Value = DBNull.Value
+            Else
+                comm.Parameters.Add("@p_suppcd", SqlDbType.Char, 10).Value = suppcdValue.ToString.Trim
+            End If
             comm.Parameters.AddWithValue("@p_name", .Item("name"))
             comm.Parameters.AddWithValue("@p_namet", .Item("namet"))
             comm.Parameters.AddWithValue("@p_addr1", .Item("addr1"))

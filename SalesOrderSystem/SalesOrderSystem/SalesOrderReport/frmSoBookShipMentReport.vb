@@ -23,7 +23,7 @@ Public Class frmSoBookShipMentReport
     End Property
 
     Private Sub frmSoBookShipMentReport_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.StartPosition = FormStartPosition.CenterScreen
+        'Me.StartPosition = FormStartPosition.CenterScreen
         'Me.WindowState = FormWindowState.Maximized
 
         dtpGenerateDateFr.Value = DateAdd(DateInterval.Month, -1, Now)

@@ -126,7 +126,7 @@ Partial Class frmSoBookShipMentReport
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnSearch, Me.btnPrint, Me.btnExportToExcel, Me.btnMinimized, Me.btnExit})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(594, 25)
+        Me.ToolStrip1.Size = New System.Drawing.Size(590, 25)
         Me.ToolStrip1.TabIndex = 0
         '
         'btnSearch
@@ -180,18 +180,19 @@ Partial Class frmSoBookShipMentReport
         Me.tabReports.Location = New System.Drawing.Point(8, 32)
         Me.tabReports.Name = "tabReports"
         Me.tabReports.SelectedIndex = 0
-        Me.tabReports.Size = New System.Drawing.Size(574, 221)
+        Me.tabReports.Size = New System.Drawing.Size(570, 236)
         Me.tabReports.TabIndex = 1
         '
         'tabGenerateReport
         '
+        Me.tabGenerateReport.Controls.Add(Me.lblNote)
         Me.tabGenerateReport.Controls.Add(Me.GroupBox1)
         Me.tabGenerateReport.Controls.Add(Me.lblGeneratePendFrom)
         Me.tabGenerateReport.Controls.Add(Me.dtpGeneratePendFrom)
         Me.tabGenerateReport.Location = New System.Drawing.Point(4, 22)
         Me.tabGenerateReport.Name = "tabGenerateReport"
         Me.tabGenerateReport.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabGenerateReport.Size = New System.Drawing.Size(566, 195)
+        Me.tabGenerateReport.Size = New System.Drawing.Size(562, 210)
         Me.tabGenerateReport.TabIndex = 0
         Me.tabGenerateReport.Text = "Generate Report"
         Me.tabGenerateReport.UseVisualStyleBackColor = True
@@ -1001,7 +1002,7 @@ Partial Class frmSoBookShipMentReport
         '
         Me.lblNote.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.lblNote.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.lblNote.Location = New System.Drawing.Point(12, 267)
+        Me.lblNote.Location = New System.Drawing.Point(7, 175)
         Me.lblNote.Name = "lblNote"
         Me.lblNote.Size = New System.Drawing.Size(552, 32)
         Me.lblNote.TabIndex = 2
@@ -1024,14 +1025,11 @@ Partial Class frmSoBookShipMentReport
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(594, 597)
-        Me.Controls.Add(Me.lblNote)
+        Me.ClientSize = New System.Drawing.Size(590, 274)
         Me.Controls.Add(Me.tabReports)
         Me.Controls.Add(Me.ToolStrip1)
-        Me.MinimumSize = New System.Drawing.Size(610, 636)
         Me.Name = "frmSoBookShipMentReport"
         Me.Text = "S/O Book Shipment"
-        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
         Me.tabReports.ResumeLayout(False)

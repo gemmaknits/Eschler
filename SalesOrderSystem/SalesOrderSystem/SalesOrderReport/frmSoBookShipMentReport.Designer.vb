@@ -25,10 +25,12 @@ Partial Class frmSoBookShipMentReport
         Me.btnExit = New System.Windows.Forms.ToolStripButton()
         Me.tabReports = New System.Windows.Forms.TabControl()
         Me.tabGenerateReport = New System.Windows.Forms.TabPage()
-        Me.lblGenerateDateFr = New System.Windows.Forms.Label()
+        Me.lblNote = New System.Windows.Forms.Label()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.dtpGenerateDateFr = New System.Windows.Forms.DateTimePicker()
-        Me.lblGenerateDateTo = New System.Windows.Forms.Label()
+        Me.lblGenerateDateFr = New System.Windows.Forms.Label()
         Me.dtpGenerateDateTo = New System.Windows.Forms.DateTimePicker()
+        Me.lblGenerateDateTo = New System.Windows.Forms.Label()
         Me.lblGeneratePendFrom = New System.Windows.Forms.Label()
         Me.dtpGeneratePendFrom = New System.Windows.Forms.DateTimePicker()
         Me.tabOrderBooked = New System.Windows.Forms.TabPage()
@@ -101,11 +103,10 @@ Partial Class frmSoBookShipMentReport
         Me.txtPendingDesignNo = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.grpPendingDate = New System.Windows.Forms.GroupBox()
-        Me.lblNote = New System.Windows.Forms.Label()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.ToolStrip1.SuspendLayout()
         Me.tabReports.SuspendLayout()
         Me.tabGenerateReport.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
         Me.tabOrderBooked.SuspendLayout()
         CType(Me.dgvOrderBooked, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpBookedCustomer.SuspendLayout()
@@ -118,7 +119,6 @@ Partial Class frmSoBookShipMentReport
         CType(Me.dgvOrderPending, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpPendingCondition.SuspendLayout()
         Me.grpPendingArticle.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'ToolStrip1
@@ -143,8 +143,8 @@ Partial Class frmSoBookShipMentReport
         Me.btnPrint.Image = Global.SalesOrderSystem.My.Resources.Resources.Print_16x
         Me.btnPrint.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnPrint.Name = "btnPrint"
-        Me.btnPrint.Size = New System.Drawing.Size(52, 22)
-        Me.btnPrint.Text = "&Print"
+        Me.btnPrint.Size = New System.Drawing.Size(106, 22)
+        Me.btnPrint.Text = "&Generte Report"
         '
         'btnExportToExcel
         '
@@ -197,14 +197,28 @@ Partial Class frmSoBookShipMentReport
         Me.tabGenerateReport.Text = "Generate Report"
         Me.tabGenerateReport.UseVisualStyleBackColor = True
         '
-        'lblGenerateDateFr
+        'lblNote
         '
-        Me.lblGenerateDateFr.AutoSize = True
-        Me.lblGenerateDateFr.Location = New System.Drawing.Point(14, 19)
-        Me.lblGenerateDateFr.Name = "lblGenerateDateFr"
-        Me.lblGenerateDateFr.Size = New System.Drawing.Size(30, 13)
-        Me.lblGenerateDateFr.TabIndex = 0
-        Me.lblGenerateDateFr.Text = "From"
+        Me.lblNote.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.lblNote.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
+        Me.lblNote.Location = New System.Drawing.Point(7, 175)
+        Me.lblNote.Name = "lblNote"
+        Me.lblNote.Size = New System.Drawing.Size(552, 32)
+        Me.lblNote.TabIndex = 2
+        Me.lblNote.Text = "* This report may take a long time to preview. Please wait a few minutes."
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.dtpGenerateDateFr)
+        Me.GroupBox1.Controls.Add(Me.lblGenerateDateFr)
+        Me.GroupBox1.Controls.Add(Me.dtpGenerateDateTo)
+        Me.GroupBox1.Controls.Add(Me.lblGenerateDateTo)
+        Me.GroupBox1.Location = New System.Drawing.Point(13, 14)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(237, 100)
+        Me.GroupBox1.TabIndex = 6
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "S/O && Invoice Date range"
         '
         'dtpGenerateDateFr
         '
@@ -215,14 +229,14 @@ Partial Class frmSoBookShipMentReport
         Me.dtpGenerateDateFr.Size = New System.Drawing.Size(112, 20)
         Me.dtpGenerateDateFr.TabIndex = 1
         '
-        'lblGenerateDateTo
+        'lblGenerateDateFr
         '
-        Me.lblGenerateDateTo.AutoSize = True
-        Me.lblGenerateDateTo.Location = New System.Drawing.Point(14, 55)
-        Me.lblGenerateDateTo.Name = "lblGenerateDateTo"
-        Me.lblGenerateDateTo.Size = New System.Drawing.Size(20, 13)
-        Me.lblGenerateDateTo.TabIndex = 2
-        Me.lblGenerateDateTo.Text = "To"
+        Me.lblGenerateDateFr.AutoSize = True
+        Me.lblGenerateDateFr.Location = New System.Drawing.Point(14, 19)
+        Me.lblGenerateDateFr.Name = "lblGenerateDateFr"
+        Me.lblGenerateDateFr.Size = New System.Drawing.Size(30, 13)
+        Me.lblGenerateDateFr.TabIndex = 0
+        Me.lblGenerateDateFr.Text = "From"
         '
         'dtpGenerateDateTo
         '
@@ -233,14 +247,23 @@ Partial Class frmSoBookShipMentReport
         Me.dtpGenerateDateTo.Size = New System.Drawing.Size(112, 20)
         Me.dtpGenerateDateTo.TabIndex = 3
         '
+        'lblGenerateDateTo
+        '
+        Me.lblGenerateDateTo.AutoSize = True
+        Me.lblGenerateDateTo.Location = New System.Drawing.Point(14, 55)
+        Me.lblGenerateDateTo.Name = "lblGenerateDateTo"
+        Me.lblGenerateDateTo.Size = New System.Drawing.Size(20, 13)
+        Me.lblGenerateDateTo.TabIndex = 2
+        Me.lblGenerateDateTo.Text = "To"
+        '
         'lblGeneratePendFrom
         '
         Me.lblGeneratePendFrom.AutoSize = True
         Me.lblGeneratePendFrom.Location = New System.Drawing.Point(21, 123)
         Me.lblGeneratePendFrom.Name = "lblGeneratePendFrom"
-        Me.lblGeneratePendFrom.Size = New System.Drawing.Size(72, 13)
+        Me.lblGeneratePendFrom.Size = New System.Drawing.Size(81, 13)
         Me.lblGeneratePendFrom.TabIndex = 4
-        Me.lblGeneratePendFrom.Text = "Pending From"
+        Me.lblGeneratePendFrom.Text = "S/O Pending Fr"
         '
         'dtpGeneratePendFrom
         '
@@ -998,29 +1021,6 @@ Partial Class frmSoBookShipMentReport
         Me.grpPendingDate.Text = "Date"
         Me.grpPendingDate.Visible = False
         '
-        'lblNote
-        '
-        Me.lblNote.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.lblNote.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.lblNote.Location = New System.Drawing.Point(7, 175)
-        Me.lblNote.Name = "lblNote"
-        Me.lblNote.Size = New System.Drawing.Size(552, 32)
-        Me.lblNote.TabIndex = 2
-        Me.lblNote.Text = "* This report may take a long time to preview. Please wait a few minutes."
-        '
-        'GroupBox1
-        '
-        Me.GroupBox1.Controls.Add(Me.dtpGenerateDateFr)
-        Me.GroupBox1.Controls.Add(Me.lblGenerateDateFr)
-        Me.GroupBox1.Controls.Add(Me.dtpGenerateDateTo)
-        Me.GroupBox1.Controls.Add(Me.lblGenerateDateTo)
-        Me.GroupBox1.Location = New System.Drawing.Point(13, 14)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(237, 100)
-        Me.GroupBox1.TabIndex = 6
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "S/O && Invoice Date range"
-        '
         'frmSoBookShipMentReport
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1035,6 +1035,8 @@ Partial Class frmSoBookShipMentReport
         Me.tabReports.ResumeLayout(False)
         Me.tabGenerateReport.ResumeLayout(False)
         Me.tabGenerateReport.PerformLayout()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.tabOrderBooked.ResumeLayout(False)
         Me.tabOrderBooked.PerformLayout()
         CType(Me.dgvOrderBooked, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1056,8 +1058,6 @@ Partial Class frmSoBookShipMentReport
         Me.grpPendingCondition.PerformLayout()
         Me.grpPendingArticle.ResumeLayout(False)
         Me.grpPendingArticle.PerformLayout()
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

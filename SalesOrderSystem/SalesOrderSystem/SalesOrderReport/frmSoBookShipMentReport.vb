@@ -4,9 +4,6 @@ Imports System.IO
 Imports System.Text
 
 Public Class frmSoBookShipMentReport
-    Private Const SORT_BY_SO_DATE As String = "SoDate"
-    Private Const SORT_BY_DESIGN_NO As String = "DesignNo"
-    Private Const SORT_BY_CUSTOMER_NAME As String = "CustomerName"
     Private Shared ReadOnly BOOKED_COLOR As Color = Color.FromArgb(198, 89, 17)
     Private Shared ReadOnly INVOICED_COLOR As Color = Color.FromArgb(0, 112, 192)
     Private Shared ReadOnly PENDING_COLOR As Color = Color.FromArgb(0, 176, 80)
@@ -14,19 +11,7 @@ Public Class frmSoBookShipMentReport
 
     Private clsConn As New classConnection
     Private clsUser As New classUserInfo
-    Private clsMstSrchDlg As New ClassMasterSearchDialog
     Private isFormLoaded As Boolean = False
-    Private lblGenerateDateFr As Label
-    Private lblGenerateDateTo As Label
-    Private lblGeneratePendFrom As Label
-    Private dtpGenerateDateFr As DateTimePicker
-    Private dtpGenerateDateTo As DateTimePicker
-    Private dtpGeneratePendFrom As DateTimePicker
-    Private dtpInvoicedDateFr As DateTimePicker
-    Private dtpInvoicedDateTo As DateTimePicker
-    Private lblPendingPendFrom As Label
-    Private dtpPendingPendFrom As DateTimePicker
-    Private wbGenerateReport As WebBrowser
 
     Public Property UserInfo() As classUserInfo
         Get
@@ -39,46 +24,15 @@ Public Class frmSoBookShipMentReport
 
     Private Sub frmSoBookShipMentReport_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.StartPosition = FormStartPosition.CenterScreen
-        Me.WindowState = FormWindowState.Maximized
+        'Me.WindowState = FormWindowState.Maximized
 
-        dtpBookedDateFr.Value = DateAdd(DateInterval.Month, -1, Now)
-        dtpBookedDateTo.Value = Now
-        dtpPendingDateFr.Value = DateAdd(DateInterval.Month, -1, Now)
-        dtpPendingDateTo.Value = Now
+        dtpGenerateDateFr.Value = DateAdd(DateInterval.Month, -1, Now)
+        dtpGenerateDateTo.Value = Now
+        dtpGeneratePendFrom.Value = DateSerial(Year(Now) - 1, 1, 1)
 
-        EnsureRuntimeControls()
-        GenCombo()
         isFormLoaded = True
         ConfigureFlatLayout()
     End Sub
-
-    Private Sub EnsureRuntimeControls()
-        If dtpGenerateDateFr IsNot Nothing Then
-            Return
-        End If
-
-        lblGenerateDateFr = New Label With {.Text = "From", .AutoSize = True}
-        lblGenerateDateTo = New Label With {.Text = "To", .AutoSize = True}
-        lblGeneratePendFrom = New Label With {.Text = "Pending From", .AutoSize = True}
-        dtpGenerateDateFr = CreateReportDatePicker(DateAdd(DateInterval.Month, -1, Now))
-        dtpGenerateDateTo = CreateReportDatePicker(Now)
-        dtpGeneratePendFrom = CreateReportDatePicker(DateSerial(Year(Now) - 1, 1, 1))
-        dtpInvoicedDateFr = CreateReportDatePicker(DateAdd(DateInterval.Month, -1, Now))
-        dtpInvoicedDateTo = CreateReportDatePicker(Now)
-
-        lblPendingPendFrom = New Label With {.Text = "Pending From", .AutoSize = True}
-        dtpPendingPendFrom = CreateReportDatePicker(DateSerial(Year(Now) - 1, 1, 1))
-        wbGenerateReport = New WebBrowser With {.AllowWebBrowserDrop = False, .IsWebBrowserContextMenuEnabled = True, .ScriptErrorsSuppressed = True, .WebBrowserShortcutsEnabled = True}
-    End Sub
-
-    Private Function CreateReportDatePicker(ByVal value As Date) As DateTimePicker
-        Return New DateTimePicker With {
-            .Format = DateTimePickerFormat.Custom,
-            .CustomFormat = "dd/MM/yyyy",
-            .Value = value,
-            .Width = 112
-        }
-    End Function
 
     Private Sub ConfigureFlatLayout()
         If Not isFormLoaded OrElse tabReports Is Nothing OrElse tabReports.TabPages.Count = 0 Then
@@ -86,9 +40,6 @@ Public Class frmSoBookShipMentReport
         End If
 
         ConfigureGenerateTab()
-        ConfigureBookedTab()
-        ConfigureInvoicedTab()
-        ConfigurePendingTab()
     End Sub
 
     Private Sub ConfigureGenerateTab()
@@ -96,127 +47,16 @@ Public Class frmSoBookShipMentReport
             Return
         End If
 
-        MoveToTab(tabGenerateReport, lblGenerateDateFr, 16, 14)
-        MoveToTab(tabGenerateReport, dtpGenerateDateFr, 64, 10)
-        MoveToTab(tabGenerateReport, lblGenerateDateTo, 184, 14)
-        MoveToTab(tabGenerateReport, dtpGenerateDateTo, 216, 10)
-        MoveToTab(tabGenerateReport, lblGeneratePendFrom, 336, 14)
-        MoveToTab(tabGenerateReport, dtpGeneratePendFrom, 424, 10)
-
-        MoveToTab(tabGenerateReport, wbGenerateReport, 8, 40)
         wbGenerateReport.Size = New Size(tabGenerateReport.ClientSize.Width - 16, tabGenerateReport.ClientSize.Height - 48)
-        wbGenerateReport.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
-        dgvGenerateReport.Visible = False
-    End Sub
-
-    Private Sub ConfigureBookedTab()
-        If dgvOrderBooked Is Nothing Then
-            Return
-        End If
-
-        grpBookedDate.Visible = False
-        grpBookedCustomer.Visible = False
-
-        MoveToTab(tabOrderBooked, Label3, 16, 14)
-        MoveToTab(tabOrderBooked, dtpBookedDateFr, 64, 10)
-        MoveToTab(tabOrderBooked, Label2, 184, 14)
-        MoveToTab(tabOrderBooked, dtpBookedDateTo, 216, 10)
-
-        SetGridBounds(dgvOrderBooked, 40)
-    End Sub
-
-    Private Sub ConfigureInvoicedTab()
-        If dgvOrderInvoiced Is Nothing Then
-            Return
-        End If
-
-        grpInvoicedOption.Visible = False
-        grpInvoicedCustomer.Visible = False
-        grpInvoicedArticle.Visible = False
-
-        Label8.Text = "From"
-        Label7.Text = "To"
-        MoveToTab(tabOrderInvoiced, Label8, 16, 14)
-        MoveToTab(tabOrderInvoiced, dtpInvoicedDateFr, 64, 10)
-        MoveToTab(tabOrderInvoiced, Label7, 184, 14)
-        MoveToTab(tabOrderInvoiced, dtpInvoicedDateTo, 216, 10)
-
-        SetGridBounds(dgvOrderInvoiced, 40)
-    End Sub
-
-    Private Sub ConfigurePendingTab()
-        If dgvOrderPending Is Nothing Then
-            Return
-        End If
-
-        grpPendingDate.Visible = False
-        grpPendingArticle.Visible = False
-        grpPendingCondition.Visible = False
-
-        MoveToTab(tabOrderPending, Label6, 16, 14)
-        MoveToTab(tabOrderPending, dtpPendingDateFr, 64, 10)
-        MoveToTab(tabOrderPending, Label1, 184, 14)
-        MoveToTab(tabOrderPending, dtpPendingDateTo, 216, 10)
-        MoveToTab(tabOrderPending, lblPendingPendFrom, 336, 14)
-        MoveToTab(tabOrderPending, dtpPendingPendFrom, 424, 10)
-
-        SetGridBounds(dgvOrderPending, 40)
-    End Sub
-
-    Private Sub MoveToTab(ByVal tabPage As TabPage, ByVal control As Control, ByVal x As Integer, ByVal y As Integer)
-        control.Parent = tabPage
-        control.Location = New Point(x, y)
-        control.Anchor = AnchorStyles.Top Or AnchorStyles.Left
-        control.Visible = True
-        control.BringToFront()
-    End Sub
-
-    Private Sub SetGridBounds(ByVal grid As DataGridView, ByVal top As Integer)
-        If grid Is Nothing OrElse grid.Parent Is Nothing Then
-            Return
-        End If
-
-        grid.Location = New Point(8, top)
-        grid.Size = New Size(grid.Parent.ClientSize.Width - 16, grid.Parent.ClientSize.Height - top - 8)
-        grid.Anchor = AnchorStyles.Top Or AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right
-        grid.BringToFront()
-    End Sub
-
-    Private Sub SetControlWidthToRightEdge(ByVal control As Control, ByVal parent As Control, ByVal rightMargin As Integer, ByVal minimumWidth As Integer)
-        control.Width = Math.Max(minimumWidth, parent.ClientSize.Width - control.Left - rightMargin)
     End Sub
 
     Private Sub tabReports_Resize(sender As Object, e As EventArgs) Handles tabReports.Resize
         ConfigureFlatLayout()
     End Sub
 
-    Private Sub GenCombo()
-        With cboPendingSalesPerson
-            .DataSource = (New classMaster).GetEmp
-            .DisplayMember = "empname"
-            .ValueMember = "empcd"
-            .SelectedIndex = -1
-        End With
-
-        With cmbPendingSortBy
-            .Items.Add(SORT_BY_SO_DATE)
-            .Items.Add(SORT_BY_DESIGN_NO)
-            .Items.Add(SORT_BY_CUSTOMER_NAME)
-            .SelectedIndex = 0
-        End With
-    End Sub
-
     Private Sub btnPrint_Click(sender As Object, e As EventArgs) Handles btnPrint.Click
         Try
-            If tabReports.SelectedTab Is tabGenerateReport Then
-                LoadGenerateReport()
-            ElseIf tabReports.SelectedTab Is tabOrderBooked Then
-                If ValidateDateRange(dtpBookedDateFr, dtpBookedDateTo) Then PrintOrderBooked()
-            ElseIf tabReports.SelectedTab Is tabOrderInvoiced Then
-                If ValidateDateRange(dtpInvoicedDateFr, dtpInvoicedDateTo) Then PrintOrderInvoiced()
-            ElseIf tabReports.SelectedTab Is tabOrderPending Then
-                If ValidateDateRange(dtpPendingDateFr, dtpPendingDateTo) Then PrintOrderPending()
-            End If
+            LoadGenerateReport()
         Catch ex As Exception
             ShowActionError("print report", ex)
         End Try
@@ -224,15 +64,7 @@ Public Class frmSoBookShipMentReport
 
     Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
         Try
-            If tabReports.SelectedTab Is tabGenerateReport Then
-                LoadGenerateReport()
-            ElseIf tabReports.SelectedTab Is tabOrderBooked Then
-                If ValidateDateRange(dtpBookedDateFr, dtpBookedDateTo) Then LoadOrderBooked()
-            ElseIf tabReports.SelectedTab Is tabOrderInvoiced Then
-                If ValidateDateRange(dtpInvoicedDateFr, dtpInvoicedDateTo) Then LoadOrderInvoiced()
-            ElseIf tabReports.SelectedTab Is tabOrderPending Then
-                If ValidateDateRange(dtpPendingDateFr, dtpPendingDateTo) Then LoadOrderPending()
-            End If
+            LoadGenerateReport()
         Catch ex As Exception
             ShowActionError("search report", ex)
         End Try
@@ -247,11 +79,7 @@ Public Class frmSoBookShipMentReport
     End Sub
 
     Private Function ValidateSelectedTabDateRange() As Boolean
-        If tabReports.SelectedTab Is tabGenerateReport Then Return ValidateDateRange(dtpGenerateDateFr, dtpGenerateDateTo)
-        If tabReports.SelectedTab Is tabOrderBooked Then Return ValidateDateRange(dtpBookedDateFr, dtpBookedDateTo)
-        If tabReports.SelectedTab Is tabOrderInvoiced Then Return ValidateDateRange(dtpInvoicedDateFr, dtpInvoicedDateTo)
-        If tabReports.SelectedTab Is tabOrderPending Then Return ValidateDateRange(dtpPendingDateFr, dtpPendingDateTo)
-        Return True
+        Return ValidateDateRange(dtpGenerateDateFr, dtpGenerateDateTo)
     End Function
 
     Private Function ValidateDateRange(ByVal dateFr As DateTimePicker, ByVal dateTo As DateTimePicker) As Boolean
@@ -439,38 +267,12 @@ Public Class frmSoBookShipMentReport
         Return safeName.Replace(" ", "_")
     End Function
 
-    Private Sub LoadOrderBooked()
-        Dim parameters As Dictionary(Of String, Object) = GetDateRangeParameters(dtpBookedDateFr, dtpBookedDateTo)
-
-        dgvOrderBooked.DataSource = GetReportData("P_SO_BOOK_SHIPMENT_REPORT_PKG_order_booked", parameters)
-    End Sub
-
-    Private Sub LoadOrderInvoiced()
-        Dim parameters As Dictionary(Of String, Object) = GetInvoicedParameters()
-
-        dgvOrderInvoiced.DataSource = GetReportData("P_SO_BOOK_SHIPMENT_REPORT_PKG_order_invoiced", parameters)
-    End Sub
-
-    Private Sub LoadOrderPending()
-        Dim parameters As Dictionary(Of String, Object) = GetPendingParameters()
-
-        dgvOrderPending.DataSource = GetReportData("P_SO_BOOK_SHIPMENT_REPORT_PKG_order_pending", parameters)
-    End Sub
-
     Private Sub ExportToExcel()
         Dim workbookData As New List(Of ReportExcelSection)
 
-        If tabReports.SelectedTab Is tabGenerateReport Then
-            workbookData.Add(New ReportExcelSection(CreateBookedSummary(GetGenerateOrderBookedData()), BOOKED_COLOR))
-            workbookData.Add(New ReportExcelSection(CreateInvoicedSummary(GetGenerateOrderInvoicedData()), INVOICED_COLOR))
-            workbookData.Add(New ReportExcelSection(CreatePendingSummary(GetGenerateOrderPendingData()), PENDING_COLOR))
-        ElseIf tabReports.SelectedTab Is tabOrderBooked Then
-            workbookData.Add(New ReportExcelSection(CreateBookedSummary(GetOrderBookedData()), BOOKED_COLOR))
-        ElseIf tabReports.SelectedTab Is tabOrderInvoiced Then
-            workbookData.Add(New ReportExcelSection(CreateInvoicedSummary(GetOrderInvoicedData()), INVOICED_COLOR))
-        ElseIf tabReports.SelectedTab Is tabOrderPending Then
-            workbookData.Add(New ReportExcelSection(CreatePendingSummary(GetOrderPendingData()), PENDING_COLOR))
-        End If
+        workbookData.Add(New ReportExcelSection(CreateBookedSummary(GetGenerateOrderBookedData()), BOOKED_COLOR))
+        workbookData.Add(New ReportExcelSection(CreateInvoicedSummary(GetGenerateOrderInvoicedData()), INVOICED_COLOR))
+        workbookData.Add(New ReportExcelSection(CreatePendingSummary(GetGenerateOrderPendingData()), PENDING_COLOR))
 
         If workbookData.Count = 0 OrElse Not HasExportData(workbookData) Then
             MessageBox.Show("No data for export.", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
@@ -492,30 +294,6 @@ Public Class frmSoBookShipMentReport
         Return GetReportData("P_SO_BOOK_SHIPMENT_REPORT_PKG_order_pending", GetGenerateParameters())
     End Function
 
-    Private Function GetOrderBookedData() As DataTable
-        If tabReports.SelectedTab Is tabOrderBooked AndAlso TypeOf dgvOrderBooked.DataSource Is DataTable Then
-            Return DirectCast(dgvOrderBooked.DataSource, DataTable)
-        End If
-
-        Return GetReportData("P_SO_BOOK_SHIPMENT_REPORT_PKG_order_booked", GetDateRangeParameters(dtpBookedDateFr, dtpBookedDateTo))
-    End Function
-
-    Private Function GetOrderInvoicedData() As DataTable
-        If tabReports.SelectedTab Is tabOrderInvoiced AndAlso TypeOf dgvOrderInvoiced.DataSource Is DataTable Then
-            Return DirectCast(dgvOrderInvoiced.DataSource, DataTable)
-        End If
-
-        Return GetReportData("P_SO_BOOK_SHIPMENT_REPORT_PKG_order_invoiced", GetInvoicedParameters())
-    End Function
-
-    Private Function GetOrderPendingData() As DataTable
-        If tabReports.SelectedTab Is tabOrderPending AndAlso TypeOf dgvOrderPending.DataSource Is DataTable Then
-            Return DirectCast(dgvOrderPending.DataSource, DataTable)
-        End If
-
-        Return GetReportData("P_SO_BOOK_SHIPMENT_REPORT_PKG_order_pending", GetPendingParameters())
-    End Function
-
     Private Function GetGenerateParameters() As Dictionary(Of String, Object)
         Dim parameters As Dictionary(Of String, Object) = GetDateRangeParameters(dtpGenerateDateFr, dtpGenerateDateTo)
         parameters.Add("@pend_from", dtpGeneratePendFrom.Value.ToString("yyyyMMdd").Trim)
@@ -526,16 +304,6 @@ Public Class frmSoBookShipMentReport
         Dim parameters As New Dictionary(Of String, Object)
         parameters.Add("@datefr", dateFr.Value.ToString("yyyyMMdd").Trim)
         parameters.Add("@dateto", dateTo.Value.ToString("yyyyMMdd").Trim)
-        Return parameters
-    End Function
-
-    Private Function GetInvoicedParameters() As Dictionary(Of String, Object)
-        Return GetDateRangeParameters(dtpInvoicedDateFr, dtpInvoicedDateTo)
-    End Function
-
-    Private Function GetPendingParameters() As Dictionary(Of String, Object)
-        Dim parameters As Dictionary(Of String, Object) = GetDateRangeParameters(dtpPendingDateFr, dtpPendingDateTo)
-        parameters.Add("@pend_from", dtpPendingPendFrom.Value.ToString("yyyyMMdd").Trim)
         Return parameters
     End Function
 
@@ -789,11 +557,7 @@ Public Class frmSoBookShipMentReport
     End Sub
 
     Private Function GetExportFileName() As String
-        If tabReports.SelectedTab Is tabGenerateReport Then Return "SO Book Shipment Generate Report"
-        If tabReports.SelectedTab Is tabOrderBooked Then Return "SO Book Shipment Order Booked"
-        If tabReports.SelectedTab Is tabOrderInvoiced Then Return "SO Book Shipment Order Invoiced"
-        If tabReports.SelectedTab Is tabOrderPending Then Return "SO Book Shipment Order Pending"
-        Return "SO Book Shipment"
+        Return "SO Book Shipment Generate Report"
     End Function
 
     Private Function GetStringValue(ByVal row As DataRow, ByVal columnName As String) As String
@@ -889,72 +653,6 @@ Public Class frmSoBookShipMentReport
 
         Return dt
     End Function
-
-    Private Sub PrintOrderBooked()
-        OpenTablePrintPreview("S/O Book Shipment - Order Booked", GetOrderBookedData())
-    End Sub
-
-    Private Sub PrintOrderInvoiced()
-        OpenTablePrintPreview("S/O Book Shipment - Order Invoiced", GetOrderInvoicedData())
-    End Sub
-
-    Private Sub PrintOrderPending()
-        OpenTablePrintPreview("S/O Book Shipment - Order Pending", GetOrderPendingData())
-    End Sub
-
-    Private Sub btnBookedGetCustomer_Click(sender As Object, e As EventArgs) Handles btnBookedGetCustomer.Click
-        SelectCustomer(txtBookedCustomerCode, txtBookedCustomerName)
-    End Sub
-
-    Private Sub btnInvoicedGetCustomer_Click(sender As Object, e As EventArgs) Handles btnInvoicedGetCustomer.Click
-        SelectCustomer(txtInvoicedCustomerCode, txtInvoicedCustomerName)
-    End Sub
-
-    Private Sub SelectCustomer(ByVal txtCode As TextBox, ByVal txtName As TextBox)
-        Dim drv As DataRowView
-
-        drv = clsMstSrchDlg.searchCustomer(clsUser.UserName, (New classConnection).getSQLConnection)
-        If drv IsNot Nothing Then
-            txtCode.Text = drv.Item("custcd").ToString.Trim
-            txtName.Text = drv.Item("name").ToString.Trim
-        End If
-    End Sub
-
-    Private Sub btnBookedClearCustomer_Click(sender As Object, e As EventArgs) Handles btnBookedClearCustomer.Click
-        txtBookedCustomerCode.Text = ""
-        txtBookedCustomerName.Text = ""
-    End Sub
-
-    Private Sub btnInvoicedClearCustomer_Click(sender As Object, e As EventArgs) Handles btnInvoicedClearCustomer.Click
-        txtInvoicedCustomerCode.Text = ""
-        txtInvoicedCustomerName.Text = ""
-    End Sub
-
-    Private Sub btnInvoicedGetArticle_Click(sender As Object, e As EventArgs) Handles btnInvoicedGetArticle.Click
-        SelectArticle(txtInvoicedDesignNo)
-    End Sub
-
-    Private Sub btnPendingGetArticle_Click(sender As Object, e As EventArgs) Handles btnPendingGetArticle.Click
-        SelectArticle(txtPendingDesignNo)
-    End Sub
-
-    Private Sub SelectArticle(ByVal txtDesignNo As TextBox)
-        Dim frm As New dlgSearchItemsList
-        frm.logempcd = clsUser.UserName
-
-        Dim designNo As String = frm.ShowFrm()
-        If designNo.Trim <> "" Then
-            txtDesignNo.Text = frm.DesignNoList.Trim
-        End If
-    End Sub
-
-    Private Sub btnInvoicedClearArticle_Click(sender As Object, e As EventArgs) Handles btnInvoicedClearArticle.Click
-        txtInvoicedDesignNo.Text = ""
-    End Sub
-
-    Private Sub btnPendingClearArticle_Click(sender As Object, e As EventArgs) Handles btnPendingClearArticle.Click
-        txtPendingDesignNo.Text = ""
-    End Sub
 
     Private Sub btnMinimized_Click(sender As Object, e As EventArgs) Handles btnMinimized.Click
         Me.WindowState = FormWindowState.Minimized

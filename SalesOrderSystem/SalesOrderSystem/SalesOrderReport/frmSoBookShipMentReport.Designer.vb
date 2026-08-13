@@ -25,8 +25,17 @@ Partial Class frmSoBookShipMentReport
         Me.btnExit = New System.Windows.Forms.ToolStripButton()
         Me.tabReports = New System.Windows.Forms.TabControl()
         Me.tabGenerateReport = New System.Windows.Forms.TabPage()
-        Me.dgvGenerateReport = New System.Windows.Forms.DataGridView()
+        Me.lblGenerateDateFr = New System.Windows.Forms.Label()
+        Me.dtpGenerateDateFr = New System.Windows.Forms.DateTimePicker()
+        Me.lblGenerateDateTo = New System.Windows.Forms.Label()
+        Me.dtpGenerateDateTo = New System.Windows.Forms.DateTimePicker()
+        Me.lblGeneratePendFrom = New System.Windows.Forms.Label()
+        Me.dtpGeneratePendFrom = New System.Windows.Forms.DateTimePicker()
         Me.tabOrderBooked = New System.Windows.Forms.TabPage()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.dtpBookedDateFr = New System.Windows.Forms.DateTimePicker()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.dtpBookedDateTo = New System.Windows.Forms.DateTimePicker()
         Me.dgvOrderBooked = New System.Windows.Forms.DataGridView()
         Me.grpBookedCustomer = New System.Windows.Forms.GroupBox()
         Me.btnBookedClearCustomer = New System.Windows.Forms.Button()
@@ -36,11 +45,11 @@ Partial Class frmSoBookShipMentReport
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.grpBookedDate = New System.Windows.Forms.GroupBox()
-        Me.dtpBookedDateTo = New System.Windows.Forms.DateTimePicker()
-        Me.dtpBookedDateFr = New System.Windows.Forms.DateTimePicker()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
         Me.tabOrderInvoiced = New System.Windows.Forms.TabPage()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.dtpInvoicedDateFr = New System.Windows.Forms.DateTimePicker()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.dtpInvoicedDateTo = New System.Windows.Forms.DateTimePicker()
         Me.dgvOrderInvoiced = New System.Windows.Forms.DataGridView()
         Me.grpInvoicedArticle = New System.Windows.Forms.GroupBox()
         Me.btnInvoicedClearArticle = New System.Windows.Forms.Button()
@@ -61,9 +70,13 @@ Partial Class frmSoBookShipMentReport
         Me.rbInvoicedLocal = New System.Windows.Forms.RadioButton()
         Me.txtInvoicedYearTo = New System.Windows.Forms.TextBox()
         Me.txtInvoicedYearFr = New System.Windows.Forms.TextBox()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.Label8 = New System.Windows.Forms.Label()
         Me.tabOrderPending = New System.Windows.Forms.TabPage()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.dtpPendingDateFr = New System.Windows.Forms.DateTimePicker()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.dtpPendingDateTo = New System.Windows.Forms.DateTimePicker()
+        Me.lblPendingPendFrom = New System.Windows.Forms.Label()
+        Me.dtpPendingPendFrom = New System.Windows.Forms.DateTimePicker()
         Me.dgvOrderPending = New System.Windows.Forms.DataGridView()
         Me.grpPendingCondition = New System.Windows.Forms.GroupBox()
         Me.rbPendingDateCustDue = New System.Windows.Forms.RadioButton()
@@ -88,19 +101,14 @@ Partial Class frmSoBookShipMentReport
         Me.txtPendingDesignNo = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.grpPendingDate = New System.Windows.Forms.GroupBox()
-        Me.dtpPendingDateTo = New System.Windows.Forms.DateTimePicker()
-        Me.dtpPendingDateFr = New System.Windows.Forms.DateTimePicker()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
         Me.lblNote = New System.Windows.Forms.Label()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.ToolStrip1.SuspendLayout()
         Me.tabReports.SuspendLayout()
         Me.tabGenerateReport.SuspendLayout()
-        CType(Me.dgvGenerateReport, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabOrderBooked.SuspendLayout()
         CType(Me.dgvOrderBooked, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpBookedCustomer.SuspendLayout()
-        Me.grpBookedDate.SuspendLayout()
         Me.tabOrderInvoiced.SuspendLayout()
         CType(Me.dgvOrderInvoiced, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpInvoicedArticle.SuspendLayout()
@@ -110,7 +118,7 @@ Partial Class frmSoBookShipMentReport
         CType(Me.dgvOrderPending, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpPendingCondition.SuspendLayout()
         Me.grpPendingArticle.SuspendLayout()
-        Me.grpPendingDate.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'ToolStrip1
@@ -142,7 +150,7 @@ Partial Class frmSoBookShipMentReport
         Me.btnExportToExcel.Image = Global.SalesOrderSystem.My.Resources.Resources.ExcelWorksheetView_16x
         Me.btnExportToExcel.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnExportToExcel.Name = "btnExportToExcel"
-        Me.btnExportToExcel.Size = New System.Drawing.Size(53, 22)
+        Me.btnExportToExcel.Size = New System.Drawing.Size(54, 22)
         Me.btnExportToExcel.Text = "Excel"
         '
         'btnMinimized
@@ -150,7 +158,7 @@ Partial Class frmSoBookShipMentReport
         Me.btnMinimized.Image = Global.SalesOrderSystem.My.Resources.Resources.Expand_16x
         Me.btnMinimized.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnMinimized.Name = "btnMinimized"
-        Me.btnMinimized.Size = New System.Drawing.Size(82, 22)
+        Me.btnMinimized.Size = New System.Drawing.Size(83, 22)
         Me.btnMinimized.Text = "Minimized"
         '
         'btnExit
@@ -158,7 +166,7 @@ Partial Class frmSoBookShipMentReport
         Me.btnExit.Image = Global.SalesOrderSystem.My.Resources.Resources.Exit_16x
         Me.btnExit.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnExit.Name = "btnExit"
-        Me.btnExit.Size = New System.Drawing.Size(45, 22)
+        Me.btnExit.Size = New System.Drawing.Size(46, 22)
         Me.btnExit.Text = "E&xit"
         '
         'tabReports
@@ -167,43 +175,85 @@ Partial Class frmSoBookShipMentReport
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.tabReports.Controls.Add(Me.tabGenerateReport)
-        Me.tabReports.Controls.Add(Me.tabOrderBooked)
-        Me.tabReports.Controls.Add(Me.tabOrderInvoiced)
-        Me.tabReports.Controls.Add(Me.tabOrderPending)
         Me.tabReports.Location = New System.Drawing.Point(8, 32)
         Me.tabReports.Name = "tabReports"
         Me.tabReports.SelectedIndex = 0
-        Me.tabReports.Size = New System.Drawing.Size(578, 520)
+        Me.tabReports.Size = New System.Drawing.Size(574, 221)
         Me.tabReports.TabIndex = 1
         '
         'tabGenerateReport
         '
-        Me.tabGenerateReport.Controls.Add(Me.dgvGenerateReport)
+        Me.tabGenerateReport.Controls.Add(Me.GroupBox1)
+        Me.tabGenerateReport.Controls.Add(Me.lblGeneratePendFrom)
+        Me.tabGenerateReport.Controls.Add(Me.dtpGeneratePendFrom)
         Me.tabGenerateReport.Location = New System.Drawing.Point(4, 22)
         Me.tabGenerateReport.Name = "tabGenerateReport"
         Me.tabGenerateReport.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabGenerateReport.Size = New System.Drawing.Size(570, 494)
+        Me.tabGenerateReport.Size = New System.Drawing.Size(566, 195)
         Me.tabGenerateReport.TabIndex = 0
         Me.tabGenerateReport.Text = "Generate Report"
         Me.tabGenerateReport.UseVisualStyleBackColor = True
         '
-        'dgvGenerateReport
+        'lblGenerateDateFr
         '
-        Me.dgvGenerateReport.AllowUserToAddRows = False
-        Me.dgvGenerateReport.AllowUserToDeleteRows = False
-        Me.dgvGenerateReport.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.dgvGenerateReport.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
-        Me.dgvGenerateReport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvGenerateReport.Location = New System.Drawing.Point(16, 16)
-        Me.dgvGenerateReport.Name = "dgvGenerateReport"
-        Me.dgvGenerateReport.ReadOnly = True
-        Me.dgvGenerateReport.Size = New System.Drawing.Size(536, 466)
-        Me.dgvGenerateReport.TabIndex = 0
+        Me.lblGenerateDateFr.AutoSize = True
+        Me.lblGenerateDateFr.Location = New System.Drawing.Point(14, 19)
+        Me.lblGenerateDateFr.Name = "lblGenerateDateFr"
+        Me.lblGenerateDateFr.Size = New System.Drawing.Size(30, 13)
+        Me.lblGenerateDateFr.TabIndex = 0
+        Me.lblGenerateDateFr.Text = "From"
+        '
+        'dtpGenerateDateFr
+        '
+        Me.dtpGenerateDateFr.CustomFormat = "dd/MM/yyyy"
+        Me.dtpGenerateDateFr.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtpGenerateDateFr.Location = New System.Drawing.Point(99, 25)
+        Me.dtpGenerateDateFr.Name = "dtpGenerateDateFr"
+        Me.dtpGenerateDateFr.Size = New System.Drawing.Size(112, 20)
+        Me.dtpGenerateDateFr.TabIndex = 1
+        '
+        'lblGenerateDateTo
+        '
+        Me.lblGenerateDateTo.AutoSize = True
+        Me.lblGenerateDateTo.Location = New System.Drawing.Point(14, 55)
+        Me.lblGenerateDateTo.Name = "lblGenerateDateTo"
+        Me.lblGenerateDateTo.Size = New System.Drawing.Size(20, 13)
+        Me.lblGenerateDateTo.TabIndex = 2
+        Me.lblGenerateDateTo.Text = "To"
+        '
+        'dtpGenerateDateTo
+        '
+        Me.dtpGenerateDateTo.CustomFormat = "dd/MM/yyyy"
+        Me.dtpGenerateDateTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtpGenerateDateTo.Location = New System.Drawing.Point(99, 61)
+        Me.dtpGenerateDateTo.Name = "dtpGenerateDateTo"
+        Me.dtpGenerateDateTo.Size = New System.Drawing.Size(112, 20)
+        Me.dtpGenerateDateTo.TabIndex = 3
+        '
+        'lblGeneratePendFrom
+        '
+        Me.lblGeneratePendFrom.AutoSize = True
+        Me.lblGeneratePendFrom.Location = New System.Drawing.Point(21, 123)
+        Me.lblGeneratePendFrom.Name = "lblGeneratePendFrom"
+        Me.lblGeneratePendFrom.Size = New System.Drawing.Size(72, 13)
+        Me.lblGeneratePendFrom.TabIndex = 4
+        Me.lblGeneratePendFrom.Text = "Pending From"
+        '
+        'dtpGeneratePendFrom
+        '
+        Me.dtpGeneratePendFrom.CustomFormat = "dd/MM/yyyy"
+        Me.dtpGeneratePendFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtpGeneratePendFrom.Location = New System.Drawing.Point(112, 122)
+        Me.dtpGeneratePendFrom.Name = "dtpGeneratePendFrom"
+        Me.dtpGeneratePendFrom.Size = New System.Drawing.Size(112, 20)
+        Me.dtpGeneratePendFrom.TabIndex = 5
         '
         'tabOrderBooked
         '
+        Me.tabOrderBooked.Controls.Add(Me.Label3)
+        Me.tabOrderBooked.Controls.Add(Me.dtpBookedDateFr)
+        Me.tabOrderBooked.Controls.Add(Me.Label2)
+        Me.tabOrderBooked.Controls.Add(Me.dtpBookedDateTo)
         Me.tabOrderBooked.Controls.Add(Me.dgvOrderBooked)
         Me.tabOrderBooked.Controls.Add(Me.grpBookedCustomer)
         Me.tabOrderBooked.Controls.Add(Me.grpBookedDate)
@@ -215,6 +265,42 @@ Partial Class frmSoBookShipMentReport
         Me.tabOrderBooked.Text = "Order Booked"
         Me.tabOrderBooked.UseVisualStyleBackColor = True
         '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(16, 14)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(30, 13)
+        Me.Label3.TabIndex = 0
+        Me.Label3.Text = "From"
+        '
+        'dtpBookedDateFr
+        '
+        Me.dtpBookedDateFr.CustomFormat = "dd/MM/yyyy"
+        Me.dtpBookedDateFr.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtpBookedDateFr.Location = New System.Drawing.Point(64, 10)
+        Me.dtpBookedDateFr.Name = "dtpBookedDateFr"
+        Me.dtpBookedDateFr.Size = New System.Drawing.Size(96, 20)
+        Me.dtpBookedDateFr.TabIndex = 1
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(184, 14)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(20, 13)
+        Me.Label2.TabIndex = 2
+        Me.Label2.Text = "To"
+        '
+        'dtpBookedDateTo
+        '
+        Me.dtpBookedDateTo.CustomFormat = "dd/MM/yyyy"
+        Me.dtpBookedDateTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtpBookedDateTo.Location = New System.Drawing.Point(216, 10)
+        Me.dtpBookedDateTo.Name = "dtpBookedDateTo"
+        Me.dtpBookedDateTo.Size = New System.Drawing.Size(96, 20)
+        Me.dtpBookedDateTo.TabIndex = 3
+        '
         'dgvOrderBooked
         '
         Me.dgvOrderBooked.AllowUserToAddRows = False
@@ -224,10 +310,10 @@ Partial Class frmSoBookShipMentReport
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvOrderBooked.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
         Me.dgvOrderBooked.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvOrderBooked.Location = New System.Drawing.Point(16, 184)
+        Me.dgvOrderBooked.Location = New System.Drawing.Point(8, 40)
         Me.dgvOrderBooked.Name = "dgvOrderBooked"
         Me.dgvOrderBooked.ReadOnly = True
-        Me.dgvOrderBooked.Size = New System.Drawing.Size(536, 298)
+        Me.dgvOrderBooked.Size = New System.Drawing.Size(554, 446)
         Me.dgvOrderBooked.TabIndex = 2
         '
         'grpBookedCustomer
@@ -246,6 +332,7 @@ Partial Class frmSoBookShipMentReport
         Me.grpBookedCustomer.TabIndex = 1
         Me.grpBookedCustomer.TabStop = False
         Me.grpBookedCustomer.Text = "Customer"
+        Me.grpBookedCustomer.Visible = False
         '
         'btnBookedClearCustomer
         '
@@ -302,55 +389,20 @@ Partial Class frmSoBookShipMentReport
         '
         Me.grpBookedDate.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.grpBookedDate.Controls.Add(Me.dtpBookedDateTo)
-        Me.grpBookedDate.Controls.Add(Me.dtpBookedDateFr)
-        Me.grpBookedDate.Controls.Add(Me.Label2)
-        Me.grpBookedDate.Controls.Add(Me.Label3)
         Me.grpBookedDate.Location = New System.Drawing.Point(16, 16)
         Me.grpBookedDate.Name = "grpBookedDate"
         Me.grpBookedDate.Size = New System.Drawing.Size(536, 64)
         Me.grpBookedDate.TabIndex = 0
         Me.grpBookedDate.TabStop = False
         Me.grpBookedDate.Text = "S/O Date"
-        '
-        'dtpBookedDateTo
-        '
-        Me.dtpBookedDateTo.CustomFormat = "dd/MM/yyyy"
-        Me.dtpBookedDateTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpBookedDateTo.Location = New System.Drawing.Point(272, 24)
-        Me.dtpBookedDateTo.Name = "dtpBookedDateTo"
-        Me.dtpBookedDateTo.Size = New System.Drawing.Size(96, 20)
-        Me.dtpBookedDateTo.TabIndex = 3
-        '
-        'dtpBookedDateFr
-        '
-        Me.dtpBookedDateFr.CustomFormat = "dd/MM/yyyy"
-        Me.dtpBookedDateFr.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpBookedDateFr.Location = New System.Drawing.Point(96, 24)
-        Me.dtpBookedDateFr.Name = "dtpBookedDateFr"
-        Me.dtpBookedDateFr.Size = New System.Drawing.Size(96, 20)
-        Me.dtpBookedDateFr.TabIndex = 1
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(232, 27)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(20, 13)
-        Me.Label2.TabIndex = 2
-        Me.Label2.Text = "To"
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(16, 27)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(30, 13)
-        Me.Label3.TabIndex = 0
-        Me.Label3.Text = "From"
+        Me.grpBookedDate.Visible = False
         '
         'tabOrderInvoiced
         '
+        Me.tabOrderInvoiced.Controls.Add(Me.Label8)
+        Me.tabOrderInvoiced.Controls.Add(Me.dtpInvoicedDateFr)
+        Me.tabOrderInvoiced.Controls.Add(Me.Label7)
+        Me.tabOrderInvoiced.Controls.Add(Me.dtpInvoicedDateTo)
         Me.tabOrderInvoiced.Controls.Add(Me.dgvOrderInvoiced)
         Me.tabOrderInvoiced.Controls.Add(Me.grpInvoicedArticle)
         Me.tabOrderInvoiced.Controls.Add(Me.grpInvoicedCustomer)
@@ -363,6 +415,42 @@ Partial Class frmSoBookShipMentReport
         Me.tabOrderInvoiced.Text = "Order Invoiced"
         Me.tabOrderInvoiced.UseVisualStyleBackColor = True
         '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(16, 14)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(30, 13)
+        Me.Label8.TabIndex = 0
+        Me.Label8.Text = "From"
+        '
+        'dtpInvoicedDateFr
+        '
+        Me.dtpInvoicedDateFr.CustomFormat = "dd/MM/yyyy"
+        Me.dtpInvoicedDateFr.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtpInvoicedDateFr.Location = New System.Drawing.Point(64, 10)
+        Me.dtpInvoicedDateFr.Name = "dtpInvoicedDateFr"
+        Me.dtpInvoicedDateFr.Size = New System.Drawing.Size(112, 20)
+        Me.dtpInvoicedDateFr.TabIndex = 1
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(184, 14)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(20, 13)
+        Me.Label7.TabIndex = 2
+        Me.Label7.Text = "To"
+        '
+        'dtpInvoicedDateTo
+        '
+        Me.dtpInvoicedDateTo.CustomFormat = "dd/MM/yyyy"
+        Me.dtpInvoicedDateTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtpInvoicedDateTo.Location = New System.Drawing.Point(216, 10)
+        Me.dtpInvoicedDateTo.Name = "dtpInvoicedDateTo"
+        Me.dtpInvoicedDateTo.Size = New System.Drawing.Size(112, 20)
+        Me.dtpInvoicedDateTo.TabIndex = 3
+        '
         'dgvOrderInvoiced
         '
         Me.dgvOrderInvoiced.AllowUserToAddRows = False
@@ -372,10 +460,10 @@ Partial Class frmSoBookShipMentReport
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvOrderInvoiced.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
         Me.dgvOrderInvoiced.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvOrderInvoiced.Location = New System.Drawing.Point(16, 256)
+        Me.dgvOrderInvoiced.Location = New System.Drawing.Point(8, 40)
         Me.dgvOrderInvoiced.Name = "dgvOrderInvoiced"
         Me.dgvOrderInvoiced.ReadOnly = True
-        Me.dgvOrderInvoiced.Size = New System.Drawing.Size(536, 226)
+        Me.dgvOrderInvoiced.Size = New System.Drawing.Size(554, 446)
         Me.dgvOrderInvoiced.TabIndex = 3
         '
         'grpInvoicedArticle
@@ -392,6 +480,7 @@ Partial Class frmSoBookShipMentReport
         Me.grpInvoicedArticle.TabIndex = 2
         Me.grpInvoicedArticle.TabStop = False
         Me.grpInvoicedArticle.Text = "Article"
+        Me.grpInvoicedArticle.Visible = False
         '
         'btnInvoicedClearArticle
         '
@@ -443,6 +532,7 @@ Partial Class frmSoBookShipMentReport
         Me.grpInvoicedCustomer.TabIndex = 1
         Me.grpInvoicedCustomer.TabStop = False
         Me.grpInvoicedCustomer.Text = "Customer"
+        Me.grpInvoicedCustomer.Visible = False
         '
         'btnInvoicedClearCustomer
         '
@@ -505,21 +595,20 @@ Partial Class frmSoBookShipMentReport
         Me.grpInvoicedOption.Controls.Add(Me.rbInvoicedLocal)
         Me.grpInvoicedOption.Controls.Add(Me.txtInvoicedYearTo)
         Me.grpInvoicedOption.Controls.Add(Me.txtInvoicedYearFr)
-        Me.grpInvoicedOption.Controls.Add(Me.Label7)
-        Me.grpInvoicedOption.Controls.Add(Me.Label8)
         Me.grpInvoicedOption.Location = New System.Drawing.Point(16, 16)
         Me.grpInvoicedOption.Name = "grpInvoicedOption"
         Me.grpInvoicedOption.Size = New System.Drawing.Size(536, 72)
         Me.grpInvoicedOption.TabIndex = 0
         Me.grpInvoicedOption.TabStop = False
         Me.grpInvoicedOption.Text = "Invoice"
+        Me.grpInvoicedOption.Visible = False
         '
         'chkInvoicedExclGMK
         '
         Me.chkInvoicedExclGMK.AutoSize = True
         Me.chkInvoicedExclGMK.Location = New System.Drawing.Point(376, 21)
         Me.chkInvoicedExclGMK.Name = "chkInvoicedExclGMK"
-        Me.chkInvoicedExclGMK.Size = New System.Drawing.Size(89, 17)
+        Me.chkInvoicedExclGMK.Size = New System.Drawing.Size(91, 17)
         Me.chkInvoicedExclGMK.TabIndex = 7
         Me.chkInvoicedExclGMK.Text = "Exclude GMK"
         Me.chkInvoicedExclGMK.UseVisualStyleBackColor = True
@@ -572,26 +661,14 @@ Partial Class frmSoBookShipMentReport
         Me.txtInvoicedYearFr.Size = New System.Drawing.Size(64, 20)
         Me.txtInvoicedYearFr.TabIndex = 1
         '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(16, 46)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(20, 13)
-        Me.Label7.TabIndex = 2
-        Me.Label7.Text = "To"
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(16, 22)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(30, 13)
-        Me.Label8.TabIndex = 0
-        Me.Label8.Text = "From"
-        '
         'tabOrderPending
         '
+        Me.tabOrderPending.Controls.Add(Me.Label6)
+        Me.tabOrderPending.Controls.Add(Me.dtpPendingDateFr)
+        Me.tabOrderPending.Controls.Add(Me.Label1)
+        Me.tabOrderPending.Controls.Add(Me.dtpPendingDateTo)
+        Me.tabOrderPending.Controls.Add(Me.lblPendingPendFrom)
+        Me.tabOrderPending.Controls.Add(Me.dtpPendingPendFrom)
         Me.tabOrderPending.Controls.Add(Me.dgvOrderPending)
         Me.tabOrderPending.Controls.Add(Me.grpPendingCondition)
         Me.tabOrderPending.Controls.Add(Me.grpPendingArticle)
@@ -604,6 +681,60 @@ Partial Class frmSoBookShipMentReport
         Me.tabOrderPending.Text = "Order Pending"
         Me.tabOrderPending.UseVisualStyleBackColor = True
         '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(16, 14)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(30, 13)
+        Me.Label6.TabIndex = 0
+        Me.Label6.Text = "From"
+        '
+        'dtpPendingDateFr
+        '
+        Me.dtpPendingDateFr.CustomFormat = "dd/MM/yyyy"
+        Me.dtpPendingDateFr.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtpPendingDateFr.Location = New System.Drawing.Point(64, 10)
+        Me.dtpPendingDateFr.Name = "dtpPendingDateFr"
+        Me.dtpPendingDateFr.Size = New System.Drawing.Size(112, 20)
+        Me.dtpPendingDateFr.TabIndex = 1
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(184, 14)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(20, 13)
+        Me.Label1.TabIndex = 2
+        Me.Label1.Text = "To"
+        '
+        'dtpPendingDateTo
+        '
+        Me.dtpPendingDateTo.CustomFormat = "dd/MM/yyyy"
+        Me.dtpPendingDateTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtpPendingDateTo.Location = New System.Drawing.Point(216, 10)
+        Me.dtpPendingDateTo.Name = "dtpPendingDateTo"
+        Me.dtpPendingDateTo.Size = New System.Drawing.Size(112, 20)
+        Me.dtpPendingDateTo.TabIndex = 3
+        '
+        'lblPendingPendFrom
+        '
+        Me.lblPendingPendFrom.AutoSize = True
+        Me.lblPendingPendFrom.Location = New System.Drawing.Point(336, 14)
+        Me.lblPendingPendFrom.Name = "lblPendingPendFrom"
+        Me.lblPendingPendFrom.Size = New System.Drawing.Size(72, 13)
+        Me.lblPendingPendFrom.TabIndex = 4
+        Me.lblPendingPendFrom.Text = "Pending From"
+        '
+        'dtpPendingPendFrom
+        '
+        Me.dtpPendingPendFrom.CustomFormat = "dd/MM/yyyy"
+        Me.dtpPendingPendFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtpPendingPendFrom.Location = New System.Drawing.Point(424, 10)
+        Me.dtpPendingPendFrom.Name = "dtpPendingPendFrom"
+        Me.dtpPendingPendFrom.Size = New System.Drawing.Size(112, 20)
+        Me.dtpPendingPendFrom.TabIndex = 5
+        '
         'dgvOrderPending
         '
         Me.dgvOrderPending.AllowUserToAddRows = False
@@ -613,10 +744,10 @@ Partial Class frmSoBookShipMentReport
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvOrderPending.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
         Me.dgvOrderPending.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvOrderPending.Location = New System.Drawing.Point(16, 288)
+        Me.dgvOrderPending.Location = New System.Drawing.Point(8, 40)
         Me.dgvOrderPending.Name = "dgvOrderPending"
         Me.dgvOrderPending.ReadOnly = True
-        Me.dgvOrderPending.Size = New System.Drawing.Size(536, 194)
+        Me.dgvOrderPending.Size = New System.Drawing.Size(554, 446)
         Me.dgvOrderPending.TabIndex = 3
         '
         'grpPendingCondition
@@ -645,13 +776,14 @@ Partial Class frmSoBookShipMentReport
         Me.grpPendingCondition.TabIndex = 2
         Me.grpPendingCondition.TabStop = False
         Me.grpPendingCondition.Text = "Condition"
+        Me.grpPendingCondition.Visible = False
         '
         'rbPendingDateCustDue
         '
         Me.rbPendingDateCustDue.AutoSize = True
         Me.rbPendingDateCustDue.Location = New System.Drawing.Point(160, 104)
         Me.rbPendingDateCustDue.Name = "rbPendingDateCustDue"
-        Me.rbPendingDateCustDue.Size = New System.Drawing.Size(87, 17)
+        Me.rbPendingDateCustDue.Size = New System.Drawing.Size(92, 17)
         Me.rbPendingDateCustDue.TabIndex = 15
         Me.rbPendingDateCustDue.Text = "Customer Due"
         Me.rbPendingDateCustDue.UseVisualStyleBackColor = True
@@ -662,7 +794,7 @@ Partial Class frmSoBookShipMentReport
         Me.rbPendingDateSO.Checked = True
         Me.rbPendingDateSO.Location = New System.Drawing.Point(88, 104)
         Me.rbPendingDateSO.Name = "rbPendingDateSO"
-        Me.rbPendingDateSO.Size = New System.Drawing.Size(42, 17)
+        Me.rbPendingDateSO.Size = New System.Drawing.Size(45, 17)
         Me.rbPendingDateSO.TabIndex = 14
         Me.rbPendingDateSO.TabStop = True
         Me.rbPendingDateSO.Text = "S/O"
@@ -673,7 +805,7 @@ Partial Class frmSoBookShipMentReport
         Me.Label17.AutoSize = True
         Me.Label17.Location = New System.Drawing.Point(16, 106)
         Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(42, 13)
+        Me.Label17.Size = New System.Drawing.Size(44, 13)
         Me.Label17.TabIndex = 13
         Me.Label17.Text = "Date Of"
         '
@@ -734,7 +866,7 @@ Partial Class frmSoBookShipMentReport
         Me.rbPendingSalesOnly.AutoSize = True
         Me.rbPendingSalesOnly.Location = New System.Drawing.Point(160, 51)
         Me.rbPendingSalesOnly.Name = "rbPendingSalesOnly"
-        Me.rbPendingSalesOnly.Size = New System.Drawing.Size(47, 17)
+        Me.rbPendingSalesOnly.Size = New System.Drawing.Size(46, 17)
         Me.rbPendingSalesOnly.TabIndex = 6
         Me.rbPendingSalesOnly.Text = "Only"
         Me.rbPendingSalesOnly.UseVisualStyleBackColor = True
@@ -756,7 +888,7 @@ Partial Class frmSoBookShipMentReport
         Me.Label14.AutoSize = True
         Me.Label14.Location = New System.Drawing.Point(16, 53)
         Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(63, 13)
+        Me.Label14.Size = New System.Drawing.Size(65, 13)
         Me.Label14.TabIndex = 4
         Me.Label14.Text = "Salesperson"
         '
@@ -786,7 +918,7 @@ Partial Class frmSoBookShipMentReport
         Me.rbPendingNotClosed.Checked = True
         Me.rbPendingNotClosed.Location = New System.Drawing.Point(88, 24)
         Me.rbPendingNotClosed.Name = "rbPendingNotClosed"
-        Me.rbPendingNotClosed.Size = New System.Drawing.Size(43, 17)
+        Me.rbPendingNotClosed.Size = New System.Drawing.Size(42, 17)
         Me.rbPendingNotClosed.TabIndex = 1
         Me.rbPendingNotClosed.TabStop = True
         Me.rbPendingNotClosed.Text = "Not"
@@ -815,6 +947,7 @@ Partial Class frmSoBookShipMentReport
         Me.grpPendingArticle.TabIndex = 1
         Me.grpPendingArticle.TabStop = False
         Me.grpPendingArticle.Text = "Article"
+        Me.grpPendingArticle.Visible = False
         '
         'btnPendingClearArticle
         '
@@ -854,62 +987,36 @@ Partial Class frmSoBookShipMentReport
         '
         Me.grpPendingDate.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.grpPendingDate.Controls.Add(Me.dtpPendingDateTo)
-        Me.grpPendingDate.Controls.Add(Me.dtpPendingDateFr)
-        Me.grpPendingDate.Controls.Add(Me.Label1)
-        Me.grpPendingDate.Controls.Add(Me.Label6)
         Me.grpPendingDate.Location = New System.Drawing.Point(16, 16)
         Me.grpPendingDate.Name = "grpPendingDate"
         Me.grpPendingDate.Size = New System.Drawing.Size(536, 56)
         Me.grpPendingDate.TabIndex = 0
         Me.grpPendingDate.TabStop = False
         Me.grpPendingDate.Text = "Date"
-        '
-        'dtpPendingDateTo
-        '
-        Me.dtpPendingDateTo.CustomFormat = "dd/MM/yyyy"
-        Me.dtpPendingDateTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpPendingDateTo.Location = New System.Drawing.Point(272, 20)
-        Me.dtpPendingDateTo.Name = "dtpPendingDateTo"
-        Me.dtpPendingDateTo.Size = New System.Drawing.Size(96, 20)
-        Me.dtpPendingDateTo.TabIndex = 3
-        '
-        'dtpPendingDateFr
-        '
-        Me.dtpPendingDateFr.CustomFormat = "dd/MM/yyyy"
-        Me.dtpPendingDateFr.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpPendingDateFr.Location = New System.Drawing.Point(96, 20)
-        Me.dtpPendingDateFr.Name = "dtpPendingDateFr"
-        Me.dtpPendingDateFr.Size = New System.Drawing.Size(96, 20)
-        Me.dtpPendingDateFr.TabIndex = 1
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(232, 23)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(20, 13)
-        Me.Label1.TabIndex = 2
-        Me.Label1.Text = "To"
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(16, 23)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(30, 13)
-        Me.Label6.TabIndex = 0
-        Me.Label6.Text = "From"
+        Me.grpPendingDate.Visible = False
         '
         'lblNote
         '
         Me.lblNote.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.lblNote.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.lblNote.Location = New System.Drawing.Point(12, 560)
+        Me.lblNote.Location = New System.Drawing.Point(12, 267)
         Me.lblNote.Name = "lblNote"
         Me.lblNote.Size = New System.Drawing.Size(552, 32)
         Me.lblNote.TabIndex = 2
         Me.lblNote.Text = "* This report may take a long time to preview. Please wait a few minutes."
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.dtpGenerateDateFr)
+        Me.GroupBox1.Controls.Add(Me.lblGenerateDateFr)
+        Me.GroupBox1.Controls.Add(Me.dtpGenerateDateTo)
+        Me.GroupBox1.Controls.Add(Me.lblGenerateDateTo)
+        Me.GroupBox1.Location = New System.Drawing.Point(13, 14)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(237, 100)
+        Me.GroupBox1.TabIndex = 6
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "S/O && Invoice Date range"
         '
         'frmSoBookShipMentReport
         '
@@ -919,9 +1026,6 @@ Partial Class frmSoBookShipMentReport
         Me.Controls.Add(Me.lblNote)
         Me.Controls.Add(Me.tabReports)
         Me.Controls.Add(Me.ToolStrip1)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable
-        Me.MaximizeBox = True
-        Me.MinimizeBox = True
         Me.MinimumSize = New System.Drawing.Size(610, 636)
         Me.Name = "frmSoBookShipMentReport"
         Me.Text = "S/O Book Shipment"
@@ -930,14 +1034,14 @@ Partial Class frmSoBookShipMentReport
         Me.ToolStrip1.PerformLayout()
         Me.tabReports.ResumeLayout(False)
         Me.tabGenerateReport.ResumeLayout(False)
-        CType(Me.dgvGenerateReport, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tabGenerateReport.PerformLayout()
         Me.tabOrderBooked.ResumeLayout(False)
+        Me.tabOrderBooked.PerformLayout()
         CType(Me.dgvOrderBooked, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpBookedCustomer.ResumeLayout(False)
         Me.grpBookedCustomer.PerformLayout()
-        Me.grpBookedDate.ResumeLayout(False)
-        Me.grpBookedDate.PerformLayout()
         Me.tabOrderInvoiced.ResumeLayout(False)
+        Me.tabOrderInvoiced.PerformLayout()
         CType(Me.dgvOrderInvoiced, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpInvoicedArticle.ResumeLayout(False)
         Me.grpInvoicedArticle.PerformLayout()
@@ -946,13 +1050,14 @@ Partial Class frmSoBookShipMentReport
         Me.grpInvoicedOption.ResumeLayout(False)
         Me.grpInvoicedOption.PerformLayout()
         Me.tabOrderPending.ResumeLayout(False)
+        Me.tabOrderPending.PerformLayout()
         CType(Me.dgvOrderPending, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpPendingCondition.ResumeLayout(False)
         Me.grpPendingCondition.PerformLayout()
         Me.grpPendingArticle.ResumeLayout(False)
         Me.grpPendingArticle.PerformLayout()
-        Me.grpPendingDate.ResumeLayout(False)
-        Me.grpPendingDate.PerformLayout()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -966,7 +1071,12 @@ Partial Class frmSoBookShipMentReport
     Friend WithEvents btnExit As System.Windows.Forms.ToolStripButton
     Friend WithEvents tabReports As System.Windows.Forms.TabControl
     Friend WithEvents tabGenerateReport As System.Windows.Forms.TabPage
-    Friend WithEvents dgvGenerateReport As System.Windows.Forms.DataGridView
+    Friend WithEvents lblGenerateDateFr As System.Windows.Forms.Label
+    Friend WithEvents dtpGenerateDateFr As System.Windows.Forms.DateTimePicker
+    Friend WithEvents lblGenerateDateTo As System.Windows.Forms.Label
+    Friend WithEvents dtpGenerateDateTo As System.Windows.Forms.DateTimePicker
+    Friend WithEvents lblGeneratePendFrom As System.Windows.Forms.Label
+    Friend WithEvents dtpGeneratePendFrom As System.Windows.Forms.DateTimePicker
     Friend WithEvents tabOrderBooked As System.Windows.Forms.TabPage
     Friend WithEvents dgvOrderBooked As System.Windows.Forms.DataGridView
     Friend WithEvents grpBookedCustomer As System.Windows.Forms.GroupBox
@@ -1004,6 +1114,8 @@ Partial Class frmSoBookShipMentReport
     Friend WithEvents txtInvoicedYearFr As System.Windows.Forms.TextBox
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents Label8 As System.Windows.Forms.Label
+    Friend WithEvents dtpInvoicedDateFr As System.Windows.Forms.DateTimePicker
+    Friend WithEvents dtpInvoicedDateTo As System.Windows.Forms.DateTimePicker
     Friend WithEvents tabOrderPending As System.Windows.Forms.TabPage
     Friend WithEvents dgvOrderPending As System.Windows.Forms.DataGridView
     Friend WithEvents grpPendingCondition As System.Windows.Forms.GroupBox
@@ -1033,5 +1145,8 @@ Partial Class frmSoBookShipMentReport
     Friend WithEvents dtpPendingDateFr As System.Windows.Forms.DateTimePicker
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Label6 As System.Windows.Forms.Label
+    Friend WithEvents lblPendingPendFrom As System.Windows.Forms.Label
+    Friend WithEvents dtpPendingPendFrom As System.Windows.Forms.DateTimePicker
     Friend WithEvents lblNote As System.Windows.Forms.Label
+    Friend WithEvents GroupBox1 As GroupBox
 End Class

@@ -43,11 +43,11 @@ Public Class frmSoBookShipMentReport
     End Sub
 
     Private Sub ConfigureGenerateTab()
-        If dgvGenerateReport Is Nothing Then
-            Return
-        End If
+        'If dgvGenerateReport Is Nothing Then
+        '     Return
+        '  End If
 
-        wbGenerateReport.Size = New Size(tabGenerateReport.ClientSize.Width - 16, tabGenerateReport.ClientSize.Height - 48)
+        ' wbGenerateReport.Size = New Size(tabGenerateReport.ClientSize.Width - 16, tabGenerateReport.ClientSize.Height - 48)
     End Sub
 
     Private Sub tabReports_Resize(sender As Object, e As EventArgs) Handles tabReports.Resize
@@ -111,7 +111,7 @@ Public Class frmSoBookShipMentReport
         Dim data As New DataTable
         data.Columns.Add("html", GetType(String))
         data.Rows.Add(html)
-        dgvGenerateReport.DataSource = data
+        'dgvGenerateReport.DataSource = data
 
         Dim htmlPath As String = SaveGenerateHtmlFile(html)
         OpenFileInDefaultApp(htmlPath)

@@ -153,6 +153,7 @@ Partial Class frmSoBookShipMentReport
         Me.btnExportToExcel.Name = "btnExportToExcel"
         Me.btnExportToExcel.Size = New System.Drawing.Size(54, 22)
         Me.btnExportToExcel.Text = "Excel"
+        Me.btnExportToExcel.Visible = False
         '
         'btnMinimized
         '

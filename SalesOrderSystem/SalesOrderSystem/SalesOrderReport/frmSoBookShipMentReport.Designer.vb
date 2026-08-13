@@ -136,6 +136,7 @@ Partial Class frmSoBookShipMentReport
         Me.btnSearch.Name = "btnSearch"
         Me.btnSearch.Size = New System.Drawing.Size(62, 22)
         Me.btnSearch.Text = "&Search"
+        Me.btnSearch.Visible = False
         '
         'btnPrint
         '

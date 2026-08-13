@@ -1193,6 +1193,14 @@ Public Class frmMainmenu
         frm.MdiParent = Me
         frm.Show()
     End Sub
+
+    Private Sub SOBookShipmentToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles menuSalesOrder_Other_SOBookShipment.Click
+        Dim frm As New frmSoBookShipMentReport
+        frm.UserInfo = clsUser
+        frm.MdiParent = Me
+        frm.Show()
+    End Sub
+
     Private Sub tsmnExportInvoiceCommision_Click(sender As Object, e As EventArgs) Handles tsmnExportInvoiceCommision.Click
         'Writen By  : Sitthana 20210901
 

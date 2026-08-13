@@ -35,6 +35,7 @@ _ReSharper*/
 # Compressed files
 *.7z
 *.zip
+*.rar
 
 # Claude Code
 .claude/

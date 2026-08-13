@@ -59,6 +59,7 @@ Partial Class frmMainmenu
         Me.menuSalesOrder_Other_SOCalendar = New System.Windows.Forms.ToolStripMenuItem()
         Me.menuSalesOrder_Other_SOSummaryByYear = New System.Windows.Forms.ToolStripMenuItem()
         Me.menuSalesOrder_Other_SONotClosedPending = New System.Windows.Forms.ToolStripMenuItem()
+        Me.menuSalesOrder_Other_SOBookShipment = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsmnExportInvoiceCommision = New System.Windows.Forms.ToolStripMenuItem()
         Me.QuotationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PDRToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -404,10 +405,10 @@ Partial Class frmMainmenu
         '
         'menuSalesOrder_Other
         '
-        Me.menuSalesOrder_Other.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.menuSalesOrder_Other_SOInvControl, Me.menuSalesOrder_Other_SOMonthly, Me.menuSalesOrder_Other_SODelivery, Me.menuSalesOrder_Other_SODeliveryPlan, Me.menuSalesOrder_Other_SOStatusCustomer, Me.menuSalesOrder_Other_SOStatusAgent, Me.menuSalesOrder_Other_SOStatusEmployee, Me.menuSalesOrder_Other_SOSummary, Me.menuSalesOrder_Other_STSummary, Me.menuSalesOrder_Other_SOTraceReport, Me.menuSalesOrder_Other_SalesPerformance, Me.menuSalesOrder_Other_PriceHistory, Me.menuSalesOrder_Other_SalesAmountCompare, Me.menuSalesOrder_Other_SOCalendar, Me.menuSalesOrder_Other_SOSummaryByYear, Me.menuSalesOrder_Other_SONotClosedPending, Me.tsmnExportInvoiceCommision})
+        Me.menuSalesOrder_Other.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.menuSalesOrder_Other_SOInvControl, Me.menuSalesOrder_Other_SOMonthly, Me.menuSalesOrder_Other_SODelivery, Me.menuSalesOrder_Other_SODeliveryPlan, Me.menuSalesOrder_Other_SOStatusCustomer, Me.menuSalesOrder_Other_SOStatusAgent, Me.menuSalesOrder_Other_SOStatusEmployee, Me.menuSalesOrder_Other_SOSummary, Me.menuSalesOrder_Other_STSummary, Me.menuSalesOrder_Other_SOTraceReport, Me.menuSalesOrder_Other_SalesPerformance, Me.menuSalesOrder_Other_PriceHistory, Me.menuSalesOrder_Other_SalesAmountCompare, Me.menuSalesOrder_Other_SOCalendar, Me.menuSalesOrder_Other_SOSummaryByYear, Me.menuSalesOrder_Other_SONotClosedPending, Me.menuSalesOrder_Other_SOBookShipment, Me.tsmnExportInvoiceCommision})
         Me.menuSalesOrder_Other.Name = "menuSalesOrder_Other"
         Me.menuSalesOrder_Other.Size = New System.Drawing.Size(200, 22)
-        Me.menuSalesOrder_Other.Text = "Other Reports"
+        Me.menuSalesOrder_Other.Text = "Report"
         '
         'menuSalesOrder_Other_SOInvControl
         '
@@ -504,6 +505,12 @@ Partial Class frmMainmenu
         Me.menuSalesOrder_Other_SONotClosedPending.Name = "menuSalesOrder_Other_SONotClosedPending"
         Me.menuSalesOrder_Other_SONotClosedPending.Size = New System.Drawing.Size(213, 22)
         Me.menuSalesOrder_Other_SONotClosedPending.Text = "S/O Not Closed (Pending)"
+        '
+        'menuSalesOrder_Other_SOBookShipment
+        '
+        Me.menuSalesOrder_Other_SOBookShipment.Name = "menuSalesOrder_Other_SOBookShipment"
+        Me.menuSalesOrder_Other_SOBookShipment.Size = New System.Drawing.Size(213, 22)
+        Me.menuSalesOrder_Other_SOBookShipment.Text = "S/O Book Shipment"
         '
         'tsmnExportInvoiceCommision
         '
@@ -1943,6 +1950,7 @@ Partial Class frmMainmenu
     Friend WithEvents GreigePDFOnhandToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents KOSchedulePlanDetailsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents menuSalesOrder_Other_SONotClosedPending As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents menuSalesOrder_Other_SOBookShipment As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents GreigeOnhandByDesignToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents DyedOutFromSampleToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem

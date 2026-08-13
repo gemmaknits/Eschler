@@ -37,7 +37,7 @@
     <MinimumRequiredVersion>1.0.0.158</MinimumRequiredVersion>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>1029</ApplicationRevision>
+    <ApplicationRevision>1031</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -623,6 +623,12 @@
       <DependentUpon>frmExpInvoiceCommision.vb</DependentUpon>
     </Compile>
     <Compile Include="SalesOrderReport\frmExpInvoiceCommision.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SalesOrderReport\frmSoBookShipMentReport.Designer.vb">
+      <DependentUpon>frmSoBookShipMentReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SalesOrderReport\frmSoBookShipMentReport.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="SalesOrderReport\frmSOItemHadInvoice.Designer.vb">
@@ -1887,6 +1893,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SalesOrderReport\frmExpInvoiceCommision.resx">
       <DependentUpon>frmExpInvoiceCommision.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SalesOrderReport\frmSoBookShipMentReport.resx">
+      <DependentUpon>frmSoBookShipMentReport.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SalesOrderReport\frmSOItemHadInvoice.resx">
       <DependentUpon>frmSOItemHadInvoice.vb</DependentUpon>

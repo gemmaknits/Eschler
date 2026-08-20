@@ -959,6 +959,12 @@
     <Compile Include="SalesOrderForm\frmSalesOrderClose.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="StockReport\frmStockSummary.designer.vb">
+      <DependentUpon>frmStockSummary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="StockReport\frmStockSummary.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="STOrderClosingForm\frmSTOrderClosing.Designer.vb">
       <DependentUpon>frmSTOrderClosing.vb</DependentUpon>
     </Compile>

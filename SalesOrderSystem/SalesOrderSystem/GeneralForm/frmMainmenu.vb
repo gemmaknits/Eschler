@@ -1955,4 +1955,11 @@ Public Class frmMainmenu
         frm.MdiParent = Me
         frm.Show()
     End Sub
+
+    Private Sub tsmiStockSummary_Click(sender As Object, e As EventArgs) Handles tsmiStockSummary.Click
+        Dim frm As New frmStockSummary
+        frm.UserInfo = clsUser
+        frm.MdiParent = Me
+        frm.Show()
+    End Sub
 End Class

@@ -37,7 +37,7 @@
     <MinimumRequiredVersion>1.0.0.158</MinimumRequiredVersion>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>1034</ApplicationRevision>
+    <ApplicationRevision>1036</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -957,6 +957,12 @@
       <DependentUpon>frmSalesOrderClose.vb</DependentUpon>
     </Compile>
     <Compile Include="SalesOrderForm\frmSalesOrderClose.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StockReport\frmStockSummary.designer.vb">
+      <DependentUpon>frmStockSummary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="StockReport\frmStockSummary.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="STOrderClosingForm\frmSTOrderClosing.Designer.vb">

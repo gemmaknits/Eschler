@@ -267,6 +267,7 @@ Partial Class frmMainmenu
         Me.TrayMenu = New System.Windows.Forms.ContextMenu()
         Me.mnuRestore = New System.Windows.Forms.MenuItem()
         Me.mnuExit = New System.Windows.Forms.MenuItem()
+        Me.tsmiStockSummary = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -671,7 +672,7 @@ Partial Class frmMainmenu
         '
         Me.menuLab.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.menuLab_Edit, Me.menuLab_Print, Me.menuLab_Others})
         Me.menuLab.Name = "menuLab"
-        Me.menuLab.Size = New System.Drawing.Size(63, 23)
+        Me.menuLab.Size = New System.Drawing.Size(62, 23)
         Me.menuLab.Text = "Lab Test"
         '
         'menuLab_Edit
@@ -709,25 +710,25 @@ Partial Class frmMainmenu
         'menuRequest_Greige
         '
         Me.menuRequest_Greige.Name = "menuRequest_Greige"
-        Me.menuRequest_Greige.Size = New System.Drawing.Size(152, 22)
+        Me.menuRequest_Greige.Size = New System.Drawing.Size(146, 22)
         Me.menuRequest_Greige.Text = "Stock Greige"
         '
         'menuRequest_Dyed
         '
         Me.menuRequest_Dyed.Name = "menuRequest_Dyed"
-        Me.menuRequest_Dyed.Size = New System.Drawing.Size(152, 22)
+        Me.menuRequest_Dyed.Size = New System.Drawing.Size(146, 22)
         Me.menuRequest_Dyed.Text = "Stock Dyed"
         '
         'menuRequest_Sample
         '
         Me.menuRequest_Sample.Name = "menuRequest_Sample"
-        Me.menuRequest_Sample.Size = New System.Drawing.Size(152, 22)
+        Me.menuRequest_Sample.Size = New System.Drawing.Size(146, 22)
         Me.menuRequest_Sample.Text = "Stock Sample"
         '
         'StockCuttingToolStripMenuItem
         '
         Me.StockCuttingToolStripMenuItem.Name = "StockCuttingToolStripMenuItem"
-        Me.StockCuttingToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.StockCuttingToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.StockCuttingToolStripMenuItem.Text = "Stock Cutting"
         '
         'menuInvoice
@@ -797,7 +798,7 @@ Partial Class frmMainmenu
         'InvoiceYearSummaryToolStripMenuItem
         '
         Me.InvoiceYearSummaryToolStripMenuItem.Name = "InvoiceYearSummaryToolStripMenuItem"
-        Me.InvoiceYearSummaryToolStripMenuItem.Size = New System.Drawing.Size(192, 22)
+        Me.InvoiceYearSummaryToolStripMenuItem.Size = New System.Drawing.Size(191, 22)
         Me.InvoiceYearSummaryToolStripMenuItem.Text = "Invoice Year Summary"
         '
         'menuStock
@@ -811,7 +812,7 @@ Partial Class frmMainmenu
         '
         Me.DyedToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DInToolStripMenuItem2, Me.DINManualToolStripMenuItem1, Me.DINPurchaseToolStripMenuItem1, Me.DINReturnToolStripMenuItem1, Me.DINLocationEditQCRemarkToolStripMenuItem})
         Me.DyedToolStripMenuItem.Name = "DyedToolStripMenuItem"
-        Me.DyedToolStripMenuItem.Size = New System.Drawing.Size(225, 22)
+        Me.DyedToolStripMenuItem.Size = New System.Drawing.Size(224, 22)
         Me.DyedToolStripMenuItem.Text = "Dyed"
         '
         'DInToolStripMenuItem2
@@ -848,7 +849,7 @@ Partial Class frmMainmenu
         '
         Me.GreigeToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GINPFDToolStripMenuItem1, Me.GINPFDManualToolStripMenuItem1, Me.GINPurchaseToolStripMenuItem1, Me.GINReturnToolStripMenuItem, Me.tsmnGINEditQCRemark})
         Me.GreigeToolStripMenuItem.Name = "GreigeToolStripMenuItem"
-        Me.GreigeToolStripMenuItem.Size = New System.Drawing.Size(225, 22)
+        Me.GreigeToolStripMenuItem.Size = New System.Drawing.Size(224, 22)
         Me.GreigeToolStripMenuItem.Text = "Greige"
         '
         'GINPFDToolStripMenuItem1
@@ -885,7 +886,7 @@ Partial Class frmMainmenu
         '
         Me.CuttingToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CuttingINToolStripMenuItem1, Me.CINPurchaseToolStripMenuItem, Me.CINFromDOUTToolStripMenuItem})
         Me.CuttingToolStripMenuItem1.Name = "CuttingToolStripMenuItem1"
-        Me.CuttingToolStripMenuItem1.Size = New System.Drawing.Size(225, 22)
+        Me.CuttingToolStripMenuItem1.Size = New System.Drawing.Size(224, 22)
         Me.CuttingToolStripMenuItem1.Text = "Cutting"
         '
         'CuttingINToolStripMenuItem1
@@ -909,42 +910,42 @@ Partial Class frmMainmenu
         'ToolStripMenuItem4
         '
         Me.ToolStripMenuItem4.Name = "ToolStripMenuItem4"
-        Me.ToolStripMenuItem4.Size = New System.Drawing.Size(222, 6)
+        Me.ToolStripMenuItem4.Size = New System.Drawing.Size(221, 6)
         '
         'PrintGINDocumentToolStripMenuItem
         '
         Me.PrintGINDocumentToolStripMenuItem.Name = "PrintGINDocumentToolStripMenuItem"
-        Me.PrintGINDocumentToolStripMenuItem.Size = New System.Drawing.Size(225, 22)
+        Me.PrintGINDocumentToolStripMenuItem.Size = New System.Drawing.Size(224, 22)
         Me.PrintGINDocumentToolStripMenuItem.Text = "Print GIN Document"
         '
         'PrintGOUTDocumentToolStripMenuItem
         '
         Me.PrintGOUTDocumentToolStripMenuItem.Name = "PrintGOUTDocumentToolStripMenuItem"
-        Me.PrintGOUTDocumentToolStripMenuItem.Size = New System.Drawing.Size(225, 22)
+        Me.PrintGOUTDocumentToolStripMenuItem.Size = New System.Drawing.Size(224, 22)
         Me.PrintGOUTDocumentToolStripMenuItem.Text = "Print GOUT Document"
         '
         'PrintDINDocumentToolStripMenuItem
         '
         Me.PrintDINDocumentToolStripMenuItem.Name = "PrintDINDocumentToolStripMenuItem"
-        Me.PrintDINDocumentToolStripMenuItem.Size = New System.Drawing.Size(225, 22)
+        Me.PrintDINDocumentToolStripMenuItem.Size = New System.Drawing.Size(224, 22)
         Me.PrintDINDocumentToolStripMenuItem.Text = "Print DIN Document"
         '
         'PrintDOUTDocumentToolStripMenuItem
         '
         Me.PrintDOUTDocumentToolStripMenuItem.Name = "PrintDOUTDocumentToolStripMenuItem"
-        Me.PrintDOUTDocumentToolStripMenuItem.Size = New System.Drawing.Size(225, 22)
+        Me.PrintDOUTDocumentToolStripMenuItem.Size = New System.Drawing.Size(224, 22)
         Me.PrintDOUTDocumentToolStripMenuItem.Text = "Print DOUT Document"
         '
         'ToolStripMenuItem5
         '
         Me.ToolStripMenuItem5.Name = "ToolStripMenuItem5"
-        Me.ToolStripMenuItem5.Size = New System.Drawing.Size(222, 6)
+        Me.ToolStripMenuItem5.Size = New System.Drawing.Size(221, 6)
         '
         'SampleToolStripMenuItem
         '
         Me.SampleToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DyedOutSamplePLSToolStripMenuItem, Me.DyedOutBarcodeToolStripMenuItem, Me.SampleGreigeINToolStripMenuItem, Me.tsmnSampleTag, Me.ReportToolStripMenuItem1})
         Me.SampleToolStripMenuItem.Name = "SampleToolStripMenuItem"
-        Me.SampleToolStripMenuItem.Size = New System.Drawing.Size(225, 22)
+        Me.SampleToolStripMenuItem.Size = New System.Drawing.Size(224, 22)
         Me.SampleToolStripMenuItem.Text = "Sample"
         '
         'DyedOutSamplePLSToolStripMenuItem
@@ -1000,7 +1001,7 @@ Partial Class frmMainmenu
         '
         Me.HangerToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HangerInBarcodeToolStripMenuItem, Me.HangerOutBarcodeToolStripMenuItem, Me.HangerReturnBarcodeToolStripMenuItem, Me.ReportToolStripMenuItem2})
         Me.HangerToolStripMenuItem.Name = "HangerToolStripMenuItem"
-        Me.HangerToolStripMenuItem.Size = New System.Drawing.Size(225, 22)
+        Me.HangerToolStripMenuItem.Size = New System.Drawing.Size(224, 22)
         Me.HangerToolStripMenuItem.Text = "Hanger"
         '
         'HangerInBarcodeToolStripMenuItem
@@ -1037,13 +1038,13 @@ Partial Class frmMainmenu
         'ToolStripMenuItem6
         '
         Me.ToolStripMenuItem6.Name = "ToolStripMenuItem6"
-        Me.ToolStripMenuItem6.Size = New System.Drawing.Size(222, 6)
+        Me.ToolStripMenuItem6.Size = New System.Drawing.Size(221, 6)
         '
         'StockGToolStripMenuItem
         '
         Me.StockGToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StockGToolStripMenuItem1, Me.StockDToolStripMenuItem1})
         Me.StockGToolStripMenuItem.Name = "StockGToolStripMenuItem"
-        Me.StockGToolStripMenuItem.Size = New System.Drawing.Size(225, 22)
+        Me.StockGToolStripMenuItem.Size = New System.Drawing.Size(224, 22)
         Me.StockGToolStripMenuItem.Text = "Clearance Sale"
         '
         'StockGToolStripMenuItem1
@@ -1062,7 +1063,7 @@ Partial Class frmMainmenu
         '
         Me.StockDToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.menuEndingYarn, Me.menuEndingGreige, Me.menuEndingDyed})
         Me.StockDToolStripMenuItem.Name = "StockDToolStripMenuItem"
-        Me.StockDToolStripMenuItem.Size = New System.Drawing.Size(225, 22)
+        Me.StockDToolStripMenuItem.Size = New System.Drawing.Size(224, 22)
         Me.StockDToolStripMenuItem.Text = "Ending Inventory"
         '
         'menuEndingYarn
@@ -1087,7 +1088,7 @@ Partial Class frmMainmenu
         '
         Me.ReportToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DINControlToolStripMenuItem, Me.DINControl2ToolStripMenuItem, Me.DINDyeChargeToolStripMenuItem, Me.StockByBOIToolStripMenuItem, Me.GOUTControlToolStripMenuItem, Me.GOUTAndDFControlToolStripMenuItem, Me.DOUTControlToolStripMenuItem, Me.NewYarnCodeToolStripMenuItem, Me.NewDesignNoToolStripMenuItem, Me.GreigeLogToolStripMenuItem, Me.CancelledOrderPendingToolStripMenuItem})
         Me.ReportToolStripMenuItem.Name = "ReportToolStripMenuItem"
-        Me.ReportToolStripMenuItem.Size = New System.Drawing.Size(225, 22)
+        Me.ReportToolStripMenuItem.Size = New System.Drawing.Size(224, 22)
         Me.ReportToolStripMenuItem.Text = "Report"
         '
         'DINControlToolStripMenuItem
@@ -1160,7 +1161,7 @@ Partial Class frmMainmenu
         '
         Me.menuTransferLocationNewArrivalToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.menuTransferYarn, Me.menuTransferGreige, Me.menuTransferDyed})
         Me.menuTransferLocationNewArrivalToolStripMenuItem.Name = "menuTransferLocationNewArrivalToolStripMenuItem"
-        Me.menuTransferLocationNewArrivalToolStripMenuItem.Size = New System.Drawing.Size(225, 22)
+        Me.menuTransferLocationNewArrivalToolStripMenuItem.Size = New System.Drawing.Size(224, 22)
         Me.menuTransferLocationNewArrivalToolStripMenuItem.Text = "Transfer Location And Grade"
         '
         'menuTransferYarn
@@ -1183,7 +1184,7 @@ Partial Class frmMainmenu
         '
         'menuRptStock
         '
-        Me.menuRptStock.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.menuStock_GreigeOutFromDF, Me.GreigeOutFromRequestToolStripMenuItem, Me.GreigeOutChangeDesignToolStripMenuItem, Me.GOUTManualNoDFToolStripMenuItem, Me.ToolStripSeparator2, Me.DyedOutFromSampleToolStripMenuItem, Me.ToolStripSeparator1, Me.GreigeINByDateToolStripMenuItem, Me.DINToolStripMenuItem, Me.StockOnhandToolStripMenuItem, Me.BarcodeToolStripMenuItem, Me.ReportsToolStripMenuItem3})
+        Me.menuRptStock.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.menuStock_GreigeOutFromDF, Me.GreigeOutFromRequestToolStripMenuItem, Me.GreigeOutChangeDesignToolStripMenuItem, Me.GOUTManualNoDFToolStripMenuItem, Me.ToolStripSeparator2, Me.DyedOutFromSampleToolStripMenuItem, Me.ToolStripSeparator1, Me.GreigeINByDateToolStripMenuItem, Me.DINToolStripMenuItem, Me.StockOnhandToolStripMenuItem, Me.BarcodeToolStripMenuItem, Me.ReportsToolStripMenuItem3, Me.tsmiStockSummary})
         Me.menuRptStock.Name = "menuRptStock"
         Me.menuRptStock.Size = New System.Drawing.Size(86, 23)
         Me.menuRptStock.Text = "Stock Report"
@@ -1317,13 +1318,13 @@ Partial Class frmMainmenu
         'GreigeBarcodeToolStripMenuItem
         '
         Me.GreigeBarcodeToolStripMenuItem.Name = "GreigeBarcodeToolStripMenuItem"
-        Me.GreigeBarcodeToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
+        Me.GreigeBarcodeToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.GreigeBarcodeToolStripMenuItem.Text = "Greige Barcode"
         '
         'StockDBarcodeToolStripMenuItem
         '
         Me.StockDBarcodeToolStripMenuItem.Name = "StockDBarcodeToolStripMenuItem"
-        Me.StockDBarcodeToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
+        Me.StockDBarcodeToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.StockDBarcodeToolStripMenuItem.Text = "Stock D Barcode"
         '
         'ReportsToolStripMenuItem3
@@ -1497,103 +1498,103 @@ Partial Class frmMainmenu
         '
         Me.YarnDemandToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.menuProduction_Reports_YarnDemandForecast, Me.YarnDemandForecstDailyToolStripMenuItem, Me.menuProduction_Reports_YarnDemandForecastSummary, Me.menuProduction_Reports_YarnDemandPlanning, Me.YarnDemandHistoryToolStripMenuItem})
         Me.YarnDemandToolStripMenuItem.Name = "YarnDemandToolStripMenuItem"
-        Me.YarnDemandToolStripMenuItem.Size = New System.Drawing.Size(269, 22)
+        Me.YarnDemandToolStripMenuItem.Size = New System.Drawing.Size(268, 22)
         Me.YarnDemandToolStripMenuItem.Text = "Yarn Demand"
         '
         'menuProduction_Reports_YarnDemandForecast
         '
         Me.menuProduction_Reports_YarnDemandForecast.Name = "menuProduction_Reports_YarnDemandForecast"
-        Me.menuProduction_Reports_YarnDemandForecast.Size = New System.Drawing.Size(247, 22)
+        Me.menuProduction_Reports_YarnDemandForecast.Size = New System.Drawing.Size(246, 22)
         Me.menuProduction_Reports_YarnDemandForecast.Text = "Yarn Demand Forecast"
         '
         'YarnDemandForecstDailyToolStripMenuItem
         '
         Me.YarnDemandForecstDailyToolStripMenuItem.Name = "YarnDemandForecstDailyToolStripMenuItem"
-        Me.YarnDemandForecstDailyToolStripMenuItem.Size = New System.Drawing.Size(247, 22)
+        Me.YarnDemandForecstDailyToolStripMenuItem.Size = New System.Drawing.Size(246, 22)
         Me.YarnDemandForecstDailyToolStripMenuItem.Text = "Yarn Demand Forecst Daily"
         '
         'menuProduction_Reports_YarnDemandForecastSummary
         '
         Me.menuProduction_Reports_YarnDemandForecastSummary.Name = "menuProduction_Reports_YarnDemandForecastSummary"
-        Me.menuProduction_Reports_YarnDemandForecastSummary.Size = New System.Drawing.Size(247, 22)
+        Me.menuProduction_Reports_YarnDemandForecastSummary.Size = New System.Drawing.Size(246, 22)
         Me.menuProduction_Reports_YarnDemandForecastSummary.Text = "Yarn Demand Forecast Summary"
         '
         'menuProduction_Reports_YarnDemandPlanning
         '
         Me.menuProduction_Reports_YarnDemandPlanning.Name = "menuProduction_Reports_YarnDemandPlanning"
-        Me.menuProduction_Reports_YarnDemandPlanning.Size = New System.Drawing.Size(247, 22)
+        Me.menuProduction_Reports_YarnDemandPlanning.Size = New System.Drawing.Size(246, 22)
         Me.menuProduction_Reports_YarnDemandPlanning.Text = "Yarn Demand Planning"
         '
         'YarnDemandHistoryToolStripMenuItem
         '
         Me.YarnDemandHistoryToolStripMenuItem.Name = "YarnDemandHistoryToolStripMenuItem"
-        Me.YarnDemandHistoryToolStripMenuItem.Size = New System.Drawing.Size(247, 22)
+        Me.YarnDemandHistoryToolStripMenuItem.Size = New System.Drawing.Size(246, 22)
         Me.YarnDemandHistoryToolStripMenuItem.Text = "Yarn Demand History"
         '
         'SONotHaveKOToolStripMenuItem
         '
         Me.SONotHaveKOToolStripMenuItem.Name = "SONotHaveKOToolStripMenuItem"
-        Me.SONotHaveKOToolStripMenuItem.Size = New System.Drawing.Size(269, 22)
+        Me.SONotHaveKOToolStripMenuItem.Size = New System.Drawing.Size(268, 22)
         Me.SONotHaveKOToolStripMenuItem.Text = "S/O Not Have K/O"
         '
         'MachineProductivityToolStripMenuItem
         '
         Me.MachineProductivityToolStripMenuItem.Name = "MachineProductivityToolStripMenuItem"
-        Me.MachineProductivityToolStripMenuItem.Size = New System.Drawing.Size(269, 22)
+        Me.MachineProductivityToolStripMenuItem.Size = New System.Drawing.Size(268, 22)
         Me.MachineProductivityToolStripMenuItem.Text = "Machine Productivity"
         '
         'GreigeDailyProductionToolStripMenuItem
         '
         Me.GreigeDailyProductionToolStripMenuItem.Name = "GreigeDailyProductionToolStripMenuItem"
-        Me.GreigeDailyProductionToolStripMenuItem.Size = New System.Drawing.Size(269, 22)
+        Me.GreigeDailyProductionToolStripMenuItem.Size = New System.Drawing.Size(268, 22)
         Me.GreigeDailyProductionToolStripMenuItem.Text = "Greige Daily Production - NOT USE"
         '
         'GreigeMonthlyProductionToolStripMenuItem
         '
         Me.GreigeMonthlyProductionToolStripMenuItem.Name = "GreigeMonthlyProductionToolStripMenuItem"
-        Me.GreigeMonthlyProductionToolStripMenuItem.Size = New System.Drawing.Size(269, 22)
+        Me.GreigeMonthlyProductionToolStripMenuItem.Size = New System.Drawing.Size(268, 22)
         Me.GreigeMonthlyProductionToolStripMenuItem.Text = "Greige Monthly Production"
         '
         'KOClosedReportToolStripMenuItem
         '
         Me.KOClosedReportToolStripMenuItem.Name = "KOClosedReportToolStripMenuItem"
-        Me.KOClosedReportToolStripMenuItem.Size = New System.Drawing.Size(269, 22)
+        Me.KOClosedReportToolStripMenuItem.Size = New System.Drawing.Size(268, 22)
         Me.KOClosedReportToolStripMenuItem.Text = "K/O Closed Report"
         '
         'KODesignHistoryToolStripMenuItem
         '
         Me.KODesignHistoryToolStripMenuItem.Name = "KODesignHistoryToolStripMenuItem"
-        Me.KODesignHistoryToolStripMenuItem.Size = New System.Drawing.Size(269, 22)
+        Me.KODesignHistoryToolStripMenuItem.Size = New System.Drawing.Size(268, 22)
         Me.KODesignHistoryToolStripMenuItem.Text = "K/O Design History"
         '
         'KILossByMachineToolStripMenuItem
         '
         Me.KILossByMachineToolStripMenuItem.Name = "KILossByMachineToolStripMenuItem"
-        Me.KILossByMachineToolStripMenuItem.Size = New System.Drawing.Size(269, 22)
+        Me.KILossByMachineToolStripMenuItem.Size = New System.Drawing.Size(268, 22)
         Me.KILossByMachineToolStripMenuItem.Text = "K/I Loss By Machine"
         '
         'DesignNoBOMToolStripMenuItem
         '
         Me.DesignNoBOMToolStripMenuItem.Name = "DesignNoBOMToolStripMenuItem"
-        Me.DesignNoBOMToolStripMenuItem.Size = New System.Drawing.Size(269, 22)
+        Me.DesignNoBOMToolStripMenuItem.Size = New System.Drawing.Size(268, 22)
         Me.DesignNoBOMToolStripMenuItem.Text = "Design No. BOM"
         '
         'KOOutsourceToolStripMenuItem
         '
         Me.KOOutsourceToolStripMenuItem.Name = "KOOutsourceToolStripMenuItem"
-        Me.KOOutsourceToolStripMenuItem.Size = New System.Drawing.Size(269, 22)
+        Me.KOOutsourceToolStripMenuItem.Size = New System.Drawing.Size(268, 22)
         Me.KOOutsourceToolStripMenuItem.Text = "K/O Outsource"
         '
         'YarnTestFormToolStripMenuItem
         '
         Me.YarnTestFormToolStripMenuItem.Name = "YarnTestFormToolStripMenuItem"
-        Me.YarnTestFormToolStripMenuItem.Size = New System.Drawing.Size(269, 22)
+        Me.YarnTestFormToolStripMenuItem.Size = New System.Drawing.Size(268, 22)
         Me.YarnTestFormToolStripMenuItem.Text = "Yarn Test Form"
         '
         'KOSchedulePlanDetailsToolStripMenuItem
         '
         Me.KOSchedulePlanDetailsToolStripMenuItem.Name = "KOSchedulePlanDetailsToolStripMenuItem"
-        Me.KOSchedulePlanDetailsToolStripMenuItem.Size = New System.Drawing.Size(269, 22)
+        Me.KOSchedulePlanDetailsToolStripMenuItem.Size = New System.Drawing.Size(268, 22)
         Me.KOSchedulePlanDetailsToolStripMenuItem.Text = "K/O Schedule Plan Details - NOT USE"
         '
         'GammaDataToolStripMenuItem
@@ -1607,7 +1608,7 @@ Partial Class frmMainmenu
         '
         Me.ReportsToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GemmaKnitsCMRControlToolStripMenuItem, Me.DFSubmitAtGammaDyedHouseToolStripMenuItem, Me.GemmaKnitsSOControlWithGammaToolStripMenuItem, Me.tsmnitmCMRList, Me.GammaDyePerformanceToolStripMenuItem})
         Me.ReportsToolStripMenuItem1.Name = "ReportsToolStripMenuItem1"
-        Me.ReportsToolStripMenuItem1.Size = New System.Drawing.Size(303, 22)
+        Me.ReportsToolStripMenuItem1.Size = New System.Drawing.Size(302, 22)
         Me.ReportsToolStripMenuItem1.Text = "Reports"
         '
         'GemmaKnitsCMRControlToolStripMenuItem
@@ -1644,44 +1645,44 @@ Partial Class frmMainmenu
         'tsmnGammaCMR
         '
         Me.tsmnGammaCMR.Name = "tsmnGammaCMR"
-        Me.tsmnGammaCMR.Size = New System.Drawing.Size(303, 22)
+        Me.tsmnGammaCMR.Size = New System.Drawing.Size(302, 22)
         Me.tsmnGammaCMR.Text = "Gamma CMR"
         '
         'tsmnGammaColourMatchingRequestTracking
         '
         Me.tsmnGammaColourMatchingRequestTracking.Name = "tsmnGammaColourMatchingRequestTracking"
-        Me.tsmnGammaColourMatchingRequestTracking.Size = New System.Drawing.Size(303, 22)
+        Me.tsmnGammaColourMatchingRequestTracking.Size = New System.Drawing.Size(302, 22)
         Me.tsmnGammaColourMatchingRequestTracking.Text = "Gamma Colour Matching Request Tracking"
         '
         'tsmnProductionProcessingTrackingChart
         '
         Me.tsmnProductionProcessingTrackingChart.Name = "tsmnProductionProcessingTrackingChart"
-        Me.tsmnProductionProcessingTrackingChart.Size = New System.Drawing.Size(303, 22)
+        Me.tsmnProductionProcessingTrackingChart.Size = New System.Drawing.Size(302, 22)
         Me.tsmnProductionProcessingTrackingChart.Text = "Production Processing Tracking Chart"
         Me.tsmnProductionProcessingTrackingChart.Visible = False
         '
         'tsmnSampleStockBalance
         '
         Me.tsmnSampleStockBalance.Name = "tsmnSampleStockBalance"
-        Me.tsmnSampleStockBalance.Size = New System.Drawing.Size(303, 22)
+        Me.tsmnSampleStockBalance.Size = New System.Drawing.Size(302, 22)
         Me.tsmnSampleStockBalance.Text = "Sample Stock Balance (Lab Dip)"
         '
         'tsmnGammaLabStockIssue
         '
         Me.tsmnGammaLabStockIssue.Name = "tsmnGammaLabStockIssue"
-        Me.tsmnGammaLabStockIssue.Size = New System.Drawing.Size(303, 22)
+        Me.tsmnGammaLabStockIssue.Size = New System.Drawing.Size(302, 22)
         Me.tsmnGammaLabStockIssue.Text = "Gamma Lab Stock Issue"
         '
         'tsmnGammaProcessTracking
         '
         Me.tsmnGammaProcessTracking.Name = "tsmnGammaProcessTracking"
-        Me.tsmnGammaProcessTracking.Size = New System.Drawing.Size(303, 22)
+        Me.tsmnGammaProcessTracking.Size = New System.Drawing.Size(302, 22)
         Me.tsmnGammaProcessTracking.Text = "Gamma Process Tracking"
         '
         'tsmnCMRLabStatus
         '
         Me.tsmnCMRLabStatus.Name = "tsmnCMRLabStatus"
-        Me.tsmnCMRLabStatus.Size = New System.Drawing.Size(303, 22)
+        Me.tsmnCMRLabStatus.Size = New System.Drawing.Size(302, 22)
         Me.tsmnCMRLabStatus.Text = "CMR Lab Status"
         '
         'ManagementToolStripMenuItem
@@ -1752,6 +1753,7 @@ Partial Class frmMainmenu
         'txtExchangeRate
         '
         Me.txtExchangeRate.Enabled = False
+        Me.txtExchangeRate.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.txtExchangeRate.Name = "txtExchangeRate"
         Me.txtExchangeRate.Size = New System.Drawing.Size(50, 23)
         Me.txtExchangeRate.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -1785,6 +1787,12 @@ Partial Class frmMainmenu
         '
         Me.mnuExit.Index = 1
         Me.mnuExit.Text = "E&xit"
+        '
+        'tsmiStockSummary
+        '
+        Me.tsmiStockSummary.Name = "tsmiStockSummary"
+        Me.tsmiStockSummary.Size = New System.Drawing.Size(247, 22)
+        Me.tsmiStockSummary.Text = "Stock Summary"
         '
         'frmMainmenu
         '
@@ -2051,4 +2059,5 @@ Partial Class frmMainmenu
     Friend WithEvents CINFromDOUTToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CuttingINToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents PackingListCuttingOutToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents tsmiStockSummary As ToolStripMenuItem
 End Class

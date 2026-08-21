@@ -933,6 +933,7 @@ Public Class frmSalesOrder
             btnSpecialCharges.Enabled = False
             btnAltItems.Enabled = False
             ref_stnoid.Visible = False
+            st_reorder_bal_kg.Visible = False
         End If
 
     End Sub

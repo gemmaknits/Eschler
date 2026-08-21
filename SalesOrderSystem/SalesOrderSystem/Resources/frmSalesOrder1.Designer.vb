@@ -45,6 +45,7 @@ Partial Class frmSalesOrder
         Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle25 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.btnGetSoNo = New System.Windows.Forms.Button()
         Me.chkDevlOrder = New System.Windows.Forms.CheckBox()
@@ -113,6 +114,7 @@ Partial Class frmSalesOrder
         Me.grdSalesOrder = New System.Windows.Forms.DataGridView()
         Me.sonoid = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ref_stnoid = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.st_reorder_bal_kg = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.design_gwth_nob = New System.Windows.Forms.DataGridViewComboBoxColumn()
         Me.design_no = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.labeldes = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -899,7 +901,7 @@ Partial Class frmSalesOrder
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grdSalesOrder.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grdSalesOrder.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.sonoid, Me.ref_stnoid, Me.design_gwth_nob, Me.design_no, Me.labeldes, Me.colRefdesno, Me.labelarticle, Me.colGmPerSqM, Me.Custdes, Me.fwth, Me.cboWidth, Me.gwth, Me.sample_fabric_qty, Me.sample_bulk_qty, Me.col, Me.custcol, Me.Column1, Me.labdipno, Me.labdip_comment, Me.labelcolor, Me.labeldata1, Me.labeldata2, Me.colCustDelidt, Me.shipdt, Me.confirmed_shipdt, Me.knit_begin_date, Me.knit_end_date, Me.dye_end_date, Me.yarn_available_date, Me.confirmed_appointment, Me.qty, Me.uom, Me.price, Me.colProdLossPerc, Me.colQtyWithLoss, Me.show_price, Me.curr, Me.exrt, Me.gr_itamt, Me.discamt, Me.nt_itamt, Me.closed2, Me.cboid_so_routing, Me.so_line_id, Me.mtl_customer_items_id, Me.mtl_customer_items_xref_id, Me.qtyship, Me.qtybal, Me.jobno, Me.sent_to})
+        Me.grdSalesOrder.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.sonoid, Me.ref_stnoid, Me.design_gwth_nob, Me.design_no, Me.labeldes, Me.colRefdesno, Me.labelarticle, Me.colGmPerSqM, Me.Custdes, Me.fwth, Me.cboWidth, Me.gwth, Me.sample_fabric_qty, Me.sample_bulk_qty, Me.col, Me.custcol, Me.Column1, Me.labdipno, Me.labdip_comment, Me.labelcolor, Me.labeldata1, Me.labeldata2, Me.colCustDelidt, Me.shipdt, Me.confirmed_shipdt, Me.knit_begin_date, Me.knit_end_date, Me.dye_end_date, Me.yarn_available_date, Me.confirmed_appointment, Me.qty, Me.uom, Me.price, Me.colProdLossPerc, Me.colQtyWithLoss, Me.show_price, Me.curr, Me.exrt, Me.gr_itamt, Me.discamt, Me.nt_itamt, Me.closed2, Me.cboid_so_routing, Me.so_line_id, Me.mtl_customer_items_id, Me.mtl_customer_items_xref_id, Me.qtyship, Me.qtybal, Me.jobno, Me.sent_to, Me.st_reorder_bal_kg})
         Me.grdSalesOrder.Location = New System.Drawing.Point(3, 31)
         Me.grdSalesOrder.Name = "grdSalesOrder"
         Me.grdSalesOrder.Size = New System.Drawing.Size(1183, 207)
@@ -920,6 +922,17 @@ Partial Class frmSalesOrder
         Me.ref_stnoid.HeaderText = "Ref. S/T No. ID"
         Me.ref_stnoid.Name = "ref_stnoid"
         Me.ref_stnoid.Width = 85
+        '
+        'st_reorder_bal_kg
+        '
+        Me.st_reorder_bal_kg.DataPropertyName = "st_reorder_bal_kg"
+        DataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle25.Format = "N2"
+        Me.st_reorder_bal_kg.DefaultCellStyle = DataGridViewCellStyle25
+        Me.st_reorder_bal_kg.HeaderText = "S/T Reorder Bal (Kg)"
+        Me.st_reorder_bal_kg.Name = "st_reorder_bal_kg"
+        Me.st_reorder_bal_kg.ReadOnly = True
+        Me.st_reorder_bal_kg.Width = 90
         '
         'design_gwth_nob
         '
@@ -2607,6 +2620,7 @@ Partial Class frmSalesOrder
     Friend WithEvents Label45 As Label
     Friend WithEvents sonoid As DataGridViewTextBoxColumn
     Friend WithEvents ref_stnoid As DataGridViewTextBoxColumn
+    Friend WithEvents st_reorder_bal_kg As DataGridViewTextBoxColumn
     Friend WithEvents design_gwth_nob As DataGridViewComboBoxColumn
     Friend WithEvents design_no As DataGridViewTextBoxColumn
     Friend WithEvents labeldes As DataGridViewTextBoxColumn

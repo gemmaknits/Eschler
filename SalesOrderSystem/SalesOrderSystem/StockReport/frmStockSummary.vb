@@ -14,9 +14,161 @@ Public Class frmStockSummary
         End Set
     End Property
 
+    Private _allArticleNos As New List(Of String)
+    Private _allCustomers As New List(Of String)
+    Private _allStNos As New List(Of String)
+    Private _isFiltering As Boolean = False
+    Private _textWhenOpened As New Dictionary(Of String, String) From {
+        {"cboArticleNo", ""},
+        {"cboCustomer", ""},
+        {"cboStNo", ""}
+    }
+
     Private Sub frmStockSummary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        dtpDateFr.Value = DateAdd(DateInterval.Month, -3, Now)
+        dtpDateFr.Value = New DateTime(Now.Year, Now.Month, 1)
         dtpDateTo.Value = Now
+        PopulateFilters()
+    End Sub
+
+    Private Sub PopulateFilters()
+        ' Article No. — from summary SP with full date range
+        Try
+            Dim dt As DataTable = LoadSummary("19000101", "99991231", "")
+            For Each r As DataRow In dt.Rows
+                Dim v As String = r("design_no").ToString().Trim()
+                If v <> "" Then _allArticleNos.Add(v)
+            Next
+            cboArticleNo.Items.AddRange(_allArticleNos.ToArray())
+        Catch
+        End Try
+
+        ' Customer — from Customers table
+        _allCustomers = LoadDistinctValues(
+            "SELECT DISTINCT name FROM Customers WHERE ISNULL(name,'') <> '' ORDER BY name")
+        cboCustomer.Items.AddRange(_allCustomers.ToArray())
+
+        ' S/T No. — from so table, stock orders only
+        _allStNos = LoadDistinctValues(
+            "SELECT DISTINCT sono FROM so WHERE order_type='STOCK' AND ISNULL(cancel_status,0)=0 ORDER BY sono")
+        cboStNo.Items.AddRange(_allStNos.ToArray())
+    End Sub
+
+    Private Function LoadDistinctValues(query As String) As List(Of String)
+        Dim result As New List(Of String)
+        Try
+            Using conn As New SqlConnection((New classConnection).connection)
+                conn.Open()
+                Using comm As New SqlCommand(query, conn)
+                    Using rdr = comm.ExecuteReader()
+                        While rdr.Read()
+                            Dim v As String = rdr(0).ToString().Trim()
+                            If v <> "" Then result.Add(v)
+                        End While
+                    End Using
+                End Using
+            End Using
+        Catch
+        End Try
+        Return result
+    End Function
+
+    ' ── ComboBox filter helpers ────────────────────────────────────
+
+    Private Sub SetDropDownHeight(cbo As ComboBox)
+        Dim rowH As Integer = If(cbo.ItemHeight > 0, cbo.ItemHeight + 2, 16)
+        Dim visible As Integer = Math.Min(cbo.Items.Count, 10)
+        cbo.DropDownHeight = If(visible > 0, visible * rowH + 4, rowH + 4)
+    End Sub
+
+    Private Sub FilterCombo(cbo As ComboBox, allItems As List(Of String))
+        If _isFiltering Then Return
+        ' User clicked an item from the list — don't touch Items or SelectedIndex;
+        ' let DropDownClosed keep the selection
+        If cbo.SelectedIndex >= 0 Then
+            _textWhenOpened(cbo.Name) = cbo.Text
+            Return
+        End If
+        _isFiltering = True
+        Try
+            Dim filter As String = cbo.Text.Trim().ToUpper()
+            Dim pos As Integer = cbo.SelectionStart
+            cbo.BeginUpdate()
+            cbo.Items.Clear()
+            If filter = "" Then
+                cbo.Items.AddRange(allItems.ToArray())
+            Else
+                For Each s As String In allItems
+                    If s.ToUpper().Contains(filter) Then cbo.Items.Add(s)
+                Next
+            End If
+            SetDropDownHeight(cbo)
+            cbo.EndUpdate()
+            _textWhenOpened(cbo.Name) = cbo.Text
+            cbo.SelectionStart = pos
+            cbo.SelectionLength = 0
+        Finally
+            _isFiltering = False
+        End Try
+    End Sub
+
+    ' Shared helpers called by per-combo event handlers
+    Private Sub HandleDropDown(cbo As ComboBox)
+        If Not _isFiltering Then
+            _textWhenOpened(cbo.Name) = cbo.Text  ' save text at the moment dropdown opens
+            cbo.SelectedIndex = -1                 ' ensure nothing is pre-highlighted
+        End If
+        SetDropDownHeight(cbo)
+    End Sub
+
+    Private Sub HandleDropDownClosed(cbo As ComboBox)
+        If _isFiltering Then Return
+        If cbo.SelectedIndex >= 0 Then
+            ' User clicked an item — accept it and update saved text
+            _textWhenOpened(cbo.Name) = cbo.Text
+        Else
+            ' Closed without selecting (Enter, Escape, Tab, click outside) — restore typed text
+            Dim saved As String = _textWhenOpened(cbo.Name)
+            If cbo.Text <> saved Then
+                _isFiltering = True
+                cbo.Text = saved
+                cbo.SelectionStart = saved.Length
+                cbo.SelectionLength = 0
+                _isFiltering = False
+            End If
+        End If
+    End Sub
+
+    ' Article No.
+    Private Sub cboArticleNo_DropDown(sender As Object, e As EventArgs) Handles cboArticleNo.DropDown
+        HandleDropDown(cboArticleNo)
+    End Sub
+    Private Sub cboArticleNo_DropDownClosed(sender As Object, e As EventArgs) Handles cboArticleNo.DropDownClosed
+        HandleDropDownClosed(cboArticleNo)
+    End Sub
+    Private Sub cboArticleNo_TextChanged(sender As Object, e As EventArgs) Handles cboArticleNo.TextChanged
+        FilterCombo(cboArticleNo, _allArticleNos)
+    End Sub
+
+    ' Customer
+    Private Sub cboCustomer_DropDown(sender As Object, e As EventArgs) Handles cboCustomer.DropDown
+        HandleDropDown(cboCustomer)
+    End Sub
+    Private Sub cboCustomer_DropDownClosed(sender As Object, e As EventArgs) Handles cboCustomer.DropDownClosed
+        HandleDropDownClosed(cboCustomer)
+    End Sub
+    Private Sub cboCustomer_TextChanged(sender As Object, e As EventArgs) Handles cboCustomer.TextChanged
+        FilterCombo(cboCustomer, _allCustomers)
+    End Sub
+
+    ' S/T No.
+    Private Sub cboStNo_DropDown(sender As Object, e As EventArgs) Handles cboStNo.DropDown
+        HandleDropDown(cboStNo)
+    End Sub
+    Private Sub cboStNo_DropDownClosed(sender As Object, e As EventArgs) Handles cboStNo.DropDownClosed
+        HandleDropDownClosed(cboStNo)
+    End Sub
+    Private Sub cboStNo_TextChanged(sender As Object, e As EventArgs) Handles cboStNo.TextChanged
+        FilterCombo(cboStNo, _allStNos)
     End Sub
 
     Private Sub btnPrint_Click(sender As Object, e As EventArgs) Handles btnPrint.Click
@@ -37,6 +189,14 @@ Public Class frmStockSummary
 
     Protected Overrides Function ProcessCmdKey(ByRef msg As Message, keyData As Keys) As Boolean
         If keyData = Keys.Enter Then
+            ' If a combo dropdown is open, close it (restores typed text via DropDownClosed) then print
+            For Each cbo In New ComboBox() {cboArticleNo, cboCustomer, cboStNo}
+                If cbo.DroppedDown Then
+                    cbo.DroppedDown = False  ' triggers DropDownClosed → restores typed text
+                    Me.BeginInvoke(New Action(Sub() btnPrint_Click(btnPrint, EventArgs.Empty)))
+                    Return True
+                End If
+            Next
             Me.BeginInvoke(New Action(Sub() btnPrint_Click(btnPrint, EventArgs.Empty)))
             Return True
         End If
@@ -87,9 +247,9 @@ Public Class frmStockSummary
     ' ─────────────────────────────────────────────────────────────
 
     Private Function GenerateHtml() As String
-        Dim articleFilter As String = txtArticleNo.Text.Trim().ToUpper()
-        Dim customerFilter As String = txtCustomer.Text.Trim()
-        Dim stNoFilter As String = txtStNo.Text.Trim().ToUpper()
+        Dim articleFilter As String = cboArticleNo.Text.Trim().ToUpper()
+        Dim customerFilter As String = cboCustomer.Text.Trim()
+        Dim stNoFilter As String = cboStNo.Text.Trim().ToUpper()
 
         Dim datefr As String
         Dim dateto As String

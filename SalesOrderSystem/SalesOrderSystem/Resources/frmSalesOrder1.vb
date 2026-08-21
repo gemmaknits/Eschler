@@ -1061,10 +1061,15 @@ Public Class frmSalesOrder
         If Not CheckDataCopySo() Then Exit Sub
 
         Dim sono As String = txtSoNo.Text.Trim
-        If CopySo(sender, e) Then
-            MessageBox.Show("Copy S/O No." & sono & " Success", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
-        Else
 
+        If CopySo(sender, e) Then
+            MessageBox.Show(
+              "S/O No. " & sono & " copied successfully." & vbCrLf &
+              "Please click Save to save the changes.",
+              "System Message",
+              MessageBoxButtons.OK,
+              MessageBoxIcon.Information
+            )
         End If
 
         'If MessageBox.Show("คุณยืนยันที่จะสร้าง So No ใหม่ " & vbCr & Space(3) & "โดยคัดลอกข้อมูลจาก So No : " & txtSoNo.Text.Trim & " ใช่ไหม ?" _
@@ -1119,7 +1124,7 @@ Public Class frmSalesOrder
 
                 For Each dcCopy As DataColumn In dtCopy.Columns
 
-                    If dtCopy.Columns.Contains(dcOld.ColumnName) Then
+                    If dcOld.ColumnName.Trim <> "ref_stnoid" AndAlso dtCopy.Columns.Contains(dcOld.ColumnName) Then
                         drNew(dcOld.ColumnName) = drCopy(dcOld.ColumnName)
                     End If
 
@@ -1902,7 +1907,10 @@ Public Class frmSalesOrder
                     MessageBox.Show("uom must not blank", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 ElseIf currentGridDesignNo = "" Then
                     MessageBox.Show("Design must not blank", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                ElseIf oConfig.IsNull(dgr.Cells("so_line_id").Value, 0) = 0 Then
+                    MessageBox.Show("S/O Line Id must not blank", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Else
+                    currentGridSoLineID = oConfig.IsNull(dgr.Cells("so_line_id").Value, 0)
                     ' Open ST Booking Web Page
                     Dim url As String = "http://172.16.3.2:3001/STBook/st-booking/" &
     "?so_line_id=" & currentGridSoLineID &

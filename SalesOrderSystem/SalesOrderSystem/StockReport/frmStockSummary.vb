@@ -90,6 +90,7 @@ Public Class frmStockSummary
     Private Function GenerateHtml() As String
         Dim articleFilter As String = txtArticleNo.Text.Trim().ToUpper()
         Dim customerFilter As String = txtCustomer.Text.Trim()
+        Dim stNoFilter As String = txtStNo.Text.Trim().ToUpper()
 
         Dim datefr As String
         Dim dateto As String
@@ -116,6 +117,28 @@ Public Class frmStockSummary
             Next
         End If
 
+        ' Pre-load detail data for all summary rows, applying ST No. filter.
+        ' Rows whose filtered detail is empty are excluded from both summary and detail.
+        Dim validRows As New List(Of DataRow)
+        Dim validDetails As New List(Of DataSet)
+        For Each r As DataRow In dtSummary.Rows
+            Dim ds As DataSet = LoadDetail(r("design_no").ToString(), datefr, dateto, customerFilter)
+            If stNoFilter <> "" AndAlso ds.Tables.Count > 0 Then
+                Dim toRemove As New List(Of DataRow)
+                For Each stRow As DataRow In ds.Tables(0).Rows
+                    If Not stRow("st_no").ToString().Trim().ToUpper().Contains(stNoFilter) Then
+                        toRemove.Add(stRow)
+                    End If
+                Next
+                For Each stRow As DataRow In toRemove
+                    ds.Tables(0).Rows.Remove(stRow)
+                Next
+                If ds.Tables(0).Rows.Count = 0 Then Continue For
+            End If
+            validRows.Add(r)
+            validDetails.Add(ds)
+        Next
+
         Dim sb As New StringBuilder
 
         sb.AppendLine("<!DOCTYPE html>")
@@ -138,6 +161,9 @@ Public Class frmStockSummary
         If customerFilter <> "" Then
             filterInfo &= $" &nbsp;|&nbsp; Customer: <strong>{H(customerFilter)}</strong>"
         End If
+        If stNoFilter <> "" Then
+            filterInfo &= $" &nbsp;|&nbsp; S/T No.: <strong>{H(stNoFilter)}</strong>"
+        End If
         sb.AppendLine($"<span class='subtitle'>{filterInfo} &nbsp;&nbsp; <span class='hint'>Click a row to view its detail below</span></span>")
         sb.AppendLine("<button class='btn-export' onclick='exportExcel()'>&#8681; Export to Excel</button>")
         sb.AppendLine("</div>")
@@ -146,7 +172,7 @@ Public Class frmStockSummary
         sb.AppendLine("<div class='pane-top'>")
         sb.AppendLine("<table class='tbl-main'>")
         sb.AppendLine("<thead><tr>")
-        sb.AppendLine("<th>#</th><th>Date</th><th>Article No.</th><th>Article</th><th>Composition</th>")
+        sb.AppendLine("<th>#</th><th>Date</th><th>Article No.</th><th>Article Name</th><th>Composition</th>")
         sb.AppendLine("<th>Balance Greige (YDS)</th><th>Greige Ready (YDS)</th><th>Greige Pending (YDS)</th>")
         sb.AppendLine("<th>Remark</th>")
         sb.AppendLine("</tr></thead><tbody>")
@@ -155,7 +181,7 @@ Public Class frmStockSummary
         Dim seq As Integer = 0
         Dim summaryJsonRows As New List(Of String)
 
-        For Each row As DataRow In dtSummary.Rows
+        For Each row As DataRow In validRows
             seq += 1
             Dim designNo As String = row("design_no").ToString()
             Dim divId As String = "det_" & seq.ToString()
@@ -191,7 +217,7 @@ Public Class frmStockSummary
         Next
 
         If seq = 0 Then
-            sb.AppendLine("<tr><td colspan='9' class='center' style='padding:20px;color:#888;'>No data found for the selected period.</td></tr>")
+            sb.AppendLine("<tr><td colspan='9' class='center' style='padding:20px;color:#888;'>No data found for the selected filters.</td></tr>")
         End If
 
         sb.AppendLine("</tbody></table>")
@@ -206,11 +232,12 @@ Public Class frmStockSummary
         Dim detailJsonParts As New List(Of String)
         Dim detSeq As Integer = 0
 
-        For Each row As DataRow In dtSummary.Rows
+        For detIdx As Integer = 0 To validRows.Count - 1
+            Dim row As DataRow = validRows(detIdx)
             detSeq += 1
             Dim designNo As String = row("design_no").ToString()
             Dim divId As String = "det_" & detSeq.ToString()
-            Dim ds As DataSet = LoadDetail(designNo, datefr, dateto, customerFilter)
+            Dim ds As DataSet = validDetails(detIdx)
 
             sb.AppendLine($"<div id='{divId}' class='detail-section'>")
             sb.AppendLine("<div class='detail-wrap'>")
@@ -236,8 +263,8 @@ Public Class frmStockSummary
             sb.AppendLine("<th colspan='10' class='sec-hdr-right'>ORDER</th>")
             sb.AppendLine("</tr>")
             sb.AppendLine("<tr>")
-            sb.AppendLine("<th>S/T No.</th><th>Date</th><th>Product</th><th>Design</th><th>CUS Color</th><th class='num'>QTY</th><th>UOM</th>")
-            sb.AppendLine("<th>O/C No.</th><th>OC Date</th><th>Customer PO</th><th>Product</th><th>CUS Color</th><th>Code Color</th><th class='num'>QTY</th><th>UOM</th><th class='num'>TTL Order</th><th class='num'>Balance Qty.</th>")
+            sb.AppendLine("<th>S/T No.</th><th>Date</th><th>Article No.</th><th>Article Name</th><th>CUS Color</th><th class='num'>QTY</th><th>UOM</th>")
+            sb.AppendLine("<th>O/C No.</th><th>OC Date</th><th>Customer PO</th><th>Article Name</th><th>CUS Color</th><th>Code Color</th><th class='num'>QTY</th><th>UOM</th><th class='num'>TTL Order</th><th class='num'>Balance Qty.</th>")
             sb.AppendLine("</tr>")
             sb.AppendLine("</thead><tbody>")
 
@@ -272,8 +299,8 @@ Public Class frmStockSummary
                         sb.AppendLine("<tr>")
                         sb.AppendLine($"<td class='st-cell'>{H(stNo)}</td>")
                         sb.AppendLine($"<td class='st-cell'>{H(stRow("st_date").ToString())}</td>")
-                        sb.AppendLine($"<td class='st-cell'>{H(stRow("product").ToString())}</td>")
                         sb.AppendLine($"<td class='st-cell'>{H(stRow("customer_design").ToString())}</td>")
+                        sb.AppendLine($"<td class='st-cell'>{H(stRow("product").ToString())}</td>")
                         sb.AppendLine($"<td class='st-cell'>{H(stRow("cus_color").ToString())}</td>")
                         sb.AppendLine($"<td class='st-cell num'>{Fmt(stQty)}</td>")
                         sb.AppendLine($"<td class='st-cell'>{H(stRow("st_uom").ToString())}</td>")
@@ -289,8 +316,8 @@ Public Class frmStockSummary
                             If i = 0 Then
                                 sb.AppendLine($"<td rowspan='{rowspan}' class='st-cell'>{H(stNo)}</td>")
                                 sb.AppendLine($"<td rowspan='{rowspan}' class='st-cell'>{H(stRow("st_date").ToString())}</td>")
-                                sb.AppendLine($"<td rowspan='{rowspan}' class='st-cell'>{H(stRow("product").ToString())}</td>")
                                 sb.AppendLine($"<td rowspan='{rowspan}' class='st-cell'>{H(stRow("customer_design").ToString())}</td>")
+                                sb.AppendLine($"<td rowspan='{rowspan}' class='st-cell'>{H(stRow("product").ToString())}</td>")
                                 sb.AppendLine($"<td rowspan='{rowspan}' class='st-cell'>{H(stRow("cus_color").ToString())}</td>")
                                 sb.AppendLine($"<td rowspan='{rowspan}' class='st-cell num'>{Fmt(stQty)}</td>")
                                 sb.AppendLine($"<td rowspan='{rowspan}' class='st-cell'>{H(stRow("st_uom").ToString())}</td>")
@@ -347,9 +374,8 @@ Public Class frmStockSummary
             sb.AppendLine("<td colspan='5'><strong>Total</strong></td>")
             sb.AppendLine($"<td class='num'><strong>{Fmt(grandStQty)}</strong></td>")
             sb.AppendLine("<td></td>")
-            sb.AppendLine("<td colspan='7'></td>")
+            sb.AppendLine("<td colspan='8'></td>")
             sb.AppendLine($"<td class='num'><strong>{Fmt(grandOcQty)}</strong></td>")
-            sb.AppendLine("<td></td>")
             sb.AppendLine($"<td class='num'><strong>{Fmt(grandStQty - grandOcQty)}</strong></td>")
             sb.AppendLine("</tr>")
             sb.AppendLine("</tbody></table></div>")
@@ -374,7 +400,7 @@ Public Class frmStockSummary
 
         ' Embed data for Excel export
         sb.AppendLine("<script>")
-        sb.AppendLine("window.__summaryHeaders=['Date','Design','Article','Composition','Balances Greige (mt.)','Greige ready knited','Greige pending','Remark'];")
+        sb.AppendLine("window.__summaryHeaders=['Date','Article No.','Article Name','Composition','Balances Greige (mt.)','Greige ready knited','Greige pending','Remark'];")
         sb.AppendLine("window.__summaryRows=[" & String.Join(",", summaryJsonRows) & "];")
         sb.AppendLine("window.__detailData={" & String.Join(",", detailJsonParts) & "};")
         sb.AppendLine("</script>")
@@ -560,17 +586,17 @@ Public Class frmStockSummary
     var visible=document.querySelector('.detail-section.visible');
     if(visible&&window.__detailData&&window.__detailData[visible.id]){
       var det=window.__detailData[visible.id];
-      var dh=['S/T No.','S/T Date','Product','Design','CUS Color','S/T QTY','UOM',
-              'O/C No.','OC Date','Customer PO','Product','CUS Color','Code Color','OC QTY','UOM','TTL Order','Balance Qty'];
+      var dh=['S/T No.','S/T Date','Article No.','Article Name','CUS Color','S/T QTY','UOM',
+              'O/C No.','OC Date','Customer PO','Article Name','CUS Color','Code Color','OC QTY','UOM','TTL Order','Balance Qty'];
       var dRows=[];
       (det.stRows||[]).forEach(function(st){
         if(!st.ocRows||st.ocRows.length===0){
-          dRows.push([st.stNo,st.stDate,st.product,st.design,st.cusColor,st.stQty,st.stUom,
+          dRows.push([st.stNo,st.stDate,st.design,st.product,st.cusColor,st.stQty,st.stUom,
                       '','','','','','','','',st.ttlOrder,st.balQty]);
         } else {
           st.ocRows.forEach(function(oc,idx){
             var isLast=idx===st.ocRows.length-1;
-            dRows.push([st.stNo,st.stDate,st.product,st.design,st.cusColor,st.stQty,st.stUom,
+            dRows.push([st.stNo,st.stDate,st.design,st.product,st.cusColor,st.stQty,st.stUom,
                         oc.ocNo,oc.ocDate,oc.custPo,oc.article,oc.cusCo,oc.colorCode,oc.ocQty,oc.ocUom,
                         isLast?st.ttlOrder:'',isLast?st.balQty:'']);
           });

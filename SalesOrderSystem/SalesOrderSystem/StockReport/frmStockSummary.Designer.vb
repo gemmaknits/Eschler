@@ -30,6 +30,8 @@ Partial Class frmStockSummary
         Me.txtArticleNo = New System.Windows.Forms.TextBox()
         Me.lblCustomer = New System.Windows.Forms.Label()
         Me.txtCustomer = New System.Windows.Forms.TextBox()
+        Me.lblStNo = New System.Windows.Forms.Label()
+        Me.txtStNo = New System.Windows.Forms.TextBox()
         Me.ToolStrip1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
@@ -65,9 +67,11 @@ Partial Class frmStockSummary
         Me.GroupBox1.Controls.Add(Me.txtArticleNo)
         Me.GroupBox1.Controls.Add(Me.lblCustomer)
         Me.GroupBox1.Controls.Add(Me.txtCustomer)
+        Me.GroupBox1.Controls.Add(Me.lblStNo)
+        Me.GroupBox1.Controls.Add(Me.txtStNo)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 32)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(456, 82)
+        Me.GroupBox1.Size = New System.Drawing.Size(456, 108)
         Me.GroupBox1.TabIndex = 1
         Me.GroupBox1.Text = "Filter"
 
@@ -121,10 +125,22 @@ Partial Class frmStockSummary
         Me.txtCustomer.Size = New System.Drawing.Size(158, 20)
         Me.txtCustomer.TabIndex = 3
 
+        ' lblStNo
+        Me.lblStNo.AutoSize = True
+        Me.lblStNo.Location = New System.Drawing.Point(8, 78)
+        Me.lblStNo.Name = "lblStNo"
+        Me.lblStNo.Text = "S/T No. :"
+
+        ' txtStNo
+        Me.txtStNo.Location = New System.Drawing.Point(80, 75)
+        Me.txtStNo.Name = "txtStNo"
+        Me.txtStNo.Size = New System.Drawing.Size(130, 20)
+        Me.txtStNo.TabIndex = 4
+
         ' frmStockSummary
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(480, 130)
+        Me.ClientSize = New System.Drawing.Size(480, 156)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.ToolStrip1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -152,4 +168,6 @@ Partial Class frmStockSummary
     Friend WithEvents txtArticleNo As System.Windows.Forms.TextBox
     Friend lblCustomer As System.Windows.Forms.Label
     Friend WithEvents txtCustomer As System.Windows.Forms.TextBox
+    Friend lblStNo As System.Windows.Forms.Label
+    Friend WithEvents txtStNo As System.Windows.Forms.TextBox
 End Class

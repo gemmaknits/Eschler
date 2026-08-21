@@ -3,7 +3,6 @@ Imports System.Text
 Imports System.IO
 
 Public Class frmStockSummary
-    Dim clsConn As New classConnection
     Dim clsUser As New classUserInfo
 
     Public Property UserInfo() As classUserInfo
@@ -102,7 +101,6 @@ Public Class frmStockSummary
         datefrDisplay = dtpDateFr.Value.ToString("dd/MM/yyyy")
         datetoDisplay = dtpDateTo.Value.ToString("dd/MM/yyyy")
 
-        Dim reportDate As String = Now.ToString("dd/MM/yyyy")
         Dim dtSummary As DataTable = LoadSummary(datefr, dateto, customerFilter)
 
         If articleFilter <> "" Then
@@ -241,7 +239,7 @@ Public Class frmStockSummary
 
             sb.AppendLine($"<div id='{divId}' class='detail-section'>")
             sb.AppendLine("<div class='detail-wrap'>")
-            sb.AppendLine($"<p class='det-title'><strong>Product :</strong> {H(designNo)} &nbsp; {H(row("article").ToString())} &nbsp;&nbsp; <strong>Composition :</strong> {H(row("composition").ToString())}</p>")
+            sb.AppendLine($"<p class='det-title'><strong>Article No. :</strong> {H(designNo)} &nbsp; {H(row("article").ToString())} &nbsp;&nbsp; <strong>Composition :</strong> {H(row("composition").ToString())}</p>")
 
             ' Build OC lookup keyed by st_no
             Dim ocByStNo As New Dictionary(Of String, List(Of DataRow))
@@ -595,15 +593,16 @@ Public Class frmStockSummary
                       '','','','','','','','',st.ttlOrder,st.balQty]);
         } else {
           st.ocRows.forEach(function(oc,idx){
+            var isFirst=idx===0;
             var isLast=idx===st.ocRows.length-1;
-            dRows.push([st.stNo,st.stDate,st.design,st.product,st.cusColor,st.stQty,st.stUom,
+            dRows.push([st.stNo,st.stDate,st.design,st.product,st.cusColor,isFirst?st.stQty:'',isFirst?st.stUom:'',
                         oc.ocNo,oc.ocDate,oc.custPo,oc.article,oc.cusCo,oc.colorCode,oc.ocQty,oc.ocUom,
                         isLast?st.ttlOrder:'',isLast?st.balQty:'']);
           });
         }
       });
-      dRows.push(['Total','','','','',det.grandStQty,'','','','','','','',det.grandOcQty,'','',det.grandStQty-det.grandOcQty]);
-      var title='Product : '+det.design+'   '+det.article+'          Composition : '+det.composition;
+      dRows.push(['Total','','','','',det.grandStQty,'','','','','','','','','',det.grandOcQty,det.grandStQty-det.grandOcQty]);
+      var title='Article No. : '+det.design+'   '+det.article+'          Composition : '+det.composition;
       addSheet(wb,det.sheetName||'Detail',dh,dRows,title);
     }
 

@@ -595,7 +595,7 @@ Public Class frmStockSummary
           st.ocRows.forEach(function(oc,idx){
             var isFirst=idx===0;
             var isLast=idx===st.ocRows.length-1;
-            dRows.push([st.stNo,st.stDate,st.design,st.product,st.cusColor,isFirst?st.stQty:'',isFirst?st.stUom:'',
+            dRows.push([isFirst?st.stNo:'',isFirst?st.stDate:'',isFirst?st.design:'',isFirst?st.product:'',isFirst?st.cusColor:'',isFirst?st.stQty:'',isFirst?st.stUom:'',
                         oc.ocNo,oc.ocDate,oc.custPo,oc.article,oc.cusCo,oc.colorCode,oc.ocQty,oc.ocUom,
                         isLast?st.ttlOrder:'',isLast?st.balQty:'']);
           });

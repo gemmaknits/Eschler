@@ -179,29 +179,26 @@ Partial Class frmSalesOrderPrint
         '
         'btnPrint
         '
-        Me.btnPrint.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.btnPrint.Image = CType(resources.GetObject("btnPrint.Image"), System.Drawing.Image)
         Me.btnPrint.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnPrint.Name = "btnPrint"
-        Me.btnPrint.Size = New System.Drawing.Size(23, 22)
+        Me.btnPrint.Size = New System.Drawing.Size(52, 22)
         Me.btnPrint.Text = "&Print"
         '
         'btnMinimized
         '
-        Me.btnMinimized.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.btnMinimized.Image = CType(resources.GetObject("btnMinimized.Image"), System.Drawing.Image)
         Me.btnMinimized.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnMinimized.Name = "btnMinimized"
-        Me.btnMinimized.Size = New System.Drawing.Size(23, 22)
+        Me.btnMinimized.Size = New System.Drawing.Size(83, 22)
         Me.btnMinimized.Text = "Minimized"
         '
         'btnExit
         '
-        Me.btnExit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.btnExit.Image = CType(resources.GetObject("btnExit.Image"), System.Drawing.Image)
         Me.btnExit.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnExit.Name = "btnExit"
-        Me.btnExit.Size = New System.Drawing.Size(23, 22)
+        Me.btnExit.Size = New System.Drawing.Size(46, 22)
         Me.btnExit.Text = "E&xit"
         '
         'frmSalesOrderPrint

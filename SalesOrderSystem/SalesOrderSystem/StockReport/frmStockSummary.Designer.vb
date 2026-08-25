@@ -27,11 +27,11 @@ Partial Class frmStockSummary
         Me.lblDateTo = New System.Windows.Forms.Label()
         Me.lblDateFr = New System.Windows.Forms.Label()
         Me.lblArticleNo = New System.Windows.Forms.Label()
-        Me.txtArticleNo = New System.Windows.Forms.TextBox()
+        Me.cboArticleNo = New System.Windows.Forms.ComboBox()
         Me.lblCustomer = New System.Windows.Forms.Label()
-        Me.txtCustomer = New System.Windows.Forms.TextBox()
+        Me.cboCustomer = New System.Windows.Forms.ComboBox()
         Me.lblStNo = New System.Windows.Forms.Label()
-        Me.txtStNo = New System.Windows.Forms.TextBox()
+        Me.cboStNo = New System.Windows.Forms.ComboBox()
         Me.ToolStrip1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
@@ -64,11 +64,11 @@ Partial Class frmStockSummary
         Me.GroupBox1.Controls.Add(Me.lblDateTo)
         Me.GroupBox1.Controls.Add(Me.lblDateFr)
         Me.GroupBox1.Controls.Add(Me.lblArticleNo)
-        Me.GroupBox1.Controls.Add(Me.txtArticleNo)
+        Me.GroupBox1.Controls.Add(Me.cboArticleNo)
         Me.GroupBox1.Controls.Add(Me.lblCustomer)
-        Me.GroupBox1.Controls.Add(Me.txtCustomer)
+        Me.GroupBox1.Controls.Add(Me.cboCustomer)
         Me.GroupBox1.Controls.Add(Me.lblStNo)
-        Me.GroupBox1.Controls.Add(Me.txtStNo)
+        Me.GroupBox1.Controls.Add(Me.cboStNo)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 32)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(456, 108)
@@ -76,66 +76,81 @@ Partial Class frmStockSummary
         Me.GroupBox1.Text = "Filter"
 
         ' lblDateFr
-        Me.lblDateFr.AutoSize = True
+        Me.lblDateFr.AutoSize = False
         Me.lblDateFr.Location = New System.Drawing.Point(8, 22)
         Me.lblDateFr.Name = "lblDateFr"
+        Me.lblDateFr.Size = New System.Drawing.Size(68, 20)
+        Me.lblDateFr.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.lblDateFr.Text = "Date From :"
 
         ' dtpDateFr
-        Me.dtpDateFr.Format = System.Windows.Forms.DateTimePickerFormat.Short
-        Me.dtpDateFr.Location = New System.Drawing.Point(80, 18)
+        Me.dtpDateFr.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtpDateFr.CustomFormat = "dd/MM/yyyy"
+        Me.dtpDateFr.Location = New System.Drawing.Point(80, 19)
         Me.dtpDateFr.Name = "dtpDateFr"
-        Me.dtpDateFr.Size = New System.Drawing.Size(110, 20)
+        Me.dtpDateFr.Size = New System.Drawing.Size(105, 20)
         Me.dtpDateFr.TabIndex = 0
 
         ' lblDateTo
-        Me.lblDateTo.AutoSize = True
-        Me.lblDateTo.Location = New System.Drawing.Point(206, 22)
+        Me.lblDateTo.AutoSize = False
+        Me.lblDateTo.Location = New System.Drawing.Point(198, 22)
         Me.lblDateTo.Name = "lblDateTo"
+        Me.lblDateTo.Size = New System.Drawing.Size(58, 20)
+        Me.lblDateTo.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.lblDateTo.Text = "Date To :"
 
         ' dtpDateTo
-        Me.dtpDateTo.Format = System.Windows.Forms.DateTimePickerFormat.Short
-        Me.dtpDateTo.Location = New System.Drawing.Point(270, 18)
+        Me.dtpDateTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtpDateTo.CustomFormat = "dd/MM/yyyy"
+        Me.dtpDateTo.Location = New System.Drawing.Point(260, 19)
         Me.dtpDateTo.Name = "dtpDateTo"
-        Me.dtpDateTo.Size = New System.Drawing.Size(110, 20)
+        Me.dtpDateTo.Size = New System.Drawing.Size(105, 20)
         Me.dtpDateTo.TabIndex = 1
 
         ' lblArticleNo
-        Me.lblArticleNo.AutoSize = True
+        Me.lblArticleNo.AutoSize = False
         Me.lblArticleNo.Location = New System.Drawing.Point(8, 50)
         Me.lblArticleNo.Name = "lblArticleNo"
+        Me.lblArticleNo.Size = New System.Drawing.Size(68, 21)
+        Me.lblArticleNo.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.lblArticleNo.Text = "Article No. :"
 
-        ' txtArticleNo
-        Me.txtArticleNo.Location = New System.Drawing.Point(80, 47)
-        Me.txtArticleNo.Name = "txtArticleNo"
-        Me.txtArticleNo.Size = New System.Drawing.Size(130, 20)
-        Me.txtArticleNo.TabIndex = 2
+        ' cboArticleNo
+        Me.cboArticleNo.Location = New System.Drawing.Point(80, 47)
+        Me.cboArticleNo.Name = "cboArticleNo"
+        Me.cboArticleNo.Size = New System.Drawing.Size(110, 21)
+        Me.cboArticleNo.TabIndex = 2
+        Me.cboArticleNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown
 
         ' lblCustomer
-        Me.lblCustomer.AutoSize = True
-        Me.lblCustomer.Location = New System.Drawing.Point(222, 50)
+        Me.lblCustomer.AutoSize = False
+        Me.lblCustomer.Location = New System.Drawing.Point(198, 50)
         Me.lblCustomer.Name = "lblCustomer"
+        Me.lblCustomer.Size = New System.Drawing.Size(58, 21)
+        Me.lblCustomer.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.lblCustomer.Text = "Customer :"
 
-        ' txtCustomer
-        Me.txtCustomer.Location = New System.Drawing.Point(288, 47)
-        Me.txtCustomer.Name = "txtCustomer"
-        Me.txtCustomer.Size = New System.Drawing.Size(158, 20)
-        Me.txtCustomer.TabIndex = 3
+        ' cboCustomer
+        Me.cboCustomer.Location = New System.Drawing.Point(260, 47)
+        Me.cboCustomer.Name = "cboCustomer"
+        Me.cboCustomer.Size = New System.Drawing.Size(182, 21)
+        Me.cboCustomer.TabIndex = 3
+        Me.cboCustomer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown
 
         ' lblStNo
-        Me.lblStNo.AutoSize = True
+        Me.lblStNo.AutoSize = False
         Me.lblStNo.Location = New System.Drawing.Point(8, 78)
         Me.lblStNo.Name = "lblStNo"
+        Me.lblStNo.Size = New System.Drawing.Size(68, 21)
+        Me.lblStNo.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.lblStNo.Text = "S/T No. :"
 
-        ' txtStNo
-        Me.txtStNo.Location = New System.Drawing.Point(80, 75)
-        Me.txtStNo.Name = "txtStNo"
-        Me.txtStNo.Size = New System.Drawing.Size(130, 20)
-        Me.txtStNo.TabIndex = 4
+        ' cboStNo
+        Me.cboStNo.Location = New System.Drawing.Point(80, 75)
+        Me.cboStNo.Name = "cboStNo"
+        Me.cboStNo.Size = New System.Drawing.Size(110, 21)
+        Me.cboStNo.TabIndex = 4
+        Me.cboStNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown
 
         ' frmStockSummary
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -165,9 +180,9 @@ Partial Class frmStockSummary
     Friend lblDateFr As System.Windows.Forms.Label
     Friend lblDateTo As System.Windows.Forms.Label
     Friend lblArticleNo As System.Windows.Forms.Label
-    Friend WithEvents txtArticleNo As System.Windows.Forms.TextBox
+    Friend WithEvents cboArticleNo As System.Windows.Forms.ComboBox
     Friend lblCustomer As System.Windows.Forms.Label
-    Friend WithEvents txtCustomer As System.Windows.Forms.TextBox
+    Friend WithEvents cboCustomer As System.Windows.Forms.ComboBox
     Friend lblStNo As System.Windows.Forms.Label
-    Friend WithEvents txtStNo As System.Windows.Forms.TextBox
+    Friend WithEvents cboStNo As System.Windows.Forms.ComboBox
 End Class

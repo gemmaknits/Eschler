@@ -681,6 +681,11 @@ Public Class frmSalesOrder
             Exit Function
         End If
 
+        If Not CheckSalesOrderItemMasterData() Then
+            CheckData = False
+            Exit Function
+        End If
+
         'If (checkBulkAppInternal.Checked = True Or chkSpecial1.Checked = True) And clsConfig.IsNull(txtMtsPerRoll.Text, 0) = 0 Then
         '    MessageBox.Show("Please enter LENGTH PER ROLL (Mts)", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
         '    CheckData = False
@@ -691,6 +696,36 @@ Public Class frmSalesOrder
 
         CheckData = True
     End Function
+
+    Private Function CheckSalesOrderItemMasterData() As Boolean
+        Dim objSalesOrder As New classSalesOrder
+        Dim isCustomerOrder As Boolean = Me.ComboSaleOrderType1.SelectedValue = "CUSTORDER"
+
+        For Each row As DataGridViewRow In grdSalesOrder.Rows
+            If row.IsNewRow Then Continue For
+
+            Dim rowNo As Integer = row.Index + 1
+            Dim designNo As String = oConfig.IsNull(row.Cells("design_no").Value, "").ToString.Trim
+
+            If designNo.Length = 0 Then
+                ShowSalesOrderGridError(row, "design_no", "Please input Design No. / Item No. in row " & rowNo & ".")
+                Return False
+            End If
+
+            If isCustomerOrder AndAlso Not objSalesOrder.SalesOrderDesignNoExists(designNo) Then
+                ShowSalesOrderGridError(row, "design_no", "Design No. / Item No. '" & designNo & "' does not exist in master. Please check row " & rowNo & ".")
+                Return False
+            End If
+        Next
+
+        Return True
+    End Function
+
+    Private Sub ShowSalesOrderGridError(ByVal row As DataGridViewRow, ByVal columnName As String, ByVal message As String)
+        MessageBox.Show(message, "System Message", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
+        grdSalesOrder.CurrentCell = row.Cells(columnName)
+        grdSalesOrder.Focus()
+    End Sub
 
     Private Sub LoadData(ByVal SoNo As String)
         Dim objDB As New classSalesOrder

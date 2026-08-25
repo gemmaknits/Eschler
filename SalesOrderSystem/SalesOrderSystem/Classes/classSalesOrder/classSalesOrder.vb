@@ -150,6 +150,30 @@ Public Class classSalesOrder
         Return dt
     End Function
 
+    Public Function SalesOrderDesignNoExists(ByVal designNo As String) As Boolean
+        designNo = oConfig.IsNull(designNo, "").ToString.Trim
+        If designNo.Length = 0 Then Return False
+
+        Dim conn As New SqlConnection((New ClassConnection).connection)
+        Dim comm As New SqlCommand("", conn)
+        comm.CommandType = CommandType.StoredProcedure
+        comm.CommandText = "p_dm_select"
+        comm.Parameters.Clear()
+        comm.Parameters.AddWithValue("@design_no", designNo)
+        Dim da As New SqlDataAdapter(comm)
+        Dim dt As New DataTable
+        da.Fill(dt)
+        conn.Close()  'Sitthana 20190325
+
+        For Each dr As DataRow In dt.Rows
+            If String.Equals(oConfig.IsNull(dr("design_no"), "").ToString.Trim, designNo, StringComparison.OrdinalIgnoreCase) Then
+                Return True
+            End If
+        Next
+
+        Return False
+    End Function
+
     Public Function GetSOFromPO(ByVal strPoNo As String) As DataTable
         Dim conn As New SqlConnection((New ClassConnection).connection)
         Dim comm As New SqlCommand("", conn)

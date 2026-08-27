@@ -152,25 +152,25 @@ Partial Class frmMainmenu
         'EditToolStripMenuItem
         '
         Me.EditToolStripMenuItem.Name = "EditToolStripMenuItem"
-        Me.EditToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
+        Me.EditToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.EditToolStripMenuItem.Text = "Edit Invoice(IV)"
         '
         'EditInvoiceToolStripMenuItem1
         '
         Me.EditInvoiceToolStripMenuItem1.Name = "EditInvoiceToolStripMenuItem1"
-        Me.EditInvoiceToolStripMenuItem1.Size = New System.Drawing.Size(157, 22)
+        Me.EditInvoiceToolStripMenuItem1.Size = New System.Drawing.Size(180, 22)
         Me.EditInvoiceToolStripMenuItem1.Text = "Edit Invoice(SC)"
         '
         'PrintInvoiceToolStripMenuItem
         '
         Me.PrintInvoiceToolStripMenuItem.Name = "PrintInvoiceToolStripMenuItem"
-        Me.PrintInvoiceToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
+        Me.PrintInvoiceToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.PrintInvoiceToolStripMenuItem.Text = "Print Invoice"
         '
         'PrintControlToolStripMenuItem
         '
         Me.PrintControlToolStripMenuItem.Name = "PrintControlToolStripMenuItem"
-        Me.PrintControlToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
+        Me.PrintControlToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.PrintControlToolStripMenuItem.Text = "Print Control"
         '
         'ExportInvoiceToolStripMenuItem

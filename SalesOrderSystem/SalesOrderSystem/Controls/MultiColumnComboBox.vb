@@ -370,9 +370,12 @@ Namespace Controls
 
         Public Overrides Property Text As String
             Get
+                If _txtDisplay Is Nothing Then Return MyBase.Text
                 Return _txtDisplay.Text
             End Get
             Set(value As String)
+                MyBase.Text = value
+                If _txtDisplay Is Nothing Then Return
                 _txtDisplay.Text = value
                 If String.IsNullOrEmpty(value) Then _selectedIndex = -1
             End Set

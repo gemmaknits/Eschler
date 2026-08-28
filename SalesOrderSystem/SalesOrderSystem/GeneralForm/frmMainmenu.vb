@@ -1962,4 +1962,8 @@ Public Class frmMainmenu
         frm.MdiParent = Me
         frm.Show()
     End Sub
+
+    Private Sub menuSalesOrder_Click(sender As Object, e As EventArgs) Handles menuSalesOrder.Click
+
+    End Sub
 End Class

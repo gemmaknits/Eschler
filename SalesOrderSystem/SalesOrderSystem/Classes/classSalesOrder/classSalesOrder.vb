@@ -203,6 +203,9 @@ Public Class classSalesOrder
     End Function
 
     Public Function Getfulfilment_typeFromSo_Type(ByVal StrSo_type As String) As DataTable
+        Dim dt As New DataTable
+        If String.IsNullOrWhiteSpace(StrSo_type) Then Return dt
+
         Dim conn As New SqlConnection((New ClassConnection).connection)
         Dim comm As New SqlCommand("", conn)
         comm.CommandType = CommandType.StoredProcedure
@@ -210,13 +213,15 @@ Public Class classSalesOrder
         comm.Parameters.Clear()
         comm.Parameters.AddWithValue("@order_type", StrSo_type.Trim)
         Dim da As New SqlDataAdapter(comm)
-        Dim dt As New DataTable
         da.Fill(dt)
         conn.Close()  'Sitthana 20190325
         Return dt
     End Function
 
     Public Function GetSo_TypeFromUserId(ByVal Strentitytype As String, ByVal Struserid As String) As DataTable
+        Dim dt As New DataTable
+        If String.IsNullOrWhiteSpace(Strentitytype) OrElse String.IsNullOrWhiteSpace(Struserid) Then Return dt
+
         Dim conn As New SqlConnection((New ClassConnection).connection)
         Dim comm As New SqlCommand("", conn)
         comm.CommandType = CommandType.StoredProcedure
@@ -225,7 +230,6 @@ Public Class classSalesOrder
         comm.Parameters.AddWithValue("@entitytype", Strentitytype.Trim)
         comm.Parameters.AddWithValue("@userid", Struserid.Trim)
         Dim da As New SqlDataAdapter(comm)
-        Dim dt As New DataTable
         da.Fill(dt)
         conn.Close()  'Sitthana 20190325
         Return dt

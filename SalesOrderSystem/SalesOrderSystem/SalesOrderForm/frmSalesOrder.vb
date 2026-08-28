@@ -992,6 +992,11 @@ Public Class frmSalesOrder
 
     End Sub
     Private Sub SetdefaultSo_typeByUserID()
+        If clsUser Is Nothing OrElse String.IsNullOrWhiteSpace(clsUser.UserID) Then
+            HadRight = False
+            Exit Sub
+        End If
+
         Dim clsSO As New classSalesOrder
         Dim dt As DataTable = clsSO.GetSo_TypeFromUserId(Strentitytype:="ORDERTYPE", Struserid:=clsUser.UserID)
         If dt.Rows.Count > 0 Then

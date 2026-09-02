@@ -27,6 +27,11 @@ Partial Class frmInvoiceExportControl
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.lblPeriod = New System.Windows.Forms.Label()
+        Me.cboPeriodMonth = New System.Windows.Forms.ComboBox()
+        Me.cboPeriodYear = New System.Windows.Forms.ComboBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.cboDesignNo = New System.Windows.Forms.ComboBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.cboAgent = New System.Windows.Forms.ComboBox()
         Me.dtpDateFr = New System.Windows.Forms.DateTimePicker()
@@ -34,11 +39,6 @@ Partial Class frmInvoiceExportControl
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.btnMinimized = New System.Windows.Forms.ToolStripButton()
         Me.btnExit = New System.Windows.Forms.ToolStripButton()
-        Me.cboDesignNo = New System.Windows.Forms.ComboBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.lblPeriod = New System.Windows.Forms.Label()
-        Me.cboPeriodMonth = New System.Windows.Forms.ComboBox()
-        Me.cboPeriodYear = New System.Windows.Forms.ComboBox()
         Me.GroupBox1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -117,6 +117,50 @@ Partial Class frmInvoiceExportControl
         Me.GroupBox1.TabIndex = 20
         Me.GroupBox1.TabStop = False
         '
+        'lblPeriod
+        '
+        Me.lblPeriod.AutoSize = True
+        Me.lblPeriod.Location = New System.Drawing.Point(8, 116)
+        Me.lblPeriod.Name = "lblPeriod"
+        Me.lblPeriod.Size = New System.Drawing.Size(25, 13)
+        Me.lblPeriod.TabIndex = 12
+        Me.lblPeriod.Text = "งวด"
+        '
+        'cboPeriodMonth
+        '
+        Me.cboPeriodMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboPeriodMonth.FormattingEnabled = True
+        Me.cboPeriodMonth.Location = New System.Drawing.Point(112, 113)
+        Me.cboPeriodMonth.Name = "cboPeriodMonth"
+        Me.cboPeriodMonth.Size = New System.Drawing.Size(130, 21)
+        Me.cboPeriodMonth.TabIndex = 13
+        '
+        'cboPeriodYear
+        '
+        Me.cboPeriodYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboPeriodYear.FormattingEnabled = True
+        Me.cboPeriodYear.Location = New System.Drawing.Point(248, 113)
+        Me.cboPeriodYear.Name = "cboPeriodYear"
+        Me.cboPeriodYear.Size = New System.Drawing.Size(80, 21)
+        Me.cboPeriodYear.TabIndex = 14
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(11, 92)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(60, 13)
+        Me.Label1.TabIndex = 11
+        Me.Label1.Text = "Design No."
+        '
+        'cboDesignNo
+        '
+        Me.cboDesignNo.FormattingEnabled = True
+        Me.cboDesignNo.Location = New System.Drawing.Point(112, 88)
+        Me.cboDesignNo.Name = "cboDesignNo"
+        Me.cboDesignNo.Size = New System.Drawing.Size(216, 21)
+        Me.cboDesignNo.TabIndex = 10
+        '
         'Label5
         '
         Me.Label5.AutoSize = True
@@ -145,11 +189,10 @@ Partial Class frmInvoiceExportControl
         '
         'btnPrint
         '
-        Me.btnPrint.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.btnPrint.Image = CType(resources.GetObject("btnPrint.Image"), System.Drawing.Image)
         Me.btnPrint.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnPrint.Name = "btnPrint"
-        Me.btnPrint.Size = New System.Drawing.Size(23, 22)
+        Me.btnPrint.Size = New System.Drawing.Size(52, 22)
         Me.btnPrint.Text = "&Print"
         '
         'ToolStrip1
@@ -162,65 +205,19 @@ Partial Class frmInvoiceExportControl
         '
         'btnMinimized
         '
-        Me.btnMinimized.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.btnMinimized.Image = CType(resources.GetObject("btnMinimized.Image"), System.Drawing.Image)
         Me.btnMinimized.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnMinimized.Name = "btnMinimized"
-        Me.btnMinimized.Size = New System.Drawing.Size(23, 22)
+        Me.btnMinimized.Size = New System.Drawing.Size(83, 22)
         Me.btnMinimized.Text = "Minimized"
         '
         'btnExit
         '
-        Me.btnExit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.btnExit.Image = CType(resources.GetObject("btnExit.Image"), System.Drawing.Image)
         Me.btnExit.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnExit.Name = "btnExit"
-        Me.btnExit.Size = New System.Drawing.Size(23, 22)
+        Me.btnExit.Size = New System.Drawing.Size(46, 22)
         Me.btnExit.Text = "E&xit"
-        '
-        'cboDesignNo
-        '
-        Me.cboDesignNo.FormattingEnabled = True
-        Me.cboDesignNo.Location = New System.Drawing.Point(112, 88)
-        Me.cboDesignNo.Name = "cboDesignNo"
-        Me.cboDesignNo.Size = New System.Drawing.Size(216, 21)
-        Me.cboDesignNo.TabIndex = 10
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(11, 92)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(60, 13)
-        Me.Label1.TabIndex = 11
-        Me.Label1.Text = "Design No."
-        '
-        'lblPeriod
-        '
-        Me.lblPeriod.AutoSize = True
-        Me.lblPeriod.Location = New System.Drawing.Point(8, 116)
-        Me.lblPeriod.Name = "lblPeriod"
-        Me.lblPeriod.Size = New System.Drawing.Size(32, 13)
-        Me.lblPeriod.TabIndex = 12
-        Me.lblPeriod.Text = "งวด"
-        '
-        'cboPeriodMonth
-        '
-        Me.cboPeriodMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboPeriodMonth.FormattingEnabled = True
-        Me.cboPeriodMonth.Location = New System.Drawing.Point(112, 113)
-        Me.cboPeriodMonth.Name = "cboPeriodMonth"
-        Me.cboPeriodMonth.Size = New System.Drawing.Size(130, 21)
-        Me.cboPeriodMonth.TabIndex = 13
-        '
-        'cboPeriodYear
-        '
-        Me.cboPeriodYear.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboPeriodYear.FormattingEnabled = True
-        Me.cboPeriodYear.Location = New System.Drawing.Point(248, 113)
-        Me.cboPeriodYear.Name = "cboPeriodYear"
-        Me.cboPeriodYear.Size = New System.Drawing.Size(80, 21)
-        Me.cboPeriodYear.TabIndex = 14
         '
         'frmInvoiceExportControl
         '

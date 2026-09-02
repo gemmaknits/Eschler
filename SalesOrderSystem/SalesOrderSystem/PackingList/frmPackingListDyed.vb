@@ -411,7 +411,7 @@ Public Class frmPackingListDyed
             MessageBox.Show("Pack NO." & PLDHeader.h02_packno & "  is Cancel Already!!  " & vbCrLf, "System Message", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
             CancelPLD = True
         Else
-            MessageBox.Show(PLDHeader.msgerr, "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+            MessageBox.Show(msgerr, "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
             CancelPLD = False
         End If
 

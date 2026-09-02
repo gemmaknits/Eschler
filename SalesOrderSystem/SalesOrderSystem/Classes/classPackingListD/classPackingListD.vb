@@ -69,7 +69,6 @@ Public Class classPackingListD
         Dim h46_empcd As String
         Dim h47_checknew As String
 
-        Dim msgerr As String
     End Structure
 
     Public Function selectStrollsRecord(ByVal pDocNo As String) As DataTable

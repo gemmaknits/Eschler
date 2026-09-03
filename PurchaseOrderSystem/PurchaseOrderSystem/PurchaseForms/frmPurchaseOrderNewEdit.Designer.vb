@@ -726,11 +726,17 @@ Partial Class frmPurchaseOrderNewEdit
         '
         'mcboPoLineType
         '
+        Me.mcboPoLineType.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.mcboPoLineType.DataSource = Nothing
+        Me.mcboPoLineType.DisplayMember = Nothing
         Me.mcboPoLineType.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.mcboPoLineType.Location = New System.Drawing.Point(558, 8)
         Me.mcboPoLineType.Name = "mcboPoLineType"
+        Me.mcboPoLineType.SelectedIndex = -1
+        Me.mcboPoLineType.SelectedValue = Nothing
         Me.mcboPoLineType.Size = New System.Drawing.Size(147, 21)
         Me.mcboPoLineType.TabIndex = 398
+        Me.mcboPoLineType.ValueMember = Nothing
         '
         'GroupBox2
         '
@@ -769,7 +775,7 @@ Partial Class frmPurchaseOrderNewEdit
         Me.cbPriceIncudingVat.AutoSize = True
         Me.cbPriceIncudingVat.Location = New System.Drawing.Point(74, 160)
         Me.cbPriceIncudingVat.Name = "cbPriceIncudingVat"
-        Me.cbPriceIncudingVat.Size = New System.Drawing.Size(112, 17)
+        Me.cbPriceIncudingVat.Size = New System.Drawing.Size(111, 17)
         Me.cbPriceIncudingVat.TabIndex = 154
         Me.cbPriceIncudingVat.Text = "Price Include Vat"
         Me.cbPriceIncudingVat.UseVisualStyleBackColor = True
@@ -941,7 +947,7 @@ Partial Class frmPurchaseOrderNewEdit
         Me.Label17.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label17.Location = New System.Drawing.Point(69, 132)
         Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(32, 13)
+        Me.Label17.Size = New System.Drawing.Size(31, 13)
         Me.Label17.TabIndex = 63
         Me.Label17.Text = "VAT :"
         '
@@ -951,7 +957,7 @@ Partial Class frmPurchaseOrderNewEdit
         Me.Label15.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label15.Location = New System.Drawing.Point(274, 132)
         Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(76, 13)
+        Me.Label15.Size = New System.Drawing.Size(75, 13)
         Me.Label15.TabIndex = 59
         Me.Label15.Text = "VAT Amount :"
         '
@@ -984,67 +990,39 @@ Partial Class frmPurchaseOrderNewEdit
         Me.Label16.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label16.Location = New System.Drawing.Point(192, 157)
         Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(158, 13)
+        Me.Label16.Size = New System.Drawing.Size(157, 13)
         Me.Label16.TabIndex = 61
         Me.Label16.Text = "Net Order Amount After VAT :"
         '
         'dtpaDeliveryDate
         '
-        Me.dtpaDeliveryDate.BorderColor = System.Drawing.Color.Empty
-        Me.dtpaDeliveryDate.CalendarSize = New System.Drawing.Size(189, 176)
-        Me.dtpaDeliveryDate.Culture = New System.Globalization.CultureInfo("en-GB")
         Me.dtpaDeliveryDate.CustomFormat = "dd/MM/yyyy"
-        Me.dtpaDeliveryDate.DropDownImage = Nothing
-        Me.dtpaDeliveryDate.DropDownNormalColor = System.Drawing.SystemColors.Control
         Me.dtpaDeliveryDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.dtpaDeliveryDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpaDeliveryDate.Location = New System.Drawing.Point(828, 193)
-        Me.dtpaDeliveryDate.MetroColor = System.Drawing.Color.FromArgb(CType(CType(22, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.dtpaDeliveryDate.MinValue = New Date(CType(0, Long))
         Me.dtpaDeliveryDate.Name = "dtpaDeliveryDate"
-        Me.dtpaDeliveryDate.ReadOnly = True
-        Me.dtpaDeliveryDate.ShowCheckBox = False
-        Me.dtpaDeliveryDate.ShowDropDownOnNull = True
         Me.dtpaDeliveryDate.Size = New System.Drawing.Size(127, 20)
         Me.dtpaDeliveryDate.TabIndex = 374
         Me.dtpaDeliveryDate.Value = New Date(2021, 1, 12, 11, 4, 9, 464)
         '
         'dtpaPayDate
         '
-        Me.dtpaPayDate.BorderColor = System.Drawing.Color.Empty
-        Me.dtpaPayDate.CalendarSize = New System.Drawing.Size(189, 176)
-        Me.dtpaPayDate.Culture = New System.Globalization.CultureInfo("en-GB")
         Me.dtpaPayDate.CustomFormat = "dd/MM/yyyy"
-        Me.dtpaPayDate.DropDownImage = Nothing
-        Me.dtpaPayDate.DropDownNormalColor = System.Drawing.SystemColors.Control
         Me.dtpaPayDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.dtpaPayDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpaPayDate.Location = New System.Drawing.Point(96, 191)
-        Me.dtpaPayDate.MetroColor = System.Drawing.Color.FromArgb(CType(CType(22, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.dtpaPayDate.MinValue = New Date(CType(0, Long))
         Me.dtpaPayDate.Name = "dtpaPayDate"
-        Me.dtpaPayDate.ShowCheckBox = False
-        Me.dtpaPayDate.ShowDropDownOnNull = True
         Me.dtpaPayDate.Size = New System.Drawing.Size(127, 20)
         Me.dtpaPayDate.TabIndex = 372
         Me.dtpaPayDate.Value = New Date(2021, 1, 12, 11, 4, 9, 464)
         '
         'dtpaLCDate
         '
-        Me.dtpaLCDate.BorderColor = System.Drawing.Color.Empty
-        Me.dtpaLCDate.CalendarSize = New System.Drawing.Size(189, 176)
-        Me.dtpaLCDate.Culture = New System.Globalization.CultureInfo("en-GB")
         Me.dtpaLCDate.CustomFormat = "dd/MM/yyyy"
-        Me.dtpaLCDate.DropDownImage = Nothing
-        Me.dtpaLCDate.DropDownNormalColor = System.Drawing.SystemColors.Control
         Me.dtpaLCDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.dtpaLCDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpaLCDate.Location = New System.Drawing.Point(496, 190)
-        Me.dtpaLCDate.MetroColor = System.Drawing.Color.FromArgb(CType(CType(22, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.dtpaLCDate.MinValue = New Date(CType(0, Long))
         Me.dtpaLCDate.Name = "dtpaLCDate"
-        Me.dtpaLCDate.ShowCheckBox = False
-        Me.dtpaLCDate.ShowDropDownOnNull = True
         Me.dtpaLCDate.Size = New System.Drawing.Size(127, 20)
         Me.dtpaLCDate.TabIndex = 371
         Me.dtpaLCDate.Value = New Date(2021, 1, 12, 11, 4, 9, 464)
@@ -1261,140 +1239,77 @@ Partial Class frmPurchaseOrderNewEdit
         '
         'dtpaArrival
         '
-        Me.dtpaArrival.BorderColor = System.Drawing.Color.Empty
-        Me.dtpaArrival.CalendarSize = New System.Drawing.Size(189, 176)
-        Me.dtpaArrival.Culture = New System.Globalization.CultureInfo("en-GB")
         Me.dtpaArrival.CustomFormat = "dd/MM/yyyy"
-        Me.dtpaArrival.DropDownImage = Nothing
-        Me.dtpaArrival.DropDownNormalColor = System.Drawing.SystemColors.Control
         Me.dtpaArrival.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.dtpaArrival.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpaArrival.Location = New System.Drawing.Point(896, 159)
-        Me.dtpaArrival.MetroColor = System.Drawing.Color.FromArgb(CType(CType(22, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.dtpaArrival.MinValue = New Date(CType(0, Long))
         Me.dtpaArrival.Name = "dtpaArrival"
-        Me.dtpaArrival.ShowCheckBox = False
-        Me.dtpaArrival.ShowDropDownOnNull = True
         Me.dtpaArrival.Size = New System.Drawing.Size(127, 20)
         Me.dtpaArrival.TabIndex = 376
         Me.dtpaArrival.Value = New Date(2021, 1, 12, 11, 4, 9, 464)
         '
         'dtpaAWB_date
         '
-        Me.dtpaAWB_date.BorderColor = System.Drawing.Color.Empty
-        Me.dtpaAWB_date.CalendarSize = New System.Drawing.Size(189, 176)
-        Me.dtpaAWB_date.Culture = New System.Globalization.CultureInfo("en-GB")
         Me.dtpaAWB_date.CustomFormat = "dd/MM/yyyy"
-        Me.dtpaAWB_date.DropDownImage = Nothing
-        Me.dtpaAWB_date.DropDownNormalColor = System.Drawing.SystemColors.Control
         Me.dtpaAWB_date.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.dtpaAWB_date.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpaAWB_date.Location = New System.Drawing.Point(896, 100)
-        Me.dtpaAWB_date.MetroColor = System.Drawing.Color.FromArgb(CType(CType(22, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.dtpaAWB_date.MinValue = New Date(CType(0, Long))
         Me.dtpaAWB_date.Name = "dtpaAWB_date"
-        Me.dtpaAWB_date.ShowCheckBox = False
-        Me.dtpaAWB_date.ShowDropDownOnNull = True
         Me.dtpaAWB_date.Size = New System.Drawing.Size(127, 20)
         Me.dtpaAWB_date.TabIndex = 375
         Me.dtpaAWB_date.Value = New Date(2021, 1, 12, 11, 4, 9, 464)
         '
         'dtpaBL_date
         '
-        Me.dtpaBL_date.BorderColor = System.Drawing.Color.Empty
-        Me.dtpaBL_date.CalendarSize = New System.Drawing.Size(189, 176)
-        Me.dtpaBL_date.Culture = New System.Globalization.CultureInfo("en-GB")
         Me.dtpaBL_date.CustomFormat = "dd/MM/yyyy"
-        Me.dtpaBL_date.DropDownImage = Nothing
-        Me.dtpaBL_date.DropDownNormalColor = System.Drawing.SystemColors.Control
         Me.dtpaBL_date.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.dtpaBL_date.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpaBL_date.Location = New System.Drawing.Point(896, 74)
-        Me.dtpaBL_date.MetroColor = System.Drawing.Color.FromArgb(CType(CType(22, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.dtpaBL_date.MinValue = New Date(CType(0, Long))
         Me.dtpaBL_date.Name = "dtpaBL_date"
-        Me.dtpaBL_date.ShowCheckBox = False
-        Me.dtpaBL_date.ShowDropDownOnNull = True
         Me.dtpaBL_date.Size = New System.Drawing.Size(127, 20)
         Me.dtpaBL_date.TabIndex = 374
         Me.dtpaBL_date.Value = New Date(2021, 1, 12, 11, 4, 9, 464)
         '
         'dtpaInvoice_date
         '
-        Me.dtpaInvoice_date.BorderColor = System.Drawing.Color.Empty
-        Me.dtpaInvoice_date.CalendarSize = New System.Drawing.Size(189, 176)
-        Me.dtpaInvoice_date.Culture = New System.Globalization.CultureInfo("en-GB")
         Me.dtpaInvoice_date.CustomFormat = "dd/MM/yyyy"
-        Me.dtpaInvoice_date.DropDownImage = Nothing
-        Me.dtpaInvoice_date.DropDownNormalColor = System.Drawing.SystemColors.Control
         Me.dtpaInvoice_date.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.dtpaInvoice_date.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpaInvoice_date.Location = New System.Drawing.Point(896, 47)
-        Me.dtpaInvoice_date.MetroColor = System.Drawing.Color.FromArgb(CType(CType(22, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.dtpaInvoice_date.MinValue = New Date(CType(0, Long))
         Me.dtpaInvoice_date.Name = "dtpaInvoice_date"
-        Me.dtpaInvoice_date.ShowCheckBox = False
-        Me.dtpaInvoice_date.ShowDropDownOnNull = True
         Me.dtpaInvoice_date.Size = New System.Drawing.Size(127, 20)
         Me.dtpaInvoice_date.TabIndex = 373
         Me.dtpaInvoice_date.Value = New Date(2021, 1, 12, 11, 4, 9, 464)
         '
         'dtpaPacking_date
         '
-        Me.dtpaPacking_date.BorderColor = System.Drawing.Color.Empty
-        Me.dtpaPacking_date.CalendarSize = New System.Drawing.Size(189, 176)
-        Me.dtpaPacking_date.Culture = New System.Globalization.CultureInfo("en-GB")
         Me.dtpaPacking_date.CustomFormat = "dd/MM/yyyy"
-        Me.dtpaPacking_date.DropDownImage = Nothing
-        Me.dtpaPacking_date.DropDownNormalColor = System.Drawing.SystemColors.Control
         Me.dtpaPacking_date.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.dtpaPacking_date.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpaPacking_date.Location = New System.Drawing.Point(896, 21)
-        Me.dtpaPacking_date.MetroColor = System.Drawing.Color.FromArgb(CType(CType(22, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.dtpaPacking_date.MinValue = New Date(CType(0, Long))
         Me.dtpaPacking_date.Name = "dtpaPacking_date"
-        Me.dtpaPacking_date.ShowCheckBox = False
-        Me.dtpaPacking_date.ShowDropDownOnNull = True
         Me.dtpaPacking_date.Size = New System.Drawing.Size(127, 20)
         Me.dtpaPacking_date.TabIndex = 372
         Me.dtpaPacking_date.Value = New Date(2021, 1, 12, 11, 4, 9, 464)
         '
         'dtpaDeparture
         '
-        Me.dtpaDeparture.BorderColor = System.Drawing.Color.Empty
-        Me.dtpaDeparture.CalendarSize = New System.Drawing.Size(189, 176)
-        Me.dtpaDeparture.Culture = New System.Globalization.CultureInfo("en-GB")
         Me.dtpaDeparture.CustomFormat = "dd/MM/yyyy"
-        Me.dtpaDeparture.DropDownImage = Nothing
-        Me.dtpaDeparture.DropDownNormalColor = System.Drawing.SystemColors.Control
         Me.dtpaDeparture.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.dtpaDeparture.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpaDeparture.Location = New System.Drawing.Point(580, 156)
-        Me.dtpaDeparture.MetroColor = System.Drawing.Color.FromArgb(CType(CType(22, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.dtpaDeparture.MinValue = New Date(CType(0, Long))
         Me.dtpaDeparture.Name = "dtpaDeparture"
-        Me.dtpaDeparture.ShowCheckBox = False
-        Me.dtpaDeparture.ShowDropDownOnNull = True
         Me.dtpaDeparture.Size = New System.Drawing.Size(127, 20)
         Me.dtpaDeparture.TabIndex = 371
         Me.dtpaDeparture.Value = New Date(2021, 1, 12, 11, 4, 9, 464)
         '
         'dtpaAWB_Received_date
         '
-        Me.dtpaAWB_Received_date.BorderColor = System.Drawing.Color.Empty
-        Me.dtpaAWB_Received_date.CalendarSize = New System.Drawing.Size(189, 176)
-        Me.dtpaAWB_Received_date.Culture = New System.Globalization.CultureInfo("en-GB")
         Me.dtpaAWB_Received_date.CustomFormat = "dd/MM/yyyy"
-        Me.dtpaAWB_Received_date.DropDownImage = Nothing
-        Me.dtpaAWB_Received_date.DropDownNormalColor = System.Drawing.SystemColors.Control
         Me.dtpaAWB_Received_date.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.dtpaAWB_Received_date.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpaAWB_Received_date.Location = New System.Drawing.Point(580, 130)
-        Me.dtpaAWB_Received_date.MetroColor = System.Drawing.Color.FromArgb(CType(CType(22, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.dtpaAWB_Received_date.MinValue = New Date(CType(0, Long))
         Me.dtpaAWB_Received_date.Name = "dtpaAWB_Received_date"
-        Me.dtpaAWB_Received_date.ShowCheckBox = False
-        Me.dtpaAWB_Received_date.ShowDropDownOnNull = True
         Me.dtpaAWB_Received_date.Size = New System.Drawing.Size(127, 20)
         Me.dtpaAWB_Received_date.TabIndex = 370
         Me.dtpaAWB_Received_date.Value = New Date(2021, 1, 12, 11, 4, 9, 464)
@@ -1438,26 +1353,17 @@ Partial Class frmPurchaseOrderNewEdit
         Me.Label54.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label54.Location = New System.Drawing.Point(32, 242)
         Me.Label54.Name = "Label54"
-        Me.Label54.Size = New System.Drawing.Size(98, 13)
+        Me.Label54.Size = New System.Drawing.Size(96, 13)
         Me.Label54.TabIndex = 177
         Me.Label54.Text = "Benefit Qty. (Kgs.)"
         '
         'dtpaQuotationDate
         '
-        Me.dtpaQuotationDate.BorderColor = System.Drawing.Color.Empty
-        Me.dtpaQuotationDate.CalendarSize = New System.Drawing.Size(189, 176)
-        Me.dtpaQuotationDate.Culture = New System.Globalization.CultureInfo("en-GB")
         Me.dtpaQuotationDate.CustomFormat = "dd/MM/yyyy"
-        Me.dtpaQuotationDate.DropDownImage = Nothing
-        Me.dtpaQuotationDate.DropDownNormalColor = System.Drawing.SystemColors.Control
         Me.dtpaQuotationDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.dtpaQuotationDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpaQuotationDate.Location = New System.Drawing.Point(496, 243)
-        Me.dtpaQuotationDate.MetroColor = System.Drawing.Color.FromArgb(CType(CType(22, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(220, Byte), Integer))
-        Me.dtpaQuotationDate.MinValue = New Date(CType(0, Long))
         Me.dtpaQuotationDate.Name = "dtpaQuotationDate"
-        Me.dtpaQuotationDate.ShowCheckBox = False
-        Me.dtpaQuotationDate.ShowDropDownOnNull = True
         Me.dtpaQuotationDate.Size = New System.Drawing.Size(127, 20)
         Me.dtpaQuotationDate.TabIndex = 373
         Me.dtpaQuotationDate.Value = New Date(2021, 1, 12, 11, 4, 9, 464)
@@ -1535,7 +1441,7 @@ Partial Class frmPurchaseOrderNewEdit
         Me.Label50.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label50.Location = New System.Drawing.Point(434, 76)
         Me.Label50.Name = "Label50"
-        Me.Label50.Size = New System.Drawing.Size(44, 13)
+        Me.Label50.Size = New System.Drawing.Size(43, 13)
         Me.Label50.TabIndex = 16
         Me.Label50.Text = "B/L No."
         '
@@ -1597,7 +1503,7 @@ Partial Class frmPurchaseOrderNewEdit
         Me.Label42.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label42.Location = New System.Drawing.Point(32, 213)
         Me.Label42.Name = "Label42"
-        Me.Label42.Size = New System.Drawing.Size(119, 13)
+        Me.Label42.Size = New System.Drawing.Size(118, 13)
         Me.Label42.TabIndex = 10
         Me.Label42.Text = "Benefit Amount (USD)"
         '
@@ -1636,7 +1542,7 @@ Partial Class frmPurchaseOrderNewEdit
         Me.Label39.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label39.Location = New System.Drawing.Point(32, 130)
         Me.Label39.Name = "Label39"
-        Me.Label39.Size = New System.Drawing.Size(76, 13)
+        Me.Label39.Size = New System.Drawing.Size(75, 13)
         Me.Label39.TabIndex = 4
         Me.Label39.Text = "Vehicle Name"
         '
@@ -1665,7 +1571,7 @@ Partial Class frmPurchaseOrderNewEdit
         Me.Label37.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label37.Location = New System.Drawing.Point(32, 76)
         Me.Label37.Name = "Label37"
-        Me.Label37.Size = New System.Drawing.Size(44, 13)
+        Me.Label37.Size = New System.Drawing.Size(43, 13)
         Me.Label37.TabIndex = 0
         Me.Label37.Text = "Benefit"
         '
@@ -1765,7 +1671,7 @@ Partial Class frmPurchaseOrderNewEdit
         Me.lblAWP_Date.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblAWP_Date.Location = New System.Drawing.Point(788, 103)
         Me.lblAWP_Date.Name = "lblAWP_Date"
-        Me.lblAWP_Date.Size = New System.Drawing.Size(59, 13)
+        Me.lblAWP_Date.Size = New System.Drawing.Size(57, 13)
         Me.lblAWP_Date.TabIndex = 193
         Me.lblAWP_Date.Text = "AWB Date"
         '
@@ -1776,7 +1682,7 @@ Partial Class frmPurchaseOrderNewEdit
         Me.lblAWBreceived_date.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblAWBreceived_date.Location = New System.Drawing.Point(434, 130)
         Me.lblAWBreceived_date.Name = "lblAWBreceived_date"
-        Me.lblAWBreceived_date.Size = New System.Drawing.Size(107, 13)
+        Me.lblAWBreceived_date.Size = New System.Drawing.Size(105, 13)
         Me.lblAWBreceived_date.TabIndex = 190
         Me.lblAWBreceived_date.Text = "AWB Received Date"
         '
@@ -1796,7 +1702,7 @@ Partial Class frmPurchaseOrderNewEdit
         Me.Label57.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label57.Location = New System.Drawing.Point(434, 103)
         Me.Label57.Name = "Label57"
-        Me.Label57.Size = New System.Drawing.Size(53, 13)
+        Me.Label57.Size = New System.Drawing.Size(51, 13)
         Me.Label57.TabIndex = 188
         Me.Label57.Text = "AWB No."
         '
@@ -1807,7 +1713,7 @@ Partial Class frmPurchaseOrderNewEdit
         Me.Label56.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label56.Location = New System.Drawing.Point(788, 76)
         Me.Label56.Name = "Label56"
-        Me.Label56.Size = New System.Drawing.Size(50, 13)
+        Me.Label56.Size = New System.Drawing.Size(49, 13)
         Me.Label56.TabIndex = 187
         Me.Label56.Text = "B/L Date"
         '
@@ -1928,7 +1834,7 @@ Partial Class frmPurchaseOrderNewEdit
         Me.chkValidateQtyCone.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chkValidateQtyCone.Location = New System.Drawing.Point(401, 280)
         Me.chkValidateQtyCone.Name = "chkValidateQtyCone"
-        Me.chkValidateQtyCone.Size = New System.Drawing.Size(119, 17)
+        Me.chkValidateQtyCone.Size = New System.Drawing.Size(117, 17)
         Me.chkValidateQtyCone.TabIndex = 378
         Me.chkValidateQtyCone.Text = "Validate Qty Cone"
         Me.chkValidateQtyCone.UseVisualStyleBackColor = True
@@ -2007,7 +1913,7 @@ Partial Class frmPurchaseOrderNewEdit
         Me.Label47.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label47.Location = New System.Drawing.Point(398, 243)
         Me.Label47.Name = "Label47"
-        Me.Label47.Size = New System.Drawing.Size(88, 13)
+        Me.Label47.Size = New System.Drawing.Size(87, 13)
         Me.Label47.TabIndex = 161
         Me.Label47.Text = "Quotation Date"
         '
@@ -2017,7 +1923,7 @@ Partial Class frmPurchaseOrderNewEdit
         Me.Label46.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label46.Location = New System.Drawing.Point(398, 217)
         Me.Label46.Name = "Label46"
-        Me.Label46.Size = New System.Drawing.Size(82, 13)
+        Me.Label46.Size = New System.Drawing.Size(81, 13)
         Me.Label46.TabIndex = 160
         Me.Label46.Text = "Quotation No."
         '
@@ -2047,9 +1953,9 @@ Partial Class frmPurchaseOrderNewEdit
         Me.Label18.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label18.Location = New System.Drawing.Point(256, 24)
         Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(105, 13)
+        Me.Label18.Size = New System.Drawing.Size(106, 13)
         Me.Label18.TabIndex = 146
-        Me.Label18.Text = "Supplier quotation"
+        Me.Label18.Text = "Supplier Quote No."
         '
         'textSupQuoteno
         '
@@ -2142,19 +2048,19 @@ Partial Class frmPurchaseOrderNewEdit
         '
         Me.tsbPrintPO.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.A4ToolStripMenuItem, Me.ENToolStripMenuItem})
         Me.tsbPrintPO.Name = "tsbPrintPO"
-        Me.tsbPrintPO.Size = New System.Drawing.Size(152, 22)
+        Me.tsbPrintPO.Size = New System.Drawing.Size(120, 22)
         Me.tsbPrintPO.Text = "Print P/O"
         '
         'A4ToolStripMenuItem
         '
         Me.A4ToolStripMenuItem.Name = "A4ToolStripMenuItem"
-        Me.A4ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.A4ToolStripMenuItem.Size = New System.Drawing.Size(88, 22)
         Me.A4ToolStripMenuItem.Text = "TH"
         '
         'ENToolStripMenuItem
         '
         Me.ENToolStripMenuItem.Name = "ENToolStripMenuItem"
-        Me.ENToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ENToolStripMenuItem.Size = New System.Drawing.Size(88, 22)
         Me.ENToolStripMenuItem.Text = "EN"
         '
         'btnCancel

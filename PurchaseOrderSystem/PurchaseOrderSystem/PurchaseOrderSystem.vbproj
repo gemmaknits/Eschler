@@ -546,6 +546,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GeneralForms\frmMainmenu.resx">
       <DependentUpon>frmMainmenu.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="GeneralForms\frmSplashScreen.resx">
       <DependentUpon>frmSplashScreen.vb</DependentUpon>

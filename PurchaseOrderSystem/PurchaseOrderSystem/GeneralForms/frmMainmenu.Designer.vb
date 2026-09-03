@@ -99,15 +99,14 @@ Partial Class frmMainmenu
         'menuMastemnuMasterSupplier
         '
         Me.menuMastemnuMasterSupplier.Name = "menuMastemnuMasterSupplier"
-        Me.menuMastemnuMasterSupplier.Size = New System.Drawing.Size(180, 22)
+        Me.menuMastemnuMasterSupplier.Size = New System.Drawing.Size(121, 22)
         Me.menuMastemnuMasterSupplier.Text = "Supplier"
-        AddHandler Me.menuMastemnuMasterSupplier.Click, AddressOf Me.menuMastemnuMasterSupplier_Click_1
         '
         'menuMasterItems
         '
         Me.menuMasterItems.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.menuMasterItemsYarn, Me.menuMasterItemsOthers})
         Me.menuMasterItems.Name = "menuMasterItems"
-        Me.menuMasterItems.Size = New System.Drawing.Size(180, 22)
+        Me.menuMasterItems.Size = New System.Drawing.Size(121, 22)
         Me.menuMasterItems.Text = "Items"
         '
         'menuMasterItemsYarn
@@ -125,14 +124,14 @@ Partial Class frmMainmenu
         'PriceListToolStripMenuItem
         '
         Me.PriceListToolStripMenuItem.Name = "PriceListToolStripMenuItem"
-        Me.PriceListToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.PriceListToolStripMenuItem.Size = New System.Drawing.Size(121, 22)
         Me.PriceListToolStripMenuItem.Text = "Price List"
         '
         'ReportsToolStripMenuItem1
         '
         Me.ReportsToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmnYarnMasterReport})
         Me.ReportsToolStripMenuItem1.Name = "ReportsToolStripMenuItem1"
-        Me.ReportsToolStripMenuItem1.Size = New System.Drawing.Size(180, 22)
+        Me.ReportsToolStripMenuItem1.Size = New System.Drawing.Size(121, 22)
         Me.ReportsToolStripMenuItem1.Text = "Reports"
         '
         'tsmnYarnMasterReport
@@ -151,62 +150,62 @@ Partial Class frmMainmenu
         'menuPurchaseNewedit
         '
         Me.menuPurchaseNewedit.Name = "menuPurchaseNewedit"
-        Me.menuPurchaseNewedit.Size = New System.Drawing.Size(129, 22)
+        Me.menuPurchaseNewedit.Size = New System.Drawing.Size(180, 22)
         Me.menuPurchaseNewedit.Text = "New / Edit"
         '
         'menuPurchaseNew
         '
         Me.menuPurchaseNew.Name = "menuPurchaseNew"
-        Me.menuPurchaseNew.Size = New System.Drawing.Size(129, 22)
+        Me.menuPurchaseNew.Size = New System.Drawing.Size(180, 22)
         Me.menuPurchaseNew.Text = "New"
         '
         'menuPurchaseEdit
         '
         Me.menuPurchaseEdit.Name = "menuPurchaseEdit"
-        Me.menuPurchaseEdit.Size = New System.Drawing.Size(129, 22)
+        Me.menuPurchaseEdit.Size = New System.Drawing.Size(180, 22)
         Me.menuPurchaseEdit.Text = "Edit"
         '
         'menuPurchaseEditBOI
         '
         Me.menuPurchaseEditBOI.Name = "menuPurchaseEditBOI"
-        Me.menuPurchaseEditBOI.Size = New System.Drawing.Size(129, 22)
+        Me.menuPurchaseEditBOI.Size = New System.Drawing.Size(180, 22)
         Me.menuPurchaseEditBOI.Text = "EditBOI"
         '
         'menuPurchaseApprove
         '
         Me.menuPurchaseApprove.Name = "menuPurchaseApprove"
-        Me.menuPurchaseApprove.Size = New System.Drawing.Size(129, 22)
+        Me.menuPurchaseApprove.Size = New System.Drawing.Size(180, 22)
         Me.menuPurchaseApprove.Text = "Approve"
         '
         'menuPurchaseCancel
         '
         Me.menuPurchaseCancel.Name = "menuPurchaseCancel"
-        Me.menuPurchaseCancel.Size = New System.Drawing.Size(129, 22)
+        Me.menuPurchaseCancel.Size = New System.Drawing.Size(180, 22)
         Me.menuPurchaseCancel.Text = "Cancel"
         '
         'PaidPOToolStripMenuItem
         '
         Me.PaidPOToolStripMenuItem.Name = "PaidPOToolStripMenuItem"
-        Me.PaidPOToolStripMenuItem.Size = New System.Drawing.Size(129, 22)
+        Me.PaidPOToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.PaidPOToolStripMenuItem.Text = "Paid P/O"
         '
         'menuClosePO
         '
         Me.menuClosePO.Name = "menuClosePO"
-        Me.menuClosePO.Size = New System.Drawing.Size(129, 22)
+        Me.menuClosePO.Size = New System.Drawing.Size(180, 22)
         Me.menuClosePO.Text = "Close P/O"
         '
         'menuPrintPO
         '
         Me.menuPrintPO.Name = "menuPrintPO"
-        Me.menuPrintPO.Size = New System.Drawing.Size(129, 22)
+        Me.menuPrintPO.Size = New System.Drawing.Size(180, 22)
         Me.menuPrintPO.Text = "Print P/O"
         '
         'ReportsToolStripMenuItem
         '
         Me.ReportsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.menuReportsPOHistory, Me.menuReportsYarnLatestPrice, Me.POYarnPendingToolStripMenuItem, Me.POAllPendingToolStripMenuItem, Me.YarnInventorySpecificCostToolStripMenuItem, Me.POCalendarToolStripMenuItem, Me.POOntimeToolStripMenuItem, Me.POOntimeByYearToolStripMenuItem, Me.POImportAnalysisToolStripMenuItem, Me.POYarnTestReportToolStripMenuItem})
         Me.ReportsToolStripMenuItem.Name = "ReportsToolStripMenuItem"
-        Me.ReportsToolStripMenuItem.Size = New System.Drawing.Size(129, 22)
+        Me.ReportsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ReportsToolStripMenuItem.Text = "Reports"
         '
         'menuReportsPOHistory
@@ -394,6 +393,7 @@ Partial Class frmMainmenu
         'txtExchangeRate
         '
         Me.txtExchangeRate.Enabled = False
+        Me.txtExchangeRate.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.txtExchangeRate.Name = "txtExchangeRate"
         Me.txtExchangeRate.Size = New System.Drawing.Size(50, 23)
         Me.txtExchangeRate.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Right

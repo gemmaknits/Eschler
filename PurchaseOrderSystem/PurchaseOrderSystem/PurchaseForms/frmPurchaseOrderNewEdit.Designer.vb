@@ -182,8 +182,6 @@ Partial Class frmPurchaseOrderNewEdit
         Me.Label46 = New System.Windows.Forms.Label()
         Me.txtQuotationNo = New System.Windows.Forms.TextBox()
         Me.Label44 = New System.Windows.Forms.Label()
-        Me.Label18 = New System.Windows.Forms.Label()
-        Me.textSupQuoteno = New System.Windows.Forms.TextBox()
         Me.Label26 = New System.Windows.Forms.Label()
         Me.DataGridViewCalendarColumn1 = New PurchaseOrderSystem.DataGridViewCalendarColumn()
         Me.txtrate = New System.Windows.Forms.TextBox()
@@ -233,6 +231,8 @@ Partial Class frmPurchaseOrderNewEdit
         Me.epcboDept = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.epItemNature = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.epPresentStatus = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.textSupQuoteno = New System.Windows.Forms.TextBox()
+        Me.Label18 = New System.Windows.Forms.Label()
         CType(Me.dgvJobDet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.contextMenuGrid.SuspendLayout()
         Me.TabPage2.SuspendLayout()
@@ -1001,6 +1001,7 @@ Partial Class frmPurchaseOrderNewEdit
         Me.dtpaDeliveryDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpaDeliveryDate.Location = New System.Drawing.Point(828, 193)
         Me.dtpaDeliveryDate.Name = "dtpaDeliveryDate"
+        Me.dtpaDeliveryDate.ShowCheckBox = True
         Me.dtpaDeliveryDate.Size = New System.Drawing.Size(127, 20)
         Me.dtpaDeliveryDate.TabIndex = 374
         Me.dtpaDeliveryDate.Value = New Date(2021, 1, 12, 11, 4, 9, 464)
@@ -1012,6 +1013,7 @@ Partial Class frmPurchaseOrderNewEdit
         Me.dtpaPayDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpaPayDate.Location = New System.Drawing.Point(96, 191)
         Me.dtpaPayDate.Name = "dtpaPayDate"
+        Me.dtpaPayDate.ShowCheckBox = True
         Me.dtpaPayDate.Size = New System.Drawing.Size(127, 20)
         Me.dtpaPayDate.TabIndex = 372
         Me.dtpaPayDate.Value = New Date(2021, 1, 12, 11, 4, 9, 464)
@@ -1023,6 +1025,7 @@ Partial Class frmPurchaseOrderNewEdit
         Me.dtpaLCDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpaLCDate.Location = New System.Drawing.Point(496, 190)
         Me.dtpaLCDate.Name = "dtpaLCDate"
+        Me.dtpaLCDate.ShowCheckBox = True
         Me.dtpaLCDate.Size = New System.Drawing.Size(127, 20)
         Me.dtpaLCDate.TabIndex = 371
         Me.dtpaLCDate.Value = New Date(2021, 1, 12, 11, 4, 9, 464)
@@ -1244,6 +1247,7 @@ Partial Class frmPurchaseOrderNewEdit
         Me.dtpaArrival.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpaArrival.Location = New System.Drawing.Point(896, 159)
         Me.dtpaArrival.Name = "dtpaArrival"
+        Me.dtpaArrival.ShowCheckBox = True
         Me.dtpaArrival.Size = New System.Drawing.Size(127, 20)
         Me.dtpaArrival.TabIndex = 376
         Me.dtpaArrival.Value = New Date(2021, 1, 12, 11, 4, 9, 464)
@@ -1255,6 +1259,7 @@ Partial Class frmPurchaseOrderNewEdit
         Me.dtpaAWB_date.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpaAWB_date.Location = New System.Drawing.Point(896, 100)
         Me.dtpaAWB_date.Name = "dtpaAWB_date"
+        Me.dtpaAWB_date.ShowCheckBox = True
         Me.dtpaAWB_date.Size = New System.Drawing.Size(127, 20)
         Me.dtpaAWB_date.TabIndex = 375
         Me.dtpaAWB_date.Value = New Date(2021, 1, 12, 11, 4, 9, 464)
@@ -1266,6 +1271,7 @@ Partial Class frmPurchaseOrderNewEdit
         Me.dtpaBL_date.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpaBL_date.Location = New System.Drawing.Point(896, 74)
         Me.dtpaBL_date.Name = "dtpaBL_date"
+        Me.dtpaBL_date.ShowCheckBox = True
         Me.dtpaBL_date.Size = New System.Drawing.Size(127, 20)
         Me.dtpaBL_date.TabIndex = 374
         Me.dtpaBL_date.Value = New Date(2021, 1, 12, 11, 4, 9, 464)
@@ -1277,6 +1283,7 @@ Partial Class frmPurchaseOrderNewEdit
         Me.dtpaInvoice_date.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpaInvoice_date.Location = New System.Drawing.Point(896, 47)
         Me.dtpaInvoice_date.Name = "dtpaInvoice_date"
+        Me.dtpaInvoice_date.ShowCheckBox = True
         Me.dtpaInvoice_date.Size = New System.Drawing.Size(127, 20)
         Me.dtpaInvoice_date.TabIndex = 373
         Me.dtpaInvoice_date.Value = New Date(2021, 1, 12, 11, 4, 9, 464)
@@ -1288,6 +1295,7 @@ Partial Class frmPurchaseOrderNewEdit
         Me.dtpaPacking_date.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpaPacking_date.Location = New System.Drawing.Point(896, 21)
         Me.dtpaPacking_date.Name = "dtpaPacking_date"
+        Me.dtpaPacking_date.ShowCheckBox = True
         Me.dtpaPacking_date.Size = New System.Drawing.Size(127, 20)
         Me.dtpaPacking_date.TabIndex = 372
         Me.dtpaPacking_date.Value = New Date(2021, 1, 12, 11, 4, 9, 464)
@@ -1299,6 +1307,7 @@ Partial Class frmPurchaseOrderNewEdit
         Me.dtpaDeparture.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpaDeparture.Location = New System.Drawing.Point(580, 156)
         Me.dtpaDeparture.Name = "dtpaDeparture"
+        Me.dtpaDeparture.ShowCheckBox = True
         Me.dtpaDeparture.Size = New System.Drawing.Size(127, 20)
         Me.dtpaDeparture.TabIndex = 371
         Me.dtpaDeparture.Value = New Date(2021, 1, 12, 11, 4, 9, 464)
@@ -1310,6 +1319,7 @@ Partial Class frmPurchaseOrderNewEdit
         Me.dtpaAWB_Received_date.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpaAWB_Received_date.Location = New System.Drawing.Point(580, 130)
         Me.dtpaAWB_Received_date.Name = "dtpaAWB_Received_date"
+        Me.dtpaAWB_Received_date.ShowCheckBox = True
         Me.dtpaAWB_Received_date.Size = New System.Drawing.Size(127, 20)
         Me.dtpaAWB_Received_date.TabIndex = 370
         Me.dtpaAWB_Received_date.Value = New Date(2021, 1, 12, 11, 4, 9, 464)
@@ -1364,6 +1374,7 @@ Partial Class frmPurchaseOrderNewEdit
         Me.dtpaQuotationDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpaQuotationDate.Location = New System.Drawing.Point(496, 243)
         Me.dtpaQuotationDate.Name = "dtpaQuotationDate"
+        Me.dtpaQuotationDate.ShowCheckBox = True
         Me.dtpaQuotationDate.Size = New System.Drawing.Size(127, 20)
         Me.dtpaQuotationDate.TabIndex = 373
         Me.dtpaQuotationDate.Value = New Date(2021, 1, 12, 11, 4, 9, 464)
@@ -1947,25 +1958,6 @@ Partial Class frmPurchaseOrderNewEdit
         Me.Label44.TabIndex = 155
         Me.Label44.Text = "L/C No."
         '
-        'Label18
-        '
-        Me.Label18.AutoSize = True
-        Me.Label18.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label18.Location = New System.Drawing.Point(256, 24)
-        Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(106, 13)
-        Me.Label18.TabIndex = 146
-        Me.Label18.Text = "Supplier Quote No."
-        '
-        'textSupQuoteno
-        '
-        Me.textSupQuoteno.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.textSupQuoteno.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
-        Me.textSupQuoteno.Location = New System.Drawing.Point(259, 40)
-        Me.textSupQuoteno.Name = "textSupQuoteno"
-        Me.textSupQuoteno.Size = New System.Drawing.Size(100, 20)
-        Me.textSupQuoteno.TabIndex = 0
-        '
         'Label26
         '
         Me.Label26.AutoSize = True
@@ -1986,7 +1978,7 @@ Partial Class frmPurchaseOrderNewEdit
         Me.txtrate.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.txtrate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtrate.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtrate.Location = New System.Drawing.Point(438, 38)
+        Me.txtrate.Location = New System.Drawing.Point(442, 39)
         Me.txtrate.Name = "txtrate"
         Me.txtrate.Size = New System.Drawing.Size(54, 22)
         Me.txtrate.TabIndex = 386
@@ -2097,7 +2089,7 @@ Partial Class frmPurchaseOrderNewEdit
         Me.txtPresentStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtPresentStatus.Enabled = False
         Me.txtPresentStatus.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPresentStatus.Location = New System.Drawing.Point(498, 38)
+        Me.txtPresentStatus.Location = New System.Drawing.Point(502, 39)
         Me.txtPresentStatus.Name = "txtPresentStatus"
         Me.txtPresentStatus.Size = New System.Drawing.Size(49, 22)
         Me.txtPresentStatus.TabIndex = 379
@@ -2211,7 +2203,7 @@ Partial Class frmPurchaseOrderNewEdit
         Me.cboCurrency.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboCurrency.FormattingEnabled = True
         Me.eptxtrate.SetIconAlignment(Me.cboCurrency, System.Windows.Forms.ErrorIconAlignment.MiddleLeft)
-        Me.cboCurrency.Location = New System.Drawing.Point(364, 40)
+        Me.cboCurrency.Location = New System.Drawing.Point(368, 39)
         Me.cboCurrency.Name = "cboCurrency"
         Me.cboCurrency.Size = New System.Drawing.Size(68, 21)
         Me.cboCurrency.TabIndex = 385
@@ -2221,7 +2213,7 @@ Partial Class frmPurchaseOrderNewEdit
         Me.Label20.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label20.AutoSize = True
         Me.Label20.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label20.Location = New System.Drawing.Point(435, 22)
+        Me.Label20.Location = New System.Drawing.Point(439, 23)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(44, 13)
         Me.Label20.TabIndex = 393
@@ -2236,7 +2228,7 @@ Partial Class frmPurchaseOrderNewEdit
         Me.Label19.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label19.AutoSize = True
         Me.Label19.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label19.Location = New System.Drawing.Point(365, 24)
+        Me.Label19.Location = New System.Drawing.Point(369, 25)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(58, 13)
         Me.Label19.TabIndex = 392
@@ -2245,6 +2237,8 @@ Partial Class frmPurchaseOrderNewEdit
         'gboxNewDoc
         '
         Me.gboxNewDoc.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.gboxNewDoc.Controls.Add(Me.Label18)
+        Me.gboxNewDoc.Controls.Add(Me.textSupQuoteno)
         Me.gboxNewDoc.Controls.Add(Me.txtPresentStatus)
         Me.gboxNewDoc.Controls.Add(Me.Label65)
         Me.gboxNewDoc.Controls.Add(Me.buttonSearchPO)
@@ -2253,17 +2247,15 @@ Partial Class frmPurchaseOrderNewEdit
         Me.gboxNewDoc.Controls.Add(Me.txtrate)
         Me.gboxNewDoc.Controls.Add(Me.lblYINno)
         Me.gboxNewDoc.Controls.Add(Me.Label2)
-        Me.gboxNewDoc.Controls.Add(Me.Label18)
         Me.gboxNewDoc.Controls.Add(Me.Label1)
         Me.gboxNewDoc.Controls.Add(Me.Label20)
-        Me.gboxNewDoc.Controls.Add(Me.textSupQuoteno)
         Me.gboxNewDoc.Controls.Add(Me.cboCurrency)
         Me.gboxNewDoc.Controls.Add(Me.Label26)
         Me.gboxNewDoc.Controls.Add(Me.Label19)
         Me.gboxNewDoc.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.gboxNewDoc.Location = New System.Drawing.Point(530, 28)
+        Me.gboxNewDoc.Location = New System.Drawing.Point(533, 30)
         Me.gboxNewDoc.Name = "gboxNewDoc"
-        Me.gboxNewDoc.Size = New System.Drawing.Size(559, 73)
+        Me.gboxNewDoc.Size = New System.Drawing.Size(560, 73)
         Me.gboxNewDoc.TabIndex = 383
         Me.gboxNewDoc.TabStop = False
         Me.gboxNewDoc.Text = "Document"
@@ -2272,7 +2264,7 @@ Partial Class frmPurchaseOrderNewEdit
         '
         Me.Label65.AutoSize = True
         Me.Label65.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label65.Location = New System.Drawing.Point(495, 22)
+        Me.Label65.Location = New System.Drawing.Point(499, 23)
         Me.Label65.Name = "Label65"
         Me.Label65.Size = New System.Drawing.Size(39, 13)
         Me.Label65.TabIndex = 152
@@ -2301,7 +2293,7 @@ Partial Class frmPurchaseOrderNewEdit
         Me.DateYIN.CalendarFont = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.DateYIN.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.DateYIN.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.DateYIN.Location = New System.Drawing.Point(153, 40)
+        Me.DateYIN.Location = New System.Drawing.Point(153, 39)
         Me.DateYIN.Name = "DateYIN"
         Me.DateYIN.Size = New System.Drawing.Size(100, 20)
         Me.DateYIN.TabIndex = 5
@@ -2392,6 +2384,25 @@ Partial Class frmPurchaseOrderNewEdit
         '
         Me.epPresentStatus.ContainerControl = Me
         '
+        'textSupQuoteno
+        '
+        Me.textSupQuoteno.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.textSupQuoteno.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.textSupQuoteno.Location = New System.Drawing.Point(259, 39)
+        Me.textSupQuoteno.Name = "textSupQuoteno"
+        Me.textSupQuoteno.Size = New System.Drawing.Size(103, 22)
+        Me.textSupQuoteno.TabIndex = 394
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label18.Location = New System.Drawing.Point(256, 23)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(106, 13)
+        Me.Label18.TabIndex = 395
+        Me.Label18.Text = "Supplier Quote No."
+        '
         'frmPurchaseOrderNewEdit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2480,8 +2491,6 @@ Partial Class frmPurchaseOrderNewEdit
     Friend WithEvents DtPayDate As System.Windows.Forms.DateTimePicker
     Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents Label11 As System.Windows.Forms.Label
-    Friend WithEvents Label18 As System.Windows.Forms.Label
-    Friend WithEvents textSupQuoteno As System.Windows.Forms.TextBox
     Friend WithEvents txtdeliveryday As System.Windows.Forms.TextBox
     Friend WithEvents Label23 As System.Windows.Forms.Label
     Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
@@ -2691,4 +2700,6 @@ Partial Class frmPurchaseOrderNewEdit
     Friend WithEvents supplier_spec_rcvd_flag As DataGridViewCheckBoxColumn
     Friend WithEvents btnTransFile As DataGridViewButtonColumn
     Friend WithEvents btnYarnFile As DataGridViewButtonColumn
+    Friend WithEvents textSupQuoteno As TextBox
+    Friend WithEvents Label18 As Label
 End Class

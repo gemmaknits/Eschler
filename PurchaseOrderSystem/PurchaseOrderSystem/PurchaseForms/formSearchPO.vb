@@ -73,7 +73,12 @@ Public Class formSearchPO
         End If
     End Sub
 
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOk.Click
+    Private Sub btnOk_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOk.Click
+        If dgvPO.CurrentRow Is Nothing Then
+            MessageBox.Show("Please select a PO.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+        End If
+
         pSelectedPO = dgvPO.CurrentRow.Cells("colJobNo").Value
         userAction = "OK"
         Me.Close()

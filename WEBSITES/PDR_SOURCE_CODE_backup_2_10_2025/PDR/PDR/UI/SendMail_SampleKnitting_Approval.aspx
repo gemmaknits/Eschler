@@ -1,0 +1,112 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SendMail_SampleKnitting_Approval.aspx.cs" Inherits="PDR.UI.SendMail_SampleKnitting_Approval" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <link href="../PDR_StyleSheet.css" rel="stylesheet" />
+ 
+    <style type="text/css">
+        .auto-style1 {
+            left: 50px;
+            top: 50px;
+            position: absolute;
+            width: 346px;
+        }
+    </style>
+ 
+</head>
+<script type="text/javascript">
+    function ShowProgressBar() {
+        document.getElementById('dvProgressBar').style.visibility = 'visible';
+    }
+
+    function HideProgressBar() {
+        document.getElementById('dvProgressBar').style.visibility = "hidden";
+    }
+</script>
+<body>
+    <form id="frmSendMailKnittingApproval" runat="server">
+        <div class="auto-style1">
+            <h4>KNITTING SAMPLE APPROVAL EMAIL</h4>
+
+        </div>
+        <div style="left: 50px; top: 100px; position: absolute; width: 700px">
+
+            <table>
+                <tr>
+                    <td>
+                        <asp:Label ID="Label2" runat="server" Text="TO" CssClass="clsFromLabel"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtTo" runat="server" CssClass="TextBox" Width="600px"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Label ID="Label3" runat="server" Text="CC" CssClass="clsFromLabel"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtCC" runat="server" CssClass="TextBox" Width="600px" onkeydown="(event.keyCode!=13);"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Label ID="Label4" runat="server" Text="SUBJECT" CssClass="clsFromLabel"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtSubject" runat="server" CssClass="TextBox" Width="250px"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Label ID="Label5" runat="server" Text="BODY" CssClass="clsFromLabel"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtBody" runat="server" CssClass="TextBox" Width="650px" TextMode="MultiLine" Rows="10" Height="400px"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <asp:Button ID="btnSendMail" runat="server" Text="Send Mail" CssClass="button" OnClick="btnSendMail_Click" OnClientClick="javascript:ShowProgressBar()" /></td>
+                </tr>
+            </table>
+        </div>
+        <div id="dvProgressBar" style="visibility: hidden; left: 100px">
+            <img src="~/Images/progress_bar.gif" runat="server" style="left: 200px; position: absolute; top: 530px;" />
+        </div>
+        <div style="top: 611px; left: 211px; position: absolute;">
+            <strong>
+                <asp:Label ID="lblmsg" runat="server" Visible="False" ForeColor="#009933"></asp:Label>
+            </strong>
+        </div>
+
+        <div  style="top: 643px; left: 55px; position: absolute;">
+              <asp:GridView ID="grdAttachmentDetails" runat="server" AutoGenerateColumns="false" GridLines="None"
+                    Width="32%">
+                    <HeaderStyle CssClass="grdheader" />
+                    <Columns>
+                         <asp:TemplateField ItemStyle-Width="2%" HeaderText="" HeaderStyle-CssClass="col col-xs-2" ItemStyle-CssClass="col col-xs-2" HeaderStyle-HorizontalAlign="Right" HeaderStyle-Font-Bold="false">
+                                <ItemTemplate>
+                                        <asp:CheckBox ID="chkdelete" runat="server" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                        <asp:BoundField ItemStyle-Width="80px" DataField="file_Description" HeaderText="DESCRIPTION" ItemStyle-Wrap="false" ItemStyle-CssClass="col" HeaderStyle-CssClass="col">
+                            <ItemStyle CssClass="col" />
+                        </asp:BoundField>
+                        <asp:BoundField DataField="file_location_disp" HeaderText="LOCATION" ReadOnly="True" HeaderStyle-CssClass="col">
+                            <ItemStyle CssClass="col" Width="20px" />
+                        </asp:BoundField>
+                         <asp:TemplateField>
+                                <HeaderStyle Width="20" />
+                                <ItemTemplate>
+                                    <asp:ImageButton ID="img" ImageUrl="~/Images/downloadfile.png" ControlStyle-Width="14px" ControlStyle-Height="14px" CommandName="Download"
+                                        CommandArgument='<%#((GridViewRow)Container).RowIndex%>' ToolTip="Download" runat="server" Height="14" Width="14" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                    </Columns>
+                </asp:GridView>
+        </div>
+    </form>
+</body>
+</html>

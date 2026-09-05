@@ -1,0 +1,132 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Master28Nov.master.cs" Inherits="PDR.SiteMaster" %>
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - PRODUCT DEVELOPMENT REQUIREMENT</title>
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
+    
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="PDR_StyleSheet.css" rel="stylesheet" />
+    <link href="/Content/ej/web/default-theme/ej.web.all.min.css" rel="stylesheet" />   
+<%-- **     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> --%>
+
+
+<%-- **     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script> --%>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+   
+    <script src="/Scripts/jquery-1.10.2.min.js"></script>                         
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></scrip
+
+    <script src="http://cdn.syncfusion.com/js/assets/external/jquery.easing.1.3.min.js"> </script>
+    <script src="http://cdn.syncfusion.com/js/assets/external/jquery.globalize.min.js"></script>
+    <script src="http://cdn.syncfusion.com/js/assets/external/jsrender.min.js"></script>
+    <script src="http://cdn.syncfusion.com/13.2.0.29/js/web/ej.web.all.min.js"> </script>
+
+    <style type="text/css">
+        .auto-style1 {
+            top: 3px;
+            left: 110px;
+            position: absolute;
+            height: 33px;
+        }
+    </style>
+ </head>
+       <script type="text/javascript">
+             document.onkeydown = function () {
+                 switch (event.keyCode) {
+                     case 116: //F5 button
+                         event.returnValue = false;
+                         event.keyCode = 0;
+                         return false;
+                     case 82: //R button
+                         if (event.ctrlKey) {
+                             event.returnValue = false;
+                             event.keyCode = 0;
+                             return false;
+                         }
+             }
+         }
+      </script>
+
+     <body onkeydown="if(event.keyCode==13){event.keyCode=9; return event.keyCode}">
+    <form runat="server" >
+        <asp:ScriptManager runat="server" EnablePageMethods="true">
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see http://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Framework Scripts--%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="bootstrap" />
+                <asp:ScriptReference Name="respond" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+
+        <div class="navbar navbar-inverse navbar-fixed-top" style="left: 0; right: 0; top: 0; height: 37px">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <div class="icon-bar"></div> 
+                        <div class="icon-bar"></div>
+
+                    </button>
+                    <div style="top: 1PX; left: 40px; position: absolute;background-color:red;color:red">
+                      <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/logo.png" Style="height: 49PX; width: 50PX" BorderColor="YellowGreen" ForeColor="Red"  />
+                    </div>
+                    <div class="auto-style1"><a class="navbar-brand"  runat="server" href="~/" style="color: lightgreen;height:25px ">PDR SYSTEM</a>
+                        <asp:Label ID="lblversion" runat="server" Text="Label" style="color: lightgreen;top: 17px; left: 120px;position:absolute"></asp:Label>
+                    </div>
+                    <asp:Label ID="Label1" runat="server" Text="Login:" ForeColor="white" Style="left: 1200px; position: absolute; top: 18px"></asp:Label>
+                    <asp:Label ID="lblUserName" runat="server" Text="" ForeColor="white" Style="left: 1250px; position: absolute; top: 18px"></asp:Label>
+                    <asp:Label ID="lblUserSessionID" runat="server" Text="" ForeColor="white" Style="left: 850px; position: absolute; top: 18px"></asp:Label>
+                    <asp:ImageButton ID="btnImgClose" runat="server" ImageUrl="~/Images/close.png" Width="15px" Height="15px" ForeColor="white" Style="left: 1400px; position: absolute; top: 18px" OnClick="btnImgClose_Click" />
+                </div>
+                <div class="navbar-collapse collapse">
+
+                    <div style="color: lightgreen"></div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="container body-content">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+            </div>
+            
+                       
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+
+        <%--<link href="//code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>--%>
+           <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <%--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> --%>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+ 
+        <!-- Datepicker-->
+            <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        <%--  <script src="//code.jquery.com/jquery-1.10.2.js"></script>--%> 
+          <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <%-- %>  <link rel="stylesheet" href="/resources/demos/style.css"> --%>
+            <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/themes/south-street/jquery-ui.css"> 
+        <%-- <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>  --%>
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script> 
+
+    </form>
+</body>
+</html>
+
+

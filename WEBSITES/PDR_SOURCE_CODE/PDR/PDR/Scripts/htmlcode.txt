@@ -1,0 +1,757 @@
+<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Book_KI.aspx.cs" Inherits="POC.UI.Book_KI" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <input type="hidden" id="hidLeftGriRowIndex" value="" runat="server" />
+    <input type="hidden" id="hidparentrow" value="" runat="server" />
+    <input type="hidden" id="hidRightGridRowIndex" value="" runat="server" />
+    <input type="hidden" id="hidarraypdfno" value="" runat="server" />
+    <input type="hidden" id="hidarraykino" value="" runat="server" />
+    <input type="hidden" id="hidarrayfactorydesign" value="" runat="server" />
+    <input type="hidden" id="hidarraybomcode" value="" runat="server" />
+    <input type="hidden" id="hidarraypdfbookedqty" value="" runat="server" />
+    <input type="hidden" id="hidarraypdflineid" value="" runat="server" />
+    <div style="width: 719px; top: 96px; position: absolute; left: 23px;">
+        <span><strong>PDF RESERVATION</strong></span><br />
+        <span><strong>Source: Production(KI)</strong></span>
+    </div>
+      <div class="auto-style6">
+        <asp:Button ID="bookisavechanges" runat="server" Text="Save Changes" CssClass="button" Height="22px" Width="103px" OnClientClick="addrows();" OnClick="bookkisavechanges_Click" />
+
+    </div>
+    <div style="height: 50px; top: 175px">
+        <table class="auto-style9" border="0" style="width: 719px; height: 50px; top: 175px; position: absolute; left: 23px;">
+            <tr class="col">
+                <td class="clsFromLabel">
+                    <strong>
+                        <asp:Label ID="Label1" runat="server" Text="So No:"></asp:Label>
+                    </strong>
+                </td>
+
+                <td class="clsFromLabel">
+                    <strong>
+                        <asp:Label ID="Label2" runat="server" Text="Customer Name:"></asp:Label>
+                    </strong>
+                </td>
+                <td class="clsFromLabel">
+                    <strong>
+                        <asp:Label ID="Label3" runat="server" Text="Customer Design"></asp:Label>
+                    </strong>
+                </td>
+                <td class="clsFromLabel"><strong>
+                    <asp:Label runat="server" Text="Mt / Kg" ID="mtkg"></asp:Label>
+                </strong>
+                </td>
+                <td class="clsFromLabel">
+                    <strong>
+                        <asp:Label ID="Label7" runat="server" Text="Article"></asp:Label>
+                    </strong>
+                </td>
+            </tr>
+            <tr class="clsFromLabel">
+                <td class="clsFromLabel">
+                    <asp:Label ID="lblSONO" runat="server" Text=""></asp:Label>
+                </td>
+                <td>
+                    <asp:Label ID="lblcustomername" runat="server" Text=""></asp:Label>
+                </td>
+
+                <td class="clsFromLabel">
+                    <asp:Label ID="lblcustomerdesign" runat="server" Text=""></asp:Label>
+                </td>
+
+                <td>
+                    <asp:Label ID="lblfinished_yield" runat="server" Text=""></asp:Label>
+                </td>
+                <td class="col">
+                    <asp:Label ID="lblArticleName" runat="server" Text=""></asp:Label>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+    <div style="width: 100%; overflow: auto; top: 230px; left: 22px; position: absolute;">
+        <strong>
+            <asp:Label ID="lbltitlebooki" runat="server" Text="ORDER COLORS" CssClass="clsTitle"></asp:Label>
+        </strong>
+    </div>
+
+    <div style="width: 100%; overflow: auto; top: 250px; left: 22px; position: absolute; margin-bottom: 0px; height: 204px;">
+        <asp:GridView ID="gvBookKI" runat="server" AutoGenerateColumns="false" OnRowDataBound="gvBookKI_RowDataBound"
+            Style="position: absolute; left: 3px; top: 9px; overflow: auto" DataKeyNames="poc_so_lines_ext_id,poc_order_group_id" HeaderStyle-Width="80px"
+            ItemStyle-Width="80px" HeaderStyle-CssClass="FixedHeader">
+            <HeaderStyle CssClass="grdheader" />
+            <Columns>
+                <asp:TemplateField HeaderText="">
+                    <ItemTemplate>
+                        <asp:CheckBox ID="chkCtrl" CssClass="gridCB" runat="server"></asp:CheckBox>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="PLAN GROUP" ItemStyle-CssClass="col" HeaderStyle-CssClass="col">
+                    <ItemTemplate>
+                        <asp:DropDownList ID="ddlPlanGroup" runat="server" Width="100px" />
+
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <%-- <asp:TemplateField HeaderText="PLAN GROUP" ItemStyle-CssClass="col" HeaderStyle-CssClass="col">
+                <ItemTemplate>
+                   
+                     <asp:HiddenField ID="hidpoc_order_group_id" runat="server" Value='<%# Eval("poc_order_group_id") %>' />
+                 </ItemTemplate>
+            </asp:TemplateField>--%>
+                <asp:BoundField ItemStyle-Width="100px" DataField="color_code" HeaderText="CODE" ItemStyle-CssClass="col" HeaderStyle-CssClass="col">
+                    <ItemStyle CssClass="col" />
+                </asp:BoundField>
+                <asp:BoundField ItemStyle-Width="300px" DataField="custcol" HeaderText="NAME" ItemStyle-CssClass="col" HeaderStyle-CssClass="col">
+                    <ItemStyle CssClass="col" />
+                </asp:BoundField>
+                <asp:BoundField ItemStyle-Width="100px" DataField="order_qty_kg" HeaderText="ORDER QTY KG" DataFormatString="{0:n}" HeaderStyle-HorizontalAlign="right"></asp:BoundField>
+
+                <asp:TemplateField ItemStyle-Width="100px" HeaderText="DYE BATCH KG" HeaderStyle-HorizontalAlign="Right" HeaderStyle-Font-Bold="false">
+                    <ItemTemplate>
+                        <asp:TextBox Width="100px" ID="txtdyebatch" runat="server" BackColor="#FFF3B7" Text='<%# Eval("dye_batch_size_kg") %>' />
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField ItemStyle-Width="100px" HeaderText="KNITT LOSS" HeaderStyle-HorizontalAlign="Right" HeaderStyle-Font-Bold="false">
+                    <ItemTemplate>
+                        <asp:TextBox CssClass="gridtextbox" Width="100px" ID="txtknittitloss" runat="server" BackColor="#FFF3B7" Text='<%# Eval("knitting_loss_perc") %>' />
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="DYEING LOSS" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right" HeaderStyle-Font-Bold="false">
+                    <ItemTemplate>
+                        <asp:TextBox Width="80px" ID="txtdyeingloss" runat="server" BackColor="#FFF3B7" Text='<%# Eval("dyeing_loss_perc") %>' />
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:BoundField ItemStyle-Width="50px" DataField="pdf_count" HeaderText="PDF" ItemStyle-CssClass="col" HeaderStyle-CssClass="col">
+                    <ItemStyle CssClass="col" />
+                </asp:BoundField>
+                <asp:BoundField ItemStyle-Width="100px" DataField="total_pdf_qty" HeaderText="PDF QTY" ItemStyle-CssClass="col" HeaderStyle-HorizontalAlign="Right">
+                    <ItemStyle CssClass="col" />
+                </asp:BoundField>
+                <asp:BoundField ItemStyle-Width="100px" DataField="total_pdf_booked_qty" HeaderText="PDF BOOKED" ItemStyle-CssClass="col" HeaderStyle-CssClass="col">
+                    <ItemStyle CssClass="col" />
+                </asp:BoundField>
+            </Columns>
+        </asp:GridView>
+    </div>
+
+
+    <div style="width:424px; top: 505px; position: absolute; left: 23px; height: 20px;">
+        <span><strong>PDF LIST</strong></span>
+    </div>
+  <%-- <%-- <div style="width: 48%; height: 931px; overflow: auto; top: 545px; left: 22px; position: absolute; margin-bottom: 0px;" onscroll="OnScrollDiv(this)" id="DivMainContent">
+    <div id="DivRoot" align="left" style="width: 48%; height: 931px; overflow: auto; top: 545px; left: 22px; position: absolute; margin-bottom: 0px;">
+    <div style="overflow: hidden;" id="DivHeaderRow">
+    </div>--%>
+     
+    <div style="width: 48%; height: 1031px;  top: 545px; left: 22px; position: absolute; margin-bottom: 0px;"  onscroll="OnScrollDiv(this)" id="DivMainContent">
+
+        <asp:GridView ID="gvBookKIPDFList" runat="server" AutoGenerateColumns="false"
+            Style="width: 90%; left: 22px; " HeaderStyle-Width="80px"
+            ItemStyle-Width="80px" OnRowDataBound="gvBookKIPDFList_RowDataBound" DataKeyNames="poc_pdf_header_id" >
+            <HeaderStyle CssClass="grdheader" />
+            <Columns>
+
+                <asp:BoundField ItemStyle-Width="80px" DataField="color_code" HeaderText="COLOR CODE" ItemStyle-CssClass="col" HeaderStyle-CssClass="col" ItemStyle-Wrap="false">
+                    <ItemStyle CssClass="col" />
+                </asp:BoundField>
+                <asp:BoundField ItemStyle-Width="200px" DataField="color_name" HeaderText="NAME" ItemStyle-CssClass="col" HeaderStyle-CssClass="col">
+                    <ItemStyle CssClass="col" />
+                </asp:BoundField>
+                <asp:BoundField ItemStyle-Width="80px" DataField="pdf_number" HeaderText="PDF NO"  HeaderStyle-CssClass="col" ItemStyle-CssClass="col" HeaderStyle-HorizontalAlign="right"></asp:BoundField>
+
+                <asp:BoundField ItemStyle-Width="50px" DataField="pdf_seq" HeaderText="SEQ" ItemStyle-CssClass="col" HeaderStyle-CssClass="col">
+                    <ItemStyle CssClass="col" />
+                </asp:BoundField>
+                <asp:BoundField ItemStyle-Width="60px" DataField="total_pdf_qty" HeaderText="PDF QTY"  HeaderStyle-CssClass="col" ItemStyle-CssClass="col" HeaderStyle-HorizontalAlign="Right">
+                    <ItemStyle CssClass="col" />
+                </asp:BoundField>
+                <asp:BoundField ItemStyle-Width="80px" DataField="factory_design_no" HeaderText="FAC DESIGN" ItemStyle-CssClass="col" HeaderStyle-CssClass="col" ItemStyle-Wrap="false">
+                    <ItemStyle CssClass="col" />
+                </asp:BoundField>
+                <asp:BoundField ItemStyle-Width="40px" DataField="bom_code" HeaderText="BOM" ItemStyle-CssClass="col" HeaderStyle-CssClass="col">
+                    <ItemStyle CssClass="col" />
+                </asp:BoundField>
+                <asp:BoundField ItemStyle-Width="50px" DataField="booking_source" HeaderText="SOURCE" ItemStyle-CssClass="col" HeaderStyle-CssClass="col">
+                    <ItemStyle CssClass="col" />
+                </asp:BoundField>
+                <asp:BoundField ItemStyle-Width="50px" DataField="" HeaderText="BOOK QTY" ItemStyle-CssClass="col" HeaderStyle-CssClass="col">
+                    <ItemStyle CssClass="col" />
+                </asp:BoundField>
+              
+                <asp:TemplateField HeaderText="PLAN G-OUT DATE" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right" HeaderStyle-Font-Bold="false" ItemStyle-Width="90px">
+                    <ItemTemplate>
+
+                        <asp:TextBox ID="plan_out_date" name="plan_out_date" class="datepicker TextBox" size="10" runat="server" BackColor="#FFF3B7" Style="width: 80px" Text='<%# Eval("plan_out_date") %>' />
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="" ShowHeader="false" HeaderStyle-Width="0px" ItemStyle-Width="0px">
+                    <ItemTemplate>
+                        <asp:HiddenField ID="poc_header_id" runat="server" Value='<%# Eval("poc_pdf_header_id") %>' />
+                    </ItemTemplate>
+
+                </asp:TemplateField>
+            </Columns>
+        </asp:GridView>
+
+    </div>
+        <div id="DivFooterRow" style="overflow:hidden">
+    </div>
+
+    <div style="width: 15%; height: 24px; overflow: auto; top: 505px; left: 916px; position: absolute; margin-bottom: 0px;">
+        <strong>
+            <asp:Label ID="lblgriegehand" Text="PRODUCTION ORDERS" runat="server"></asp:Label>
+        </strong>
+    </div>
+    <div style="width: 50%; height: 213px; overflow: auto; top: 545px; left: 922px; position: absolute; margin-bottom: 0px;">
+        <asp:GridView ID="gvBookKI_ProdOrders" runat="server" AutoGenerateColumns="false"
+            Style="width: 750px; left: 960px; overflow: auto" HeaderStyle-Width="80px"
+            ItemStyle-Width="80px"  OnRowDataBound="gvBookKI_ProdOrders_RowDataBound" DataKeyNames="bom_header_id">
+            <HeaderStyle CssClass="grdheader" />
+            <Columns>
+
+                <asp:BoundField ItemStyle-Width="100px" DataField="kono" HeaderText="KI NO." ItemStyle-CssClass="col" HeaderStyle-CssClass="col">
+                    <ItemStyle CssClass="col" />
+                </asp:BoundField>
+
+                 <asp:BoundField DataField="ko_date" HeaderText="KI DATE" DataFormatString="{0:d}"  ItemStyle-Wrap="false" HeaderStyle-CssClass="col">
+                <ItemStyle Width="150px" CssClass="col" />
+            </asp:BoundField>
+              
+                <asp:BoundField ItemStyle-Width="300px" DataField="knitting_qty" HeaderText="KI QTY(KG)" ItemStyle-CssClass="col" HeaderStyle-CssClass="col">
+                    <ItemStyle CssClass="col" />
+                </asp:BoundField>
+                <asp:BoundField ItemStyle-Width="100px" DataField="total_booked_qty" HeaderText="BOOK QTY" HeaderStyle-CssClass="col"  ItemStyle-CssClass="col" HeaderStyle-HorizontalAlign="right"></asp:BoundField>
+
+                <asp:BoundField ItemStyle-Width="50px" DataField="avail_qty" HeaderText="KI QTY AVAIL" ItemStyle-CssClass="col" HeaderStyle-CssClass="col">
+                    <ItemStyle CssClass="col" />
+                </asp:BoundField>
+                <asp:BoundField ItemStyle-Width="120px" DataField="design_no" HeaderText="FACTORY DESIGN" HeaderStyle-CssClass="col" ItemStyle-CssClass="col" HeaderStyle-HorizontalAlign="Right" ItemStyle-Wrap="false">
+                    <ItemStyle CssClass="col" />
+                </asp:BoundField>
+                <asp:BoundField ItemStyle-Width="150px" DataField="bom_code" HeaderText="BOM" ItemStyle-CssClass="col" HeaderStyle-CssClass="col">
+                    <ItemStyle CssClass="col" />
+                </asp:BoundField>
+                <asp:BoundField ItemStyle-Width="100px" DataField="machine_number" HeaderText="M/C"  ItemStyle-Wrap="false" ItemStyle-CssClass="col" HeaderStyle-CssClass="col">
+                    <ItemStyle CssClass="col" />
+                </asp:BoundField>
+                 <asp:BoundField DataField="knit_start_date" HeaderText="START DATE" DataFormatString="{0:dd/MM/yyy}"   ItemStyle-Wrap="false" HeaderStyle-CssClass="col">
+                <ItemStyle Width="150px" CssClass="col" />
+            </asp:BoundField>
+               <asp:BoundField DataField="knit_end_date" HeaderText="END DATE" DataFormatString="{0:d}"  ItemStyle-Wrap="false" HeaderStyle-CssClass="col">
+                <ItemStyle Width="150px" CssClass="col" />
+            </asp:BoundField>
+              
+                <asp:BoundField ItemStyle-Width="120px" DataField="" HeaderText="CUSTOMER" ItemStyle-CssClass="col" HeaderStyle-CssClass="col" ItemStyle-Wrap="false"></asp:BoundField>
+               
+                <asp:BoundField ItemStyle-Width="300px" DataField="" HeaderText="PDF QTY" ItemStyle-CssClass="col" HeaderStyle-CssClass="col">
+                    <ItemStyle CssClass="col" />
+                </asp:BoundField>
+                <asp:BoundField ItemStyle-Width="300px" DataField="" HeaderText="KG/DAY" ItemStyle-CssClass="col" HeaderStyle-CssClass="col">
+                    <ItemStyle CssClass="col" />
+                </asp:BoundField>
+
+
+            </Columns>
+        </asp:GridView>
+    </div>
+    <div  style="margin-bottom: 0px;">
+        <strong class="auto-style4">
+        <asp:Label ID="lblkooingdeatils" runat="server" Text="BOOKING DETAILS"></asp:Label>
+        </strong>
+    </div>
+    <div  class="auto-style5" >
+        <asp:GridView ID="gvBookKI_BookingDetails" runat="server" AutoGenerateColumns="false"
+            Style="width: 450px; left: 792px; " HeaderStyle-Width="80px" 
+            ItemStyle-Width="80px"  DataKeyNames="poc_pdf_header_id,poc_pdf_lines_id" ShowHeaderWhenEmpty="true" >
+            <HeaderStyle CssClass="grdheader" />
+            <Columns>
+                <%-- <asp:TemplateField HeaderText="PDF NO" ItemStyle-Width="150px" ItemStyle-CssClass="Name">
+            <ItemTemplate>
+                <%# Eval("pdf_number") %>
+            </ItemTemplate>
+        </asp:TemplateField>--%>
+               
+               
+                 <asp:BoundField ItemStyle-Width="100px" DataField="pdf_number" HeaderText="PDF NO" HeaderStyle-CssClass="col" ItemStyle-CssClass="col" ItemStyle-Wrap="false"  HeaderStyle-HorizontalAlign="right"></asp:BoundField>
+                 <asp:BoundField ItemStyle-Width="100px" DataField="kono" HeaderText="KO NO"  HeaderStyle-CssClass="col" ItemStyle-CssClass="col" ItemStyle-Wrap="false" HeaderStyle-HorizontalAlign="right"></asp:BoundField>
+                 <asp:BoundField ItemStyle-Width="100px" DataField="factory_design_no" HeaderText="FAC.DESIGN" HeaderStyle-CssClass="col" ItemStyle-CssClass="col" ItemStyle-Wrap="false" HeaderStyle-HorizontalAlign="right"></asp:BoundField>
+                 <asp:BoundField ItemStyle-Width="100px" DataField="bom_code" HeaderText="BOM"  HeaderStyle-CssClass="col" ItemStyle-Wrap="false"  ItemStyle-CssClass="col" HeaderStyle-HorizontalAlign="right"></asp:BoundField>
+                 <asp:BoundField ItemStyle-Width="100px" DataField="pdf_booked_qty" HeaderText="BOOK QTY"  HeaderStyle-CssClass="col" ItemStyle-CssClass="col" ItemStyle-Wrap="false"  HeaderStyle-HorizontalAlign="right"></asp:BoundField>
+                 
+                 <asp:TemplateField ShowHeader="False">
+                     <ItemStyle Width="50px" />
+                        <ItemTemplate >                              
+                                
+                                        <asp:Button ID="Deletebtn" runat="server"  OnClientClick="return delrow(this)"  
+                                 Text="Remove" UseSubmitBehavior="false" />
+                                     
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                 
+                <%--<asp:BoundField HeaderText="" ShowHeader="false" HeaderStyle-Width="1px" ItemStyle-Width="1px" DataField="poc_pdf_lines_id" >
+                    <ItemStyle Width="1px" />
+                </asp:BoundField>--%>
+                 <asp:TemplateField HeaderText="" ShowHeader="false" >
+                    <ItemTemplate>
+                        <asp:HiddenField ID="poc_header_id_book" runat="server" Value='<%# Eval("poc_pdf_lines_id") %>' />
+                    </ItemTemplate>
+
+                </asp:TemplateField>
+            </Columns>
+        </asp:GridView>
+    </div>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        var prevRowIndex;
+        function ChangeRowColor(row, rowIndex, poc_header_id) {
+            var parent = document.getElementById(row);
+            var currentRowIndex = parseInt(rowIndex) + 1;
+
+
+            if (prevRowIndex == currentRowIndex) {
+                return;
+            }
+            else if (prevRowIndex != null) {
+                parent.rows[prevRowIndex].style.backgroundColor = "#FFFFFF";
+            }
+
+            parent.rows[currentRowIndex].style.backgroundColor = "#FFF3B7"; //selected row color
+
+            prevRowIndex = currentRowIndex;
+
+            document.getElementById("ContentPlaceHolder1_hidLeftGriRowIndex").value = currentRowIndex;
+            // alert(document.getElementById("ContentPlaceHolder1_hidLeftGriRowIndex").value);
+            $('#<%= gvBookKIPDFList.ClientID %>').val(row);
+            $('#<%= gvBookKIPDFList.ClientID %>').val(rowIndex);
+        }
+
+        $(function () {
+            RetainSelectedRow();
+        });
+
+        function RetainSelectedRow() {
+            var parent = $('#<%= gvBookKIPDFList.ClientID %>').val();
+            var currentIndex = $('#<%= gvBookKIPDFList.ClientID %>').val();
+            if (parent != null) {
+                ChangeRowColor(parent, currentIndex);
+            }
+        }
+
+    </script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("[id*=gvBookKIPDFList] td").click(function () {
+                DisplayDetails($(this).closest("tr"));
+            });
+        });
+        function DisplayDetails(row) {
+            var message = "";
+            var pdfno = "";
+            message += "Id: " + $("td", row).eq(0).html();
+            message += "\nName: " + $("td", row).eq(1).html();
+            //pdfno = "\nDescription: " + $("td", row).eq(2).html();
+            pdfno = $("td", row).eq(2).html();
+            var leftgridpdfqty = $("td", row).eq(4).html();
+            //  alert(leftgridpdfqty);
+            //  DisplayDetailsRight(leftgridpdfqty);
+            //var left_poc_header_id =$('table td:eq(10;)');// $("td", row).eq(10).html();
+            //alert(left_poc_header_id.text);
+            //var rowindexpdf = $(this).closest('td').parent()[0].sectionRowIndex;
+            //alert(rowindexpdf);
+            // greigevalue(pdfno);
+        }
+    </script>
+
+    <style type="text/css">
+        body {
+            font-family: Arial;
+            font-size: 10pt;
+        }
+
+        .selected {
+            background-color: white; /*#A1DCF2;*/
+        }
+
+        .auto-style4 {
+            width: 17%;
+            height: 23px;
+            top: 790px;
+            left: 921px;
+            position: absolute;
+        }
+
+        .auto-style5 {
+            width: 50%;
+            height: 400px;
+            overflow: auto;
+            top: 830px;
+            left: 923px;
+            position: absolute;
+        }
+
+        .auto-style6 {
+            position: absolute;
+            left: 875px;
+            top: 189px;
+            height: 1px;
+        }
+    </style>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        var prevRowIndexRight;
+        function ChangeRowColorRight(rowRight, rowIndexRight) {
+            var parentRight = document.getElementById(rowRight);
+            var currentRowIndexRight = parseInt(rowIndexRight) + 1;
+
+
+            if (prevRowIndexRight == currentRowIndexRight) {
+                return;
+            }
+            else if (prevRowIndexRight != null) {
+                parentRight.rows[prevRowIndexRight].style.backgroundColor = "#FFFFFF";
+            }
+
+            parentRight.rows[currentRowIndexRight].style.backgroundColor = "#FFF3B7"; //selected row color
+
+            prevRowIndexRight = currentRowIndexRight;
+            //document.getElementById("   ").value = currentRowIndexRight;
+
+         <%--   $('#<%= gvBookKI_ProdOrders.ClientID %>').val(rowRight); 
+            $('#<%= gvBookKI_ProdOrders.ClientID %>').val(rowIndexRight); --%>
+            var gridright = document.getElementById("<%= gvBookKI_ProdOrders.ClientID %>");
+            var gridleft = document.getElementById("<%= gvBookKIPDFList.ClientID %>");
+            var leftgridselectedrowindex = (document.getElementById("ContentPlaceHolder1_hidLeftGriRowIndex").value);
+            var leftgridpdftqty = '';
+            var leftgridpdfno = '';
+            var leftgridbookedqy = '';
+
+            var rightgridbookedqty = '';
+            var rightgridavailqty = '';
+            rightgridbookedqty = gridright.rows[currentRowIndexRight].cells[3].innerHTML;
+            rightgridavailqty = gridright.rows[currentRowIndexRight].cells[4].innerHTML;
+            var leftgridtotalbookedqty = '';
+            var rightgridkino = gridright.rows[currentRowIndexRight].cells[0].innerHTML;
+            var rightgridfactorydesign = gridright.rows[currentRowIndexRight].cells[5].innerHTML;
+            var rightgridbom = gridright.rows[currentRowIndexRight].cells[6].innerHTML;
+            // alert(leftgridselectedrowindex);
+            if (leftgridselectedrowindex == '' || leftgridselectedrowindex == null) {
+
+                // alert(leftgridselectedrowindex);
+                leftgridpdfno = 0;// gridleft.rows[leftgridselectedrowindex].cells[2].innerHTML;
+                leftgridpdftqty = 0;// gridleft.rows[leftgridselectedrowindex].cells[4].innerHTML;
+                leftgridbookedqy = 0;// gridleft.rows[leftgridselectedrowindex].cells[8].innerHTML;
+            }
+            else {
+                // alert(leftgridselectedrowindex);
+                leftgridpdfno = gridleft.rows[leftgridselectedrowindex].cells[2].innerHTML;
+                leftgridpdftqty = gridleft.rows[leftgridselectedrowindex].cells[4].innerHTML;
+                leftgridbookedqy = gridleft.rows[leftgridselectedrowindex].cells[8].innerHTML;
+            }
+            if (leftgridpdfno == '' || leftgridpdfno == null || leftgridpdfno == "0.00") {
+                leftgridbookedqy = "0";
+            }
+            else {
+                //  alert(leftgridselectedrowindex);
+                if (rightgridavailqty >= leftgridpdftqty) {
+                    // alert("availqty is greater than pdfqty");
+
+                    gridright.rows[currentRowIndexRight].cells[3].innerHTML = eval(rightgridbookedqty) + eval(leftgridpdftqty);
+                    gridright.rows[currentRowIndexRight].cells[4].innerHTML = eval(rightgridavailqty) - eval(leftgridpdftqty);
+                    if (leftgridbookedqy == '' || leftgridbookedqy == null) {
+                        leftgridbookedqy = "0";
+                    }
+                    gridleft.rows[leftgridselectedrowindex].cells[8].innerHTML = eval(leftgridbookedqy) + eval(leftgridpdftqty);
+                }
+                else {
+                    // alert("availqty is less than pdfqty");
+                    gridright.rows[currentRowIndexRight].cells[3].innerHTML = eval(rightgridbookedqty) + eval(rightgridavailqty);
+                    gridright.rows[currentRowIndexRight].cells[4].innerHTML = "0";// eval(rightgridavailqty) - eval(leftgridpdftqty);
+                    if (leftgridbookedqy == '' || leftgridbookedqy == null) {
+                        leftgridbookedqy = "0";
+                    }
+                    gridleft.rows[leftgridselectedrowindex].cells[8].innerHTML = eval(leftgridbookedqy) + eval(rightgridavailqty);
+                }
+                //leftgridtotalbookedqty = leftgridbookedqy
+            }
+            AddRow(leftgridpdfno, rightgridkino, rightgridfactorydesign, rightgridbom, leftgridpdftqty);
+        }
+
+        $(function () {
+            RetainSelectedRowRight();
+        });
+
+        function RetainSelectedRowRight() {
+            var parentRight = $('#<%= gvBookKI_ProdOrders.ClientID %>').val();
+            var currentIndexRight = $('#<%= gvBookKI_ProdOrders.ClientID %>').val();
+            if (parentRight != null) {
+                ChangeRowColorRight(parentRight, currentIndexRight);
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript">
+        function AddRow(bookingpdfno, bookingkino, bookingfactorydesign, bookingbom, bookinpdfqty) {
+           <%-- //Reference the GridView.
+            var gridView = document.getElementById("<%=gvBookKI_BookingDetails.ClientID %>");
+
+            //Reference the TBODY tag.
+            var tbody = gridView.getElementsByTagName("tbody")[0];--%>
+
+
+
+            var grd = document.getElementById("<%=gvBookKI_BookingDetails.ClientID %>");
+            // alert(grd);
+
+            var tbod = grd.rows[0].parentNode;
+
+            //  alert(grd.parentNode.childNodes[0].innerHTML);
+            //alert(grd.rows[1].cells[0].innerHTML);
+            var bookingrowcell = grd.rows[1].cells[0].value;
+            //alert((bookingrowcell));
+            var checkbookingpdfno = '';
+            var checkbookingkino = '';
+            //// alert(grd.rows.length);
+            var result = confirm('Are you sure Add the KINO?');
+           
+            if (result) {
+                if (bookingrowcell == '$nbsp;' || grd.rows[1].cells[0].innerHTML == null || grd.rows[1].cells[0].innerHTML == 'undefined') {
+                    alert("empty");
+                    //grd.rows[1].cells[0].innerHTML = bookingpdfno;
+                    //grd.rows[1].cells[1].innerHTML = bookingkino;
+                    //grd.rows[1].cells[2].innerHTML = bookingfactorydesign;
+                    //grd.rows[1].cells[3].innerHTML = bookingbom;
+                    //grd.rows[1].cells[4].innerHTML = bookingpdfno;
+                    //grd.rows[1].cells[5].innerHTML = bookinpdfqty;
+
+                    grd.rows[newrowindex].cells[0].innerHTML = bookingpdfno;
+                    grd.rows[newrowindex].cells[1].innerHTML = bookingkino;
+                    grd.rows[newrowindex].cells[2].innerHTML = bookingfactorydesign;
+                    grd.rows[newrowindex].cells[3].innerHTML = bookingbom;
+                    // grd.rows[newrowindex].cells[4].innerHTML = bookingpdfno;
+                    grd.rows[newrowindex].cells[4].innerHTML = bookinpdfqty;
+                    //var newRow = grd.rows[grd.rows.length - 1].cloneNode(true);
+                    //tbod.appendChild(newRow);
+                }
+                else {
+
+                    var newrowindex = grd.rows.length - 1
+                    // alert("row existing");
+
+                    grd.rows[newrowindex].cells[0].innerHTML = bookingpdfno;
+                    grd.rows[newrowindex].cells[1].innerHTML = bookingkino;
+                    grd.rows[newrowindex].cells[2].innerHTML = bookingfactorydesign;
+                    grd.rows[newrowindex].cells[3].innerHTML = bookingbom;
+                    // grd.rows[newrowindex].cells[4].innerHTML = bookingpdfno;
+                    grd.rows[newrowindex].cells[4].innerHTML = bookinpdfqty;
+                    grd.rows[newrowindex].cells[6].innerHTML = "-1";
+                    grd.rows[newrowindex].cells[6].style.width = "0px";
+                    grd.rows[newrowindex].cells[6].style.width = "0px";
+                    grd.rows[newrowindex].cells[6].style.height = "0px";
+
+                    // var newRow = grd.rows[grd.rows.length - 1].cloneNode(true);
+                    var newRow = grd.rows[newrowindex].cloneNode(true);
+                    tbod.appendChild(newRow);
+                }
+            }
+            return false;
+
+
+        };
+
+        //function SetValue(row, index, name, textbox) {
+        //    //Reference the Cell and set the value.
+        //    row.cells[index].innerHTML = textbox.value;
+
+        //    //Create and add a Hidden Field to send value to server.
+        //    var input = document.createElement("input");
+        //    input.type = "hidden";
+        //    input.name = name;
+        //    input.value = textbox.value;
+        //    row.cells[index].appendChild(input);
+
+        //    //Clear the TextBox.
+        //    textbox.value = "";
+        //}
+</script>
+
+      <script src="../Scripts/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript">
+        //        function deleteRow(rowId) {
+        //            alert(rowId);
+        //            $("#gvBookKI_BookingDetails" + rowId).remove();
+        //}
+
+
+        function delrow(lnk) {
+           
+            var row = lnk.parentNode.parentNode;
+           // alert(row.rowIndex + 1);
+            var rowIndexbooking = row.rowIndex + 1;
+           // alert(rowIndexbooking);
+            //alert("rowindex: " + rowindexbooking);
+
+            //delete using ajax
+
+            // confirm meg check for delete  
+            //var result = confirm('Are you sure delete Emp Record?');  
+            //if (result) {
+            var grididselected = document.getElementById("<%=gvBookKI_BookingDetails.ClientID %>")
+            //var grididselected = document.getelementbyid("<%=gvBookKI_BookingDetails.ClientID %>");
+            //    // this is for get hdnvalue id  
+            //    var value = val.replace("btndelete", "hdnempid");  
+            // alert(grididselected);
+            // alert(grididselected.rows[rowindexbooking].cells[0].innerhtml);
+           // alert("DDD");
+            //alert(rowIndexbooking);
+            var pdfnoselected = $.trim(grididselected.rows[rowIndexbooking].cells[0].innerhtml);
+            var kinoselected = $.trim(grididselected.rows[rowIndexbooking].cells[1].innerhtml);
+            
+            var pdflineid = $.trim(grididselected.rows[rowIndexbooking].cells[6].innerhtml);
+            
+            pdflineid = "1";
+            alert(pdflineid);
+            $.ajax({
+                type: "post",
+                //contenttype: "application/json; charset=utf-8",
+                data: '{pdflineid: ' + pdflineid + '}', //data: '{empid: "' + $("#" + pdflineid) + '" }',// empid value 
+                url: "Book_KI.aspx/DeletegvBookKI_BookingDetails", // this for calling the web method function in cs code.  
+                datatype: "json",
+                success: onsuccess,
+                failure: function (data) {
+                    alert(data);
+                }
+
+
+            });
+
+            return false;
+            // }  
+
+
+            // function onsuccess  
+            function onsuccess(response) {
+                return false;
+                alert("yeS");
+                if (response.d == 'true') {
+
+
+                }
+
+            }
+
+            // alert(lnk.$index);
+            //var gridID = document.getElementById("<%=gvBookKI_BookingDetails.ClientID %>");
+            //  alert(gridID.rows[rowIndexbooking].cells[0].innerHTML);   
+            // gridID.deleteRow(rowIndexbooking);
+            //alert(lnk);
+
+            $(document).ready(function () {
+                $("#<%=gvBookKI_BookingDetails.ClientID%> tr:has(td)").click(function () {
+
+                    $(this).fadeOut(100, function () {
+
+                        $(this).remove();
+
+                    });
+
+                });
+
+            });
+
+            return false;
+
+        }
+
+        function addrows() {
+            var gridID = document.getElementById("<%=gvBookKI_BookingDetails.ClientID %>");
+            var arr = new Array([150]);
+            for (var i = 1; i < gridID.rows.length; i++) {
+                // alert("in");
+                arr[i] = new Array(10);
+            }
+            var pdfnoarr = '';
+            var kinoarr = '';
+            var factorydesign = '';
+            var bomcode = '';
+            var pdfbookedqty = '';
+            var pocpdflineid = '';
+            for (var j = 1; j < gridID.rows.length; j++) {
+                //grd.rows[newrowindex].cells[0].innerHTML
+                pdfnoarr = pdfnoarr + $.trim(gridID.rows[j].cells[0].innerHTML) + "~";
+                kinoarr = kinoarr + $.trim(gridID.rows[j].cells[1].innerHTML) + "~";
+                factorydesign = $.trim(factorydesign + gridID.rows[j].cells[2].innerHTML) + "~";
+                bomcode = bomcode + $.trim(gridID.rows[j].cells[3].innerHTML) + "~";
+                pdfbookedqty = pdfbookedqty + $.trim(gridID.rows[j].cells[4].innerHTML) + "~";
+                pocpdflineid = pocpdflineid + $.trim(gridID.rows[j].cells[6].innerHTML) + "~";
+                // alert($.trim(gridID.rows[j].cells[6].innerHTML));
+                //alert($.trim(gridID.rows[j].cells[5].innerHTML));
+            }
+
+            document.getElementById("ContentPlaceHolder1_hidarraypdfno").value = pdfnoarr;
+            document.getElementById("ContentPlaceHolder1_hidarraykino").value = kinoarr;
+            document.getElementById("ContentPlaceHolder1_hidarrayfactorydesign").value = factorydesign;
+            document.getElementById("ContentPlaceHolder1_hidarraybomcode").value = bomcode;
+            document.getElementById("ContentPlaceHolder1_hidarraypdfbookedqty").value = pdfbookedqty;
+            document.getElementById("ContentPlaceHolder1_hidarraypdflineid").value = pocpdflineid;
+            //alert(document.getElementById("ContentPlaceHolder1_hidarraypdfno").value);
+            //alert(document.getElementById("ContentPlaceHolder1_hidarraykino").value);
+            //alert(document.getElementById("ContentPlaceHolder1_hidarrayfactorydesign").value);
+            //alert(document.getElementById("ContentPlaceHolder1_hidarraybomcode").value);
+            //alert(document.getElementById("ContentPlaceHolder1_hidarraypdfbookedqty").value);
+            //  alert(document.getElementById("ContentPlaceHolder1_hidarraypdflineid").value);
+            return true;
+        }
+  </script>
+       
+    
+    
+    <script src="../Scripts/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript">  </script>
+   <script ="text/javascript">
+
+       function DeleteConfirmbox(val) {
+
+           // confirm meg check for delete  
+           var result = confirm('Are you sure delete Emp Record?');
+           if (result) {
+
+               // this is for get hdnvalue id  
+               var value = val.replace("btnDelete", "hdnEmpId");
+
+               $.ajax({
+                   type: "POST",
+                   contentType: "application/json; charset=utf-8",
+                   url: "Default.aspx/DeletegvEmpData", // this for calling the web method function in cs code.  
+                   data: '{empid: "' + $("#" + value).val() + '" }',// empid value                      
+                   dataType: "json",
+                   success: OnSuccess,
+                   failure: function (data) {
+                       alert(data);
+                   }
+
+
+               });
+
+               return false;
+           }
+       }
+
+       // function OnSuccess  
+       function OnSuccess(response) {
+           return false;
+           if (response.d == 'true') {
+
+
+           }
+
+       }
+    </script> 
+  
+</asp:Content>

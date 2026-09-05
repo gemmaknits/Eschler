@@ -1,0 +1,20 @@
+    [System.Web.Services.WebMethod]
+        public static string DeletegvBookKI_BookingDetails()
+        {
+            string strmsg = string.Empty;
+            //SqlConnection con = new SqlConnection("data source=LENOVO;initial catalog=practise;UID=sa;PWD=connect;");
+
+            //SqlCommand cmd = new SqlCommand("delete from tbl_Emp where EmpId= @Empid", con);
+
+            //con.Open();
+            //cmd.Parameters.AddWithValue("@Empid", pdflineid);
+            int retval = 1;// cmd.ExecuteNonQuery();
+            //con.Close();
+
+            if (retval == 1)
+                strmsg = "true";
+            else
+                strmsg = "false";
+
+            return strmsg;
+        }

@@ -1,0 +1,178 @@
+﻿body {
+
+}
+.TextBox {
+	border:1px solid #456879;
+	border-radius:3px;
+	height: 25px;   
+	font-family: Arial,sans-serif;
+	font-size:12px;
+	font-weight:normal;
+
+}
+.TextBoxNumeric {
+	border:1px solid #456879;
+	border-radius:3px;
+	height: 22px;   
+	font-family: Arial,sans-serif;
+	font-size:12px;
+	font-weight:normal;
+
+}
+.combo {
+	border:1px solid #456879;
+	border-radius:3px;
+	height: 23px;   
+	font-family: Arial,sans-serif;
+	font-size:12px;
+	font-weight:normal;
+
+}
+.clsFromLabel{
+    	height: 22px;   
+	font-family: Arial,sans-serif;
+	font-size:12px;
+	font-weight:normal;
+    
+}
+.clsRow {
+	background-color: white;
+	font-family: Arial,sans-serif;
+	font-size:12px;
+	font-weight:normal;
+	text-align:left;
+	color:#333333;
+	padding-left:0px;
+	height:18px;
+	border:1px solid #CCD5F2;
+	vertical-align:middle;
+}
+.clsRow2 {
+	background-color:white;
+    font-family: Arial,sans-serif;
+	font-size:12px;
+	font-weight:normal;
+	text-align:left;
+	color:black;
+	padding-left:0px;
+	height:18px;
+	vertical-align:middle;
+}
+.clsTitle{
+   text-align:center;
+ font-family: Arial,sans-serif;
+	font-size:12px;}
+.rightpadding{
+    padding-right:1em;
+}
+table.padded-table td {padding:2px; }
+.spaceUnder
+{
+
+  padding-left:2px;
+  padding-right:2px;
+}
+.gridview td {
+    padding: 2px;
+}
+table.GridView tr td, th
+{
+  margin-left:4px;
+}
+input:focus {
+
+    background-color:rgba(0, 255, 255, 0.12);
+}
+.button {
+
+    background-color:lightgreen;
+    border:1px solid #456879;
+	border-radius:5px;
+	height: 25px;
+    width:75px;
+}
+.grdheader {
+
+background-color :lightgreen;/* #D8F781;*/
+font-family: Arial,sans-serif;
+	font-size:12px;
+	font-weight:normal;
+
+/*padding-left:5px;
+
+    padding-right:10px;
+padding-left:10px;
+padding-top:5px;
+padding-bottom:5px;*/
+}
+.grdheadernocolor {
+
+padding-left:5px;
+font-family: Arial,sans-serif;
+	font-size:12px;
+	font-weight:normal;
+    padding-right:10px;
+padding-left:10px;
+padding-top:5px;
+padding-bottom:5px;
+font-weight:bold;
+}
+.grdheaderline{
+     border-top-style:none;
+    border-left-style:none;
+    border-right-style:none;
+}
+.grdtextbox
+{
+
+}
+.col
+{
+padding-right:3px;
+padding-left:3px;
+padding-top:5px;
+padding-bottom:5px;
+font-family: Arial,sans-serif;
+    	font-size:12px;
+	font-weight:normal;
+}
+.numericcol
+{   
+    padding-right:3px;
+    padding-left:3px;
+    padding-top:5px;
+    padding-bottom:5px; 
+    height:22px;
+    text-align:right;
+    
+}
+.dtcol
+{
+padding-right:5px;
+padding-left:5px;
+padding-top:5px;
+padding-bottom:5px;
+font-family: Arial,sans-serif;
+    	font-size:12px;
+	font-weight:normal;
+}
+.chkcol
+{
+padding-right:5px;
+padding-left:25px;
+padding-top:5px;
+padding-bottom:5px;
+font-family: Arial,sans-serif;
+    	font-size:12px;
+	font-weight:normal;
+}
+.gridtextbox{
+    grid-column-align:end;
+    float:right;
+}
+.RowStyle {
+  height: 20px;
+}
+.AlternateRowStyle {
+  height: 20px;
+}

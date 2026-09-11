@@ -572,3 +572,10 @@ td input.edit.bad{
    and the entry explains why it does nothing. */
 .ctxmenu li.disabled{color:var(--muted); cursor:default}
 .ctxmenu li.disabled:hover{background:transparent; color:var(--muted)}
+
+/* The copied design, shown against Insert here so it is clear what will land */
+.ctxmenu .ctxnote{
+  margin-left:8px; font-family:IBM Plex Mono,monospace; font-size:11px;
+  color:var(--accent);
+}
+.ctxmenu li:hover .ctxnote{color:var(--accent)}

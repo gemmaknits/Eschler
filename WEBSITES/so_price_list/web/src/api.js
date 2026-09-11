@@ -95,6 +95,15 @@ export const api = {
   saveRow: (headerId, body) =>
     call(`/price_list/${headerId}/row`, { method: 'POST', body: JSON.stringify(body) }),
 
+  // what the company already knows about a design - fabric name and spec.
+  // Comes back with found:false for a design the ERP masters do not carry.
+  lookupDesign: (designNo) =>
+    call(`/price_list/design${qs({ design_no: designNo })}`),
+
+  // right-click Insert here with nothing copied: a new line at that position
+  insertSet: (headerId, body) =>
+    call(`/price_list/${headerId}/set/insert`, { method: 'POST', body: JSON.stringify(body) }),
+
   // right-click Copy -> Insert: duplicates a whole grid row (every tier and
   // currency behind it) and drops it after the row that was right-clicked
   copySet: (headerId, body) =>

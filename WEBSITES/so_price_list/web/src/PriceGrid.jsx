@@ -317,7 +317,10 @@ export default function PriceGrid({
                   if (col.key === 'notes' && row.notes) cls.push('hasnote');
                   if (col.num) cls.push('num', 'mono');
                   if (col.sticky) cls.push('stk', 's1', 'mono');
-                  if (!col.num && !col.sticky) cls.push('dim');
+                  /* The fabric and spec columns used to be greyed as secondary
+                     detail. They are not: they are data being reviewed and
+                     corrected, and grey text reads as disabled or less
+                     trustworthy. Every column now carries the same weight. */
                 }
                 if (isFocus) cls.push('foc');
 
@@ -414,15 +417,12 @@ export default function PriceGrid({
         <li onClick={() => { onCopyRow(menu.row); setMenu(null); }}>
           Copy line
         </li>
-        <li className={copied ? '' : 'disabled'}
-            onClick={() => {
-              if (!copied) return;
-              onInsertCopied(menu.row);
-              setMenu(null);
-            }}>
-          {copied
-            ? `Insert copied (${copied.design_no}) below`
-            : 'Insert copied — nothing copied yet'}
+        {/* Always available. With something copied it inserts that; with
+            nothing copied it opens a blank line in the same place, so this is
+            the one way to add a line anywhere but the end. */}
+        <li onClick={() => { onInsertCopied(menu.row); setMenu(null); }}>
+          Insert here
+          {copied && <span className="ctxnote">{copied.design_no}</span>}
         </li>
         <li className="danger"
             onClick={() => { onDeleteRow(menu.row); setMenu(null); }}>

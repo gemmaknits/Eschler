@@ -136,6 +136,23 @@ app.MapGet("/price_list/price", async (Db db, HttpRequest r) =>
     });
 });
 
+// What the company already knows about a design: fabric name from dm.refdesno,
+// composition and spec from designs. Declared before /{id} so "design" is not
+// read as an id. Returns found=0 rather than an error when the design is not in
+// the masters - 31 of the 261 in use are not.
+app.MapGet("/price_list/design", async (Db db, HttpRequest r) =>
+{
+    var designNo = S(r.Query["design_no"]) ?? S(r.Query["article"]);
+    if (designNo is null)
+        return Results.BadRequest(new { error = "design_no is required." });
+
+    return Results.Ok(await db.SingleAsync("P_SO_PRICE_LIST_PKG_select_design", new[]
+    {
+        Text("@design_no", designNo, 60),
+        Text("@logempcd",  Who(r), 15)
+    }));
+});
+
 // Customer list of values. Lives in the LOV schema per house convention, so
 // the name is schema-qualified rather than resolved against SO.
 app.MapGet("/lov/customer", async (Db db, HttpRequest r) =>
@@ -259,6 +276,32 @@ app.MapPost("/price_list/{id:long}/set/copy", async (Db db, HttpRequest r, long 
         Num("@so_price_list_header_id", id),
         Int32P("@source_set_no",        IJ(b, "source_set_no")),
         Int32P("@after_set_no",         IJ(b, "after_set_no")),
+        Text("@logempcd",               Who(r), 15)
+    })));
+
+// Right-click Insert here with nothing copied: a brand new line at that spot.
+// The sets below shift down, so it lands where it was asked for rather than at
+// the end of the list.
+app.MapPost("/price_list/{id:long}/set/insert", async (Db db, HttpRequest r, long id, System.Text.Json.JsonElement b) =>
+    Results.Ok(await db.SingleAsync("P_SO_PRICE_LIST_PKG_insert_price_list_set", new[]
+    {
+        Num("@so_price_list_header_id", id),
+        Int32P("@after_set_no",         IJ(b, "after_set_no")),
+        Text("@design_no",              SJ(b, "design_no"), 60),
+        Text("@article_variant",        SJ(b, "article_variant"), 20),
+        Int32P("@qty_min",              IJ(b, "qty_min")),
+        Int32P("@qty_max",              IJ(b, "qty_max")),
+        Chr("@qty_unit",                SJ(b, "qty_unit") ?? "M", 2),
+        Text("@color_tier",             SJ(b, "color_tier"), 30),
+        Chr("@currency",                SJ(b, "currency") ?? "USD", 3),
+        Dec("@price",                   DecJ(b, "price")),
+        Text("@fabric_name",            SJ(b, "fabric_name"), 120),
+        Text("@composition",            SJ(b, "composition"), 200),
+        Text("@full_width_cm",          SJ(b, "full_width_cm"), 30),
+        Text("@usable_width_cm",        SJ(b, "usable_width_cm"), 30),
+        Text("@weight_gsm",             SJ(b, "weight_gsm"), 30),
+        Text("@moq",                    SJ(b, "moq"), 30),
+        Text("@notes",                  SJ(b, "notes"), 500),
         Text("@logempcd",               Who(r), 15)
     })));
 

@@ -123,7 +123,25 @@ export default function App() {
   const visibleRows = hideInactive
     ? grid.rows.filter(r => r.active !== 'N')
     : grid.rows;
-  const rows = [...visibleRows, ...drafts];
+  /* A draft opened with "Insert here" shows where it was asked for, directly
+     below that row - not at the bottom of the list. Seeing it appear somewhere
+     else is how you lose track of what you were inserting. Drafts from
+     "+ Add line" have no position and still go at the end. */
+  const rows = (() => {
+    const placed = drafts.filter(d => d.after_set_no != null);
+    const appended = drafts.filter(d => d.after_set_no == null);
+    if (!placed.length) return [...visibleRows, ...appended];
+
+    const out = [];
+    for (const r of visibleRows) {
+      out.push(r);
+      for (const d of placed) if (d.after_set_no === r.set_no) out.push(d);
+    }
+    /* A draft whose anchor is hidden (a withdrawn row, with Hidden on) would
+       vanish silently, so it falls to the end rather than being dropped. */
+    for (const d of placed) if (!out.includes(d)) out.push(d);
+    return [...out, ...appended];
+  })();
   const inactiveCount = grid.rows.filter(r => r.active === 'N').length;
 
   /* ---- right-click: copy / insert / delete a whole line ------------------
@@ -135,7 +153,29 @@ export default function App() {
   }, [say]);
 
   const insertCopied = useCallback(async target => {
-    if (!copied) return;
+    /* Nothing copied: open a blank line in that position instead. It is a
+       draft, so it costs nothing until a design and a price are typed - but it
+       remembers where it was asked for, and saves into that slot rather than
+       at the end of the list. */
+    if (!copied) {
+      setDrafts(d => [...d, {
+        key: `draft-${Date.now()}-${d.length}`,
+        isDraft: true,
+        after_set_no: target.set_no,
+        design_no: '',
+        article_variant: '',
+        qty_min: 0,
+        qty_max: null,
+        qty_unit: target.qty_unit || 'M',
+        fabric_name: '', composition: '',
+        full_width_cm: '', usable_width_cm: '', weight_gsm: '', moq: '',
+        source_row: null,
+        cells: {}
+      }]);
+      say(`New line below ${target.design_no} — fill the design no and a price`);
+      return;
+    }
+
     setBusy(true);
     try {
       /* after_set_no is the row that was right-clicked, so the copy lands
@@ -200,11 +240,57 @@ export default function App() {
     setDrafts(d => d.map(r => (r.key === key ? { ...r, ...patch } : r)));
 
   /* ---- edit a row-level field ---- */
+  /* Typing a design number fills in what the company already knows about it:
+     the fabric name from dm.refdesno, the spec from designs. Only EMPTY fields
+     are filled - a value already on the line is the price list's own, possibly
+     corrected, and is never overwritten by the master.
+
+     An unknown design is not an error. 31 of the 261 designs in use are not in
+     the ERP masters at all, so the fields are simply left to be typed. */
+  const fillFromDesign = useCallback(async (row, designNo) => {
+    const key = (designNo || '').trim();
+    if (!key) return;
+    try {
+      const d = await api.lookupDesign(key);
+      if (!d?.found) { say(`${key} — not in the design master, fill it in by hand`); return; }
+
+      const patch = {};
+      const take = (field, incoming) => {
+        const current = (row[field] ?? '').toString().trim();
+        if (!current && incoming) patch[field] = incoming;
+      };
+      take('fabric_name',     d.fabric_name);
+      take('composition',     d.composition);
+      take('weight_gsm',      d.weight_gsm);
+      take('usable_width_cm', d.usable_width_cm);
+
+      if (!Object.keys(patch).length) { say(`${key} — ${d.fabric_name || 'found'}`); return; }
+
+      if (row.isDraft) { patchDraft(row.key, patch); }
+      else {
+        for (const line of Object.values(row.cells || {})) {
+          await api.saveDetail({ detail_id: line.so_price_list_detail_id, ...patch });
+        }
+        patchRowLocally(row.key, patch, patch);
+      }
+      say(`${key} — ${d.fabric_name || 'spec'} filled in`);
+    } catch (err) {
+      /* A lookup failure must not lose the design number the user just typed. */
+      setError(`Design lookup failed: ${err.message}`);
+    }
+  }, [say, patchRowLocally]);
+
   const editRow = useCallback(async (row, col, raw) => {
     const value = col.num ? (raw === '' ? null : parseInt(raw, 10)) : raw;
     if (col.num && raw !== '' && Number.isNaN(value)) return;
 
-    if (row.isDraft) { patchDraft(row.key, { [col.key]: value }); return; }
+    if (row.isDraft) {
+      patchDraft(row.key, { [col.key]: value });
+      if (col.key === 'design_no' && value) {
+        fillFromDesign({ ...row, [col.key]: value }, value);
+      }
+      return;
+    }
 
     /* The active flag is set on THIS row's own price lines, by id.
        It cannot go through update_price_list_row: that proc matches on
@@ -270,10 +356,17 @@ export default function App() {
       say(lines.length === 1
         ? `${col.label} updated`
         : `${col.label} updated on ${lines.length} prices in this row`);
+
+      /* A design number changed, so the spec on the line may now belong to a
+         different fabric. Fill anything blank from the master - what is
+         already there stays, since it may be a correction being made now. */
+      if (col.key === 'design_no' && value) {
+        await fillFromDesign({ ...row, design_no: value }, value);
+      }
     } catch (err) {
       setError(err.message);
     } finally { setBusy(false); }
-  }, [headerId, reload, say]);
+  }, [headerId, reload, say, fillFromDesign]);
 
   /* ---- edit or create a price ---- */
   const editPrice = useCallback(async (row, currency, tier, value) => {
@@ -319,7 +412,7 @@ export default function App() {
       if (!row.design_no) { setError('Give the line a design no first.'); return; }
       setBusy(true);
       try {
-        await api.saveDetail({
+        const body = {
           header_id: headerId, design_no: row.design_no,
           article_variant: row.article_variant || null,
           qty_min: row.qty_min ?? 0, qty_max: row.qty_max, qty_unit: row.qty_unit || 'M',
@@ -327,7 +420,16 @@ export default function App() {
           fabric_name: row.fabric_name, composition: row.composition,
           full_width_cm: row.full_width_cm, usable_width_cm: row.usable_width_cm,
           weight_gsm: row.weight_gsm, moq: row.moq
-        });
+        };
+
+        /* A draft opened with "Insert here" knows where it belongs, and goes
+           through the set insert so the rows below shift down to make room.
+           A draft from "+ Add line" has no position and just appends. */
+        if (row.after_set_no != null) {
+          await api.insertSet(headerId, { ...body, after_set_no: row.after_set_no });
+        } else {
+          await api.saveDetail(body);
+        }
         say(`Line saved — ${row.design_no} · ${tier} · ${currency}`);
         reload(true); refreshLists();
       } catch (err) { setError(err.message); } finally { setBusy(false); }

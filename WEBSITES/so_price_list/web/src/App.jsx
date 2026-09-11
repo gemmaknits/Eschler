@@ -706,6 +706,7 @@ export default function App() {
               conflictTotal={conflictTotal}
               onEdit={() => setEditHeader({ mode: 'edit' })}
               onSetCustomer={setCustomer}
+              onAssign={h => setAssignFor(h)}
               hideInactive={hideInactive}
               inactiveCount={inactiveCount}
               onHideInactive={setHideInactivePref}
@@ -825,7 +826,7 @@ export default function App() {
   );
 }
 
-function MetaStrip({ header: h, conflictTotal, onEdit, onSetCustomer,
+function MetaStrip({ header: h, conflictTotal, onEdit, onSetCustomer, onAssign,
                      hideInactive, inactiveCount, onHideInactive }) {
   const F = ({ k, v, dim }) => (
     <div className="mf">
@@ -848,6 +849,19 @@ function MetaStrip({ header: h, conflictTotal, onEdit, onSetCustomer,
           onPick={c => onSetCustomer(c.customer_id)}
           onClear={() => onSetCustomer(null)}
         />
+      </div>
+      {/* A list is quoted to more than one customer, and the field above holds
+          only the one the import matched. This is where the rest are, so it
+          sits beside it rather than two clicks inside Edit header. */}
+      <div className="mf">
+        <span className="k">Assigned to</span>
+        <button className="assignbtn" onClick={() => onAssign(h)}
+                title="Customers this price list is quoted to">
+          {h.customer_count > 0
+            ? <>{h.customer_count} customer{h.customer_count === 1 ? '' : 's'}</>
+            : <span className="dim">nobody yet</span>}
+          <span className="assignedit">edit</span>
+        </button>
       </div>
       <F k="Workbook name" v={h.customer_excel || '—'} dim={!h.customer_excel} />
       <F k="Terms" v={h.terms || 'not stated'} dim={!h.terms} />

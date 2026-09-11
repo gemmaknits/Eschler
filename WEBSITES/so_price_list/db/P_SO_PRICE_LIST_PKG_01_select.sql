@@ -73,6 +73,9 @@ BEGIN
             h.updated_by,
             ISNULL(d.line_count, 0)    AS line_count,
             ISNULL(c.conflict_count,0) AS conflict_count,
+            /* how many customers this list is quoted to, so the header can say
+               so without the app asking per list */
+            ISNULL(ac.customer_count, 0) AS customer_count,
             CASE WHEN h.valid_to IS NOT NULL
                   AND h.valid_to < CAST(GETDATE() AS date) THEN 'Y' ELSE 'N' END AS expired_flag
     FROM    SO.so_price_list_header h
@@ -82,6 +85,11 @@ BEGIN
             WHERE  delete_mark <> 'Y'
             GROUP BY so_price_list_header_id
     ) d ON d.so_price_list_header_id = h.so_price_list_header_id
+    LEFT JOIN (
+            SELECT so_price_list_header_id, COUNT(*) AS customer_count
+            FROM   SO.so_price_list_customers
+            GROUP BY so_price_list_header_id
+    ) ac ON ac.so_price_list_header_id = h.so_price_list_header_id
     LEFT JOIN (
             /* cells that resolve to more than one LIVE price line */
             SELECT so_price_list_header_id, COUNT(*) AS conflict_count

@@ -636,3 +636,20 @@ td input.edit.bad{
 .lovgrid.assigngrid td button{padding:1px 7px; font-size:11px}
 button.ghost.danger{color:var(--danger)}
 button.ghost.danger:hover:not(:disabled){background:var(--danger-soft); color:var(--danger)}
+
+/* "Assigned to" in the header strip: reads as a value, behaves as a button. */
+.assignbtn{
+  display:inline-flex; align-items:center; gap:7px;
+  background:transparent; border:1px solid transparent; border-radius:3px;
+  padding:1px 6px 1px 0; font-size:12px; font-weight:500; color:var(--ink);
+}
+.assignbtn:hover:not(:disabled){
+  background:var(--accent-soft); border-color:var(--accent); color:var(--accent);
+  padding-left:6px;
+}
+.assignbtn .dim{color:var(--muted); font-style:italic; font-weight:400}
+.assignedit{
+  font-size:9px; font-weight:600; letter-spacing:.07em; text-transform:uppercase;
+  color:var(--muted); opacity:0; transition:opacity .12s;
+}
+.assignbtn:hover .assignedit{opacity:1; color:var(--accent)}

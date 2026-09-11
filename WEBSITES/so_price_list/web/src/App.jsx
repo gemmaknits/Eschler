@@ -8,6 +8,7 @@ import ColumnsMenu from './ColumnsMenu.jsx';
 import PriceListNav from './PriceListNav.jsx';
 import HeaderForm from './HeaderForm.jsx';
 import CustomerField from './CustomerField.jsx';
+import DesignLov from './DesignLov.jsx';
 
 export default function App() {
   const [lists, setLists]       = useState([]);
@@ -32,6 +33,8 @@ export default function App() {
      a snapshot of the values - the copy happens on the server from whatever
      the row says at Insert time, so an edit in between is not lost. */
   const [copied, setCopied]     = useState(null);
+  /* {row, filter} while the design picker is open. */
+  const [designLov, setDesignLov] = useState(null);
   const [emp, setEmp]           = useState(getEmpCd());
   const flashTimer = useRef(null);
 
@@ -252,7 +255,12 @@ export default function App() {
     if (!key) return;
     try {
       const d = await api.lookupDesign(key);
-      if (!d?.found) { say(`${key} — not in the design master, fill it in by hand`); return; }
+
+      /* No exact match. A price list often carries the STEM of a number the ERP
+         holds in full - 255699AA against 255699AA/14, /15, /16 - so offer those
+         rather than declaring the design unknown. The picker decides; if it
+         finds nothing either, it says so and the line is typed by hand. */
+      if (!d?.found) { setDesignLov({ row, filter: key }); return; }
 
       const patch = {};
       const take = (field, incoming) => {
@@ -279,6 +287,34 @@ export default function App() {
       setError(`Design lookup failed: ${err.message}`);
     }
   }, [say, patchRowLocally]);
+
+  /* A design picked from the list of values. It replaces what was typed - the
+     stem 255699AA becomes the real 255699AA/14 - and brings the spec with it,
+     so the line ends up carrying a number the ERP actually knows. */
+  const pickDesign = useCallback(async picked => {
+    const target = designLov?.row;
+    setDesignLov(null);
+    if (!target || !picked?.design_no) return;
+
+    const patch = {
+      design_no: picked.design_no,
+      ...(picked.fabric_name     && !((target.fabric_name     ?? '').trim()) ? { fabric_name:     picked.fabric_name } : {}),
+      ...(picked.composition     && !((target.composition     ?? '').trim()) ? { composition:     picked.composition } : {}),
+      ...(picked.weight_gsm      && !((target.weight_gsm      ?? '').trim()) ? { weight_gsm:      picked.weight_gsm } : {}),
+      ...(picked.usable_width_cm && !((target.usable_width_cm ?? '').trim()) ? { usable_width_cm: picked.usable_width_cm } : {})
+    };
+
+    if (target.isDraft) { patchDraft(target.key, patch); say(`${picked.design_no} selected`); return; }
+
+    setBusy(true);
+    try {
+      for (const line of Object.values(target.cells || {})) {
+        await api.saveDetail({ detail_id: line.so_price_list_detail_id, ...patch });
+      }
+      patchRowLocally(target.key, patch, patch);
+      say(`${picked.design_no} — ${picked.fabric_name || 'selected'}`);
+    } catch (err) { setError(err.message); } finally { setBusy(false); }
+  }, [designLov, patchRowLocally, say]);
 
   const editRow = useCallback(async (row, col, raw) => {
     const value = col.num ? (raw === '' ? null : parseInt(raw, 10)) : raw;
@@ -510,6 +546,31 @@ export default function App() {
     } catch (err) { setError(err.message); }
   }, [headerId, say]);
 
+  /* Delete a whole price list from the nav. It was only reachable from inside
+     Edit header before, which is not where anyone looks for it.
+
+     Soft, like every delete here: the header and every one of its lines go to
+     delete_mark 'Y' in one transaction, and nothing reads them afterwards. */
+  const deleteList = useCallback(list => {
+    const lines = list.line_count || 0;
+    setConfirm({
+      title: `Delete "${list.list_name}"?`,
+      body: lines > 0
+        ? `${lines} price line${lines === 1 ? '' : 's'} go with it.`
+        : 'This list has no price lines.',
+      detail: 'A soft delete — the rows stay in the table and can be brought back.',
+      cta: 'Delete price list',
+      onYes: async () => {
+        setBusy(true);
+        try {
+          const res = await api.deleteList(list.so_price_list_header_id);
+          await headerDeleted(list.so_price_list_header_id, res?.deleted_line_count ?? lines);
+        } catch (err) { setError(err.message); } finally { setBusy(false); }
+      }
+    });
+  }, [headerDeleted]);
+
+
   /* Set (or clear) the customer straight from the meta strip, without opening
      the whole header dialog - 53 imported lists still need mapping and that is
      the only field most of them are missing.
@@ -588,6 +649,7 @@ export default function App() {
           onSearch={setNavSearch}
           onSelect={id => { setHeaderId(id); setDrafts([]); }}
           onNew={() => setEditHeader({ mode: 'new' })}
+          onDeleteList={deleteList}
           busy={busy}
         />
 
@@ -662,6 +724,17 @@ export default function App() {
           onSaved={headerSaved}
           onDeleted={headerDeleted}
           onClose={() => setEditHeader(null)}
+        />
+      )}
+
+      {designLov && (
+        <DesignLov
+          initialFilter={designLov.filter}
+          onPick={pickDesign}
+          /* Closing without picking leaves the typed number exactly as it was.
+             It may be a design the ERP has never carried, and this app is not
+             the place to refuse it. */
+          onClose={() => setDesignLov(null)}
         />
       )}
 

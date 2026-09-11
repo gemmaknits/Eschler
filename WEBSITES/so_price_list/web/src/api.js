@@ -100,6 +100,9 @@ export const api = {
   lookupDesign: (designNo) =>
     call(`/price_list/design${qs({ design_no: designNo })}`),
 
+  // the design picker: a partial number or a fabric name -> the real designs
+  lovDesign: (params = {}) => call(`/price_list/design_list${qs(params)}`),
+
   // right-click Insert here with nothing copied: a new line at that position
   insertSet: (headerId, body) =>
     call(`/price_list/${headerId}/set/insert`, { method: 'POST', body: JSON.stringify(body) }),

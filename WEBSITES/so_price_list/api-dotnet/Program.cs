@@ -153,6 +153,16 @@ app.MapGet("/price_list/design", async (Db db, HttpRequest r) =>
     }));
 });
 
+// Design list of values: a partial number (255699AA) offers the real ones the
+// ERP holds (255699AA/14, /15, /16). Declared before /{id} like the others.
+app.MapGet("/price_list/design_list", async (Db db, HttpRequest r) =>
+    Results.Ok(await db.QueryAsync("P_SO_PRICE_LIST_PKG_select_design_list", new[]
+    {
+        Text("@filter",   S(r.Query["filter"]), 60),
+        Int32P("@top_n",  I(r.Query["top_n"]) ?? 200),
+        Text("@logempcd", Who(r), 15)
+    })));
+
 // Customer list of values. Lives in the LOV schema per house convention, so
 // the name is schema-qualified rather than resolved against SO.
 app.MapGet("/lov/customer", async (Db db, HttpRequest r) =>

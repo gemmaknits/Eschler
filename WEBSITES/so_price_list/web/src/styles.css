@@ -579,3 +579,37 @@ td input.edit.bad{
   color:var(--accent);
 }
 .ctxmenu li:hover .ctxnote{color:var(--accent)}
+
+/* Header line in a context menu: names what the menu will act on, so a
+   destructive entry cannot be read against the wrong row. */
+.ctxmenu li.ctxhead{
+  padding:4px 10px 6px; margin-bottom:2px;
+  border-bottom:1px solid var(--rule);
+  font-size:10px; font-weight:600; letter-spacing:.06em; text-transform:uppercase;
+  color:var(--muted); cursor:default;
+}
+.ctxmenu li.ctxhead:hover{background:transparent; color:var(--muted)}
+/* the nav is a positioned container, and the menu is fixed to the viewport */
+.nav{position:relative}
+
+/* The LOV grid's column widths are laid out fixed and sized for the CUSTOMER
+   picker's six columns. The design picker has five different ones, so without
+   its own widths "255699AA/14" is squeezed into 62px and the composition runs
+   over the weight. These override the nth-child rules above. */
+.lovgrid.designlov table{table-layout:fixed; width:100%}
+.lovgrid.designlov th:nth-child(1),.lovgrid.designlov td:nth-child(1){width:140px}
+.lovgrid.designlov th:nth-child(2),.lovgrid.designlov td:nth-child(2){width:auto}
+.lovgrid.designlov th:nth-child(3),.lovgrid.designlov td:nth-child(3){width:200px}
+.lovgrid.designlov th:nth-child(4),.lovgrid.designlov td:nth-child(4){width:104px}
+.lovgrid.designlov th:nth-child(5),.lovgrid.designlov td:nth-child(5){width:118px}
+/* every cell clips its own text rather than spilling into the next column */
+.lovgrid.designlov td,.lovgrid.designlov th{
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+
+/* Fabric names run to "PORTO INVISIBLE TM EMB"; the customer picker's 700px
+   leaves the column too narrow to read one. Wider modal, tighter spec columns. */
+.modal.lov.designlovmodal{max-width:820px}
+.lovgrid.designlov th:nth-child(3),.lovgrid.designlov td:nth-child(3){width:184px}
+.lovgrid.designlov th:nth-child(4),.lovgrid.designlov td:nth-child(4){width:98px}
+.lovgrid.designlov th:nth-child(5),.lovgrid.designlov td:nth-child(5){width:110px}

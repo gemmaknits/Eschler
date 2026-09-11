@@ -1,4 +1,4 @@
-import { useMemo, useRef, useEffect } from 'react';
+import { useMemo, useRef, useEffect, useState } from 'react';
 
 /**
  * Left navigation: every price list, searchable, with the counts that matter
@@ -8,9 +8,29 @@ import { useMemo, useRef, useEffect } from 'react';
  * is instant and does not wait on the network.
  */
 export default function PriceListNav({
-  lists, selectedId, search, onSearch, onSelect, onNew, busy
+  lists, selectedId, search, onSearch, onSelect, onNew, onDeleteList, busy
 }) {
   const listRef = useRef(null);
+  /* {x, y, list} - the right-clicked price list. Delete lives here rather than
+     as a button on every row: it is destructive, and a stray click on a hover
+     target in a list of 53 is exactly how the wrong one goes. */
+  const [menu, setMenu] = useState(null);
+
+  useEffect(() => {
+    if (!menu) return;
+    const close = () => setMenu(null);
+    const onKey = e => { if (e.key === 'Escape') close(); };
+    window.addEventListener('click', close);
+    window.addEventListener('resize', close);
+    window.addEventListener('scroll', close, true);
+    window.addEventListener('keydown', onKey);
+    return () => {
+      window.removeEventListener('click', close);
+      window.removeEventListener('resize', close);
+      window.removeEventListener('scroll', close, true);
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [menu]);
 
   const shown = useMemo(() => {
     const q = search.trim().toLowerCase();
@@ -66,6 +86,10 @@ export default function PriceListNav({
               key={id}
               className={`navitem${id === selectedId ? ' on' : ''}`}
               onClick={() => onSelect(id)}
+              onContextMenu={e => {
+                e.preventDefault();
+                setMenu({ x: e.clientX, y: e.clientY, list: l });
+              }}
               title={l.list_desc || l.list_name}
             >
               <span className="navname">{l.list_name}</span>
@@ -90,6 +114,19 @@ export default function PriceListNav({
         <span><b>{shown.length}</b>{shown.length !== lists.length && <> of <b>{lists.length}</b></>} lists</span>
         {totalConflicts > 0 && <span className="navfootwarn">{totalConflicts} conflicts</span>}
       </div>
+
+      {menu && (
+        <ul className="ctxmenu"
+            style={{ left: menu.x, top: menu.y }}
+            onClick={e => e.stopPropagation()}>
+          <li className="ctxhead">{menu.list.list_name}</li>
+          <li className="danger"
+              onClick={() => { onDeleteList(menu.list); setMenu(null); }}>
+            Delete price list
+            <span className="ctxnote">{menu.list.line_count} lines</span>
+          </li>
+        </ul>
+      )}
     </nav>
   );
 }

@@ -73,9 +73,14 @@ BEGIN
             h.updated_by,
             ISNULL(d.line_count, 0)    AS line_count,
             ISNULL(c.conflict_count,0) AS conflict_count,
-            /* how many customers this list is quoted to, so the header can say
-               so without the app asking per list */
+            /* Who this list is quoted to. The header used to carry one
+               customer_id, matched during the import; a list goes to several,
+               so the assignments in so_price_list_customers are the answer and
+               these two carry it - the count for the header strip, the names
+               for the navigation. STUFF/FOR XML rather than STRING_AGG: the
+               target is SQL Server 2014. */
             ISNULL(ac.customer_count, 0) AS customer_count,
+            ac.assigned_customers,
             CASE WHEN h.valid_to IS NOT NULL
                   AND h.valid_to < CAST(GETDATE() AS date) THEN 'Y' ELSE 'N' END AS expired_flag
     FROM    SO.so_price_list_header h
@@ -86,9 +91,17 @@ BEGIN
             GROUP BY so_price_list_header_id
     ) d ON d.so_price_list_header_id = h.so_price_list_header_id
     LEFT JOIN (
-            SELECT so_price_list_header_id, COUNT(*) AS customer_count
-            FROM   SO.so_price_list_customers
-            GROUP BY so_price_list_header_id
+            SELECT c.so_price_list_header_id,
+                   COUNT(*) AS customer_count,
+                   STUFF((SELECT N', ' + ISNULL(cu2.name, N'customer ' + CAST(c2.customer_id AS nvarchar(20)))
+                          FROM   SO.so_price_list_customers c2
+                          LEFT JOIN dbo.customers cu2 ON cu2.customer_id = c2.customer_id
+                          WHERE  c2.so_price_list_header_id = c.so_price_list_header_id
+                          ORDER BY cu2.name
+                          FOR XML PATH(''), TYPE).value('.','nvarchar(max)'), 1, 2, '')
+                       AS assigned_customers
+            FROM   SO.so_price_list_customers c
+            GROUP BY c.so_price_list_header_id
     ) ac ON ac.so_price_list_header_id = h.so_price_list_header_id
     LEFT JOIN (
             /* cells that resolve to more than one LIVE price line */

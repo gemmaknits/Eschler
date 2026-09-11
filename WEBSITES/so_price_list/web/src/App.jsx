@@ -7,7 +7,6 @@ import PriceGrid from './PriceGrid.jsx';
 import ColumnsMenu from './ColumnsMenu.jsx';
 import PriceListNav from './PriceListNav.jsx';
 import HeaderForm from './HeaderForm.jsx';
-import CustomerField from './CustomerField.jsx';
 import DesignLov from './DesignLov.jsx';
 import UomLov from './UomLov.jsx';
 import CustomerAssign from './CustomerAssign.jsx';
@@ -617,39 +616,7 @@ export default function App() {
   }, [headerDeleted]);
 
 
-  /* Set (or clear) the customer straight from the meta strip, without opening
-     the whole header dialog - 53 imported lists still need mapping and that is
-     the only field most of them are missing.
-
-     update_price_list is a full upsert, so every other field has to be sent
-     back as it stands or it would be nulled out. */
-  const setCustomer = useCallback(async (customerId) => {
-    if (!header) return;
-    setBusy(true);
-    try {
-      await api.saveHeader({
-        header_id: header.so_price_list_header_id,
-        list_name: header.list_name,
-        list_desc: header.list_desc || null,
-        customer_id: customerId,
-        customer_excel: header.customer_excel || null,
-        list_date: header.list_date || null,
-        valid_from: header.valid_from || null,
-        valid_to: header.valid_to || null,
-        terms: header.terms || null,
-        quote_ref: header.quote_ref || null,
-        sonoid: header.sonoid || null,
-        so_line_id: header.so_line_id ?? null,
-        notes: header.notes || null
-      });
-      const rows = await api.listPriceLists();
-      setLists(rows);
-      say(customerId ? 'Customer set on this price list' : 'Customer cleared');
-    } catch (err) { setError(err.message); }
-    finally { setBusy(false); }
-  }, [header, say]);
-
-  const onEmp = e => { const v = e.target.value.toUpperCase(); setEmp(v); setEmpCd(v); };
+    const onEmp = e => { const v = e.target.value.toUpperCase(); setEmp(v); setEmpCd(v); };
 
   /* rows that are one of several alternatives for the same design and band */
   const multiPriceRows = grid.rows.filter(r => r.groupSize > 1).length;
@@ -705,7 +672,6 @@ export default function App() {
               header={header}
               conflictTotal={conflictTotal}
               onEdit={() => setEditHeader({ mode: 'edit' })}
-              onSetCustomer={setCustomer}
               onAssign={h => setAssignFor(h)}
               hideInactive={hideInactive}
               inactiveCount={inactiveCount}
@@ -826,7 +792,7 @@ export default function App() {
   );
 }
 
-function MetaStrip({ header: h, conflictTotal, onEdit, onSetCustomer, onAssign,
+function MetaStrip({ header: h, conflictTotal, onEdit, onAssign,
                      hideInactive, inactiveCount, onHideInactive }) {
   const F = ({ k, v, dim }) => (
     <div className="mf">
@@ -837,30 +803,22 @@ function MetaStrip({ header: h, conflictTotal, onEdit, onSetCustomer, onAssign,
   return (
     <section className="meta">
       <F k="Header id" v={<span className="mono">{h.so_price_list_header_id}</span>} />
-      {/* editable in place: mapping a customer is the one field most of the
-          imported lists are still missing */}
+      {/* A price list is quoted to whoever it is quoted to - often several.
+          The header used to hold a single customer_id from the import, which
+          could not say that, so this is the only customer control now and the
+          assignments behind it are the answer. */}
       <div className="mf mfcust">
-        <span className="k">Customer</span>
-        <CustomerField
-          key={h.so_price_list_header_id}
-          compact
-          customerId={h.customer_id}
-          customerName={h.customer_name}
-          onPick={c => onSetCustomer(c.customer_id)}
-          onClear={() => onSetCustomer(null)}
-        />
-      </div>
-      {/* A list is quoted to more than one customer, and the field above holds
-          only the one the import matched. This is where the rest are, so it
-          sits beside it rather than two clicks inside Edit header. */}
-      <div className="mf">
-        <span className="k">Assigned to</span>
+        <span className="k">Customers</span>
         <button className="assignbtn" onClick={() => onAssign(h)}
                 title="Customers this price list is quoted to">
           {h.customer_count > 0
-            ? <>{h.customer_count} customer{h.customer_count === 1 ? '' : 's'}</>
-            : <span className="dim">nobody yet</span>}
-          <span className="assignedit">edit</span>
+            ? <span className="assignnames" title={h.assigned_customers || ''}>
+                {h.assigned_customers}
+              </span>
+            : <span className="dim">nobody assigned</span>}
+          <span className="assignedit">
+            {h.customer_count > 0 ? `${h.customer_count} ·  edit` : 'assign'}
+          </span>
         </button>
       </div>
       <F k="Workbook name" v={h.customer_excel || '—'} dim={!h.customer_excel} />

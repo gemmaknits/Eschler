@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { api } from './api';
-import CustomerField from './CustomerField.jsx';
 
 const asDate = v => (v ? String(v).slice(0, 10) : '');
 
@@ -16,9 +15,6 @@ export default function HeaderForm({ header, onSaved, onClose, onDeleted, onAssi
   const [f, setF] = useState({
     list_name: header?.list_name || '',
     list_desc: header?.list_desc || '',
-    customer_id: header?.customer_id || null,
-    customer_name: header?.customer_name || '',
-    custcd: '',
     customer_excel: header?.customer_excel || '',
     valid_from: asDate(header?.valid_from),
     valid_to: asDate(header?.valid_to),
@@ -65,7 +61,6 @@ export default function HeaderForm({ header, onSaved, onClose, onDeleted, onAssi
         header_id: header?.so_price_list_header_id ?? null,
         list_name: name,
         list_desc: f.list_desc || null,
-        customer_id: f.customer_id,
         customer_excel: f.customer_excel || null,
         valid_from: f.valid_from || null,
         valid_to: f.valid_to || null,
@@ -123,22 +118,16 @@ export default function HeaderForm({ header, onSaved, onClose, onDeleted, onAssi
         </label>
 
         <div className="fld">
-          <span className="fldk">Customer</span>
-          <CustomerField
-            customerId={f.customer_id}
-            customerName={f.customer_name}
-            custcd={f.custcd}
-            onPick={c => {
-              set('customer_id', c.customer_id);
-              set('customer_name', c.customer_name);
-              set('custcd', (c.custcd || '').trim());
-            }}
-            onClear={() => {
-              set('customer_id', null); set('customer_name', ''); set('custcd', '');
-            }}
-          />
-          {f.customer_id == null &&
-            <span className="fldmsg">Optional — a list works without one.</span>}
+          <span className="fldk">Customers</span>
+          {isNew
+            ? <span className="fldmsg">
+                Create the list first, then assign customers to it - a list can go to several.
+              </span>
+            : <button className="assignfield" onClick={() => onAssign?.(header)}>
+                {header.customer_count > 0
+                  ? <>{header.customer_count} assigned - {header.assigned_customers}</>
+                  : <span className="dim">nobody assigned yet</span>}
+              </button>}
         </div>
 
         <div className="fldrow">
@@ -170,14 +159,6 @@ export default function HeaderForm({ header, onSaved, onClose, onDeleted, onAssi
             {saving ? 'Saving…' : isNew ? 'Create price list' : 'Save changes'}
           </button>
           <button className="ghost" onClick={onClose} disabled={saving}>Cancel</button>
-
-          {/* A new list has no id yet, so there is nothing to assign anyone to.
-              Save it first and the button is there. */}
-          {!isNew && (
-            <button className="ghost" onClick={() => onAssign?.(header)} disabled={saving}>
-              Customers…
-            </button>
-          )}
 
           {!isNew && (
             <span className="modaldel">

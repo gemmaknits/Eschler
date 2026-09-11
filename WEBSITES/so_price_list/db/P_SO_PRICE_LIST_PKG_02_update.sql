@@ -145,8 +145,11 @@ BEGIN
         UPDATE SO.so_price_list_header
         SET    list_name         = @list_name,
                list_desc         = @list_desc,
-               customer_id       = @customer_id,
-               customer_name     = @customer_name,
+               /* customer_id and customer_name are NOT written any more. A
+                  price list is quoted to several customers and those live in
+                  so_price_list_customers; these two columns hold what the
+                  import matched and are left as they were rather than nulled
+                  out by every save from a form that no longer sends them. */
                customer_excel    = @customer_excel,
                list_date         = @list_date,
                valid_from        = @valid_from,

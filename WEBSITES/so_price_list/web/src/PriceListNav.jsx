@@ -37,7 +37,7 @@ export default function PriceListNav({
     if (!q) return lists;
     return lists.filter(l =>
       (l.list_name || '').toLowerCase().includes(q) ||
-      (l.customer_name || '').toLowerCase().includes(q) ||
+      (l.assigned_customers || '').toLowerCase().includes(q) ||
       (l.customer_excel || '').toLowerCase().includes(q) ||
       (l.list_desc || '').toLowerCase().includes(q));
   }, [lists, search]);
@@ -102,9 +102,9 @@ export default function PriceListNav({
                 )}
                 {expired && <span className="navexp" title="Past its valid-to date">expired</span>}
               </span>
-              {l.customer_name
-                ? <span className="navcust">{l.customer_name}</span>
-                : <span className="navcust dim">not mapped to a customer</span>}
+              {l.customer_count > 0
+                ? <span className="navcust" title={l.assigned_customers}>{l.assigned_customers}</span>
+                : <span className="navcust dim">no customer assigned</span>}
             </button>
           );
         })}

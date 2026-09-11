@@ -634,8 +634,17 @@ td input.edit.bad{
 .lovgrid.assigngrid th:nth-child(4),.lovgrid.assigngrid td:nth-child(4){width:96px}
 .lovgrid.assigngrid th:nth-child(5),.lovgrid.assigngrid td:nth-child(5){width:82px}
 .lovgrid.assigngrid td button{padding:1px 7px; font-size:11px}
-button.ghost.danger{color:var(--danger)}
-button.ghost.danger:hover:not(:disabled){background:var(--danger-soft); color:var(--danger)}
+/* A ghost button that happens to be destructive: red LETTERING on the page,
+   not a solid red block. button.danger above paints the background red, and
+   overriding only the colour here put red text on red - an invisible label
+   inside a red rectangle. The background and border have to come back too. */
+button.ghost.danger{
+  background:transparent; border-color:transparent;
+  color:var(--danger); font-weight:500;
+}
+button.ghost.danger:hover:not(:disabled){
+  background:var(--danger-soft); border-color:var(--danger); color:var(--danger);
+}
 
 /* "Assigned to" in the header strip: reads as a value, behaves as a button. */
 .assignbtn{

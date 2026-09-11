@@ -1537,7 +1537,7 @@ Public Class frmKnittingOrderNew
 
         KOHeader.kono = txtPRODNo.Text.Trim
         KOHeader.kodt = dtpKODate.Value.ToString("dd/MM/yyyy")
-        KOHeader.koclosedt = Now.ToString("yyyMMdd") 'dtpClosed.Value.ToString("yyyyMMdd") 'Neung 20260427
+        KOHeader.koclosedt = dtpClosed.Value.ToString("yyyyMMdd") 'Neung 20260911
         KOHeader.rem_closed = txtClosedRemark.Text.Trim
         KOHeader.Strmsgerr = ""
 
@@ -1939,4 +1939,7 @@ Public Class frmKnittingOrderNew
         End If
     End Sub
 
+    Private Sub BtnDelivered_Click(sender As Object, e As EventArgs) Handles BtnDelivered.Click
+
+    End Sub
 End Class

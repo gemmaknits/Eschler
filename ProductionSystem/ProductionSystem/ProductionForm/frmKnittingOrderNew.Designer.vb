@@ -211,10 +211,16 @@ Partial Class frmKnittingOrderNew
         'McboIDYarnChange
         '
         Me.McboIDYarnChange.BackColor = System.Drawing.Color.Khaki
+        Me.McboIDYarnChange.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.McboIDYarnChange.DataSource = Nothing
+        Me.McboIDYarnChange.DisplayMember = Nothing
         Me.McboIDYarnChange.Location = New System.Drawing.Point(534, 21)
         Me.McboIDYarnChange.Name = "McboIDYarnChange"
+        Me.McboIDYarnChange.SelectedIndex = -1
+        Me.McboIDYarnChange.SelectedValue = Nothing
         Me.McboIDYarnChange.Size = New System.Drawing.Size(150, 21)
         Me.McboIDYarnChange.TabIndex = 275
+        Me.McboIDYarnChange.ValueMember = Nothing
         '
         'Label15
         '
@@ -454,7 +460,7 @@ Partial Class frmKnittingOrderNew
         Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(477, 25)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(54, 13)
+        Me.Label5.Size = New System.Drawing.Size(53, 13)
         Me.Label5.TabIndex = 194
         Me.Label5.Text = "BOM No."
         '
@@ -665,7 +671,7 @@ Partial Class frmKnittingOrderNew
         Me.btnExit.Image = CType(resources.GetObject("btnExit.Image"), System.Drawing.Image)
         Me.btnExit.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnExit.Name = "btnExit"
-        Me.btnExit.Size = New System.Drawing.Size(45, 22)
+        Me.btnExit.Size = New System.Drawing.Size(46, 22)
         Me.btnExit.Text = "Exit"
         '
         'txtDFBatchSize
@@ -946,7 +952,7 @@ Partial Class frmKnittingOrderNew
         Me.Label21.AutoSize = True
         Me.Label21.Location = New System.Drawing.Point(291, 75)
         Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(80, 13)
+        Me.Label21.Size = New System.Drawing.Size(79, 13)
         Me.Label21.TabIndex = 202
         Me.Label21.Text = "D/F Batch Size"
         '
@@ -955,7 +961,7 @@ Partial Class frmKnittingOrderNew
         Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(13, 71)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(105, 13)
+        Me.Label3.Size = New System.Drawing.Size(107, 13)
         Me.Label3.TabIndex = 251
         Me.Label3.Text = "PRODUCTION TYPE:"
         '
@@ -1079,7 +1085,7 @@ Partial Class frmKnittingOrderNew
         Me.Label12.AutoSize = True
         Me.Label12.Location = New System.Drawing.Point(5, 113)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(85, 13)
+        Me.Label12.Size = New System.Drawing.Size(84, 13)
         Me.Label12.TabIndex = 203
         Me.Label12.Text = "Production Qty"
         '

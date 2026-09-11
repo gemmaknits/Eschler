@@ -119,6 +119,10 @@ export const api = {
   deleteSet: (headerId, body) =>
     call(`/price_list/${headerId}/set/delete`, { method: 'POST', body: JSON.stringify(body) }),
 
+  // records that a person has checked a price list; refuses to save unsigned
+  setVerified: (headerId, body) =>
+    call(`/price_list/${headerId}/verified`, { method: 'POST', body: JSON.stringify(body) }),
+
   saveGridShape: (headerId, body) =>
     call(`/price_list/${headerId}/grid_shape`, { method: 'POST', body: JSON.stringify(body) }),
 

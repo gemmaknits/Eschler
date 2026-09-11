@@ -123,6 +123,19 @@ export default function App() {
 
   const refreshLists = () => api.listPriceLists().then(setLists).catch(() => {});
 
+  /* Tick or untick "I have checked this list". The procedure refuses an
+     unsigned confirmation, so the error it returns is the one worth showing:
+     it names what to do about it. */
+  const setVerified = useCallback(async (h, on) => {
+    setBusy(true);
+    try {
+      await api.setVerified(h.so_price_list_header_id, { verified: on ? 'Y' : 'N' });
+      setLists(await api.listPriceLists());
+      say(on ? `${h.list_name} marked as checked`
+             : `${h.list_name} is no longer marked checked`);
+    } catch (err) { setError(err.message); } finally { setBusy(false); }
+  }, [say]);
+
   /* The units of measure, once. The grid checks a typed unit against these
      before saving, so an invalid one opens the picker instead of coming back
      as an error from the database. */
@@ -673,6 +686,7 @@ export default function App() {
               conflictTotal={conflictTotal}
               onEdit={() => setEditHeader({ mode: 'edit' })}
               onAssign={h => setAssignFor(h)}
+              onVerify={setVerified}
               hideInactive={hideInactive}
               inactiveCount={inactiveCount}
               onHideInactive={setHideInactivePref}
@@ -792,7 +806,7 @@ export default function App() {
   );
 }
 
-function MetaStrip({ header: h, conflictTotal, onEdit, onAssign,
+function MetaStrip({ header: h, conflictTotal, onEdit, onAssign, onVerify,
                      hideInactive, inactiveCount, onHideInactive }) {
   const F = ({ k, v, dim }) => (
     <div className="mf">
@@ -843,6 +857,23 @@ function MetaStrip({ header: h, conflictTotal, onEdit, onAssign,
                  onChange={e => onHideInactive(e.target.checked)} />
           <span>Hidden</span>
           {inactiveCount > 0 && <span className="metacount">{inactiveCount}</span>}
+        </label>
+      </div>
+      {/* The confirmation that a person has been through this list. It is the
+          last thing in the strip because it is the last thing done. */}
+      <div className="mf">
+        <span className="k">Data checked</span>
+        <label className={`chk metachk verifychk${h.excel_data_verified === 'Y' ? ' on' : ''}`}
+               title={h.excel_data_verified === 'Y'
+                 ? `Confirmed by ${h.verified_by || 'somebody'}${h.verified_date ? ' on ' + fmtDate(h.verified_date) : ''}`
+                 : 'Tick once you have been through this list and corrected what was wrong'}>
+          <input type="checkbox" checked={h.excel_data_verified === 'Y'}
+                 onChange={e => onVerify(h, e.target.checked)} />
+          <span>
+            {h.excel_data_verified === 'Y'
+              ? <>Verified{h.verified_by ? <> · {h.verified_by}</> : null}</>
+              : 'Not yet'}
+          </span>
         </label>
       </div>
       <div className="mf" style={{ marginLeft: 'auto', marginRight: 0, borderRight: 'none' }}>

@@ -65,6 +65,10 @@ BEGIN
             h.tier_set,
             h.currency_set,
             h.hide_inactive,
+            /* whether a person has gone through this list and confirmed it */
+            h.excel_data_verified,
+            h.verified_by,
+            h.verified_date,
             h.creation_date,
             h.created_by,
             h.last_updated_date,

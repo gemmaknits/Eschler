@@ -49,6 +49,8 @@ export default function PriceListNav({
   }, [selectedId, shown.length]);
 
   const totalConflicts = lists.reduce((a, l) => a + (l.conflict_count || 0), 0);
+  /* how far the review has got - the number people will actually ask about */
+  const verified = lists.filter(l => l.excel_data_verified === 'Y').length;
 
   return (
     <nav className="nav">
@@ -101,6 +103,11 @@ export default function PriceListNav({
                   </span>
                 )}
                 {expired && <span className="navexp" title="Past its valid-to date">expired</span>}
+                {/* so the reviewer can see at a glance which lists are done */}
+                {l.excel_data_verified === 'Y' &&
+                  <span className="navok" title={`Checked by ${l.verified_by || 'somebody'}`}>
+                    checked
+                  </span>}
               </span>
               {l.customer_count > 0
                 ? <span className="navcust" title={l.assigned_customers}>{l.assigned_customers}</span>
@@ -112,6 +119,9 @@ export default function PriceListNav({
 
       <div className="navfoot">
         <span><b>{shown.length}</b>{shown.length !== lists.length && <> of <b>{lists.length}</b></>} lists</span>
+        <span title="Price lists somebody has been through and confirmed">
+          <b>{verified}</b>/{lists.length} checked
+        </span>
         {totalConflicts > 0 && <span className="navfootwarn">{totalConflicts} conflicts</span>}
       </div>
 

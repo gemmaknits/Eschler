@@ -675,3 +675,14 @@ button.ghost.danger:hover:not(:disabled){
 }
 .assignfield:hover:not(:disabled){border-color:var(--accent); background:var(--accent-soft)}
 .assignfield .dim{color:var(--muted); font-style:italic}
+
+/* "checked" against a price list that somebody has been through. */
+.navok{
+  font-size:9px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+  color:var(--accent); background:var(--accent-soft);
+  border-radius:99px; padding:0 5px; line-height:14px;
+}
+/* The confirmation in the header strip reads plainly until it is ticked, then
+   it says so - it is the one state in this app worth showing off. */
+.verifychk.on span{color:var(--accent); font-weight:600}
+.verifychk input{accent-color:var(--accent)}

@@ -359,6 +359,16 @@ app.MapPost("/price_list/{id:long}/set/delete", async (Db db, HttpRequest r, lon
         Text("@logempcd",               Who(r), 15)
     })));
 
+// "I have checked this list." The procedure refuses an unsigned confirmation,
+// so this is also the one call that fails when no user is set.
+app.MapPost("/price_list/{id:long}/verified", async (Db db, HttpRequest r, long id, System.Text.Json.JsonElement b) =>
+    Results.Ok(await db.SingleAsync("P_SO_PRICE_LIST_PKG_set_price_list_verified", new[]
+    {
+        Num("@so_price_list_header_id", id),
+        Chr("@verified",                SJ(b, "verified") ?? "Y", 1),
+        Text("@logempcd",               Who(r), 15)
+    })));
+
 app.MapPost("/price_list/{id:long}/grid_shape", async (Db db, HttpRequest r, long id, System.Text.Json.JsonElement b) =>
     Results.Ok(await db.SingleAsync("P_SO_PRICE_LIST_PKG_update_price_list_grid_shape", new[]
     {

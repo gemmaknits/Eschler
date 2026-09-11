@@ -5,6 +5,14 @@
          matter which .NET runtimes are installed on the IIS box (the existing
          WebAPI targets net7.0 and we must not disturb it). -->
     <TargetFramework>net8.0</TargetFramework>
+    <!-- Declared HERE, not on the publish command line. These used to be passed
+         as flags; a publish that forgot them produced a framework-dependent
+         build, which IIS rejected at run time with
+             HTTP Error 500.31 - Failed to load ASP.NET Core runtime
+         because the box has no .NET 8 shared runtime. Keeping them in the
+         project means any `dotnet publish` produces a deployable build. -->
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>true</SelfContained>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>SoPriceListApi</RootNamespace>

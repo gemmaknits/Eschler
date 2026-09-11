@@ -17,8 +17,8 @@ WITH k AS (
            d.qty_unit, d.color_tier, d.currency,
            COUNT(*)                AS n,
            COUNT(DISTINCT d.price) AS distinct_prices
-    FROM dbo.so_price_list_detail d
-    JOIN dbo.so_price_list_header h ON h.so_price_list_header_id = d.so_price_list_header_id
+    FROM SO.so_price_list_detail d
+    JOIN SO.so_price_list_header h ON h.so_price_list_header_id = d.so_price_list_header_id
     WHERE d.delete_mark <> 'Y'
     GROUP BY d.so_price_list_header_id, h.list_name, d.article, d.article_variant,
              d.qty_min, d.qty_max, d.qty_unit, d.color_tier, d.currency
@@ -36,7 +36,7 @@ ORDER BY SUM(CASE WHEN distinct_prices > 1 THEN 1 ELSE 0 END) DESC, COUNT(*) DES
 WITH k AS (
     SELECT so_price_list_header_id, article, article_variant, qty_min, qty_max,
            qty_unit, color_tier, currency
-    FROM dbo.so_price_list_detail
+    FROM SO.so_price_list_detail
     WHERE delete_mark <> 'Y'
     GROUP BY so_price_list_header_id, article, article_variant, qty_min, qty_max,
              qty_unit, color_tier, currency
@@ -45,7 +45,7 @@ WITH k AS (
 SELECT h.list_name, d.so_price_list_detail_id, d.source_row, d.line_no,
        d.article, d.article_variant, d.qty_min, d.qty_max, d.qty_unit,
        d.color_tier, d.currency, d.price, d.moq, d.fabric_name
-FROM dbo.so_price_list_detail d
+FROM SO.so_price_list_detail d
 JOIN k ON k.so_price_list_header_id = d.so_price_list_header_id
       AND k.article = d.article
       AND ISNULL(k.article_variant,'') = ISNULL(d.article_variant,'')
@@ -54,7 +54,7 @@ JOIN k ON k.so_price_list_header_id = d.so_price_list_header_id
       AND k.qty_unit = d.qty_unit
       AND k.color_tier = d.color_tier
       AND k.currency = d.currency
-JOIN dbo.so_price_list_header h ON h.so_price_list_header_id = d.so_price_list_header_id
+JOIN SO.so_price_list_header h ON h.so_price_list_header_id = d.so_price_list_header_id
 WHERE d.delete_mark <> 'Y'
 ORDER BY h.list_name, d.article, d.qty_min, d.color_tier, d.currency, d.source_row;
 
@@ -64,14 +64,14 @@ ORDER BY h.list_name, d.article, d.qty_min, d.color_tier, d.currency, d.source_r
 
 UPDATE d
 SET    delete_mark = 'Y', deleted_by = 'SURES', last_updated_date = SYSDATETIME()
-FROM   dbo.so_price_list_detail d
+FROM   SO.so_price_list_detail d
 JOIN (
     SELECT so_price_list_detail_id,
            ROW_NUMBER() OVER (
              PARTITION BY so_price_list_header_id, article, article_variant,
                           qty_min, qty_max, qty_unit, color_tier, currency, price
              ORDER BY source_row, so_price_list_detail_id) AS rn
-    FROM dbo.so_price_list_detail
+    FROM SO.so_price_list_detail
     WHERE delete_mark <> 'Y'
 ) x ON x.so_price_list_detail_id = d.so_price_list_detail_id
 WHERE x.rn > 1;

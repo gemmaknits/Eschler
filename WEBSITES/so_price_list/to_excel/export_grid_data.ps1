@@ -25,7 +25,7 @@ SELECT so_price_list_header_id, list_name, ISNULL(list_desc,'') AS list_desc,
        ISNULL(CAST(customer_id AS varchar(20)),'') AS customer_id,
        ISNULL(customer_name,'') AS customer_name,
        ISNULL(source_sheet,'') AS source_sheet
-FROM dbo.so_price_list_header
+FROM SO.so_price_list_header
 WHERE delete_mark <> 'Y'
 ORDER BY list_name;
 "@
@@ -58,7 +58,7 @@ SELECT so_price_list_detail_id, so_price_list_header_id, line_no,
        ISNULL(weight_gsm,'') AS weight_gsm, ISNULL(moq,'') AS moq,
        qty_min, ISNULL(CAST(qty_max AS varchar(20)),'') AS qty_max, qty_unit,
        color_tier, currency, price, ISNULL(source_row,0) AS source_row
-FROM dbo.so_price_list_detail
+FROM SO.so_price_list_detail
 WHERE delete_mark <> 'Y'
 ORDER BY so_price_list_header_id, line_no;
 "@

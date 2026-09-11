@@ -42,7 +42,7 @@ BEGIN
     END
 
     SELECT TOP 1 @taken_by = so_price_list_header_id
-    FROM   dbo.so_price_list_header
+    FROM   SO.so_price_list_header
     WHERE  list_name = @list_name
       AND  delete_mark <> 'Y'
       AND (@so_price_list_header_id IS NULL
@@ -96,7 +96,7 @@ BEGIN
         RETURN;
     END
 
-    IF EXISTS (SELECT 1 FROM dbo.so_price_list_header
+    IF EXISTS (SELECT 1 FROM SO.so_price_list_header
                WHERE list_name = @list_name AND delete_mark <> 'Y'
                  AND (@so_price_list_header_id IS NULL
                       OR so_price_list_header_id <> @so_price_list_header_id))
@@ -119,7 +119,7 @@ BEGIN
 
     IF @so_price_list_header_id IS NULL
     BEGIN
-        INSERT INTO dbo.so_price_list_header
+        INSERT INTO SO.so_price_list_header
             (list_name, list_desc, customer_id, customer_name, customer_excel,
              list_date, valid_from, valid_to, terms, quote_ref,
              sonoid, so_line_id, notes, created_by)
@@ -132,7 +132,7 @@ BEGIN
     END
     ELSE
     BEGIN
-        UPDATE dbo.so_price_list_header
+        UPDATE SO.so_price_list_header
         SET    list_name         = @list_name,
                list_desc         = @list_desc,
                customer_id       = @customer_id,
@@ -189,12 +189,14 @@ CREATE PROCEDURE [SO].[P_SO_PRICE_LIST_PKG_update_price_list_detail]
     @weight_gsm              nvarchar(30)  = null,
     @moq                     nvarchar(30)  = null,
     @qty_min                 int           = null,
-    @qty_max                 int           = null,   -- NULL = open upper bound
+    @qty_max                 int           = null,
+    @clear_qty_max           bit           = 0,      -- explicit: NULL is a real value
     @qty_unit                char(2)       = 'M',
     @color_tier              nvarchar(30)  = null,
     @currency                char(3)       = null,
     @price                   decimal(18,4) = null,
     @line_no                 int           = null,
+    @active                  char(1)       = null,   -- 'Y' | 'N'
     @notes                   nvarchar(500) = null,
     @logempcd                varchar(15)   = ''
 AS
@@ -210,11 +212,17 @@ BEGIN
     END
 
     IF @so_price_list_detail_id IS NULL
-       AND NOT EXISTS (SELECT 1 FROM dbo.so_price_list_header
+       AND NOT EXISTS (SELECT 1 FROM SO.so_price_list_header
                        WHERE so_price_list_header_id = @so_price_list_header_id
                          AND delete_mark <> 'Y')
     BEGIN
         RAISERROR('Price list not found, or already deleted.', 16, 1);
+        RETURN;
+    END
+
+    IF @active IS NOT NULL AND @active NOT IN ('Y','N')
+    BEGIN
+        RAISERROR('Active must be Y or N.', 16, 1);
         RETURN;
     END
 
@@ -252,26 +260,66 @@ BEGIN
         /* append to the end of the list unless a position was given */
         IF @line_no IS NULL
             SELECT @line_no = ISNULL(MAX(line_no), 0) + 1
-            FROM   dbo.so_price_list_detail
+            FROM   SO.so_price_list_detail
             WHERE  so_price_list_header_id = @so_price_list_header_id;
 
-        INSERT INTO dbo.so_price_list_detail
+        INSERT INTO SO.so_price_list_detail
             (so_price_list_header_id, line_no, article, design_no, article_variant,
              fabric_name, composition, full_width_cm, usable_width_cm, weight_gsm,
              moq, qty_min, qty_max, qty_unit, color_tier, currency, price,
-             notes, created_by)
+             active, notes, created_by)
         VALUES
             (@so_price_list_header_id, @line_no, @article, @design_no, @article_variant,
              @fabric_name, @composition, @full_width_cm, @usable_width_cm, @weight_gsm,
              @moq, @qty_min, @qty_max, @qty_unit, @color_tier, @currency, @price,
-             @notes, @logempcd);
+             ISNULL(@active,'Y'), @notes, @logempcd);
 
         SET @so_price_list_detail_id = SCOPE_IDENTITY();
+
+        /* ------------------------------------------------------------------
+           A price line always comes as a USD/THB pair.
+
+           The grid shows the two currencies folded into one row, so creating
+           only the half that was typed leaves a half-empty row and no cell to
+           type the other price into later. Insert the counterpart at 0 so both
+           cells exist from the start; entering the real figure then UPDATES
+           that row rather than inserting a second one.
+
+           Skipped when the counterpart already exists - typing USD after THB
+           must not create a duplicate.
+           ------------------------------------------------------------------ */
+        DECLARE @other char(3) =
+            CASE @currency WHEN 'USD' THEN 'THB' WHEN 'THB' THEN 'USD' END;
+
+        IF @other IS NOT NULL
+           AND NOT EXISTS (
+               SELECT 1 FROM SO.so_price_list_detail
+               WHERE  so_price_list_header_id = @so_price_list_header_id
+                 AND  article  = @article
+                 AND  ISNULL(article_variant,'') = ISNULL(@article_variant,'')
+                 AND  qty_min  = @qty_min
+                 AND  ISNULL(qty_max,-1) = ISNULL(@qty_max,-1)
+                 AND  qty_unit = @qty_unit
+                 AND  color_tier = @color_tier
+                 AND  currency = @other
+                 AND  delete_mark <> 'Y')
+        BEGIN
+            INSERT INTO SO.so_price_list_detail
+                (so_price_list_header_id, line_no, article, design_no, article_variant,
+                 fabric_name, composition, full_width_cm, usable_width_cm, weight_gsm,
+                 moq, qty_min, qty_max, qty_unit, color_tier, currency, price,
+                 active, notes, created_by)
+            VALUES
+                (@so_price_list_header_id, @line_no + 1, @article, @design_no, @article_variant,
+                 @fabric_name, @composition, @full_width_cm, @usable_width_cm, @weight_gsm,
+                 @moq, @qty_min, @qty_max, @qty_unit, @color_tier, @other, 0,
+                 ISNULL(@active,'Y'), @notes, @logempcd);
+        END
     END
     ELSE
     BEGIN
         /* only overwrite what was supplied - the grid edits one cell at a time */
-        UPDATE dbo.so_price_list_detail
+        UPDATE SO.so_price_list_detail
         SET    article           = ISNULL(@article,         article),
                design_no         = ISNULL(@design_no,       design_no),
                article_variant   = ISNULL(@article_variant, article_variant),
@@ -282,12 +330,17 @@ BEGIN
                weight_gsm        = ISNULL(@weight_gsm,      weight_gsm),
                moq               = ISNULL(@moq,             moq),
                qty_min           = ISNULL(@qty_min,         qty_min),
-               qty_max           = @qty_max,          -- NULL is meaningful here
+               /* An open upper bound is a real value, so it cannot be signalled
+                  by passing NULL - that is indistinguishable from "leave alone",
+                  and a price-only save would silently wipe the band. */
+               qty_max           = CASE WHEN @clear_qty_max = 1 THEN NULL
+                                        ELSE ISNULL(@qty_max, qty_max) END,
                qty_unit          = ISNULL(@qty_unit,        qty_unit),
                color_tier        = ISNULL(@color_tier,      color_tier),
                currency          = ISNULL(@currency,        currency),
                price             = ISNULL(@price,           price),
                line_no           = ISNULL(@line_no,         line_no),
+               active            = ISNULL(@active,          active),
                notes             = ISNULL(@notes,           notes),
                last_updated_date = SYSDATETIME(),
                updated_by        = @logempcd
@@ -306,8 +359,8 @@ BEGIN
     DECLARE @conflict_count int;
 
     SELECT @conflict_count = COUNT(*)
-    FROM   dbo.so_price_list_detail d
-    JOIN   dbo.so_price_list_detail me
+    FROM   SO.so_price_list_detail d
+    JOIN   SO.so_price_list_detail me
              ON me.so_price_list_detail_id = @so_price_list_detail_id
     WHERE  d.so_price_list_header_id = me.so_price_list_header_id
       AND  d.article                 = me.article

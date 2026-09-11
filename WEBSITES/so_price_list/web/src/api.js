@@ -85,6 +85,9 @@ export const api = {
   saveHeader: (body) =>
     call('/price_list', { method: 'POST', body: JSON.stringify(body) }),
 
+  setRowActive: (headerId, body) =>
+    call(`/price_list/${headerId}/row`, { method: 'POST', body: JSON.stringify(body) }),
+
   saveDetail: (body) =>
     call('/price_list/detail', { method: 'POST', body: JSON.stringify(body) }),
 
@@ -131,42 +134,110 @@ export function gridShape(header) {
   };
 }
 
+/* The key that identifies one price line: everything the unique index uses.
+   Exported so the grid can find the other lines sharing a cell's key. */
+const SEP = '';
+export const bizKeyOf = ({ article, article_variant, qty_min, qty_max, qty_unit },
+                         color_tier, currency) =>
+  [article, article_variant || '', qty_min, qty_max ?? '', (qty_unit || '').trim(),
+   color_tier, (currency || '').trim()].join(SEP);
+
 export function pivotToGrid(rows) {
-  const byKey = new Map();
+  const byBase = new Map();    // base key -> grid rows ("buckets") for that key
   const tiers = new Set();
+  const currencies = new Set();
+  const siblings = new Map();  // business key -> every detail line sharing it
+
+  const baseKeyOf = d => [d.article, d.article_variant || '', d.qty_min,
+                          d.qty_max ?? '', (d.qty_unit || '').trim()].join(SEP);
+
+  const newBucket = (d, base, n) => ({
+    key: `${base}#${n}`,
+    baseKey: base,
+    article: d.article,
+    article_variant: d.article_variant || '',
+    qty_min: d.qty_min,
+    qty_max: d.qty_max,
+    qty_unit: (d.qty_unit || '').trim(),
+    fabric_name: d.fabric_name, composition: d.composition,
+    full_width_cm: d.full_width_cm, usable_width_cm: d.usable_width_cm,
+    weight_gsm: d.weight_gsm, moq: d.moq,
+    /* active came from the workbook's ACTIVE column, one value per worksheet
+       line, so every detail in a grid row carries the same flag. */
+    active: d.active || 'Y',
+    /* notes is per-detail in the table, but no grid row has details that
+       disagree on it, so it behaves as a row-level field like fabric. */
+    notes: d.notes || '',
+    source_row: d.source_row,
+    cells: {}
+  });
 
   for (const d of rows) {
     tiers.add(d.color_tier);
-    const key = [d.article, d.article_variant || '', d.qty_min,
-                 d.qty_max ?? '', (d.qty_unit || '').trim()].join('');
+    currencies.add((d.currency || '').trim());
 
-    if (!byKey.has(key)) {
-      byKey.set(key, {
-        key,
-        article: d.article,
-        article_variant: d.article_variant || '',
-        qty_min: d.qty_min,
-        qty_max: d.qty_max,
-        qty_unit: (d.qty_unit || '').trim(),
-        fabric_name: d.fabric_name, composition: d.composition,
-        full_width_cm: d.full_width_cm, usable_width_cm: d.usable_width_cm,
-        weight_gsm: d.weight_gsm, moq: d.moq,
-        source_row: d.source_row,
-        cells: {}
-      });
-    }
-    const row = byKey.get(key);
+    const bk = bizKeyOf(d, d.color_tier, d.currency);
+    if (!siblings.has(bk)) siblings.set(bk, []);
+    siblings.get(bk).push(d);
+
+    const base = baseKeyOf(d);
     const cellKey = `${(d.currency || '').trim()}|${d.color_tier}`;
-    (row.cells[cellKey] ||= []).push(d);
+    if (!byBase.has(base)) byBase.set(base, []);
+    const buckets = byBase.get(base);
+
+    /* ONE detail per cell, never two. A second line for the same article and
+       colour tier gets its own grid row rather than being folded in behind a
+       badge - duplicated prices are a thing to look at, not to hide.
+
+       What MAY share a row is the set of lines that came from one worksheet
+       line: its USD and THB halves, and its colour tiers. source_row is what
+       identifies that original line, so a detail only ever joins a row with the
+       same source_row - never merely the first row with a free cell, which
+       would pair prices that were never together in the workbook.
+
+       Lines entered in the app carry no source_row; they group with each other
+       the same way, and never get absorbed into an imported row. */
+    const sameOrigin = b =>
+      (d.source_row == null ? b.source_row == null : b.source_row === d.source_row);
+    let bucket = buckets.find(b => sameOrigin(b) && b.cells[cellKey] === undefined);
+
+    if (!bucket) {
+      bucket = newBucket(d, base, buckets.length);
+      buckets.push(bucket);
+    }
+    bucket.cells[cellKey] = d;
   }
 
-  const gridRows = [...byKey.values()].sort(
-    (a, b) => a.article.localeCompare(b.article) || a.qty_min - b.qty_min
-  );
+  const gridRows = [...byBase.values()].flat().sort((a, b) =>
+    a.article.localeCompare(b.article) ||
+    a.qty_min - b.qty_min ||
+    (a.source_row ?? 0) - (b.source_row ?? 0));
 
-  // tiersInData is only a safety net: if a line exists under a tier the header
-  // forgot to declare, its column still appears rather than the price vanishing.
-  return { rows: gridRows, tiersInData: [...tiers] };
+  /* Rows sharing a base key are alternatives for the same article and quantity
+     band - split apart so every price is visible, then bracketed in the grid.
+     Tag position AFTER sorting: the buckets were built in arrival order, and
+     the sort reorders them, so tagging earlier puts the end-cap on the wrong
+     row. Members stay contiguous because they share article and qty_min. */
+  for (let i = 0; i < gridRows.length; ) {
+    let j = i;
+    while (j < gridRows.length && gridRows[j].baseKey === gridRows[i].baseKey) j++;
+    const size = j - i;
+    for (let k = i; k < j; k++) {
+      gridRows[k].groupSize = size;
+      gridRows[k].groupPos  = k - i;
+    }
+    i = j;
+  }
+
+  /* tiersInData / currenciesInData are a safety net: a price that exists must
+     always have a column to appear in. Without it, entering a THB price on a
+     list whose currency_set is USD saves the row and then hides it. */
+  return {
+    rows: gridRows,
+    tiersInData: [...tiers],
+    currenciesInData: [...currencies].filter(Boolean),
+    siblings
+  };
 }
 
 export const TIER_ORDER =

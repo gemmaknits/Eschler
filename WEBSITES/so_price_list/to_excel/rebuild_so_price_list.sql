@@ -1,5 +1,5 @@
 /* ============================================================================
-   Rebuild dbo.so_price_list with currency + price (tall) instead of
+   Rebuild SO.so_price_list with currency + price (tall) instead of
    price_usd + price_thb (wide).
 
    One row per (customer x article x variant x qty band x color tier x CURRENCY).
@@ -22,21 +22,21 @@ SET XACT_ABORT ON;
 /* --- 1. Safety copy of the current (wide) table ------------------------- */
 DECLARE @bak sysname = N'so_price_list_bak_' + CONVERT(char(8), GETDATE(), 112);
 
-IF OBJECT_ID('dbo.so_price_list', 'U') IS NOT NULL
+IF OBJECT_ID('SO.so_price_list', 'U') IS NOT NULL
 BEGIN
     IF OBJECT_ID('dbo.' + @bak, 'U') IS NOT NULL
         EXEC(N'DROP TABLE dbo.' + @bak + N';');
 
-    EXEC(N'SELECT * INTO dbo.' + @bak + N' FROM dbo.so_price_list;');
+    EXEC(N'SELECT * INTO dbo.' + @bak + N' FROM SO.so_price_list;');
     PRINT 'Backed up to dbo.' + @bak;
 
-    DROP TABLE dbo.so_price_list;
-    PRINT 'Dropped dbo.so_price_list';
+    DROP TABLE SO.so_price_list;
+    PRINT 'Dropped SO.so_price_list';
 END
 GO
 
 /* --- 2. Recreate, tall ------------------------------------------------- */
-CREATE TABLE dbo.so_price_list
+CREATE TABLE SO.so_price_list
 (
     so_price_list_id   bigint         IDENTITY(1,1) NOT NULL,
 
@@ -96,17 +96,17 @@ GO
    the same price line collide. Still filtered on customer_id/design_no so bulk
    import can complete before the manual mapping pass. */
 CREATE UNIQUE NONCLUSTERED INDEX UX_so_price_list_active
-    ON dbo.so_price_list (customer_id, design_no, article_variant,
+    ON SO.so_price_list (customer_id, design_no, article_variant,
                           qty_min, qty_max, qty_unit, color_tier, currency)
     WHERE delete_mark <> 'Y' AND customer_id IS NOT NULL AND design_no IS NOT NULL;
 GO
 
 /* Lookup path. INCLUDE carries currency+price so the price probe stays covering. */
 CREATE NONCLUSTERED INDEX IX_so_price_list_design_customer
-    ON dbo.so_price_list (design_no, customer_id)
+    ON SO.so_price_list (design_no, customer_id)
     INCLUDE (color_tier, qty_min, qty_max, currency, price,
              valid_from, valid_to, delete_mark);
 GO
 
-PRINT 'Recreated dbo.so_price_list (tall: currency + price)';
+PRINT 'Recreated SO.so_price_list (tall: currency + price)';
 GO

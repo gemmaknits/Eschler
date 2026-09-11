@@ -201,7 +201,7 @@ $rd.Close()
 
 $excel = New-Object Collections.Generic.List[object]
 $cmd = $cn.CreateCommand()
-$cmd.CommandText = "SELECT customer_excel, COUNT(*) AS n FROM dbo.so_price_list WHERE customer_excel IS NOT NULL GROUP BY customer_excel"
+$cmd.CommandText = "SELECT customer_excel, COUNT(*) AS n FROM SO.so_price_list WHERE customer_excel IS NOT NULL GROUP BY customer_excel"
 $rd = $cmd.ExecuteReader()
 while ($rd.Read()) { $excel.Add([pscustomobject]@{ customer_excel = "$($rd[0])"; rows = [int]$rd[1] }) }
 $rd.Close()

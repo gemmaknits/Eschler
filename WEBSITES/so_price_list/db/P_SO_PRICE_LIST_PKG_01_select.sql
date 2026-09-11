@@ -56,6 +56,7 @@ BEGIN
                to infer columns from until the first price is entered. */
             h.tier_set,
             h.currency_set,
+            h.hide_inactive,
             h.creation_date,
             h.created_by,
             h.last_updated_date,
@@ -64,20 +65,21 @@ BEGIN
             ISNULL(c.conflict_count,0) AS conflict_count,
             CASE WHEN h.valid_to IS NOT NULL
                   AND h.valid_to < CAST(GETDATE() AS date) THEN 'Y' ELSE 'N' END AS expired_flag
-    FROM    dbo.so_price_list_header h
+    FROM    SO.so_price_list_header h
     LEFT JOIN (
             SELECT so_price_list_header_id, COUNT(*) AS line_count
-            FROM   dbo.so_price_list_detail
+            FROM   SO.so_price_list_detail
             WHERE  delete_mark <> 'Y'
             GROUP BY so_price_list_header_id
     ) d ON d.so_price_list_header_id = h.so_price_list_header_id
     LEFT JOIN (
-            /* cells that resolve to more than one price line */
+            /* cells that resolve to more than one LIVE price line */
             SELECT so_price_list_header_id, COUNT(*) AS conflict_count
             FROM (
                 SELECT so_price_list_header_id
-                FROM   dbo.so_price_list_detail
+                FROM   SO.so_price_list_detail
                 WHERE  delete_mark <> 'Y'
+                  AND  active = 'Y'
                 GROUP BY so_price_list_header_id, article, article_variant,
                          qty_min, qty_max, qty_unit, color_tier, currency
                 HAVING COUNT(*) > 1
@@ -119,12 +121,15 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
+    /* Only ACTIVE lines compete. A withdrawn line is not an alternative price,
+       so it must not inflate the count shown against the ones that are. */
     ;WITH dup AS (
         SELECT so_price_list_header_id, article, article_variant,
                qty_min, qty_max, qty_unit, color_tier, currency,
                COUNT(*) AS n
-        FROM   dbo.so_price_list_detail
+        FROM   SO.so_price_list_detail
         WHERE  delete_mark <> 'Y'
+          AND  active = 'Y'
           AND (@so_price_list_header_id IS NULL
                OR so_price_list_header_id = @so_price_list_header_id)
         GROUP BY so_price_list_header_id, article, article_variant,
@@ -148,15 +153,17 @@ BEGIN
             d.color_tier,
             d.currency,
             d.price,
+            d.active,
             d.source_row,
             d.notes,
             d.creation_date,
             d.created_by,
             d.last_updated_date,
             d.updated_by,
-            dup.n AS conflict_count
-    FROM    dbo.so_price_list_detail d
-    JOIN    dup ON dup.so_price_list_header_id = d.so_price_list_header_id
+            /* 0 for a withdrawn line: it carries no badge of its own. */
+            CASE WHEN d.active = 'Y' THEN ISNULL(dup.n, 1) ELSE 0 END AS conflict_count
+    FROM    SO.so_price_list_detail d
+    LEFT JOIN dup ON dup.so_price_list_header_id = d.so_price_list_header_id
                 AND dup.article                = d.article
                 AND ISNULL(dup.article_variant,'') = ISNULL(d.article_variant,'')
                 AND dup.qty_min                = d.qty_min
@@ -172,7 +179,7 @@ BEGIN
             OR d.article     LIKE '%' + @search + '%'
             OR d.fabric_name LIKE '%' + @search + '%'
             OR d.composition LIKE '%' + @search + '%')
-      AND  (@conflicts_only = 0 OR dup.n > 1)
+      AND  (@conflicts_only = 0 OR (d.active = 'Y' AND ISNULL(dup.n,0) > 1))
     ORDER BY d.so_price_list_header_id, d.article, d.qty_min, d.color_tier, d.currency;
 END
 GO
@@ -203,6 +210,7 @@ CREATE PROCEDURE [SO].[P_SO_PRICE_LIST_PKG_get_price]
     @qty_unit                char(2)      = 'M',
     @currency                char(3)      = null,   -- null = both
     @as_of                   date         = null,   -- validity check on the header
+    @include_inactive        bit          = 0,      -- retired lines stay hidden
     @logempcd                varchar(15)  = ''
 AS
 BEGIN
@@ -223,6 +231,7 @@ BEGIN
             d.qty_unit,
             d.currency,
             d.price,
+            d.active,
             d.moq,
             h.terms,
             h.valid_from,
@@ -232,13 +241,16 @@ BEGIN
             CASE WHEN d.qty_max IS NULL THEN 2147483647 ELSE d.qty_max - d.qty_min END
                 AS band_width,
             COUNT(*) OVER () AS match_count
-    FROM    dbo.so_price_list_detail d
-    JOIN    dbo.so_price_list_header h
+    FROM    SO.so_price_list_detail d
+    JOIN    SO.so_price_list_header h
               ON h.so_price_list_header_id = d.so_price_list_header_id
     WHERE   d.so_price_list_header_id = @so_price_list_header_id
       AND   d.article    = @article
       AND   d.delete_mark <> 'Y'
       AND   h.delete_mark <> 'Y'
+      /* Ausco and GLAMORISE carry an ACTIVE flag in the workbook; an 'N' line
+         is a price that has been withdrawn, so it is not offered by default. */
+      AND  (@include_inactive = 1 OR d.active = 'Y')
       AND  (@color_tier IS NULL OR @color_tier = '' OR d.color_tier = @color_tier)
       AND  (@currency   IS NULL OR @currency   = '' OR d.currency   = @currency)
       AND  (@qty_unit   IS NULL OR d.qty_unit  = @qty_unit)
@@ -338,7 +350,7 @@ BEGIN
                  WHEN 'Dark'       THEN 8
                  WHEN 'All_colors' THEN 9
                  ELSE 99 END AS sort_order
-    FROM    dbo.so_price_list_detail d
+    FROM    SO.so_price_list_detail d
     WHERE   d.delete_mark <> 'Y'
       AND  (@so_price_list_header_id IS NULL
             OR d.so_price_list_header_id = @so_price_list_header_id)

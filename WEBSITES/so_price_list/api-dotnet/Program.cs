@@ -31,19 +31,33 @@ static long? LJ(System.Text.Json.JsonElement e, string k) =>
     e.TryGetProperty(k, out var v) && v.ValueKind is not System.Text.Json.JsonValueKind.Null
         ? (v.ValueKind == System.Text.Json.JsonValueKind.Number ? v.GetInt64() : L(v.GetString()))
         : null;
-static int? IJ(System.Text.Json.JsonElement e, string k) =>
-    e.TryGetProperty(k, out var v) && v.ValueKind is not System.Text.Json.JsonValueKind.Null
-        ? (v.ValueKind == System.Text.Json.JsonValueKind.Number ? v.GetInt32() : I(v.GetString()))
-        : null;
+/* Present-but-unparseable is a caller error, not "leave it alone". Returning
+   null for junk quietly wrote 0 into qty_min and NULL into price. */
+static int? IJ(System.Text.Json.JsonElement e, string k)
+{
+    if (!e.TryGetProperty(k, out var v) || v.ValueKind is System.Text.Json.JsonValueKind.Null)
+        return null;
+    if (v.ValueKind == System.Text.Json.JsonValueKind.Number) return v.GetInt32();
+    var s = v.GetString();
+    if (string.IsNullOrWhiteSpace(s)) return null;
+    if (int.TryParse(s, out var n)) return n;
+    throw new BadInputException($"{k} must be a whole number; got \"{s}\".");
+}
 static string? SJ(System.Text.Json.JsonElement e, string k) =>
     e.TryGetProperty(k, out var v) && v.ValueKind is not System.Text.Json.JsonValueKind.Null
         ? S(v.ValueKind == System.Text.Json.JsonValueKind.String ? v.GetString() : v.ToString())
         : null;
-static decimal? DecJ(System.Text.Json.JsonElement e, string k) =>
-    e.TryGetProperty(k, out var v) && v.ValueKind is not System.Text.Json.JsonValueKind.Null
-        ? (v.ValueKind == System.Text.Json.JsonValueKind.Number ? v.GetDecimal()
-           : decimal.TryParse(v.GetString(), out var d) ? d : null)
-        : null;
+static decimal? DecJ(System.Text.Json.JsonElement e, string k)
+{
+    if (!e.TryGetProperty(k, out var v) || v.ValueKind is System.Text.Json.JsonValueKind.Null)
+        return null;
+    if (v.ValueKind == System.Text.Json.JsonValueKind.Number) return v.GetDecimal();
+    var s = v.GetString();
+    if (string.IsNullOrWhiteSpace(s)) return null;
+    if (decimal.TryParse(s, System.Globalization.NumberStyles.Number,
+                         System.Globalization.CultureInfo.InvariantCulture, out var d)) return d;
+    throw new BadInputException($"{k} must be a number; got \"{s}\".");
+}
 static DateTime? DJ(System.Text.Json.JsonElement e, string k) => D(SJ(e, k));
 static bool BJ(System.Text.Json.JsonElement e, string k) =>
     e.TryGetProperty(k, out var v) && v.ValueKind == System.Text.Json.JsonValueKind.True;
@@ -54,6 +68,11 @@ static bool BJ(System.Text.Json.JsonElement e, string k) =>
 app.Use(async (ctx, next) =>
 {
     try { await next(); }
+    catch (BadInputException ex)
+    {
+        ctx.Response.StatusCode = 400;
+        await ctx.Response.WriteAsJsonAsync(new { error = ex.Message });
+    }
     catch (SqlException ex) when (ex.Number is 50000 or 0)
     {
         ctx.Response.StatusCode = 400;
@@ -101,6 +120,7 @@ app.MapGet("/price_list/price", async (Db db, HttpRequest r) =>
         Chr("@qty_unit",                S(r.Query["qty_unit"]) ?? "M", 2),
         Chr("@currency",                S(r.Query["currency"]), 3),
         Dt("@as_of",                    D(r.Query["as_of"])),
+        Flag("@include_inactive",       r.Query["include_inactive"] == "1"),
         Text("@logempcd",               Who(r), 15)
     });
 
@@ -191,6 +211,7 @@ app.MapPost("/price_list/detail", async (Db db, HttpRequest r, System.Text.Json.
         Chr("@currency",                SJ(b, "currency"), 3),
         Dec("@price",                   DecJ(b, "price")),
         Int32P("@line_no",              IJ(b, "line_no")),
+        Chr("@active",                  SJ(b, "active"), 1),
         Text("@notes",                  SJ(b, "notes"), 500),
         Text("@logempcd",               Who(r), 15)
     })));
@@ -219,6 +240,7 @@ app.MapPost("/price_list/{id:long}/row", async (Db db, HttpRequest r, long id, S
         Text("@weight_gsm",             SJ(b, "weight_gsm"), 30),
         Text("@moq",                    SJ(b, "moq"), 30),
         Chr("@design_no",               SJ(b, "design_no"), 20),
+        Chr("@active",                  SJ(b, "active"), 1),
         Text("@logempcd",               Who(r), 15)
     })));
 
@@ -228,6 +250,7 @@ app.MapPost("/price_list/{id:long}/grid_shape", async (Db db, HttpRequest r, lon
         Num("@so_price_list_header_id", id),
         Text("@tier_set",               SJ(b, "tier_set"), 200),
         Text("@currency_set",           SJ(b, "currency_set"), 20),
+        Chr("@hide_inactive",           SJ(b, "hide_inactive"), 1),
         Text("@logempcd",               Who(r), 15)
     })));
 
@@ -258,3 +281,10 @@ app.MapDelete("/price_list/{id:long}", async (Db db, HttpRequest r, long id) =>
     })));
 
 app.Run();
+
+/* Thrown when a request carries a value that cannot be parsed. Declared after
+   the top-level statements, as C# requires. */
+sealed class BadInputException : Exception
+{
+    public BadInputException(string message) : base(message) { }
+}

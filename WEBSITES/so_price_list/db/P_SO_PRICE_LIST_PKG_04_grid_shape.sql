@@ -17,11 +17,37 @@
 SET NOCOUNT ON;
 GO
 
-IF COL_LENGTH('dbo.so_price_list_header','tier_set') IS NULL
-    ALTER TABLE dbo.so_price_list_header ADD tier_set nvarchar(200) NULL;
+IF COL_LENGTH('SO.so_price_list_header','tier_set') IS NULL
+    ALTER TABLE SO.so_price_list_header ADD tier_set nvarchar(200) NULL;
 GO
-IF COL_LENGTH('dbo.so_price_list_header','currency_set') IS NULL
-    ALTER TABLE dbo.so_price_list_header ADD currency_set nvarchar(20) NULL;
+IF COL_LENGTH('SO.so_price_list_header','currency_set') IS NULL
+    ALTER TABLE SO.so_price_list_header ADD currency_set nvarchar(20) NULL;
+GO
+/* Whether this list's grid hides withdrawn lines. A per-list view preference,
+   remembered so whoever opens the list next sees it the way it was left.
+
+   Default 'Y' - hidden. A withdrawn price is one nobody should be quoting, so
+   the normal view is the one without them; showing them is the deliberate act,
+   taken per list. */
+IF COL_LENGTH('SO.so_price_list_header','hide_inactive') IS NULL
+    ALTER TABLE SO.so_price_list_header
+        ADD hide_inactive char(1) NOT NULL
+            CONSTRAINT DF_so_price_list_header_hide_inactive DEFAULT ('Y');
+GO
+
+/* Move an existing 'N' default over to 'Y', and bring the rows with it. */
+IF EXISTS (SELECT 1 FROM sys.default_constraints
+           WHERE name = 'DF_so_price_list_header_hide_inactive'
+             AND definition LIKE '%N%')
+BEGIN
+    ALTER TABLE SO.so_price_list_header
+        DROP CONSTRAINT DF_so_price_list_header_hide_inactive;
+    ALTER TABLE SO.so_price_list_header
+        ADD CONSTRAINT DF_so_price_list_header_hide_inactive
+            DEFAULT ('Y') FOR hide_inactive;
+    UPDATE SO.so_price_list_header SET hide_inactive = 'Y' WHERE hide_inactive = 'N';
+    PRINT 'hide_inactive default moved to Y';
+END
 GO
 
 /* Backfill the 53 imported lists from what their lines actually use, so an
@@ -29,11 +55,11 @@ GO
 UPDATE h
 SET    h.tier_set = t.tiers,
        h.currency_set = c.currencies
-FROM   dbo.so_price_list_header h
+FROM   SO.so_price_list_header h
 CROSS APPLY (
     SELECT STUFF((SELECT ',' + x.color_tier
                   FROM (SELECT DISTINCT color_tier
-                        FROM dbo.so_price_list_detail
+                        FROM SO.so_price_list_detail
                         WHERE so_price_list_header_id = h.so_price_list_header_id
                           AND delete_mark <> 'Y') x
                   ORDER BY x.color_tier
@@ -42,7 +68,7 @@ CROSS APPLY (
 CROSS APPLY (
     SELECT STUFF((SELECT ',' + LTRIM(RTRIM(y.currency))
                   FROM (SELECT DISTINCT currency
-                        FROM dbo.so_price_list_detail
+                        FROM SO.so_price_list_detail
                         WHERE so_price_list_header_id = h.so_price_list_header_id
                           AND delete_mark <> 'Y') y
                   ORDER BY y.currency
@@ -72,12 +98,13 @@ CREATE PROCEDURE [SO].[P_SO_PRICE_LIST_PKG_update_price_list_grid_shape]
     @so_price_list_header_id bigint,
     @tier_set                nvarchar(200) = null,
     @currency_set            nvarchar(20)  = null,
+    @hide_inactive           char(1)       = null,   -- 'Y' | 'N'
     @logempcd                varchar(15)   = ''
 AS
 BEGIN
     SET NOCOUNT ON;
 
-    IF NOT EXISTS (SELECT 1 FROM dbo.so_price_list_header
+    IF NOT EXISTS (SELECT 1 FROM SO.so_price_list_header
                    WHERE so_price_list_header_id = @so_price_list_header_id
                      AND delete_mark <> 'Y')
     BEGIN
@@ -85,15 +112,22 @@ BEGIN
         RETURN;
     END
 
-    UPDATE dbo.so_price_list_header
+    IF @hide_inactive IS NOT NULL AND @hide_inactive NOT IN ('Y','N')
+    BEGIN
+        RAISERROR('Hide inactive must be Y or N.', 16, 1);
+        RETURN;
+    END
+
+    UPDATE SO.so_price_list_header
     SET    tier_set          = ISNULL(@tier_set, tier_set),
            currency_set      = ISNULL(@currency_set, currency_set),
+           hide_inactive     = ISNULL(@hide_inactive, hide_inactive),
            last_updated_date = SYSDATETIME(),
            updated_by        = @logempcd
     WHERE  so_price_list_header_id = @so_price_list_header_id;
 
-    SELECT so_price_list_header_id, tier_set, currency_set
-    FROM   dbo.so_price_list_header
+    SELECT so_price_list_header_id, tier_set, currency_set, hide_inactive
+    FROM   SO.so_price_list_header
     WHERE  so_price_list_header_id = @so_price_list_header_id;
 END
 GO
@@ -136,6 +170,7 @@ CREATE PROCEDURE [SO].[P_SO_PRICE_LIST_PKG_update_price_list_row]
     @weight_gsm              nvarchar(30)  = null,
     @moq                     nvarchar(30)  = null,
     @design_no               char(20)      = null,
+    @active                  char(1)       = null,   -- 'Y' | 'N', whole row
     @logempcd                varchar(15)   = ''
 AS
 BEGIN
@@ -158,13 +193,19 @@ BEGIN
         RETURN;
     END
 
+    IF @active IS NOT NULL AND @active NOT IN ('Y','N')
+    BEGIN
+        RAISERROR('Active must be Y or N.', 16, 1);
+        RETURN;
+    END
+
     IF @new_article IS NOT NULL AND LTRIM(RTRIM(@new_article)) = ''
     BEGIN
         RAISERROR('Article is required.', 16, 1);
         RETURN;
     END
 
-    UPDATE dbo.so_price_list_detail
+    UPDATE SO.so_price_list_detail
     SET    article           = ISNULL(@new_article,         article),
            article_variant   = ISNULL(@new_article_variant, article_variant),
            qty_min           = @qmin,
@@ -177,6 +218,7 @@ BEGIN
            weight_gsm        = ISNULL(@weight_gsm,      weight_gsm),
            moq               = ISNULL(@moq,             moq),
            design_no         = ISNULL(@design_no,       design_no),
+           active            = ISNULL(@active,         active),
            last_updated_date = SYSDATETIME(),
            updated_by        = @logempcd
     WHERE  so_price_list_header_id = @so_price_list_header_id

@@ -6,7 +6,7 @@ $cs  = 'Server=172.16.3.10;Database=gemmasoft;User Id=sa;Password=sql@min;Connec
 $who = 'SURES'
 
 # The CSV is WIDE (price_usd + price_thb on one line, which is how the CENTER
-# sheet and the entry surfaces are laid out). dbo.so_price_list is TALL: one row
+# sheet and the entry surfaces are laid out). SO.so_price_list is TALL: one row
 # per currency. This script is where the fan-out happens.
 
 # --- 1. Load CSV ---
@@ -92,11 +92,11 @@ Write-Host "  skipped (no price): $nSkipped"
 Write-Host "  DataTable rows: $($dt.Rows.Count)"
 
 # --- 3. SqlBulkCopy ---
-Write-Host "Bulk-loading into dbo.so_price_list..."
+Write-Host "Bulk-loading into SO.so_price_list..."
 $cn = New-Object System.Data.SqlClient.SqlConnection $cs
 $cn.Open()
 $bulk = New-Object System.Data.SqlClient.SqlBulkCopy($cn)
-$bulk.DestinationTableName = 'dbo.so_price_list'
+$bulk.DestinationTableName = 'SO.so_price_list'
 $bulk.BulkCopyTimeout = 300
 $bulk.BatchSize = 1000
 foreach ($col in $dt.Columns) {
@@ -107,11 +107,11 @@ $bulk.Close()
 
 # --- 4. Verify ---
 $cmd = $cn.CreateCommand()
-$cmd.CommandText = "SELECT currency, COUNT(*) FROM dbo.so_price_list WHERE created_by='$who' GROUP BY currency ORDER BY currency"
+$cmd.CommandText = "SELECT currency, COUNT(*) FROM SO.so_price_list WHERE created_by='$who' GROUP BY currency ORDER BY currency"
 $rd = $cmd.ExecuteReader()
 while ($rd.Read()) { Write-Host ("  {0} : {1}" -f $rd[0], $rd[1]) }
 $rd.Close()
-$cmd.CommandText = "SELECT COUNT(*) FROM dbo.so_price_list WHERE created_by='$who'"
+$cmd.CommandText = "SELECT COUNT(*) FROM SO.so_price_list WHERE created_by='$who'"
 Write-Host "so_price_list rows created_by=$who : $($cmd.ExecuteScalar())"
 $cn.Close()
 Write-Host "Done."

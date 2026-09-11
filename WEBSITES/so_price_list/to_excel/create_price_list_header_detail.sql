@@ -1,5 +1,5 @@
 /* ============================================================================
-   Split dbo.so_price_list into header + detail.
+   Split SO.so_price_list into header + detail.
 
    WHY: order entry selects a price LIST, rather than the app resolving a
    customer name to a customer_id. That makes customer identity a property of
@@ -23,12 +23,12 @@ SET NOCOUNT ON;
 SET XACT_ABORT ON;
 GO
 
-IF OBJECT_ID('dbo.so_price_list_detail', 'U') IS NOT NULL DROP TABLE dbo.so_price_list_detail;
-IF OBJECT_ID('dbo.so_price_list_header', 'U') IS NOT NULL DROP TABLE dbo.so_price_list_header;
+IF OBJECT_ID('SO.so_price_list_detail', 'U') IS NOT NULL DROP TABLE SO.so_price_list_detail;
+IF OBJECT_ID('SO.so_price_list_header', 'U') IS NOT NULL DROP TABLE SO.so_price_list_header;
 GO
 
 /* --- header ------------------------------------------------------------ */
-CREATE TABLE dbo.so_price_list_header
+CREATE TABLE SO.so_price_list_header
 (
     so_price_list_header_id  bigint         IDENTITY(1,1) NOT NULL,
 
@@ -71,18 +71,18 @@ GO
 /* list_name is what the order-entry picker shows, so it must be unambiguous
    among live lists. Filtered, so a soft-deleted list frees its name. */
 CREATE UNIQUE NONCLUSTERED INDEX UX_splh_list_name
-    ON dbo.so_price_list_header (list_name)
+    ON SO.so_price_list_header (list_name)
     WHERE delete_mark <> 'Y';
 GO
 
 /* Finding the candidate lists for a customer at order entry. */
 CREATE NONCLUSTERED INDEX IX_splh_customer
-    ON dbo.so_price_list_header (customer_id)
+    ON SO.so_price_list_header (customer_id)
     INCLUDE (list_name, valid_from, valid_to, delete_mark);
 GO
 
 /* --- detail ------------------------------------------------------------ */
-CREATE TABLE dbo.so_price_list_detail
+CREATE TABLE SO.so_price_list_detail
 (
     so_price_list_detail_id  bigint         IDENTITY(1,1) NOT NULL,
     so_price_list_header_id  bigint         NOT NULL,
@@ -121,7 +121,7 @@ CREATE TABLE dbo.so_price_list_detail
 
     CONSTRAINT PK_so_price_list_detail PRIMARY KEY CLUSTERED (so_price_list_detail_id),
     CONSTRAINT FK_spld_header FOREIGN KEY (so_price_list_header_id)
-        REFERENCES dbo.so_price_list_header (so_price_list_header_id),
+        REFERENCES SO.so_price_list_header (so_price_list_header_id),
     CONSTRAINT CK_spld_currency CHECK (currency IN ('USD','THB'))
 );
 GO
@@ -134,15 +134,15 @@ GO
    extractor. Resolve them, then swap this for the UNIQUE version below.
    Detection query: see resolve_duplicate_price_lines.sql */
 CREATE NONCLUSTERED INDEX IX_spld_business_key
-    ON dbo.so_price_list_detail (so_price_list_header_id, article, article_variant,
+    ON SO.so_price_list_detail (so_price_list_header_id, article, article_variant,
                                  qty_min, qty_max, qty_unit, color_tier, currency)
     WHERE delete_mark <> 'Y';
 GO
 
 /*  -- once the duplicates are resolved:
-DROP INDEX IX_spld_business_key ON dbo.so_price_list_detail;
+DROP INDEX IX_spld_business_key ON SO.so_price_list_detail;
 CREATE UNIQUE NONCLUSTERED INDEX UX_spld_business_key
-    ON dbo.so_price_list_detail (so_price_list_header_id, article, article_variant,
+    ON SO.so_price_list_detail (so_price_list_header_id, article, article_variant,
                                  qty_min, qty_max, qty_unit, color_tier, currency)
     WHERE delete_mark <> 'Y';
 */
@@ -150,17 +150,17 @@ CREATE UNIQUE NONCLUSTERED INDEX UX_spld_business_key
 /* The order-entry price probe: header chosen by the user, then article + tier
    + qty band. Covering, so the probe never touches the base table. */
 CREATE NONCLUSTERED INDEX IX_spld_lookup
-    ON dbo.so_price_list_detail (so_price_list_header_id, article)
+    ON SO.so_price_list_detail (so_price_list_header_id, article)
     INCLUDE (design_no, color_tier, qty_min, qty_max, qty_unit,
              currency, price, moq, delete_mark);
 GO
 
 /* design_no path, for lookups that start from the design rather than the list. */
 CREATE NONCLUSTERED INDEX IX_spld_design
-    ON dbo.so_price_list_detail (design_no)
+    ON SO.so_price_list_detail (design_no)
     INCLUDE (so_price_list_header_id, color_tier, qty_min, qty_max,
              currency, price, delete_mark);
 GO
 
-PRINT 'Created dbo.so_price_list_header + dbo.so_price_list_detail';
+PRINT 'Created SO.so_price_list_header + SO.so_price_list_detail';
 GO

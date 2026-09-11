@@ -1,10 +1,9 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import {
-  api, pivotToGrid, gridShape, orderTiers,
+  api, pivotToGrid, gridShape, orderTiers, bizKeyOf,
   getEmpCd, setEmpCd, isUserFromUrl, launch
 } from './api';
 import PriceGrid from './PriceGrid.jsx';
-import ConflictPicker from './ConflictPicker.jsx';
 import ColumnsMenu from './ColumnsMenu.jsx';
 import PriceListNav from './PriceListNav.jsx';
 import HeaderForm from './HeaderForm.jsx';
@@ -22,11 +21,12 @@ export default function App() {
   const [error, setError]       = useState(null);
   const [filter, setFilter]     = useState('');
   const [conflictsOnly, setConflictsOnly] = useState(false);
-  const [picker, setPicker]     = useState(null);
+  // hidden by default; the header carries each list's own choice
+  const [hideInactive, setHideInactive] = useState(true);
   const [showCols, setShowCols] = useState(false);
   const [navSearch, setNavSearch] = useState('');
   const [editHeader, setEditHeader] = useState(null);  // {mode:'new'} | {mode:'edit'}
-  const [picked, setPicked]     = useState({});
+  const [confirm, setConfirm]   = useState(null);      // {title, body, cta, onYes}
   const [flash, setFlash]       = useState('');
   const [emp, setEmp]           = useState(getEmpCd());
   const flashTimer = useRef(null);
@@ -63,20 +63,44 @@ export default function App() {
 
   /* Columns come from the header, so an empty list still has somewhere to type. */
   useEffect(() => {
-    if (header) setShape(gridShape(header));
+    if (header) {
+      setShape(gridShape(header));
+      setHideInactive(header.hide_inactive !== 'N');
+    }
   }, [header]);
 
-  const reload = useCallback(() => {
+  /* silent = refresh the data underneath without flipping to the loading
+     state. The loading message replaces the whole table, which loses scroll
+     position and focus - fine when switching lists, jarring after an edit. */
+  const reload = useCallback((silent = false) => {
     if (headerId == null) return;
-    setLoading(true);
+    if (!silent) setLoading(true);
     setError(null);
     api.listDetail(headerId, {
         search: filter || undefined,
         conflicts_only: conflictsOnly ? 1 : undefined
       })
-      .then(rows => { setGrid(pivotToGrid(rows)); setDrafts([]); setLoading(false); })
-      .catch(err => { setError(err.message); setLoading(false); });
+      .then(rows => { setGrid(pivotToGrid(rows)); setDrafts([]); if (!silent) setLoading(false); })
+      .catch(err => { setError(err.message); if (!silent) setLoading(false); });
   }, [headerId, filter, conflictsOnly]);
+
+  /* Patch the loaded rows in place. A field edit changes values we already
+     know, so there is nothing to fetch - and not fetching keeps the row where
+     it is under the cursor. */
+  const patchRowLocally = useCallback((rowKey, patch, cellPatch) => {
+    setGrid(g => ({
+      ...g,
+      rows: g.rows.map(r => {
+        if (r.key !== rowKey) return r;
+        const next = { ...r, ...patch };
+        if (cellPatch) {
+          next.cells = Object.fromEntries(
+            Object.entries(r.cells).map(([k, d]) => [k, { ...d, ...cellPatch }]));
+        }
+        return next;
+      })
+    }));
+  }, []);
 
   useEffect(() => {
     const t = setTimeout(reload, filter ? 250 : 0);
@@ -85,10 +109,18 @@ export default function App() {
 
   const refreshLists = () => api.listPriceLists().then(setLists).catch(() => {});
 
-  /* A tier with prices but no column would hide money, so union them. */
+
+  /* A tier or currency with prices but no column would hide money, so union
+     what the header declares with what the data actually holds. */
   const tiers = orderTiers([...shape.tiers, ...(grid.tiersInData || [])]);
-  const currencies = shape.currencies.length ? shape.currencies : ['USD'];
-  const rows = [...grid.rows, ...drafts];
+  const currencies = ['USD', 'THB'].filter(c =>
+    (shape.currencies.length ? shape.currencies : ['USD']).includes(c) ||
+    (grid.currenciesInData || []).includes(c));
+  const visibleRows = hideInactive
+    ? grid.rows.filter(r => r.active !== 'N')
+    : grid.rows;
+  const rows = [...visibleRows, ...drafts];
+  const inactiveCount = grid.rows.filter(r => r.active === 'N').length;
 
   /* ---- add a line ---------------------------------------------------------
      A draft lives only in the browser until a price is typed. A detail row
@@ -126,23 +158,70 @@ export default function App() {
 
     if (row.isDraft) { patchDraft(row.key, { [col.key]: value }); return; }
 
+    /* The active flag is set on THIS row's own price lines, by id.
+       It cannot go through update_price_list_row: that proc matches on
+       (article, variant, qty band) without tier or currency, so on a list where
+       several rows share a quantity band - which is most of them - one click
+       would silently withdraw all of its siblings. */
+    if (col.flag) {
+      const lines = Object.values(row.cells || {});
+      if (!lines.length) return;
+
+      const apply = async () => {
+        setBusy(true);
+        try {
+          for (const d of lines) {
+            await api.saveDetail({ detail_id: d.so_price_list_detail_id, active: value });
+          }
+          patchRowLocally(row.key, { active: value }, { active: value });
+          say(value === 'N'
+            ? `${row.article} withdrawn — order entry will not offer it`
+            : `${row.article} set active`);
+        } catch (err) { setError(err.message); }
+        finally { setBusy(false); }
+      };
+
+      // Withdrawing removes a price from order entry, so ask. Re-enabling
+      // restores it and is harmless, so it just happens.
+      if (value === 'N') {
+        setConfirm({
+          title: 'Withdraw this price line?',
+          body: `${row.article} · ${row.qty_min}–${row.qty_max === null ? '∞' : row.qty_max} ${row.qty_unit}`,
+          detail: lines.length === 1
+            ? 'Order entry will stop offering this price.'
+            : `Order entry will stop offering all ${lines.length} prices on this row.`,
+          cta: 'Withdraw',
+          onYes: apply
+        });
+        return;
+      }
+      await apply();
+      return;
+    }
+
+    /* Every row-level edit is applied to THIS row's own price lines, by id.
+       update_price_list_row matches on (article, variant, qty band) without
+       tier or currency, so on a list where several rows share a quantity band
+       - most of them - editing one row would quietly rewrite its siblings.
+       The proc is still there for a deliberate bulk change; the grid does not
+       use it. */
+    const lines = Object.values(row.cells || {});
+    if (!lines.length) return;
+
     setBusy(true);
     try {
-      await api.saveRow(headerId, {
-        article: row.article,
-        article_variant: row.article_variant,
-        qty_min: row.qty_min,
-        qty_max: row.qty_max,
-        qty_unit: row.qty_unit,
-        [`new_${col.key}`]: col.key.startsWith('qty') || col.key.startsWith('article')
-          ? value : undefined,
-        // qty_max empty means "open upper bound", which is a real value, not a skip
-        clear_qty_max: col.key === 'qty_max' && value === null,
-        ...(['fabric_name','composition','full_width_cm','usable_width_cm',
-             'weight_gsm','moq'].includes(col.key) ? { [col.key]: value } : {})
-      });
-      say(`${col.label} updated across the line`);
-      reload();
+      for (const d of lines) {
+        await api.saveDetail({
+          detail_id: d.so_price_list_detail_id,
+          [col.key]: value,
+          // an open upper bound is a real value, not "leave alone"
+          ...(col.key === 'qty_max' && value === null ? { clear_qty_max: true } : {})
+        });
+      }
+      patchRowLocally(row.key, { [col.key]: value }, { [col.key]: value });
+      say(lines.length === 1
+        ? `${col.label} updated`
+        : `${col.label} updated on ${lines.length} prices in this row`);
     } catch (err) {
       setError(err.message);
     } finally { setBusy(false); }
@@ -150,11 +229,7 @@ export default function App() {
 
   /* ---- edit or create a price ---- */
   const editPrice = useCallback(async (row, currency, tier, value) => {
-    const existing = row.cells?.[`${currency}|${tier}`] || [];
-    const w = existing.length === 1
-      ? existing[0]
-      : existing.find(d => d.so_price_list_detail_id === picked[`${row.key}|${currency}|${tier}`])
-        || existing[0];
+    const w = row.cells?.[`${currency}|${tier}`] || null;
 
     if (!row.isDraft && !w) {
       // no line under this cell yet - create one on this row's key
@@ -171,7 +246,7 @@ export default function App() {
           weight_gsm: row.weight_gsm, moq: row.moq
         });
         say(`Added ${row.article} · ${tier} · ${currency}`);
-        reload(); refreshLists();
+        reload(true); refreshLists();
       } catch (err) { setError(err.message); } finally { setBusy(false); }
       return;
     }
@@ -190,7 +265,7 @@ export default function App() {
           weight_gsm: row.weight_gsm, moq: row.moq
         });
         say(`Line saved — ${row.article} · ${tier} · ${currency}`);
-        reload(); refreshLists();
+        reload(true); refreshLists();
       } catch (err) { setError(err.message); } finally { setBusy(false); }
       return;
     }
@@ -198,30 +273,34 @@ export default function App() {
     setBusy(true);
     try {
       await api.saveDetail({ detail_id: w.so_price_list_detail_id, price: value });
+      /* One detail per cell since alternatives were split into their own rows.
+         This used to treat cells as arrays and threw on every price edit. */
       setGrid(g => ({
         ...g,
         rows: g.rows.map(r => r.key !== row.key ? r : {
           ...r,
-          cells: Object.fromEntries(Object.entries(r.cells).map(([k, list]) => [
-            k, list.map(d => d.so_price_list_detail_id === w.so_price_list_detail_id
-                              ? { ...d, price: value } : d)
+          cells: Object.fromEntries(Object.entries(r.cells).map(([k, d]) => [
+            k, d.so_price_list_detail_id === w.so_price_list_detail_id
+                 ? { ...d, price: value } : d
           ]))
         })
       }));
       say(`${row.article} · ${tier} · ${currency} → ${value}`);
     } catch (err) { setError(err.message); } finally { setBusy(false); }
-  }, [headerId, picked, reload, say]);
+  }, [headerId, reload, say]);
 
-  const retireLine = useCallback(async (detail) => {
-    setBusy(true);
+
+  /* A per-list view preference, stored on the header so the next person to open
+     this list sees it the way it was left. */
+  const setHideInactivePref = useCallback(async (on) => {
+    setHideInactive(on);
+    if (!headerId) return;
     try {
-      const res = await api.deleteDetail(detail.so_price_list_detail_id);
-      say(res.remaining_count === 1
-        ? 'Conflict resolved — one price line remains'
-        : `Line retired — ${res.remaining_count} still share this key`);
-      setPicker(null); reload(); refreshLists();
-    } catch (err) { setError(err.message); } finally { setBusy(false); }
-  }, [reload, say]);
+      await api.saveGridShape(headerId, { hide_inactive: on ? 'Y' : 'N' });
+      setLists(ls => ls.map(l => l.so_price_list_header_id === headerId
+        ? { ...l, hide_inactive: on ? 'Y' : 'N' } : l));
+    } catch (err) { setError(err.message); }
+  }, [headerId]);
 
   const applyShape = useCallback(async (newTiers, newCurrencies) => {
     setShowCols(false);
@@ -247,7 +326,7 @@ export default function App() {
       setHeaderId(id);
       setNavSearch('');
       setDrafts([]);
-      setPicked({});
+     
       say(wasNew ? 'Price list created' : 'Price list saved');
     } catch (err) { setError(err.message); }
   }, [say]);
@@ -299,8 +378,9 @@ export default function App() {
 
   const onEmp = e => { const v = e.target.value.toUpperCase(); setEmp(v); setEmpCd(v); };
 
-  const conflictTotal = grid.rows.reduce(
-    (a, r) => a + Object.values(r.cells).filter(c => c.length > 1).length, 0);
+  /* rows that are one of several alternatives for the same article and band */
+  const multiPriceRows = grid.rows.filter(r => r.groupSize > 1).length;
+  const conflictTotal = header?.conflict_count ?? 0;
 
   return (
     <>
@@ -317,6 +397,7 @@ export default function App() {
                 onClick={() => setConflictsOnly(v => !v)}>
           Conflicts only
         </button>
+
 
         <button onClick={() => setShowCols(v => !v)}>
           Columns <span className="dimcount">{tiers.length}×{currencies.length}</span>
@@ -339,7 +420,7 @@ export default function App() {
           selectedId={headerId}
           search={navSearch}
           onSearch={setNavSearch}
-          onSelect={id => { setHeaderId(id); setPicked({}); setDrafts([]); }}
+          onSelect={id => { setHeaderId(id); setDrafts([]); }}
           onNew={() => setEditHeader({ mode: 'new' })}
           busy={busy}
         />
@@ -351,6 +432,9 @@ export default function App() {
               conflictTotal={conflictTotal}
               onEdit={() => setEditHeader({ mode: 'edit' })}
               onSetCustomer={setCustomer}
+              hideInactive={hideInactive}
+              inactiveCount={inactiveCount}
+              onHideInactive={setHideInactivePref}
             />
           )}
 
@@ -373,20 +457,20 @@ export default function App() {
               : loading
                 ? <div className="loading">Loading price lines…</div>
                 : <PriceGrid
-                    grid={{ rows }} tiers={tiers} currencies={currencies} picked={picked}
+                    grid={{ rows }} tiers={tiers} currencies={currencies}
                     onEditPrice={editPrice} onEditRow={editRow} onAddRow={addRow}
-                    onPick={(row, currency, tier, anchor) =>
-                      setPicker({ row, currency, tier, anchor })}
+                    onInvalid={say}
                   />}
           </div>
 
           <footer className="status">
             <span><b>{rows.length}</b> grid rows{drafts.length ? ` · ${drafts.length} unsaved` : ''}</span>
+            {hideInactive && inactiveCount > 0 && (
+              <span><b>{inactiveCount}</b> inactive hidden</span>
+            )}
             <span><b>{header?.line_count ?? 0}</b> detail lines in this list</span>
-            {conflictTotal > 0 && (
-              <span style={{ color: 'var(--warn)' }}>
-                <b style={{ color: 'var(--warn)' }}>{conflictTotal}</b> cells need a pick
-              </span>
+            {multiPriceRows > 0 && (
+              <span><b>{multiPriceRows}</b> rows are alternatives</span>
             )}
             <span className="spacer" />
             <span><kbd>↑↓←→</kbd> move · <kbd>Enter</kbd> edit · <kbd>Space</kbd> pick price · <kbd>Esc</kbd> cancel</span>
@@ -401,18 +485,6 @@ export default function App() {
         />
       )}
 
-      {picker && (
-        <ConflictPicker
-          {...picker} picked={picked}
-          onChoose={(cellKey, detailId) => {
-            setPicked(p => ({ ...p, [cellKey]: detailId }));
-            setPicker(null);
-            say('Price selected for this line');
-          }}
-          onRetire={retireLine}
-          onClose={() => setPicker(null)}
-        />
-      )}
 
       {editHeader && (
         <HeaderForm
@@ -423,12 +495,31 @@ export default function App() {
         />
       )}
 
+      {confirm && (
+        <div className="modalwrap" onMouseDown={e => { if (e.target === e.currentTarget) setConfirm(null); }}>
+          <div className="modal confirm" role="alertdialog" aria-label={confirm.title}
+               onKeyDown={e => { if (e.key === 'Escape') setConfirm(null); }}>
+            <h3>{confirm.title}</h3>
+            <p className="confirmbody mono">{confirm.body}</p>
+            <p className="modalsub">{confirm.detail}</p>
+            <div className="modalactions">
+              <button className="danger" autoFocus
+                      onClick={() => { const f = confirm.onYes; setConfirm(null); f(); }}>
+                {confirm.cta}
+              </button>
+              <button className="ghost" onClick={() => setConfirm(null)}>Cancel</button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className={`flash${flash ? ' on' : ''}`}>{flash}</div>
     </>
   );
 }
 
-function MetaStrip({ header: h, conflictTotal, onEdit, onSetCustomer }) {
+function MetaStrip({ header: h, conflictTotal, onEdit, onSetCustomer,
+                     hideInactive, inactiveCount, onHideInactive }) {
   const F = ({ k, v, dim }) => (
     <div className="mf">
       <span className="k">{k}</span>
@@ -464,6 +555,16 @@ function MetaStrip({ header: h, conflictTotal, onEdit, onSetCustomer }) {
           <span className="pill open">{h.line_count} in DB</span>
           {conflictTotal > 0 && <span className="pill warnp">{conflictTotal} conflicts</span>}
         </span>
+      </div>
+      <div className="mf">
+        <span className="k">Withdrawn lines</span>
+        <label className="chk metachk"
+               title="Remembered for this price list. Withdrawn lines are not offered by order entry either way.">
+          <input type="checkbox" checked={hideInactive}
+                 onChange={e => onHideInactive(e.target.checked)} />
+          <span>Hidden</span>
+          {inactiveCount > 0 && <span className="metacount">{inactiveCount}</span>}
+        </label>
       </div>
       <div className="mf" style={{ marginLeft: 'auto', marginRight: 0, borderRight: 'none' }}>
         <span className="k">&nbsp;</span>

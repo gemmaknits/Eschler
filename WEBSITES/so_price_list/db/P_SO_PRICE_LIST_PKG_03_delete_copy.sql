@@ -25,7 +25,7 @@ BEGIN
     SET NOCOUNT ON;
     SET XACT_ABORT ON;
 
-    IF NOT EXISTS (SELECT 1 FROM dbo.so_price_list_header
+    IF NOT EXISTS (SELECT 1 FROM SO.so_price_list_header
                    WHERE so_price_list_header_id = @so_price_list_header_id
                      AND delete_mark <> 'Y')
     BEGIN
@@ -37,7 +37,7 @@ BEGIN
 
     BEGIN TRAN;
 
-        UPDATE dbo.so_price_list_detail
+        UPDATE SO.so_price_list_detail
         SET    delete_mark       = 'Y',
                deleted_by        = @logempcd,
                last_updated_date = SYSDATETIME(),
@@ -47,7 +47,7 @@ BEGIN
 
         SET @lines = @@ROWCOUNT;
 
-        UPDATE dbo.so_price_list_header
+        UPDATE SO.so_price_list_header
         SET    delete_mark       = 'Y',
                deleted_by        = @logempcd,
                last_updated_date = SYSDATETIME(),
@@ -88,7 +88,7 @@ BEGIN
     SELECT @hdr = so_price_list_header_id, @article = article,
            @variant = article_variant, @qmin = qty_min, @qmax = qty_max,
            @qunit = qty_unit, @tier = color_tier, @ccy = currency
-    FROM   dbo.so_price_list_detail
+    FROM   SO.so_price_list_detail
     WHERE  so_price_list_detail_id = @so_price_list_detail_id
       AND  delete_mark <> 'Y';
 
@@ -98,7 +98,7 @@ BEGIN
         RETURN;
     END
 
-    UPDATE dbo.so_price_list_detail
+    UPDATE SO.so_price_list_detail
     SET    delete_mark       = 'Y',
            deleted_by        = @logempcd,
            last_updated_date = SYSDATETIME(),
@@ -107,7 +107,7 @@ BEGIN
 
     SELECT @so_price_list_detail_id AS so_price_list_detail_id,
            (SELECT COUNT(*)
-            FROM   dbo.so_price_list_detail
+            FROM   SO.so_price_list_detail
             WHERE  so_price_list_header_id = @hdr
               AND  article = @article
               AND  ISNULL(article_variant,'') = ISNULL(@variant,'')
@@ -145,7 +145,7 @@ BEGIN
     SET NOCOUNT ON;
     SET XACT_ABORT ON;
 
-    IF NOT EXISTS (SELECT 1 FROM dbo.so_price_list_header
+    IF NOT EXISTS (SELECT 1 FROM SO.so_price_list_header
                    WHERE so_price_list_header_id = @source_header_id
                      AND delete_mark <> 'Y')
     BEGIN
@@ -159,7 +159,7 @@ BEGIN
         RETURN;
     END
 
-    IF EXISTS (SELECT 1 FROM dbo.so_price_list_header
+    IF EXISTS (SELECT 1 FROM SO.so_price_list_header
                WHERE list_name = @list_name AND delete_mark <> 'Y')
     BEGIN
         RAISERROR('Another price list already uses this name.', 16, 1);
@@ -173,7 +173,7 @@ BEGIN
 
     BEGIN TRAN;
 
-        INSERT INTO dbo.so_price_list_header
+        INSERT INTO SO.so_price_list_header
             (list_name, list_desc, customer_id, customer_name, customer_excel,
              list_date, valid_from, valid_to, terms, quote_ref,
              sonoid, so_line_id, source_sheet, notes, created_by)
@@ -187,12 +187,12 @@ BEGIN
                h.terms, h.quote_ref,
                h.sonoid, h.so_line_id, h.source_sheet, h.notes,
                @logempcd
-        FROM   dbo.so_price_list_header h
+        FROM   SO.so_price_list_header h
         WHERE  h.so_price_list_header_id = @source_header_id;
 
         SET @new_id = SCOPE_IDENTITY();
 
-        INSERT INTO dbo.so_price_list_detail
+        INSERT INTO SO.so_price_list_detail
             (so_price_list_header_id, line_no, article, design_no, article_variant,
              fabric_name, composition, full_width_cm, usable_width_cm, weight_gsm,
              moq, qty_min, qty_max, qty_unit, color_tier, currency, price,
@@ -202,7 +202,7 @@ BEGIN
                d.weight_gsm, d.moq, d.qty_min, d.qty_max, d.qty_unit,
                d.color_tier, d.currency, d.price,
                d.source_row, d.notes, @logempcd
-        FROM   dbo.so_price_list_detail d
+        FROM   SO.so_price_list_detail d
         WHERE  d.so_price_list_header_id = @source_header_id
           AND  d.delete_mark <> 'Y';
 

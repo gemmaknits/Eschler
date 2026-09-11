@@ -95,6 +95,15 @@ export const api = {
   saveRow: (headerId, body) =>
     call(`/price_list/${headerId}/row`, { method: 'POST', body: JSON.stringify(body) }),
 
+  // right-click Copy -> Insert: duplicates a whole grid row (every tier and
+  // currency behind it) and drops it after the row that was right-clicked
+  copySet: (headerId, body) =>
+    call(`/price_list/${headerId}/set/copy`, { method: 'POST', body: JSON.stringify(body) }),
+
+  // right-click Delete: soft, the lines keep their row and go delete_mark='Y'
+  deleteSet: (headerId, body) =>
+    call(`/price_list/${headerId}/set/delete`, { method: 'POST', body: JSON.stringify(body) }),
+
   saveGridShape: (headerId, body) =>
     call(`/price_list/${headerId}/grid_shape`, { method: 'POST', body: JSON.stringify(body) }),
 
@@ -137,9 +146,9 @@ export function gridShape(header) {
 /* The key that identifies one price line: everything the unique index uses.
    Exported so the grid can find the other lines sharing a cell's key. */
 const SEP = '';
-export const bizKeyOf = ({ article, article_variant, qty_min, qty_max, qty_unit },
+export const bizKeyOf = ({ design_no, article_variant, qty_min, qty_max, qty_unit },
                          color_tier, currency) =>
-  [article, article_variant || '', qty_min, qty_max ?? '', (qty_unit || '').trim(),
+  [design_no, article_variant || '', qty_min, qty_max ?? '', (qty_unit || '').trim(),
    color_tier, (currency || '').trim()].join(SEP);
 
 export function pivotToGrid(rows) {
@@ -148,14 +157,15 @@ export function pivotToGrid(rows) {
   const currencies = new Set();
   const siblings = new Map();  // business key -> every detail line sharing it
 
-  const baseKeyOf = d => [d.article, d.article_variant || '', d.qty_min,
+  const baseKeyOf = d => [d.design_no, d.article_variant || '', d.qty_min,
                           d.qty_max ?? '', (d.qty_unit || '').trim()].join(SEP);
 
   const newBucket = (d, base, n) => ({
     key: `${base}#${d.set_no ?? n}`,
     baseKey: base,
     set_no: d.set_no,
-    /* the workbook names a line by its design, so saves send it back */
+    /* design_no is the identifier; article is the mirror column the order-entry
+       client still reads, carried along so a save can write both. */
     design_no: d.design_no,
     article: d.article,
     article_variant: d.article_variant || '',

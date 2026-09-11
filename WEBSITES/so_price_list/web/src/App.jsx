@@ -28,6 +28,10 @@ export default function App() {
   const [editHeader, setEditHeader] = useState(null);  // {mode:'new'} | {mode:'edit'}
   const [confirm, setConfirm]   = useState(null);      // {title, body, cta, onYes}
   const [flash, setFlash]       = useState('');
+  /* The right-click clipboard: the row Copy was used on. It holds set_no, not
+     a snapshot of the values - the copy happens on the server from whatever
+     the row says at Insert time, so an edit in between is not lost. */
+  const [copied, setCopied]     = useState(null);
   const [emp, setEmp]           = useState(getEmpCd());
   const flashTimer = useRef(null);
 
@@ -122,6 +126,50 @@ export default function App() {
   const rows = [...visibleRows, ...drafts];
   const inactiveCount = grid.rows.filter(r => r.active === 'N').length;
 
+  /* ---- right-click: copy / insert / delete a whole line ------------------
+     A grid row is a whole set - every tier, both currencies - so all three act
+     on the set, never on the single cell that was clicked. */
+  const copyRow = useCallback(row => {
+    setCopied({ set_no: row.set_no, design_no: row.design_no });
+    say(`Copied ${row.design_no} — right-click another line to insert it`);
+  }, [say]);
+
+  const insertCopied = useCallback(async target => {
+    if (!copied) return;
+    setBusy(true);
+    try {
+      /* after_set_no is the row that was right-clicked, so the copy lands
+         directly below it. The procedure shifts everything under that point
+         down, and carries line_no over unchanged so the tiers inside the
+         copied row keep the order they were put in. */
+      const res = await api.copySet(headerId, {
+        source_set_no: copied.set_no,
+        after_set_no: target.set_no
+      });
+      say(`Inserted ${copied.design_no} below ${target.design_no} — ${res?.rows_created ?? 0} prices`);
+      reload(true); refreshLists();
+    } catch (err) { setError(err.message); } finally { setBusy(false); }
+  }, [copied, headerId, reload, say]);
+
+  const deleteRow = useCallback(row => {
+    setConfirm({
+      title: `Delete ${row.design_no}?`,
+      body: `${row.qty_min}–${row.qty_max === null ? '∞' : row.qty_max} ${row.qty_unit}. `
+          + 'Every price on this line goes with it. This is a soft delete — the '
+          + 'rows stay in the table and can be brought back.',
+      cta: 'Delete line',
+      onYes: async () => {
+        setBusy(true);
+        try {
+          const res = await api.deleteSet(headerId, { set_no: row.set_no });
+          if (copied?.set_no === row.set_no) setCopied(null);
+          say(`${row.design_no} deleted — ${res?.lines_deleted ?? 0} prices`);
+          reload(true); refreshLists();
+        } catch (err) { setError(err.message); } finally { setBusy(false); }
+      }
+    });
+  }, [headerId, copied, reload, say]);
+
   /* ---- add a line ---------------------------------------------------------
      A draft lives only in the browser until a price is typed. A detail row
      cannot exist without a currency, tier and price, so there is nothing to
@@ -131,7 +179,7 @@ export default function App() {
     setDrafts(d => [...d, {
       key: `draft-${Date.now()}-${d.length}`,
       isDraft: true,
-      article: last?.article || '',
+      design_no: last?.design_no || '',
       article_variant: '',
       qty_min: last?.qty_max != null ? Number(last.qty_max) + 1 : 0,
       qty_max: null,
@@ -145,7 +193,7 @@ export default function App() {
       source_row: null,
       cells: {}
     }]);
-    say('New line — fill the article and a price, then it saves');
+    say('New line — fill the design no and a price, then it saves');
   }, [rows, say]);
 
   const patchDraft = (key, patch) =>
@@ -160,7 +208,7 @@ export default function App() {
 
     /* The active flag is set on THIS row's own price lines, by id.
        It cannot go through update_price_list_row: that proc matches on
-       (article, variant, qty band) without tier or currency, so on a list where
+       (design, variant, qty band) without tier or currency, so on a list where
        several rows share a quantity band - which is most of them - one click
        would silently withdraw all of its siblings. */
     if (col.flag) {
@@ -175,8 +223,8 @@ export default function App() {
           }
           patchRowLocally(row.key, { active: value }, { active: value });
           say(value === 'N'
-            ? `${row.article} withdrawn — order entry will not offer it`
-            : `${row.article} set active`);
+            ? `${row.design_no} withdrawn — order entry will not offer it`
+            : `${row.design_no} set active`);
         } catch (err) { setError(err.message); }
         finally { setBusy(false); }
       };
@@ -186,7 +234,7 @@ export default function App() {
       if (value === 'N') {
         setConfirm({
           title: 'Withdraw this price line?',
-          body: `${row.article} · ${row.qty_min}–${row.qty_max === null ? '∞' : row.qty_max} ${row.qty_unit}`,
+          body: `${row.design_no} · ${row.qty_min}–${row.qty_max === null ? '∞' : row.qty_max} ${row.qty_unit}`,
           detail: lines.length === 1
             ? 'Order entry will stop offering this price.'
             : `Order entry will stop offering all ${lines.length} prices on this row.`,
@@ -200,7 +248,7 @@ export default function App() {
     }
 
     /* Every row-level edit is applied to THIS row's own price lines, by id.
-       update_price_list_row matches on (article, variant, qty band) without
+       update_price_list_row matches on (design, variant, qty band) without
        tier or currency, so on a list where several rows share a quantity band
        - most of them - editing one row would quietly rewrite its siblings.
        The proc is still there for a deliberate bulk change; the grid does not
@@ -233,16 +281,16 @@ export default function App() {
 
     if (!row.isDraft && !w) {
       // no line under this cell yet - create one on this row's key
-      if (!row.article) { setError('Give the line an article first.'); return; }
+      if (!row.design_no) { setError('Give the line a design no first.'); return; }
       setBusy(true);
       try {
-        /* The row is identified by its design and article - that is what names
-           a line in the workbook, so it is what the save sends.
+        /* The row is identified by its design no - that is what names a line
+           in the workbook, so it is what the save sends.
 
-           set_no rides along only as a tiebreaker: two rows CAN share a design,
-           article and quantity band and still hold different prices (the grid
-           brackets them together), and design alone cannot say which of those
-           the user clicked.
+           set_no rides along only as a tiebreaker: two rows CAN share a design
+           and quantity band and still hold different prices (the grid brackets
+           them together), and the design alone cannot say which of those the
+           user clicked.
 
            after_line_no keeps the new tier where it was typed. Without it the
            line is appended to the end of the row's lines instead of sitting
@@ -252,9 +300,8 @@ export default function App() {
 
         await api.saveDetail({
           header_id: headerId, set_no: row.set_no,
-          design_no: row.design_no || null,
+          design_no: row.design_no,
           after_line_no: lineNos.length ? Math.max(...lineNos) : null,
-          article: row.article,
           article_variant: row.article_variant || null,
           qty_min: row.qty_min, qty_max: row.qty_max, qty_unit: row.qty_unit,
           color_tier: tier, currency, price: value,
@@ -262,18 +309,18 @@ export default function App() {
           full_width_cm: row.full_width_cm, usable_width_cm: row.usable_width_cm,
           weight_gsm: row.weight_gsm, moq: row.moq
         });
-        say(`Added ${row.article} · ${tier} · ${currency}`);
+        say(`Added ${row.design_no} · ${tier} · ${currency}`);
         reload(true); refreshLists();
       } catch (err) { setError(err.message); } finally { setBusy(false); }
       return;
     }
 
     if (row.isDraft) {
-      if (!row.article) { setError('Give the line an article first.'); return; }
+      if (!row.design_no) { setError('Give the line a design no first.'); return; }
       setBusy(true);
       try {
         await api.saveDetail({
-          header_id: headerId, article: row.article,
+          header_id: headerId, design_no: row.design_no,
           article_variant: row.article_variant || null,
           qty_min: row.qty_min ?? 0, qty_max: row.qty_max, qty_unit: row.qty_unit || 'M',
           color_tier: tier, currency, price: value,
@@ -281,7 +328,7 @@ export default function App() {
           full_width_cm: row.full_width_cm, usable_width_cm: row.usable_width_cm,
           weight_gsm: row.weight_gsm, moq: row.moq
         });
-        say(`Line saved — ${row.article} · ${tier} · ${currency}`);
+        say(`Line saved — ${row.design_no} · ${tier} · ${currency}`);
         reload(true); refreshLists();
       } catch (err) { setError(err.message); } finally { setBusy(false); }
       return;
@@ -302,7 +349,7 @@ export default function App() {
           ]))
         })
       }));
-      say(`${row.article} · ${tier} · ${currency} → ${value}`);
+      say(`${row.design_no} · ${tier} · ${currency} → ${value}`);
     } catch (err) { setError(err.message); } finally { setBusy(false); }
   }, [headerId, reload, say]);
 
@@ -395,7 +442,7 @@ export default function App() {
 
   const onEmp = e => { const v = e.target.value.toUpperCase(); setEmp(v); setEmpCd(v); };
 
-  /* rows that are one of several alternatives for the same article and band */
+  /* rows that are one of several alternatives for the same design and band */
   const multiPriceRows = grid.rows.filter(r => r.groupSize > 1).length;
   const conflictTotal = header?.conflict_count ?? 0;
 
@@ -407,7 +454,7 @@ export default function App() {
           <span className="tag">header · detail</span>
         </div>
 
-        <input type="search" placeholder="Filter article…"
+        <input type="search" placeholder="Filter design…"
                value={filter} onChange={e => setFilter(e.target.value)} />
 
         <button className={conflictsOnly ? 'on' : ''}
@@ -477,6 +524,10 @@ export default function App() {
                     grid={{ rows }} tiers={tiers} currencies={currencies}
                     onEditPrice={editPrice} onEditRow={editRow} onAddRow={addRow}
                     onInvalid={say}
+                    copied={copied}
+                    onCopyRow={copyRow}
+                    onInsertCopied={insertCopied}
+                    onDeleteRow={deleteRow}
                   />}
           </div>
 

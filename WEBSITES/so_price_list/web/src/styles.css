@@ -551,3 +551,24 @@ td input.edit.bad{
   box-shadow:inset 0 0 0 2px var(--danger);
   background:var(--danger-soft); color:var(--danger); font-weight:600;
 }
+
+/* ---- right-click menu on a grid row -------------------------------------
+   position:fixed against the viewport, because the grid scrolls inside its
+   own container - an absolutely positioned menu would be clipped by it. */
+.ctxmenu{
+  position:fixed; z-index:80; margin:0; padding:4px; list-style:none;
+  min-width:232px;
+  background:var(--surface); border:1px solid var(--rule-strong);
+  border-radius:5px; box-shadow:var(--shadow);
+}
+.ctxmenu li{
+  padding:6px 10px; border-radius:3px; cursor:pointer;
+  font-size:12px; color:var(--ink); white-space:nowrap;
+}
+.ctxmenu li:hover{background:var(--accent-soft); color:var(--accent)}
+.ctxmenu li.danger{color:var(--danger)}
+.ctxmenu li.danger:hover{background:var(--danger-soft); color:var(--danger)}
+/* Nothing copied yet: shown, not hidden, so the menu keeps a stable shape
+   and the entry explains why it does nothing. */
+.ctxmenu li.disabled{color:var(--muted); cursor:default}
+.ctxmenu li.disabled:hover{background:transparent; color:var(--muted)}

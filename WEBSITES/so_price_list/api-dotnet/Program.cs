@@ -107,9 +107,11 @@ app.MapGet("/price_list", async (Db db, HttpRequest r) =>
 app.MapGet("/price_list/price", async (Db db, HttpRequest r) =>
 {
     var headerId = L(r.Query["header_id"]);
-    var article = S(r.Query["article"]);
+    // design_no is the identifier now; article is its mirror column, which is
+    // what get_price still filters on - so either query name works here.
+    var article = S(r.Query["design_no"]) ?? S(r.Query["article"]);
     if (headerId is null || article is null)
-        return Results.BadRequest(new { error = "header_id and article are required." });
+        return Results.BadRequest(new { error = "header_id and design_no are required." });
 
     var rows = await db.QueryAsync("P_SO_PRICE_LIST_PKG_get_price", new[]
     {
@@ -155,6 +157,7 @@ app.MapGet("/price_list/{id:long}/detail", async (Db db, HttpRequest r, long id)
     Results.Ok(await db.QueryAsync("P_SO_PRICE_LIST_PKG_select_price_list_detail", new[]
     {
         Num("@so_price_list_header_id", id),
+        Text("@design_no",              S(r.Query["design_no"]), 60),
         Text("@article",                S(r.Query["article"]), 30),
         Text("@search",                 S(r.Query["search"]), 100),
         Flag("@conflicts_only",         r.Query["conflicts_only"] == "1"),
@@ -197,7 +200,7 @@ app.MapPost("/price_list/detail", async (Db db, HttpRequest r, System.Text.Json.
         Num("@so_price_list_header_id", LJ(b, "header_id")),
         Int32P("@set_no",               IJ(b, "set_no")),
         Text("@article",                SJ(b, "article"), 30),
-        Chr("@design_no",               SJ(b, "design_no"), 20),
+        Text("@design_no",              SJ(b, "design_no"), 60),
         Text("@article_variant",        SJ(b, "article_variant"), 20),
         Text("@fabric_name",            SJ(b, "fabric_name"), 120),
         Text("@composition",            SJ(b, "composition"), 200),
@@ -224,11 +227,13 @@ app.MapPost("/price_list/{id:long}/row", async (Db db, HttpRequest r, long id, S
     Results.Ok(await db.SingleAsync("P_SO_PRICE_LIST_PKG_update_price_list_row", new[]
     {
         Num("@so_price_list_header_id", id),
+        Text("@design_no",              SJ(b, "design_no"), 60),
         Text("@article",                SJ(b, "article"), 30),
         Text("@article_variant",        SJ(b, "article_variant"), 20),
         Int32P("@qty_min",              IJ(b, "qty_min")),
         Int32P("@qty_max",              IJ(b, "qty_max")),
         Chr("@qty_unit",                SJ(b, "qty_unit") ?? "M", 2),
+        Text("@new_design_no",          SJ(b, "new_design_no"), 60),
         Text("@new_article",            SJ(b, "new_article"), 30),
         Text("@new_article_variant",    SJ(b, "new_article_variant"), 20),
         Int32P("@new_qty_min",          IJ(b, "new_qty_min")),
@@ -241,8 +246,29 @@ app.MapPost("/price_list/{id:long}/row", async (Db db, HttpRequest r, long id, S
         Text("@usable_width_cm",        SJ(b, "usable_width_cm"), 30),
         Text("@weight_gsm",             SJ(b, "weight_gsm"), 30),
         Text("@moq",                    SJ(b, "moq"), 30),
-        Chr("@design_no",               SJ(b, "design_no"), 20),
         Chr("@active",                  SJ(b, "active"), 1),
+        Text("@logempcd",               Who(r), 15)
+    })));
+
+// Right-click Copy then Insert. A grid row is a whole set, so this duplicates
+// every line behind it - all tiers, both currencies - and lands it after the
+// row that was right-clicked. after_set_no 0 puts it first.
+app.MapPost("/price_list/{id:long}/set/copy", async (Db db, HttpRequest r, long id, System.Text.Json.JsonElement b) =>
+    Results.Ok(await db.SingleAsync("P_SO_PRICE_LIST_PKG_copy_price_list_set", new[]
+    {
+        Num("@so_price_list_header_id", id),
+        Int32P("@source_set_no",        IJ(b, "source_set_no")),
+        Int32P("@after_set_no",         IJ(b, "after_set_no")),
+        Text("@logempcd",               Who(r), 15)
+    })));
+
+// Right-click Delete. Soft, like every delete here: delete_mark goes to 'Y' and
+// the rows stay in the table, out of sight of every select.
+app.MapPost("/price_list/{id:long}/set/delete", async (Db db, HttpRequest r, long id, System.Text.Json.JsonElement b) =>
+    Results.Ok(await db.SingleAsync("P_SO_PRICE_LIST_PKG_delete_price_list_set", new[]
+    {
+        Num("@so_price_list_header_id", id),
+        Int32P("@set_no",               IJ(b, "set_no")),
         Text("@logempcd",               Who(r), 15)
     })));
 

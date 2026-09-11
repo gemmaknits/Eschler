@@ -161,13 +161,15 @@ GO
 CREATE PROCEDURE [SO].[P_SO_PRICE_LIST_PKG_update_price_list_row]
     @so_price_list_header_id bigint,
     -- which row (its key as currently stored)
-    @article                 nvarchar(30),
+    @design_no               nvarchar(60) = null,
+    @article                 nvarchar(30) = null,   -- old alias for @design_no
     @article_variant         nvarchar(20)  = null,
     @qty_min                 int,
     @qty_max                 int           = null,
     @qty_unit                char(2)       = 'M',
     -- new values; NULL means leave alone, except new_qty_max (see below)
-    @new_article             nvarchar(30)  = null,
+    @new_design_no           nvarchar(60)  = null,
+    @new_article             nvarchar(30)  = null,   -- old alias for @new_design_no
     @new_article_variant     nvarchar(20)  = null,
     @new_qty_min             int           = null,
     @new_qty_max             int           = null,
@@ -179,7 +181,6 @@ CREATE PROCEDURE [SO].[P_SO_PRICE_LIST_PKG_update_price_list_row]
     @usable_width_cm         nvarchar(30)  = null,
     @weight_gsm              nvarchar(30)  = null,
     @moq                     nvarchar(30)  = null,
-    @design_no               char(20)      = null,
     @active                  char(1)       = null,   -- 'Y' | 'N', whole row
     @logempcd                varchar(15)   = ''
 AS
@@ -209,14 +210,28 @@ BEGIN
         RETURN;
     END
 
-    IF @new_article IS NOT NULL AND LTRIM(RTRIM(@new_article)) = ''
+    /* design_no identifies the row; article is its mirror. Either name may be
+       used on the way in, and both columns are written on the way out, so the
+       pair cannot drift - get_price still reads article. */
+    IF @design_no     IS NULL OR LTRIM(RTRIM(@design_no))     = '' SET @design_no     = @article;
+    IF @new_design_no IS NULL OR LTRIM(RTRIM(@new_design_no)) = '' SET @new_design_no = @new_article;
+    IF @new_article   IS NULL OR LTRIM(RTRIM(@new_article))   = '' SET @new_article   = @new_design_no;
+
+    IF @design_no IS NULL OR LTRIM(RTRIM(@design_no)) = ''
     BEGIN
-        RAISERROR('Article is required.', 16, 1);
+        RAISERROR('Design no is required to identify the row.', 16, 1);
+        RETURN;
+    END
+
+    IF @new_design_no IS NOT NULL AND LTRIM(RTRIM(@new_design_no)) = ''
+    BEGIN
+        RAISERROR('Design no is required.', 16, 1);
         RETURN;
     END
 
     UPDATE SO.so_price_list_detail
-    SET    article           = ISNULL(@new_article,         article),
+    SET    design_no         = ISNULL(@new_design_no,       design_no),
+           article           = ISNULL(@new_article,         article),
            article_variant   = ISNULL(@new_article_variant, article_variant),
            qty_min           = @qmin,
            qty_max           = @qmax,
@@ -227,12 +242,11 @@ BEGIN
            usable_width_cm   = ISNULL(@usable_width_cm, usable_width_cm),
            weight_gsm        = ISNULL(@weight_gsm,      weight_gsm),
            moq               = ISNULL(@moq,             moq),
-           design_no         = ISNULL(@design_no,       design_no),
            active            = ISNULL(@active,         active),
            last_updated_date = SYSDATETIME(),
            updated_by        = @logempcd
     WHERE  so_price_list_header_id = @so_price_list_header_id
-      AND  article    = @article
+      AND  design_no  = @design_no
       AND  ISNULL(article_variant,'') = ISNULL(@article_variant,'')
       AND  qty_min    = @qty_min
       AND  ISNULL(qty_max,-1) = ISNULL(@qty_max,-1)

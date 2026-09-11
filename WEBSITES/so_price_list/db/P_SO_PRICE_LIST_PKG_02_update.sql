@@ -190,8 +190,8 @@ CREATE PROCEDURE [SO].[P_SO_PRICE_LIST_PKG_update_price_list_detail]
     @so_price_list_detail_id bigint        = null,
     @so_price_list_header_id bigint        = null,
     @set_no                  int           = null,   -- which grid row to join
-    @article                 nvarchar(30)  = null,   -- bind as string, always
-    @design_no               char(20)      = null,
+    @design_no               nvarchar(60)  = null,   -- the identifier; bind as string
+    @article                 nvarchar(30)  = null,   -- mirror of design_no, kept for get_price
     @article_variant         nvarchar(20)  = null,
     @fabric_name             nvarchar(120) = null,
     @composition             nvarchar(200) = null,
@@ -231,6 +231,14 @@ BEGIN
         RAISERROR('Price list not found, or already deleted.', 16, 1);
         RETURN;
     END
+
+    /* design_no is the identifier; article mirrors it.
+
+       Accept either one and fill in the other, so the two can never drift
+       apart. The grid sends design_no; get_price and the VB.NET order-entry
+       client still read article, which is why both columns are written. */
+    IF @design_no IS NULL OR LTRIM(RTRIM(@design_no)) = '' SET @design_no = @article;
+    IF @article   IS NULL OR LTRIM(RTRIM(@article))   = '' SET @article   = @design_no;
 
     IF @active IS NOT NULL AND @active NOT IN ('Y','N')
     BEGIN
@@ -283,7 +291,7 @@ BEGIN
             SELECT TOP 1 @set_no = set_no
             FROM   SO.so_price_list_detail
             WHERE  so_price_list_header_id = @so_price_list_header_id
-              AND  article = @article
+              AND  design_no = @design_no
               AND  ISNULL(article_variant,'') = ISNULL(@article_variant,'')
               AND  qty_min = @qty_min
               AND  ISNULL(qty_max,-1) = ISNULL(@qty_max,-1)
@@ -411,8 +419,8 @@ BEGIN
     BEGIN
         /* only overwrite what was supplied - the grid edits one cell at a time */
         UPDATE SO.so_price_list_detail
-        SET    article           = ISNULL(@article,         article),
-               design_no         = ISNULL(@design_no,       design_no),
+        SET    design_no         = ISNULL(@design_no,       design_no),
+               article           = ISNULL(@article,         article),
                article_variant   = ISNULL(@article_variant, article_variant),
                fabric_name       = ISNULL(@fabric_name,     fabric_name),
                composition       = ISNULL(@composition,     composition),
@@ -454,7 +462,7 @@ BEGIN
     JOIN   SO.so_price_list_detail me
              ON me.so_price_list_detail_id = @so_price_list_detail_id
     WHERE  d.so_price_list_header_id = me.so_price_list_header_id
-      AND  d.article                 = me.article
+      AND  d.design_no               = me.design_no
       AND  ISNULL(d.article_variant,'') = ISNULL(me.article_variant,'')
       AND  d.qty_min                 = me.qty_min
       AND  ISNULL(d.qty_max,-1)      = ISNULL(me.qty_max,-1)

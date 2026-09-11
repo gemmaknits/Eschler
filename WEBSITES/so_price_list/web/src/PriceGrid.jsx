@@ -16,7 +16,7 @@ const money = (v, ccy) => {
    4,468 lines. */
 export const ROW_COLS = [
   { key: 'active',   label: 'Act',     width: 52, flag: true },
-  { key: 'article',  label: 'Article', sticky: true, width: 118 },
+  { key: 'design_no', label: 'Design No', sticky: true, width: 118 },
   { key: 'qty_min',  label: 'Min',     group: 'Quantity', num: true,  width: 72 },
   { key: 'qty_max',  label: 'Max',     group: 'Quantity', num: true,  width: 72, blank: true },
   { key: 'qty_unit', label: 'Unit',    group: 'Quantity', width: 56 }
@@ -54,13 +54,35 @@ const IS_PRICE = /^\d{1,12}(\.\d{1,4})?$/;     // decimal(18,4), non-negative
 
 export default function PriceGrid({
   grid, tiers, currencies,
-  onEditPrice, onEditRow, onAddRow, onInvalid
+  onEditPrice, onEditRow, onAddRow, onInvalid,
+  onCopyRow, onInsertCopied, onDeleteRow, copied
 }) {
   const [focus, setFocus] = useState(null);      // {r, c} - c indexes ALL columns
   const [editing, setEditing] = useState(null);  // {r, c, value, mode}
   const tableRef = useRef(null);
   const lastCommit = useRef(null);
   const [invalid, setInvalid] = useState(false);
+  /* {x, y, row} - where the menu sits and which row it acts on. Held here
+     rather than per row so only one can ever be open. */
+  const [menu, setMenu] = useState(null);
+
+  /* Any click elsewhere, Escape, or a scroll closes it. Without the scroll
+     listener the menu hangs in place while the rows move underneath it. */
+  useEffect(() => {
+    if (!menu) return;
+    const close = () => setMenu(null);
+    const onKey = e => { if (e.key === 'Escape') close(); };
+    window.addEventListener('click', close);
+    window.addEventListener('resize', close);
+    window.addEventListener('scroll', close, true);
+    window.addEventListener('keydown', onKey);
+    return () => {
+      window.removeEventListener('click', close);
+      window.removeEventListener('resize', close);
+      window.removeEventListener('scroll', close, true);
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [menu]);
 
   const { rows } = grid;
 
@@ -216,6 +238,7 @@ export default function PriceGrid({
   const tableWidth = GUTTER_W + columns.reduce((a, c) => a + colWidth(c), 0);
 
   return (
+    <>
     <table id="grid" ref={tableRef} style={{ width: tableWidth }}>
       {/* fixed geometry: one <col> per column, same on every list */}
       <colgroup>
@@ -231,14 +254,14 @@ export default function PriceGrid({
         <tr>
           <th className="stk s0" rowSpan={2} />
           <th className="stk sAct" rowSpan={2} title="Active — N is a withdrawn price">Act</th>
-          <th className="stk s1" rowSpan={2}>Article</th>
+          <th className="stk s1" rowSpan={2}>Design No</th>
           <th className="grp" colSpan={3}>Quantity</th>
           {currencies.map(ccy => (
             <th key={ccy} className={`grp ${ccy === 'USD' ? 'usd' : 'thb'}`} colSpan={tiers.length}>
               {ccy} · {ccy === 'USD' ? '$' : '฿'} per unit
             </th>
           ))}
-          <th className="grp" colSpan={INFO_COLS.length}>Article detail</th>
+          <th className="grp" colSpan={INFO_COLS.length}>Design detail</th>
         </tr>
         <tr>
           <th className="num">Min</th>
@@ -253,11 +276,19 @@ export default function PriceGrid({
       </thead>
       <tbody>
         {rows.map((row, ri) => {
-          const newArt = row.article !== prevArticle;
-          prevArticle = row.article;
+          const newArt = row.design_no !== prevArticle;
+          prevArticle = row.design_no;
 
           return (
-            <tr key={row.key} className={`${newArt ? 'newart' : ''}${row.active === 'N' ? ' rowinactive' : ''}`}>
+            <tr key={row.key}
+                className={`${newArt ? 'newart' : ''}${row.active === 'N' ? ' rowinactive' : ''}`}
+                onContextMenu={e => {
+                  /* A draft has no set_no yet - there is nothing on the server
+                     to copy or delete - so it gets the browser's own menu. */
+                  if (row.isDraft) return;
+                  e.preventDefault();
+                  setMenu({ x: e.clientX, y: e.clientY, row });
+                }}>
               <td className={[
                     'stk', 's0', 'rn',
                     row.groupSize > 1 ? 'grp' : '',
@@ -265,7 +296,7 @@ export default function PriceGrid({
                     row.groupSize > 1 && row.groupPos === row.groupSize - 1 ? 'grplast' : ''
                   ].filter(Boolean).join(' ')}
                   title={row.groupSize > 1
-                    ? `${row.groupPos + 1} of ${row.groupSize} prices for ${row.article}, ${row.qty_min}–${row.qty_max === null ? '∞' : row.qty_max} ${row.qty_unit}`
+                    ? `${row.groupPos + 1} of ${row.groupSize} prices for ${row.design_no}, ${row.qty_min}–${row.qty_max === null ? '∞' : row.qty_max} ${row.qty_unit}`
                     : undefined}>
                 {row.isDraft ? '＋' : ri + 1}
               </td>
@@ -372,5 +403,33 @@ export default function PriceGrid({
         </tr>
       </tbody>
     </table>
+
+    {menu && (
+      /* Positioned against the viewport, so it is not clipped by the grid's
+         own scroll container. onClick stops here: the window listener that
+         closes the menu would otherwise fire before the action runs. */
+      <ul className="ctxmenu"
+          style={{ left: menu.x, top: menu.y }}
+          onClick={e => e.stopPropagation()}>
+        <li onClick={() => { onCopyRow(menu.row); setMenu(null); }}>
+          Copy line
+        </li>
+        <li className={copied ? '' : 'disabled'}
+            onClick={() => {
+              if (!copied) return;
+              onInsertCopied(menu.row);
+              setMenu(null);
+            }}>
+          {copied
+            ? `Insert copied (${copied.design_no}) below`
+            : 'Insert copied — nothing copied yet'}
+        </li>
+        <li className="danger"
+            onClick={() => { onDeleteRow(menu.row); setMenu(null); }}>
+          Delete line
+        </li>
+      </ul>
+    )}
+    </>
   );
 }

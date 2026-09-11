@@ -90,7 +90,7 @@ BEGIN
                 FROM   SO.so_price_list_detail
                 WHERE  delete_mark <> 'Y'
                   AND  active = 'Y'
-                GROUP BY so_price_list_header_id, article, article_variant,
+                GROUP BY so_price_list_header_id, design_no, article_variant,
                          qty_min, qty_max, qty_unit, color_tier, currency
                 HAVING COUNT(*) > 1
             ) z
@@ -123,8 +123,9 @@ GO
 -- SO.P_SO_PRICE_LIST_PKG_select_price_list_detail 31, null, null, null, ''
 CREATE PROCEDURE [SO].[P_SO_PRICE_LIST_PKG_select_price_list_detail]
     @so_price_list_header_id bigint       = null,
-    @article                 nvarchar(30) = null,   -- exact; text, never numeric
-    @search                  nvarchar(100)= null,   -- article / fabric / composition
+    @design_no               nvarchar(60) = null,   -- exact; text, never numeric
+    @article                 nvarchar(30) = null,   -- accepted as an alias for @design_no
+    @search                  nvarchar(100)= null,   -- design / fabric / composition
     @conflicts_only          bit          = 0,
     @logempcd                varchar(15)  = ''
 AS
@@ -134,7 +135,7 @@ BEGIN
     /* Only ACTIVE lines compete. A withdrawn line is not an alternative price,
        so it must not inflate the count shown against the ones that are. */
     ;WITH dup AS (
-        SELECT so_price_list_header_id, article, article_variant,
+        SELECT so_price_list_header_id, design_no, article_variant,
                qty_min, qty_max, qty_unit, color_tier, currency,
                COUNT(*) AS n
         FROM   SO.so_price_list_detail
@@ -142,7 +143,7 @@ BEGIN
           AND  active = 'Y'
           AND (@so_price_list_header_id IS NULL
                OR so_price_list_header_id = @so_price_list_header_id)
-        GROUP BY so_price_list_header_id, article, article_variant,
+        GROUP BY so_price_list_header_id, design_no, article_variant,
                  qty_min, qty_max, qty_unit, color_tier, currency
     )
     SELECT  d.so_price_list_detail_id,
@@ -177,7 +178,7 @@ BEGIN
             CASE WHEN d.active = 'Y' THEN ISNULL(dup.n, 1) ELSE 0 END AS conflict_count
     FROM    SO.so_price_list_detail d
     LEFT JOIN dup ON dup.so_price_list_header_id = d.so_price_list_header_id
-                AND dup.article                = d.article
+                AND dup.design_no              = d.design_no
                 AND ISNULL(dup.article_variant,'') = ISNULL(d.article_variant,'')
                 AND dup.qty_min                = d.qty_min
                 AND ISNULL(dup.qty_max,-1)     = ISNULL(d.qty_max,-1)
@@ -187,9 +188,11 @@ BEGIN
     WHERE   d.delete_mark <> 'Y'
       AND  (@so_price_list_header_id IS NULL
             OR d.so_price_list_header_id = @so_price_list_header_id)
-      AND  (@article IS NULL OR @article = '' OR d.article = @article)
+      /* @article is the old name for this filter; either one narrows by design */
+      AND  (COALESCE(NULLIF(@design_no,''), NULLIF(@article,'')) IS NULL
+            OR d.design_no = COALESCE(NULLIF(@design_no,''), NULLIF(@article,'')))
       AND  (@search  IS NULL OR @search  = ''
-            OR d.article     LIKE '%' + @search + '%'
+            OR d.design_no   LIKE '%' + @search + '%'
             OR d.fabric_name LIKE '%' + @search + '%'
             OR d.composition LIKE '%' + @search + '%')
       AND  (@conflicts_only = 0 OR (d.active = 'Y' AND ISNULL(dup.n,0) > 1))

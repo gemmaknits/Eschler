@@ -1,0 +1,306 @@
+<title>Price Book</title>
+<style>
+:root{--bg:#f6f6f3;--panel:#fff;--ink:#171717;--ink2:#666;--line:#e4e4e0;--field:#fafaf7;--accent:#2563eb;--warn:#c2410c;--ok:#059669;--chip:#eef2ff;--chip-on:#2563eb;--danger:#b91c1c}
+:root:not([data-theme="light"]) @media (prefers-color-scheme:dark){}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#161616;--panel:#1f1f1f;--ink:#ececec;--ink2:#9a9a9a;--line:#333;--field:#262626;--chip:#1e293b;--chip-on:#3b82f6}}
+:root[data-theme="dark"]{--bg:#161616;--panel:#1f1f1f;--ink:#ececec;--ink2:#9a9a9a;--line:#333;--field:#262626;--chip:#1e293b;--chip-on:#3b82f6}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:14px/1.5 system-ui,-apple-system,Segoe UI,sans-serif;margin:0}
+.app{display:grid;grid-template-columns:280px 1fr;min-height:100vh}
+.side{background:var(--panel);border-right:1px solid var(--line);padding:14px;overflow:auto;position:sticky;top:0;height:100vh}
+.side h1{font-size:15px;margin:0 0 4px}
+.side .sub{color:var(--ink2);font-size:12px;margin-bottom:12px}
+.search{width:100%;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--field);color:var(--ink);margin-bottom:8px}
+.newbtn{width:100%;padding:6px 8px;border:1px solid var(--accent);background:var(--accent);color:#fff;border-radius:6px;cursor:pointer;margin-bottom:12px;font-weight:500}
+.pset{padding:8px;border:1px solid var(--line);border-radius:6px;margin-bottom:6px;cursor:pointer;background:var(--panel)}
+.pset:hover{border-color:var(--accent)}
+.pset.active{border-color:var(--accent);background:var(--chip)}
+.pset .cust{font-weight:600;font-size:12px;color:var(--accent)}
+.pset .art{font-size:13px;margin-top:2px}
+.pset .meta{color:var(--ink2);font-size:11px;margin-top:2px}
+.main{padding:18px 24px;max-width:1200px}
+.crumbs{color:var(--ink2);font-size:12px;margin-bottom:6px}
+.title{font-size:20px;font-weight:600;margin:0 0 14px}
+.er{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin-bottom:16px;font-size:12px;color:var(--ink2);display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.er b{color:var(--ink)}
+.er .box{border:1px dashed var(--line);border-radius:6px;padding:6px 10px;color:var(--ink)}
+.er .arrow{color:var(--ink2)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px;margin-bottom:14px}
+.card h3{margin:0 0 10px;font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink2);font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px 14px}
+.f{display:flex;flex-direction:column;gap:3px}
+.f label{font-size:11px;color:var(--ink2)}
+.f input,.f select,.f textarea{padding:6px 8px;border:1px solid var(--line);background:var(--field);color:var(--ink);border-radius:6px;font:inherit;width:100%}
+.f textarea{min-height:52px;resize:vertical}
+.f.row2{grid-column:span 2}
+.f.row3{grid-column:span 3}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.chip{padding:4px 10px;border:1px solid var(--line);border-radius:999px;background:var(--chip);color:var(--ink2);cursor:pointer;user-select:none;font-size:12px}
+.chip.on{background:var(--chip-on);color:#fff;border-color:var(--chip-on)}
+.tiers{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{border:1px solid var(--line);padding:0;text-align:left;vertical-align:top}
+th{background:var(--field);color:var(--ink2);font-size:11px;text-transform:uppercase;padding:6px 8px;font-weight:600}
+td{padding:0}
+td input{width:100%;padding:6px 8px;border:0;background:transparent;color:var(--ink);font:inherit;text-align:right}
+td.text input{text-align:left}
+td .pair{display:grid;grid-template-rows:1fr 1fr}
+td .pair input{border-bottom:1px dashed var(--line)}
+td .pair input:last-child{border-bottom:0}
+td .prefix{position:relative}
+td .prefix::before{content:attr(data-p);position:absolute;left:6px;top:6px;color:var(--ink2);font-size:11px;pointer-events:none}
+td .prefix input{padding-left:20px}
+.rowbtn{padding:4px 8px;background:transparent;color:var(--ink2);border:0;cursor:pointer;font-size:16px}
+.rowbtn:hover{color:var(--danger)}
+.actions{display:flex;gap:8px;justify-content:flex-end;margin-top:14px}
+button.btn{padding:8px 14px;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:6px;cursor:pointer;font:inherit}
+button.btn.primary{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:500}
+button.btn.warn{color:var(--danger);border-color:var(--danger)}
+.savedflash{position:fixed;top:12px;right:12px;background:var(--ok);color:#fff;padding:8px 14px;border-radius:6px;opacity:0;transition:opacity .2s;pointer-events:none;font-size:13px;z-index:10}
+.savedflash.on{opacity:1}
+.small{font-size:12px;color:var(--ink2)}
+.addtier{margin-top:8px;padding:6px 12px;background:transparent;border:1px dashed var(--line);color:var(--ink2);border-radius:6px;cursor:pointer;font:inherit}
+.addtier:hover{color:var(--accent);border-color:var(--accent)}
+.expired{color:var(--warn);font-weight:600;font-size:11px}
+.empty{padding:40px;text-align:center;color:var(--ink2)}
+</style>
+<div class="app">
+  <aside class="side">
+    <h1>Price Book</h1>
+    <div class="sub">Mock UI · data-entry &amp; maintenance</div>
+    <input id="search" class="search" placeholder="Filter customer / article…">
+    <button id="newbtn" class="newbtn">+ New price set</button>
+    <div id="list"></div>
+  </aside>
+  <main class="main">
+    <div class="crumbs" id="crumbs">—</div>
+    <h2 class="title" id="ptitle">Select a price set to edit</h2>
+    <div class="er">
+      <b>ER model:</b>
+      <span class="box">price_set (header)</span>
+      <span class="arrow">──1 : N──▶</span>
+      <span class="box">qty_tier (row)</span>
+      <span class="arrow">──1 : N──▶</span>
+      <span class="box">price_cell (color × USD/THB)</span>
+    </div>
+    <div id="editor"></div>
+  </main>
+</div>
+<div id="flash" class="savedflash">saved</div>
+<script id="seed" type="application/json">
+[
+ {"id":"ANITA-256524","customer":"ANITA","article":"256524","variant":"","fabric":"CO/PA PIQUET","comp":"59% CO, 41% PA","fw":"160-165","uw":"155-160","wt":"65-70","moq":"","qu":"M","terms":"FOB Bangkok / DDP excl VAT","vf":"2013-01-01","vt":"2015-12-31","qr":"ANITA sheet","src":"ANITA_Thailand_&_Germany","note":"Made in Thailand for 701-2500 band",
+  "colors":["PFE/PFD","White","Light","Medium","Dark"],
+  "tiers":[
+   {"qmin":200,"qmax":700,"p":{"PFE/PFD":{"usd":5.20,"thb":156},"White":{"usd":5.97,"thb":179},"Light":{"usd":6.10,"thb":183},"Medium":{"usd":6.10,"thb":183},"Dark":{"usd":6.10,"thb":183}}},
+   {"qmin":701,"qmax":2500,"p":{"PFE/PFD":{"usd":4.93,"thb":148},"White":{"usd":5.50,"thb":165},"Light":{"usd":5.63,"thb":169},"Medium":{"usd":5.63,"thb":169},"Dark":{"usd":5.83,"thb":175}}},
+   {"qmin":2501,"qmax":10000,"p":{"PFE/PFD":{"usd":4.77,"thb":143},"White":{"usd":5.20,"thb":156},"Light":{"usd":5.33,"thb":160},"Medium":{"usd":5.47,"thb":164},"Dark":{"usd":5.63,"thb":169}}}
+  ]},
+ {"id":"CENTER-256524","customer":"CENTER","article":"256524","variant":"","fabric":"CO/PA PIQUET","comp":"59% CO, 41% PA","fw":"160-165","uw":"155-160","wt":"65-70","moq":"3,000 m","qu":"M","terms":"FOB Bangkok","vf":"2020-03-04","vt":"","qr":"Center price 4-Mar-2020","src":"CENTER PRICE USD for internal","note":"",
+  "colors":["PFE/PFD","All_colors"],
+  "tiers":[
+   {"qmin":200,"qmax":600,"p":{"PFE/PFD":{"usd":3.05,"thb":null},"All_colors":{"usd":3.85,"thb":null}}},
+   {"qmin":601,"qmax":2000,"p":{"PFE/PFD":{"usd":2.75,"thb":null},"All_colors":{"usd":3.55,"thb":null}}},
+   {"qmin":2001,"qmax":5000,"p":{"PFE/PFD":{"usd":2.65,"thb":null},"All_colors":{"usd":3.40,"thb":null}}}
+  ]},
+ {"id":"ETH-256524","customer":"ETH","article":"256524","variant":"","fabric":"CO/PA PIQUE","comp":"59% CO, 41% PA","fw":"","uw":"155-160","wt":"","moq":"","qu":"M","terms":"THB Ex works","vf":"2023-02-06","vt":"","qr":"Price offer 06.02.2023","src":"ETH_Sheet","note":"",
+  "colors":["PFD"],
+  "tiers":[
+   {"qmin":1000,"qmax":null,"p":{"PFD":{"usd":null,"thb":98}}},
+   {"qmin":5000,"qmax":null,"p":{"PFD":{"usd":null,"thb":94}}}
+  ]},
+ {"id":"BISCHOFF-256524","customer":"BISCHOFF","article":"256524","variant":"","fabric":"CO/PA PIQUET","comp":"59% CO, 41% PA","fw":"","uw":"","wt":"","moq":"","qu":"M","terms":"","vf":"2024-06-06","vt":"","qr":"PFE STOCK for Bischoff","src":"Dated Quotes","note":"",
+  "colors":["PFE_Stock"],
+  "tiers":[{"qmin":1,"qmax":null,"p":{"PFE_Stock":{"usd":null,"thb":99}}}]},
+ {"id":"ANITA-251205","customer":"ANITA","article":"251205","variant":"","fabric":"","comp":"","fw":"","uw":"","wt":"","moq":"","qu":"M","terms":"FOB Bangkok / DDP excl VAT","vf":"2013-01-01","vt":"2015-12-31","qr":"ANITA sheet","src":"ANITA_Thailand_&_Germany","note":"",
+  "colors":["PFE/PFD","White","Light","Medium","Dark"],
+  "tiers":[
+   {"qmin":200,"qmax":700,"p":{"PFE/PFD":{"usd":5.43,"thb":163},"White":{"usd":6.10,"thb":183},"Light":{"usd":6.27,"thb":188},"Medium":{"usd":6.27,"thb":188},"Dark":{"usd":6.63,"thb":199}}}
+  ]},
+ {"id":"CENTER-251166","customer":"CENTER","article":"251166","variant":"","fabric":"ELASTIC CHARMEUSE","comp":"80% PA, 20% ELASTANE","fw":"150-155","uw":"145-150","wt":"145-160","moq":"3,000 m","qu":"M","terms":"FOB Bangkok","vf":"2020-03-04","vt":"","qr":"Center price 4-Mar-2020","src":"CENTER PRICE USD for internal","note":"",
+  "colors":["PFE/PFD","All_colors"],
+  "tiers":[
+   {"qmin":200,"qmax":600,"p":{"PFE/PFD":{"usd":4.50,"thb":null},"All_colors":{"usd":5.33,"thb":null}}},
+   {"qmin":601,"qmax":2000,"p":{"PFE/PFD":{"usd":4.23,"thb":null},"All_colors":{"usd":5.00,"thb":null}}}
+  ]},
+ {"id":"CENTER-251195","customer":"CENTER","article":"251195","variant":"","fabric":"PA CHARMEUSE SILK TOUCH","comp":"100% PA","fw":"150-155","uw":"145-150","wt":"36-41","moq":"3,000 m","qu":"M","terms":"FOB Bangkok","vf":"2020-03-04","vt":"","qr":"Center price 4-Mar-2020","src":"CENTER PRICE USD for internal","note":"",
+  "colors":["PFE/PFD","All_colors"],
+  "tiers":[
+   {"qmin":200,"qmax":600,"p":{"PFE/PFD":{"usd":2.23,"thb":null},"All_colors":{"usd":2.90,"thb":null}}}
+  ]}
+]
+</script>
+<script>
+const ALL_COLORS = ["PFE/PFD","PFD","PFE","White","Light","Medium","Dark","All_colors","Color_Black","PFE_Stock","Solid_Dyed","Greige","Natural"];
+const STORE_KEY = "eschler_price_book_v1";
+let data = load();
+let currentId = data[0]?.id ?? null;
+
+function load(){
+  try{ const s=localStorage.getItem(STORE_KEY); if(s) return JSON.parse(s); }catch(e){}
+  return JSON.parse(document.getElementById("seed").textContent);
+}
+function save(){ localStorage.setItem(STORE_KEY, JSON.stringify(data)); flash(); }
+function flash(msg){ const f=document.getElementById("flash"); if(msg) f.textContent=msg; f.classList.add("on"); setTimeout(()=>f.classList.remove("on"),1200); }
+function esc(s){ return (s??"").toString().replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+function isExpired(vt){ if(!vt) return false; try{ return new Date(vt) < new Date(); }catch(e){ return false;} }
+
+function renderList(){
+  const q=(document.getElementById("search").value||"").toLowerCase();
+  const el=document.getElementById("list");
+  el.innerHTML = data
+    .filter(x => !q || x.customer.toLowerCase().includes(q) || x.article.toLowerCase().includes(q) || (x.fabric||"").toLowerCase().includes(q))
+    .map(x => `<div class="pset ${x.id===currentId?'active':''}" data-id="${x.id}">
+        <div class="cust">${esc(x.customer)}</div>
+        <div class="art">${esc(x.article)}${x.variant?" "+esc(x.variant):""} · ${esc(x.fabric||"—")}</div>
+        <div class="meta">${x.tiers.length} tier${x.tiers.length!==1?"s":""} · ${x.colors.length} color${x.colors.length!==1?"s":""}${isExpired(x.vt)?' · <span class="expired">EXPIRED</span>':''}</div>
+      </div>`).join("");
+  el.querySelectorAll(".pset").forEach(n => n.onclick = () => { currentId = n.dataset.id; renderAll(); });
+}
+
+function currentSet(){ return data.find(x => x.id === currentId); }
+
+function renderEditor(){
+  const s = currentSet();
+  const ed = document.getElementById("editor");
+  if(!s){ ed.innerHTML = `<div class="empty">Pick a price set on the left, or click <b>+ New price set</b>.</div>`; document.getElementById("ptitle").textContent="Select a price set to edit"; document.getElementById("crumbs").textContent="—"; return; }
+  document.getElementById("ptitle").textContent = `${s.customer} · ${s.article}${s.variant?" "+s.variant:""}`;
+  document.getElementById("crumbs").innerHTML = `${esc(s.src||"—")} ${isExpired(s.vt)?'· <span class="expired">EXPIRED</span>':''}`;
+
+  const field = (k,label,val,cls="")=>`<div class="f ${cls}"><label>${label}</label><input data-k="${k}" value="${esc(val)}"></div>`;
+  const textarea = (k,label,val)=>`<div class="f row3"><label>${label}</label><textarea data-k="${k}">${esc(val)}</textarea></div>`;
+
+  const header = `
+   <div class="card"><h3>Header</h3><div class="grid">
+    ${field("customer","Customer",s.customer)}
+    ${field("article","Article",s.article)}
+    ${field("variant","Article variant",s.variant)}
+    ${field("fabric","Fabric name",s.fabric)}
+    ${field("comp","Composition",s.comp,"row2")}
+    ${field("fw","Full width (cm)",s.fw)}
+    ${field("uw","Usable width (cm)",s.uw)}
+    ${field("wt","Weight (gsm)",s.wt)}
+    ${field("moq","MOQ",s.moq)}
+    <div class="f"><label>Qty unit</label><select data-k="qu"><option value="M" ${s.qu==='M'?'selected':''}>M (meter)</option><option value="KG" ${s.qu==='KG'?'selected':''}>KG</option></select></div>
+    ${field("terms","Terms",s.terms,"row2")}
+    ${field("vf","Valid from (YYYY-MM-DD)",s.vf)}
+    ${field("vt","Valid to (YYYY-MM-DD)",s.vt)}
+    ${field("qr","Quote reference",s.qr,"row2")}
+    ${field("src","Source sheet",s.src,"row2")}
+    ${textarea("note","Notes",s.note)}
+   </div></div>`;
+
+  const colorChips = `
+   <div class="card"><h3>Colors in this set</h3>
+    <div class="chips" id="chips">
+      ${ALL_COLORS.map(c=>`<span class="chip ${s.colors.includes(c)?'on':''}" data-c="${esc(c)}">${esc(c)}</span>`).join("")}
+    </div>
+    <div class="small">Turn a chip on to add a column to the tier table; turn off to remove it (prices in that column are dropped).</div>
+   </div>`;
+
+  const th = ["Qty min","Qty max",...s.colors.map(c=>`${c}<div class="small">$ / ฿</div>`), ""];
+  const rows = s.tiers.map((t,i)=>{
+    const cells = s.colors.map(c=>{
+      const p = t.p[c] || {usd:null, thb:null};
+      return `<td>
+        <div class="pair">
+          <div class="prefix" data-p="$"><input data-i="${i}" data-c="${esc(c)}" data-cur="usd" value="${p.usd??""}" placeholder=""></div>
+          <div class="prefix" data-p="฿"><input data-i="${i}" data-c="${esc(c)}" data-cur="thb" value="${p.thb??""}" placeholder=""></div>
+        </div></td>`;
+    }).join("");
+    return `<tr>
+      <td class="text"><input data-i="${i}" data-t="qmin" value="${t.qmin??""}"></td>
+      <td class="text"><input data-i="${i}" data-t="qmax" value="${t.qmax??""}" placeholder="+"></td>
+      ${cells}
+      <td><button class="rowbtn" data-del="${i}" title="Delete tier">×</button></td>
+    </tr>`;
+  }).join("");
+
+  const tiers = `
+   <div class="card"><h3>Quantity tiers</h3>
+    <div class="tiers"><table id="tbl">
+      <thead><tr>${th.map(h=>`<th>${h}</th>`).join("")}</tr></thead>
+      <tbody>${rows || `<tr><td colspan="${th.length}" class="empty">No tiers yet</td></tr>`}</tbody>
+    </table></div>
+    <button class="addtier" id="addtier">+ Add tier</button>
+    <div class="small" style="margin-top:6px">Qty unit is <b>${s.qu}</b> · leave <b>Qty max</b> blank for "+" (unbounded top band).</div>
+   </div>`;
+
+  const actions = `
+   <div class="actions">
+    <button class="btn warn" id="deletebtn">Delete price set</button>
+    <button class="btn" id="dupbtn">Duplicate</button>
+    <button class="btn" id="revertbtn">Revert to seed</button>
+    <button class="btn primary" id="savebtn">Save</button>
+   </div>`;
+
+  ed.innerHTML = header + colorChips + tiers + actions;
+  wireEditor(s);
+}
+
+function wireEditor(s){
+  document.querySelectorAll('#editor .f input, #editor .f select, #editor .f textarea').forEach(el=>{
+    el.oninput = ()=>{ s[el.dataset.k] = el.value; };
+  });
+  document.querySelectorAll('#chips .chip').forEach(ch=>{
+    ch.onclick = ()=>{
+      const c=ch.dataset.c; const idx=s.colors.indexOf(c);
+      if(idx>=0){ s.colors.splice(idx,1); s.tiers.forEach(t=>delete t.p[c]); }
+      else{ s.colors.push(c); s.tiers.forEach(t=>t.p[c]={usd:null,thb:null}); }
+      renderEditor();
+    };
+  });
+  document.querySelectorAll('#tbl tbody input[data-t]').forEach(el=>{
+    el.oninput = ()=>{
+      const i=+el.dataset.i, k=el.dataset.t, v=el.value.trim();
+      s.tiers[i][k] = v===""? null : (isNaN(+v)? v : +v);
+    };
+  });
+  document.querySelectorAll('#tbl tbody input[data-cur]').forEach(el=>{
+    el.oninput = ()=>{
+      const i=+el.dataset.i, c=el.dataset.c, cur=el.dataset.cur, v=el.value.trim();
+      if(!s.tiers[i].p[c]) s.tiers[i].p[c]={usd:null,thb:null};
+      s.tiers[i].p[c][cur] = v===""? null : +v;
+    };
+  });
+  document.querySelectorAll('#tbl [data-del]').forEach(b=>{
+    b.onclick = ()=>{ s.tiers.splice(+b.dataset.del,1); renderEditor(); };
+  });
+  document.getElementById("addtier").onclick = ()=>{
+    const last = s.tiers[s.tiers.length-1];
+    const qmin = last?.qmax ? last.qmax+1 : 200;
+    const p={}; s.colors.forEach(c=>p[c]={usd:null,thb:null});
+    s.tiers.push({qmin, qmax:null, p});
+    renderEditor();
+  };
+  document.getElementById("savebtn").onclick = ()=>{
+    // regenerate ID if customer/article changed
+    s.id = `${s.customer}-${s.article}${s.variant?"-"+s.variant:""}`;
+    currentId = s.id;
+    save(); renderAll();
+  };
+  document.getElementById("dupbtn").onclick = ()=>{
+    const copy = JSON.parse(JSON.stringify(s));
+    copy.customer += "_copy"; copy.id = `${copy.customer}-${copy.article}`;
+    data.push(copy); currentId = copy.id; save(); renderAll();
+  };
+  document.getElementById("deletebtn").onclick = ()=>{
+    if(!confirm(`Delete price set "${s.customer} · ${s.article}"?`)) return;
+    data = data.filter(x=>x.id!==s.id); currentId = data[0]?.id ?? null; save(); renderAll();
+  };
+  document.getElementById("revertbtn").onclick = ()=>{
+    if(!confirm("Revert ALL price sets to the seed data? Local edits will be lost.")) return;
+    localStorage.removeItem(STORE_KEY); data = load(); currentId = data[0]?.id ?? null; renderAll(); flash("reverted");
+  };
+}
+
+function newSet(){
+  const s={id:"NEW-"+Date.now(),customer:"NEW_CUSTOMER",article:"NEW_ARTICLE",variant:"",fabric:"",comp:"",fw:"",uw:"",wt:"",moq:"",qu:"M",terms:"",vf:"",vt:"",qr:"",src:"",note:"",colors:["PFE/PFD","All_colors"],tiers:[{qmin:200,qmax:600,p:{"PFE/PFD":{usd:null,thb:null},"All_colors":{usd:null,thb:null}}}]};
+  data.unshift(s); currentId=s.id; renderAll();
+}
+
+function renderAll(){ renderList(); renderEditor(); }
+document.getElementById("search").oninput = renderList;
+document.getElementById("newbtn").onclick = newSet;
+renderAll();
+</script>

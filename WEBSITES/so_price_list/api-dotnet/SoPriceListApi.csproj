@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <!-- net8.0 self-contained: the runtime ships with the app, so it does not
+         matter which .NET runtimes are installed on the IIS box (the existing
+         WebAPI targets net7.0 and we must not disturb it). -->
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>SoPriceListApi</RootNamespace>
+    <AssemblyName>SoPriceListApi</AssemblyName>
+    <!-- Microsoft.Data.SqlClient does not run under invariant globalization. -->
+    <InvariantGlobalization>false</InvariantGlobalization>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.2" />
+  </ItemGroup>
+
+</Project>

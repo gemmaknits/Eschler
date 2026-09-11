@@ -44,12 +44,12 @@ CREATE PROCEDURE [SO].[P_SO_PRICE_LIST_PKG_insert_price_list_set]
     @color_tier              nvarchar(30)  = null,
     @currency                char(3)       = 'USD',  -- the half you typed
     @price                   decimal(18,4) = null,
-    @fabric_name             nvarchar(120) = null,
+    @fabric_name             nvarchar(200) = null,
     @composition             nvarchar(200) = null,
-    @full_width_cm           nvarchar(30)  = null,
-    @usable_width_cm         nvarchar(30)  = null,
-    @weight_gsm              nvarchar(30)  = null,
-    @moq                     nvarchar(30)  = null,
+    @full_width_cm           nvarchar(60)  = null,
+    @usable_width_cm         nvarchar(60)  = null,
+    @weight_gsm              nvarchar(60)  = null,
+    @moq                     nvarchar(60)  = null,
     @notes                   nvarchar(500) = null,
     @logempcd                varchar(15)   = ''
 AS

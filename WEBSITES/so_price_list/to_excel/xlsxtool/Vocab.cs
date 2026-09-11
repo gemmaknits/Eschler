@@ -6,7 +6,10 @@
     is reported rather than guessed at. */
 
 enum Role { None, Article, Composition, Fabric, Moq, QtyTier, FullWidth,
-            UsableWidth, Weight, Date, Remark, Price }
+            UsableWidth, Weight, Date, Remark, Price,
+            /* a column whose CELLS name the colour tier, rather than a column
+               that IS one tier - "color Type" holding PFD / White / Color-Black */
+            TierValue }
 
 static class Vocab
 {
@@ -53,6 +56,11 @@ static class Vocab
         var s = Norm(label).TrimEnd('.', ':').Trim();
         if (s.Length == 0 || s.Length > 40) return Role.None;
 
+        if (s.Contains("article")) return Role.Article;   // "eschler article no.", "eth article"
+        if (s is "product" or "product no" or "quality no") return Role.Article;
+        if (s is "color type" or "colour type" or "color" or "colour"
+         or "color/type" or "type of color") return Role.TierValue;
+
         if (s is "article" or "article #" or "article no" or "article number"
               or "design" or "design no" or "design #" or "art" or "art.") return Role.Article;
         if (s.StartsWith("article") || s.StartsWith("design no")) return Role.Article;
@@ -78,5 +86,49 @@ static class Vocab
         if (s.StartsWith("remark")) return Role.Remark;
 
         return Tier(s) != null ? Role.Price : Role.None;
+    }
+}
+
+static class Vocab2
+{
+    /* A price column need not name a colour tier. Plenty of tables carry one
+       price and label it after the money instead: "USD/ m", "Price/M.",
+       "New FOB Bangkok Price USD/m.", "Eschler price". Those were being read
+       as no price column at all, which silenced whole sheets. */
+    public static bool IsMoneyLabel(string label)
+    {
+        var s = (label ?? "").ToLowerInvariant().Trim();
+        if (s.Length == 0 || s.Length > 60) return false;
+        if (s.Contains("yield") || s.Contains("width") || s.Contains("weight")) return false;
+        return s.Contains("price") || s.Contains("usd") || s.Contains("thb")
+            || s.Contains("baht") || s.Contains("$") || s.Contains("/m")
+            || s.Contains("per meter") || s.Contains("per metre");
+    }
+
+    /* Euro columns exist on a few sheets. The price book is USD and THB, and a
+       euro figure written into either would be a straight error, so it is left
+       out and reported rather than converted or guessed at. */
+    public static bool IsEuro(string label)
+    {
+        var s = (label ?? "").ToLowerInvariant();
+        return s.Contains("euro") || s.Contains("eur ") || s.Contains("€");
+    }
+
+    /* Does this header cell name a quantity band rather than a field?
+       STG and others put the bands ACROSS the top - 200 m | 400 m | 1000 m+ -
+       and the colour tier down the side. */
+    public static bool IsQtyHeader(string label, out int min, out int? max)
+    {
+        min = 0; max = null;
+        var s = (label ?? "").Trim();
+        if (s.Length == 0 || s.Length > 24) return false;
+        if (!System.Text.RegularExpressions.Regex.IsMatch(s, @"\d")) return false;
+        // must look like a quantity, not a date or a width
+        if (System.Text.RegularExpressions.Regex.IsMatch(s, @"\d{1,2}[/.-]\d{1,2}[/.-]\d{2,4}")) return false;
+        if (s.ToLowerInvariant().Contains("cm")) return false;
+        if (!System.Text.RegularExpressions.Regex.IsMatch(
+                s, @"(m\.?\b|meter|mtr|pcs|kg|\+|up)", System.Text.RegularExpressions.RegexOptions.IgnoreCase))
+            return false;
+        return Parse.QtyBand(s, out min, out max);
     }
 }

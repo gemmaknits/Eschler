@@ -175,12 +175,12 @@ CREATE PROCEDURE [SO].[P_SO_PRICE_LIST_PKG_update_price_list_row]
     @new_qty_max             int           = null,
     @clear_qty_max           bit           = 0,   -- explicit, since NULL is a real value
     @new_qty_unit            char(2)       = null,
-    @fabric_name             nvarchar(120) = null,
+    @fabric_name             nvarchar(200) = null,
     @composition             nvarchar(200) = null,
-    @full_width_cm           nvarchar(30)  = null,
-    @usable_width_cm         nvarchar(30)  = null,
-    @weight_gsm              nvarchar(30)  = null,
-    @moq                     nvarchar(30)  = null,
+    @full_width_cm           nvarchar(60)  = null,
+    @usable_width_cm         nvarchar(60)  = null,
+    @weight_gsm              nvarchar(60)  = null,
+    @moq                     nvarchar(60)  = null,
     @active                  char(1)       = null,   -- 'Y' | 'N', whole row
     @logempcd                varchar(15)   = ''
 AS

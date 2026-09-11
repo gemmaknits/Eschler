@@ -77,14 +77,13 @@ IF OBJECT_ID('SO.P_SO_PRICE_LIST_PKG_update_price_list','P') IS NOT NULL
 GO
 -- =============================================
 -- Description: Upsert a price list header. NULL id inserts, otherwise updates.
---              customer_name is snapshotted from customers at save time.
+--              Customers are assigned separately - see part 8.
 -- =============================================
 -- SO.P_SO_PRICE_LIST_PKG_update_price_list null,'ANITA 2027','New season',173,...,'SURES'
 CREATE PROCEDURE [SO].[P_SO_PRICE_LIST_PKG_update_price_list]
     @so_price_list_header_id bigint        = null,
     @list_name               nvarchar(60)  = null,
     @list_desc               nvarchar(400) = null,
-    @customer_id             bigint        = null,
     @customer_excel          nvarchar(120) = null,
     @list_date               date          = null,
     @valid_from              date          = null,
@@ -121,20 +120,14 @@ BEGIN
         RETURN;
     END
 
-    /* snapshot the customer name so the list still reads correctly if the
-       customer record is later renamed */
-    DECLARE @customer_name nvarchar(100) = null;
-    IF @customer_id IS NOT NULL
-        SELECT @customer_name = name FROM dbo.customers WHERE customer_id = @customer_id;
-
     IF @so_price_list_header_id IS NULL
     BEGIN
         INSERT INTO SO.so_price_list_header
-            (list_name, list_desc, customer_id, customer_name, customer_excel,
+            (list_name, list_desc, customer_excel,
              list_date, valid_from, valid_to, terms, quote_ref,
              sonoid, so_line_id, notes, created_by)
         VALUES
-            (@list_name, @list_desc, @customer_id, @customer_name, @customer_excel,
+            (@list_name, @list_desc, @customer_excel,
              @list_date, @valid_from, @valid_to, @terms, @quote_ref,
              @sonoid, @so_line_id, @notes, @logempcd);
 
@@ -145,11 +138,6 @@ BEGIN
         UPDATE SO.so_price_list_header
         SET    list_name         = @list_name,
                list_desc         = @list_desc,
-               /* customer_id and customer_name are NOT written any more. A
-                  price list is quoted to several customers and those live in
-                  so_price_list_customers; these two columns hold what the
-                  import matched and are left as they were rather than nulled
-                  out by every save from a form that no longer sends them. */
                customer_excel    = @customer_excel,
                list_date         = @list_date,
                valid_from        = @valid_from,

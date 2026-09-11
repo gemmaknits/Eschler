@@ -49,8 +49,6 @@ BEGIN
     SELECT  h.so_price_list_header_id,
             h.list_name,
             h.list_desc,
-            h.customer_id,
-            h.customer_name,
             h.customer_excel,
             h.list_date,
             h.valid_from,
@@ -74,7 +72,7 @@ BEGIN
             ISNULL(d.line_count, 0)    AS line_count,
             ISNULL(c.conflict_count,0) AS conflict_count,
             /* Who this list is quoted to. The header used to carry one
-               customer_id, matched during the import; a list goes to several,
+               customer_id that the import never filled in; a list goes to several,
                so the assignments in so_price_list_customers are the answer and
                these two carry it - the count for the header strip, the names
                for the navigation. STUFF/FOR XML rather than STRING_AGG: the
@@ -119,7 +117,11 @@ BEGIN
     ) c ON c.so_price_list_header_id = h.so_price_list_header_id
     WHERE   h.delete_mark <> 'Y'
       AND  (@so_price_list_header_id IS NULL OR h.so_price_list_header_id = @so_price_list_header_id)
-      AND  (@customer_id IS NULL OR h.customer_id = @customer_id)
+      /* lists quoted to one customer, via the assignments */
+      AND  (@customer_id IS NULL
+            OR EXISTS (SELECT 1 FROM SO.so_price_list_customers ac2
+                       WHERE ac2.so_price_list_header_id = h.so_price_list_header_id
+                         AND ac2.customer_id = @customer_id))
       AND  (@search IS NULL OR @search = ''
             OR h.list_name      LIKE '%' + @search + '%'
             OR h.list_desc      LIKE '%' + @search + '%'

@@ -80,9 +80,12 @@ export default function CustomerAssign({ headerId, listName, onClose, onChanged 
                     <td className="mono">{r.custcd || '—'}</td>
                     <td>{r.customer_name || <span className="nil">customer {r.customer_id}</span>}</td>
                     <td className="mono">{r.ctry || ''}</td>
-                    {/* MIGRATE marks the one carried over from the header's
-                        own customer_id when this table was introduced. */}
-                    <td className="dim">{r.created_by === 'MIGRATE' ? 'from import' : (r.created_by || '')}</td>
+                    {/* MIGRATE marks one carried over from the header's own
+                        customer_id when this table arrived. That column was
+                        never filled in by the import - those values were set
+                        in the app - so the label says carried over, not
+                        imported. */}
+                    <td className="dim">{r.created_by === 'MIGRATE' ? 'carried over' : (r.created_by || '—')}</td>
                     <td>
                       <button className="ghost danger" disabled={busy}
                               onClick={() => remove(r)}>Remove</button>

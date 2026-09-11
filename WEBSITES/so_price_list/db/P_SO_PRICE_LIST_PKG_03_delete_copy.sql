@@ -146,7 +146,6 @@ GO
 CREATE PROCEDURE [SO].[P_SO_PRICE_LIST_PKG_copy_price_list]
     @source_header_id bigint,
     @list_name        nvarchar(60),
-    @customer_id      bigint      = null,   -- null = keep the source's customer
     @valid_from       date        = null,
     @valid_to         date        = null,
     @logempcd         varchar(15) = ''
@@ -176,21 +175,16 @@ BEGIN
         RETURN;
     END
 
-    DECLARE @new_id bigint, @lines int, @customer_name nvarchar(100);
-
-    IF @customer_id IS NOT NULL
-        SELECT @customer_name = name FROM dbo.customers WHERE customer_id = @customer_id;
+    DECLARE @new_id bigint, @lines int;
 
     BEGIN TRAN;
 
         INSERT INTO SO.so_price_list_header
-            (list_name, list_desc, customer_id, customer_name, customer_excel,
+            (list_name, list_desc, customer_excel,
              list_date, valid_from, valid_to, terms, quote_ref,
              sonoid, so_line_id, source_sheet, notes, created_by)
         SELECT @list_name,
                N'Copied from ' + h.list_name,
-               ISNULL(@customer_id, h.customer_id),
-               CASE WHEN @customer_id IS NULL THEN h.customer_name ELSE @customer_name END,
                h.customer_excel,
                CAST(GETDATE() AS date),
                @valid_from, @valid_to,
@@ -220,6 +214,15 @@ BEGIN
           AND  d.delete_mark <> 'Y';
 
         SET @lines = @@ROWCOUNT;
+
+        /* The customers come with the copy. A copied price list is quoted to
+           the same people until somebody says otherwise, and rebuilding that
+           by hand is exactly the kind of thing that gets forgotten. */
+        INSERT INTO SO.so_price_list_customers
+               (so_price_list_header_id, customer_id, created_by)
+        SELECT @new_id, c.customer_id, @logempcd
+        FROM   SO.so_price_list_customers c
+        WHERE  c.so_price_list_header_id = @source_header_id;
 
     COMMIT;
 

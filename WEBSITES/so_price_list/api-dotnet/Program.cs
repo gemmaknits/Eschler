@@ -242,7 +242,6 @@ app.MapPost("/price_list", async (Db db, HttpRequest r, System.Text.Json.JsonEle
         Num("@so_price_list_header_id", LJ(b, "header_id")),
         Text("@list_name",              SJ(b, "list_name"), 60),
         Text("@list_desc",              SJ(b, "list_desc"), 400),
-        Num("@customer_id",             LJ(b, "customer_id")),
         Text("@customer_excel",         SJ(b, "customer_excel"), 120),
         Dt("@list_date",                DJ(b, "list_date")),
         Dt("@valid_from",               DJ(b, "valid_from")),
@@ -375,7 +374,6 @@ app.MapPost("/price_list/{id:long}/copy", async (Db db, HttpRequest r, long id, 
     {
         Num("@source_header_id", id),
         Text("@list_name",       SJ(b, "list_name"), 60),
-        Num("@customer_id",      LJ(b, "customer_id")),
         Dt("@valid_from",        DJ(b, "valid_from")),
         Dt("@valid_to",          DJ(b, "valid_to")),
         Text("@logempcd",        Who(r), 15)

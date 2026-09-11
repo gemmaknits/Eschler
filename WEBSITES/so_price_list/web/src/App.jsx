@@ -10,6 +10,7 @@ import HeaderForm from './HeaderForm.jsx';
 import CustomerField from './CustomerField.jsx';
 import DesignLov from './DesignLov.jsx';
 import UomLov from './UomLov.jsx';
+import CustomerAssign from './CustomerAssign.jsx';
 
 export default function App() {
   const [lists, setLists]       = useState([]);
@@ -40,6 +41,8 @@ export default function App() {
      loaded once, so a typed unit can be checked without a round trip. */
   const [uomLov, setUomLov] = useState(null);
   const [uoms, setUoms] = useState([]);
+  /* the header whose customer assignments are open, if any */
+  const [assignFor, setAssignFor] = useState(null);
   const [emp, setEmp]           = useState(getEmpCd());
   const flashTimer = useRef(null);
 
@@ -766,7 +769,17 @@ export default function App() {
           header={editHeader.mode === 'edit' ? header : null}
           onSaved={headerSaved}
           onDeleted={headerDeleted}
+          onAssign={h => setAssignFor(h)}
           onClose={() => setEditHeader(null)}
+        />
+      )}
+
+      {assignFor && (
+        <CustomerAssign
+          headerId={assignFor.so_price_list_header_id}
+          listName={assignFor.list_name}
+          onChanged={refreshLists}
+          onClose={() => setAssignFor(null)}
         />
       )}
 

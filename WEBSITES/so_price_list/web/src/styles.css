@@ -621,3 +621,18 @@ td input.edit.bad{
 .lovgrid.uomlov th:nth-child(1),.lovgrid.uomlov td:nth-child(1){width:90px}
 .lovgrid.uomlov th:nth-child(2),.lovgrid.uomlov td:nth-child(2){width:auto}
 .lovgrid.uomlov th:nth-child(3),.lovgrid.uomlov td:nth-child(3){width:80px}
+
+/* Customers on a price list. Wider than a form, narrower than the pickers -
+   it is a short table with a Remove on each row. */
+.modal.assignmodal{max-width:640px}
+.lovgrid.assigngrid{max-height:min(48vh,360px)}
+.lovgrid.assigngrid table{table-layout:fixed; width:100%}
+.lovgrid.assigngrid th:nth-child(1),.lovgrid.assigngrid td:nth-child(1){width:70px}
+.lovgrid.assigngrid th:nth-child(2),.lovgrid.assigngrid td:nth-child(2){width:auto;
+  overflow:hidden; text-overflow:ellipsis}
+.lovgrid.assigngrid th:nth-child(3),.lovgrid.assigngrid td:nth-child(3){width:46px}
+.lovgrid.assigngrid th:nth-child(4),.lovgrid.assigngrid td:nth-child(4){width:96px}
+.lovgrid.assigngrid th:nth-child(5),.lovgrid.assigngrid td:nth-child(5){width:82px}
+.lovgrid.assigngrid td button{padding:1px 7px; font-size:11px}
+button.ghost.danger{color:var(--danger)}
+button.ghost.danger:hover:not(:disabled){background:var(--danger-soft); color:var(--danger)}

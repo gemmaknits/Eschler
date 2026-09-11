@@ -11,7 +11,7 @@ const asDate = v => (v ? String(v).slice(0, 10) : '');
  * the imported 53 show that customer, dates and terms are often unknown at the
  * start. Everything else can be filled in later.
  */
-export default function HeaderForm({ header, onSaved, onClose, onDeleted }) {
+export default function HeaderForm({ header, onSaved, onClose, onDeleted, onAssign }) {
   const isNew = !header;
   const [f, setF] = useState({
     list_name: header?.list_name || '',
@@ -170,6 +170,14 @@ export default function HeaderForm({ header, onSaved, onClose, onDeleted }) {
             {saving ? 'Saving…' : isNew ? 'Create price list' : 'Save changes'}
           </button>
           <button className="ghost" onClick={onClose} disabled={saving}>Cancel</button>
+
+          {/* A new list has no id yet, so there is nothing to assign anyone to.
+              Save it first and the button is there. */}
+          {!isNew && (
+            <button className="ghost" onClick={() => onAssign?.(header)} disabled={saving}>
+              Customers…
+            </button>
+          )}
 
           {!isNew && (
             <span className="modaldel">

@@ -125,6 +125,18 @@ export const api = {
   copyList: (headerId, body) =>
     call(`/price_list/${headerId}/copy`, { method: 'POST', body: JSON.stringify(body) }),
 
+  /* The customers a list is quoted to. Each of these returns the full list
+     afterwards, so the modal shows what the database holds rather than a
+     local copy kept in step by hand. */
+  listAssignedCustomers: (headerId) =>
+    call(`/price_list/${headerId}/customers`),
+
+  assignCustomer: (headerId, body) =>
+    call(`/price_list/${headerId}/customers`, { method: 'POST', body: JSON.stringify(body) }),
+
+  unassignCustomer: (headerId, customerId) =>
+    call(`/price_list/${headerId}/customers/${customerId}`, { method: 'DELETE' }),
+
   deleteList: (headerId) =>
     call(`/price_list/${headerId}`, { method: 'DELETE' }),
 

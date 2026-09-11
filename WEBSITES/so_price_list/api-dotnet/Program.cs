@@ -172,6 +172,32 @@ app.MapGet("/uom", async (Db db, HttpRequest r) =>
         Text("@logempcd", Who(r), 15)
     })));
 
+// A price list is quoted to more than one customer. These read, add and
+// remove those assignments; each returns the full list afterwards, so the
+// modal never has to ask again.
+app.MapGet("/price_list/{id:long}/customers", async (Db db, HttpRequest r, long id) =>
+    Results.Ok(await db.QueryAsync("P_SO_PRICE_LIST_PKG_select_price_list_customer", new[]
+    {
+        Num("@so_price_list_header_id", id),
+        Text("@logempcd",               Who(r), 15)
+    })));
+
+app.MapPost("/price_list/{id:long}/customers", async (Db db, HttpRequest r, long id, System.Text.Json.JsonElement b) =>
+    Results.Ok(await db.QueryAsync("P_SO_PRICE_LIST_PKG_assign_price_list_customer", new[]
+    {
+        Num("@so_price_list_header_id", id),
+        Num("@customer_id",             LJ(b, "customer_id")),
+        Text("@logempcd",               Who(r), 15)
+    })));
+
+app.MapDelete("/price_list/{id:long}/customers/{customerId:long}", async (Db db, HttpRequest r, long id, long customerId) =>
+    Results.Ok(await db.QueryAsync("P_SO_PRICE_LIST_PKG_unassign_price_list_customer", new[]
+    {
+        Num("@so_price_list_header_id", id),
+        Num("@customer_id",             customerId),
+        Text("@logempcd",               Who(r), 15)
+    })));
+
 // Customer list of values. Lives in the LOV schema per house convention, so
 // the name is schema-qualified rather than resolved against SO.
 app.MapGet("/lov/customer", async (Db db, HttpRequest r) =>

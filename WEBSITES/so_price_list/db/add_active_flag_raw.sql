@@ -9,6 +9,16 @@
    actually carry an ACTIVE column (Ausco, GLAMORISE) get an 'N'.
    ============================================================================ */
 
+/* Baked in, not left to the deploy tool: so_price_list_detail carries FILTERED
+   indexes, and any INSERT or UPDATE from a module created with QUOTED_IDENTIFIER
+   OFF fails at run time with error 1934. sqlcmd defaults it OFF, SSMS ON, which
+   is why the same file could deploy working procedures one day and broken ones
+   the next. */
+SET ANSI_NULLS ON;
+GO
+SET QUOTED_IDENTIFIER ON;
+GO
+
 SET NOCOUNT ON;
 GO
 

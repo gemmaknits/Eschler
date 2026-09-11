@@ -40,7 +40,7 @@ CREATE PROCEDURE [SO].[P_SO_PRICE_LIST_PKG_insert_price_list_set]
     @article_variant         nvarchar(20)  = null,
     @qty_min                 int           = null,
     @qty_max                 int           = null,
-    @qty_unit                char(2)       = 'M',
+    @qty_unit                nvarchar(10)  = N'MTS',
     @color_tier              nvarchar(30)  = null,
     @currency                char(3)       = 'USD',  -- the half you typed
     @price                   decimal(18,4) = null,
@@ -82,6 +82,15 @@ BEGIN
         RETURN;
     END
 
+    /* the unit must be one dbo.uom knows - see part 7 */
+    IF @qty_unit IS NOT NULL AND LTRIM(RTRIM(@qty_unit)) <> ''
+       AND SO.F_SO_PRICE_LIST_uom_ok(@qty_unit) = 0
+    BEGIN
+        RAISERROR('Unit "%s" is not a unit of measure in the system. Pick one from the list.',
+                  16, 1, @qty_unit);
+        RETURN;
+    END
+
     IF @qty_min IS NULL SET @qty_min = 0;
     IF @qty_min < 0
     BEGIN
@@ -101,7 +110,7 @@ BEGIN
         RETURN;
     END
 
-    IF @qty_unit   IS NULL SET @qty_unit = 'M';
+    IF @qty_unit IS NULL OR LTRIM(RTRIM(@qty_unit)) = '' SET @qty_unit = N'MTS';
     IF @color_tier IS NULL OR LTRIM(RTRIM(@color_tier)) = ''
         SET @color_tier = N'Unspecified';
     IF @after_set_no IS NULL SET @after_set_no = 0;

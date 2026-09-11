@@ -613,3 +613,11 @@ td input.edit.bad{
 .lovgrid.designlov th:nth-child(3),.lovgrid.designlov td:nth-child(3){width:184px}
 .lovgrid.designlov th:nth-child(4),.lovgrid.designlov td:nth-child(4){width:98px}
 .lovgrid.designlov th:nth-child(5),.lovgrid.designlov td:nth-child(5){width:110px}
+
+/* The unit picker is a short list - three narrow columns, no need for the
+   customer picker's width. */
+.modal.lov.uomlovmodal{max-width:460px}
+.lovgrid.uomlov table{table-layout:fixed; width:100%}
+.lovgrid.uomlov th:nth-child(1),.lovgrid.uomlov td:nth-child(1){width:90px}
+.lovgrid.uomlov th:nth-child(2),.lovgrid.uomlov td:nth-child(2){width:auto}
+.lovgrid.uomlov th:nth-child(3),.lovgrid.uomlov td:nth-child(3){width:80px}

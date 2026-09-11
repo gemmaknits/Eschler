@@ -100,6 +100,9 @@ export const api = {
   lookupDesign: (designNo) =>
     call(`/price_list/design${qs({ design_no: designNo })}`),
 
+  // the units the system knows; anything not on this list is refused on save
+  lovUom: (params = {}) => call(`/uom${qs(params)}`),
+
   // the design picker: a partial number or a fabric name -> the real designs
   lovDesign: (params = {}) => call(`/price_list/design_list${qs(params)}`),
 

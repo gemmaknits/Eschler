@@ -119,7 +119,7 @@ app.MapGet("/price_list/price", async (Db db, HttpRequest r) =>
         Text("@article",                article, 30),   // text: 487 lines look like '255484AA/11'
         Text("@color_tier",             S(r.Query["color_tier"]), 30),
         Int32P("@qty",                  I(r.Query["qty"])),
-        Chr("@qty_unit",                S(r.Query["qty_unit"]) ?? "M", 2),
+        Text("@qty_unit",               S(r.Query["qty_unit"]) ?? "MTS", 10),
         Chr("@currency",                S(r.Query["currency"]), 3),
         Dt("@as_of",                    D(r.Query["as_of"])),
         Flag("@include_inactive",       r.Query["include_inactive"] == "1"),
@@ -160,6 +160,15 @@ app.MapGet("/price_list/design_list", async (Db db, HttpRequest r) =>
     {
         Text("@filter",   S(r.Query["filter"]), 60),
         Int32P("@top_n",  I(r.Query["top_n"]) ?? 200),
+        Text("@logempcd", Who(r), 15)
+    })));
+
+// The units of measure the system knows, for the picker in the grid. A unit
+// that is not on this list is refused by the write procedures.
+app.MapGet("/uom", async (Db db, HttpRequest r) =>
+    Results.Ok(await db.QueryAsync("P_SO_PRICE_LIST_PKG_select_uom", new[]
+    {
+        Text("@filter",   S(r.Query["filter"]), 40),
         Text("@logempcd", Who(r), 15)
     })));
 
@@ -237,7 +246,7 @@ app.MapPost("/price_list/detail", async (Db db, HttpRequest r, System.Text.Json.
         Text("@moq",                    SJ(b, "moq"), 60),
         Int32P("@qty_min",              IJ(b, "qty_min")),
         Int32P("@qty_max",              IJ(b, "qty_max")),
-        Chr("@qty_unit",                SJ(b, "qty_unit") ?? "M", 2),
+        Text("@qty_unit",               SJ(b, "qty_unit") ?? "MTS", 10),
         Text("@color_tier",             SJ(b, "color_tier"), 30),
         Chr("@currency",                SJ(b, "currency"), 3),
         Dec("@price",                   DecJ(b, "price")),
@@ -259,14 +268,14 @@ app.MapPost("/price_list/{id:long}/row", async (Db db, HttpRequest r, long id, S
         Text("@article_variant",        SJ(b, "article_variant"), 20),
         Int32P("@qty_min",              IJ(b, "qty_min")),
         Int32P("@qty_max",              IJ(b, "qty_max")),
-        Chr("@qty_unit",                SJ(b, "qty_unit") ?? "M", 2),
+        Text("@qty_unit",               SJ(b, "qty_unit") ?? "MTS", 10),
         Text("@new_design_no",          SJ(b, "new_design_no"), 60),
         Text("@new_article",            SJ(b, "new_article"), 30),
         Text("@new_article_variant",    SJ(b, "new_article_variant"), 20),
         Int32P("@new_qty_min",          IJ(b, "new_qty_min")),
         Int32P("@new_qty_max",          IJ(b, "new_qty_max")),
         Flag("@clear_qty_max",          BJ(b, "clear_qty_max")),
-        Chr("@new_qty_unit",            SJ(b, "new_qty_unit"), 2),
+        Text("@new_qty_unit",           SJ(b, "new_qty_unit"), 10),
         Text("@fabric_name",            SJ(b, "fabric_name"), 200),
         Text("@composition",            SJ(b, "composition"), 200),
         Text("@full_width_cm",          SJ(b, "full_width_cm"), 60),
@@ -301,7 +310,7 @@ app.MapPost("/price_list/{id:long}/set/insert", async (Db db, HttpRequest r, lon
         Text("@article_variant",        SJ(b, "article_variant"), 20),
         Int32P("@qty_min",              IJ(b, "qty_min")),
         Int32P("@qty_max",              IJ(b, "qty_max")),
-        Chr("@qty_unit",                SJ(b, "qty_unit") ?? "M", 2),
+        Text("@qty_unit",               SJ(b, "qty_unit") ?? "MTS", 10),
         Text("@color_tier",             SJ(b, "color_tier"), 30),
         Chr("@currency",                SJ(b, "currency") ?? "USD", 3),
         Dec("@price",                   DecJ(b, "price")),

@@ -166,7 +166,7 @@ CREATE PROCEDURE [SO].[P_SO_PRICE_LIST_PKG_update_price_list_row]
     @article_variant         nvarchar(20)  = null,
     @qty_min                 int,
     @qty_max                 int           = null,
-    @qty_unit                char(2)       = 'M',
+    @qty_unit                nvarchar(10)  = N'MTS',
     -- new values; NULL means leave alone, except new_qty_max (see below)
     @new_design_no           nvarchar(60)  = null,
     @new_article             nvarchar(30)  = null,   -- old alias for @new_design_no
@@ -174,7 +174,7 @@ CREATE PROCEDURE [SO].[P_SO_PRICE_LIST_PKG_update_price_list_row]
     @new_qty_min             int           = null,
     @new_qty_max             int           = null,
     @clear_qty_max           bit           = 0,   -- explicit, since NULL is a real value
-    @new_qty_unit            char(2)       = null,
+    @new_qty_unit            nvarchar(10)  = null,
     @fabric_name             nvarchar(200) = null,
     @composition             nvarchar(200) = null,
     @full_width_cm           nvarchar(60)  = null,
@@ -226,6 +226,15 @@ BEGIN
     IF @new_design_no IS NOT NULL AND LTRIM(RTRIM(@new_design_no)) = ''
     BEGIN
         RAISERROR('Design no is required.', 16, 1);
+        RETURN;
+    END
+
+    /* the unit must be one dbo.uom knows - see part 7 */
+    IF @new_qty_unit IS NOT NULL AND LTRIM(RTRIM(@new_qty_unit)) <> ''
+       AND SO.F_SO_PRICE_LIST_uom_ok(@new_qty_unit) = 0
+    BEGIN
+        RAISERROR('Unit "%s" is not a unit of measure in the system. Pick one from the list.',
+                  16, 1, @new_qty_unit);
         RETURN;
     END
 

@@ -9,6 +9,7 @@ import PriceListNav from './PriceListNav.jsx';
 import HeaderForm from './HeaderForm.jsx';
 import CustomerField from './CustomerField.jsx';
 import DesignLov from './DesignLov.jsx';
+import UomLov from './UomLov.jsx';
 
 export default function App() {
   const [lists, setLists]       = useState([]);
@@ -35,6 +36,10 @@ export default function App() {
   const [copied, setCopied]     = useState(null);
   /* {row, filter} while the design picker is open. */
   const [designLov, setDesignLov] = useState(null);
+  /* {row, typed} while the unit picker is open, and the units themselves -
+     loaded once, so a typed unit can be checked without a round trip. */
+  const [uomLov, setUomLov] = useState(null);
+  const [uoms, setUoms] = useState([]);
   const [emp, setEmp]           = useState(getEmpCd());
   const flashTimer = useRef(null);
 
@@ -116,6 +121,13 @@ export default function App() {
 
   const refreshLists = () => api.listPriceLists().then(setLists).catch(() => {});
 
+  /* The units of measure, once. The grid checks a typed unit against these
+     before saving, so an invalid one opens the picker instead of coming back
+     as an error from the database. */
+  useEffect(() => {
+    api.lovUom().then(rows => setUoms(rows.map(u => u.uom))).catch(() => {});
+  }, []);
+
 
   /* A tier or currency with prices but no column would hide money, so union
      what the header declares with what the data actually holds. */
@@ -169,7 +181,7 @@ export default function App() {
         article_variant: '',
         qty_min: 0,
         qty_max: null,
-        qty_unit: target.qty_unit || 'M',
+        qty_unit: target.qty_unit || 'MTS',
         fabric_name: '', composition: '',
         full_width_cm: '', usable_width_cm: '', weight_gsm: '', moq: '',
         source_row: null,
@@ -226,7 +238,7 @@ export default function App() {
       article_variant: '',
       qty_min: last?.qty_max != null ? Number(last.qty_max) + 1 : 0,
       qty_max: null,
-      qty_unit: last?.qty_unit || 'M',
+      qty_unit: last?.qty_unit || 'MTS',
       fabric_name: last?.fabric_name || '',
       composition: last?.composition || '',
       full_width_cm: last?.full_width_cm || '',
@@ -316,7 +328,38 @@ export default function App() {
     } catch (err) { setError(err.message); } finally { setBusy(false); }
   }, [designLov, patchRowLocally, say]);
 
+  /* A unit chosen from the picker, applied to the row it was opened for. */
+  const pickUom = useCallback(async uom => {
+    const target = uomLov?.row;
+    setUomLov(null);
+    if (!target || !uom) return;
+
+    if (target.isDraft) { patchDraft(target.key, { qty_unit: uom }); say(`Unit ${uom}`); return; }
+    setBusy(true);
+    try {
+      for (const line of Object.values(target.cells || {})) {
+        await api.saveDetail({ detail_id: line.so_price_list_detail_id, qty_unit: uom });
+      }
+      patchRowLocally(target.key, { qty_unit: uom }, { qty_unit: uom });
+      say(`Unit set to ${uom}`);
+    } catch (err) { setError(err.message); } finally { setBusy(false); }
+  }, [uomLov, patchRowLocally, say]);
+
   const editRow = useCallback(async (row, col, raw) => {
+    /* The unit has to be one the system knows. The database refuses anything
+       else, so rather than let the save fail and report it, check here and
+       open the picker - the typed value is shown so it is clear what was
+       rejected. Case is not the user's problem: "mts" becomes "MTS".
+
+       Checked BEFORE the value is read, so the corrected case is what gets
+       saved rather than what was typed. */
+    if (col.key === 'qty_unit' && uoms.length) {
+      const typed = (raw || '').trim();
+      const match = uoms.find(u => u.toUpperCase() === typed.toUpperCase());
+      if (!match) { setUomLov({ row, typed }); return; }
+      raw = match;
+    }
+
     const value = col.num ? (raw === '' ? null : parseInt(raw, 10)) : raw;
     if (col.num && raw !== '' && Number.isNaN(value)) return;
 
@@ -402,7 +445,7 @@ export default function App() {
     } catch (err) {
       setError(err.message);
     } finally { setBusy(false); }
-  }, [headerId, reload, say, fillFromDesign]);
+  }, [headerId, reload, say, fillFromDesign, uoms]);
 
   /* ---- edit or create a price ---- */
   const editPrice = useCallback(async (row, currency, tier, value) => {
@@ -451,7 +494,7 @@ export default function App() {
         const body = {
           header_id: headerId, design_no: row.design_no,
           article_variant: row.article_variant || null,
-          qty_min: row.qty_min ?? 0, qty_max: row.qty_max, qty_unit: row.qty_unit || 'M',
+          qty_min: row.qty_min ?? 0, qty_max: row.qty_max, qty_unit: row.qty_unit || 'MTS',
           color_tier: tier, currency, price: value,
           fabric_name: row.fabric_name, composition: row.composition,
           full_width_cm: row.full_width_cm, usable_width_cm: row.usable_width_cm,
@@ -724,6 +767,14 @@ export default function App() {
           onSaved={headerSaved}
           onDeleted={headerDeleted}
           onClose={() => setEditHeader(null)}
+        />
+      )}
+
+      {uomLov && (
+        <UomLov
+          invalid={uomLov.typed}
+          onPick={pickUom}
+          onClose={() => setUomLov(null)}
         />
       )}
 

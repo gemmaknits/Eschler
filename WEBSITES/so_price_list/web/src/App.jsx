@@ -236,8 +236,25 @@ export default function App() {
       if (!row.article) { setError('Give the line an article first.'); return; }
       setBusy(true);
       try {
+        /* The row is identified by its design and article - that is what names
+           a line in the workbook, so it is what the save sends.
+
+           set_no rides along only as a tiebreaker: two rows CAN share a design,
+           article and quantity band and still hold different prices (the grid
+           brackets them together), and design alone cannot say which of those
+           the user clicked.
+
+           after_line_no keeps the new tier where it was typed. Without it the
+           line is appended to the end of the row's lines instead of sitting
+           next to the tier above it. */
+        const lineNos = Object.values(row.cells || {})
+          .map(d => d.line_no).filter(n => n != null);
+
         await api.saveDetail({
-          header_id: headerId, article: row.article,
+          header_id: headerId, set_no: row.set_no,
+          design_no: row.design_no || null,
+          after_line_no: lineNos.length ? Math.max(...lineNos) : null,
+          article: row.article,
           article_variant: row.article_variant || null,
           qty_min: row.qty_min, qty_max: row.qty_max, qty_unit: row.qty_unit,
           color_tier: tier, currency, price: value,

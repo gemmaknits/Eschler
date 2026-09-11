@@ -8,6 +8,16 @@
    way.
    ============================================================================ */
 
+/* Baked in, not left to the deploy tool: so_price_list_detail carries FILTERED
+   indexes, and any INSERT or UPDATE from a module created with QUOTED_IDENTIFIER
+   OFF fails at run time with error 1934. sqlcmd defaults it OFF, SSMS ON, which
+   is why the same file could deploy working procedures one day and broken ones
+   the next. */
+SET ANSI_NULLS ON;
+GO
+SET QUOTED_IDENTIFIER ON;
+GO
+
 SET NOCOUNT ON;
 GO
 
@@ -179,6 +189,7 @@ GO
 CREATE PROCEDURE [SO].[P_SO_PRICE_LIST_PKG_update_price_list_detail]
     @so_price_list_detail_id bigint        = null,
     @so_price_list_header_id bigint        = null,
+    @set_no                  int           = null,   -- which grid row to join
     @article                 nvarchar(30)  = null,   -- bind as string, always
     @design_no               char(20)      = null,
     @article_variant         nvarchar(20)  = null,
@@ -196,6 +207,7 @@ CREATE PROCEDURE [SO].[P_SO_PRICE_LIST_PKG_update_price_list_detail]
     @currency                char(3)       = null,
     @price                   decimal(18,4) = null,
     @line_no                 int           = null,
+    @after_line_no           int           = null,   -- insert after this line; NULL appends
     @active                  char(1)       = null,   -- 'Y' | 'N'
     @notes                   nvarchar(500) = null,
     @logempcd                varchar(15)   = ''
@@ -257,19 +269,95 @@ BEGIN
         IF @color_tier IS NULL OR LTRIM(RTRIM(@color_tier)) = ''
             SET @color_tier = N'Unspecified';
 
-        /* append to the end of the list unless a position was given */
-        IF @line_no IS NULL
-            SELECT @line_no = ISNULL(MAX(line_no), 0) + 1
+        /* Which grid row does this line join?
+
+           A set is one article, variant and quantity band - it spans EVERY
+           colour tier, because tiers are columns within the row. So the lookup
+           must NOT match on colour tier: doing so meant a new tier started its
+           own set, and typing into an empty tier cell split the row in two.
+
+           The caller should pass @set_no, since only it knows which row was
+           clicked when several share an article and band. Without it, join the
+           first set with that article and band, or start a new one. */
+        IF @set_no IS NULL
+            SELECT TOP 1 @set_no = set_no
+            FROM   SO.so_price_list_detail
+            WHERE  so_price_list_header_id = @so_price_list_header_id
+              AND  article = @article
+              AND  ISNULL(article_variant,'') = ISNULL(@article_variant,'')
+              AND  qty_min = @qty_min
+              AND  ISNULL(qty_max,-1) = ISNULL(@qty_max,-1)
+              AND  qty_unit = @qty_unit
+              AND  delete_mark <> 'Y'
+            ORDER BY set_no;
+
+        IF @set_no IS NULL
+            SELECT @set_no = ISNULL(MAX(set_no), 0) + 1
             FROM   SO.so_price_list_detail
             WHERE  so_price_list_header_id = @so_price_list_header_id;
 
+        /* The cell may already hold a line.
+
+           Typing one currency creates its counterpart alongside it at 0, so
+           the other half of the pair usually EXISTS before it is first typed
+           into. Filling it in is an update of that line - a set holds at most
+           one row per tier and currency, and inserting here would put a second
+           Dark USD in the same grid row.
+
+           The grid passes the detail id and never reaches this, but a caller
+           that only knows which cell was clicked would otherwise duplicate. */
+        SELECT TOP 1 @so_price_list_detail_id = so_price_list_detail_id
+        FROM   SO.so_price_list_detail
+        WHERE  so_price_list_header_id = @so_price_list_header_id
+          AND  set_no     = @set_no
+          AND  color_tier = @color_tier
+          AND  currency   = @currency
+          AND  delete_mark <> 'Y'
+        ORDER BY so_price_list_detail_id;
+    END
+
+    IF @so_price_list_detail_id IS NULL
+    BEGIN
+        /* Where in the set does the new line go?
+
+           line_no is the position the user put the line at, and it has to stay
+           there. A tier added between lines 2 and 3 belongs between 2 and 3 -
+           it is NOT re-sorted into tier order, because the order within a set
+           is the user's, not the tier list's.
+
+           So make room and drop the pair into the gap. One line_no per tier
+           row, NOT per currency: the USD and THB halves are the same worksheet
+           line, so they share a number and the shift is 1, not 2.
+           @after_line_no NULL means append to the end of the set. */
+        IF @line_no IS NULL
+        BEGIN
+            IF @after_line_no IS NULL
+                SELECT @line_no = ISNULL(MAX(line_no), 0) + 1
+                FROM   SO.so_price_list_detail
+                WHERE  so_price_list_header_id = @so_price_list_header_id
+                  AND  set_no = @set_no;
+            ELSE
+            BEGIN
+                SET @line_no = @after_line_no + 1;
+
+                UPDATE SO.so_price_list_detail
+                SET    line_no           = line_no + 1,
+                       last_updated_date = SYSDATETIME(),
+                       updated_by        = @logempcd
+                WHERE  so_price_list_header_id = @so_price_list_header_id
+                  AND  set_no  = @set_no
+                  AND  line_no >= @line_no
+                  AND  delete_mark <> 'Y';
+            END
+        END
+
         INSERT INTO SO.so_price_list_detail
-            (so_price_list_header_id, line_no, article, design_no, article_variant,
+            (so_price_list_header_id, set_no, line_no, article, design_no, article_variant,
              fabric_name, composition, full_width_cm, usable_width_cm, weight_gsm,
              moq, qty_min, qty_max, qty_unit, color_tier, currency, price,
              active, notes, created_by)
         VALUES
-            (@so_price_list_header_id, @line_no, @article, @design_no, @article_variant,
+            (@so_price_list_header_id, @set_no, @line_no, @article, @design_no, @article_variant,
              @fabric_name, @composition, @full_width_cm, @usable_width_cm, @weight_gsm,
              @moq, @qty_min, @qty_max, @qty_unit, @color_tier, @currency, @price,
              ISNULL(@active,'Y'), @notes, @logempcd);
@@ -285,6 +373,12 @@ BEGIN
            cells exist from the start; entering the real figure then UPDATES
            that row rather than inserting a second one.
 
+           The counterpart carries the SAME line_no: one worksheet line holds
+           both currencies, so line_no numbers the tier row, not the currency.
+           (set_no, line_no) therefore names one tier row of one grid row, and
+           reading a pair back is a single equality test rather than arithmetic
+           on adjacent numbers.
+
            Skipped when the counterpart already exists - typing USD after THB
            must not create a duplicate.
            ------------------------------------------------------------------ */
@@ -295,26 +389,23 @@ BEGIN
            AND NOT EXISTS (
                SELECT 1 FROM SO.so_price_list_detail
                WHERE  so_price_list_header_id = @so_price_list_header_id
-                 AND  article  = @article
-                 AND  ISNULL(article_variant,'') = ISNULL(@article_variant,'')
-                 AND  qty_min  = @qty_min
-                 AND  ISNULL(qty_max,-1) = ISNULL(@qty_max,-1)
-                 AND  qty_unit = @qty_unit
+                 AND  set_no = @set_no
                  AND  color_tier = @color_tier
                  AND  currency = @other
                  AND  delete_mark <> 'Y')
         BEGIN
             INSERT INTO SO.so_price_list_detail
-                (so_price_list_header_id, line_no, article, design_no, article_variant,
+                (so_price_list_header_id, set_no, line_no, article, design_no, article_variant,
                  fabric_name, composition, full_width_cm, usable_width_cm, weight_gsm,
                  moq, qty_min, qty_max, qty_unit, color_tier, currency, price,
                  active, notes, created_by)
             VALUES
-                (@so_price_list_header_id, @line_no + 1, @article, @design_no, @article_variant,
+                (@so_price_list_header_id, @set_no, @line_no, @article, @design_no, @article_variant,
                  @fabric_name, @composition, @full_width_cm, @usable_width_cm, @weight_gsm,
                  @moq, @qty_min, @qty_max, @qty_unit, @color_tier, @other, 0,
                  ISNULL(@active,'Y'), @notes, @logempcd);
         END
+
     END
     ELSE
     BEGIN

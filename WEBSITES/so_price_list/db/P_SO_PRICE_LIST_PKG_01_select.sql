@@ -12,6 +12,16 @@
    as Int, or the alphanumeric codes are rejected before they reach the proc.
    ============================================================================ */
 
+/* Baked in, not left to the deploy tool: so_price_list_detail carries FILTERED
+   indexes, and any INSERT or UPDATE from a module created with QUOTED_IDENTIFIER
+   OFF fails at run time with error 1934. sqlcmd defaults it OFF, SSMS ON, which
+   is why the same file could deploy working procedures one day and broken ones
+   the next. */
+SET ANSI_NULLS ON;
+GO
+SET QUOTED_IDENTIFIER ON;
+GO
+
 SET NOCOUNT ON;
 GO
 
@@ -137,6 +147,9 @@ BEGIN
     )
     SELECT  d.so_price_list_detail_id,
             d.so_price_list_header_id,
+            /* set_no is the grid row: the USD and THB halves of one price line
+               carry the same value, line_no orders them within it. */
+            d.set_no,
             d.line_no,
             d.article,
             d.design_no,
@@ -180,7 +193,9 @@ BEGIN
             OR d.fabric_name LIKE '%' + @search + '%'
             OR d.composition LIKE '%' + @search + '%')
       AND  (@conflicts_only = 0 OR (d.active = 'Y' AND ISNULL(dup.n,0) > 1))
-    ORDER BY d.so_price_list_header_id, d.article, d.qty_min, d.color_tier, d.currency;
+    /* Workbook order, which is what set_no preserves - and what makes an
+       inserted line stay where it was put. */
+    ORDER BY d.so_price_list_header_id, d.set_no, d.line_no;
 END
 GO
 
@@ -338,18 +353,10 @@ BEGIN
 
     SELECT  d.color_tier,
             COUNT(*) AS line_count,
-            /* stable display order; unknown tiers fall to the end alphabetically */
-            CASE d.color_tier
-                 WHEN 'PFE/PFD'    THEN 1
-                 WHEN 'PFE'        THEN 2
-                 WHEN 'PFD'        THEN 3
-                 WHEN 'Greige'     THEN 4
-                 WHEN 'White'      THEN 5
-                 WHEN 'Light'      THEN 6
-                 WHEN 'Medium'     THEN 7
-                 WHEN 'Dark'       THEN 8
-                 WHEN 'All_colors' THEN 9
-                 ELSE 99 END AS sort_order
+            /* stable display order; unknown tiers fall to the end alphabetically.
+               Same function the insert uses to order lines within a set, so the
+               columns and the rows behind them can never disagree. */
+            SO.F_SO_PRICE_LIST_tier_order(d.color_tier) AS sort_order
     FROM    SO.so_price_list_detail d
     WHERE   d.delete_mark <> 'Y'
       AND  (@so_price_list_header_id IS NULL

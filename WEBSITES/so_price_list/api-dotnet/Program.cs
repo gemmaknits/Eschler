@@ -195,6 +195,7 @@ app.MapPost("/price_list/detail", async (Db db, HttpRequest r, System.Text.Json.
     {
         Num("@so_price_list_detail_id", LJ(b, "detail_id")),
         Num("@so_price_list_header_id", LJ(b, "header_id")),
+        Int32P("@set_no",               IJ(b, "set_no")),
         Text("@article",                SJ(b, "article"), 30),
         Chr("@design_no",               SJ(b, "design_no"), 20),
         Text("@article_variant",        SJ(b, "article_variant"), 20),
@@ -211,6 +212,7 @@ app.MapPost("/price_list/detail", async (Db db, HttpRequest r, System.Text.Json.
         Chr("@currency",                SJ(b, "currency"), 3),
         Dec("@price",                   DecJ(b, "price")),
         Int32P("@line_no",              IJ(b, "line_no")),
+        Int32P("@after_line_no",        IJ(b, "after_line_no")),
         Chr("@active",                  SJ(b, "active"), 1),
         Text("@notes",                  SJ(b, "notes"), 500),
         Text("@logempcd",               Who(r), 15)

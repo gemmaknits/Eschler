@@ -293,10 +293,23 @@ static class Scan
        is an article: a continuation carries labels, not design numbers. */
     static bool IsHeaderContinuation(string[] row)
     {
+        int pricey = 0;
         foreach (var v in row)
-            if (!string.IsNullOrWhiteSpace(v) && Parse.Article(v) != null)
-                return false;
-        return true;
+        {
+            if (string.IsNullOrWhiteSpace(v)) continue;
+            if (Parse.Article(v) != null) return false;
+            if (Parse.Price(v, out _, out _)) pricey++;
+        }
+
+        /* A header carries labels, not figures. Testing only for an article
+           was not enough: a data row whose design cell is blank - because the
+           design carries down from the row above - looked like a header.
+
+           On ANITA that row read "2,000 m. +  $ 3.90", and "2,000 m. +" was
+           taken for a column of quantity bands, so the "Qty per color" column
+           became a price column and every band under it was lost. Two figures
+           on a row is enough to say it is data. */
+        return pricey < 2;
     }
 
     /* The first row below a header that is actually DATA. A header can be two

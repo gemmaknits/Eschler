@@ -11,9 +11,20 @@ if (args.Length < 2) { Console.Error.WriteLine("usage: xlsxtool sheets|dump <fil
 var mode = args[0];
 var path = args[1];
 
+/* the vocabulary probe opens no workbook - it answers questions about labels */
+if (mode == "vocab")
+{
+    for (int i = 1; i < args.Length; i++)
+        Console.WriteLine($"[{args[i]}] role={Vocab.Of(args[i])} tier={Vocab.Tier(args[i]) ?? "-"} money={Vocab2.IsMoneyLabel(args[i])}");
+    return 0;
+}
+
 using var wb = new XLWorkbook(path);
 
 if (mode == "headers") return Headers.Run(path);
+
+if (mode == "explain")
+    return Explain.Run(args[1], args[2]);
 
 if (mode == "coverage")
     return Coverage.Run(args[1], args.Length > 2 ? args[2] : null);

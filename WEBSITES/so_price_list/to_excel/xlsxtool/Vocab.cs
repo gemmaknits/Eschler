@@ -71,6 +71,16 @@ static class Vocab
 
         if (s.Contains("article")) return Role.Article;   // "eschler article no.", "eth article"
         if (s is "product" or "product no" or "quality no") return Role.Article;
+
+        /* The number is a DESIGN number and plenty of sheets say so: ANITA's
+           later tables head the column "Eschler Design :". Without this the
+           table has nothing to identify a line by, so it is not recognised as
+           a table at all and every price under it is silently dropped - that
+           is 30-odd prices on ANITA alone, the ones reported as "$ 6.95 not
+           captured". */
+        if (s.Contains("design")
+            && !s.Contains("designation") && !s.Contains("designer"))
+            return Role.Article;
         if (s is "color type" or "colour type" or "color" or "colour"
          or "color/type" or "type of color") return Role.TierValue;
 

@@ -8,7 +8,7 @@ import { useMemo, useRef, useEffect, useState } from 'react';
  * is instant and does not wait on the network.
  */
 export default function PriceListNav({
-  lists, selectedId, search, onSearch, onSelect, onNew, onDeleteList, busy
+  lists, loading, selectedId, search, onSearch, onSelect, onNew, onDeleteList, busy
 }) {
   const listRef = useRef(null);
   /* {x, y, list} - the right-clicked price list. Delete lives here rather than
@@ -73,7 +73,15 @@ export default function PriceListNav({
       </div>
 
       <div className="navlist" ref={listRef}>
-        {shown.length === 0 && (
+        {/* Before the first list arrives there is nothing here at all, and
+            "no list matches" would be a lie - nothing has been searched yet. */}
+        {loading && shown.length === 0 && (
+          <p className="navempty">
+            <span className="navloading">Loading price lists…</span>
+          </p>
+        )}
+
+        {!loading && shown.length === 0 && (
           <p className="navempty">
             No list matches “{search}”.
             <button className="ghost" onClick={() => onSearch('')}>Clear</button>

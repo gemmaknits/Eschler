@@ -11,6 +11,26 @@ import DesignLov from './DesignLov.jsx';
 import UomLov from './UomLov.jsx';
 import CustomerAssign from './CustomerAssign.jsx';
 
+/**
+ * True once `active` has been true CONTINUOUSLY for `ms`.
+ *
+ * A fast load should show nothing at all — an indicator that flashes up for
+ * 200ms and vanishes is worse than none, because it reads as something going
+ * wrong. This waits, so the only time anyone sees it is when the wait is real.
+ *
+ * Two seconds by default. The lists are 8,500 price lines now, and the first
+ * request after a quiet period also has to wake the server on the way through.
+ */
+function useSlow(active, ms = 2000) {
+  const [slow, setSlow] = useState(false);
+  useEffect(() => {
+    if (!active) { setSlow(false); return; }
+    const t = setTimeout(() => setSlow(true), ms);
+    return () => clearTimeout(t);
+  }, [active, ms]);
+  return slow;
+}
+
 export default function App() {
   const [lists, setLists]       = useState([]);
   const [headerId, setHeaderId] = useState(null);
@@ -26,6 +46,9 @@ export default function App() {
   // hidden by default; the header carries each list's own choice
   const [hideInactive, setHideInactive] = useState(true);
   const [showCols, setShowCols] = useState(false);
+  /* The Columns popover opens against this button rather than in the corner
+     of the window, so the panel appears where you clicked. */
+  const colBtnRef = useRef(null);
   const [navSearch, setNavSearch] = useState('');
   const [editHeader, setEditHeader] = useState(null);  // {mode:'new'} | {mode:'edit'}
   const [confirm, setConfirm]   = useState(null);      // {title, body, cta, onYes}
@@ -189,6 +212,12 @@ export default function App() {
     return [...out, ...appended];
   })();
   const inactiveCount = grid.rows.filter(r => r.active === 'N').length;
+
+  /* Indicators that only appear when the wait is long enough to notice. */
+  const slowLoad = useSlow(loading);
+  const slowBusy = useSlow(busy);
+  /* Before the first list arrives there is nothing on screen at all. */
+  const booting  = loading && lists.length === 0 && !error;
 
   /* ---- right-click: copy / insert / delete a whole line ------------------
      A grid row is a whole set - every tier, both currencies - so all three act
@@ -668,12 +697,15 @@ export default function App() {
         </button>
 
 
-        <button onClick={() => setShowCols(v => !v)}>
+        <button ref={colBtnRef} onClick={() => setShowCols(v => !v)}>
           Columns <span className="dimcount">{tiers.length}×{currencies.length}</span>
         </button>
 
         <div className="spacer" />
         {busy && <span className="saving" title="Saving…" />}
+        {/* The dot alone says "something", not "what". Once a save is taking a
+            noticeable time, say so in words. */}
+        {slowBusy && <span className="savingword">Saving…</span>}
         <div className="pick">
           <label htmlFor="empcd">User</label>
           {isUserFromUrl()
@@ -686,6 +718,7 @@ export default function App() {
       <div className="shell">
         <PriceListNav
           lists={lists}
+          loading={booting}
           selectedId={headerId}
           search={navSearch}
           onSearch={setNavSearch}
@@ -726,7 +759,23 @@ export default function App() {
                   </button>
                 </div>
               : loading
-                ? <div className="loading">Loading price lines…</div>
+                ? <div className="loading">
+                    <span>Loading price lines…</span>
+                    {/* Only once the wait is real. Says what is being waited on
+                        and why it can be slow, so nobody sits wondering whether
+                        the page has stopped. */}
+                    {slowLoad && (
+                      <div className="slow">
+                        <div className="slowbar"><span /></div>
+                        <p>
+                          Still working{header?.line_count
+                            ? <> — {header.line_count.toLocaleString()} lines on <b>{header.list_name}</b></>
+                            : null}.
+                          The first load after a quiet spell also has to wake the server.
+                        </p>
+                      </div>
+                    )}
+                  </div>
                 : <PriceGrid
                     grid={{ rows }} tiers={tiers} currencies={currencies}
                     onEditPrice={editPrice} onEditRow={editRow} onAddRow={addRow}
@@ -756,6 +805,7 @@ export default function App() {
       {showCols && (
         <ColumnsMenu
           tiers={tiers} currencies={currencies} allTiers={allTiers}
+          anchor={colBtnRef}
           onApply={applyShape} onClose={() => setShowCols(false)}
         />
       )}

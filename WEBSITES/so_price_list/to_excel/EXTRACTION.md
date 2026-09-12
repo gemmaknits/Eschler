@@ -41,10 +41,11 @@ Current numbers, for comparison after a change:
 
 | | |
 |---|---|
-| price lines | 8,613 |
+| price lines | 8,574 |
 | distinct designs | 667 |
 | sheets producing lines | 100 of 117 |
-| money cells captured | 886 of 1,138 |
+| money cells captured as PRICES | 877 of 1,138 |
+| the rest kept as NOTES | yes - see below |
 | USD prices over 100 (implausible) | 1.4% |
 
 ---
@@ -436,3 +437,43 @@ price inside a sentence - "K.Sivy reduce price to THB 480/kg (including TC for
 only this order)" - is a condition, a negotiation or a one-off, and turning it
 into a price line would put an invented number in front of a reviewer. They are
 listed instead.
+---
+
+## A price inside a sentence is a NOTE, never a price
+
+The sheets state terms in prose, and those sentences contain figures:
+
+```
+For neon color / super dark color, there is surcharge USD 0.50/m. for every article
+Photo sample 100-199 m. /color with USD 150/ colour surcharge
+1. 200-600m. => add sea freight cost USD1.35/m. based on FOB Thailand price
+Greige price :  THB 450.-/kg
+```
+
+None of those is the price of a fabric. They are surcharges, freight, one-offs
+and conditions — and lifting the figure out would put an invented price in front
+of a reviewer. `USD 150` became the price of a fabric exactly that way.
+
+So two rules, and they work together:
+
+**The figure is not taken.** A cell in a price column that reads as a sentence —
+longer than 25 characters with eight or more letters — is not read as a price.
+
+**The words are kept.** Every line of prose that mentions money is attached to
+the nearest block of prices as a note, so the reviewer reads the terms beside the
+figures they qualify. 2,099 lines now carry a surcharge or freight condition
+that was previously going nowhere at all.
+
+### The exception: prose that STATES a price
+
+PT Busana writes its price as `USD 2.95/ m for White and Black colour`. That is a
+sentence, but the money leads and the rest qualifies it. CENTER writes
+`Photo sample 100-199 m. /color with USD 150/ colour surcharge`, where the money
+arrives late and belongs to the surcharge.
+
+**Where the figure sits is what separates them**: a statement of a price opens
+with it, within the first dozen characters. Without that exception PT Busana lost
+its only two prices.
+
+`notes` is `nvarchar(2000)` because these terms run long and were being cut
+mid-sentence at 500.

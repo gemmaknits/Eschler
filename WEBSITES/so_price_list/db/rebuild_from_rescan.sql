@@ -116,7 +116,7 @@ SELECT header_id, set_no, line_no,
             ISNULL(block_note, N'')
           + CASE WHEN block_note IS NOT NULL AND remark IS NOT NULL
                  THEN N' -- ' ELSE N'' END
-          + ISNULL(remark, N''))), 500),
+          + ISNULL(remark, N''))), 2000),
        @who
 FROM   mapped;
 

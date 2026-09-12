@@ -579,6 +579,22 @@ static class Scan
                     && cellMin == ownBand.Min)
                     continue;
 
+                /* A SENTENCE in a price column is not a price.
+
+                   CENTER states "Photo sample 100-199 m. /color with USD 150/
+                   colour surcharge" in a cell under a price heading, and the
+                   150 was coming through as the price of a fabric. A surcharge,
+                   a condition or an explanation keeps its words - it is picked
+                   up as a note below - but its figure is never lifted out and
+                   called a price.
+
+                   Length and letters tell them apart: real prices are short
+                   ("USD4.93/m.", "THB 216.00", "$ 2.11 /m.", "200-599 m = 4.90/
+                   m" - four letters at most). */
+                var cellText = grid[i][c] ?? "";
+                if (cellText.Length > 25 && cellText.Count(char.IsLetter) >= 8
+                    && !LeadsWithMoney(cellText)) continue;
+
                 /* "200-599 m = 4.90/ m" - the band and the price in one cell.
                    Hanes Global writes its entire price column that way. The
                    cell carries its own band, so it overrides the row's. */
@@ -643,6 +659,10 @@ static class Scan
            block above it. */
         AttachFootnotes(grid, rows, cols, r0, outp, sheetVoice);
 
+        /* and every remaining line of prose that mentions money, given to the
+           nearest block - kept as a note, never read as a price */
+        AttachLooseProse(grid, rows, cols, r0, outp);
+
         return outp;
     }
 
@@ -687,6 +707,83 @@ static class Scan
                               ? joined : l.BlockNote + " // " + joined;
         }
     }
+
+    /* A price written inside a sentence is still worth keeping - as a NOTE.
+
+           on 9th April 2020 K. Sivy quoted ... USD3.13/m. to add air freight
+           cost USD0.40/m. (FOB BKK USD2.73 + air freight cost USD0.40/m.)
+           Greige price :  THB 450.-/kg
+           hydrophilic = surcharge US$0.50/m.
+
+       None of these is a base price: they are conditions, surcharges, one-offs
+       and negotiations, and turning them into price lines would put an invented
+       figure in front of a reviewer. But dropping them loses terms that change
+       what a price means.
+
+       So every line of prose carrying money that did not become a price is
+       attached to the nearest block of prices, and the reviewer reads it beside
+       the figures it qualifies. Nothing is inferred from it. */
+    static void AttachLooseProse(string[][] grid, int rows, int cols, int r0, List<Line> outp)
+    {
+        if (outp.Count == 0) return;
+
+        // where each block's prices sit, so prose can be given to the nearest
+        var blocks = outp.GroupBy(l => l.HeaderRow)
+                         .Select(g => (Key: g.Key,
+                                       First: g.Min(l => l.Row) - r0,
+                                       Last: g.Max(l => l.Row) - r0,
+                                       Lines: g.ToList()))
+                         .OrderBy(b => b.First)
+                         .ToList();
+
+        var priceRows = new HashSet<int>(outp.Select(l => l.Row - r0));
+
+        for (int i = 0; i < rows; i++)
+        {
+            if (priceRows.Contains(i)) continue;              // it became a price
+
+            var text = string.Join(" ", grid[i].Where(v => !string.IsNullOrWhiteSpace(v))).Trim();
+            if (text.Length < 12) continue;
+            if (text.Count(char.IsLetter) < 8) continue;      // prose, not a stray figure
+            if (!MentionsMoney(text)) continue;
+
+            /* the block whose prices are closest to this line */
+            var best = blocks.OrderBy(b => i >= b.First && i <= b.Last ? 0
+                                         : Math.Min(Math.Abs(i - b.First), Math.Abs(i - b.Last)))
+                             .First();
+
+            var note = text.Length > 200 ? text.Substring(0, 200) : text;
+            foreach (var l in best.Lines)
+            {
+                if (!string.IsNullOrEmpty(l.BlockNote) && l.BlockNote.Contains(note)) continue;
+                l.BlockNote = string.IsNullOrWhiteSpace(l.BlockNote)
+                              ? note : l.BlockNote + " // " + note;
+            }
+        }
+    }
+
+    /* Does the cell STATE a price, or mention one in passing?
+
+       PT Busana writes its price as "USD 2.95/ m for White and Black colour" -
+       prose, but the money leads and the rest is qualification. CENTER writes
+       "Photo sample 100-199 m. /color with USD 150/ colour surcharge", where
+       the money arrives late and belongs to a surcharge, not to the fabric.
+
+       Where the figure sits is what separates them: a statement of a price
+       opens with it. */
+    static bool LeadsWithMoney(string text)
+    {
+        var m = System.Text.RegularExpressions.Regex.Match(
+            text ?? "", @"(\$|usd|us\$|thb|baht)\s*\d",
+            System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+        return m.Success && m.Index <= 12;
+    }
+
+    /* A currency mark or word standing next to a figure. */
+    static bool MentionsMoney(string text) =>
+        System.Text.RegularExpressions.Regex.IsMatch(
+            text, @"(\$|usd|us\$|thb|baht|฿)\s*\d|\d[\d,]*(\.\d+)?\s*(usd|thb|baht|฿)",
+            System.Text.RegularExpressions.RegexOptions.IgnoreCase);
 }
 
 static partial class ScanHelpers { }

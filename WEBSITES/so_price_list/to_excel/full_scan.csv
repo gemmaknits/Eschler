@@ -1824,12 +1824,12 @@ CENTER PRICE USD for internal,687,14,255605,RACE 02,"82% PES, 18% ELASTANE",143 
 CENTER PRICE USD for internal,689,14,255614,SAHARA,"90% PA, 10% ELASTANE",145-155 CM,140-150,66-74,3000 m,500,500,,All_colors,USD,2.95,,,DATE : 4th Mar 2020
 CENTER PRICE USD for internal,693,14,255640,LUNA TM,100% PA,155 - 165 cm.,150 - 160 cm.,23 - 28 g/m2,"3,000m",200-600,200,600,PFE/PFD,USD,1.45,,,DATE : 4th Mar 2020
 CENTER PRICE USD for internal,693,14,255640,LUNA TM,100% PA,155 - 165 cm.,150 - 160 cm.,23 - 28 g/m2,"3,000m",200-600,200,600,All_colors,USD,1.95,,,DATE : 4th Mar 2020
-CENTER PRICE USD for internal,693,14,255640,LUNA TM,100% PA,155 - 165 cm.,150 - 160 cm.,23 - 28 g/m2,"3,000m",200-600,200,600,PFE/PFD,THB,0.2030,,,DATE : 4th Mar 2020
-CENTER PRICE USD for internal,693,14,255640,LUNA TM,100% PA,155 - 165 cm.,150 - 160 cm.,23 - 28 g/m2,"3,000m",200-600,200,600,All_colors,THB,0.2030,,,DATE : 4th Mar 2020
+CENTER PRICE USD for internal,693,14,255640,LUNA TM,100% PA,155 - 165 cm.,150 - 160 cm.,23 - 28 g/m2,"3,000m",200-600,200,600,PFE/PFD,THB,2030,,,DATE : 4th Mar 2020
+CENTER PRICE USD for internal,693,14,255640,LUNA TM,100% PA,155 - 165 cm.,150 - 160 cm.,23 - 28 g/m2,"3,000m",200-600,200,600,All_colors,THB,2030,,,DATE : 4th Mar 2020
 CENTER PRICE USD for internal,694,14,255640,LUNA TM,100% PA,155 - 165 cm.,150 - 160 cm.,23 - 28 g/m2,"3,000m","601-2,000",601,2000,PFE/PFD,USD,1.2,,,DATE : 4th Mar 2020
 CENTER PRICE USD for internal,694,14,255640,LUNA TM,100% PA,155 - 165 cm.,150 - 160 cm.,23 - 28 g/m2,"3,000m","601-2,000",601,2000,All_colors,USD,1.55,,,DATE : 4th Mar 2020
-CENTER PRICE USD for internal,694,14,255640,LUNA TM,100% PA,155 - 165 cm.,150 - 160 cm.,23 - 28 g/m2,"3,000m","601-2,000",601,2000,PFE/PFD,THB,0.2030,,,DATE : 4th Mar 2020
-CENTER PRICE USD for internal,694,14,255640,LUNA TM,100% PA,155 - 165 cm.,150 - 160 cm.,23 - 28 g/m2,"3,000m","601-2,000",601,2000,All_colors,THB,0.2030,,,DATE : 4th Mar 2020
+CENTER PRICE USD for internal,694,14,255640,LUNA TM,100% PA,155 - 165 cm.,150 - 160 cm.,23 - 28 g/m2,"3,000m","601-2,000",601,2000,PFE/PFD,THB,2030,,,DATE : 4th Mar 2020
+CENTER PRICE USD for internal,694,14,255640,LUNA TM,100% PA,155 - 165 cm.,150 - 160 cm.,23 - 28 g/m2,"3,000m","601-2,000",601,2000,All_colors,THB,2030,,,DATE : 4th Mar 2020
 CENTER PRICE USD for internal,695,14,255640,LUNA TM,100% PA,155 - 165 cm.,150 - 160 cm.,23 - 28 g/m2,"3,000m","2,001-5,000",2001,5000,PFE/PFD,USD,1.15,,,DATE : 4th Mar 2020
 CENTER PRICE USD for internal,695,14,255640,LUNA TM,100% PA,155 - 165 cm.,150 - 160 cm.,23 - 28 g/m2,"3,000m","2,001-5,000",2001,5000,All_colors,USD,1.48,,,DATE : 4th Mar 2020
 CENTER PRICE USD for internal,697,14,255691BA,ALPHA LUREX TM 5691BA,"65% PA, 35% Metallised PES ( LUREX )",140 - 150 cm.,135 - 145 cm.,33 - 38 g/m2,"3,000m.",200-600,200,600,PFE/PFD,USD,2.25,,,DATE : 4th Mar 2020
@@ -3537,10 +3537,8 @@ Aronne Faccio,36,32,254804,PA Power Net Elastic Tuell,"86% PA, 14% PUE",142 - 14
 Aronne Faccio,36,32,254804,PA Power Net Elastic Tuell,"86% PA, 14% PUE",142 - 147 cm.,,45 - 50 g/m2,,"2,501 m.+",2501,,Light,USD,2.91,,,CIF Shanghai by air
 Aronne Faccio,36,32,254804,PA Power Net Elastic Tuell,"86% PA, 14% PUE",142 - 147 cm.,,45 - 50 g/m2,,"2,501 m.+",2501,,Medium,USD,3.22,,,CIF Shanghai by air
 Aronne Faccio,36,32,254804,PA Power Net Elastic Tuell,"86% PA, 14% PUE",142 - 147 cm.,,45 - 50 g/m2,,"2,501 m.+",2501,,Dark,USD,3.22,,,CIF Shanghai by air
-Aronne Faccio,47,32,254804,e-mail: janyuma@eschler.co.th,"86% PA, 14% PUE",142 - 147 cm.,,45 - 50 g/m2,,,0,,White,USD,0.8605735079511,,,CIF Shanghai by air
-Aronne Faccio,47,32,254804,e-mail: janyuma@eschler.co.th,"86% PA, 14% PUE",142 - 147 cm.,,45 - 50 g/m2,,,0,,Light,USD,0.8605735079511,,,CIF Shanghai by air
-Aronne Faccio,48,32,254804,e-mail: janyuma@eschler.co.th,"86% PA, 14% PUE",142 - 147 cm.,,45 - 50 g/m2,,,0,,White,USD,0.8605735079512,,,CIF Shanghai by air
-Aronne Faccio,48,32,254804,e-mail: janyuma@eschler.co.th,"86% PA, 14% PUE",142 - 147 cm.,,45 - 50 g/m2,,,0,,Light,USD,0.8605735079512,,,CIF Shanghai by air
+Aronne Faccio,44,32,254804,26th February 2021,"86% PA, 14% PUE",142 - 147 cm.,,45 - 50 g/m2,,,0,,White,USD,3213,,,CIF Shanghai by air
+Aronne Faccio,44,32,254804,26th February 2021,"86% PA, 14% PUE",142 - 147 cm.,,45 - 50 g/m2,,,0,,Light,USD,3213,,,CIF Shanghai by air
 Aronne Faccio,58,56,254804,ELASTIC TULLE,"86% PA, 14% ELASTANE",,142 - 147 cm.,45 - 50 g/m2,,200-600m.,200,600,PFE/PFD,USD,3,,,Price : FOB Thailand USD/meter
 Aronne Faccio,58,56,254804,ELASTIC TULLE,"86% PA, 14% ELASTANE",,142 - 147 cm.,45 - 50 g/m2,,200-600m.,200,600,PFE/PFD,THB,3.00,,,Price : FOB Thailand USD/meter
 Aronne Faccio,58,56,254804,ELASTIC TULLE,"86% PA, 14% ELASTANE",,142 - 147 cm.,45 - 50 g/m2,,200-600m.,200,600,All_colors,THB,3.60,,,Price : FOB Thailand USD/meter
@@ -3983,7 +3981,9 @@ Biga Thailand ,9,1,257243AA,,20% METALLISSED PES (LUREX),165 - 175,160 - 170,33 
 Biga Thailand ,9,1,257243AA,,20% METALLISSED PES (LUREX),165 - 175,160 - 170,33 - 37,200 kgs,"2,000 - 4,999 m.",2000,4999,All_colors,THB,93,12/11/2024,,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,10,1,257243AA,,20% METALLISSED PES (LUREX),165 - 175,160 - 170,33 - 37,200 kgs,"5,000 m. +",5000,,PFE/PFD,THB,69,12/11/2024,,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,10,1,257243AA,,20% METALLISSED PES (LUREX),165 - 175,160 - 170,33 - 37,200 kgs,"5,000 m. +",5000,,All_colors,THB,89,12/11/2024,,BIGA THAILAND PRICE : UPDATED ON 25/06/21
+Biga Thailand ,11,1,257135AA/11,,20% METALLISSED PES (LUREX),165 - 175,160 - 170,33 - 37,150 kgs.,,150,,Greige,THB,890,2/6/2023,Quoted Greige price to Bichoff Lanka,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,12,1,257094AA/14,,20% METALLISSED PES (LUREX),165 - 175,160 - 170,33 - 37,600 kgs.,,600,,Greige,THB,300,9/3/2023,K.Sivy quoted Price for K.Cherry by Line 9 Mar 23,BIGA THAILAND PRICE : UPDATED ON 25/06/21
+Biga Thailand ,13,1,257094AA/14,,20% METALLISSED PES (LUREX),165 - 175,160 - 170,33 - 37,600 kgs.,,600,,Greige,THB,335,27/7/2023,K.Muay's inquiry,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,14,1,257094AA/14,,20% METALLISSED PES (LUREX),165 - 175,160 - 170,33 - 37,600 kgs.,200 - 499 m.,200,499,PFE/PFD,THB,87.00,27/7/2023,,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,14,1,257094AA/14,,20% METALLISSED PES (LUREX),165 - 175,160 - 170,33 - 37,600 kgs.,200 - 499 m.,200,499,All_colors,THB,108.00,27/7/2023,,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,15,1,257094AA/14,,20% METALLISSED PES (LUREX),165 - 175,160 - 170,33 - 37,600 kgs.,"500 - 1,999 m.",500,1999,PFE/PFD,THB,73.00,27/7/2023,,BIGA THAILAND PRICE : UPDATED ON 25/06/21
@@ -4072,6 +4072,7 @@ Biga Thailand ,83,1,257182,,100% PA,145 - 155,140 - 150,38 - 41,"3,000 m.","2,00
 Biga Thailand ,83,1,257182,,100% PA,145 - 155,140 - 150,38 - 41,"3,000 m.","2,000 - 4,999 m.",2000,4999,All_colors,THB,73.00,27/7/2023,,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,84,1,257182,,100% PA,145 - 155,140 - 150,38 - 41,"3,000 m.","5,000 m. +",5000,,PFE/PFD,THB,53.00,27/7/2023,,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,84,1,257182,,100% PA,145 - 155,140 - 150,38 - 41,"3,000 m.","5,000 m. +",5000,,All_colors,THB,71.00,27/7/2023,,BIGA THAILAND PRICE : UPDATED ON 25/06/21
+Biga Thailand ,85,1,257162,,100% PA,145 - 155,140 - 150,38 - 41,"3,000 m.",,3000,,Greige,THB,840,27/7/2023,,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,86,1,257162,,100% PA,145 - 155,140 - 150,38 - 41,"3,000 m.",200 - 499 m.,200,499,PFE/PFD,THB,169.00,27/7/2023,,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,86,1,257162,,100% PA,145 - 155,140 - 150,38 - 41,"3,000 m.",200 - 499 m.,200,499,All_colors,THB,195.00,27/7/2023,,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,87,1,257162,,100% PA,145 - 155,140 - 150,38 - 41,"3,000 m.","500 - 1,999 m.",500,1999,PFE/PFD,THB,147.00,27/7/2023,,BIGA THAILAND PRICE : UPDATED ON 25/06/21
@@ -4079,12 +4080,14 @@ Biga Thailand ,87,1,257162,,100% PA,145 - 155,140 - 150,38 - 41,"3,000 m.","500 
 Biga Thailand ,88,1,257162,,100% PA,145 - 155,140 - 150,38 - 41,"3,000 m.","2,000 m. +",2000,,PFE/PFD,THB,140.00,27/7/2023,,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,88,1,257162,,100% PA,145 - 155,140 - 150,38 - 41,"3,000 m.","2,000 m. +",2000,,All_colors,THB,160.00,27/7/2023,,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,89,1,257154,,"74% PA, 26% ELASTANE",150 -160,145 - 155,152 - 168,800 kgs.,,800,,Greige,THB,415,6/2/2024,Quoted for Bischoff Lanka (Third Love),BIGA THAILAND PRICE : UPDATED ON 25/06/21
+Biga Thailand ,90,1,257144,,"74% PA, 26% ELASTANE",150 -160,145 - 155,152 - 168,150 kgs.,,150,,Greige,THB,515,31/7/2023,,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,91,1,257144,,"74% PA, 26% ELASTANE",150 -160,145 - 155,152 - 168,"3,000 m.",200 - 599 m.,200,599,PFE/PFD,THB,55.00,31/7/2023,,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,91,1,257144,,"74% PA, 26% ELASTANE",150 -160,145 - 155,152 - 168,"3,000 m.",200 - 599 m.,200,599,All_colors,THB,78.00,31/7/2023,,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,92,1,257144,,"74% PA, 26% ELASTANE",150 -160,145 - 155,152 - 168,"3,000 m.","600 - 1,999 m.",600,1999,PFE/PFD,THB,47.00,31/7/2023,,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,92,1,257144,,"74% PA, 26% ELASTANE",150 -160,145 - 155,152 - 168,"3,000 m.","600 - 1,999 m.",600,1999,All_colors,THB,68.00,31/7/2023,,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,93,1,257144,,"74% PA, 26% ELASTANE",150 -160,145 - 155,152 - 168,"3,000 m.","2,000 m. +",2000,,PFE/PFD,THB,45.00,31/7/2023,,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,93,1,257144,,"74% PA, 26% ELASTANE",150 -160,145 - 155,152 - 168,"3,000 m.","2,000 m. +",2000,,All_colors,THB,65.00,31/7/2023,,BIGA THAILAND PRICE : UPDATED ON 25/06/21
+Biga Thailand ,94,1,257143,,"74% PA, 26% ELASTANE",150 -160,145 - 155,152 - 168,"3,000 m.",,3000,,Greige,THB,525,27/7/2023,,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,95,1,257143,,"74% PA, 26% ELASTANE",150 -160,145 - 155,152 - 168,"3,000 m.",200 - 599 m.,200,599,PFE/PFD,THB,50.00,27/7/2023,,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,95,1,257143,,"74% PA, 26% ELASTANE",150 -160,145 - 155,152 - 168,"3,000 m.",200 - 599 m.,200,599,All_colors,THB,68.00,27/7/2023,,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,96,1,257143,,"74% PA, 26% ELASTANE",150 -160,145 - 155,152 - 168,"3,000 m.","600 - 1,999 m.",600,1999,PFE/PFD,THB,43.00,27/7/2023,,BIGA THAILAND PRICE : UPDATED ON 25/06/21
@@ -4105,6 +4108,7 @@ Biga Thailand ,105,1,257133,,"74% PA, 26% ELASTANE",150 -160,145 - 155,152 - 168
 Biga Thailand ,105,1,257133,,"74% PA, 26% ELASTANE",150 -160,145 - 155,152 - 168,"3,000 m.","500 - 1,999 m.",500,1999,All_colors,THB,165.00,27/7/2023,not accept lower than 500 m.,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,106,1,257133,,"74% PA, 26% ELASTANE",150 -160,145 - 155,152 - 168,"3,000 m.","2,000 -m. +",2000,,PFE/PFD,THB,125.00,27/7/2023,,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,106,1,257133,,"74% PA, 26% ELASTANE",150 -160,145 - 155,152 - 168,"3,000 m.","2,000 -m. +",2000,,All_colors,THB,158.00,27/7/2023,,BIGA THAILAND PRICE : UPDATED ON 25/06/21
+Biga Thailand ,107,1,257131,,"74% PA, 26% ELASTANE",150 -160,145 - 155,152 - 168,"3,000 m.",,3000,,Greige,THB,415,27/7/2023,,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,108,1,257131,,"74% PA, 26% ELASTANE",150 -160,145 - 155,152 - 168,"3,000 m.",200 - 599 m.,200,599,PFE/PFD,THB,72.00,27/7/2023,K.Muay's inquiry,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,108,1,257131,,"74% PA, 26% ELASTANE",150 -160,145 - 155,152 - 168,"3,000 m.",200 - 599 m.,200,599,All_colors,THB,88.00,27/7/2023,K.Muay's inquiry,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,109,1,257131,,"74% PA, 26% ELASTANE",150 -160,145 - 155,152 - 168,"3,000 m.","600 - 1,999 m.",600,1999,PFE/PFD,THB,63.00,27/7/2023,,BIGA THAILAND PRICE : UPDATED ON 25/06/21
@@ -4116,6 +4120,7 @@ Biga Thailand ,112,1,257131,,"89%PA, 11% ELASTANE",170 - 180,165 - 175,40 - 54,"
 Biga Thailand ,113,1,257128,,"89%PA, 11% ELASTANE",170 - 180,165 - 175,40 - 54,"3,000 m.",200 - 600 m.,200,600,All_colors,THB,110.00,31/1/2023,K.Sivy quoted Price for Bischoff Collection_Jan.2023,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,114,1,257128,,"89%PA, 11% ELASTANE",170 - 180,165 - 175,40 - 54,"3,000 m.","601 - 2,000 m.",601,2000,All_colors,THB,95.00,31/1/2023,K.Sivy quoted Price for Bischoff Collection_Jan.2023,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,115,1,257128,,"89%PA, 11% ELASTANE",170 - 180,165 - 175,40 - 54,"3,000 m.","2,001 m. +",2001,,All_colors,THB,85.00,31/1/2023,K.Sivy quoted Price for Bischoff Collection_Jan.2023,BIGA THAILAND PRICE : UPDATED ON 25/06/21
+Biga Thailand ,116,1,257119,,"89%PA, 11% ELASTANE",170 - 180,165 - 175,40 - 54,"3,000 m.",,3000,,Greige,THB,270,27/7/2023,,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,117,1,257119,,"89%PA, 11% ELASTANE",170 - 180,165 - 175,40 - 54,"3,000 m.",200 - 499 m.,200,499,PFE/PFD,THB,145.00,27/7/2023,K.Muay's inquiry,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,117,1,257119,,"89%PA, 11% ELASTANE",170 - 180,165 - 175,40 - 54,"3,000 m.",200 - 499 m.,200,499,All_colors,THB,215.00,27/7/2023,K.Muay's inquiry,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,118,1,257119,,"89%PA, 11% ELASTANE",170 - 180,165 - 175,40 - 54,"3,000 m.","500 - 1,999 m.",500,1999,PFE/PFD,THB,122.00,27/7/2023,,BIGA THAILAND PRICE : UPDATED ON 25/06/21
@@ -4182,12 +4187,14 @@ Biga Thailand ,163,1,256530,,"70% Post-consumer Recycled Polyester, 30% Coventio
 Biga Thailand ,164,1,256530,,"70% Post-consumer Recycled Polyester, 30% Coventional Elastane",170 - 180,165 - 175,40 - 54,3.000 m.,200-600m.,200,600,All_colors,THB,75.00,25.06.21,Quoted by K.Sivy at office Asoke on 25.06.21,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,165,1,256530,,"70% Post-consumer Recycled Polyester, 30% Coventional Elastane",170 - 180,165 - 175,40 - 54,3.000 m.,"601-2,000m.",601,2000,All_colors,THB,65.00,25.06.21,Quoted by K.Sivy at office Asoke on 25.06.21,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,166,1,256530,,"70% Post-consumer Recycled Polyester, 30% Coventional Elastane",170 - 180,165 - 175,40 - 54,3.000 m.,"2,001m.+",2001,,All_colors,THB,55.00,25.06.21,Quoted by K.Sivy at office Asoke on 25.06.21,BIGA THAILAND PRICE : UPDATED ON 25/06/21
+Biga Thailand ,167,1,256530,,"70% Post-consumer Recycled Polyester, 30% Coventional Elastane",170 - 180,165 - 175,40 - 54,200 kgs.,,200,,Greige,THB,400,2/8/2023,Quoted by K.Sivy at office Asoke on 2.08.23,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,168,1,256530,,"70% Post-consumer Recycled Polyester, 30% Coventional Elastane",170 - 180,165 - 175,40 - 54,"3,000 m.",200 - 599 m.,200,599,PFE/PFD,THB,50.00,2/8/2023,Quoted by K.Sivy at office Asoke on 2.08.23,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,168,1,256530,,"70% Post-consumer Recycled Polyester, 30% Coventional Elastane",170 - 180,165 - 175,40 - 54,"3,000 m.",200 - 599 m.,200,599,All_colors,THB,65.00,2/8/2023,Quoted by K.Sivy at office Asoke on 2.08.23,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,169,1,256530,,"70% Post-consumer Recycled Polyester, 30% Coventional Elastane",170 - 180,165 - 175,40 - 54,"3,000 m.","600 - 1,999 m.",600,1999,PFE/PFD,THB,42.00,2/8/2023,Quoted by K.Sivy at office Asoke on 2.08.23,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,169,1,256530,,"70% Post-consumer Recycled Polyester, 30% Coventional Elastane",170 - 180,165 - 175,40 - 54,"3,000 m.","600 - 1,999 m.",600,1999,All_colors,THB,55.00,2/8/2023,Quoted by K.Sivy at office Asoke on 2.08.23,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,170,1,256530,,"70% Post-consumer Recycled Polyester, 30% Coventional Elastane",170 - 180,165 - 175,40 - 54,"3,000 m.","2,000 m. +",2000,,PFE/PFD,THB,40.00,2/8/2023,Quoted by K.Sivy at office Asoke on 2.08.23,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,170,1,256530,,"70% Post-consumer Recycled Polyester, 30% Coventional Elastane",170 - 180,165 - 175,40 - 54,"3,000 m.","2,000 m. +",2000,,All_colors,THB,52.00,2/8/2023,Quoted by K.Sivy at office Asoke on 2.08.23,BIGA THAILAND PRICE : UPDATED ON 25/06/21
+Biga Thailand ,171,1,256530,,"70% Post-consumer Recycled Polyester, 30% Coventional Elastane",170 - 180,165 - 175,40 - 54,200 kgs.,,200,,Greige,THB,350,1/2/2024,Quoted by K.Sivy at office Asoke on 1.02.24,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,172,1,256530,,"70% Post-consumer Recycled Polyester, 30% Coventional Elastane",170 - 180,165 - 175,40 - 54,"3,000 m.",200 - 599 m.,200,599,PFE/PFD,THB,46.00,1/2/2024,Quoted by K.Sivy at office Asoke on 1.02.24,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,172,1,256530,,"70% Post-consumer Recycled Polyester, 30% Coventional Elastane",170 - 180,165 - 175,40 - 54,"3,000 m.",200 - 599 m.,200,599,All_colors,THB,65.00,1/2/2024,Quoted by K.Sivy at office Asoke on 1.02.24,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,173,1,256530,,"70% Post-consumer Recycled Polyester, 30% Coventional Elastane",170 - 180,165 - 175,40 - 54,"3,000 m.","600 - 1,999 m.",600,1999,PFE/PFD,THB,40.00,1/2/2024,Quoted by K.Sivy at office Asoke on 1.02.24,BIGA THAILAND PRICE : UPDATED ON 25/06/21
@@ -4345,6 +4352,7 @@ Biga Thailand ,261,1,255584,,"68% PA, 32% ELASTANE",177 - 187 cm.,172 - 182 cm.,
 Biga Thailand ,261,1,255584,,"68% PA, 32% ELASTANE",177 - 187 cm.,172 - 182 cm.,47 - 52 g/m2,"1,500m.","600-2,000m.",600,2000,All_colors,THB,74,9/1/2023,K.Sivy quoted at Asoke office (Requted price by K.Rus for new Collection),BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,262,1,255584,,"68% PA, 32% ELASTANE",177 - 187 cm.,172 - 182 cm.,47 - 52 g/m2,"1,500m.","2,001-5,000m.",2001,5000,PFE/PFD,THB,50,9/1/2023,K.Sivy quoted at Asoke office (Requted price by K.Rus for new Collection),BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,262,1,255584,,"68% PA, 32% ELASTANE",177 - 187 cm.,172 - 182 cm.,47 - 52 g/m2,"1,500m.","2,001-5,000m.",2001,5000,All_colors,THB,70,9/1/2023,K.Sivy quoted at Asoke office (Requted price by K.Rus for new Collection),BIGA THAILAND PRICE : UPDATED ON 25/06/21
+Biga Thailand ,263,1,255560,,"68% PA, 32% ELASTANE",177 - 187 cm.,172 - 182 cm.,47 - 52 g/m2,200 kgs.,,200,,Greige,THB,425,2/8/2023,K.Sivy quoted at Asoke office,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,264,1,255560,,"68% PA, 32% ELASTANE",177 - 187 cm.,172 - 182 cm.,47 - 52 g/m2,"3,000 m.",200 - 599 m.,200,599,PFE/PFD,THB,46.00,2/8/2023,,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,264,1,255560,,"68% PA, 32% ELASTANE",177 - 187 cm.,172 - 182 cm.,47 - 52 g/m2,"3,000 m.",200 - 599 m.,200,599,All_colors,THB,59.00,2/8/2023,,BIGA THAILAND PRICE : UPDATED ON 25/06/21
 Biga Thailand ,265,1,255560,,"68% PA, 32% ELASTANE",177 - 187 cm.,172 - 182 cm.,47 - 52 g/m2,"3,000 m.","600 - 1,999 m.",600,1999,PFE/PFD,THB,39.00,2/8/2023,,BIGA THAILAND PRICE : UPDATED ON 25/06/21
@@ -4744,8 +4752,8 @@ BIGA Lanka greige & PFD ,111,5,205026,,,,,,3000.00,,3000,,Greige,USD,11.60,19/1/
 BIGA Lanka greige & PFD ,114,5,201173,,,,,,3000.00,,3000,,PFD,USD,25,19/1/2023,,For customer
 BIGA Lanka greige & PFD ,115,5,201173,,,,,,3000.00,,3000,,PFD,USD,2.50,19/1/2023,,For customer
 BIGA Lanka greige & PFD ,116,5,205367,,,,,,3000.00,,3000,,Greige,USD,6.20,19/1/2023,,For customer
+BIGA Lanka greige & PFD ,125,5,255367,,,,,,increase.00,,0,,Greige,USD,15.95,19/1/2023,,For customer
 BIGA Lanka greige & PFD ,160,133,205747,,,,,,,,0,,All_colors,USD,96.77,,550.00,Offer Price & No development
-BIGA Lanka greige & PFD ,164,133,205747,,,,,,,,0,,All_colors,THB,0.255570,,280.00,Offer Price & No development
 BIGA Lanka greige & PFD ,168,133,205747,,,,,,,,0,,All_colors,THB,8515,,,Offer Price & No development
 BIGA Lanka greige & PFD ,169,133,205747,,,,,,,,0,,All_colors,THB,1605,,,Offer Price & No development
 BIGA Lanka greige & PFD ,170,133,205747,,,,,,,,0,,All_colors,THB,1055,,,Offer Price & No development
@@ -5274,6 +5282,9 @@ Bodywear,6,4,255028,POWER MESH,"75% PA, 25% ELASTANE",185 - 190 cm.,180 - 185 cm
 Bodywear,7,4,255028,POWER MESH,"75% PA, 25% ELASTANE",185 - 190 cm.,180 - 185 cm.,95 - 105 g/m2,"3,000m.","2,001-5,000m.",2001,5000,PFE/PFD,THB,148,,,Center Price List THB /meter in year 2017 : K. Sivy OK to keep the above price on 12/09/2023
 Bodywear,7,4,255028,POWER MESH,"75% PA, 25% ELASTANE",185 - 190 cm.,180 - 185 cm.,95 - 105 g/m2,"3,000m.","2,001-5,000m.",2001,5000,All_colors,THB,170,,,Center Price List THB /meter in year 2017 : K. Sivy OK to keep the above price on 12/09/2023
 Bodywear,12,10,255123AA/78,PES CHARMEUSE TM BO,100%PES,165-170cm,160-165cm,105-110g/m2,"3,000m.",500m.,500,,All_colors,THB,105,,,Price : THB /meter exclude VAT 7%
+Brandix,4,3,255616,,,,,,3000,,3000,,All_colors,USD,3.80,,For CK,Yield
+Brandix,5,3,255616,,,,,,3000,,3000,,All_colors,USD,3.60,,,Yield
+Brandix,6,3,255616,,,,,,3000,,3000,,All_colors,USD,3.50,,,Yield
 Cerie ,6,4,254622,PA MARQUISETTE TM SOFT,"100% PA,",150 - 155 cm.,145 - 150 cm.,45 - 50 g/m2,"3,000 m.",200 m.,200,,All_colors,USD,2.05,,,Price : FOB Bangkok USD/meter
 Cerie ,7,4,254622,PA MARQUISETTE TM SOFT,"100% PA,",150 - 155 cm.,145 - 150 cm.,45 - 50 g/m2,"3,000 m.",600 m.,600,,All_colors,USD,1.75,,,Price : FOB Bangkok USD/meter
 Cerie ,8,4,254622,PA MARQUISETTE TM SOFT,"100% PA,",150 - 155 cm.,145 - 150 cm.,45 - 50 g/m2,"3,000 m.","2,000 m. +",2000,,All_colors,USD,1.65,,,Price : FOB Bangkok USD/meter
@@ -5295,29 +5306,78 @@ Cerie ,17,12,254622,PA MARQUISETTE,100% PA,150 - 155 cm.,145 - 150 cm.,45 - 50 g
 Cerie ,17,12,254622,PA MARQUISETTE,100% PA,150 - 155 cm.,145 - 150 cm.,45 - 50 g/m2,100,"2,001-5,000m.",2001,5000,All_colors,THB,48,,,Eschler to Bischoff THAILAND
 Cerie ,22,12,254622,PA MARQUISETTE,100% PA,150 - 155 cm.,145 - 150 cm.,45 - 50 g/m2,1000,,1000,,Greige,THB,3000,,Term : Ex-work,Eschler to Bischoff THAILAND
 Cerie ,22,12,254622,PA MARQUISETTE,100% PA,150 - 155 cm.,145 - 150 cm.,45 - 50 g/m2,1000,,1000,,Greige,THB,270,,Term : Ex-work,Eschler to Bischoff THAILAND
-Chief You,31,2,255539,PES VOILE 150 cm.,100% PES,145 - 155 cm.,140 - 150 cm.,33 - 38 g/m2,"3,000m.",200-600m.,200,600,PFE/PFD,USD,1.45,2/6/2025,Valid witnin 6 months on 31st July 2025,All dye colors
-Chief You,32,2,255539,Offering to similar as FNY mesh (Nude col.),100% PES,145 - 155 cm.,140 - 150 cm.,33 - 38 g/m2,"3,000m.","601-2,000m.",601,2000,PFE/PFD,USD,1.15,2/6/2025,,All dye colors
-Chief You,33,2,255539,Offering to similar as FNY mesh (Nude col.),100% PES,145 - 155 cm.,140 - 150 cm.,33 - 38 g/m2,"3,000m.","2,001-5,000m.",2001,5000,PFE/PFD,USD,1.05,2/6/2025,,All dye colors
-Chief You,34,2,255678AA/11,CHARLOTTE TM SOFT,100% PES,150 - 160 cm.,145-155 cm.,33 - 38 g/m2,"3,000m.",200-600m.,200,600,PFE/PFD,USD,1.70,2/6/2025,Valid witnin 6 months on 31st July 2025,All dye colors
-Chief You,35,2,255678AA/11,Offering to similar as FNG mesh (Off White col.),100% PES,150 - 160 cm.,145-155 cm.,33 - 38 g/m2,"3,000m.","601-2,000m.",601,2000,PFE/PFD,USD,1.38,2/6/2025,,All dye colors
-Chief You,36,2,255678AA/11,Offering to similar as FNG mesh (Off White col.),100% PES,150 - 160 cm.,145-155 cm.,33 - 38 g/m2,"3,000m.","2,001-5,000m.",2001,5000,PFE/PFD,USD,1.25,2/6/2025,,All dye colors
-Chief You,37,2,255776AA/11,RECYCLE TORINO 35,100% Recycled PES,155 - 165 cm.,150 - 160 cm.,20 - 25 g/m2,"3,000m.",200-599 m.,200,599,PFE/PFD,USD,1.9,14/3/2025,,All dye colors
-Chief You,38,2,255776AA/11,RECYCLE TORINO 35,100% Recycled PES,155 - 165 cm.,150 - 160 cm.,20 - 25 g/m2,"3,000m.","600-1,999 m.",600,1999,PFE/PFD,USD,1.5,14/3/2025,,All dye colors
-Chief You,39,2,255776AA/11,RECYCLE TORINO 35,100% Recycled PES,155 - 165 cm.,150 - 160 cm.,20 - 25 g/m2,"3,000m.","2,000 - 4,999 m.",2000,4999,PFE/PFD,USD,1.35,14/3/2025,,All dye colors
-Chief You,40,2,255776AA/11,RECYCLE TORINO 35,100% Recycled PES,155 - 165 cm.,150 - 160 cm.,20 - 25 g/m2,"3,000m.","5,000 - 9,999 m.",5000,9999,PFE/PFD,USD,1.2,14/3/2025,,All dye colors
-Chief You,41,2,255776AA/11,RECYCLE TORINO 35,100% Recycled PES,155 - 165 cm.,150 - 160 cm.,20 - 25 g/m2,"3,000m.","10,000 m.+",10000,,PFE/PFD,USD,1.1,14/3/2025,,All dye colors
-Chief You,42,2,257209BA/11,Glamour TM Soft,100% PA,153 - 162 cm.,148 - 158 cm.,22 - 26 g/m2,"3,000m.",200-599 m.,200,599,PFE/PFD,USD,2.05,14/3/2025,,All dye colors
-Chief You,43,2,257209BA/11,Glamour TM Soft,100% PA,153 - 162 cm.,148 - 158 cm.,22 - 26 g/m2,"3,000m.","600-1,999 m.",600,1999,PFE/PFD,USD,1.65,14/3/2025,,All dye colors
-Chief You,44,2,257209BA/11,Glamour TM Soft,100% PA,153 - 162 cm.,148 - 158 cm.,22 - 26 g/m2,"3,000m.","2,000 - 4,999 m.",2000,4999,PFE/PFD,USD,1.50,14/3/2025,,All dye colors
-Chief You,45,2,257209BA/11,Glamour TM Soft,100% PA,153 - 162 cm.,148 - 158 cm.,22 - 26 g/m2,"3,000m.","5,000 - 9,999 m.",5000,9999,PFE/PFD,USD,1.35,14/3/2025,,All dye colors
-Chief You,46,2,257209BA/11,Glamour TM Soft,100% PA,153 - 162 cm.,148 - 158 cm.,22 - 26 g/m2,"3,000m.","10,000 m.+",10000,,PFE/PFD,USD,1.2,14/3/2025,,All dye colors
-Chief You,47,2,255539,To require weight 58 – 59 g/meter and to convert weight 36 – 37 g/m2,100% PES VOILE,160 cm.,152 cm.,33 - 38 g/m2,"3,000m.",200-600m.,200,600,PFE/PFD,USD,2.50,9/30/2025,,All dye colors
-Chief You,48,2,255539,CDR no. 057/25 : to knit the new greige in case of development,100% PES VOILE,160 cm.,152 cm.,33 - 38 g/m2,"3,000m.","601-2,000m.",601,2000,PFE/PFD,USD,2.00,9/30/2025,,All dye colors
-Chief You,49,2,255539,CDR no. 057/25 : to knit the new greige in case of development,100% PES VOILE,160 cm.,152 cm.,33 - 38 g/m2,"3,000m.","2,001-5,000m.",2001,5000,PFE/PFD,USD,1.85,9/30/2025,,All dye colors
-Chief You,50,2,W10HV002-1A/11,to use greige 255539 to extend the widht 160 cm.,100% PES VOILE,155-165 cm.,150-160 cm.,31 - 35 g/m2,"3,000m.",200-600m.,200,600,PFE/PFD,USD,1.55,9/30/2025,,All dye colors
-Chief You,51,2,W10HV002-1A/11,"PDR NO. 50611 : to require weight 58 – 59 g/meter and to convert weight 36 – 37 g/m2 , full width 160 cm., usable width 152 cm.",100% PES VOILE,155-165 cm.,150-160 cm.,31 - 35 g/m2,"3,000m.","601-2,000m.",601,2000,PFE/PFD,USD,1.25,9/30/2025,,All dye colors
-Chief You,52,2,W10HV002-1A/11,"Ecru 80 col. - job no. J25100303, full width 164 cm., weight 33 g/m2",100% PES VOILE,155-165 cm.,150-160 cm.,31 - 35 g/m2,"3,000m.","2,001-5,000m.",2001,5000,PFE/PFD,USD,1.15,9/30/2025,,All dye colors
-Chief You,54,2,257207BA/67,Prorate price from orignal art. 255539 PFD price,"68% PA, 32% ELASTANE",170-180 cm,165-175 cm,75-85 g/m2,"3,000m.",500m.+,500,,PFE/PFD,USD,4.20,2/10/25,,All dye colors
+Chief You,3,2,255484,Invisible Tulle Bright,100% PA,152 - 162 cm.,147 - 157 cm.,13 - 18 g/m2,"3,000 m.",200 - 600 m.,200,600,PFE/PFD,USD,2.11,Year 2018,,CHIEF YOU
+Chief You,3,2,255484,Invisible Tulle Bright,100% PA,152 - 162 cm.,147 - 157 cm.,13 - 18 g/m2,"3,000 m.",200 - 600 m.,200,600,All_colors,USD,2.73,Year 2018,,CHIEF YOU
+Chief You,4,2,255484,Invisible Tulle Bright,100% PA,152 - 162 cm.,147 - 157 cm.,13 - 18 g/m2,"3,000 m.","601 - 2,000 m.",601,2000,PFE/PFD,USD,1.77,Year 2018,,CHIEF YOU
+Chief You,4,2,255484,Invisible Tulle Bright,100% PA,152 - 162 cm.,147 - 157 cm.,13 - 18 g/m2,"3,000 m.","601 - 2,000 m.",601,2000,All_colors,USD,2.27,Year 2018,,CHIEF YOU
+Chief You,5,2,255484,Invisible Tulle Bright,100% PA,152 - 162 cm.,147 - 157 cm.,13 - 18 g/m2,"3,000 m.","2,001 - 5,000 m.",2001,5000,PFE/PFD,USD,1.70,Year 2018,,CHIEF YOU
+Chief You,5,2,255484,Invisible Tulle Bright,100% PA,152 - 162 cm.,147 - 157 cm.,13 - 18 g/m2,"3,000 m.","2,001 - 5,000 m.",2001,5000,All_colors,USD,2.07,Year 2018,,CHIEF YOU
+Chief You,6,2,255484,Invisible Tulle Bright,100% PA,152 - 162 cm.,147 - 157 cm.,13 - 18 g/m2,"3,000 m.","10,000 m.",10000,,PFE/PFD,USD,1.50,25/12/2024,,CHIEF YOU
+Chief You,7,2,255484,Invisible Tulle Bright,100% PA,152 - 162 cm.,147 - 157 cm.,13 - 18 g/m2,"3,000 m.","30,000 m.",30000,,PFE/PFD,USD,1.40,25/12/2024,,CHIEF YOU
+Chief You,8,2,255484,Invisible Tulle Bright,100% PA,152 - 162 cm.,147 - 157 cm.,13 - 18 g/m2,"3,000 m.","50,000 m.",50000,,PFE/PFD,USD,1.20,25/12/2024,,CHIEF YOU
+Chief You,9,2,255484CA/15,Invisible Tulle Bright,100% PA,157 - 162 cm.,152 - 157 cm.,17 - 22 g/m2,"3,000 m.","10,000 m.",10000,,PFE/PFD,USD,1.35,6/1/2025,,CHIEF YOU
+Chief You,10,2,255484CA/15,Invisible Tulle Bright,100% PA,157 - 162 cm.,152 - 157 cm.,17 - 22 g/m2,"3,000 m.","30,000 m.",30000,,PFE/PFD,USD,1.20,6/1/2025,,CHIEF YOU
+Chief You,11,2,255484CA/15,Invisible Tulle Bright,100% PA,157 - 162 cm.,152 - 157 cm.,17 - 22 g/m2,"3,000 m.","50,000 m.",50000,,PFE/PFD,USD,1.00,6/1/2025,,CHIEF YOU
+Chief You,12,2,255603,ELASTIC TULLE PASCAL Wider (254824),"70% PA, 30% ELASTANE",155 - 160 cm.,150 - 155 cm.,50 - 55 g/m2,"3,000 m.",200-600m.,200,600,PFE/PFD,USD,3.17,21/1/2022,,CHIEF YOU
+Chief You,12,2,255603,ELASTIC TULLE PASCAL Wider (254824),"70% PA, 30% ELASTANE",155 - 160 cm.,150 - 155 cm.,50 - 55 g/m2,"3,000 m.",200-600m.,200,600,All_colors,USD,3.77,21/1/2022,,CHIEF YOU
+Chief You,13,2,255603,ELASTIC TULLE PASCAL Wider (254824),"70% PA, 30% ELASTANE",155 - 160 cm.,150 - 155 cm.,50 - 55 g/m2,"3,000 m.","601-2,000m.",601,2000,PFE/PFD,USD,2.83,21/1/2022,,CHIEF YOU
+Chief You,13,2,255603,ELASTIC TULLE PASCAL Wider (254824),"70% PA, 30% ELASTANE",155 - 160 cm.,150 - 155 cm.,50 - 55 g/m2,"3,000 m.","601-2,000m.",601,2000,All_colors,USD,3.33,21/1/2022,,CHIEF YOU
+Chief You,14,2,255603,ELASTIC TULLE PASCAL Wider (254824),"70% PA, 30% ELASTANE",155 - 160 cm.,150 - 155 cm.,50 - 55 g/m2,"3,000 m.","2,001-5,000m.",2001,5000,PFE/PFD,USD,2.77,21/1/2022,,CHIEF YOU
+Chief You,14,2,255603,ELASTIC TULLE PASCAL Wider (254824),"70% PA, 30% ELASTANE",155 - 160 cm.,150 - 155 cm.,50 - 55 g/m2,"3,000 m.","2,001-5,000m.",2001,5000,All_colors,USD,3.23,21/1/2022,,CHIEF YOU
+Chief You,16,2,255603,ELASTIC TULLE PASCAL Wider (254824),"70% PA, 30% ELASTANE",155 - 160 cm.,150 - 155 cm.,50 - 55 g/m2,"3,000 m.","10,220 m.",10220,,All_colors,USD,2.75,15/3/2023,,CHIEF YOU
+Chief You,19,2,255603,ELASTIC TULLE PASCAL Wider (254824),"70% PA, 30% ELASTANE",155 - 160 cm.,150 - 155 cm.,50 - 55 g/m2,"3,000 m.","1,400 m.",1400,,All_colors,USD,3.66,3/10/2023,,CHIEF YOU
+Chief You,22,2,255603,ELASTIC TULLE PASCAL Wider (254824),"70% PA, 30% ELASTANE",155 - 160 cm.,150 - 155 cm.,50 - 55 g/m2,"3,000 m.",200-600 m.,200,600,All_colors,USD,3.50,22/4/2024,,CHIEF YOU
+Chief You,23,2,255603,ELASTIC TULLE PASCAL Wider (254824),"70% PA, 30% ELASTANE",155 - 160 cm.,150 - 155 cm.,50 - 55 g/m2,"3,000 m.","601-2,000 m.",601,2000,All_colors,USD,3.05,22/4/2024,,CHIEF YOU
+Chief You,24,2,255603,ELASTIC TULLE PASCAL Wider (254824),"70% PA, 30% ELASTANE",155 - 160 cm.,150 - 155 cm.,50 - 55 g/m2,"3,000 m.","2,001-5,000 m.",2001,5000,All_colors,USD,2.90,22/4/2024,,CHIEF YOU
+Chief You,25,2,255603,ELASTIC TULLE PASCAL Wider (254824),"70% PA, 30% ELASTANE",155 - 160 cm.,150 - 155 cm.,50 - 55 g/m2,"3,000 m.","10,000 m.",10000,,All_colors,USD,2.75,22/4/2024,,CHIEF YOU
+Chief You,26,2,255603,ELASTIC TULLE PASCAL Wider (254824),"70% PA, 30% ELASTANE",155 - 160 cm.,150 - 155 cm.,50 - 55 g/m2,"3,000 m.",200-600 m.,200,600,PFE/PFD,USD,2.75,2/4/2025,,CHIEF YOU
+Chief You,27,2,255603,ELASTIC TULLE PASCAL Wider (254824),"70% PA, 30% ELASTANE",155 - 160 cm.,150 - 155 cm.,50 - 55 g/m2,"3,000 m.","601-2,000 m.",601,2000,PFE/PFD,USD,2.35,2/4/2025,,CHIEF YOU
+Chief You,28,2,255603,ELASTIC TULLE PASCAL Wider (254824),"70% PA, 30% ELASTANE",155 - 160 cm.,150 - 155 cm.,50 - 55 g/m2,"3,000 m.","2,001-5,000 m.",2001,5000,PFE/PFD,USD,2.25,2/4/2025,,CHIEF YOU
+Chief You,29,2,255603,ELASTIC TULLE PASCAL Wider (254824),"70% PA, 30% ELASTANE",155 - 160 cm.,150 - 155 cm.,50 - 55 g/m2,"3,000 m.","10,000 m.",10000,,PFE/PFD,USD,2.15,2/4/2025,,CHIEF YOU
+Chief You,30,2,255603,ELASTIC TULLE PASCAL Wider (254824),"70% PA, 30% ELASTANE",155 - 160 cm.,150 - 155 cm.,50 - 55 g/m2,"3,000 m.","3,000 m.",3000,,PFE/PFD,USD,2.15,5/1/2026,,CHIEF YOU
+Chief You,31,2,255539,PES VOILE 150 cm.,100% PES,145 - 155 cm.,140 - 150 cm.,33 - 38 g/m2,"3,000m.",200-600m.,200,600,PFE/PFD,USD,1.45,2/6/2025,Valid witnin 6 months on 31st July 2025,CHIEF YOU
+Chief You,31,2,255539,PES VOILE 150 cm.,100% PES,145 - 155 cm.,140 - 150 cm.,33 - 38 g/m2,"3,000m.",200-600m.,200,600,All_colors,USD,2.25,2/6/2025,Valid witnin 6 months on 31st July 2025,CHIEF YOU
+Chief You,32,2,255539,Offering to similar as FNY mesh (Nude col.),100% PES,145 - 155 cm.,140 - 150 cm.,33 - 38 g/m2,"3,000m.","601-2,000m.",601,2000,PFE/PFD,USD,1.15,2/6/2025,,CHIEF YOU
+Chief You,32,2,255539,Offering to similar as FNY mesh (Nude col.),100% PES,145 - 155 cm.,140 - 150 cm.,33 - 38 g/m2,"3,000m.","601-2,000m.",601,2000,All_colors,USD,1.80,2/6/2025,,CHIEF YOU
+Chief You,33,2,255539,Offering to similar as FNY mesh (Nude col.),100% PES,145 - 155 cm.,140 - 150 cm.,33 - 38 g/m2,"3,000m.","2,001-5,000m.",2001,5000,PFE/PFD,USD,1.05,2/6/2025,,CHIEF YOU
+Chief You,33,2,255539,Offering to similar as FNY mesh (Nude col.),100% PES,145 - 155 cm.,140 - 150 cm.,33 - 38 g/m2,"3,000m.","2,001-5,000m.",2001,5000,All_colors,USD,1.65,2/6/2025,,CHIEF YOU
+Chief You,34,2,255678AA/11,CHARLOTTE TM SOFT,100% PES,150 - 160 cm.,145-155 cm.,33 - 38 g/m2,"3,000m.",200-600m.,200,600,PFE/PFD,USD,1.70,2/6/2025,Valid witnin 6 months on 31st July 2025,CHIEF YOU
+Chief You,34,2,255678AA/11,CHARLOTTE TM SOFT,100% PES,150 - 160 cm.,145-155 cm.,33 - 38 g/m2,"3,000m.",200-600m.,200,600,All_colors,USD,2.60,2/6/2025,Valid witnin 6 months on 31st July 2025,CHIEF YOU
+Chief You,35,2,255678AA/11,Offering to similar as FNG mesh (Off White col.),100% PES,150 - 160 cm.,145-155 cm.,33 - 38 g/m2,"3,000m.","601-2,000m.",601,2000,PFE/PFD,USD,1.38,2/6/2025,,CHIEF YOU
+Chief You,35,2,255678AA/11,Offering to similar as FNG mesh (Off White col.),100% PES,150 - 160 cm.,145-155 cm.,33 - 38 g/m2,"3,000m.","601-2,000m.",601,2000,All_colors,USD,2.10,2/6/2025,,CHIEF YOU
+Chief You,36,2,255678AA/11,Offering to similar as FNG mesh (Off White col.),100% PES,150 - 160 cm.,145-155 cm.,33 - 38 g/m2,"3,000m.","2,001-5,000m.",2001,5000,PFE/PFD,USD,1.25,2/6/2025,,CHIEF YOU
+Chief You,36,2,255678AA/11,Offering to similar as FNG mesh (Off White col.),100% PES,150 - 160 cm.,145-155 cm.,33 - 38 g/m2,"3,000m.","2,001-5,000m.",2001,5000,All_colors,USD,1.90,2/6/2025,,CHIEF YOU
+Chief You,37,2,255776AA/11,RECYCLE TORINO 35,100% Recycled PES,155 - 165 cm.,150 - 160 cm.,20 - 25 g/m2,"3,000m.",200-599 m.,200,599,PFE/PFD,USD,1.9,14/3/2025,,CHIEF YOU
+Chief You,37,2,255776AA/11,RECYCLE TORINO 35,100% Recycled PES,155 - 165 cm.,150 - 160 cm.,20 - 25 g/m2,"3,000m.",200-599 m.,200,599,All_colors,USD,2.95,14/3/2025,,CHIEF YOU
+Chief You,38,2,255776AA/11,RECYCLE TORINO 35,100% Recycled PES,155 - 165 cm.,150 - 160 cm.,20 - 25 g/m2,"3,000m.","600-1,999 m.",600,1999,PFE/PFD,USD,1.5,14/3/2025,,CHIEF YOU
+Chief You,38,2,255776AA/11,RECYCLE TORINO 35,100% Recycled PES,155 - 165 cm.,150 - 160 cm.,20 - 25 g/m2,"3,000m.","600-1,999 m.",600,1999,All_colors,USD,2.35,14/3/2025,,CHIEF YOU
+Chief You,39,2,255776AA/11,RECYCLE TORINO 35,100% Recycled PES,155 - 165 cm.,150 - 160 cm.,20 - 25 g/m2,"3,000m.","2,000 - 4,999 m.",2000,4999,PFE/PFD,USD,1.35,14/3/2025,,CHIEF YOU
+Chief You,39,2,255776AA/11,RECYCLE TORINO 35,100% Recycled PES,155 - 165 cm.,150 - 160 cm.,20 - 25 g/m2,"3,000m.","2,000 - 4,999 m.",2000,4999,All_colors,USD,2.15,14/3/2025,,CHIEF YOU
+Chief You,40,2,255776AA/11,RECYCLE TORINO 35,100% Recycled PES,155 - 165 cm.,150 - 160 cm.,20 - 25 g/m2,"3,000m.","5,000 - 9,999 m.",5000,9999,PFE/PFD,USD,1.2,14/3/2025,,CHIEF YOU
+Chief You,40,2,255776AA/11,RECYCLE TORINO 35,100% Recycled PES,155 - 165 cm.,150 - 160 cm.,20 - 25 g/m2,"3,000m.","5,000 - 9,999 m.",5000,9999,All_colors,USD,1.95,14/3/2025,,CHIEF YOU
+Chief You,41,2,255776AA/11,RECYCLE TORINO 35,100% Recycled PES,155 - 165 cm.,150 - 160 cm.,20 - 25 g/m2,"3,000m.","10,000 m.+",10000,,PFE/PFD,USD,1.1,14/3/2025,,CHIEF YOU
+Chief You,41,2,255776AA/11,RECYCLE TORINO 35,100% Recycled PES,155 - 165 cm.,150 - 160 cm.,20 - 25 g/m2,"3,000m.","10,000 m.+",10000,,All_colors,USD,1.75,14/3/2025,,CHIEF YOU
+Chief You,42,2,257209BA/11,Glamour TM Soft,100% PA,153 - 162 cm.,148 - 158 cm.,22 - 26 g/m2,"3,000m.",200-599 m.,200,599,PFE/PFD,USD,2.05,14/3/2025,,CHIEF YOU
+Chief You,42,2,257209BA/11,Glamour TM Soft,100% PA,153 - 162 cm.,148 - 158 cm.,22 - 26 g/m2,"3,000m.",200-599 m.,200,599,All_colors,USD,3.15,14/3/2025,,CHIEF YOU
+Chief You,43,2,257209BA/11,Glamour TM Soft,100% PA,153 - 162 cm.,148 - 158 cm.,22 - 26 g/m2,"3,000m.","600-1,999 m.",600,1999,PFE/PFD,USD,1.65,14/3/2025,,CHIEF YOU
+Chief You,43,2,257209BA/11,Glamour TM Soft,100% PA,153 - 162 cm.,148 - 158 cm.,22 - 26 g/m2,"3,000m.","600-1,999 m.",600,1999,All_colors,USD,2.5,14/3/2025,,CHIEF YOU
+Chief You,44,2,257209BA/11,Glamour TM Soft,100% PA,153 - 162 cm.,148 - 158 cm.,22 - 26 g/m2,"3,000m.","2,000 - 4,999 m.",2000,4999,PFE/PFD,USD,1.50,14/3/2025,,CHIEF YOU
+Chief You,44,2,257209BA/11,Glamour TM Soft,100% PA,153 - 162 cm.,148 - 158 cm.,22 - 26 g/m2,"3,000m.","2,000 - 4,999 m.",2000,4999,All_colors,USD,2.25,14/3/2025,,CHIEF YOU
+Chief You,45,2,257209BA/11,Glamour TM Soft,100% PA,153 - 162 cm.,148 - 158 cm.,22 - 26 g/m2,"3,000m.","5,000 - 9,999 m.",5000,9999,PFE/PFD,USD,1.35,14/3/2025,,CHIEF YOU
+Chief You,45,2,257209BA/11,Glamour TM Soft,100% PA,153 - 162 cm.,148 - 158 cm.,22 - 26 g/m2,"3,000m.","5,000 - 9,999 m.",5000,9999,All_colors,USD,2.05,14/3/2025,,CHIEF YOU
+Chief You,46,2,257209BA/11,Glamour TM Soft,100% PA,153 - 162 cm.,148 - 158 cm.,22 - 26 g/m2,"3,000m.","10,000 m.+",10000,,PFE/PFD,USD,1.2,14/3/2025,,CHIEF YOU
+Chief You,46,2,257209BA/11,Glamour TM Soft,100% PA,153 - 162 cm.,148 - 158 cm.,22 - 26 g/m2,"3,000m.","10,000 m.+",10000,,All_colors,USD,1.85,14/3/2025,,CHIEF YOU
+Chief You,47,2,255539,To require weight 58 – 59 g/meter and to convert weight 36 – 37 g/m2,100% PES VOILE,160 cm.,152 cm.,33 - 38 g/m2,"3,000m.",200-600m.,200,600,PFE/PFD,USD,2.50,9/30/2025,,CHIEF YOU
+Chief You,47,2,255539,To require weight 58 – 59 g/meter and to convert weight 36 – 37 g/m2,100% PES VOILE,160 cm.,152 cm.,33 - 38 g/m2,"3,000m.",200-600m.,200,600,All_colors,USD,3.15,9/30/2025,,CHIEF YOU
+Chief You,48,2,255539,CDR no. 057/25 : to knit the new greige in case of development,100% PES VOILE,160 cm.,152 cm.,33 - 38 g/m2,"3,000m.","601-2,000m.",601,2000,PFE/PFD,USD,2.00,9/30/2025,,CHIEF YOU
+Chief You,48,2,255539,CDR no. 057/25 : to knit the new greige in case of development,100% PES VOILE,160 cm.,152 cm.,33 - 38 g/m2,"3,000m.","601-2,000m.",601,2000,All_colors,USD,2.55,9/30/2025,,CHIEF YOU
+Chief You,49,2,255539,CDR no. 057/25 : to knit the new greige in case of development,100% PES VOILE,160 cm.,152 cm.,33 - 38 g/m2,"3,000m.","2,001-5,000m.",2001,5000,PFE/PFD,USD,1.85,9/30/2025,,CHIEF YOU
+Chief You,49,2,255539,CDR no. 057/25 : to knit the new greige in case of development,100% PES VOILE,160 cm.,152 cm.,33 - 38 g/m2,"3,000m.","2,001-5,000m.",2001,5000,All_colors,USD,2.35,9/30/2025,,CHIEF YOU
+Chief You,50,2,W10HV002-1A/11,to use greige 255539 to extend the widht 160 cm.,100% PES VOILE,155-165 cm.,150-160 cm.,31 - 35 g/m2,"3,000m.",200-600m.,200,600,PFE/PFD,USD,1.55,9/30/2025,,CHIEF YOU
+Chief You,51,2,W10HV002-1A/11,"PDR NO. 50611 : to require weight 58 – 59 g/meter and to convert weight 36 – 37 g/m2 , full width 160 cm., usable width 152 cm.",100% PES VOILE,155-165 cm.,150-160 cm.,31 - 35 g/m2,"3,000m.","601-2,000m.",601,2000,PFE/PFD,USD,1.25,9/30/2025,,CHIEF YOU
+Chief You,52,2,W10HV002-1A/11,"Ecru 80 col. - job no. J25100303, full width 164 cm., weight 33 g/m2",100% PES VOILE,155-165 cm.,150-160 cm.,31 - 35 g/m2,"3,000m.","2,001-5,000m.",2001,5000,PFE/PFD,USD,1.15,9/30/2025,,CHIEF YOU
+Chief You,54,2,257207BA/67,Prorate price from orignal art. 255539 PFD price,"68% PA, 32% ELASTANE",170-180 cm,165-175 cm,75-85 g/m2,"3,000m.",500m.+,500,,PFE/PFD,USD,4.20,2/10/25,,CHIEF YOU
+Chief You,54,2,257207BA/67,Prorate price from orignal art. 255539 PFD price,"68% PA, 32% ELASTANE",170-180 cm,165-175 cm,75-85 g/m2,"3,000m.",500m.+,500,,All_colors,USD,5.35,2/10/25,,CHIEF YOU
 Chi Shing,4,3,254555,PES TULLE,100%PES,157 - 162 cm.,152 - 157 cm.,30 - 35 g/m2,,200-600m.,200,600,All_colors,USD,2.73,,,
 Chi Shing,5,3,254555,PES TULLE,100%PES,157 - 162 cm.,152 - 157 cm.,30 - 35 g/m2,,601-900m.,601,900,All_colors,USD,2.30,,,
 Chi Shing,6,3,254555,PES TULLE,100%PES,157 - 162 cm.,152 - 157 cm.,30 - 35 g/m2,,"1,000m.+",1000,,All_colors,USD,2.10,,,
@@ -5446,6 +5506,13 @@ Delta Bogart,22,20,SAG-070BA/22,-,"57% COTTON PIMA, 26%PA, 17% ELASTANE",-,175 c
 Delta Bogart,24,20,SAG-172AA/22,-,"57% COTTON COMPACT, 26%PA, 17% ELASTANE",-,175 cm.,75 g/m2,"3,000m.",500m.,500,,All_colors,USD,3.60,,,Price : FOB Bangkok USD/meter
 Fidelity,25,24,254615,PA Tuell-SH,100%PA,ca 137-142 cm.,,35-40g/m2,,200 m. and more,200,,All_colors,USD,2.65,,,Price : FOB Thailand price of art. 254615 (Tri#15401) - Normal Finishing Price : FOB Thailand price of art. 254615 (Tri#15401) - Normal Finishing Price : FOB Thailand price of art. 254615 (Tri#15401) - Normal Finishing Price : FOB Thailand price of art. 254615 (Tri#15401) - Normal Finishing
 Fidelity,31,30,254615,PA Tuell-SH,100%PA,ca 137-142 cm.,,35-40g/m2,,100 m. (old stock) & 500 m. (dyed new lot),100,,All_colors,USD,2.65,,,on 5/11/20 customer placed order 254615 White col. 500 m. (dyed new lot) & Black col. = 100 m. (old stock) and asked K. Sivy to give special FOB Thailand price USD2.65/m. to ship one time.
+Forster_FRSZ & SED,7,6,254723,,,,,,,-,0,,All_colors,USD,28.50,01/12/2021,,FR ART.
+Forster_FRSZ & SED,11,10,254933,,,,,,,"minimum 5,000 m.",5000,,All_colors,USD,2.27,01/12/2021,,FR ART.
+Forster_FRSZ & SED,15,14,255603,,,,,,,"minimum5,000 m.",5000,,All_colors,USD,2.00,01/12/2021,,FR ART.
+Forster_FRSZ & SED,19,18,255730,,,,,,,"minimum 10,000 m.",10000,,All_colors,USD,1.20,01/12/2021,,FR ART.
+Forster_FRSZ & SED,20,18,255730,,,,,,,"minimum 5,000 m.",5000,,All_colors,USD,1.25,01/12/2021,,FR ART.
+Forster_FRSZ & SED,24,23,255908AA,,"70% Recycled PES, 30% Recycled Elastane",,,,"5,000m.",,5000,,All_colors,USD,2.25,01/12/2021,,FR ART.
+Forster_FRSZ & SED,25,23,255908AA,,"70% Recycled PES, 30% Recycled Elastane",,,,"2,000m.",,2000,,All_colors,USD,2.35,01/11/2023,,FR ART.
 Forster_FRSZ & SED,30,29,254582,PA TULLE,100 % PA,157 - 162 cm.,152 - 157 cm.,18 - 23 g/m2,"2,000m.",,2000,,All_colors,USD,1.03,16/3/2022,,Date MOQ Article Fabric name Composition Full Width Useable Width Weight PFE/PFD
 Forster_FRSZ & SED,35,29,254582,Composition,Full Width,Useable Width,Weight,16th March 2022 PFD/PFE,Article,,0,,All_colors,USD,2023,Qty per color,,Date MOQ Article Fabric name Composition Full Width Useable Width Weight PFE/PFD
 Forster_FRSZ & SED,37,29,254582,100 % PA,145 - 150 cm.,140 - 145 cm.,"MQO 2,000 m. PFD USD1.03/m.",1.03,(FR no. 4389),,4389,,All_colors,USD,1.03,"601-2,000m.",,Date MOQ Article Fabric name Composition Full Width Useable Width Weight PFE/PFD
@@ -5460,6 +5527,7 @@ Forster_FRSZ & SED,59,29,255204,"70% PA, 30% ELASTANE",155 - 160 cm.,150 - 155 c
 Forster_FRSZ & SED,60,29,255204,"70% PA, 30% ELASTANE",155 - 160 cm.,150 - 155 cm.,50 - 55 g/m2,2.20,(Inter Spitzen no. 238-0000),,238,0,All_colors,USD,2.00,5000 m,,Date MOQ Article Fabric name Composition Full Width Useable Width Weight PFE/PFD
 Forster_FRSZ & SED,61,29,255204,"70% PA, 30% ELASTANE",155 - 160 cm.,150 - 155 cm.,50 - 55 g/m2,2.00,(Inter Spitzen no. 238-0000),,238,0,All_colors,USD,1.90,10000 m,,Date MOQ Article Fabric name Composition Full Width Useable Width Weight PFE/PFD
 Forster_FRSZ & SED,69,65,255603,ELASTIC TULLE PASCAL WIDER,"70% PA, 30% ELASTANE",155 - 160 cm.,150 - 155 cm.,50 - 55 g/m2,,5000 m,5000,,PFE/PFD,USD,2.00,,,June 2023 PFD/PFE
+Forster_FRSZ & SED,74,73,255908AA,,"70% Recycled PES, 30% Recycled Elastane",,,,"5,000m.",,5000,,All_colors,USD,2.25,12/1/2021,,FR ART.
 Forster_FRSZ & SED,79,78,255908AA/15,RECYCLE PES ELASTIC TULLE TM PFD,"70% Post-Consumer Recycled PES, 18% Pre-Consumer Recycled Elastane, 12% Conventional Elastane",148-158 cm.,143-153 cm.,50-55 g/m2,"5,000m.",,5000,,PFE/PFD,USD,2.25,12/1/2021,,Date MOQ Article Fabric name Composition Full Width Useable Width Weight FOB BKK USD Price per meter
 Forster_FRSZ & SED,80,78,255908AA/15,RECYCLE PES ELASTIC TULLE TM PFD,"70% Post-Consumer Recycled PES, 18% Pre-Consumer Recycled Elastane, 12% Conventional Elastane",148-158 cm.,143-153 cm.,50-55 g/m2,"2,000-5,000m.+",,2000,,PFE/PFD,USD,2.35,11/1/2023,,Date MOQ Article Fabric name Composition Full Width Useable Width Weight FOB BKK USD Price per meter
 Forster_FRSZ & SED,85,83,255908AD/15,RECYCLE PES ELASTIC TULLE TM PFD,"70% Post-Consumer Recycled PES, 18% Pre-Consumer Recycled Elastane, 12% Conventional Elastane",148-158 cm.,143-153 cm.,50-55 g/m2,"3,000m.",,3000,,PFE/PFD,USD,2.00,6/5/2025,,FOB BKK USD Price per meter
@@ -5478,6 +5546,8 @@ Forster_FRSZ & SED,109,107,255830AA,SINIA TM EMB,100% PES,157-167 cm.,152-162 cm
 Forster_FRSZ & SED,109,107,255830AA,SINIA TM EMB,100% PES,157-167 cm.,152-162 cm.,25 - 30 g/m2,,"601-2,000m.",601,2000,All_colors,USD,2.45,,,Qty per color Article Fabric name Composition Full Width Useable Width Weight PFE/PFD All colors
 Forster_FRSZ & SED,110,107,255830AA,SINIA TM EMB,100% PES,157-167 cm.,152-162 cm.,25 - 30 g/m2,,"2,001m. up",2001,,All_colors,USD,1.55,,,Qty per color Article Fabric name Composition Full Width Useable Width Weight PFE/PFD All colors
 Forster_FRSZ & SED,110,107,255830AA,SINIA TM EMB,100% PES,157-167 cm.,152-162 cm.,25 - 30 g/m2,,"2,001m. up",2001,,All_colors,USD,2.35,,,Qty per color Article Fabric name Composition Full Width Useable Width Weight PFE/PFD All colors
+Forster_FRSZ & SED,123,121,254723,,100% PES,,,,-,,0,,All_colors,USD,28.50,18.12.2023,,Price : FOB Bangkok USD/kg.
+Forster_FRSZ & SED,130,128,254723,,100% PES,,,,-,,0,,All_colors,USD,28.50,02.09.2025,,Price : FOB Bangkok USD/kg.
 Gamma 28,66,65,255539,PES VOILE 150 cm.,100% PES,145 - 155 cm.,140 - 150 cm.,33 - 38 g/m2,"3,000m.",,3000,,PFE/PFD,THB,55,,,Price from center list of art. 255539 that Gamma 28 placed trial order PFD = 400 m. & sent end of March 2020
 Gamma 28,67,65,255539,PES VOILE 150 cm.,100% PES,145 - 155 cm.,140 - 150 cm.,33 - 38 g/m2,"3,000m.",,3000,,PFE/PFD,THB,50,,,Price from center list of art. 255539 that Gamma 28 placed trial order PFD = 400 m. & sent end of March 2020
 Gamma 28,68,65,255539,PES VOILE 150 cm.,100% PES,145 - 155 cm.,140 - 150 cm.,33 - 38 g/m2,"3,000m.",,3000,,PFE/PFD,THB,45,,,Price from center list of art. 255539 that Gamma 28 placed trial order PFD = 400 m. & sent end of March 2020
@@ -5646,7 +5716,7 @@ Hanes Global,117,115,255729AA/11,CEIBA TM Soft,"64% CO, 36% PA",135 - 145 cm.,13
 Hanes Global,118,115,255729AA/11,CEIBA TM Soft,"64% CO, 36% PA",135 - 145 cm.,130 - 140 cm.,106 - 118 g/m2,"3,000m.","2,001-5,000m.",2001,5000,PFE/PFD,USD,3.60,,,by K. Sivy 29/9/21
 Hanes Global,118,115,255729AA/11,CEIBA TM Soft,"64% CO, 36% PA",135 - 145 cm.,130 - 140 cm.,106 - 118 g/m2,"3,000m.","2,001-5,000m.",2001,5000,All_colors,USD,4.05,,,by K. Sivy 29/9/21
 Hanes Global,119,115,255729AA/11,CEIBA TM Soft,"64% CO, 36% PA",135 - 145 cm.,130 - 140 cm.,106 - 118 g/m2,"3,000m.",,3000,,PFE/PFD,USD,3.50,,,by K. Sivy 29/9/21
-Hanes Global,119,115,255729AA/11,CEIBA TM Soft,"64% CO, 36% PA",135 - 145 cm.,130 - 140 cm.,106 - 118 g/m2,"3,000m.",,3000,,All_colors,USD,0.20921,,,by K. Sivy 29/9/21
+Hanes Global,119,115,255729AA/11,CEIBA TM Soft,"64% CO, 36% PA",135 - 145 cm.,130 - 140 cm.,106 - 118 g/m2,"3,000m.",,3000,,All_colors,USD,20921,,,by K. Sivy 29/9/21
 Hanes Global,124,122,255729AA/11,CEIBA TM Soft,"64% CO, 36% PA",135 - 145 cm.,130 - 140 cm.,106 - 118 g/m2,"3,000m.",200-600m.,200,600,PFE/PFD,USD,3.70,,,Price : FOB Thailand USD/yard
 Hanes Global,124,122,255729AA/11,CEIBA TM Soft,"64% CO, 36% PA",135 - 145 cm.,130 - 140 cm.,106 - 118 g/m2,"3,000m.",200-600m.,200,600,All_colors,USD,4.11,,,Price : FOB Thailand USD/yard
 Hanes Global,125,122,255729AA/11,CEIBA TM Soft,"64% CO, 36% PA",135 - 145 cm.,130 - 140 cm.,106 - 118 g/m2,"3,000m.","601-2,000m.",601,2000,PFE/PFD,USD,3.43,,,Price : FOB Thailand USD/yard
@@ -6265,7 +6335,6 @@ Inter-Spitzen,324,317,255827,Recycle PA + Recycle Elastic Tulle Pascal Plus TM E
 Inter-Spitzen,328,327,254741,PES TULLE POINT,100% PES,170 - 175 cm.,165 - 170 cm.,22 - 27 g/m2,"3,000m.",,3000,,PFE/PFD,USD,2.25,28.10.2025,,
 Inter-Spitzen,329,327,254741,PES TULLE POINT,100% PES,170 - 175 cm.,165 - 170 cm.,22 - 27 g/m2,"3,000m.",,3000,,PFE/PFD,USD,1.9,28.10.2025,,
 Inter-Spitzen,330,327,254741,PES TULLE POINT,100% PES,170 - 175 cm.,165 - 170 cm.,22 - 27 g/m2,"3,000m.",,3000,,PFE/PFD,USD,1.8,28.10.2025,,
-Inter-Spitzen,333,327,254741,PES TULLE POINT,100% PES,170 - 175 cm.,165 - 170 cm.,22 - 27 g/m2,Price : Inter Spitzen (FOB Bangkok USD/m.) : Start from now on and valid on 31st August 2026,,601,2000,All_colors,USD,0.312026,Price : Inter Spitzen (FOB Bangkok USD/m.) : Start from now on and valid on 31st August 2026,,
 Inter-Spitzen,334,327,254741,Fabric name,Composition,Full Width,Useable Width,Weight,MOQ,,0,,PFE/PFD,USD,2022,Date,,
 Inter-Spitzen,335,327,255730,RECYCLE PES TULLE TM EMB,100% Recycle PES,155 - 165 cm.,150 - 160 cm.,30 -35 g/m2,"3,0000 m.",,30000,,PFE/PFD,USD,1.35,12.02.2026,,
 Inter-Spitzen,336,327,255730,RECYCLE PES TULLE TM EMB,100% Recycle PES,155 - 165 cm.,150 - 160 cm.,30 -35 g/m2,"3,0000 m.",,30000,,PFE/PFD,USD,1.25,12.02.2026,,
@@ -6591,8 +6660,7 @@ Mastex,247,244,255589AB/15,PES Tulle PFD,100% PES,160 - 165 cm.,155 - 160 cm.,30
 Mastex,252,250,255589AB/14,PES Tulle PFD,100% PES,155 - 165 cm.,150 - 160 cm.,30-35 g/m2,200-600 m.,,200,600,All_colors,THB,67,15.01.2026,,Price : THB/meter Dyed stock for Bravissimo in UK
 Mastex,253,250,255589AB/14,PES Tulle PFD,100% PES,155 - 165 cm.,150 - 160 cm.,30-35 g/m2,"601-2,000m.",,601,2000,All_colors,THB,58,15.01.2026,,Price : THB/meter Dyed stock for Bravissimo in UK
 Mastex,254,250,255589AB/14,PES Tulle PFD,100% PES,155 - 165 cm.,150 - 160 cm.,30-35 g/m2,"2,001-5,000m.",,2001,5000,All_colors,THB,55,15.01.2026,,Price : THB/meter Dyed stock for Bravissimo in UK
-Mizoroki,5,3,255730,,,,,,,500-2000 m,500,2000,All_colors,USD,1.93,,MOQ =3000 m.,Yield
-Mizoroki,6,3,255730,,,,,,,2001-5000 m.,2001,5000,All_colors,USD,1.86,,,Yield
+Mizoroki,5,3,255730,,,,,,,500-2000 m,500,2000,All_colors,THB,2.5,,MOQ =3000 m.,Yield
 Mizoroki,6,3,255730,,,,,,,2001-5000 m.,2001,5000,All_colors,THB,2.30,,,Yield
 MIRAE,5,2,257067AA/26,CLEAN CUT FIT 03TH SOFTPHILIC,"74% POLYMIDE FD, 26% SPANDEX",150 cm.,142 cm.,150 g/m2,"3,000 m.",500 m.,500,,All_colors,USD,4.25,1/8/2025,,CUSTOMER : MIRAE ASIAPASIFIK
 Milavitsa,6,3,257224AA/23,,100% PA,180-190,175-185,120-133,500,,500,,All_colors,USD,3.7,,,DATE 1/2/2024
@@ -6779,7 +6847,7 @@ PT Indonesia Wacoal ,52,47,254622AA/14,,100% PA,150-155,145-150,45-50,600,,600,,
 PT Indonesia Wacoal ,53,47,254992,,"88% PA, 12% Elastane",160-170,155-165,85-95,500,,500,,All_colors,USD,3.85,,,Price : FOB Bangkok USD/meter
 PT Indonesia Wacoal ,54,47,255470,,"84% PA, 16% Elastane",160-170,155-165,100-110,500,,500,,All_colors,USD,4.95,,,Price : FOB Bangkok USD/meter
 PT Indonesia Wacoal ,55,47,255028,,"75% PA, 25% Elastane",185-190,180-185,95-105,500,,500,,All_colors,USD,4.2,,,Price : FOB Bangkok USD/meter
-PT. Kelwaram,4,3,254555,,,,,,"25,000 y","25,000y",25000,,All_colors,USD,0.85,,"MOQ = 25,000 yard",Yield
+PT. Kelwaram,10,3,255584,,,,,,"25,000 y",,25000,,PFE/PFD,THB,3.00,,MOQ =3000,Yield
 PT. Kelwaram,22,20,255589,PES Tulle,100% PES,155-165,150-160,30-35 g/m2,,"5,000 yds",5000,,PFE/PFD,USD,0.90,,,Price : FOB Bangkok USD/yard quoted on 18/09/2023 valid until 30th March 2024
 PT. Kelwaram,24,20,255589,PES Tulle,100% PES,cm.,cm.,30-35 g/m2,,"10,000 yds",10000,,PFE/PFD,USD,0.86,,,Price : FOB Bangkok USD/yard quoted on 18/09/2023 valid until 30th March 2024
 PT. Kelwaram,25,20,255589,PES Tulle,100% PES,cm.,cm.,30-35 g/m2,,"25,000 yds",25000,,PFE/PFD,USD,0.83,,,Price : FOB Bangkok USD/yard quoted on 18/09/2023 valid until 30th March 2024
@@ -7147,10 +7215,13 @@ Setafil Thailand,142,80,255021,,,,,,,,2001,5000,All_colors,USD,62,,"K. Sivy quot
 Setafil Thailand,143,80,255021,,,,,,,,3000,,All_colors,USD,60,,"K. Sivy quoted on 13.03.2025, give 5% discount for end buyer SLD China",Quality
 Setafil Thailand,144,80,255022,,,,,,,,3000,,All_colors,USD,105,,"K. Sivy quoted on 15.03.2024, give 5% discount for end buyer Surelace/Potencier",Quality
 SLD China,12,9,254555,,,,,,,,0,,All_colors,USD,100,,,"Price :FOB Bangkok VS. CIF Shanghai, China by Sea USD/kgs."
+SLD China,12,9,254555,,,,,,,,0,,All_colors,USD,1472.32000,,,"Price :FOB Bangkok VS. CIF Shanghai, China by Sea USD/kgs."
+SLD China,12,9,254555,,,,,,,,0,,All_colors,USD,2944.64000,,,"Price :FOB Bangkok VS. CIF Shanghai, China by Sea USD/kgs."
 SLD China,13,9,254555,,,,,,,,0,,All_colors,USD,100,,,"Price :FOB Bangkok VS. CIF Shanghai, China by Sea USD/kgs."
 SLD China,13,9,254555,,,,,,,,0,,All_colors,USD,14.00,,,"Price :FOB Bangkok VS. CIF Shanghai, China by Sea USD/kgs."
 SLD China,13,9,254555,,,,,,,,0,,All_colors,USD,12.50,,,"Price :FOB Bangkok VS. CIF Shanghai, China by Sea USD/kgs."
 SLD China,19,16,255484,,,,,,,,0,,All_colors,USD,100,,,"Price :FOB Bangkok VS. CIF Shanghai, China by Sea USD/kgs."
+SLD China,19,16,255484,,,,,,,,0,,All_colors,USD,1484.8064000,,,"Price :FOB Bangkok VS. CIF Shanghai, China by Sea USD/kgs."
 SLD China,20,16,255484,,,,,,,,0,,All_colors,USD,100,,,"Price :FOB Bangkok VS. CIF Shanghai, China by Sea USD/kgs."
 SLD China,20,16,255484,,,,,,,,0,,All_colors,USD,29.50,,,"Price :FOB Bangkok VS. CIF Shanghai, China by Sea USD/kgs."
 SLD China,20,16,255484,,,,,,,,0,,All_colors,USD,27.50,,,"Price :FOB Bangkok VS. CIF Shanghai, China by Sea USD/kgs."
@@ -7161,6 +7232,8 @@ special price for EMB customer,4,1,255699AA,PORTO INVISIBLE TM EMB,100% PES,152 
 special price for EMB customer,5,1,255699AA,PORTO INVISIBLE TM EMB,100% PES,152 - 162 cm.,147 - 157 cm.,15 - 20 g/m2,3000 m,2001-4999,2001,4999,PFD,USD,1.80,,,Price : FOB THAILAND ( USD)
 special price for EMB customer,6,1,255699AA,PORTO INVISIBLE TM EMB,100% PES,152 - 162 cm.,147 - 157 cm.,15 - 20 g/m2,3000 m,5000 up,5000,,PFD,USD,1.75,,,Price : FOB THAILAND ( USD)
 special price for EMB customer,7,1,255699AA,PORTO INVISIBLE TM EMB,100% PES,152 - 162 cm.,147 - 157 cm.,15 - 20 g/m2,3000 m,10000 up,10000,,PFD,USD,1.65,,,Price : FOB THAILAND ( USD)
+special price for EMB customer,13,11,254824,,,,,,"5,000","5,000",5000,,PFD,USD,1.90,,,Price : FOB THAILAND ( USD)
+special price for EMB customer,15,11,254804,,,,,,5000,5000,5000,,PFD,USD,1.95,,,Price : FOB THAILAND ( USD)
 STG,5,3,256575,,,,,,,,1000,,PFD,THB,31,,,Schweninger Textil Gmbh
 STG,5,3,256575,,,,,,,,5000,,PFD,THB,25,,,Schweninger Textil Gmbh
 STG,6,3,256575,,,,,,,,200,,White,THB,46,,,Schweninger Textil Gmbh
@@ -7279,172 +7352,178 @@ STG,65,61,255288,,,,,,,,200,,White,THB,64,,,
 STG,65,61,255288,,,,,,,,400,,White,THB,56,,,
 STG,65,61,255288,,,,,,,,600,,White,THB,48,,,
 STG,65,61,255288,,,,,,,,1000,,White,THB,40,,,
-STG,66,61,255288,,,,,,,,200,,All_colors,THB,71,,,
-STG,66,61,255288,,,,,,,,400,,All_colors,THB,63,,,
-STG,66,61,255288,,,,,,,,600,,All_colors,THB,55,,,
-STG,66,61,255288,,,,,,,,1000,,All_colors,THB,47,,,
-STG,74,68,256634,,,,,,,,400,,All_colors,THB,54,,,Quality
-STG,74,68,256634,,,,,,,,600,,All_colors,THB,45,,,Quality
-STG,74,68,256634,,,,,,,,1000,,All_colors,THB,36,,,Quality
-STG,74,68,256634,,,,,,,,5000,,All_colors,THB,34,,,Quality
-STG,75,68,256634,,,,,,,,200,,All_colors,THB,80,,,Quality
-STG,75,68,256634,,,,,,,,400,,All_colors,THB,73,,,Quality
-STG,75,68,256634,,,,,,,,600,,All_colors,THB,66,,,Quality
-STG,75,68,256634,,,,,,,,1000,,All_colors,THB,57,,,Quality
-STG,76,68,256634,,,,,,,,200,,All_colors,THB,85,,,Quality
-STG,76,68,256634,,,,,,,,400,,All_colors,THB,78,,,Quality
-STG,76,68,256634,,,,,,,,600,,All_colors,THB,71,,,Quality
-STG,76,68,256634,,,,,,,,1000,,All_colors,THB,62,,,Quality
-STG,79,68,254559,,,,,,,,1000,,All_colors,THB,31,,,Quality
-STG,79,68,254559,,,,,,,,5000,,All_colors,THB,29,,,Quality
-STG,80,68,254559,,,,,,,,200,,All_colors,THB,78,,,Quality
-STG,80,68,254559,,,,,,,,400,,All_colors,THB,71,,,Quality
-STG,80,68,254559,,,,,,,,600,,All_colors,THB,59,,,Quality
-STG,80,68,254559,,,,,,,,1000,,All_colors,THB,56,,,Quality
-STG,81,68,254559,,,,,,,,200,,All_colors,THB,83,,,Quality
-STG,81,68,254559,,,,,,,,400,,All_colors,THB,76,,,Quality
-STG,81,68,254559,,,,,,,,600,,All_colors,THB,64,,,Quality
-STG,81,68,254559,,,,,,,,1000,,All_colors,THB,61,,,Quality
-STG,84,68,254580,,,,,,,,1000,,All_colors,THB,32,,,Quality
-STG,84,68,254580,,,,,,,,5000,,All_colors,THB,31,,,Quality
-STG,85,68,254580,,,,,,,,200,,All_colors,THB,76,,,Quality
-STG,85,68,254580,,,,,,,,400,,All_colors,THB,69,,,Quality
-STG,85,68,254580,,,,,,,,600,,All_colors,THB,57,,,Quality
-STG,85,68,254580,,,,,,,,1000,,All_colors,THB,53,,,Quality
-STG,86,68,254580,,,,,,,,200,,All_colors,THB,81,,,Quality
-STG,86,68,254580,,,,,,,,400,,All_colors,THB,74,,,Quality
-STG,86,68,254580,,,,,,,,600,,All_colors,THB,62,,,Quality
-STG,86,68,254580,,,,,,,,1000,,All_colors,THB,58,,,Quality
-STG,89,68,254580,,,,,,,,600,,All_colors,THB,36,,,Quality
-STG,89,68,254580,,,,,,,,1000,,All_colors,THB,34,,,Quality
-STG,90,68,254580,,,,,,,,200,,All_colors,THB,86,,,Quality
-STG,90,68,254580,,,,,,,,400,,All_colors,THB,77,,,Quality
-STG,90,68,254580,,,,,,,,600,,All_colors,THB,65,,,Quality
-STG,90,68,254580,,,,,,,,1000,,All_colors,THB,59,,,Quality
-STG,91,68,254580,,,,,,,,200,,All_colors,THB,92,,,Quality
-STG,91,68,254580,,,,,,,,400,,All_colors,THB,83,,,Quality
-STG,91,68,254580,,,,,,,,600,,All_colors,THB,70,,,Quality
-STG,91,68,254580,,,,,,,,1000,,All_colors,THB,65,,,Quality
-STG,94,68,254580,,,,,,,,1000,,All_colors,THB,28,,,Quality
-STG,94,68,254580,,,,,,,,5000,,All_colors,THB,26,,,Quality
-STG,95,68,254580,,,,,,,,200,,All_colors,THB,79,,,Quality
-STG,95,68,254580,,,,,,,,400,,All_colors,THB,72,,,Quality
-STG,95,68,254580,,,,,,,,600,,All_colors,THB,60,,,Quality
-STG,95,68,254580,,,,,,,,1000,,All_colors,THB,57,,,Quality
-STG,96,68,254580,,,,,,,,200,,All_colors,THB,84,,,Quality
-STG,96,68,254580,,,,,,,,400,,All_colors,THB,77,,,Quality
-STG,96,68,254580,,,,,,,,600,,All_colors,THB,65,,,Quality
-STG,96,68,254580,,,,,,,,1000,,All_colors,THB,62,,,Quality
-STG,99,68,255363,,,,,,,,1000,,All_colors,THB,36,,,Quality
-STG,99,68,255363,,,,,,,,5000,,All_colors,THB,30,,,Quality
-STG,100,68,255363,,,,,,,,200,,All_colors,THB,78,,,Quality
-STG,100,68,255363,,,,,,,,400,,All_colors,THB,71,,,Quality
-STG,100,68,255363,,,,,,,,600,,All_colors,THB,59,,,Quality
-STG,100,68,255363,,,,,,,,1000,,All_colors,THB,55,,,Quality
-STG,101,68,255363,,,,,,,,200,,All_colors,THB,83,,,Quality
-STG,101,68,255363,,,,,,,,400,,All_colors,THB,76,,,Quality
-STG,101,68,255363,,,,,,,,600,,All_colors,THB,64,,,Quality
-STG,101,68,255363,,,,,,,,1000,,All_colors,THB,60,,,Quality
-STG,104,68,255484,,,,,,,,1000,,All_colors,THB,40,,,Quality
-STG,104,68,255484,,,,,,,,5000,,All_colors,THB,30,,,Quality
-STG,105,68,255484,,,,,,,,200,,All_colors,THB,76,,,Quality
-STG,105,68,255484,,,,,,,,400,,All_colors,THB,69,,,Quality
-STG,105,68,255484,,,,,,,,600,,All_colors,THB,57,,,Quality
-STG,105,68,255484,,,,,,,,1000,,All_colors,THB,54,,,Quality
-STG,106,68,255484,,,,,,,,200,,All_colors,THB,81,,,Quality
-STG,106,68,255484,,,,,,,,400,,All_colors,THB,74,,,Quality
-STG,106,68,255484,,,,,,,,600,,All_colors,THB,62,,,Quality
-STG,106,68,255484,,,,,,,,1000,,All_colors,THB,59,,,Quality
-STG,109,68,255484,,,,,,,,1000,,All_colors,THB,46,,,Quality
-STG,109,68,255484,,,,,,,,5000,,All_colors,THB,35,,,Quality
-STG,110,68,255484,,,,,,,,200,,All_colors,THB,88,,,Quality
-STG,110,68,255484,,,,,,,,400,,All_colors,THB,80,,,Quality
-STG,110,68,255484,,,,,,,,600,,All_colors,THB,66,,,Quality
-STG,110,68,255484,,,,,,,,1000,,All_colors,THB,62,,,Quality
-STG,111,68,255484,,,,,,,,200,,All_colors,THB,93,,,Quality
-STG,111,68,255484,,,,,,,,400,,All_colors,THB,85,,,Quality
-STG,111,68,255484,,,,,,,,600,,All_colors,THB,72,,,Quality
-STG,111,68,255484,,,,,,,,1000,,All_colors,THB,68,,,Quality
-STG,115,68,257139,,,,,,,,1000,,All_colors,THB,49,,,Quality
-STG,115,68,257139,,,,,,,,5000,,All_colors,THB,44,,,Quality
-STG,116,68,257139,,,,,,,,200,,All_colors,THB,83,,,Quality
-STG,116,68,257139,,,,,,,,400,,All_colors,THB,77,,,Quality
-STG,116,68,257139,,,,,,,,600,,All_colors,THB,70,,,Quality
-STG,116,68,257139,,,,,,,,1000,,All_colors,THB,65,,,Quality
-STG,117,68,257139,,,,,,,,200,,All_colors,THB,88,,,Quality
-STG,117,68,257139,,,,,,,,400,,All_colors,THB,82,,,Quality
-STG,117,68,257139,,,,,,,,600,,All_colors,THB,75,,,Quality
-STG,117,68,257139,,,,,,,,1000,,All_colors,THB,70,,,Quality
-STG,120,68,257127AA/14,,,,,,,,400,,All_colors,THB,54,,,Quality
-STG,120,68,257127AA/14,,,,,,,,1000,,All_colors,THB,36,,,Quality
-STG,120,68,257127AA/14,,,,,,,,5000,,All_colors,THB,34,,,Quality
-STG,121,68,257127AA/14,,,,,,,,200,,All_colors,THB,80,,,Quality
-STG,121,68,257127AA/14,,,,,,,,400,,All_colors,THB,73,,,Quality
-STG,121,68,257127AA/14,,,,,,,,600,,All_colors,THB,66,,,Quality
-STG,121,68,257127AA/14,,,,,,,,1000,,All_colors,THB,57,,,Quality
-STG,122,68,257127AA/14,,,,,,,,200,,All_colors,THB,85,,,Quality
-STG,122,68,257127AA/14,,,,,,,,400,,All_colors,THB,78,,,Quality
-STG,122,68,257127AA/14,,,,,,,,600,,All_colors,THB,71,,,Quality
-STG,122,68,257127AA/14,,,,,,,,1000,,All_colors,THB,62,,,Quality
-STG,125,68,251051,,,,,,,,1000,,All_colors,THB,32,,,Quality
-STG,126,68,251051,,,,,,,,200,,All_colors,THB,70,,,Quality
-STG,126,68,251051,,,,,,,,400,,All_colors,THB,62,,,Quality
-STG,126,68,251051,,,,,,,,600,,All_colors,THB,54,,,Quality
-STG,126,68,251051,,,,,,,,1000,,All_colors,THB,46,,,Quality
-STG,127,68,251051,,,,,,,,200,,All_colors,THB,77,,,Quality
-STG,127,68,251051,,,,,,,,400,,All_colors,THB,69,,,Quality
-STG,127,68,251051,,,,,,,,600,,All_colors,THB,61,,,Quality
-STG,127,68,251051,,,,,,,,1000,,All_colors,THB,53,,,Quality
-STG,130,68,257206AA,,,,,,,,1000,,All_colors,THB,67,,,Quality
-STG,130,68,257206AA,,,,,,,,5000,,All_colors,THB,63,,,Quality
-STG,131,68,257206AA,,,,,,,,200,,All_colors,THB,114,,,Quality
-STG,131,68,257206AA,,,,,,,,400,,All_colors,THB,106,,,Quality
-STG,131,68,257206AA,,,,,,,,600,,All_colors,THB,97,,,Quality
-STG,131,68,257206AA,,,,,,,,1000,,All_colors,THB,91,,,Quality
-STG,132,68,257206AA,,,,,,,,200,,All_colors,THB,119,,,Quality
-STG,132,68,257206AA,,,,,,,,400,,All_colors,THB,111,,,Quality
-STG,132,68,257206AA,,,,,,,,600,,All_colors,THB,102,,,Quality
-STG,132,68,257206AA,,,,,,,,1000,,All_colors,THB,96,,,Quality
-STG,135,68,257201AA,,,,,,,,1000,,All_colors,THB,28,,,Quality
-STG,135,68,257201AA,,,,,,,,5000,,All_colors,THB,26,,,Quality
-STG,136,68,257201AA,,,,,,,,200,,All_colors,THB,66,,,Quality
-STG,136,68,257201AA,,,,,,,,400,,All_colors,THB,59,,,Quality
-STG,136,68,257201AA,,,,,,,,600,,All_colors,THB,47,,,Quality
-STG,136,68,257201AA,,,,,,,,1000,,All_colors,THB,44,,,Quality
-STG,137,68,257201AA,,,,,,,,200,,All_colors,THB,71,,,Quality
-STG,137,68,257201AA,,,,,,,,400,,All_colors,THB,64,,,Quality
-STG,137,68,257201AA,,,,,,,,600,,All_colors,THB,52,,,Quality
-STG,137,68,257201AA,,,,,,,,1000,,All_colors,THB,49,,,Quality
-STG,141,68,257198AA,,,,,,,,1000,,All_colors,THB,28,,,Quality
-STG,141,68,257198AA,,,,,,,,5000,,All_colors,THB,26,,,Quality
-STG,142,68,257198AA,,,,,,,,200,,All_colors,THB,66,,,Quality
-STG,142,68,257198AA,,,,,,,,400,,All_colors,THB,59,,,Quality
-STG,142,68,257198AA,,,,,,,,600,,All_colors,THB,47,,,Quality
-STG,142,68,257198AA,,,,,,,,1000,,All_colors,THB,44,,,Quality
-STG,143,68,257198AA,,,,,,,,200,,All_colors,THB,71,,,Quality
-STG,143,68,257198AA,,,,,,,,400,,All_colors,THB,64,,,Quality
-STG,143,68,257198AA,,,,,,,,600,,All_colors,THB,52,,,Quality
-STG,143,68,257198AA,,,,,,,,1000,,All_colors,THB,49,,,Quality
-STG,147,68,257200AA,,,,,,,,1000,,All_colors,THB,37,,,Quality
-STG,147,68,257200AA,,,,,,,,5000,,All_colors,THB,32,,,Quality
-STG,148,68,art.TR-0210,,,,,,,,200,,All_colors,THB,73,,,Quality
-STG,148,68,art.TR-0210,,,,,,,,400,,All_colors,THB,66,,,Quality
-STG,148,68,art.TR-0210,,,,,,,,600,,All_colors,THB,54,,,Quality
-STG,148,68,art.TR-0210,,,,,,,,1000,,All_colors,THB,51,,,Quality
-STG,149,68,art.TR-0210,,,,,,,,200,,All_colors,THB,78,,,Quality
-STG,149,68,art.TR-0210,,,,,,,,400,,All_colors,THB,71,,,Quality
-STG,149,68,art.TR-0210,,,,,,,,600,,All_colors,THB,59,,,Quality
-STG,149,68,art.TR-0210,,,,,,,,1000,,All_colors,THB,56,,,Quality
-STG,153,68,W10HV001-1A,,,,,,,,1000,,All_colors,THB,51,,,Quality
-STG,153,68,W10HV001-1A,,,,,,,,5000,,All_colors,THB,49,,,Quality
-STG,154,68,W10HV001-1A,,,,,,,,200,,All_colors,THB,94,,,Quality
-STG,154,68,W10HV001-1A,,,,,,,,400,,All_colors,THB,87,,,Quality
-STG,154,68,W10HV001-1A,,,,,,,,600,,All_colors,THB,80,,,Quality
-STG,154,68,W10HV001-1A,,,,,,,,1000,,All_colors,THB,71,,,Quality
-STG,155,68,W10HV001-1A,,,,,,,,200,,All_colors,THB,99,,,Quality
-STG,155,68,W10HV001-1A,,,,,,,,400,,All_colors,THB,92,,,Quality
-STG,155,68,W10HV001-1A,,,,,,,,600,,All_colors,THB,85,,,Quality
-STG,155,68,W10HV001-1A,,,,,,,,1000,,All_colors,THB,76,,,Quality
+STG,69,66,256530,,,,,,,,1000,,PFD,THB,36,,,71
+STG,69,66,256530,,,,,,,,5000,,PFD,THB,34,,,71
+STG,70,66,256530,,,,,,,,200,,White,THB,79,,,71
+STG,70,66,256530,,,,,,,,400,,White,THB,72,,,71
+STG,70,66,256530,,,,,,,,600,,White,THB,65,,,71
+STG,70,66,256530,,,,,,,,1000,,White,THB,56,,,71
+STG,71,66,256530,,,,,,,,200,,All_colors,THB,83,,,71
+STG,71,66,256530,,,,,,,,400,,All_colors,THB,77,,,71
+STG,71,66,256530,,,,,,,,600,,All_colors,THB,70,,,71
+STG,71,66,256530,,,,,,,,1000,,All_colors,THB,61,,,71
+STG,74,66,256634,,,,,,,,400,,PFD,THB,54,,,71
+STG,74,66,256634,,,,,,,,600,,PFD,THB,45,,,71
+STG,74,66,256634,,,,,,,,1000,,PFD,THB,36,,,71
+STG,74,66,256634,,,,,,,,5000,,PFD,THB,34,,,71
+STG,75,66,256634,,,,,,,,200,,White,THB,80,,,71
+STG,75,66,256634,,,,,,,,400,,White,THB,73,,,71
+STG,75,66,256634,,,,,,,,600,,White,THB,66,,,71
+STG,75,66,256634,,,,,,,,1000,,White,THB,57,,,71
+STG,76,66,256634,,,,,,,,200,,All_colors,THB,85,,,71
+STG,76,66,256634,,,,,,,,400,,All_colors,THB,78,,,71
+STG,76,66,256634,,,,,,,,600,,All_colors,THB,71,,,71
+STG,76,66,256634,,,,,,,,1000,,All_colors,THB,62,,,71
+STG,79,66,254559,,,,,,,,1000,,PFD,THB,31,,,71
+STG,79,66,254559,,,,,,,,5000,,PFD,THB,29,,,71
+STG,80,66,254559,,,,,,,,200,,White,THB,78,,,71
+STG,80,66,254559,,,,,,,,400,,White,THB,71,,,71
+STG,80,66,254559,,,,,,,,600,,White,THB,59,,,71
+STG,80,66,254559,,,,,,,,1000,,White,THB,56,,,71
+STG,81,66,254559,,,,,,,,200,,All_colors,THB,83,,,71
+STG,81,66,254559,,,,,,,,400,,All_colors,THB,76,,,71
+STG,81,66,254559,,,,,,,,600,,All_colors,THB,64,,,71
+STG,81,66,254559,,,,,,,,1000,,All_colors,THB,61,,,71
+STG,84,66,254580,,,,,,,,1000,,PFD,THB,32,,,71
+STG,84,66,254580,,,,,,,,5000,,PFD,THB,31,,,71
+STG,85,66,254580,,,,,,,,200,,White,THB,76,,,71
+STG,85,66,254580,,,,,,,,400,,White,THB,69,,,71
+STG,85,66,254580,,,,,,,,600,,White,THB,57,,,71
+STG,85,66,254580,,,,,,,,1000,,White,THB,53,,,71
+STG,86,66,254580,,,,,,,,200,,All_colors,THB,81,,,71
+STG,86,66,254580,,,,,,,,400,,All_colors,THB,74,,,71
+STG,86,66,254580,,,,,,,,600,,All_colors,THB,62,,,71
+STG,86,66,254580,,,,,,,,1000,,All_colors,THB,58,,,71
+STG,89,66,254580,,,,,,,,600,,PFD,THB,36,,,71
+STG,89,66,254580,,,,,,,,1000,,PFD,THB,34,,,71
+STG,90,66,254580,,,,,,,,200,,White,THB,86,,,71
+STG,90,66,254580,,,,,,,,400,,White,THB,77,,,71
+STG,90,66,254580,,,,,,,,600,,White,THB,65,,,71
+STG,90,66,254580,,,,,,,,1000,,White,THB,59,,,71
+STG,91,66,254580,,,,,,,,200,,All_colors,THB,92,,,71
+STG,91,66,254580,,,,,,,,400,,All_colors,THB,83,,,71
+STG,91,66,254580,,,,,,,,600,,All_colors,THB,70,,,71
+STG,91,66,254580,,,,,,,,1000,,All_colors,THB,65,,,71
+STG,94,66,254580,,,,,,,,1000,,PFD,THB,28,,,71
+STG,94,66,254580,,,,,,,,5000,,PFD,THB,26,,,71
+STG,95,66,254580,,,,,,,,200,,White,THB,79,,,71
+STG,95,66,254580,,,,,,,,400,,White,THB,72,,,71
+STG,95,66,254580,,,,,,,,600,,White,THB,60,,,71
+STG,95,66,254580,,,,,,,,1000,,White,THB,57,,,71
+STG,96,66,254580,,,,,,,,200,,All_colors,THB,84,,,71
+STG,96,66,254580,,,,,,,,400,,All_colors,THB,77,,,71
+STG,96,66,254580,,,,,,,,600,,All_colors,THB,65,,,71
+STG,96,66,254580,,,,,,,,1000,,All_colors,THB,62,,,71
+STG,99,66,255363,,,,,,,,1000,,PFD,THB,36,,,71
+STG,99,66,255363,,,,,,,,5000,,PFD,THB,30,,,71
+STG,100,66,255363,,,,,,,,200,,All_colors,THB,78,,,71
+STG,100,66,255363,,,,,,,,400,,All_colors,THB,71,,,71
+STG,100,66,255363,,,,,,,,600,,All_colors,THB,59,,,71
+STG,100,66,255363,,,,,,,,1000,,All_colors,THB,55,,,71
+STG,101,66,255363,,,,,,,,200,,All_colors,THB,83,,,71
+STG,101,66,255363,,,,,,,,400,,All_colors,THB,76,,,71
+STG,101,66,255363,,,,,,,,600,,All_colors,THB,64,,,71
+STG,101,66,255363,,,,,,,,1000,,All_colors,THB,60,,,71
+STG,104,66,255484,,,,,,,,1000,,PFD,THB,40,,,71
+STG,104,66,255484,,,,,,,,5000,,PFD,THB,30,,,71
+STG,105,66,255484,,,,,,,,200,,White,THB,76,,,71
+STG,105,66,255484,,,,,,,,400,,White,THB,69,,,71
+STG,105,66,255484,,,,,,,,600,,White,THB,57,,,71
+STG,105,66,255484,,,,,,,,1000,,White,THB,54,,,71
+STG,106,66,255484,,,,,,,,200,,All_colors,THB,81,,,71
+STG,106,66,255484,,,,,,,,400,,All_colors,THB,74,,,71
+STG,106,66,255484,,,,,,,,600,,All_colors,THB,62,,,71
+STG,106,66,255484,,,,,,,,1000,,All_colors,THB,59,,,71
+STG,109,66,255484,,,,,,,,1000,,PFD,THB,46,,,71
+STG,109,66,255484,,,,,,,,5000,,PFD,THB,35,,,71
+STG,110,66,255484,,,,,,,,200,,White,THB,88,,,71
+STG,110,66,255484,,,,,,,,400,,White,THB,80,,,71
+STG,110,66,255484,,,,,,,,600,,White,THB,66,,,71
+STG,110,66,255484,,,,,,,,1000,,White,THB,62,,,71
+STG,111,66,255484,,,,,,,,200,,All_colors,THB,93,,,71
+STG,111,66,255484,,,,,,,,400,,All_colors,THB,85,,,71
+STG,111,66,255484,,,,,,,,600,,All_colors,THB,72,,,71
+STG,111,66,255484,,,,,,,,1000,,All_colors,THB,68,,,71
+STG,115,66,257139,,,,,,,,1000,,PFD,THB,49,,,71
+STG,115,66,257139,,,,,,,,5000,,PFD,THB,44,,,71
+STG,116,66,257139,,,,,,,,200,,White,THB,83,,,71
+STG,116,66,257139,,,,,,,,400,,White,THB,77,,,71
+STG,116,66,257139,,,,,,,,600,,White,THB,70,,,71
+STG,116,66,257139,,,,,,,,1000,,White,THB,65,,,71
+STG,117,66,257139,,,,,,,,200,,All_colors,THB,88,,,71
+STG,117,66,257139,,,,,,,,400,,All_colors,THB,82,,,71
+STG,117,66,257139,,,,,,,,600,,All_colors,THB,75,,,71
+STG,117,66,257139,,,,,,,,1000,,All_colors,THB,70,,,71
+STG,120,66,257127AA/14,,,,,,,,400,,PFD,THB,54,,,71
+STG,120,66,257127AA/14,,,,,,,,1000,,PFD,THB,36,,,71
+STG,120,66,257127AA/14,,,,,,,,5000,,PFD,THB,34,,,71
+STG,121,66,257127AA/14,,,,,,,,200,,White,THB,80,,,71
+STG,121,66,257127AA/14,,,,,,,,400,,White,THB,73,,,71
+STG,121,66,257127AA/14,,,,,,,,600,,White,THB,66,,,71
+STG,121,66,257127AA/14,,,,,,,,1000,,White,THB,57,,,71
+STG,122,66,257127AA/14,,,,,,,,200,,All_colors,THB,85,,,71
+STG,122,66,257127AA/14,,,,,,,,400,,All_colors,THB,78,,,71
+STG,122,66,257127AA/14,,,,,,,,600,,All_colors,THB,71,,,71
+STG,122,66,257127AA/14,,,,,,,,1000,,All_colors,THB,62,,,71
+STG,125,66,251051,,,,,,,,1000,,PFD,THB,32,,,71
+STG,126,66,251051,,,,,,,,200,,White,THB,70,,,71
+STG,126,66,251051,,,,,,,,400,,White,THB,62,,,71
+STG,126,66,251051,,,,,,,,600,,White,THB,54,,,71
+STG,126,66,251051,,,,,,,,1000,,White,THB,46,,,71
+STG,127,66,251051,,,,,,,,200,,All_colors,THB,77,,,71
+STG,127,66,251051,,,,,,,,400,,All_colors,THB,69,,,71
+STG,127,66,251051,,,,,,,,600,,All_colors,THB,61,,,71
+STG,127,66,251051,,,,,,,,1000,,All_colors,THB,53,,,71
+STG,130,66,257206AA,,,,,,,,1000,,PFD,THB,67,,,71
+STG,130,66,257206AA,,,,,,,,5000,,PFD,THB,63,,,71
+STG,131,66,257206AA,,,,,,,,200,,White,THB,114,,,71
+STG,131,66,257206AA,,,,,,,,400,,White,THB,106,,,71
+STG,131,66,257206AA,,,,,,,,600,,White,THB,97,,,71
+STG,131,66,257206AA,,,,,,,,1000,,White,THB,91,,,71
+STG,132,66,257206AA,,,,,,,,200,,All_colors,THB,119,,,71
+STG,132,66,257206AA,,,,,,,,400,,All_colors,THB,111,,,71
+STG,132,66,257206AA,,,,,,,,600,,All_colors,THB,102,,,71
+STG,132,66,257206AA,,,,,,,,1000,,All_colors,THB,96,,,71
+STG,135,66,257201AA,,,,,,,,1000,,PFD,THB,28,,,71
+STG,135,66,257201AA,,,,,,,,5000,,PFD,THB,26,,,71
+STG,136,66,257201AA,,,,,,,,200,,White,THB,66,,,71
+STG,136,66,257201AA,,,,,,,,400,,White,THB,59,,,71
+STG,136,66,257201AA,,,,,,,,600,,White,THB,47,,,71
+STG,136,66,257201AA,,,,,,,,1000,,White,THB,44,,,71
+STG,137,66,257201AA,,,,,,,,200,,All_colors,THB,71,,,71
+STG,137,66,257201AA,,,,,,,,400,,All_colors,THB,64,,,71
+STG,137,66,257201AA,,,,,,,,600,,All_colors,THB,52,,,71
+STG,137,66,257201AA,,,,,,,,1000,,All_colors,THB,49,,,71
+STG,141,66,257198AA,,,,,,,,1000,,PFD,THB,28,,,71
+STG,141,66,257198AA,,,,,,,,5000,,PFD,THB,26,,,71
+STG,142,66,257198AA,,,,,,,,200,,White,THB,66,,,71
+STG,142,66,257198AA,,,,,,,,400,,White,THB,59,,,71
+STG,142,66,257198AA,,,,,,,,600,,White,THB,47,,,71
+STG,142,66,257198AA,,,,,,,,1000,,White,THB,44,,,71
+STG,143,66,257198AA,,,,,,,,200,,All_colors,THB,71,,,71
+STG,143,66,257198AA,,,,,,,,400,,All_colors,THB,64,,,71
+STG,143,66,257198AA,,,,,,,,600,,All_colors,THB,52,,,71
+STG,143,66,257198AA,,,,,,,,1000,,All_colors,THB,49,,,71
+STG,147,66,257200AA,,,,,,,,1000,,PFD,THB,37,,,71
+STG,147,66,257200AA,,,,,,,,5000,,PFD,THB,32,,,71
+STG,148,66,art.TR-0210,,,,,,,,200,,White,THB,73,,,71
+STG,148,66,art.TR-0210,,,,,,,,400,,White,THB,66,,,71
+STG,148,66,art.TR-0210,,,,,,,,600,,White,THB,54,,,71
+STG,148,66,art.TR-0210,,,,,,,,1000,,White,THB,51,,,71
+STG,149,66,art.TR-0210,,,,,,,,200,,All_colors,THB,78,,,71
+STG,149,66,art.TR-0210,,,,,,,,400,,All_colors,THB,71,,,71
+STG,149,66,art.TR-0210,,,,,,,,600,,All_colors,THB,59,,,71
+STG,149,66,art.TR-0210,,,,,,,,1000,,All_colors,THB,56,,,71
+STG,153,66,W10HV001-1A,,,,,,,,1000,,PFD,THB,51,,,71
+STG,153,66,W10HV001-1A,,,,,,,,5000,,PFD,THB,49,,,71
+STG,154,66,W10HV001-1A,,,,,,,,200,,White,THB,94,,,71
+STG,154,66,W10HV001-1A,,,,,,,,400,,White,THB,87,,,71
+STG,154,66,W10HV001-1A,,,,,,,,600,,White,THB,80,,,71
+STG,154,66,W10HV001-1A,,,,,,,,1000,,White,THB,71,,,71
+STG,155,66,W10HV001-1A,,,,,,,,200,,All_colors,THB,99,,,71
+STG,155,66,W10HV001-1A,,,,,,,,400,,All_colors,THB,92,,,71
+STG,155,66,W10HV001-1A,,,,,,,,600,,All_colors,THB,85,,,71
+STG,155,66,W10HV001-1A,,,,,,,,1000,,All_colors,THB,76,,,71
 STG,167,160,W9RP001-0A,,,82%PA 18%EA,,,,,1000,,All_colors,THB,108,,,Quality
 STG,167,160,W9RP001-0A,,,82%PA 18%EA,,,,,5000,,All_colors,THB,105,,,Quality
 STG,168,160,W9RP001-0A,,,Full width : 155-165cm,,,,,200,,All_colors,THB,149,,,Quality
@@ -7911,6 +7990,8 @@ Savage,22,21,255048AA/11,PES TULLE INVISIBLE,100% PES,,165 - 170 cm.,18 - 23 g/m
 Savage,23,21,255048AA/11,PES TULLE INVISIBLE,100% PES,,165 - 170 cm.,18 - 23 g/m2,"3,000m.",400-599 m.,400,599,All_colors,USD,2.50,,,MOQ Qty per color Article Fabric name Composition Useable Width Weight All colors
 Savage,24,21,255048AA/11,PES TULLE INVISIBLE,100% PES,,165 - 170 cm.,18 - 23 g/m2,"3,000m.","600-2,000 m.",600,2000,All_colors,USD,2.05,,,MOQ Qty per color Article Fabric name Composition Useable Width Weight All colors
 Savage,25,21,255048AA/11,PES TULLE INVISIBLE,100% PES,,165 - 170 cm.,18 - 23 g/m2,"3,000m.","2,001-5,000 m.",2001,5000,All_colors,USD,1.85,,,MOQ Qty per color Article Fabric name Composition Useable Width Weight All colors
+Savage,48,47,257207AA/12,,"68%PA, 32% Elastane",165-175 cm,160-170 cm,77-86 g/m2,"3,500Y.",550Y.,550,,All_colors,USD,3.95,,,Price : FOB Bangkok USD/Yard for TechStyle / Savage X Quoted by K.Sivy on 1st December 2023
+Savage,52,47,257208AA/12,,"66%PA, 34% Elastane",145-155 cm.,140-150 cm.,120- 133 g/m2,"3,500Y.",550Y.,550,,All_colors,USD,3.85,,,Price : FOB Bangkok USD/Yard for TechStyle / Savage X Quoted by K.Sivy on 1st December 2023
 Savage,61,59,255484,Invisible Tulle Bright,100%PA,,147 - 157 cm,13 – 18 g/m2,"3,000m.",200-600m.,200,600,All_colors,USD,2.73,,,10.12.2021
 Savage,61,59,255484,Invisible Tulle Bright,100%PA,,147 - 157 cm,13 – 18 g/m2,"3,000m.",200-600m.,200,600,All_colors,USD,2.78,,,10.12.2021
 Savage,61,59,255484,Invisible Tulle Bright,100%PA,,147 - 157 cm,13 – 18 g/m2,"3,000m.",200-600m.,200,600,All_colors,USD,2.35,,,10.12.2021
@@ -7929,8 +8010,11 @@ Savage,68,65,255898AA11,Itri,100% PA,,146 - 152 cm.,30 - 35 g/m2,"3,000m.","601-
 Savage,69,65,255898AA11,Itri,100% PA,,146 - 152 cm.,30 - 35 g/m2,"3,000m.","2,001-4,999m.",2001,4999,All_colors,USD,2.05,,,10.12.2021
 Savage,69,65,255898AA11,Itri,100% PA,,146 - 152 cm.,30 - 35 g/m2,"3,000m.","2,001-4,999m.",2001,4999,All_colors,USD,2.10,,,10.12.2021
 Savage,69,65,255898AA11,Itri,100% PA,,146 - 152 cm.,30 - 35 g/m2,"3,000m.","2,001-4,999m.",2001,4999,All_colors,USD,1.95,,,10.12.2021
+Savage,75,73,257207BA/67,,"67%PA, 33% Elastane",170-180 cm,165-175 cm,75-85,550Y.,,550,,All_colors,USD,4.45,,,FOB Bangkok/SEA
+Savage,75,73,257207BA/67,,"67%PA, 33% Elastane",170-180 cm,165-175 cm,75-85,550Y.,,550,,All_colors,USD,4.05,,,FOB Bangkok/SEA
 Savage,76,73,257207BA/67,,"67%PA, 33% Elastane",170-180 cm,165-175 cm,75-85,220 - 350Y.,,220,350,All_colors,USD,5.5625,,,FOB Bangkok/SEA
 Savage,76,73,257207BA/67,,"67%PA, 33% Elastane",170-180 cm,165-175 cm,75-85,220 - 350Y.,,220,350,All_colors,USD,5.1025,,,FOB Bangkok/SEA
+Savage,81,79,257207BA/67,,"67%PA, 33% Elastane",170-180 cm,165-175 cm,75-85,550Y.,,550,,All_colors,USD,5.25,,,CIF by sea Semarang
 Savage,81,79,257207BA/67,,"67%PA, 33% Elastane",170-180 cm,165-175 cm,75-85,550Y.,,550,,All_colors,USD,4.8,,,CIF by sea Semarang
 Savage,81,79,257207BA/67,,"67%PA, 33% Elastane",170-180 cm,165-175 cm,75-85,550Y.,,550,,All_colors,USD,5.60,,,CIF by sea Semarang
 Savage,81,79,257207BA/67,,"67%PA, 33% Elastane",170-180 cm,165-175 cm,75-85,550Y.,,550,,All_colors,USD,5.12,,,CIF by sea Semarang
@@ -7938,6 +8022,12 @@ Savage,82,79,257207BA/67,,"67%PA, 33% Elastane",170-180 cm,165-175 cm,75-85,220 
 Savage,82,79,257207BA/67,,"67%PA, 33% Elastane",170-180 cm,165-175 cm,75-85,220 - 350Y.,,220,350,All_colors,USD,6.30,,,CIF by sea Semarang
 Savage,82,79,257207BA/67,,"67%PA, 33% Elastane",170-180 cm,165-175 cm,75-85,220 - 350Y.,,220,350,All_colors,USD,7.51,,,CIF by sea Semarang
 Savage,82,79,257207BA/67,,"67%PA, 33% Elastane",170-180 cm,165-175 cm,75-85,220 - 350Y.,,220,350,All_colors,USD,6.87,,,CIF by sea Semarang
+Savage,87,85,257207BA/67,,"68%PA, 32% Elastane",170-180 cm,165-175 cm,75-85,550Y.(500M),,550,,All_colors,USD,5.25,,,CIF by sea Semarang/ Valid 9.10.25
+Savage,88,85,257207BA/67,,"68%PA, 32% Elastane",170-180 cm,165-175 cm,75-85,300Y(275M),,300,,All_colors,USD,6.90,,,CIF by sea Semarang/ Valid 9.10.25
+Savage,96,94,257207BA/67,,"68%PA, 32% Elastane",170-180 cm,165-175 cm,75-85,550Y.(500M),,550,,All_colors,USD,5.25,,,CIF by sea Semarang/ Valid 31.12.2025
+Savage,97,94,257207BA/67,,"68%PA, 32% Elastane",170-180 cm,165-175 cm,75-85,300Y(275M),,300,,All_colors,USD,6.90,,,CIF by sea Semarang/ Valid 31.12.2025
+Savage,104,102,257207BA/67,,"68%PA, 32% Elastane",170-180 cm,165-175 cm,75-85,550Y.(500M),,550,,All_colors,USD,4.31,,,FOB Bangkok/SEA
+Savage,104,102,257207BA/67,,"68%PA, 32% Elastane",170-180 cm,165-175 cm,75-85,550Y.(500M),,550,,All_colors,USD,3.95,,,FOB Bangkok/SEA
 Savage,105,102,257207BA/67,,"68%PA, 32% Elastane",170-180 cm,165-175 cm,75-85,300Y(275M),,300,,All_colors,USD,5.1720,,,FOB Bangkok/SEA
 Savage,105,102,257207BA/67,,"68%PA, 32% Elastane",170-180 cm,165-175 cm,75-85,300Y(275M),,300,,All_colors,USD,4.7420,,,FOB Bangkok/SEA
 Savage,112,111,255484,,100%PA,,147 - 157 cm,13 – 18 g/m2,"3,000m.",200-600m.,200,600,All_colors,USD,2.35,,,MOQ Qty per color Article Composition Useable Width Weight OLD PRICE NEW PRICE START 15May2026 UPDATE 26/5/2026 REVERT TO SAME PRICE
@@ -8143,6 +8233,8 @@ Union,190,178,255787,Elviny TM Soft,"45% PES, 55% ELASTANE",155 - 165 cm.,150 - 
 Union,191,178,255787,Elviny TM Soft,"45% PES, 55% ELASTANE",155 - 165 cm.,150 - 160 cm.,53 - 58 g/m2,"3,000m.","601-2,000m.",601,2000,PFE/PFD,USD,2.80,,,Price : FOB Bangkok USD/meter (valid until 30th June 2024)
 Union,192,178,255787,Elviny TM Soft,"45% PES, 55% ELASTANE",155 - 165 cm.,150 - 160 cm.,53 - 58 g/m2,"3,000m.","2,001-5,000m.",2001,5000,PFE/PFD,USD,2.65,,,Price : FOB Bangkok USD/meter (valid until 30th June 2024)
 Union,193,178,255787,Elviny TM Soft,"45% PES, 55% ELASTANE",155 - 165 cm.,150 - 160 cm.,53 - 58 g/m2,"3,000m.","8,000m.",8000,,PFE/PFD,USD,2.55,,,Price : FOB Bangkok USD/meter (valid until 30th June 2024)
+Union,224,222,255908AA,,"70% Recycled PES, 30% Recycled Elastane",,,,"5,000m.",,5000,,All_colors,USD,2.25,1/12/2021,,Price : FOB Bangkok USD/meter
+Union,225,222,255908AA,,"70% Recycled PES, 30% Recycled Elastane",,,,"2,000m.",,2000,,All_colors,USD,2.35,1/11/2023,,Price : FOB Bangkok USD/meter
 Union,230,229,255908,,,,,,"5,000 m.",500 m.,500,,Greige,THB,635,19.04.21,K.Sivy quoted by LINE on 19.04.21 & Color quoted by LINE on 17.05.21,Yield
 Union,230,229,255908,,,,,,"5,000 m.",500 m.,500,,PFE/PFD,THB,62,19.04.21,K.Sivy quoted by LINE on 19.04.21 & Color quoted by LINE on 17.05.21,Yield
 Union,230,229,255908,,,,,,"5,000 m.",500 m.,500,,All_colors,THB,91,19.04.21,K.Sivy quoted by LINE on 19.04.21 & Color quoted by LINE on 17.05.21,Yield
@@ -8331,6 +8423,8 @@ YEH Pattana,37,30,255613,JODIE,14% ELASTANE,140 - 150 cm.,135 - 145 cm.,133 - 14
 YEH Pattana,46,44,255123AB/78,,100% PES,165 - 170 cm.,160 - 165 cm.,105 - 110 g/m2,5000 m.,500 m.,500,,All_colors,THB,85,,K.Sivy quoted @asoke office.,All colour
 YEH Pattana,52,44,255123AB/78,150 cm.,142-145 cm.,195 g/m2 (+/-5%),"3,000 meters",500 meters,WUJ-2026AA/26,Beauty FIT tm Softphilic,0,,All_colors,THB,175,,Valid price : 3 months,All colour
 YEH Pattana,58,57,WUJ-2003AA/23,MCF1356NY,80% Polyamide 20% Lycra,160 cm.,,197 g/m2 (+/-5%),500 meters,,500,,All_colors,THB,185,9/2/2024,Valid price : 3 months,Usaable width
+YEH Pattana,65,64,255367,PES MARQUISETTE MONO,100 % PES,145 - 155,140 - 150,40 - 45,"3,000 M.",600 M.,600,,All_colors,THB,47,19-04-24,,Customer
+YEH Pattana,72,71,255621,MYLA 03 TM SOFT 5621AB Lurex,80% PA,152 - 162,147 - 157,51 - 57,"3,000 M.",600 M.,600,,All_colors,THB,92,19-04-24,,Customer
 YEH Pattana,84,78,255387,,32% ELASTANE,165 - 175,160 - 170,161-179,"3,300 yds",550 yds/color,550,,All_colors,THB,160,8/5/24,,Customer
 YEH Pattana,88,87,257056AA/11,Bella tm Soft,"84% PES, 16% ELASTANE",170 - 180,165 - 175,150 - 165,"3,300 yds",550 yds,550,,All_colors,THB,140,05-09-24,,Customer
 YEH Pattana,91,87,257056AA/11,Bella tm Soft,"84% PES RECYCLE, 16% ELASTANE",170 - 180,165 - 175,150 - 165,"10,000 yds",550 yds,550,,All_colors,THB,170,05-09-24,,Customer

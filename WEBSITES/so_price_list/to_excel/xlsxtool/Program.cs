@@ -15,6 +15,9 @@ using var wb = new XLWorkbook(path);
 
 if (mode == "headers") return Headers.Run(path);
 
+if (mode == "coverage")
+    return Coverage.Run(args[1], args.Length > 2 ? args[2] : null);
+
 if (mode == "scan")
     return Emit.Run(path, args.Length > 2 ? args[2] : "scan.csv",
                           args.Length > 3 ? args[3] : null);

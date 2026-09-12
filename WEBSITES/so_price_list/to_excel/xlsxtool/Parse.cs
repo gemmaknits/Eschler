@@ -75,6 +75,17 @@ static class Parse
         else if (s.Contains('$') || Regex.IsMatch(s, @"\busd\b", RegexOptions.IgnoreCase)) currencyFromCell = "USD";
 
         var cleaned = Regex.Replace(s, @"[^\d.]", "");
+
+        /* A price is very often written with its unit after it - "$ 2.11 /m.",
+           "USD 1.15/m", "THB 47.-/M." - and stripping the letters leaves the
+           unit's full stop behind: "2.11." reads as two decimal points and was
+           thrown out as malformed. Chief You is written entirely that way and
+           yielded NOTHING; so did most of Crystal Martin and Hanes Global.
+
+           Trimming the stops at the ends keeps "1.2.3" rejected, which is the
+           case the test was actually for. */
+        cleaned = cleaned.Trim('.');
+
         if (cleaned.Length == 0) return false;
         // "1.2.3" is not a price
         if (cleaned.Count(ch => ch == '.') > 1) return false;

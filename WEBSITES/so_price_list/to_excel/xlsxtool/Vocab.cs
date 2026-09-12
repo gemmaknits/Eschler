@@ -38,6 +38,19 @@ static class Vocab
         if (bare is "medium") return "Medium";
         if (bare is "dark") return "Dark";
         if (bare is "color" or "colour" or "colors" or "colours") return "All_colors";
+
+        /* Every other way the sheets say "any colour you like": Chief You
+           writes "All dye colors", others "dyed colours" or "color/black".
+           Each unrecognised spelling silences a whole price column - Chief
+           You's was carrying twelve prices nobody could see. */
+        if (bare.StartsWith("all dye") || bare.StartsWith("all dyed")
+            || bare.StartsWith("dye color") || bare.StartsWith("dyed color")
+            || bare.StartsWith("dye colour") || bare.StartsWith("dyed colour")
+            || bare.StartsWith("all other color") || bare.StartsWith("other color")
+            || bare.StartsWith("color/black") || bare.StartsWith("colour/black")
+            || bare.StartsWith("color / black") || bare.StartsWith("black/color"))
+            return "All_colors";
+
         return null;
     }
 

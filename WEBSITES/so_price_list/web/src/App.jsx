@@ -145,11 +145,27 @@ export default function App() {
 
 
   /* A tier or currency with prices but no column would hide money, so union
-     what the header declares with what the data actually holds. */
-  const tiers = orderTiers([...shape.tiers, ...(grid.tiersInData || [])]);
+     what the header declares with what the data actually holds.
+
+     EXCEPT when a filter is on. ANITA declares seven tiers because other
+     designs on the sheet use White, Light, Medium and Dark - but 255028 is
+     priced only on All_colors and PFE/PFD, and All_colors sorts last. Searching
+     for that design left its one USD price in the seventh price column, off the
+     right-hand edge, which reads as "this design has no USD price".
+
+     So a filtered view shows the tiers the rows on screen actually use. The
+     Columns menu still reaches the rest. */
+  const narrowed = Boolean(filter.trim()) || conflictsOnly;
+  const tiersInData = grid.tiersInData || [];
+  const tiers = orderTiers(
+    narrowed && tiersInData.length ? tiersInData
+                                   : [...shape.tiers, ...tiersInData]);
+  const currenciesInData = grid.currenciesInData || [];
   const currencies = ['USD', 'THB'].filter(c =>
-    (shape.currencies.length ? shape.currencies : ['USD']).includes(c) ||
-    (grid.currenciesInData || []).includes(c));
+    narrowed && currenciesInData.length
+      ? currenciesInData.includes(c)
+      : ((shape.currencies.length ? shape.currencies : ['USD']).includes(c)
+         || currenciesInData.includes(c)));
   const visibleRows = hideInactive
     ? grid.rows.filter(r => r.active !== 'N')
     : grid.rows;

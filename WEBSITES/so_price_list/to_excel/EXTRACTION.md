@@ -41,10 +41,10 @@ Current numbers, for comparison after a change:
 
 | | |
 |---|---|
-| price lines | 8,556 |
-| distinct designs | 660 |
-| sheets producing lines | 99 of 117 |
-| money cells captured | 862 of 1,138 |
+| price lines | 8,613 |
+| distinct designs | 667 |
+| sheets producing lines | 100 of 117 |
+| money cells captured | 886 of 1,138 |
 | USD prices over 100 (implausible) | 1.4% |
 
 ---
@@ -267,7 +267,7 @@ another dropped Ausco from 268 lines to 20.
 
 **2. Coverage went up, not down.** `coverage` counts cells that can only be
 money — a currency symbol or the word USD/THB beside a number — and says how
-many became price lines. 862 of 1,138 today.
+many became price lines. 886 of 1,138 today.
 
 **3. Implausible prices stayed low.** USD over 100 is 1.4%. It peaked at 12.7%
 when quantities were being read as prices.
@@ -380,25 +380,59 @@ indistinguishable and someone would take a customer's target for our price.
 
 ---
 
-## Known-unread layouts
+## Rows that belong to no table
 
-Two shapes are understood and deliberately not handled. Both are listed in
-`uncaptured_money.csv`, and both would need a different table model — the design
-does not sit on the same row as its prices:
+A few sheets quote with no header at all. Mas Intimates writes the design on a
+line of its own and the bands underneath it:
 
-- **Mas Intimates / Unichela** — the design sits alone on one row and the
-  quantity bands follow beneath it with no header of their own:
+```
+255102        MOQ, 3,000m
+              200-599m       .35/m
+              600-2,000m     $ 4.05/m
+```
 
-  ```
-  Mas SL for La Senza          FOB THAILAND
-  255102        MOQ, 3,000m
-                200-599m       $4.35/m
-  ```
+`Fallback.cs` picks these up AFTER the main scan and only on rows nothing else
+read. It is deliberately tight, because a loose rule here is how invented prices
+get in. A row qualifies only when it is unmistakable: exactly one cell holds
+money, exactly one other is a plain quantity band, and a design was stated on
+its own line within fifteen rows above. Anything less clear is left for
+`uncaptured_money.csv` and a person.
 
-- **Hanes Global, first table** — a customer's own 29-column procurement form,
-  where the header is repeated on the row below with the money columns replaced
-  by "based on Incoterm validated". The rest of that sheet reads normally.
+---
 
-A subset rule for the second was tried and removed: it did not recover the
-prices and cost four cells elsewhere. Attempting these is reasonable; do it
-against the four checks above, not against the sheet alone.
+## Footnotes under a block
+
+Hop Lun states its freight surcharges on their own lines beneath the prices they
+apply to:
+
+```
+1. 200-600m. => add sea freight cost USD1.35/m. based on FOB Thailand price.
+2. 601-2,00m. => add sea freight cost USD0.50/m.
+```
+
+Those are a CONDITION on a price, not a price, so they are not read as money -
+but a price list without them is misleading, and they were going nowhere at all.
+Each is appended to the note of the lines in the block above it.
+
+The scan stops at the next block, and a row sitting directly above a header is
+that header's TITLE rather than this block's footnote. Without that second test
+a Hop Lun block swallowed "Here below price quoted by K. Sivy on 18.06.20",
+which introduces the prices that follow it.
+
+---
+
+## What is left, and why
+
+One layout is understood and not handled: **Hanes Global's first table**, a
+customer's own 29-column procurement form whose header is repeated on the row
+below with the money columns replaced by "based on Incoterm validated". Read on
+its own that second row is a valid header carrying one price column where the
+real one has four, so it replaces it. A containment rule was tried and removed -
+it recovered nothing and cost four cells elsewhere. The rest of that sheet reads
+normally.
+
+The remaining uncaptured cells are prose, and prose is where this stops. A
+price inside a sentence - "K.Sivy reduce price to THB 480/kg (including TC for
+only this order)" - is a condition, a negotiation or a one-off, and turning it
+into a price line would put an invented number in front of a reviewer. They are
+listed instead.

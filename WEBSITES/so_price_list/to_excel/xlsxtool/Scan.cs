@@ -622,7 +622,70 @@ static class Scan
                 });
             }
         }
+
+        /* Rows belonging to no table at all - a design on its own line with the
+           bands beneath it. See Fallback.cs; it only looks at rows nothing else
+           read. */
+        var covered = new HashSet<int>(outp.Select(l => l.Row - r0));
+        outp.AddRange(Fallback.Rows(grid, rows, cols, r0, covered, sheetVoice, ws.Name));
+
+        /* Footnotes under a block belong to it.
+
+           Hop Lun states its freight surcharges on their own lines beneath the
+           prices they apply to:
+
+               1. 200-600m. => add sea freight cost USD1.35/m. based on FOB ...
+               2. 601-2,00m. => add sea freight cost USD0.50/m. ...
+
+           Those are a condition on the price, not a price, so they are not read
+           as money - but a price list without them is misleading, and they were
+           going nowhere at all. Each is appended to the note of the lines in the
+           block above it. */
+        AttachFootnotes(grid, rows, cols, r0, outp, sheetVoice);
+
         return outp;
+    }
+
+    /* Free text below a block of prices, carrying no design of its own. */
+    static void AttachFootnotes(string[][] grid, int rows, int cols, int r0,
+                                List<Line> outp, string[] sheetVoice)
+    {
+        if (outp.Count == 0) return;
+
+        foreach (var block in outp.GroupBy(l => l.HeaderRow))
+        {
+            int lastData = block.Max(l => l.Row) - r0;
+            var notes = new List<string>();
+
+            for (int i = lastData + 1; i < rows && i <= lastData + 6; i++)
+            {
+                var text = string.Join(" ", grid[i].Where(v => !string.IsNullOrWhiteSpace(v)))
+                                 .Trim();
+                if (text.Length == 0) continue;
+
+                /* Stop at the next block. A row holding a design is data
+                   again - and a row sitting directly above a header is that
+                   header's TITLE, not this block's footnote. Without the
+                   second test a Hop Lun block swallowed "Here below price
+                   quoted by K. Sivy on 18.06.20", which introduces the prices
+                   that follow it. */
+                if (grid[i].Any(v => !string.IsNullOrWhiteSpace(v) && Parse.Article(v) != null)) break;
+                if (i + 1 < rows && ReadHeader(grid, i + 1, cols, sheetVoice) != null) break;
+                if (ReadHeader(grid, i, cols, sheetVoice) != null) break;
+
+                /* only prose worth keeping - a sentence, not a stray figure */
+                if (text.Length < 12 || text.Count(char.IsLetter) < 8) continue;
+
+                notes.Add(text.Length > 200 ? text.Substring(0, 200) : text);
+            }
+
+            if (notes.Count == 0) continue;
+            var joined = string.Join(" // ", notes);
+
+            foreach (var l in block)
+                l.BlockNote = string.IsNullOrWhiteSpace(l.BlockNote)
+                              ? joined : l.BlockNote + " // " + joined;
+        }
     }
 }
 

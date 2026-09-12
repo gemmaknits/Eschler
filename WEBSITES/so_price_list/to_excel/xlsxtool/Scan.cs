@@ -14,7 +14,7 @@ using ClosedXML.Excel;
 sealed class Line
 {
     public string Sheet, Article, Fabric, Composition, FullWidth, UsableWidth,
-                  Weight, Moq, QtyRaw, Tier, Currency, Remark, DateRaw;
+                  Weight, Moq, QtyRaw, Tier, Currency, Remark, DateRaw, BlockNote;
     public int Row, HeaderRow, QtyMin, Col;
     /* true when a LABEL named the currency; false when it was inferred */
     public bool CurrencyStated;
@@ -33,6 +33,8 @@ sealed class Table
     /* set only where a LABEL named the currency, so the repeated-tier rule
        never overrules something the sheet actually said */
     public Dictionary<int, string> StatedCurrency = new();
+    /* what the sheet calls this block of prices - the line above the header */
+    public string BlockNote;
     /* for tables that put the quantity bands across the top */
     public Dictionary<int, (int Min, int? Max)> QtyOfColumn = new();
 }
@@ -135,6 +137,14 @@ static class Scan
             else if (role == Role.Price && tier == "All_colors" && LooksTierNames(grid, r + 1, c))
             { role = Role.TierValue; tier = null; }
 
+            /* A column named after a colour that holds WORDS is a description,
+               not prices. The PT Busana quotation form has a COLOR column
+               reading "White & Black" and "Other colour", with the money in a
+               column called PRICE - and treating COLOR as a price column threw
+               that whole sheet away. */
+            if (role == Role.Price && tier != null && LooksTexty(grid, r + 1, c))
+                continue;
+
             t.Roles[c] = role;
 
             if (role == Role.Price)
@@ -162,7 +172,10 @@ static class Scan
            reads as "money" - including the one holding "3,000 m.", which then
            came through as a price of 3000. Where the table names its tiers,
            those are the price columns and these are dropped. */
-        if (moneyOnly.Count > 0 && t.TierOf.Values.Any(v => v != null))
+        /* ...and only when a tier column actually holds NUMBERS. A tier-named
+           column full of words is not competing for the same job. */
+        if (moneyOnly.Count > 0
+            && t.TierOf.Any(kv => kv.Value != null && LooksNumeric(grid, r + 1, kv.Key)))
             foreach (var c in moneyOnly)
             {
                 t.Roles.Remove(c);
@@ -224,6 +237,57 @@ static class Scan
         }
     }
 
+    /* The sheet's own name for a block of prices: the nearest non-empty text
+       above the header that is not itself part of a header. "Quoted Price by
+       K. Sivy on 20.12.2022", "Price valid 01.01.2013 - 31.12.2015".
+
+       Two quotes for the same design and quantity band are two different
+       worksheet lines, and telling them apart is the reviewer's whole job -
+       without the line that dates them they are identical on screen. */
+    static string BlockTitle(string[][] grid, int headerRow)
+    {
+        /* Usually the title is IN the header row, in the first column, with the
+           group headings beside it:
+
+               Quoted Price by K. Sivy on 20.12.2022 | | USD per meter / FOB | ...
+               Qty | Article | PFE/PFD | All colors
+
+           So look along the header row first, and take the leftmost cell that
+           is not a label the scanner recognises. */
+        foreach (var raw in grid[headerRow])
+        {
+            if (string.IsNullOrWhiteSpace(raw)) continue;
+            var v = raw.Trim();
+
+            /* A column label is short - "Qty", "Article", "USD per meter / FOB".
+               A title is prose: "Quoted Price by K. Sivy line on 01.10.2018".
+               Length is what separates them, and it has to, because the title
+               contains the word "price" and would otherwise be mistaken for a
+               money label and skipped. */
+            bool looksLikeALabel =
+                v.Length <= 25 &&
+                (Vocab.Of(v) != Role.None || Vocab.Tier(v) != null
+                 || Vocab2.IsMoneyLabel(v) || Vocab2.IsQtyHeader(v, out _, out _));
+            if (looksLikeALabel) continue;
+            if (v.Length <= 25 && Vocab.Of(v) != Role.None) continue;
+
+            return Trim300(v);
+        }
+
+        /* Otherwise the line above, as long as it is not DATA - a row carrying
+           an article is the previous table's last line, not this one's title. */
+        for (int r = headerRow - 1; r >= 0 && r >= headerRow - 3; r--)
+        {
+            if (!IsHeaderContinuation(grid[r])) break;      // hit data: stop
+            var joined = string.Join(" ", grid[r].Where(v => !string.IsNullOrWhiteSpace(v))).Trim();
+            if (joined.Length == 0) continue;
+            return Trim300(joined);
+        }
+        return null;
+    }
+
+    static string Trim300(string s) => s.Length > 300 ? s.Substring(0, 300) : s;
+
     /* A header row may be continued on the row below - names on one line,
        units and tier labels on the next. A DATA row never is. The difference
        is an article: a continuation carries labels, not design numbers. */
@@ -235,13 +299,26 @@ static class Scan
         return true;
     }
 
+    /* The first row below a header that is actually DATA. A header can be two
+       or three rows deep, and sampling the row immediately below it reads the
+       units line - "CM.", "THB/KG", "THB/M" - as if it were data. On Ausco
+       that made every price column look like a column of words, and the sheet
+       fell from 170 lines to 20. */
+    static int FirstDataRow(string[][] grid, int from)
+    {
+        int r = from;
+        while (r < grid.Length && IsHeaderContinuation(grid[r])
+               && grid[r].Any(v => !string.IsNullOrWhiteSpace(v))) r++;
+        return r;
+    }
+
     /* Do the cells under this header look like money, or like tier names?
        Used only to settle a column headed "Color", which different sheets use
        for both. Looks at a handful of rows, not the whole table. */
     static bool LooksNumeric(string[][] grid, int from, int c)
     {
         int seen = 0, numeric = 0;
-        for (int r = from; r < grid.Length && seen < 6; r++)
+        for (int r = FirstDataRow(grid, from); r < grid.Length && seen < 6; r++)
         {
             var v = grid[r][c];
             if (string.IsNullOrWhiteSpace(v)) continue;
@@ -251,10 +328,36 @@ static class Scan
         return seen > 0 && numeric * 2 > seen;
     }
 
+    /* A column of WORDS - "White & Black", "Other colour".
+
+       Words, not merely "not a number": a price column often carries "-" or
+       "n/a" where there is no price, and treating those as prose demoted real
+       tier columns and lost ten designs. So a cell only counts as text when it
+       holds at least three letters. */
+    static bool LooksTexty(string[][] grid, int from, int c)
+    {
+        int wordy = 0, priced = 0;
+        int seen = 0;
+        for (int r = FirstDataRow(grid, from); r < grid.Length && seen < 8; r++)
+        {
+            var v = grid[r][c];
+            if (string.IsNullOrWhiteSpace(v)) continue;
+            seen++;
+            if (Parse.Price(v, out _, out _)) { priced++; continue; }
+            if (v.Count(char.IsLetter) >= 3) wordy++;
+        }
+        /* One real price anywhere in the column and it stays a price column.
+           A looser test demoted YEH Pattana's "All color" column - which holds
+           "THB 175/meter" - and with no price column left the header stopped
+           being recognised at all, so two quotes were silently attributed to
+           whatever design was carried down from the table above. */
+        return priced == 0 && wordy >= 2;
+    }
+
     static bool LooksTierNames(string[][] grid, int from, int c)
     {
         int seen = 0, tiers = 0;
-        for (int r = from; r < grid.Length && seen < 6; r++)
+        for (int r = FirstDataRow(grid, from); r < grid.Length && seen < 6; r++)
         {
             var v = grid[r][c];
             if (string.IsNullOrWhiteSpace(v)) continue;
@@ -337,6 +440,18 @@ static class Scan
             if (maybe != null)
             {
                 t = maybe;
+                /* What this block of prices is. The line above a header is
+                   usually the sheet saying where the quote came from:
+
+                       Quoted Price by K. Sivy line on 01.10.2018
+                       Qty | Article | PFE/PFD | All colors
+                       200-600m. | 255028 | | 6.17
+
+                   ANITA holds two quotes for 255028, one from 2018 and one
+                   from 2022, with prices that partly agree. Without this the
+                   two are indistinguishable in the grid and nobody can say
+                   which to keep. */
+                t.BlockNote = BlockTitle(grid, maybe.HeaderRow);
                 // skip the second header row, so its unit labels are not
                 // mistaken for data
                 i += t.Depth - 1;
@@ -404,6 +519,29 @@ static class Scan
                    money. Take the row's tier, and fall back to All_colors -
                    a single unlabelled price is a price for any colour. */
                 var tier = rowTier ?? colTier ?? "All_colors";
+
+                /* A cell that restates its own column's band is a repeated
+                   HEADER, not a price. Sheets that put the bands across the top
+                   reprint that row every few articles - STG does it three times
+                   for one - and "200 m" under the 200 column was coming through
+                   as a price of 200.
+
+                   Narrow on purpose: only in a band-as-column table, and only
+                   when the cell names that very band. Testing the cell alone
+                   was too broad and threw away real greige prices quoted per
+                   kilo - 415, 430, 450 - because "kg" reads as a quantity unit
+                   too. Those are prices, and they are back. */
+                /* "3,000 m." is a quantity wherever it appears, and a merged
+                   "USD per meter / FOB" heading spans columns that hold no
+                   prices - the MOQ under one came through as a price of 3000
+                   on ANITA's 2022 quote. */
+                if (Vocab3.IsPlainQuantity(grid[i][c])) continue;
+
+                if (t.QtyOfColumn.TryGetValue(c, out var ownBand)
+                    && Vocab2.IsQtyHeader(grid[i][c], out var cellMin, out _)
+                    && cellMin == ownBand.Min)
+                    continue;
+
                 if (!Parse.Price(grid[i][c], out var price, out var curCell)) continue;
 
                 /* A figure that IS the row's quantity is a quantity, not a
@@ -428,7 +566,7 @@ static class Scan
                     QtyRaw = qtyRaw, QtyMin = qmin, QtyMax = qmax,
                     Tier = tier, Currency = currency, Price = price, Col = c,
                     CurrencyStated = curCell != null || t.StatedCurrency.ContainsKey(c),
-                    Remark = remark, DateRaw = dt
+                    Remark = remark, DateRaw = dt, BlockNote = t.BlockNote
                 });
             }
         }

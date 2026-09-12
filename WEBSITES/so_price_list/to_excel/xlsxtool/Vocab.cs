@@ -132,3 +132,27 @@ static class Vocab2
         return Parse.QtyBand(s, out min, out max);
     }
 }
+
+static class Vocab3
+{
+    /* The WHOLE cell is a quantity: a number followed by a length unit, and
+       nothing else. "3,000 m.", "500 meters", "1,000 yds".
+
+       Not a price. Prices carry a currency or a decimal ("USD 2.95/ m",
+       "2.78"), and a greige price per kilo ("430/kg") is deliberately outside
+       this - kg is a weight the fabric is SOLD by, so those are real money.
+
+       Wanted because merged group headings like "USD per meter / FOB" span
+       columns that hold no prices at all, and the MOQ sitting under one came
+       through as a price of 3000. */
+    static readonly System.Text.RegularExpressions.Regex PlainQty = new(
+        @"^\d[\d,]*(\.\d+)?\s*(m|m\.|mt|mtr|mtrs|meter|meters|metre|metres|yd|yds|yard|yards)\.?$",
+        System.Text.RegularExpressions.RegexOptions.IgnoreCase
+      | System.Text.RegularExpressions.RegexOptions.Compiled);
+
+    public static bool IsPlainQuantity(string cell)
+    {
+        var s = (cell ?? "").Trim();
+        return s.Length > 0 && s.Length <= 20 && PlainQty.IsMatch(s);
+    }
+}

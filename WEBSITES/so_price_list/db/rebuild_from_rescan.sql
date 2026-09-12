@@ -75,8 +75,14 @@ PRINT CONCAT('old lines removed: ', @@ROWCOUNT);
 /* Where the set first appears in the sheet. Computed on its own, because a
    window function cannot be nested inside another one's ORDER BY. */
 anchored AS (
+    /* header_row is part of the key on purpose. A sheet often holds the SAME
+       design and quantity band quoted TWICE, in two tables - ANITA prices
+       255028 once in a 2018 quote and again in 2022. Keyed without it, the two
+       collapse into one grid row, the two USD prices collide in one cell, and
+       the pivot splits them back apart arbitrarily: one row keeps the THB and
+       the other looks half empty. Two quotes are two lines. */
     SELECT *,
-           MIN(source_row) OVER (PARTITION BY header_id, design_no,
+           MIN(source_row) OVER (PARTITION BY header_id, header_row, design_no,
                                               qty_min, ISNULL(qty_max, -1)) AS first_row
     FROM   base
 ),
@@ -85,10 +91,10 @@ mapped AS (
            /* one grid row = one design and one quantity band, in sheet order */
            DENSE_RANK() OVER (
                PARTITION BY header_id
-               ORDER BY first_row, design_no, qty_min, ISNULL(qty_max, -1)) AS set_no,
+               ORDER BY first_row, header_row, design_no, qty_min, ISNULL(qty_max, -1)) AS set_no,
            /* tiers in reading order within the set; both currencies share it */
            DENSE_RANK() OVER (
-               PARTITION BY header_id, design_no, qty_min, ISNULL(qty_max, -1)
+               PARTITION BY header_id, header_row, design_no, qty_min, ISNULL(qty_max, -1)
                ORDER BY SO.F_SO_PRICE_LIST_tier_order(color_tier), color_tier) AS line_no
     FROM   anchored
 )
@@ -100,8 +106,18 @@ INSERT INTO SO.so_price_list_detail
 SELECT header_id, set_no, line_no,
        design_no, design_no, NULL,          -- article mirrors design_no
        fabric_name, composition, full_width_cm, usable_width_cm, weight_gsm, moq,
-       ISNULL(qty_min, 0), qty_max, 'M', color_tier, currency, price,
-       'Y', source_row, remark, @who
+       ISNULL(qty_min, 0), qty_max, N'MTS', color_tier, currency, price,
+       'Y', source_row,
+       /* Which quote this line came from, then whatever the row's own remark
+          said. Two identical-looking rows - the 2018 and the 2022 quote for
+          255028 - are only tellable apart by this, and telling them apart is
+          the reviewer's whole job. */
+       LEFT(LTRIM(RTRIM(
+            ISNULL(block_note, N'')
+          + CASE WHEN block_note IS NOT NULL AND remark IS NOT NULL
+                 THEN N' -- ' ELSE N'' END
+          + ISNULL(remark, N''))), 500),
+       @who
 FROM   mapped;
 
 PRINT CONCAT('lines inserted: ', @@ROWCOUNT);

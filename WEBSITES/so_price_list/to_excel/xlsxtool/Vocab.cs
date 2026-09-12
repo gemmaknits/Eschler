@@ -72,6 +72,18 @@ static class Vocab
         if (s.Contains("article")) return Role.Article;   // "eschler article no.", "eth article"
         if (s is "product" or "product no" or "quality no") return Role.Article;
 
+        /* OUR item code. Deliberately not bare "item": Chantasia has a
+           "Chantasia item" column holding the CUSTOMER's code alongside a real
+           Article column, and treating that as the design would overwrite it. */
+        if (s is "eth item" or "eschler item" or "eth item no" or "eschler item no")
+            return Role.Article;
+
+        /* On a customer's own form OUR design number is "the supplier's code".
+           Hanes Global heads it "Suplier code" - their typo - and without this
+           the sheet has nothing to identify a line by. */
+        if (s is "suplier code" or "supplier code" or "supplier ref"
+         or "supplier reference" or "vendor code") return Role.Article;
+
         /* The number is a DESIGN number and plenty of sheets say so: ANITA's
            later tables head the column "Eschler Design :". Without this the
            table has nothing to identify a line by, so it is not recognised as

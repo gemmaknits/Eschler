@@ -1,3 +1,4 @@
+| `Article` | contains `article`; `product`; `quality no`; contains `design`; `eth item`; `suplier code` | Each of these was a whole sheet nobody could see: ANITA heads its later tables `Eschler Design :`, Crystal Martin `ETH ITEM`, Hanes Global `Suplier code` - on a customer's own form OUR number is the supplier's code. Bare `item` is deliberately NOT matched: Chantasia has a `Chantasia item` column holding the customer's code beside a real Article column. |
 # Reading the Eschler price-book workbook
 
 How `Eschler_Updated Special Price list_2025.xlsx` is turned into price lines,
@@ -40,10 +41,10 @@ Current numbers, for comparison after a change:
 
 | | |
 |---|---|
-| price lines | 8,481 |
-| distinct designs | 646 |
-| sheets producing lines | 97 of 117 |
-| money cells captured | 819 of 1,138 |
+| price lines | 8,556 |
+| distinct designs | 660 |
+| sheets producing lines | 99 of 117 |
+| money cells captured | 862 of 1,138 |
 | USD prices over 100 (implausible) | 1.4% |
 
 ---
@@ -266,7 +267,7 @@ another dropped Ausco from 268 lines to 20.
 
 **2. Coverage went up, not down.** `coverage` counts cells that can only be
 money — a currency symbol or the word USD/THB beside a number — and says how
-many became price lines. 819 of 1,138 today.
+many became price lines. 862 of 1,138 today.
 
 **3. Implausible prices stayed low.** USD over 100 is 1.4%. It peaked at 12.7%
 when quantities were being read as prices.
@@ -345,3 +346,59 @@ SELECT * INTO SO.so_price_list_detail_snap_<date> FROM SO.so_price_list_detail;
   ON. It is set inside the .sql files so the deploy tool cannot decide it.
 - **`dbo.dm`, `dbo.designs`, `dbo.customers`, `dbo.uom` belong to other
   systems.** Read them; never write them.
+
+---
+
+## Two more cell shapes
+
+**The band and the price in one cell.** Hanes Global writes its price column as
+
+```
+200-599  m = 4.90/ m
+600-1999 m = 4.55/ m
+2,000 +    = 4.40/ m
+```
+
+`Parse.BandEqualsPrice` splits at the `=`, reads the band from the left and the
+price from the right, and the cell's own band overrides the row's. Both halves
+are checked against each other — the right-hand side must parse as a price and
+must **not** itself look like a quantity, so a cross-reference
+(`200-599 m = 600-999 m`) is not read as a price of 600.
+
+**Several money columns that are not all ours.** Crystal Martin quotes
+
+```
+TARGET PRICE | PA PRICE | ESCHLER PRICE (NORMAL) | ESCHLER PRICE ( RECYCLED)
+```
+
+side by side. All four are money and all four are captured, because a reviewer
+correcting a price list needs to see what was on the table — but `TARGET PRICE`
+is the customer's target, not ours. So **a money column with no colour tier
+carries its own heading into the line's note**, and the grid shows
+`QUALITY -- TARGET PRICE` against that figure. Without it the four are
+indistinguishable and someone would take a customer's target for our price.
+
+---
+
+## Known-unread layouts
+
+Two shapes are understood and deliberately not handled. Both are listed in
+`uncaptured_money.csv`, and both would need a different table model — the design
+does not sit on the same row as its prices:
+
+- **Mas Intimates / Unichela** — the design sits alone on one row and the
+  quantity bands follow beneath it with no header of their own:
+
+  ```
+  Mas SL for La Senza          FOB THAILAND
+  255102        MOQ, 3,000m
+                200-599m       $4.35/m
+  ```
+
+- **Hanes Global, first table** — a customer's own 29-column procurement form,
+  where the header is repeated on the row below with the money columns replaced
+  by "based on Incoterm validated". The rest of that sheet reads normally.
+
+A subset rule for the second was tried and removed: it did not recover the
+prices and cost four cells elsewhere. Attempting these is reasonable; do it
+against the four checks above, not against the sheet alone.

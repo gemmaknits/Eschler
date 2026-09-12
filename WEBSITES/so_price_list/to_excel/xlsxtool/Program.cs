@@ -15,7 +15,13 @@ var path = args[1];
 if (mode == "vocab")
 {
     for (int i = 1; i < args.Length; i++)
+    {
+        var okP = Parse.Price(args[i], out var pv, out var pc);
+        var okB = Parse.BandEqualsPrice(args[i], out var bmin, out var bmax, out var bv, out _);
+        var okQ = Parse.QtyBand(args[i], out var qn, out var qx);
         Console.WriteLine($"[{args[i]}] role={Vocab.Of(args[i])} tier={Vocab.Tier(args[i]) ?? "-"} money={Vocab2.IsMoneyLabel(args[i])}");
+        Console.WriteLine($"    price={(okP ? pv.ToString() + " " + (pc ?? "") : "no")}  band={(okQ ? qn + "-" + (qx?.ToString() ?? "open") : "no")}  band=price={(okB ? bmin + "-" + (bmax?.ToString() ?? "open") + " @ " + bv : "no")}");
+    }
     return 0;
 }
 
@@ -24,7 +30,7 @@ using var wb = new XLWorkbook(path);
 if (mode == "headers") return Headers.Run(path);
 
 if (mode == "explain")
-    return Explain.Run(args[1], args[2]);
+    return Explain.Run(args[1], args[2], args.Length > 3 ? int.Parse(args[3]) : 0);
 
 if (mode == "coverage")
     return Coverage.Run(args[1], args.Length > 2 ? args[2] : null);

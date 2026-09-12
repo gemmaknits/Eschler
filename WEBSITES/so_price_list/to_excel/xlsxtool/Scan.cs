@@ -35,6 +35,10 @@ sealed class Table
     public Dictionary<int, string> StatedCurrency = new();
     /* what the sheet calls this block of prices - the line above the header */
     public string BlockNote;
+    /* the heading of each money-labelled price column, kept because a sheet can
+       have several and they are not all OUR price: Crystal Martin quotes
+       "TARGET PRICE", "PA PRICE" and two "ESCHLER PRICE" columns side by side */
+    public Dictionary<int, string> LabelOf = new();
     /* for tables that put the quantity bands across the top */
     public Dictionary<int, (int Min, int? Max)> QtyOfColumn = new();
 }
@@ -43,7 +47,7 @@ static class Scan
 {
     /* A header needs a price column and something to identify the line by;
        three recognised labels on their own is a coincidence, not a table. */
-    static Table ReadHeader(string[][] grid, int r, int cols, string[] sheetCurrencyHints)
+    internal static Table ReadHeader(string[][] grid, int r, int cols, string[] sheetCurrencyHints)
     {
         /* Headers are sometimes two rows deep. Several sheets name the money
            on one row and the colour tier on the next:
@@ -149,7 +153,7 @@ static class Scan
 
             if (role == Role.Price)
             {
-                if (tier == null && money) moneyOnly.Add(c);
+                if (tier == null && money) { moneyOnly.Add(c); t.LabelOf[c] = (top ?? "").Trim().Length > 0 ? top.Trim() : (bot ?? "").Trim(); }
                 t.TierOf[c] = tier;
                 // currency: either label, else a group heading above, else the
                 // sheet's own wording
@@ -291,25 +295,38 @@ static class Scan
     /* A header row may be continued on the row below - names on one line,
        units and tier labels on the next. A DATA row never is. The difference
        is an article: a continuation carries labels, not design numbers. */
-    static bool IsHeaderContinuation(string[] row)
+    internal static bool IsHeaderContinuation(string[] row)
     {
-        int pricey = 0;
         foreach (var v in row)
         {
             if (string.IsNullOrWhiteSpace(v)) continue;
             if (Parse.Article(v) != null) return false;
-            if (Parse.Price(v, out _, out _)) pricey++;
+            if (LooksLikeMoney(v)) return false;
         }
+        return true;
+    }
 
-        /* A header carries labels, not figures. Testing only for an article
-           was not enough: a data row whose design cell is blank - because the
-           design carries down from the row above - looked like a header.
+    /* Does this cell hold MONEY, as opposed to any old number?
 
-           On ANITA that row read "2,000 m. +  $ 3.90", and "2,000 m. +" was
-           taken for a column of quantity bands, so the "Qty per color" column
-           became a price column and every band under it was lost. Two figures
-           on a row is enough to say it is data. */
-        return pricey < 2;
+       The test for "is the row below more header, or is it data" cannot simply
+       be "does it hold an article": a data row whose design cell is blank -
+       because the design carries down from the row above - has no article on
+       it. Hop Lun and ANITA both have such rows directly under a header, and
+       reading them as header text turned "600 - 1,999 m" into a column of
+       quantity bands and "MCQ" into a column of prices.
+
+       Nor can it be "does it hold a number". A genuine continuation row is
+       full of units - "g/m2" cleans down to "2" and parses perfectly well as
+       a price - and rejecting those would break every two-row header.
+
+       Money is the difference: a currency mark, or a decimal point. "$2.05"
+       and "2.11" are prices; "g/m2", "61 - 69" and "30 - 35 g/m2" are not. */
+    static bool LooksLikeMoney(string v)
+    {
+        if (!Parse.Price(v, out _, out var cur)) return false;
+        if (cur != null) return true;                       // named a currency
+        var digits = System.Text.RegularExpressions.Regex.Replace(v, @"[^\d.]", "");
+        return digits.Trim('.').Contains('.');              // a decimal figure
     }
 
     /* The first row below a header that is actually DATA. A header can be two
@@ -468,6 +485,13 @@ static class Scan
                 // skip the second header row, so its unit labels are not
                 // mistaken for data
                 i += t.Depth - 1;
+
+                /* Any further labels-only rows belong to this header, not to a
+                   table of their own. */
+                while (i + 1 < rows
+                       && grid[i + 1].Any(v => !string.IsNullOrWhiteSpace(v))
+                       && IsHeaderContinuation(grid[i + 1]))
+                    i++;
                 // a new table starts fresh - nothing carries across its header
                 art = fab = comp = fw = uw = wt = moq = dt = null;
                 blanks = 0;
@@ -555,19 +579,26 @@ static class Scan
                     && cellMin == ownBand.Min)
                     continue;
 
-                if (!Parse.Price(grid[i][c], out var price, out var curCell)) continue;
+                /* "200-599 m = 4.90/ m" - the band and the price in one cell.
+                   Hanes Global writes its entire price column that way. The
+                   cell carries its own band, so it overrides the row's. */
+                bool ownQty = Parse.BandEqualsPrice(grid[i][c], out var bqmin, out var bqmax,
+                                                    out var price, out var curCell);
+                if (!ownQty && !Parse.Price(grid[i][c], out price, out curCell)) continue;
 
                 /* A figure that IS the row's quantity is a quantity, not a
                    price. "3,000m." in a MOQ column came through as a price of
                    3000 where a column was read loosely. Fabric is not sold at
                    three thousand dollars a metre. */
-                if (price == qmin0 || (qmax0.HasValue && price == qmax0.Value)
-                    || price == moqNumber) continue;
+                if (!ownQty && (price == qmin0 || (qmax0.HasValue && price == qmax0.Value)
+                                || price == moqNumber)) continue;
 
                 var currency = curCell ?? t.CurrencyOf.GetValueOrDefault(c) ?? "USD";
 
                 int qmin; int? qmax;
-                if (t.QtyOfColumn.TryGetValue(c, out var band))
+                if (ownQty)
+                { qmin = bqmin; qmax = bqmax; }
+                else if (t.QtyOfColumn.TryGetValue(c, out var band))
                 { qmin = band.Min; qmax = band.Max; }
                 else
                     Parse.QtyBand(qtyRaw ?? moq ?? "", out qmin, out qmax);
@@ -579,7 +610,15 @@ static class Scan
                     QtyRaw = qtyRaw, QtyMin = qmin, QtyMax = qmax,
                     Tier = tier, Currency = currency, Price = price, Col = c,
                     CurrencyStated = curCell != null || t.StatedCurrency.ContainsKey(c),
-                    Remark = remark, DateRaw = dt, BlockNote = t.BlockNote
+                    Remark = remark, DateRaw = dt,
+                    /* the block's own title, and - where a money column carries
+                       no tier - which column the figure came from. Crystal
+                       Martin quotes TARGET, PA and two ESCHLER prices side by
+                       side; without the heading they are indistinguishable. */
+                    BlockNote = t.LabelOf.TryGetValue(c, out var colLabel)
+                                ? (string.IsNullOrWhiteSpace(t.BlockNote)
+                                   ? colLabel : t.BlockNote + " -- " + colLabel)
+                                : t.BlockNote
                 });
             }
         }

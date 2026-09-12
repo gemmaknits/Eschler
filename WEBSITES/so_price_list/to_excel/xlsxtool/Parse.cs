@@ -98,6 +98,40 @@ static class Parse
         return true;
     }
 
+    /* One cell carrying both the band and the price:
+
+           200-599  m = 4.90/ m
+           600-1999 m = 4.55/ m
+           2,000 +    = 4.40/ m
+
+       Hanes Global writes its whole price column that way, in a column headed
+       "PRICE of REF in linear meter". Split at the "=", read the band from the
+       left and the price from the right.
+
+       The two halves are checked against each other: the left must parse as a
+       quantity and the right as a price, and the right must NOT itself look
+       like a quantity. Without that, "200-599 m = 600-999 m" - a cross
+       reference, not a price - would come through as a price of 600. */
+    public static bool BandEqualsPrice(string raw, out int qmin, out int? qmax,
+                                       out decimal value, out string currencyFromCell)
+    {
+        qmin = 0; qmax = null; value = 0; currencyFromCell = null;
+
+        var s = (raw ?? "").Trim();
+        int eq = s.IndexOf('=');
+        if (eq <= 0 || eq == s.Length - 1) return false;
+
+        var left = s.Substring(0, eq).Trim();
+        var right = s.Substring(eq + 1).Trim();
+        if (left.Length == 0 || right.Length == 0) return false;
+
+        if (!QtyBand(left, out qmin, out qmax)) return false;
+        if (Vocab3.IsPlainQuantity(right)) return false;
+        if (!Price(right, out value, out currencyFromCell)) return false;
+
+        return true;
+    }
+
     public static string Clean(string raw)
     {
         var s = (raw ?? "").Replace("\n", " ").Replace("\r", " ").Trim();

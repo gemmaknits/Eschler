@@ -57,7 +57,19 @@ static class Coverage
                        the whole list and decide. */
                     var flat = v.Replace("\"", "\"\"").Replace("\t", " ")
                                 .Replace("\n", " ").Replace("\r", " ").Trim();
-                    missedRows.Add($"\"{ws.Name.Replace("\"", "\"\"")}\",{r},{c},\"{flat}\"");
+
+                    /* Not read as a price - but is it at least VISIBLE?
+
+                       A price inside a sentence keeps its words: they are
+                       attached to the nearby prices as a note, so the reviewer
+                       already sees the term in the grid. Only the rest of this
+                       list needs a person to go and look at the workbook. */
+                    var probe = flat.Length > 40 ? flat.Substring(0, 40) : flat;
+                    var kept = flat.Length >= 12
+                               && lines.Any(l => l.BlockNote != null && l.BlockNote.Contains(probe));
+
+                    missedRows.Add($"\"{ws.Name.Replace("\"", "\"\"")}\",{r},{c}," +
+                                   $"{(kept ? "yes" : "no")},\"{flat}\"");
                     if (examples.Count < 3) examples.Add($"r{r}:{flat}");
                 }
 
@@ -67,7 +79,7 @@ static class Coverage
         if (outCsv != null)
         {
             var sb = new System.Text.StringBuilder();
-            sb.AppendLine("sheet,source_row,col,cell_text");
+            sb.AppendLine("sheet,source_row,col,kept_as_note,cell_text");
             foreach (var m in missedRows) sb.AppendLine(m);
             File.WriteAllText(outCsv, sb.ToString(), new System.Text.UTF8Encoding(true));
             Console.Error.WriteLine($"uncaptured money cells written: {missedRows.Count}");

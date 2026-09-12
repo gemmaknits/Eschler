@@ -736,13 +736,24 @@ static class Scan
                          .OrderBy(b => b.First)
                          .ToList();
 
-        var priceRows = new HashSet<int>(outp.Select(l => l.Row - r0));
+        /* Per CELL, not per row. A row that produced prices can still carry a
+           sentence of terms beside them - BIGA Lanka states "Greige price :
+           THB 450.-/kg" on the same row as the figures it explains - and
+           skipping the whole row lost those. */
+        var priceCells = new HashSet<(int, int)>(outp.Select(l => (l.Row - r0, l.Col)));
 
         for (int i = 0; i < rows; i++)
         {
-            if (priceRows.Contains(i)) continue;              // it became a price
+            var parts = new List<string>();
+            for (int c = 0; c < cols; c++)
+            {
+                var v = grid[i][c];
+                if (string.IsNullOrWhiteSpace(v)) continue;
+                if (priceCells.Contains((i, c))) continue;    // that cell became a price
+                parts.Add(v);
+            }
 
-            var text = string.Join(" ", grid[i].Where(v => !string.IsNullOrWhiteSpace(v))).Trim();
+            var text = string.Join(" ", parts).Trim();
             if (text.Length < 12) continue;
             if (text.Count(char.IsLetter) < 8) continue;      // prose, not a stray figure
             if (!MentionsMoney(text)) continue;

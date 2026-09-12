@@ -432,11 +432,14 @@ real one has four, so it replaces it. A containment rule was tried and removed -
 it recovered nothing and cost four cells elsewhere. The rest of that sheet reads
 normally.
 
-The remaining uncaptured cells are prose, and prose is where this stops. A
-price inside a sentence - "K.Sivy reduce price to THB 480/kg (including TC for
-only this order)" - is a condition, a negotiation or a one-off, and turning it
-into a price line would put an invented number in front of a reviewer. They are
-listed instead.
+The report now says which is which. `uncaptured_money.csv` carries a
+`kept_as_note` column:
+
+- **yes (168 of 261)** - not read as a price, but its words are attached to the
+  nearby prices, so the reviewer already sees the term in the grid.
+- **no (93)** - not represented anywhere. 74 of those are bare figures like
+  `.00` sitting in a table that was never recognised; the rest are fragments
+  too short to be worth keeping as a note.
 ---
 
 ## A price inside a sentence is a NOTE, never a price

@@ -195,6 +195,38 @@ button.danger{background:var(--danger); border-color:var(--danger); color:#fff; 
 .pill.open{background:var(--accent-soft); color:var(--accent); border-color:var(--accent)}
 .pill.warnp{background:var(--warn-soft); color:var(--warn); border-color:var(--warn-rule)}
 
+
+/* ---------------------------------------------------------------------------
+   The meta strip is dark too, on the same principle as the nav above: redefine
+   the palette tokens on the element and every existing rule inside it follows.
+
+   Chrome dark, worksheet light - the strip reads as part of the frame around
+   the grid rather than as a first row of data. */
+.meta{
+  --surface:#151A19; --surface-2:#121716; --surface-3:#202726;
+  --ink:#E7EDEB; --ink-2:#AFB9B6; --muted:#7C8683;
+  --rule:#28302E; --rule-strong:#3A4442;
+  --accent:#54C2C6; --accent-soft:#15302F;
+  --warn:#E3A54A; --warn-soft:#2C2314; --warn-rule:#5C4620;
+  --danger:#E8796C; --danger-soft:#2E1917;
+  color:var(--ink);
+  border-bottom-color:#0B100F;
+}
+/* Badges sit ON their colour, so their text stays dark whatever the page is
+   doing - the same fix the nav's conflict count needs. */
+.meta .metacount{color:#12100A}
+/* Inputs and buttons inside the strip: the shared rules paint them from
+   --surface, which is now the dark value, but the borders need the stronger
+   rule to stay visible against it. */
+.meta input[type="text"], .meta input[type="search"], .meta select{
+  background:var(--surface-3); border-color:var(--rule-strong); color:var(--ink);
+}
+.meta button{color:var(--ink); border-color:var(--rule-strong); background:var(--surface-3)}
+.meta button:hover:not(:disabled){background:var(--surface); border-color:var(--accent)}
+.meta .assignbtn{background:transparent; border-color:transparent}
+.meta .assignbtn:hover{background:var(--surface-3); border-color:var(--rule-strong)}
+.meta .chk, .meta .metachk{color:var(--ink)}
+
 /* ============================ worksheet ============================ */
 .gridwrap{flex:1; overflow:auto; background:var(--surface); min-height:0}
 table#grid{
@@ -778,3 +810,82 @@ button.ghost.danger:hover:not(:disabled){
   color:var(--accent);
 }
 .navloading{color:var(--muted); font-style:italic}
+
+/* ============================ selected rows ============================
+   Click a row number to select, shift-click for a block, ctrl-click to add or
+   drop one. What it is for is copying several rows in one go.
+
+   The row is washed rather than filled: the USD and THB column tints carry
+   meaning, and a solid selection colour would paint over the one thing the
+   grid exists to show. The gutter cell does the shouting. */
+td.rn.pick{cursor:pointer}
+td.rn.pick:hover{background:var(--grid-strong)}
+tbody tr.selrow td{background-image:linear-gradient(var(--sel-soft), var(--sel-soft))}
+tbody tr.selrow td.rn{
+  background:var(--sel); background-image:none;
+  color:var(--surface); font-weight:700;
+}
+:root[data-theme="dark"] tbody tr.selrow td.rn,
+:root:not([data-theme="light"]) tbody tr.selrow td.rn{color:#0E1312}
+/* the focused cell still has to be findable inside a selected block */
+tbody tr.selrow td.foc{background-image:none; background:var(--sel-soft)}
+
+/* ============================ column filters ============================
+   A row of boxes under the headings, sticky with them. Substring by default;
+   on a column of numbers >5, <=2.5 and =0 compare instead, and "=" alone finds
+   blanks - which is most of what a data review is looking for. */
+table#grid thead tr.filterrow th{
+  top:54px; height:24px; padding:0 3px;
+  background:var(--surface-2); border-bottom:1px solid var(--grid-strong);
+}
+table#grid thead tr.filterrow th.on{background:var(--accent-soft)}
+.fin{
+  width:100%; height:20px; padding:0 5px; border:1px solid var(--rule);
+  border-radius:2px; background:var(--surface); color:var(--ink);
+  font-family:inherit; font-size:11px; font-weight:400; text-align:left;
+}
+.fin:focus{outline:none; border-color:var(--accent); box-shadow:0 0 0 2px var(--accent-soft)}
+.fin::placeholder{color:var(--muted); opacity:.6}
+
+/* the funnel in the corner cell, and the clear-all under it */
+th.fbtn{padding:0}
+th.fbtn button, .fclear{
+  width:100%; height:100%; padding:0; border:none; background:transparent;
+  color:var(--muted); font-size:9px; line-height:1; cursor:pointer; border-radius:0;
+}
+th.fbtn button:hover, .fclear:hover{background:var(--grid-strong); color:var(--ink)}
+th.fbtn button.on{color:var(--accent); font-weight:700}
+.fclear{font-size:14px; color:var(--warn)}
+
+/* what is on the clipboard, under "Insert here" */
+.ctxmenu .ctxwhat{
+  display:block; margin-top:1px; max-width:250px;
+  white-space:normal; line-height:1.35;
+}
+
+/* ============================ the navigation bar ============================
+   Dark in both themes. Rather than restating every rule in the sidebar, the
+   palette tokens are redefined here and the existing rules follow: the nav is
+   simply a dark island, and one place decides what dark means.
+
+   In the dark theme these are already the values in force, so this changes
+   nothing there - it only pins the light theme to the same look. */
+.nav{
+  --surface:#151A19; --surface-2:#121716; --surface-3:#202726;
+  --ink:#E7EDEB; --ink-2:#AFB9B6; --muted:#7C8683;
+  --rule:#28302E; --rule-strong:#3A4442;
+  --accent:#54C2C6; --accent-soft:#15302F;
+  --warn:#E3A54A; --danger:#E8796C;
+  --grid-strong:#333B39;
+  color:var(--ink);
+}
+/* The badge sits ON the warn colour, so its text has to be dark whatever the
+   page theme is doing. */
+.nav .navconf{color:#12100A}
+/* A white button on a dark panel is too loud; the accent reads better. */
+.nav .newbtn{background:var(--accent); border-color:var(--accent); color:#0E1312}
+.nav .navsearch{background:var(--surface-3); border-color:var(--rule-strong); color:var(--ink)}
+.nav .navsearch::placeholder{color:var(--muted)}
+/* Keep the divider against the worksheet crisp in the light theme, where the
+   paper beside it is nearly white. */
+.nav{border-right-color:#0B100F}

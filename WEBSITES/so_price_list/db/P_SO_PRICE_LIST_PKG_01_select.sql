@@ -188,6 +188,7 @@ BEGIN
             d.usable_width_cm,
             d.weight_gsm,
             d.moq,
+            d.price_line_date,
             d.qty_min,
             d.qty_max,
             d.qty_unit,

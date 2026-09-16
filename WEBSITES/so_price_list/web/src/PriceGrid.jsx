@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 
 const money = (v, ccy) => {
   if (v === null || v === undefined || v === '') return '';
@@ -29,6 +29,12 @@ export const INFO_COLS = [
   { key: 'usable_width_cm', label: 'Usable W',   width: 124 },
   { key: 'weight_gsm',      label: 'g/m²',       width: 112 },
   { key: 'moq',             label: 'MOQ',        width: 104 },
+  /* When this price was quoted. A property of the whole row, like the columns
+     either side of it, so editing it writes every price line behind the row.
+     The imported data has none of these - the notes carry the date as prose
+     ("Quoted Price by K. Sivy on 20.12.2022") and it is the reviewers who put
+     it here as they work through the book. */
+  { key: 'price_line_date', label: 'Price date', width: 116, date: true },
   /* Only 3% of lines have a note, but they carry the quote's provenance -
      who quoted it, when, on what terms - so they are worth the widest column
      here. They run to 2,000 characters, so no width fits them all: what does
@@ -73,15 +79,84 @@ function loadWidths() {
    there is nothing hidden behind a badge and nothing to click to reveal. */
 const cellAt = (row, ccy, tier) => row.cells?.[`${ccy}|${tier}`] || null;
 
+/* PageUp/PageDown move by what is actually on screen, not a fixed guess, so
+   the row under the cursor stays under the cursor. 29px is the row height set
+   in the stylesheet; the fallback is a sensible screenful. */
+/* ---------- column filters ----------
+
+   A filter is a substring by default, because that is what people type. On a
+   column of numbers an operator makes it a comparison instead, which is the
+   thing you actually want of a price column: >5, <=2.5, =0.
+
+   "=" on its own means blank, the one case that cannot be written as text -
+   and finding the gaps is most of what this review is for. */
+const OPS = [['>=', (a, b) => a >= b], ['<=', (a, b) => a <= b],
+             ['<>', (a, b) => a !== b], ['>',  (a, b) => a >  b],
+             ['<',  (a, b) => a <  b],  ['=',  (a, b) => a === b]];
+
+function matches(text, q) {
+  const needle = q.trim();
+  if (!needle) return true;
+  const have = (text ?? '').toString().trim();
+
+  if (needle === '=') return have === '';
+
+  for (const [sym, test] of OPS) {
+    if (!needle.startsWith(sym)) continue;
+    const n = Number(needle.slice(sym.length).trim());
+    const v = Number(have);
+    if (!Number.isFinite(n)) break;          // ">abc" - fall through to text
+    if (have === '' || !Number.isFinite(v)) return false;
+    return test(v, n);
+  }
+  return have.toLowerCase().includes(needle.toLowerCase());
+}
+
+const ROW_H = 29;
+function pageRows() {
+  const pane = document.querySelector('.gridwrap');
+  const h = pane?.clientHeight;
+  return h ? Math.max(1, Math.floor(h / ROW_H) - 1) : 20;
+}
+
+/* What is on the clipboard, in the few words the menu has room for.
+
+   The design number alone is not enough to tell two copied rows apart - a
+   design usually appears several times over, once per quantity band, and the
+   thing that distinguishes them is the colour tier and what it costs. */
+function describe(c) {
+  if (!c) return null;
+  if (c.count > 1) return `${c.count} lines · ${c.designs.slice(0, 3).join(', ')}` +
+                          (c.designs.length > 3 ? ' …' : '');
+  const band = c.qty_min !== undefined
+    ? ` · ${c.qty_min}–${c.qty_max === null || c.qty_max === '' ? '∞' : c.qty_max}` : '';
+  const priced = (c.tiers || []).filter(t => t.price !== null && t.price !== undefined);
+  const shown = (priced.length ? priced : (c.tiers || [])).slice(0, 3);
+  const tiers = shown.map(t =>
+    t.price === null || t.price === undefined
+      ? t.tier
+      : `${t.tier} ${t.currency === 'THB' ? '฿' : '$'}${t.price}`).join(' · ');
+  return `${c.design_no}${band}${tiers ? ' · ' + tiers : ''}`;
+}
+
 /* Whole string or nothing. parseFloat('3.5xyz') is 3.5 and parseInt('12abc')
    is 12, so a typo would be silently truncated and saved. */
 const IS_QTY   = /^\d{1,9}$/;                  // non-negative whole number
 const IS_PRICE = /^\d{1,12}(\.\d{1,4})?$/;     // decimal(18,4), non-negative
+/* ISO only, and the day has to be real: 2025-02-31 parses to 3 March in JS,
+   which would silently save a date nobody typed. */
+const IS_DATE  = /^\d{4}-\d{2}-\d{2}$/;
+const dateOk = v => {
+  if (!IS_DATE.test(v)) return false;
+  const [y, m, d] = v.split('-').map(Number);
+  if (m < 1 || m > 12 || d < 1) return false;
+  return d <= new Date(y, m, 0).getDate();
+};
 
 export default function PriceGrid({
   grid, tiers, currencies,
   onEditPrice, onEditRow, onAddRow, onInvalid,
-  onCopyRow, onInsertCopied, onDeleteRow, copied
+  onCopyRow, onInsertCopied, onInsertBlank, onDeleteRow, copied
 }) {
   const [focus, setFocus] = useState(null);      // {r, c} - c indexes ALL columns
   const [editing, setEditing] = useState(null);  // {r, c, value, mode}
@@ -94,6 +169,18 @@ export default function PriceGrid({
   /* {x, y, row} - where the menu sits and which row it acts on. Held here
      rather than per row so only one can ever be open. */
   const [menu, setMenu] = useState(null);
+
+  /* Row selection, by row key. Click a row number to select it, shift-click
+     another to take the block between them, ctrl-click to add or drop one -
+     the same three gestures as a spreadsheet's row headings. What it is FOR is
+     copying several rows in one go; everything else still works a row at a
+     time. */
+  const [selected, setSelected] = useState(() => new Set());
+  /* colId -> what was typed under that column. */
+  const [colFilter, setColFilter] = useState({});
+  const [showFilters, setShowFilters] = useState(false);
+  /* Where a shift-click measures from. */
+  const anchor = useRef(null);
 
   /* Any click elsewhere, Escape, or a scroll closes it. Without the scroll
      listener the menu hangs in place while the rows move underneath it. */
@@ -113,14 +200,6 @@ export default function PriceGrid({
     };
   }, [menu]);
 
-  const { rows } = grid;
-
-  /* Written on every drop rather than on every pixel - setSized already runs
-     per mousemove, and localStorage is synchronous. */
-  useEffect(() => {
-    try { localStorage.setItem(WIDTH_KEY, JSON.stringify(sized)); } catch { /* private mode */ }
-  }, [sized]);
-
   /* One flat column model, so arrow keys cross field columns and price columns
      alike instead of stopping at the boundary. */
   const columns = [
@@ -131,16 +210,89 @@ export default function PriceGrid({
   ];
   const maxC = columns.length - 1;
 
-  /* ------------------------------ column widths ------------------------------
-     The defaults above are the starting point, not the law: a reviewer reading
-     long notes or Thai fabric names needs to widen a column, and the width they
-     choose should still be there tomorrow.
-
-     One stable id per column, so a remembered width survives a reload and a
+  /* One stable id per column, so a remembered width survives a reload and a
      change of price list. Price columns are keyed by currency and tier rather
      than by position - the columns shift when a filter narrows them. */
   const colId = c => c.kind === 'price' ? `p:${c.currency}:${c.tier}` : `f:${c.key}`;
 
+  /* Filtered at source, deliberately: every index in this component - the
+     focused cell, the shift-anchor, what a right-click acts on - counts rows
+     as they appear on screen. Filtering anywhere later would leave the
+     keyboard walking over rows nobody can see. */
+  const allRows = grid.rows;
+  const activeFilters = Object.entries(colFilter).filter(([, v]) => v.trim());
+
+  const rows = useMemo(() => {
+    if (!activeFilters.length) return allRows;
+    return allRows.filter(row =>
+      /* A draft is a line being typed. It has nothing in it yet, so every
+         filter would hide it the moment it was created. */
+      row.isDraft ||
+      activeFilters.every(([id, q]) => {
+        const col = columns.find(c => colId(c) === id);
+        if (!col) return true;
+        if (col.kind === 'price') {
+          const d = cellAt(row, col.currency, col.tier);
+          return matches(d ? d.price : '', q);
+        }
+        if (col.key === 'qty_max' && (row.qty_max === null || row.qty_max === ''))
+          return matches('', q);
+        return matches(row[col.key], q);
+      }));
+  }, [allRows, colFilter, columns]);
+
+  const hidden = allRows.length - rows.length;
+
+  const setFilter = (id, v) => setColFilter(p => ({ ...p, [id]: v }));
+  const clearFilters = () => { setColFilter({}); setShowFilters(false); };
+
+  /* A new list, or a reload after a save, renumbers everything - so a
+     selection carried across would point at rows the user never picked. */
+  useEffect(() => { setSelected(new Set()); anchor.current = null; }, [grid]);
+
+  /* Rows can disappear under a selection (a delete, a filter). Everything that
+     acts on the selection reads it through here, so it can only ever contain
+     rows that are actually on screen. */
+  const selectedRows = rows.filter(r => selected.has(r.key));
+
+  /* Click a row number. Plain click replaces the selection, shift extends from
+     the anchor, ctrl/cmd toggles one. */
+  const pickRow = useCallback((ri, e) => {
+    const row = rows[ri];
+    if (!row) return;
+    setSelected(prev => {
+      const next = new Set(prev);
+      if (e.shiftKey && anchor.current !== null) {
+        const [a, b] = [anchor.current, ri].sort((x, y) => x - y);
+        next.clear();
+        for (let i = a; i <= b; i++) if (rows[i]) next.add(rows[i].key);
+        return next;
+      }
+      if (e.ctrlKey || e.metaKey) {
+        next.has(row.key) ? next.delete(row.key) : next.add(row.key);
+        anchor.current = ri;
+        return next;
+      }
+      /* A plain click on the only selected row clears it, so there is a way
+         out that does not need the keyboard. */
+      const only = prev.size === 1 && prev.has(row.key);
+      next.clear();
+      if (!only) next.add(row.key);
+      anchor.current = only ? null : ri;
+      return next;
+    });
+  }, [rows]);
+
+  /* Written on every drop rather than on every pixel - setSized already runs
+     per mousemove, and localStorage is synchronous. */
+  useEffect(() => {
+    try { localStorage.setItem(WIDTH_KEY, JSON.stringify(sized)); } catch { /* private mode */ }
+  }, [sized]);
+
+  /* ------------------------------ column widths ------------------------------
+     The defaults above are the starting point, not the law: a reviewer reading
+     long notes or Thai fabric names needs to widen a column, and the width they
+     choose should still be there tomorrow. */
   const colWidth = c => sized[colId(c)]
                      ?? (c.kind === 'price' ? PRICE_W : (c.width || 120));
   /* table-layout:fixed only honours <col> widths when the table has an explicit
@@ -235,28 +387,134 @@ export default function PriceGrid({
     setEditing({ r: focus.r, c: focus.c, value: valueAt(row, col), mode });
   }, [focus, rows, columns, valueAt]);
 
+  /* Jump straight to a cell, rather than stepping. */
+  const goto = useCallback((r, c) => setFocus({
+    r: Math.min(Math.max(r, 0), rows.length - 1),
+    c: Math.min(Math.max(c, 0), maxC)
+  }), [rows.length, maxC]);
+
+  /* Select from the shift-anchor to a row, the way shift-arrow does in a
+     spreadsheet: the anchor stays put and the far end follows the cursor. */
+  const extendTo = useCallback(ri => {
+    if (anchor.current === null) anchor.current = focus?.r ?? ri;
+    const [a, b] = [anchor.current, ri].sort((x, y) => x - y);
+    const next = new Set();
+    for (let i = a; i <= b; i++) if (rows[i]) next.add(rows[i].key);
+    setSelected(next);
+  }, [rows, focus]);
+
   useEffect(() => {
     const onKey = e => {
       if (editing) return;
       if (e.target.matches('input,select,textarea,button')) return;
+      const jump = e.ctrlKey || e.metaKey;
+      const r = focus?.r ?? 0, c = focus?.c ?? 0;
+      const lastRow = rows.length - 1;
+
       switch (e.key) {
-        case 'ArrowUp':    move(-1, 0); e.preventDefault(); break;
-        case 'ArrowDown':  move(1, 0);  e.preventDefault(); break;
-        case 'ArrowLeft':  move(0, -1); e.preventDefault(); break;
-        case 'ArrowRight': move(0, 1);  e.preventDefault(); break;
+        /* Ctrl+arrow runs to the edge of the grid, as it does in a sheet where
+           every row is filled. Shift+up/down grows the row selection. */
+        case 'ArrowUp':
+          e.preventDefault();
+          if (e.shiftKey) { const t = Math.max(r - 1, 0); goto(t, c); extendTo(t); }
+          else if (jump) goto(0, c);
+          else move(-1, 0);
+          break;
+        case 'ArrowDown':
+          e.preventDefault();
+          if (e.shiftKey) { const t = Math.min(r + 1, lastRow); goto(t, c); extendTo(t); }
+          else if (jump) goto(lastRow, c);
+          else move(1, 0);
+          break;
+        case 'ArrowLeft':
+          e.preventDefault();
+          jump ? goto(r, 0) : move(0, -1);
+          break;
+        case 'ArrowRight':
+          e.preventDefault();
+          jump ? goto(r, maxC) : move(0, 1);
+          break;
+
+        /* Home/End are the row; with ctrl they are the whole grid. */
+        case 'Home':
+          e.preventDefault();
+          jump ? goto(0, 0) : goto(r, 0);
+          break;
+        case 'End':
+          e.preventDefault();
+          jump ? goto(lastRow, maxC) : goto(r, maxC);
+          break;
+
+        case 'PageDown':
+          e.preventDefault();
+          goto(Math.min(r + pageRows(), lastRow), c);
+          break;
+        case 'PageUp':
+          e.preventDefault();
+          goto(Math.max(r - pageRows(), 0), c);
+          break;
+
+        case 'Tab':
+          /* Tab crosses the row and wraps to the next one, rather than
+             stopping dead at the last column. */
+          e.preventDefault();
+          if (e.shiftKey) c === 0 ? goto(r - 1, maxC) : move(0, -1);
+          else            c === maxC ? goto(r + 1, 0) : move(0, 1);
+          break;
+
+        case 'Escape':
+          /* Drop the selection; the focused cell stays where it is. */
+          if (selected.size) { e.preventDefault(); setSelected(new Set()); anchor.current = null; }
+          break;
+
         case 'Enter':
         case 'F2':         beginEdit('edit'); e.preventDefault(); break;
+
         case ' ': {
-          if (!focus) break;
-          const row = rows[focus.r], col = columns[focus.c];
-          if (col?.flag) {
-            onEditRow(row, col, row.active === 'N' ? 'Y' : 'N');
-            e.preventDefault();
+          e.preventDefault();
+          const row = rows[r], col = columns[c];
+          /* Ctrl+space takes the whole row, as in a sheet. */
+          if (jump) {
+            if (row && !row.isDraft) {
+              setSelected(new Set([row.key]));
+              anchor.current = r;
+            }
             break;
           }
-          e.preventDefault();
+          if (col?.flag && row) onEditRow(row, col, row.active === 'N' ? 'Y' : 'N');
           break;
         }
+
+        case 'l':
+        case 'L':
+          if (jump && e.shiftKey) {
+            e.preventDefault();
+            if (activeFilters.length) clearFilters();
+            else setShowFilters(v => !v);
+          }
+          break;
+
+        case 'a':
+        case 'A':
+          if (jump) {
+            e.preventDefault();
+            setSelected(new Set(rows.filter(x => !x.isDraft).map(x => x.key)));
+            anchor.current = 0;
+          }
+          break;
+
+        case 'c':
+        case 'C':
+          /* Ctrl+C copies the selected rows, or the focused one if nothing is
+             selected - the same thing the right-click menu does. */
+          if (jump) {
+            e.preventDefault();
+            const picked = selected.size ? rows.filter(x => selected.has(x.key))
+                                         : (rows[r] ? [rows[r]] : []);
+            if (picked.length) onCopyRow(picked);
+          }
+          break;
+
         default:
           // start typing to edit, the way a spreadsheet does
           if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey && focus) {
@@ -270,7 +528,45 @@ export default function PriceGrid({
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [move, beginEdit, editing, focus, rows, columns]);
+  }, [move, goto, extendTo, beginEdit, editing, focus, rows, columns, maxC,
+      selected, onCopyRow, onEditRow, activeFilters.length]);
+
+  /* Keep the focused cell on screen.
+
+     scrollIntoView is no good here: the header and the three frozen columns
+     are sticky, so "in view" by its reckoning still means underneath them.
+     These insets are measured from the live elements rather than assumed, so
+     they stay right when a frozen column is resized. */
+  useEffect(() => {
+    if (!focus) return;
+    const table = tableRef.current;
+    const pane  = table?.closest('.gridwrap');
+    const cell  = table?.querySelector(`td[data-r="${focus.r}"][data-c="${focus.c}"]`);
+    if (!pane || !cell) return;
+
+    const head = table.querySelector('thead');
+    const topInset  = head ? head.getBoundingClientRect().height : 0;
+    /* everything frozen to the left: gutter + Act + Design No */
+    const frozen = table.querySelector('tbody tr td.s1');
+    const leftInset = frozen
+      ? frozen.getBoundingClientRect().right - pane.getBoundingClientRect().left
+      : 0;
+
+    const p = pane.getBoundingClientRect();
+    const b = cell.getBoundingClientRect();
+
+    if (b.top    < p.top + topInset)  pane.scrollTop  -= (p.top + topInset) - b.top;
+    else if (b.bottom > p.bottom)     pane.scrollTop  += b.bottom - p.bottom;
+
+    /* A frozen cell is always on screen, so there is nothing to scroll it
+       into - but there is nothing to its left either, so landing on one means
+       going back to the start of the sheet. Without this, Home moves the
+       cursor and the view stays where it was, which reads as nothing having
+       happened. */
+    if (cell.classList.contains('stk')) pane.scrollLeft = 0;
+    else if (b.left  < p.left + leftInset) pane.scrollLeft -= (p.left + leftInset) - b.left;
+    else if (b.right > p.right)           pane.scrollLeft += b.right - p.right;
+  }, [focus]);
 
   /* Enter, Tab and the arrow keys all commit and then move, which unmounts the
      input - and the blur handler would commit the same edit a second time.
@@ -294,6 +590,12 @@ export default function PriceGrid({
     } else if (col.num) {
       if (raw !== '' && !IS_QTY.test(raw)) {
         onInvalid?.(`"${raw}" is not a quantity. Use whole numbers, e.g. 600`);
+        setInvalid(true);
+        return;
+      }
+    } else if (col.date) {
+      if (raw !== '' && !dateOk(raw)) {
+        onInvalid?.(`"${raw}" is not a date. Use YYYY-MM-DD, e.g. 2025-07-25`);
         setInvalid(true);
         return;
       }
@@ -363,7 +665,15 @@ export default function PriceGrid({
       </colgroup>
       <thead>
         <tr>
-          <th className="stk s0" rowSpan={2} />
+          <th className="stk s0 fbtn" rowSpan={2}>
+            <button
+              className={activeFilters.length ? 'on' : ''}
+              title={activeFilters.length
+                ? `${activeFilters.length} column filter${activeFilters.length > 1 ? 's' : ''} · ${hidden} row${hidden === 1 ? '' : 's'} hidden — Ctrl+Shift+L to clear`
+                : 'Filter columns (Ctrl+Shift+L)'}
+              onClick={() => setShowFilters(v => !v)}
+            >▼</button>
+          </th>
           <th className="stk sAct" rowSpan={2} title="Active — N is a withdrawn price">
             Act{grip(byKey('active'))}
           </th>
@@ -396,6 +706,41 @@ export default function PriceGrid({
             <th key={c.key}>{c.label}{grip(byKey(c.key))}</th>
           ))}
         </tr>
+
+        {/* One box per column. Sticky like the two rows above it, so it stays
+            put while the rows scroll under it. */}
+        {showFilters && (
+          <tr className="filterrow">
+            <th className="stk s0 fx">
+              {activeFilters.length > 0 && (
+                <button className="fclear" title="Clear every filter"
+                        onClick={clearFilters}>×</button>
+              )}
+            </th>
+            {columns.map((c, i) => {
+              const id = colId(c);
+              const on = (colFilter[id] || '').trim();
+              const sticky = c.flag ? 'stk sAct ' : c.sticky ? 'stk s1 ' : '';
+              return (
+                <th key={`f-${id}-${i}`} className={`${sticky}fx${on ? ' on' : ''}`}>
+                  <input
+                    className="fin"
+                    value={colFilter[id] || ''}
+                    placeholder={c.kind === 'price' || c.num ? '>0' : '…'}
+                    title={c.kind === 'price' || c.num
+                      ? 'Type to match, or compare: >5  <=2.5  =0.  "=" alone finds blanks.'
+                      : 'Type to match. "=" alone finds blanks.'}
+                    onChange={e => setFilter(id, e.target.value)}
+                    onKeyDown={e => {
+                      e.stopPropagation();
+                      if (e.key === 'Escape') { e.preventDefault(); setFilter(id, ''); }
+                    }}
+                  />
+                </th>
+              );
+            })}
+          </tr>
+        )}
       </thead>
       <tbody>
         {rows.map((row, ri) => {
@@ -404,23 +749,34 @@ export default function PriceGrid({
 
           return (
             <tr key={row.key}
-                className={`${newArt ? 'newart' : ''}${row.active === 'N' ? ' rowinactive' : ''}`}
+                className={`${newArt ? 'newart' : ''}${row.active === 'N' ? ' rowinactive' : ''}${selected.has(row.key) ? ' selrow' : ''}`}
                 onContextMenu={e => {
                   /* A draft has no set_no yet - there is nothing on the server
                      to copy or delete - so it gets the browser's own menu. */
                   if (row.isDraft) return;
                   e.preventDefault();
+                  /* Right-clicking outside the selection moves to that row, the
+                     way a spreadsheet does; inside it, the selection stands and
+                     the menu acts on all of it. */
+                  if (!selected.has(row.key)) {
+                    setSelected(new Set([row.key]));
+                    anchor.current = ri;
+                  }
                   setMenu({ x: e.clientX, y: e.clientY, row });
                 }}>
               <td className={[
                     'stk', 's0', 'rn',
+                    row.isDraft ? '' : 'pick',
+                    selected.has(row.key) ? 'picked' : '',
                     row.groupSize > 1 ? 'grp' : '',
                     row.groupSize > 1 && row.groupPos === 0 ? 'grpfirst' : '',
                     row.groupSize > 1 && row.groupPos === row.groupSize - 1 ? 'grplast' : ''
                   ].filter(Boolean).join(' ')}
-                  title={row.groupSize > 1
-                    ? `${row.groupPos + 1} of ${row.groupSize} prices for ${row.design_no}, ${row.qty_min}–${row.qty_max === null ? '∞' : row.qty_max} ${row.qty_unit}`
-                    : undefined}>
+                  onClick={e => { if (!row.isDraft) pickRow(ri, e); }}
+                  title={row.isDraft ? undefined
+                    : (row.groupSize > 1
+                        ? `${row.groupPos + 1} of ${row.groupSize} prices for ${row.design_no}, ${row.qty_min}–${row.qty_max === null ? '∞' : row.qty_max} ${row.qty_unit}\nClick to select · shift-click for a block`
+                        : 'Click to select · shift-click for a block')}>
                 {row.isDraft ? '＋' : ri + 1}
               </td>
 
@@ -543,29 +899,54 @@ export default function PriceGrid({
       </tbody>
     </table>
 
-    {menu && (
+    {menu && (() => {
+      /* What the menu acts on: the selection if the clicked row is part of
+         one, otherwise just that row. onContextMenu has already made sure the
+         clicked row is in the selection, so this is only ever a widening. */
+      const acting = selectedRows.length > 1 && selected.has(menu.row.key)
+        ? selectedRows : [menu.row];
+      const many = acting.length > 1;
+
+      return (
       /* Positioned against the viewport, so it is not clipped by the grid's
          own scroll container. onClick stops here: the window listener that
          closes the menu would otherwise fire before the action runs. */
       <ul className="ctxmenu"
           style={{ left: menu.x, top: menu.y }}
           onClick={e => e.stopPropagation()}>
-        <li onClick={() => { onCopyRow(menu.row); setMenu(null); }}>
-          Copy line
+        <li onClick={() => { onCopyRow(acting); setMenu(null); }}>
+          {many ? `Copy ${acting.length} lines` : 'Copy line'}
+          {many && <span className="ctxnote">
+            {acting.map(r => r.design_no).join(', ')}
+          </span>}
         </li>
+
         {/* Always available. With something copied it inserts that; with
             nothing copied it opens a blank line in the same place, so this is
             the one way to add a line anywhere but the end. */}
         <li onClick={() => { onInsertCopied(menu.row); setMenu(null); }}>
           Insert here
-          {copied && <span className="ctxnote">{copied.design_no}</span>}
+          {copied && <span className="ctxnote ctxwhat">{describe(copied)}</span>}
         </li>
+
+        {/* With a row on the clipboard "Insert here" means that row, so there
+            has to be a second way to say "a new empty one". Without a
+            clipboard the item above already does this, and a second entry
+            saying the same thing would just be noise. */}
+        {copied && (
+          <li onClick={() => { onInsertBlank(menu.row); setMenu(null); }}>
+            Insert here blank
+            <span className="ctxnote">an empty line</span>
+          </li>
+        )}
+
         <li className="danger"
             onClick={() => { onDeleteRow(menu.row); setMenu(null); }}>
           Delete line
         </li>
       </ul>
-    )}
+      );
+    })()}
     </>
   );
 }

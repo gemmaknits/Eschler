@@ -50,6 +50,7 @@ CREATE PROCEDURE [SO].[P_SO_PRICE_LIST_PKG_insert_price_list_set]
     @usable_width_cm         nvarchar(60)  = null,
     @weight_gsm              nvarchar(60)  = null,
     @moq                     nvarchar(60)  = null,
+    @price_line_date         date          = null,
     @notes                   nvarchar(500) = null,
     @logempcd                varchar(15)   = ''
 AS
@@ -137,11 +138,11 @@ BEGIN
         INSERT INTO SO.so_price_list_detail
             (so_price_list_header_id, set_no, line_no, article, design_no, article_variant,
              fabric_name, composition, full_width_cm, usable_width_cm, weight_gsm,
-             moq, qty_min, qty_max, qty_unit, color_tier, currency, price,
+             moq, price_line_date, qty_min, qty_max, qty_unit, color_tier, currency, price,
              active, notes, created_by)
         SELECT @so_price_list_header_id, @new_set, v.line_no, @article, @design_no, @article_variant,
                @fabric_name, @composition, @full_width_cm, @usable_width_cm, @weight_gsm,
-               @moq, @qty_min, @qty_max, @qty_unit, @color_tier, v.ccy, v.price,
+               @moq, @price_line_date, @qty_min, @qty_max, @qty_unit, @color_tier, v.ccy, v.price,
                'Y', @notes, @logempcd
         FROM  (VALUES (1, @currency, @price),
                       (1, @other,    CAST(0 AS decimal(18,4)))) AS v(line_no, ccy, price);
@@ -205,6 +206,18 @@ GO
    like the row it came from: the tiers stay in the order the user put them in,
    and each USD/THB pair keeps the single line_no it shares. Only set_no moves,
    which is what decides where the row lands.
+
+   SEVERAL ROWS AT ONCE. @source_set_nos takes a comma separated list, so a
+   multi-row selection is copied in one transaction rather than one call per
+   row. Copying them one at a time would shift the rows below N times over and
+   land them reversed, because each insert pushes the previous one further
+   down. They arrive in grid order - ascending set_no - whatever order they
+   happen to be listed in.
+
+   @source_set_no is still accepted, for a single row.
+
+   No STRING_SPLIT here: this is SQL Server 2014 at compatibility level 120,
+   where that function does not exist. The XML split below is what runs.
    --------------------------------------------------------------------------- */
 IF OBJECT_ID('SO.P_SO_PRICE_LIST_PKG_copy_price_list_set','P') IS NOT NULL
     DROP PROCEDURE SO.P_SO_PRICE_LIST_PKG_copy_price_list_set;
@@ -215,9 +228,10 @@ GO
 -- SO.P_SO_PRICE_LIST_PKG_copy_price_list_set 29, 1, 4, 'SURES'
 CREATE PROCEDURE [SO].[P_SO_PRICE_LIST_PKG_copy_price_list_set]
     @so_price_list_header_id bigint,
-    @source_set_no           int,                  -- the row that was copied
-    @after_set_no            int         = null,   -- NULL or 0 = put it first
-    @logempcd                varchar(15) = ''
+    @source_set_no           int          = null,  -- one row, or
+    @source_set_nos          varchar(max) = null,  -- several, comma separated
+    @after_set_no            int          = null,  -- NULL or 0 = put them first
+    @logempcd                varchar(15)  = ''
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -231,55 +245,88 @@ BEGIN
         RETURN;
     END
 
-    IF NOT EXISTS (SELECT 1 FROM SO.so_price_list_detail
-                   WHERE so_price_list_header_id = @so_price_list_header_id
-                     AND set_no = @source_set_no
-                     AND delete_mark <> 'Y')
+    /* One list, however the caller expressed it. */
+    DECLARE @src TABLE (src_set int PRIMARY KEY, new_set int NULL);
+
+    IF @source_set_nos IS NOT NULL AND LTRIM(RTRIM(@source_set_nos)) <> ''
+        INSERT INTO @src (src_set)
+        SELECT DISTINCT TRY_CONVERT(int, LTRIM(RTRIM(x.v.value('.', 'varchar(20)'))))
+        FROM   (SELECT CAST('<i>' + REPLACE(@source_set_nos, ',', '</i><i>') + '</i>' AS xml) AS d) t
+        CROSS APPLY t.d.nodes('/i') AS x(v)
+        WHERE  TRY_CONVERT(int, LTRIM(RTRIM(x.v.value('.', 'varchar(20)')))) IS NOT NULL;
+    ELSE IF @source_set_no IS NOT NULL
+        INSERT INTO @src (src_set) VALUES (@source_set_no);
+
+    IF NOT EXISTS (SELECT 1 FROM @src)
     BEGIN
-        RAISERROR('The line being copied no longer exists.', 16, 1);
+        RAISERROR('No line was given to copy.', 16, 1);
+        RETURN;
+    END
+
+    /* Every one of them must still be there. Copying four rows and silently
+       producing three is worse than refusing. */
+    DECLARE @missing int =
+        (SELECT COUNT(*) FROM @src s
+         WHERE NOT EXISTS (SELECT 1 FROM SO.so_price_list_detail d
+                           WHERE d.so_price_list_header_id = @so_price_list_header_id
+                             AND d.set_no = s.src_set
+                             AND d.delete_mark <> 'Y'));
+    IF @missing > 0
+    BEGIN
+        RAISERROR('%d of the lines being copied no longer exist.', 16, 1, @missing);
         RETURN;
     END
 
     IF @after_set_no IS NULL SET @after_set_no = 0;
 
     DECLARE @new_set int = @after_set_no + 1;
+    DECLARE @n       int = (SELECT COUNT(*) FROM @src);
 
     BEGIN TRAN;
 
-        /* Make room first. The source may itself sit below the insertion point,
-           in which case this shifts it too - so read its number afterwards, not
-           before, or the copy silently duplicates the wrong row. */
+        /* Make room for all of them at once. The sources may themselves sit
+           below the insertion point, in which case this shifts them too - so
+           their numbers are re-read afterwards, not before, or the copy
+           silently duplicates the wrong rows. */
         UPDATE SO.so_price_list_detail
-        SET    set_no            = set_no + 1,
+        SET    set_no            = set_no + @n,
                last_updated_date = SYSDATETIME(),
                updated_by        = @logempcd
         WHERE  so_price_list_header_id = @so_price_list_header_id
           AND  set_no >= @new_set
           AND  delete_mark <> 'Y';
 
-        DECLARE @from int =
-            CASE WHEN @source_set_no >= @new_set THEN @source_set_no + 1
-                 ELSE @source_set_no END;
+        /* Where each one reads from now, and where its copy lands. Ascending
+           source order, so the block arrives in the order it appears on
+           screen rather than the order it happened to be listed in. */
+        UPDATE s
+        SET    s.new_set = @new_set + x.rn - 1,
+               s.src_set = CASE WHEN s.src_set >= @new_set THEN s.src_set + @n
+                                ELSE s.src_set END
+        FROM   @src s
+        JOIN  (SELECT src_set, ROW_NUMBER() OVER (ORDER BY src_set) AS rn
+               FROM   @src) x ON x.src_set = s.src_set;
 
         INSERT INTO SO.so_price_list_detail
             (so_price_list_header_id, set_no, line_no, article, design_no, article_variant,
              fabric_name, composition, full_width_cm, usable_width_cm, weight_gsm,
-             moq, qty_min, qty_max, qty_unit, color_tier, currency, price,
+             moq, price_line_date, qty_min, qty_max, qty_unit, color_tier, currency, price,
              active, notes, created_by)
-        SELECT d.so_price_list_header_id, @new_set, d.line_no, d.article, d.design_no,
+        SELECT d.so_price_list_header_id, s.new_set, d.line_no, d.article, d.design_no,
                d.article_variant, d.fabric_name, d.composition, d.full_width_cm,
-               d.usable_width_cm, d.weight_gsm, d.moq, d.qty_min, d.qty_max, d.qty_unit,
+               d.usable_width_cm, d.weight_gsm, d.moq, d.price_line_date,
+               d.qty_min, d.qty_max, d.qty_unit,
                d.color_tier, d.currency, d.price, d.active, d.notes, @logempcd
         FROM   SO.so_price_list_detail d
+        JOIN   @src s ON s.src_set = d.set_no
         WHERE  d.so_price_list_header_id = @so_price_list_header_id
-          AND  d.set_no = @from
           AND  d.delete_mark <> 'Y';
 
         DECLARE @rows int = @@ROWCOUNT;
 
     COMMIT;
 
-    SELECT @new_set AS set_no, @rows AS rows_created;
+    SELECT @new_set AS set_no, @rows AS rows_created, @n AS sets_copied;
 END
 GO
 

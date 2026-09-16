@@ -206,6 +206,10 @@ export function pivotToGrid(rows) {
     fabric_name: d.fabric_name, composition: d.composition,
     full_width_cm: d.full_width_cm, usable_width_cm: d.usable_width_cm,
     weight_gsm: d.weight_gsm, moq: d.moq,
+    /* A date column comes back as a full timestamp; the grid only ever shows
+       and edits the day part, so it is trimmed once here rather than at every
+       place that reads it. */
+    price_line_date: (d.price_line_date || '').slice(0, 10),
     /* active came from the workbook's ACTIVE column, one value per worksheet
        line, so every detail in a grid row carries the same flag. */
     active: d.active || 'Y',

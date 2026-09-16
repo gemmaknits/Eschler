@@ -181,6 +181,12 @@ CREATE PROCEDURE [SO].[P_SO_PRICE_LIST_PKG_update_price_list_row]
     @usable_width_cm         nvarchar(60)  = null,
     @weight_gsm              nvarchar(60)  = null,
     @moq                     nvarchar(60)  = null,
+    /* When the price was quoted. A property of the row, like the columns
+       above it, so it is written to every line of the set. NULL leaves it
+       alone; clearing it needs the explicit flag, since NULL is a real value
+       here - the same reason @clear_qty_max exists. */
+    @price_line_date         date          = null,
+    @clear_price_line_date   bit           = 0,
     @active                  char(1)       = null,   -- 'Y' | 'N', whole row
     @logempcd                varchar(15)   = ''
 AS
@@ -251,6 +257,8 @@ BEGIN
            usable_width_cm   = ISNULL(@usable_width_cm, usable_width_cm),
            weight_gsm        = ISNULL(@weight_gsm,      weight_gsm),
            moq               = ISNULL(@moq,             moq),
+           price_line_date   = CASE WHEN @clear_price_line_date = 1 THEN NULL
+                                    ELSE ISNULL(@price_line_date, price_line_date) END,
            active            = ISNULL(@active,         active),
            last_updated_date = SYSDATETIME(),
            updated_by        = @logempcd

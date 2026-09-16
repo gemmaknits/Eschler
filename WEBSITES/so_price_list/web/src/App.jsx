@@ -222,49 +222,90 @@ export default function App() {
   /* ---- right-click: copy / insert / delete a whole line ------------------
      A grid row is a whole set - every tier, both currencies - so all three act
      on the set, never on the single cell that was clicked. */
-  const copyRow = useCallback(row => {
-    setCopied({ set_no: row.set_no, design_no: row.design_no });
-    say(`Copied ${row.design_no} — right-click another line to insert it`);
+  /* Trailing zeros off, so a clipboard summary reads 6.17 and 216 rather than
+     6.1700 and 216.0000. */
+  const shortMoney = v => {
+    if (v === null || v === undefined || v === '') return null;
+    const n = Number(v);
+    return Number.isFinite(n) ? String(Number(n.toFixed(4))) : null;
+  };
+
+  /* One row or a whole selection - the grid passes a list either way.
+
+     What is remembered is not just which rows, but enough about the first of
+     them to describe it in the menu: a design number on its own does not
+     identify a row, because the same design appears once per quantity band and
+     what tells them apart is the colour tier and the price. */
+  const copyRow = useCallback(list => {
+    const picked = (Array.isArray(list) ? list : [list]).filter(r => r && !r.isDraft);
+    if (!picked.length) return;
+    const first = picked[0];
+
+    setCopied({
+      set_nos: picked.map(r => r.set_no),
+      count: picked.length,
+      design_no: first.design_no,
+      designs: picked.map(r => r.design_no),
+      qty_min: first.qty_min,
+      qty_max: first.qty_max,
+      tiers: Object.entries(first.cells || {}).map(([k, d]) => {
+        const [currency, tier] = k.split('|');
+        return { currency, tier, price: shortMoney(d?.price) };
+      })
+    });
+
+    say(picked.length === 1
+      ? `Copied ${first.design_no} — right-click another line to insert it`
+      : `Copied ${picked.length} lines — right-click where they should go`);
+  }, [say]);
+
+  /* A blank line at a chosen position. It is a draft, so it costs nothing
+     until a design and a price are typed - but it remembers where it was asked
+     for, and saves into that slot rather than at the end of the list.
+
+     Its own handler now, because with something on the clipboard "Insert here"
+     means that row, and there still has to be a way to say "a new empty one". */
+  const insertBlank = useCallback(target => {
+    setDrafts(d => [...d, {
+      key: `draft-${Date.now()}-${d.length}`,
+      isDraft: true,
+      after_set_no: target.set_no,
+      design_no: '',
+      article_variant: '',
+      qty_min: 0,
+      qty_max: null,
+      qty_unit: target.qty_unit || 'MTS',
+      fabric_name: '', composition: '',
+      full_width_cm: '', usable_width_cm: '', weight_gsm: '', moq: '',
+      price_line_date: '',
+      source_row: null,
+      cells: {}
+    }]);
+    say(`New line below ${target.design_no} — fill the design no and a price`);
   }, [say]);
 
   const insertCopied = useCallback(async target => {
-    /* Nothing copied: open a blank line in that position instead. It is a
-       draft, so it costs nothing until a design and a price are typed - but it
-       remembers where it was asked for, and saves into that slot rather than
-       at the end of the list. */
-    if (!copied) {
-      setDrafts(d => [...d, {
-        key: `draft-${Date.now()}-${d.length}`,
-        isDraft: true,
-        after_set_no: target.set_no,
-        design_no: '',
-        article_variant: '',
-        qty_min: 0,
-        qty_max: null,
-        qty_unit: target.qty_unit || 'MTS',
-        fabric_name: '', composition: '',
-        full_width_cm: '', usable_width_cm: '', weight_gsm: '', moq: '',
-        source_row: null,
-        cells: {}
-      }]);
-      say(`New line below ${target.design_no} — fill the design no and a price`);
-      return;
-    }
+    if (!copied) { insertBlank(target); return; }
 
     setBusy(true);
     try {
-      /* after_set_no is the row that was right-clicked, so the copy lands
+      /* after_set_no is the row that was right-clicked, so the copies land
          directly below it. The procedure shifts everything under that point
-         down, and carries line_no over unchanged so the tiers inside the
-         copied row keep the order they were put in. */
+         down in one move and carries line_no over unchanged, so the tiers
+         inside each copied row keep the order they were put in.
+
+         The whole selection goes in one call. Copying them one at a time would
+         shift the rows below once per copy and land them reversed. */
       const res = await api.copySet(headerId, {
-        source_set_no: copied.set_no,
+        source_set_nos: copied.set_nos.join(','),
         after_set_no: target.set_no
       });
-      say(`Inserted ${copied.design_no} below ${target.design_no} — ${res?.rows_created ?? 0} prices`);
+      say(copied.count === 1
+        ? `Inserted ${copied.design_no} below ${target.design_no} — ${res?.rows_created ?? 0} prices`
+        : `Inserted ${res?.sets_copied ?? copied.count} lines below ${target.design_no} — ${res?.rows_created ?? 0} prices`);
       reload(true); refreshLists();
     } catch (err) { setError(err.message); } finally { setBusy(false); }
-  }, [copied, headerId, reload, say]);
+  }, [copied, headerId, reload, say, insertBlank]);
 
   const deleteRow = useCallback(row => {
     setConfirm({
@@ -277,7 +318,12 @@ export default function App() {
         setBusy(true);
         try {
           const res = await api.deleteSet(headerId, { set_no: row.set_no });
-          if (copied?.set_no === row.set_no) setCopied(null);
+          if (copied?.set_nos?.includes(row.set_no)) {
+            const left = copied.set_nos.filter(n => n !== row.set_no);
+            setCopied(left.length
+              ? { ...copied, set_nos: left, count: left.length }
+              : null);
+          }
           say(`${row.design_no} deleted — ${res?.lines_deleted ?? 0} prices`);
           reload(true); refreshLists();
         } catch (err) { setError(err.message); } finally { setBusy(false); }
@@ -488,7 +534,11 @@ export default function App() {
           detail_id: d.so_price_list_detail_id,
           [col.key]: value,
           // an open upper bound is a real value, not "leave alone"
-          ...(col.key === 'qty_max' && value === null ? { clear_qty_max: true } : {})
+          ...(col.key === 'qty_max' && value === null ? { clear_qty_max: true } : {}),
+          /* Same problem for the date: an empty string reaches the procedure
+             as NULL, which means "leave alone", so blanking a wrong date would
+             silently do nothing. Say so explicitly. */
+          ...(col.date && value === '' ? { clear_price_line_date: true } : {})
         });
       }
       patchRowLocally(row.key, { [col.key]: value }, { [col.key]: value });
@@ -783,6 +833,7 @@ export default function App() {
                     copied={copied}
                     onCopyRow={copyRow}
                     onInsertCopied={insertCopied}
+                    onInsertBlank={insertBlank}
                     onDeleteRow={deleteRow}
                   />}
           </div>

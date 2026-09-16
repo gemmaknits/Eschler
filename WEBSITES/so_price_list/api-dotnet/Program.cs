@@ -269,6 +269,8 @@ app.MapPost("/price_list/detail", async (Db db, HttpRequest r, System.Text.Json.
         Text("@usable_width_cm",        SJ(b, "usable_width_cm"), 60),
         Text("@weight_gsm",             SJ(b, "weight_gsm"), 60),
         Text("@moq",                    SJ(b, "moq"), 60),
+        Dt("@price_line_date",          DJ(b, "price_line_date")),
+        Flag("@clear_price_line_date",  BJ(b, "clear_price_line_date")),
         Int32P("@qty_min",              IJ(b, "qty_min")),
         Int32P("@qty_max",              IJ(b, "qty_max")),
         Text("@qty_unit",               SJ(b, "qty_unit") ?? "MTS", 10),
@@ -307,6 +309,8 @@ app.MapPost("/price_list/{id:long}/row", async (Db db, HttpRequest r, long id, S
         Text("@usable_width_cm",        SJ(b, "usable_width_cm"), 60),
         Text("@weight_gsm",             SJ(b, "weight_gsm"), 60),
         Text("@moq",                    SJ(b, "moq"), 60),
+        Dt("@price_line_date",          DJ(b, "price_line_date")),
+        Flag("@clear_price_line_date",  BJ(b, "clear_price_line_date")),
         Chr("@active",                  SJ(b, "active"), 1),
         Text("@logempcd",               Who(r), 15)
     })));
@@ -319,6 +323,8 @@ app.MapPost("/price_list/{id:long}/set/copy", async (Db db, HttpRequest r, long 
     {
         Num("@so_price_list_header_id", id),
         Int32P("@source_set_no",        IJ(b, "source_set_no")),
+        // a multi-row selection, comma separated; size -1 is varchar(MAX)
+        Text("@source_set_nos",         SJ(b, "source_set_nos"), -1),
         Int32P("@after_set_no",         IJ(b, "after_set_no")),
         Text("@logempcd",               Who(r), 15)
     })));
@@ -345,6 +351,7 @@ app.MapPost("/price_list/{id:long}/set/insert", async (Db db, HttpRequest r, lon
         Text("@usable_width_cm",        SJ(b, "usable_width_cm"), 60),
         Text("@weight_gsm",             SJ(b, "weight_gsm"), 60),
         Text("@moq",                    SJ(b, "moq"), 60),
+        Dt("@price_line_date",          DJ(b, "price_line_date")),
         Text("@notes",                  SJ(b, "notes"), 500),
         Text("@logempcd",               Who(r), 15)
     })));

@@ -1,0 +1,10 @@
+# Built assets. Vite writes LF, but core.autocrlf=true is set on this machine,
+# so git wants CRLF in the working tree and flags every file under dist/ as
+# modified after a build even when the bytes are identical to what is committed.
+# `git diff` then shows nothing, because it normalises - so the noise hides real
+# changes rather than reporting them.
+#
+# Pinning these to LF makes the working tree match what the build actually
+# produces. Scoped to dist/ deliberately: a repo-wide `* text=auto` would
+# renormalise thousands of existing files in one go.
+dist/** text eol=lf

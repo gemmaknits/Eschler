@@ -1,0 +1,9 @@
+{
+  "short_name": "Price Book",
+  "name": "Eschler Price Book",
+  "start_url": "/SoPriceList/",
+  "display": "standalone",
+  "theme_color": "#0E6A72",
+  "background_color": "#F5F7F6",
+  "icons": []
+}

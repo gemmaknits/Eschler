@@ -1,0 +1,780 @@
+/* Eschler Price Book
+   Excel-like worksheet: hairline gridlines, tight rows, grey header gutter.
+   Palette is dye-vat teal on cool paper; USD and THB column groups are tinted
+   so currency reads at a glance. */
+
+:root{
+  --paper:#F4F6F5; --surface:#FFFFFF; --surface-2:#FAFBFA; --surface-3:#F1F3F2;
+  --ink:#14181A; --ink-2:#49534F; --muted:#7B8582;
+
+  /* worksheet chrome */
+  --grid:#EAEDEB;            /* hairline between cells - ultra thin */
+  --grid-strong:#CBD3D0;     /* frozen-pane edge, header underline */
+  --headfill:#EFF2F1;        /* column/row header fill */
+  --headink:#3E4845;
+
+  --rule:#DDE3E0; --rule-strong:#BFC9C5;
+  --accent:#0E6A72; --accent-soft:#E2EFEF;
+  --usd-tint:#F0F7F6; --usd-ink:#0E6A72;
+  --thb-tint:#FCF5EF; --thb-ink:#95511F;
+  --warn:#A85F08; --warn-soft:#FBEBD2; --warn-rule:#E3B268;
+  --danger:#A32B22; --danger-soft:#FBE9E7;
+  --sel:#0E6A72; --sel-soft:#DDEDED;
+  --shadow:0 1px 2px rgba(20,24,26,.07), 0 10px 30px rgba(20,24,26,.10);
+}
+:root:not([data-theme="light"]){ @media (prefers-color-scheme:dark){
+  --paper:#0E1312; --surface:#151A19; --surface-2:#1A201F; --surface-3:#202726;
+  --ink:#E7EDEB; --ink-2:#AFB9B6; --muted:#7C8683;
+  --grid:#242B2A; --grid-strong:#333B39;
+  --headfill:#1E2524; --headink:#B6C0BD;
+  --rule:#28302E; --rule-strong:#3A4442;
+  --accent:#54C2C6; --accent-soft:#15302F;
+  --usd-tint:#152322; --usd-ink:#5FC8C0;
+  --thb-tint:#251B14; --thb-ink:#D99A63;
+  --warn:#E3A54A; --warn-soft:#2C2314; --warn-rule:#5C4620;
+  --danger:#E8796C; --danger-soft:#2E1917;
+  --sel:#54C2C6; --sel-soft:#183534;
+  --shadow:0 1px 2px rgba(0,0,0,.45), 0 10px 30px rgba(0,0,0,.5);
+}}
+:root[data-theme="dark"]{
+  --paper:#0E1312; --surface:#151A19; --surface-2:#1A201F; --surface-3:#202726;
+  --ink:#E7EDEB; --ink-2:#AFB9B6; --muted:#7C8683;
+  --grid:#242B2A; --grid-strong:#333B39;
+  --headfill:#1E2524; --headink:#B6C0BD;
+  --rule:#28302E; --rule-strong:#3A4442;
+  --accent:#54C2C6; --accent-soft:#15302F;
+  --usd-tint:#152322; --usd-ink:#5FC8C0;
+  --thb-tint:#251B14; --thb-ink:#D99A63;
+  --warn:#E3A54A; --warn-soft:#2C2314; --warn-rule:#5C4620;
+  --danger:#E8796C; --danger-soft:#2E1917;
+  --sel:#54C2C6; --sel-soft:#183534;
+  --shadow:0 1px 2px rgba(0,0,0,.45), 0 10px 30px rgba(0,0,0,.5);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:Archivo,"Segoe UI","Helvetica Neue",Arial,sans-serif;
+  font-size:13px; line-height:1.45; overflow:hidden;
+}
+#root{display:flex; flex-direction:column; height:100vh; overflow:hidden}
+img{max-width:100%}
+[hidden]{display:none!important}
+.mono{font-family:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace}
+.spacer{flex:1}
+.dim{color:var(--muted)}
+
+/* ============================ top bar ============================ */
+.topbar{
+  display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+  padding:8px 14px; background:var(--surface);
+  border-bottom:1px solid var(--rule-strong); flex:none;
+}
+.brand{display:flex; align-items:baseline; gap:8px}
+.brand h1{margin:0; font-size:15px; font-weight:700; letter-spacing:-.01em}
+.brand .tag{
+  font-size:9.5px; font-weight:600; letter-spacing:.09em; text-transform:uppercase;
+  color:var(--accent); background:var(--accent-soft); padding:2px 6px; border-radius:3px;
+}
+.pick{display:flex; align-items:center; gap:6px}
+.pick label,.pick>span{
+  font-size:9.5px; font-weight:600; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--muted);
+}
+input,select,textarea{
+  font-family:inherit; font-size:12.5px; color:var(--ink);
+  background:var(--surface); border:1px solid var(--rule-strong);
+  border-radius:3px; padding:4px 7px;
+}
+input[type=search]{width:150px}
+input:focus-visible,select:focus-visible,button:focus-visible,textarea:focus-visible{
+  outline:2px solid var(--sel); outline-offset:1px;
+}
+button{
+  font-family:inherit; font-size:12px; font-weight:500; color:var(--ink);
+  background:var(--surface-2); border:1px solid var(--rule-strong);
+  border-radius:3px; padding:4px 9px; cursor:pointer;
+}
+button:hover:not(:disabled){background:var(--surface-3); border-color:var(--muted)}
+button:disabled{opacity:.5; cursor:not-allowed}
+button.on{background:var(--warn-soft); border-color:var(--warn-rule); color:var(--warn)}
+button.ghost{background:transparent; border-color:transparent; color:var(--muted); padding:4px 7px}
+button.ghost:hover:not(:disabled){background:var(--surface-3); color:var(--ink)}
+button.primary{background:var(--accent); border-color:var(--accent); color:#fff; font-weight:600}
+button.primary:hover:not(:disabled){filter:brightness(1.08); background:var(--accent)}
+button.danger{background:var(--danger); border-color:var(--danger); color:#fff; font-weight:600}
+.dimcount{color:var(--muted); font-size:10.5px; margin-left:3px; font-family:"IBM Plex Mono",monospace}
+.userchip{
+  font-size:11px; font-weight:600; letter-spacing:.04em; padding:3px 8px; border-radius:3px;
+  background:var(--accent-soft); color:var(--accent); border:1px solid var(--accent);
+}
+.emp{width:78px; font-family:"IBM Plex Mono",monospace; font-size:11px; text-transform:uppercase}
+.saving{
+  display:inline-block; width:8px; height:8px; border-radius:50%;
+  background:var(--accent); animation:pulse 1s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:.25}50%{opacity:1}}
+@media (prefers-reduced-motion:reduce){.saving{animation:none;opacity:.7}}
+
+/* ============================ shell ============================ */
+.shell{display:flex; flex:1; min-height:0}
+.main{display:flex; flex-direction:column; flex:1; min-width:0; min-height:0}
+
+/* ============================ left nav ============================ */
+.nav{
+  width:236px; flex:none; display:flex; flex-direction:column;
+  background:var(--surface-2); border-right:1px solid var(--rule-strong);
+  min-height:0;
+}
+.navhead{display:flex; flex-direction:column; gap:7px; padding:9px 9px 8px; border-bottom:1px solid var(--rule)}
+.newbtn{
+  background:var(--accent); border-color:var(--accent); color:#fff;
+  font-weight:600; font-size:12px; padding:6px 9px; text-align:left;
+}
+.newbtn:hover:not(:disabled){filter:brightness(1.08); background:var(--accent); border-color:var(--accent)}
+.newbtn span{margin-right:3px; font-weight:700}
+.navsearch{width:100%}
+
+.navlist{flex:1; overflow-y:auto; overflow-x:hidden; min-height:0; padding:3px 0}
+.navitem{
+  display:flex; flex-direction:column; gap:1px; width:100%; text-align:left;
+  padding:6px 9px 7px; border:none; border-left:3px solid transparent;
+  border-radius:0; background:transparent; cursor:pointer;
+}
+.navitem:hover{background:var(--surface-3)}
+.navitem.on{
+  background:var(--accent-soft); border-left-color:var(--accent);
+}
+.navname{
+  font-size:12.5px; font-weight:600; color:var(--ink);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.navitem.on .navname{color:var(--accent)}
+.navmeta{display:flex; align-items:center; gap:5px; font-size:10.5px; color:var(--muted)}
+.navlines{font-variant-numeric:tabular-nums}
+.navconf{
+  background:var(--warn); color:var(--surface); font-weight:700; font-size:9px;
+  border-radius:99px; padding:0 5px; line-height:14px;
+}
+:root[data-theme="dark"] .navconf,
+:root:not([data-theme="light"]) .navconf{color:#12100A}
+.navexp{
+  font-size:9px; font-weight:600; text-transform:uppercase; letter-spacing:.06em;
+  color:var(--danger);
+}
+.navcust{
+  font-size:10.5px; color:var(--ink-2);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.navcust.dim{color:var(--muted); font-style:italic}
+.navempty{padding:16px 10px; margin:0; font-size:12px; color:var(--muted); line-height:1.6}
+.navfoot{
+  display:flex; align-items:center; justify-content:space-between; gap:8px;
+  padding:6px 10px; border-top:1px solid var(--rule);
+  font-size:10.5px; color:var(--muted);
+}
+.navfoot b{color:var(--ink); font-variant-numeric:tabular-nums}
+.navfootwarn{color:var(--warn); font-weight:600}
+
+/* ============================ meta strip ============================ */
+.meta{
+  display:flex; flex-wrap:wrap; align-items:stretch; flex:none;
+  background:var(--surface-2); border-bottom:1px solid var(--rule-strong); padding:0 12px;
+}
+.mf{
+  display:flex; flex-direction:column; gap:1px; justify-content:center;
+  padding:7px 14px 8px 0; margin-right:14px; border-right:1px solid var(--rule);
+}
+.mf:last-child{border-right:none}
+.mf .k{font-size:9px; font-weight:600; letter-spacing:.09em; text-transform:uppercase; color:var(--muted)}
+.mf .v{font-size:12px; font-weight:500; color:var(--ink)}
+.mf .v.dim{color:var(--muted); font-weight:400; font-style:italic}
+.pillrow{display:flex; gap:4px; align-items:center}
+.pill{font-size:9.5px; font-weight:600; padding:2px 6px; border-radius:99px; border:1px solid transparent}
+.pill.open{background:var(--accent-soft); color:var(--accent); border-color:var(--accent)}
+.pill.warnp{background:var(--warn-soft); color:var(--warn); border-color:var(--warn-rule)}
+
+/* ============================ worksheet ============================ */
+.gridwrap{flex:1; overflow:auto; background:var(--surface); min-height:0}
+table#grid{
+  border-collapse:separate;   /* required for sticky headers */
+  border-spacing:0;
+  font-size:12.5px;
+  /* fixed: widths come from <colgroup>, never from the data, so every price
+     list renders with identical column geometry */
+  table-layout:fixed;
+}
+/* content that outgrows its fixed column is trimmed, not allowed to widen it */
+table#grid td, table#grid th{overflow:hidden; text-overflow:ellipsis}
+
+/* Hairlines. One border per edge, right+bottom only, so no doubling.
+   On HiDPI screens drop to a true half-pixel for a finer Excel rule. */
+table#grid th, table#grid td{
+  border-right:1px solid var(--grid);
+  border-bottom:1px solid var(--grid);
+  padding:0 11px; height:29px; white-space:nowrap;
+}
+/* true hairlines where the display can render them */
+@media (min-resolution:1.5dppx){
+  table#grid th, table#grid td{border-right-width:.5px; border-bottom-width:.5px}
+}
+@media (min-resolution:3dppx){
+  table#grid th, table#grid td{border-right-width:.33px; border-bottom-width:.33px}
+}
+
+/* column headers */
+table#grid thead th{
+  position:sticky; z-index:3;
+  background:var(--headfill); color:var(--headink);
+  font-weight:600; font-size:11.5px; text-align:center; letter-spacing:.01em;
+  height:27px;
+}
+table#grid thead tr:first-child th{top:0}
+table#grid thead tr:nth-child(2) th{top:27px; border-bottom:1px solid var(--grid-strong)}
+table#grid thead th.grp{
+  font-size:9px; letter-spacing:.11em; text-transform:uppercase; font-weight:700;
+}
+table#grid thead th.grp.usd{background:var(--usd-tint); color:var(--usd-ink)}
+table#grid thead th.grp.thb{background:var(--thb-tint); color:var(--thb-ink)}
+table#grid thead th.usdc{background:var(--usd-tint); color:var(--usd-ink)}
+table#grid thead th.thbc{background:var(--thb-tint); color:var(--thb-ink)}
+
+/* frozen columns: row-number gutter + article.
+   The .cell rule below sets position:relative on every body cell, which
+   outranks a bare td.stk - so the frozen cells need their own higher
+   specificity or they stop sticking and their left offset shoves them over
+   the next column instead. Widths are pinned here too so the sticky offsets
+   always agree with the <colgroup>.
+
+   --w0 / --wact / --w1 are set on the table from the live column widths, so
+   dragging Act or Design No wider moves the columns frozen to their right
+   instead of letting them overlap. The fallbacks are the defaults. */
+th.stk,td.stk{position:sticky; z-index:2}
+table#grid tbody td.cell.stk{position:sticky; z-index:2}
+table#grid th.s0, table#grid td.s0{
+  width:var(--w0,42px); min-width:var(--w0,42px); max-width:var(--w0,42px);
+}
+table#grid th.s1, table#grid td.s1{
+  width:var(--w1,118px); min-width:var(--w1,118px); max-width:var(--w1,118px);
+}
+/* Every one of these needs the #grid prefix. "table#grid thead th" above
+   carries an ID, so a bare "thead th.stk" loses to it however many classes it
+   has - the frozen header cells fell behind the group headings as soon as the
+   grid was scrolled right, and the strong rule down the frozen edge never
+   painted at all. */
+table#grid thead th.stk{z-index:5}
+th.s0,td.s0{left:0}
+th.s1,td.s1{left:var(--w0,42px)}
+td.stk{background:var(--surface)}
+table#grid td.s1{border-right:1px solid var(--grid-strong)}
+table#grid thead th.s1{border-right:1px solid var(--grid-strong)}
+
+/* row-number gutter reads as a header, like Excel's row headings */
+table#grid td.rn{
+  background:var(--headfill); color:var(--headink);
+  text-align:center; font-size:10.5px; font-variant-numeric:tabular-nums;
+  border-right:1px solid var(--grid-strong);
+}
+
+tbody td{color:var(--ink); background:var(--surface)}
+tbody td.num{text-align:right; font-variant-numeric:tabular-nums}
+tbody td.usdc{background:var(--usd-tint)}
+tbody td.thbc{background:var(--thb-tint)}
+tbody td.usdc .val{color:var(--usd-ink); font-weight:500}
+tbody td.thbc .val{color:var(--thb-ink); font-weight:500}
+tbody td.dim{color:var(--muted)}
+.nil{color:var(--grid-strong)}
+
+/* a new article starts a new block - one darker rule, not a heavy band */
+tbody tr.newart td{border-top:1px solid var(--grid-strong)}
+
+/* selection: crisp inset ring, the way Excel outlines the active cell */
+tbody td.cell{cursor:cell; position:relative}
+tbody td.cell:hover{box-shadow:inset 0 0 0 1px var(--grid-strong)}
+tbody td.foc{box-shadow:inset 0 0 0 2px var(--sel); background:var(--sel-soft)}
+tbody td.usdc.foc,tbody td.thbc.foc{background:var(--sel-soft)}
+tbody td.conf{background:var(--warn-soft)}
+tbody td.conf .val{color:var(--warn)}
+.badge{
+  display:inline-block; margin-left:4px; font-size:8.5px; font-weight:700;
+  background:var(--warn); color:var(--surface);
+  border-radius:99px; padding:0 4px; line-height:13px; vertical-align:1px;
+}
+:root[data-theme="dark"] .badge,
+:root:not([data-theme="light"]) .badge{color:#12100A}
+td input.edit{
+  width:100%; border:none; outline:none; background:transparent;
+  font-family:"IBM Plex Mono",monospace; font-size:12.5px; color:var(--ink);
+  text-align:right; padding:0; height:26px;
+}
+tr.addrow td{
+  border-bottom:none; background:var(--surface-2);
+  position:sticky; bottom:0; z-index:1;
+}
+tr.addrow button{font-size:11.5px; font-weight:600; color:var(--accent)}
+tr.addrow button:hover{background:var(--accent-soft)}
+
+/* ============================ status bar ============================ */
+.status{
+  display:flex; align-items:center; gap:14px; flex-wrap:wrap; flex:none;
+  padding:5px 12px; background:var(--surface); border-top:1px solid var(--rule-strong);
+  font-size:10.5px; color:var(--muted);
+}
+.status b{color:var(--ink); font-weight:600; font-variant-numeric:tabular-nums}
+kbd{
+  font-family:"IBM Plex Mono",monospace; font-size:9.5px;
+  background:var(--surface-3); border:1px solid var(--rule-strong);
+  border-bottom-width:2px; border-radius:3px; padding:0 4px; color:var(--ink-2);
+}
+
+/* ============================ messages ============================ */
+.loading,.errbox{padding:20px 14px; color:var(--muted); font-size:12.5px}
+.errbox{
+  margin:10px 12px; padding:9px 12px; border-radius:4px; display:flex; align-items:baseline; gap:8px;
+  background:var(--warn-soft); border:1px solid var(--warn-rule); color:var(--warn); font-weight:500;
+}
+.errbox b{display:block; color:var(--warn)}
+.flash{
+  position:fixed; bottom:38px; left:50%; transform:translateX(-50%) translateY(6px);
+  background:var(--ink); color:var(--paper); font-size:11.5px; font-weight:500;
+  padding:6px 13px; border-radius:99px; opacity:0; pointer-events:none;
+  transition:opacity .16s, transform .16s; z-index:60;
+}
+.flash.on{opacity:1; transform:translateX(-50%) translateY(0)}
+@media (prefers-reduced-motion:reduce){.flash{transition:none}}
+
+.empty{display:flex; flex-direction:column; align-items:flex-start; gap:8px; padding:30px 20px; max-width:54ch}
+.empty .big{margin:0; font-size:14.5px; font-weight:600; color:var(--ink)}
+.empty p{margin:0; color:var(--muted); line-height:1.55}
+.empty b{color:var(--ink); font-weight:600}
+.empty button{margin-top:4px; padding:6px 12px; font-weight:600}
+
+/* ============================ popovers ============================ */
+.pop{
+  position:absolute; z-index:40; min-width:228px;
+  background:var(--surface); border:1px solid var(--rule-strong);
+  border-radius:5px; box-shadow:var(--shadow); padding:9px 10px 10px;
+  max-height:min(60vh,420px); overflow-y:auto; overscroll-behavior:contain;
+}
+.pop h4{margin:0 0 2px; font-size:10.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--warn)}
+.pop .sub{margin:0 0 8px; font-size:10.5px; color:var(--muted); line-height:1.45}
+.opt{
+  display:flex; align-items:center; gap:8px; width:100%; padding:5px 7px; border-radius:3px;
+  cursor:pointer; border:1px solid var(--rule); background:var(--surface-2); margin-bottom:4px; text-align:left;
+}
+.opt:hover,.opt.chosen{border-color:var(--accent); background:var(--accent-soft)}
+.opt .p{font-family:"IBM Plex Mono",monospace; font-size:13.5px; font-weight:600; font-variant-numeric:tabular-nums; min-width:60px}
+.opt .m{font-size:10px; color:var(--muted); line-height:1.3}
+.opt .tick{margin-left:auto; color:var(--accent); font-weight:700; visibility:hidden}
+.opt.chosen .tick{visibility:visible}
+
+/* Positioned in JS against the Columns button - fixed to the viewport, with
+   top/left set on the element. Pinned here to the window's top-right corner it
+   opened nowhere near the button that opens it. */
+.colmenu{position:fixed; min-width:246px; max-width:296px}
+.colgroup{display:flex; flex-wrap:wrap; gap:5px 9px; align-items:center; padding:7px 0; border-top:1px solid var(--rule)}
+.collabel{width:100%; font-size:9px; font-weight:600; letter-spacing:.09em; text-transform:uppercase; color:var(--muted)}
+.chk{display:flex; align-items:center; gap:4px; font-size:11.5px; cursor:pointer}
+.chk input{margin:0; accent-color:var(--accent)}
+.colactions{display:flex; gap:6px; padding-top:8px; border-top:1px solid var(--rule)}
+
+/* ============================ header modal ============================ */
+.modalwrap{
+  position:fixed; inset:0; z-index:70; display:flex; align-items:flex-start; justify-content:center;
+  padding:56px 16px 16px; background:rgba(20,24,26,.34); overflow-y:auto;
+}
+:root[data-theme="dark"] .modalwrap,
+:root:not([data-theme="light"]) .modalwrap{background:rgba(0,0,0,.55)}
+.modal{
+  width:100%; max-width:470px; background:var(--surface);
+  border:1px solid var(--rule-strong); border-radius:6px;
+  box-shadow:var(--shadow); padding:16px 18px 14px;
+}
+.modal h3{margin:0 0 2px; font-size:15px; font-weight:700; letter-spacing:-.01em}
+.modalsub{margin:0 0 12px; font-size:11.5px; color:var(--muted); line-height:1.5}
+.modalerr{
+  margin:0 0 11px; padding:8px 10px; border-radius:4px; font-size:12px; font-weight:500;
+  background:var(--danger-soft); border:1px solid var(--danger); color:var(--danger);
+}
+.fld{display:flex; flex-direction:column; gap:3px; margin-bottom:11px; flex:1; min-width:0}
+.fldrow{display:flex; gap:11px}
+.fldk{font-size:9px; font-weight:600; letter-spacing:.09em; text-transform:uppercase; color:var(--muted)}
+.fldk em{font-style:normal; color:var(--accent); margin-left:4px; letter-spacing:.04em}
+.fld input{width:100%}
+.fld input.bad{border-color:var(--danger)}
+.fldmsg{font-size:10.5px; color:var(--muted); line-height:1.4}
+.fldmsg.bad{color:var(--danger); font-weight:500}
+.fldmsg.ok{color:var(--accent)}
+
+.custpick{display:flex; align-items:center; gap:7px; padding:5px 8px; border:1px solid var(--rule-strong); border-radius:3px; background:var(--surface-2)}
+.custname{font-size:12.5px; font-weight:500; flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.custid{font-size:11px; color:var(--muted)}
+.custsearch{position:relative; display:flex; flex-direction:column; gap:3px}
+.custlist{
+  position:absolute; top:30px; left:0; right:0; z-index:5; max-height:230px; overflow-y:auto;
+  background:var(--surface); border:1px solid var(--rule-strong); border-radius:4px; box-shadow:var(--shadow);
+}
+.custrow{
+  display:flex; flex-direction:column; gap:1px; width:100%; text-align:left;
+  padding:6px 9px; border:none; border-radius:0; background:transparent; border-bottom:1px solid var(--rule);
+}
+.custrow:last-child{border-bottom:none}
+.custrow:hover{background:var(--accent-soft)}
+.custrowname{font-size:12px; font-weight:600; color:var(--ink)}
+.custrowmeta{font-size:10.5px; color:var(--muted)}
+
+.modalactions{display:flex; align-items:center; gap:7px; padding-top:11px; border-top:1px solid var(--rule); flex-wrap:wrap}
+.modaldel{margin-left:auto; display:flex; align-items:center; gap:6px}
+.delwarn{font-size:11px; color:var(--danger); font-weight:500}
+
+/* ============================ list of values ============================ */
+.modal.lov{max-width:700px}
+.lovbar{display:flex; align-items:center; gap:10px; margin-bottom:9px}
+.lovbar input[type=text],.lovbar input:not([type]){flex:1}
+.lovbar>input:first-child{flex:1}
+.lovcount{font-size:10.5px; color:var(--muted); font-variant-numeric:tabular-nums}
+
+.lovgrid{
+  max-height:min(46vh,340px); overflow:auto;
+  border:1px solid var(--rule-strong); border-radius:3px; background:var(--surface);
+}
+.lovgrid table{
+  border-collapse:separate; border-spacing:0; width:100%; font-size:12px;
+  /* fixed so the date column cannot be pushed out of view by a long name */
+  table-layout:fixed;
+}
+.lovgrid th:nth-child(1),.lovgrid td:nth-child(1){width:62px}
+.lovgrid th:nth-child(3),.lovgrid td:nth-child(3){width:46px}
+.lovgrid th:nth-child(4),.lovgrid td:nth-child(4){width:104px}
+.lovgrid th:nth-child(5),.lovgrid td:nth-child(5){width:64px}
+.lovgrid th:nth-child(6),.lovgrid td:nth-child(6){width:92px}
+.lovgrid td:nth-child(2){overflow:hidden; text-overflow:ellipsis}
+.lovgrid th{
+  position:sticky; top:0; z-index:2; background:var(--headfill); color:var(--headink);
+  font-weight:600; font-size:10.5px; text-align:left; white-space:nowrap;
+  padding:0 8px; height:22px;
+  border-bottom:1px solid var(--grid-strong); border-right:1px solid var(--grid);
+}
+.lovgrid th.num{text-align:right}
+.lovgrid td{
+  padding:0 8px; height:22px; white-space:nowrap;
+  border-bottom:1px solid var(--grid); border-right:1px solid var(--grid);
+}
+@media (min-resolution:2dppx){
+  .lovgrid th,.lovgrid td{border-bottom-width:.5px; border-right-width:.5px}
+}
+.lovgrid td.num{text-align:right; font-variant-numeric:tabular-nums}
+.lovgrid tbody tr{cursor:pointer}
+.lovgrid tbody tr.cur td{background:var(--accent-soft); box-shadow:inset 0 0 0 0 transparent}
+.lovgrid tbody tr.cur td:first-child{box-shadow:inset 3px 0 0 var(--accent)}
+.lovgrid tbody tr.inactive td{color:var(--muted)}
+.lovtag{
+  margin-left:6px; font-size:9px; font-weight:600; text-transform:uppercase;
+  letter-spacing:.05em; color:var(--danger);
+}
+.lovempty{padding:18px 10px; color:var(--muted); text-align:center}
+.lovhint{font-size:10px; color:var(--muted)}
+
+/* ============================ customer field ============================ */
+.custfield{display:flex; align-items:center; gap:7px; flex-wrap:nowrap}
+.custfield input{flex:1; min-width:0}
+.custfield .custname{
+  font-size:12.5px; font-weight:500; max-width:230px;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.custfield .custid{font-size:11px; color:var(--muted)}
+/* compact = inline on the meta strip, not inside the dialog */
+.custfield.compact{gap:5px}
+.custfield.compact input{
+  width:196px; flex:none; font-size:12px; padding:2px 6px;
+}
+.custfield.compact .custname{font-size:12px; font-weight:500; max-width:210px}
+.custfield.compact button{padding:2px 6px; font-size:11px}
+.mfcust{min-width:290px}
+
+/* a duplicate line, shown for reference in the popover - not clickable */
+.opt.static{cursor:default}
+.opt.static:hover{border-color:var(--rule); background:var(--surface-2)}
+.opt.static.chosen{border-color:var(--accent); background:var(--accent-soft)}
+
+/* ============================ active flag ============================ */
+/* A third frozen column, so the flag stays visible while scrolling right.
+   Offsets: gutter 42 -> Act 52 -> Article 118. */
+th.sAct,td.sAct{position:sticky; left:var(--w0,42px); z-index:2}
+table#grid thead th.sAct{z-index:5}
+table#grid th.sAct, table#grid td.sAct{
+  width:var(--wact,52px); min-width:var(--wact,52px); max-width:var(--wact,52px);
+}
+table#grid tbody td.cell.sAct{position:sticky; z-index:2}
+table#grid th.s1, table#grid td.s1{left:calc(var(--w0,42px) + var(--wact,52px))}
+
+td.flagcell{text-align:center; background:var(--surface)}
+.flagbox{
+  margin:0; cursor:pointer; accent-color:var(--accent);
+  width:13px; height:13px; vertical-align:middle;
+}
+/* a withdrawn line should read as withdrawn across the whole row */
+tbody tr.rowinactive td{color:var(--muted)}
+tbody tr.rowinactive td .val{opacity:.55; text-decoration:line-through}
+tbody tr.rowinactive td.s1{color:var(--muted); text-decoration:line-through}
+tbody tr.rowinactive td.flagcell{background:var(--surface-3)}
+.topchk{
+  display:flex; align-items:center; gap:5px; font-size:12px;
+  color:var(--ink); cursor:pointer; white-space:nowrap;
+}
+.topchk input{margin:0; accent-color:var(--accent)}
+
+/* ============================ confirm dialog ============================ */
+.modal.confirm{max-width:390px}
+.modal.confirm h3{margin-bottom:6px}
+.confirmbody{
+  margin:0 0 6px; padding:7px 10px; border-radius:3px;
+  background:var(--surface-3); border:1px solid var(--rule);
+  font-size:12.5px; font-weight:600; color:var(--ink);
+}
+.metachk{
+  display:flex; align-items:center; gap:5px; font-size:12px;
+  color:var(--ink); cursor:pointer; white-space:nowrap;
+}
+.metachk input{margin:0; accent-color:var(--accent)}
+.metacount{
+  font-size:9.5px; font-weight:700; background:var(--warn); color:var(--surface);
+  border-radius:99px; padding:0 5px; line-height:14px;
+}
+:root[data-theme="dark"] .metacount,
+:root:not([data-theme="light"]) .metacount{color:#12100A}
+
+/* Notes: present on ~3% of lines, and long when present. Truncate in place and
+   show the whole thing on hover; a marker makes the populated ones findable. */
+/* A populated note reads in full ink rather than the dimmed grey the other
+   text columns use - that is enough to pick it out, without a marker glyph. */
+tbody td.hasnote{color:var(--ink)}
+
+/* A wide column still cannot hold 2,000 characters, so its cell scrolls
+   sideways instead of ending the note at an ellipsis. The scrollbar is there
+   whenever the text overflows - always, so nothing shifts - but its thumb only
+   takes colour under the pointer, or a list of notes would read as a stack of
+   grey bars. */
+td.wcell{padding:0}
+/* Absolute, so the scrollbar is out of the row's flow: in flow it added five
+   pixels to any row holding a long note and the grid lost its even ruling.
+   line-height is the full cell height while the visible band is six pixels
+   shorter, which puts the text on the same baseline as every other column and
+   leaves the bottom strip for the bar. */
+td.wcell > .scrollcell{
+  position:absolute; inset:0; padding:0 11px;
+  overflow-x:auto; overflow-y:hidden;
+  white-space:nowrap; line-height:29px;
+}
+/* scrollbar-width:thin would override the height below and force ten pixels */
+td.wcell > .scrollcell::-webkit-scrollbar{height:6px}
+td.wcell > .scrollcell::-webkit-scrollbar-track{background:transparent}
+td.wcell > .scrollcell::-webkit-scrollbar-thumb{background:transparent; border-radius:99px}
+td.wcell:hover > .scrollcell::-webkit-scrollbar-thumb{background:var(--grid-strong)}
+td.wcell > .scrollcell::-webkit-scrollbar-thumb:hover{background:var(--muted)}
+
+/* ---------- resizable columns ----------
+   A grip on the right edge of each header cell: the thing you drag is the
+   boundary you are moving. Invisible until the pointer is in the header, so it
+   does not add nine vertical rules to a grid whose whole point is the numbers. */
+table#grid thead th .rsz{
+  position:absolute; top:0; right:0; width:9px; height:100%;
+  cursor:col-resize; z-index:6;
+}
+table#grid thead th .rsz::after{
+  content:''; position:absolute; top:5px; bottom:5px; right:3px;
+  width:1px; background:transparent; border-radius:1px;
+}
+table#grid thead th:hover .rsz::after{background:var(--grid-strong)}
+table#grid thead th .rsz:hover::after{
+  top:1px; bottom:1px; right:2px; width:3px; background:var(--accent);
+}
+/* Hold the resize cursor for the whole drag, wherever the pointer wanders, and
+   stop the drag from selecting the header text it passes over. */
+body.colresizing, body.colresizing *{cursor:col-resize !important; user-select:none}
+
+/* ---------- alternatives: rows sharing an article + quantity band ----------
+   A rail in the row-number gutter brackets them. It never touches the data
+   cells, so it cannot fight the USD/THB column tints, and it stays readable
+   whether the group holds 2 rows or 15. Singletons get nothing. */
+td.rn.grp{position:relative}
+td.rn.grp::before{
+  content:""; position:absolute; left:3px; top:0; bottom:0;
+  width:3px; background:var(--accent);
+}
+td.rn.grpfirst::before{top:4px; border-radius:2px 2px 0 0}
+td.rn.grplast::before{bottom:4px; border-radius:0 0 2px 2px}
+td.rn.grp{padding-left:11px}
+
+/* a rejected value stays in the cell with the cursor in it, marked */
+td input.edit.bad{
+  box-shadow:inset 0 0 0 2px var(--danger);
+  background:var(--danger-soft); color:var(--danger); font-weight:600;
+}
+
+/* ---- right-click menu on a grid row -------------------------------------
+   position:fixed against the viewport, because the grid scrolls inside its
+   own container - an absolutely positioned menu would be clipped by it. */
+.ctxmenu{
+  position:fixed; z-index:80; margin:0; padding:4px; list-style:none;
+  min-width:232px;
+  background:var(--surface); border:1px solid var(--rule-strong);
+  border-radius:5px; box-shadow:var(--shadow);
+}
+.ctxmenu li{
+  padding:6px 10px; border-radius:3px; cursor:pointer;
+  font-size:12px; color:var(--ink); white-space:nowrap;
+}
+.ctxmenu li:hover{background:var(--accent-soft); color:var(--accent)}
+.ctxmenu li.danger{color:var(--danger)}
+.ctxmenu li.danger:hover{background:var(--danger-soft); color:var(--danger)}
+/* Nothing copied yet: shown, not hidden, so the menu keeps a stable shape
+   and the entry explains why it does nothing. */
+.ctxmenu li.disabled{color:var(--muted); cursor:default}
+.ctxmenu li.disabled:hover{background:transparent; color:var(--muted)}
+
+/* The copied design, shown against Insert here so it is clear what will land */
+.ctxmenu .ctxnote{
+  margin-left:8px; font-family:IBM Plex Mono,monospace; font-size:11px;
+  color:var(--accent);
+}
+.ctxmenu li:hover .ctxnote{color:var(--accent)}
+
+/* Header line in a context menu: names what the menu will act on, so a
+   destructive entry cannot be read against the wrong row. */
+.ctxmenu li.ctxhead{
+  padding:4px 10px 6px; margin-bottom:2px;
+  border-bottom:1px solid var(--rule);
+  font-size:10px; font-weight:600; letter-spacing:.06em; text-transform:uppercase;
+  color:var(--muted); cursor:default;
+}
+.ctxmenu li.ctxhead:hover{background:transparent; color:var(--muted)}
+/* the nav is a positioned container, and the menu is fixed to the viewport */
+.nav{position:relative}
+
+/* The LOV grid's column widths are laid out fixed and sized for the CUSTOMER
+   picker's six columns. The design picker has five different ones, so without
+   its own widths "255699AA/14" is squeezed into 62px and the composition runs
+   over the weight. These override the nth-child rules above. */
+.lovgrid.designlov table{table-layout:fixed; width:100%}
+.lovgrid.designlov th:nth-child(1),.lovgrid.designlov td:nth-child(1){width:140px}
+.lovgrid.designlov th:nth-child(2),.lovgrid.designlov td:nth-child(2){width:auto}
+.lovgrid.designlov th:nth-child(3),.lovgrid.designlov td:nth-child(3){width:200px}
+.lovgrid.designlov th:nth-child(4),.lovgrid.designlov td:nth-child(4){width:104px}
+.lovgrid.designlov th:nth-child(5),.lovgrid.designlov td:nth-child(5){width:118px}
+/* every cell clips its own text rather than spilling into the next column */
+.lovgrid.designlov td,.lovgrid.designlov th{
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+
+/* Fabric names run to "PORTO INVISIBLE TM EMB"; the customer picker's 700px
+   leaves the column too narrow to read one. Wider modal, tighter spec columns. */
+.modal.lov.designlovmodal{max-width:820px}
+.lovgrid.designlov th:nth-child(3),.lovgrid.designlov td:nth-child(3){width:184px}
+.lovgrid.designlov th:nth-child(4),.lovgrid.designlov td:nth-child(4){width:98px}
+.lovgrid.designlov th:nth-child(5),.lovgrid.designlov td:nth-child(5){width:110px}
+
+/* The unit picker is a short list - three narrow columns, no need for the
+   customer picker's width. */
+.modal.lov.uomlovmodal{max-width:460px}
+.lovgrid.uomlov table{table-layout:fixed; width:100%}
+.lovgrid.uomlov th:nth-child(1),.lovgrid.uomlov td:nth-child(1){width:90px}
+.lovgrid.uomlov th:nth-child(2),.lovgrid.uomlov td:nth-child(2){width:auto}
+.lovgrid.uomlov th:nth-child(3),.lovgrid.uomlov td:nth-child(3){width:80px}
+
+/* Customers on a price list. Wider than a form, narrower than the pickers -
+   it is a short table with a Remove on each row. */
+.modal.assignmodal{max-width:640px}
+.lovgrid.assigngrid{max-height:min(48vh,360px)}
+.lovgrid.assigngrid table{table-layout:fixed; width:100%}
+.lovgrid.assigngrid th:nth-child(1),.lovgrid.assigngrid td:nth-child(1){width:70px}
+.lovgrid.assigngrid th:nth-child(2),.lovgrid.assigngrid td:nth-child(2){width:auto;
+  overflow:hidden; text-overflow:ellipsis}
+.lovgrid.assigngrid th:nth-child(3),.lovgrid.assigngrid td:nth-child(3){width:46px}
+.lovgrid.assigngrid th:nth-child(4),.lovgrid.assigngrid td:nth-child(4){width:96px}
+.lovgrid.assigngrid th:nth-child(5),.lovgrid.assigngrid td:nth-child(5){width:82px}
+.lovgrid.assigngrid td button{padding:1px 7px; font-size:11px}
+/* A ghost button that happens to be destructive: red LETTERING on the page,
+   not a solid red block. button.danger above paints the background red, and
+   overriding only the colour here put red text on red - an invisible label
+   inside a red rectangle. The background and border have to come back too. */
+button.ghost.danger{
+  background:transparent; border-color:transparent;
+  color:var(--danger); font-weight:500;
+}
+button.ghost.danger:hover:not(:disabled){
+  background:var(--danger-soft); border-color:var(--danger); color:var(--danger);
+}
+
+/* "Assigned to" in the header strip: reads as a value, behaves as a button. */
+.assignbtn{
+  display:inline-flex; align-items:center; gap:7px;
+  background:transparent; border:1px solid transparent; border-radius:3px;
+  padding:1px 6px 1px 0; font-size:12px; font-weight:500; color:var(--ink);
+}
+.assignbtn:hover:not(:disabled){
+  background:var(--accent-soft); border-color:var(--accent); color:var(--accent);
+  padding-left:6px;
+}
+.assignbtn .dim{color:var(--muted); font-style:italic; font-weight:400}
+.assignedit{
+  font-size:9px; font-weight:600; letter-spacing:.07em; text-transform:uppercase;
+  color:var(--muted); opacity:0; transition:opacity .12s;
+}
+.assignbtn:hover .assignedit{opacity:1; color:var(--accent)}
+
+/* The customers a list is quoted to, as shown in the header strip and the
+   header form. Reads as a value; behaves as a button. */
+.assignnames{
+  max-width:280px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.assignfield{
+  display:block; width:100%; text-align:left;
+  background:var(--surface-2); border:1px solid var(--rule-strong); border-radius:3px;
+  padding:5px 8px; font-size:12.5px; color:var(--ink);
+}
+.assignfield:hover:not(:disabled){border-color:var(--accent); background:var(--accent-soft)}
+.assignfield .dim{color:var(--muted); font-style:italic}
+
+/* "checked" against a price list that somebody has been through. */
+.navok{
+  font-size:9px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+  color:var(--accent); background:var(--accent-soft);
+  border-radius:99px; padding:0 5px; line-height:14px;
+}
+/* The confirmation in the header strip reads plainly until it is ticked, then
+   it says so - it is the one state in this app worth showing off. */
+.verifychk.on span{color:var(--accent); font-weight:600}
+.verifychk input{accent-color:var(--accent)}
+
+/* ---- waiting ------------------------------------------------------------
+   Shown only once a wait passes two seconds, so a fast load stays silent. */
+.loading{display:flex; flex-direction:column; gap:12px; align-items:flex-start}
+.slow{max-width:46ch}
+.slow p{margin:8px 0 0; font-size:11.5px; color:var(--muted); line-height:1.55}
+.slow p b{color:var(--ink-2); font-weight:600}
+
+/* An indeterminate bar: it says "still working", not "this much done", because
+   the app genuinely does not know how far through it is. */
+.slowbar{
+  position:relative; height:3px; width:260px; max-width:100%;
+  background:var(--surface-3); border-radius:99px; overflow:hidden;
+}
+.slowbar span{
+  position:absolute; top:0; bottom:0; left:0; width:40%;
+  background:var(--accent); border-radius:99px;
+  animation:slide 1.15s ease-in-out infinite;
+}
+@keyframes slide{
+  0%{left:-40%} 100%{left:100%}
+}
+@media (prefers-reduced-motion:reduce){
+  .slowbar span{animation:none; left:0; width:100%; opacity:.45}
+}
+
+.savingword{
+  font-size:11px; font-weight:600; letter-spacing:.04em;
+  color:var(--accent);
+}
+.navloading{color:var(--muted); font-style:italic}

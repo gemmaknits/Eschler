@@ -246,9 +246,14 @@ export default function PriceGrid({
   const setFilter = (id, v) => setColFilter(p => ({ ...p, [id]: v }));
   const clearFilters = () => { setColFilter({}); setShowFilters(false); };
 
-  /* A new list, or a reload after a save, renumbers everything - so a
-     selection carried across would point at rows the user never picked. */
-  useEffect(() => { setSelected(new Set()); anchor.current = null; }, [grid]);
+  /* Opening a different price list drops the selection. Deliberately NOT keyed
+     on the grid object: it is rebuilt on every render of the parent, so that
+     cleared the selection every time anything saved - including the save you
+     were selecting rows in order to make. The first row's key and the row
+     count together change when the list changes and hold still when it does
+     not. */
+  const listSig = `${grid.rows[0]?.key ?? ''}|${grid.rows.length}`;
+  useEffect(() => { setSelected(new Set()); anchor.current = null; }, [listSig]);
 
   /* Rows can disappear under a selection (a delete, a filter). Everything that
      acts on the selection reads it through here, so it can only ever contain

@@ -11,6 +11,13 @@ import DesignLov from './DesignLov.jsx';
 import UomLov from './UomLov.jsx';
 import CustomerAssign from './CustomerAssign.jsx';
 
+/* Everything on a grid row that a reviewer can change, and therefore
+   everything a one-row undo has to remember. */
+const ROW_FIELDS = ['design_no', 'article_variant', 'qty_min', 'qty_max',
+                    'qty_unit', 'fabric_name', 'composition', 'full_width_cm',
+                    'usable_width_cm', 'weight_gsm', 'moq', 'price_line_date',
+                    'notes', 'active'];
+
 /**
  * True once `active` has been true CONTINUOUSLY for `ms`.
  *
@@ -218,6 +225,99 @@ export default function App() {
   const slowBusy = useSlow(busy);
   /* Before the first list arrives there is nothing on screen at all. */
   const booting  = loading && lists.length === 0 && !error;
+
+
+  /* ---- undo, one row deep ------------------------------------------------
+
+     Saves happen as you type, so there is no Cancel to press. Instead the row
+     under the cursor is photographed when you arrive on it, and Undo puts that
+     photograph back. Step off the row and the photograph is replaced by one of
+     the row you stepped onto - so this covers "I have just made a mess of this
+     line", which is the case that actually happens, and deliberately not "what
+     did I change half an hour ago", which would need a history table.
+
+     Held in memory only. A reload loses it, which is honest: after a reload
+     there is nothing on screen that the user still thinks of as "just now". */
+  const [rowSnap, setRowSnap] = useState(null);
+
+  /* Photographed on the first edit to a row, not on arriving at it.
+
+     Arriving looked like the obvious moment, and it is how this was written
+     first - but Enter commits and steps down a row, exactly as in a
+     spreadsheet. So the commonest gesture there is, type-then-Enter, left the
+     row instantly and threw the photograph away before Undo could use it.
+
+     Taking it on the first edit is both simpler and safer: the edit handlers
+     are already holding the row as it was immediately before the write, which
+     is precisely the thing Undo needs. Where the cursor goes afterwards stops
+     mattering. Editing a different row replaces the photograph - so this is
+     still one row deep, and still "the row I have just made a mess of". */
+  const armRow = useCallback(row => {
+    if (!row || row.isDraft) return;
+    setRowSnap(prev => {
+      if (prev && prev.key === row.key) return prev;     // already photographed
+      const fields = {};
+      for (const f of ROW_FIELDS) fields[f] = row[f] ?? null;
+      return {
+        key: row.key,
+        design_no: row.design_no,
+        fields,
+        cells: Object.fromEntries(Object.entries(row.cells || {}).map(([k, d]) =>
+          [k, { detail_id: d.so_price_list_detail_id, price: d.price }]))
+      };
+    });
+  }, []);
+
+  /* What Undo would actually put back. Also what greys the button out: an
+     enabled Undo on an untouched row is a lie. */
+  const liveSnapRow = rowSnap ? grid.rows.find(r => r.key === rowSnap.key) : null;
+  const undoable = (() => {
+    if (!rowSnap || !liveSnapRow) return null;
+    const changed = ROW_FIELDS.filter(f =>
+      String(liveSnapRow[f] ?? '') !== String(rowSnap.fields[f] ?? ''));
+    const live = liveSnapRow.cells || {};
+    const priceChanges = Object.entries(rowSnap.cells)
+      .filter(([k, s]) => live[k] && String(live[k].price ?? '') !== String(s.price ?? ''));
+    /* A price typed into an empty cell created a line; putting the row back
+       means taking it away again. */
+    const added = Object.entries(live).filter(([k]) => !rowSnap.cells[k]);
+    if (!changed.length && !priceChanges.length && !added.length) return null;
+    return { changed, priceChanges, added, row: liveSnapRow };
+  })();
+
+  const undoRow = useCallback(async () => {
+    if (!undoable || !rowSnap) return;
+    const { changed, priceChanges, added, row } = undoable;
+    setBusy(true);
+    try {
+      /* Prices first, then the row fields, then the lines that did not exist
+         when we arrived - deleting those last means a failure part way through
+         leaves more of the row restored rather than less. */
+      for (const [, s] of priceChanges)
+        await api.saveDetail({ detail_id: s.detail_id, price: s.price });
+
+      if (changed.length) {
+        const patch = {};
+        for (const f of changed) {
+          patch[f] = rowSnap.fields[f];
+          /* NULL means "leave alone" to the procedure, so putting a value back
+             to empty has to say so explicitly. */
+          if (f === 'qty_max' && (rowSnap.fields[f] === null || rowSnap.fields[f] === ''))
+            patch.clear_qty_max = true;
+          if (f === 'price_line_date' && !rowSnap.fields[f])
+            patch.clear_price_line_date = true;
+        }
+        for (const d of Object.values(row.cells || {}))
+          await api.saveDetail({ detail_id: d.so_price_list_detail_id, ...patch });
+      }
+
+      for (const [, d] of added) await api.deleteDetail(d.so_price_list_detail_id);
+
+      const n = changed.length + priceChanges.length + added.length;
+      say(`${rowSnap.design_no} put back — ${n} change${n === 1 ? '' : 's'} undone`);
+      reload(true); refreshLists();
+    } catch (err) { setError(err.message); } finally { setBusy(false); }
+  }, [undoable, rowSnap, reload, say]);
 
   /* ---- right-click: copy / insert / delete a whole line ------------------
      A grid row is a whole set - every tier, both currencies - so all three act
@@ -452,6 +552,7 @@ export default function App() {
   }, [uomLov, patchRowLocally, say]);
 
   const editRow = useCallback(async (row, col, raw) => {
+    armRow(row);            // before anything is written
     /* The unit has to be one the system knows. The database refuses anything
        else, so rather than let the save fail and report it, check here and
        open the picker - the typed value is shown so it is clear what was
@@ -555,10 +656,11 @@ export default function App() {
     } catch (err) {
       setError(err.message);
     } finally { setBusy(false); }
-  }, [headerId, reload, say, fillFromDesign, uoms]);
+  }, [headerId, reload, say, fillFromDesign, uoms, armRow]);
 
   /* ---- edit or create a price ---- */
   const editPrice = useCallback(async (row, currency, tier, value) => {
+    armRow(row);            // before anything is written
     const w = row.cells?.[`${currency}|${tier}`] || null;
 
     if (!row.isDraft && !w) {
@@ -642,7 +744,7 @@ export default function App() {
       }));
       say(`${row.design_no} · ${tier} · ${currency} → ${value}`);
     } catch (err) { setError(err.message); } finally { setBusy(false); }
-  }, [headerId, reload, say]);
+  }, [headerId, reload, say, armRow]);
 
 
   /* A per-list view preference, stored on the header so the next person to open
@@ -749,6 +851,19 @@ export default function App() {
 
         <button ref={colBtnRef} onClick={() => setShowCols(v => !v)}>
           Columns <span className="dimcount">{tiers.length}×{currencies.length}</span>
+        </button>
+
+        {/* Nothing to undo reads as a disabled button rather than a missing
+            one, so the way back is always in the same place. */}
+        <button
+          className="undobtn"
+          onClick={undoRow}
+          disabled={!undoable || busy}
+          title={undoable
+            ? `Put ${rowSnap.design_no} back as it was when you moved onto it — ${undoable.changed.length + undoable.priceChanges.length + undoable.added.length} change(s)`
+            : 'Nothing to undo on this line. Edits save as you type; Undo covers the line the cursor is on.'}
+        >
+          ↶ Undo line
         </button>
 
         <div className="spacer" />

@@ -889,3 +889,9 @@ th.fbtn button.on{color:var(--accent); font-weight:700}
 /* Keep the divider against the worksheet crisp in the light theme, where the
    paper beside it is nearly white. */
 .nav{border-right-color:#0B100F}
+
+/* The way back. Disabled rather than hidden when there is nothing to undo, so
+   it never moves and is always where the eye last left it. */
+.undobtn{font-variant-numeric:tabular-nums}
+.undobtn:not(:disabled){color:var(--warn); border-color:var(--warn-rule)}
+.undobtn:not(:disabled):hover{background:var(--warn-soft); border-color:var(--warn)}

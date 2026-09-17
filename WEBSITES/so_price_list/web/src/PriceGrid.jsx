@@ -17,6 +17,10 @@ const money = (v, ccy) => {
 export const ROW_COLS = [
   { key: 'active',   label: 'Act',     width: 52, flag: true },
   { key: 'design_no', label: 'Design No', sticky: true, width: 118 },
+  /* When this price was quoted. Next to the design number because that is
+     where it is read - "this design, at this price, on this date" - rather
+     than at the far end of the spec columns where it started. */
+  { key: 'price_line_date', label: 'Price date', width: 132, date: true },
   { key: 'qty_min',  label: 'Min',     group: 'Quantity', num: true,  width: 72 },
   { key: 'qty_max',  label: 'Max',     group: 'Quantity', num: true,  width: 72, blank: true },
   { key: 'qty_unit', label: 'Unit',    group: 'Quantity', width: 56 }
@@ -29,12 +33,6 @@ export const INFO_COLS = [
   { key: 'usable_width_cm', label: 'Usable W',   width: 124 },
   { key: 'weight_gsm',      label: 'g/m²',       width: 112 },
   { key: 'moq',             label: 'MOQ',        width: 104 },
-  /* When this price was quoted. A property of the whole row, like the columns
-     either side of it, so editing it writes every price line behind the row.
-     The imported data has none of these - the notes carry the date as prose
-     ("Quoted Price by K. Sivy on 20.12.2022") and it is the reviewers who put
-     it here as they work through the book. */
-  { key: 'price_line_date', label: 'Price date', width: 116, date: true },
   /* Only 3% of lines have a note, but they carry the quote's provenance -
      who quoted it, when, on what terms - so they are worth the widest column
      here. They run to 2,000 characters, so no width fits them all: what does
@@ -685,6 +683,7 @@ export default function PriceGrid({
           <th className="stk s1" rowSpan={2}>
             Design No{grip(byKey('design_no'))}
           </th>
+          <th rowSpan={2}>Price date{grip(byKey('price_line_date'))}</th>
           <th className="grp" colSpan={3}>Quantity</th>
           {currencies.map(ccy => (
             <th key={ccy} className={`grp ${ccy === 'USD' ? 'usd' : 'thb'}`} colSpan={tiers.length}>
@@ -854,7 +853,12 @@ export default function PriceGrid({
                   >
                     {isEdit ? (
                       <input
-                        className={`edit${col.kind === 'price' || col.num ? ' mono' : ''}${invalid ? ' bad' : ''}`}
+                        /* A native picker on a date column: the calendar is
+                           there for people who want it, and the field still
+                           accepts a typed YYYY-MM-DD for people who would
+                           rather not reach for the mouse. */
+                        type={col.date ? 'date' : 'text'}
+                        className={`edit${col.kind === 'price' || col.num ? ' mono' : ''}${col.date ? ' datein' : ''}${invalid ? ' bad' : ''}`}
                         style={col.kind === 'price' || col.num ? undefined : { textAlign: 'left' }}
                         autoFocus
                         value={editing.value}
@@ -872,6 +876,13 @@ export default function PriceGrid({
                           if (k === 'Enter')       { e.preventDefault(); commit(); move(1, 0); }
                           else if (k === 'Escape') { e.preventDefault(); setInvalid(false); setEditing(null); }
                           else if (k === 'Tab')    { e.preventDefault(); commit(); move(0, e.shiftKey ? -1 : 1); }
+                          /* A date field spends its arrow keys on its own
+                             segments - up and down step the day, left and
+                             right move between day, month and year. Taking
+                             them away to move the cursor would make the picker
+                             useless, so on a date cell they stay with it and
+                             Enter, Tab or Escape are the way out. */
+                          else if (col.date) { /* leave the arrows to the picker */ }
                           // Up/Down always leave the cell - a single-line input
                           // has nowhere for them to go anyway
                           else if (k === 'ArrowUp')   { e.preventDefault(); commit(); move(-1, 0); }

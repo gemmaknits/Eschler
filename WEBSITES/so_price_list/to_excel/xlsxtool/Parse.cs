@@ -18,11 +18,24 @@ static class Parse
        sentences are real cells in the sheet and were being read as articles. */
     static readonly Regex ArticleShape = new(@"^[A-Za-z0-9][A-Za-z0-9\-/._]{2,29}$", RegexOptions.Compiled);
 
+    /* A code with a second code after it in brackets: "254990 (#040047)".
+       ANITA writes the supplier's own reference that way when a design is
+       re-quoted. Both halves matter, and they are not the same thing: the
+       sheet's full text is the ARTICLE, and the part in front of the bracket
+       is the DESIGN NUMBER the rest of the system knows the fabric by.
+
+       Before this the whole cell failed to parse as an article at all, so
+       every row of the revised table was skipped - the table was found, and
+       then discarded line by line for having no article. */
+    static readonly Regex BracketedShape = new(
+        @"^([A-Za-z0-9][A-Za-z0-9\-/._]{2,29})\s*\(\s*([^)]{1,25}?)\s*\)$",
+        RegexOptions.Compiled);
+
     public static string Article(string raw)
     {
         var s = (raw ?? "").Trim().TrimEnd('.', ',');
-        if (s.Length < 3 || s.Length > 30) return null;
-        if (!ArticleShape.IsMatch(s)) return null;
+        if (s.Length < 3 || s.Length > 56) return null;
+        if (!ArticleShape.IsMatch(s) && !BracketedShape.IsMatch(s)) return null;
         if (s.Count(char.IsDigit) < 3) return null;
         /* "25-30" and "155-165" are a weight and a width, not articles. Two
            short numbers around a dash is a RANGE - real codes here are six
@@ -31,6 +44,15 @@ static class Parse
            header was misread. */
         if (Regex.IsMatch(s, @"^\d{1,4}\s*-\s*\d{1,4}$")) return null;
         return s;
+    }
+
+    /* The design number inside an article. Everything that is not a bracketed
+       pair is already its own design number and comes back unchanged. */
+    public static string DesignNo(string article)
+    {
+        if (string.IsNullOrWhiteSpace(article)) return article;
+        var m = BracketedShape.Match(article.Trim());
+        return m.Success ? m.Groups[1].Value : article.Trim();
     }
 
     /* A quantity band. A single figure is a MINIMUM ("2,000 m." means 2,000 and

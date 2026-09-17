@@ -27,7 +27,16 @@ CREATE TABLE SO.so_price_list_stage (
     sheet             nvarchar(120)  NOT NULL,
     source_row        int            NOT NULL,
     header_row        int            NOT NULL,
-    design_no         nvarchar(60)   NOT NULL,
+    /* The article as the sheet writes it. Usually the design number and
+       nothing else, but ANITA, BIGA and Biga Thailand re-quote a design with a
+       second reference after it - "254990 (#040047)", "255359 (255026 width
+       155cm)", "255123 ( B GRADE)". The full text is kept here and the code in
+       front of the bracket becomes the design number, which is what the rest of
+       the system knows the fabric by.
+
+       block_note below was referenced by rebuild_from_rescan.sql but missing
+       from this table, so the two scripts did not agree; it is here now. */
+    article           nvarchar(120)  NOT NULL,
     fabric_name       nvarchar(200)  NULL,
     composition       nvarchar(300)  NULL,
     full_width_cm     nvarchar(60)   NULL,
@@ -41,7 +50,9 @@ CREATE TABLE SO.so_price_list_stage (
     currency          char(3)        NULL,
     price             decimal(18,4)  NULL,
     date_raw          nvarchar(120)  NULL,
-    remark            nvarchar(1000) NULL
+    remark            nvarchar(1000) NULL,
+    block_note        nvarchar(max)  NULL,
+    design_no         nvarchar(60)   NOT NULL
 );
 GO
 

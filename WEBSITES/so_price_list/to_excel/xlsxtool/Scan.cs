@@ -13,7 +13,7 @@ using ClosedXML.Excel;
 
 sealed class Line
 {
-    public string Sheet, Article, Fabric, Composition, FullWidth, UsableWidth,
+    public string Sheet, Article, DesignNo, Fabric, Composition, FullWidth, UsableWidth,
                   Weight, Moq, QtyRaw, Tier, Currency, Remark, DateRaw, BlockNote;
     public int Row, HeaderRow, QtyMin, Col;
     /* true when a LABEL named the currency; false when it was inferred */
@@ -60,6 +60,23 @@ static class Scan
            each column takes whichever of the two rows actually says something,
            and a price column takes its tier from one and its currency from
            the other. */
+        /* The candidate row must not itself be DATA, however much the rows
+           under it look like labels.
+
+           ANITA puts a revision block immediately below a table's last tier:
+
+               2,501-10,000m. |   | 1.80 | 2.18 | 54 | 66     <- data
+               UPDATED : 26.11.21 by K.Sivy | USD per meter / FOB ...
+               Qty | Article | PFE/PFD | All colors | ...
+
+           Rows two and three read as a header and its continuation, so the
+           tier row above them was being swallowed as the first line of a
+           three-row header - losing its four prices, and leaving the table
+           below to be read with the swallowed row's columns instead of its
+           own. Both halves of that were reported from the floor: the last
+           quantity tier missing, and the whole lower table missing. */
+        if (LooksLikeDataRow(grid[r])) return null;
+
         var t = new Table { HeaderRow = r };
         int priced = 0, identifying = 0;
         int depth = 1;
@@ -295,6 +312,23 @@ static class Scan
     /* A header row may be continued on the row below - names on one line,
        units and tier labels on the next. A DATA row never is. The difference
        is an article: a continuation carries labels, not design numbers. */
+    /* Bare numbers, with no letters anywhere in the cell: 1.80, 54, 2.18.
+       A heading says "Qty" or "PFE/PFD" or "USD per meter / FOB" and has none
+       of them; a row of prices is nothing else. Two is the threshold because a
+       single stray figure in a title ("Price list 2025") is common and means
+       nothing. */
+    static bool LooksLikeDataRow(string[] row)
+    {
+        int bare = 0;
+        foreach (var v in row)
+        {
+            if (string.IsNullOrWhiteSpace(v)) continue;
+            if (v.Any(char.IsLetter)) continue;
+            if (Parse.Price(v, out _, out _)) bare++;
+        }
+        return bare >= 2;
+    }
+
     internal static bool IsHeaderContinuation(string[] row)
     {
         foreach (var v in row)
@@ -621,7 +655,8 @@ static class Scan
 
                 outp.Add(new Line {
                     Sheet = ws.Name, Row = r0 + i, HeaderRow = r0 + t.HeaderRow,
-                    Article = art, Fabric = fab, Composition = comp,
+                    Article = art, DesignNo = Parse.DesignNo(art),
+                    Fabric = fab, Composition = comp,
                     FullWidth = fw, UsableWidth = uw, Weight = wt, Moq = moq,
                     QtyRaw = qtyRaw, QtyMin = qmin, QtyMax = qmax,
                     Tier = tier, Currency = currency, Price = price, Col = c,

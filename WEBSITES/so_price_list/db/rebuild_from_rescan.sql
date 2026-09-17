@@ -104,7 +104,15 @@ INSERT INTO SO.so_price_list_detail
         qty_min, qty_max, qty_unit, color_tier, currency, price,
         active, source_row, notes, created_by)
 SELECT header_id, set_no, line_no,
-       design_no, design_no, NULL,          -- article mirrors design_no
+       /* article is what the sheet said; design_no is the identifier. These
+          were the same column until the workbook turned out to re-quote a
+          design with a supplier reference after it, so now article carries
+          "254990 (#040047)" and design_no carries "254990".
+
+          get_price is still called with @article by the order-entry client, so
+          a bracketed article will NOT match a plain lookup - see the note at
+          the foot of this file. */
+       article, design_no, NULL,
        fabric_name, composition, full_width_cm, usable_width_cm, weight_gsm, moq,
        ISNULL(qty_min, 0), qty_max, N'MTS', color_tier, currency, price,
        'Y', source_row,

@@ -33,7 +33,7 @@ static class Emit
         var sb = new StringBuilder();
         sb.AppendLine("sheet,source_row,header_row,article,fabric_name,composition," +
                       "full_width_cm,usable_width_cm,weight_gsm,moq,qty_raw,qty_min,qty_max," +
-                      "color_tier,currency,price,date_raw,remark,block_note");
+                      "color_tier,currency,price,date_raw,remark,block_note,design_no");
         foreach (var l in all)
             sb.AppendLine(string.Join(",", new[] {
                 Q(l.Sheet), l.Row.ToString(), l.HeaderRow.ToString(), Q(l.Article),
@@ -41,7 +41,7 @@ static class Emit
                 Q(l.Weight), Q(l.Moq), Q(l.QtyRaw), l.QtyMin.ToString(),
                 l.QtyMax?.ToString() ?? "", Q(l.Tier), Q(l.Currency),
                 l.Price.ToString(System.Globalization.CultureInfo.InvariantCulture),
-                Q(l.DateRaw), Q(l.Remark), Q(l.BlockNote)
+                Q(l.DateRaw), Q(l.Remark), Q(l.BlockNote), Q(l.DesignNo)
             }));
         File.WriteAllText(outCsv, sb.ToString(), new UTF8Encoding(true));
 

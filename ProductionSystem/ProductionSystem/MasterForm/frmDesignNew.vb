@@ -93,6 +93,9 @@ Public Class frmDesignNew
         tsbCopy.Enabled = AllowNew
         btnSave.Enabled = AllowEdit
         btnPrint.Enabled = AllowPrint
+        AddHandler bsDesignMaster.CurrentChanged, AddressOf UpdateDeleteDesignButton
+        AddHandler bsDesignMaster.ListChanged, AddressOf UpdateDeleteDesignButton
+        UpdateDeleteDesignButton(Nothing, EventArgs.Empty)
 
         If _pDesignNo.Trim <> "" Then
             txtDesignNo.Text = _pDesignNo.Trim
@@ -668,6 +671,58 @@ Public Class frmDesignNew
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
         AskBeforeSave()
     End Sub
+
+    Private Sub UpdateDeleteDesignButton(ByVal sender As Object, ByVal e As EventArgs)
+        Dim current = TryCast(bsDesignMaster.Current, DataRowView)
+        btnDeleteDesign.Enabled = False
+        If Not CBool(AllowEdit) OrElse current Is Nothing Then Return
+        If current.Row.RowState = DataRowState.Deleted OrElse Not current.Row.HasVersion(DataRowVersion.Original) Then Return
+        If IsDBNull(current("dm_item_id")) Then Return
+        btnDeleteDesign.Enabled = Convert.ToInt64(current("dm_item_id")) > 0
+    End Sub
+
+    Private Sub btnDeleteDesign_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnDeleteDesign.Click
+        If Not CBool(AllowEdit) Then Return
+        Dim current = TryCast(bsDesignMaster.Current, DataRowView)
+        If current Is Nothing OrElse Not current.Row.HasVersion(DataRowVersion.Original) Then Return
+        If IsDBNull(current("dm_item_id")) OrElse Convert.ToInt64(current("dm_item_id")) <= 0 Then Return
+
+        'Use the persisted identity, never the editable Design No. textbox.
+        Dim savedId = Convert.ToInt64(current.Row("dm_item_id", DataRowVersion.Original))
+        Dim savedNo = Convert.ToString(current.Row("dm_design_no", DataRowVersion.Original)).Trim()
+        Dim confirmation = Microsoft.VisualBasic.Interaction.InputBox(
+            "Permanently delete Design " & savedNo & "?" & Environment.NewLine &
+            "Unsaved changes will be discarded only if deletion succeeds." & Environment.NewLine &
+            "Type the Design No. to confirm:", "Delete Design")
+        If confirmation.Length = 0 Then Return
+        If Not String.Equals(confirmation.Trim(), savedNo, StringComparison.OrdinalIgnoreCase) Then
+            MessageBox.Show("Design No. does not match. Nothing was deleted.", "Delete Design", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        btnDeleteDesign.Enabled = False
+        Me.Cursor = Cursors.WaitCursor
+        Try
+            Dim updater As New classMasterUpdate
+            updater.DeleteDesignMaster(savedId, savedNo, clsUser.UserID)
+        Catch ex As Exception
+            MessageBox.Show(ex.Message, "Delete Design failed", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        Finally
+            Me.Cursor = Cursors.Default
+            UpdateDeleteDesignButton(Nothing, EventArgs.Empty)
+        End Try
+
+        ClearDataBindings()
+        InitControl()
+        DesignNo = ""
+        blnCancel = False
+        CreateNewRecord()
+        BindData()
+        txtDesignNo.AutoCompleteCustomSource.Remove(savedNo)
+        MessageBox.Show("Design " & savedNo & " deleted.", "Delete Design", MessageBoxButtons.OK, MessageBoxIcon.Information)
+    End Sub
+
     Private Sub AskBeforeSave()
         If AllowEdit = False Then
             Exit Sub
@@ -965,7 +1020,7 @@ Public Class frmDesignNew
         drv = CType(bsDesignMaster.Current, DataRowView)
 
         If drv IsNot Nothing Then
-            CountryLookupValueId = drv.Item("ds_shoe_country_id")
+            CountryLookupValueId = oConfig.IsNull(drv.Item("ds_shoe_country_id"), Nothing)
             genComboShoeSize(CountryLookupValueId)
         End If
 

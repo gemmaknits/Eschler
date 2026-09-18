@@ -21,11 +21,12 @@ Partial Class frmDesignNew
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDesignNew))
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.btnNew = New System.Windows.Forms.ToolStripButton()
         Me.btnSave = New System.Windows.Forms.ToolStripButton()
+        Me.btnDeleteDesign = New System.Windows.Forms.ToolStripButton()
         Me.BtnfrmItemsCategory = New System.Windows.Forms.ToolStripButton()
         Me.tsbCopy = New System.Windows.Forms.ToolStripButton()
         Me.btnPrint = New System.Windows.Forms.ToolStripDropDownButton()
@@ -149,6 +150,19 @@ Partial Class frmDesignNew
         Me.colCWName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colRemarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.tpSpecification = New System.Windows.Forms.TabPage()
+        Me.GroupBox13 = New System.Windows.Forms.GroupBox()
+        Me.Label128 = New System.Windows.Forms.Label()
+        Me.Label127 = New System.Windows.Forms.Label()
+        Me.Label126 = New System.Windows.Forms.Label()
+        Me.Label125 = New System.Windows.Forms.Label()
+        Me.Label123 = New System.Windows.Forms.Label()
+        Me.txtStitchNote2str = New System.Windows.Forms.TextBox()
+        Me.Label122 = New System.Windows.Forms.Label()
+        Me.txtStitchNote1str = New System.Windows.Forms.TextBox()
+        Me.Label120 = New System.Windows.Forms.Label()
+        Me.txtStitchNoteTr005 = New System.Windows.Forms.TextBox()
+        Me.Label116 = New System.Windows.Forms.Label()
+        Me.txtStitchNoteSuk90 = New System.Windows.Forms.TextBox()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.lbldesign_gauge = New System.Windows.Forms.Label()
         Me.Label44 = New System.Windows.Forms.Label()
@@ -313,19 +327,6 @@ Partial Class frmDesignNew
         Me.Label21 = New System.Windows.Forms.Label()
         Me.txtSuppDesignNo = New System.Windows.Forms.TextBox()
         Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
-        Me.GroupBox13 = New System.Windows.Forms.GroupBox()
-        Me.Label116 = New System.Windows.Forms.Label()
-        Me.txtStitchNoteSuk90 = New System.Windows.Forms.TextBox()
-        Me.Label120 = New System.Windows.Forms.Label()
-        Me.txtStitchNoteTr005 = New System.Windows.Forms.TextBox()
-        Me.Label122 = New System.Windows.Forms.Label()
-        Me.txtStitchNote1str = New System.Windows.Forms.TextBox()
-        Me.Label123 = New System.Windows.Forms.Label()
-        Me.txtStitchNote2str = New System.Windows.Forms.TextBox()
-        Me.Label125 = New System.Windows.Forms.Label()
-        Me.Label126 = New System.Windows.Forms.Label()
-        Me.Label127 = New System.Windows.Forms.Label()
-        Me.Label128 = New System.Windows.Forms.Label()
         Me.ToolStrip1.SuspendLayout()
         Me.tpSpecialFabricPro.SuspendLayout()
         Me.GroupBox10.SuspendLayout()
@@ -337,6 +338,7 @@ Partial Class frmDesignNew
         CType(Me.dgvBOMLines, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgvBomHeader, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tpSpecification.SuspendLayout()
+        Me.GroupBox13.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         CType(Me.cboMultiMachineGroup, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox5.SuspendLayout()
@@ -349,12 +351,11 @@ Partial Class frmDesignNew
         CType(Me.grdParentDesign, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox11.SuspendLayout()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox13.SuspendLayout()
         Me.SuspendLayout()
         '
         'ToolStrip1
         '
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnNew, Me.btnSave, Me.BtnfrmItemsCategory, Me.tsbCopy, Me.btnPrint, Me.BtmfrmDoc_attachments, Me.btnExit, Me.ToolStripSeparator2})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnNew, Me.btnSave, Me.btnDeleteDesign, Me.BtnfrmItemsCategory, Me.tsbCopy, Me.btnPrint, Me.BtmfrmDoc_attachments, Me.btnExit, Me.ToolStripSeparator2})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.Size = New System.Drawing.Size(1118, 25)
@@ -375,6 +376,15 @@ Partial Class frmDesignNew
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(51, 22)
         Me.btnSave.Text = "Save"
+        '
+        'btnDeleteDesign
+        '
+        Me.btnDeleteDesign.Enabled = False
+        Me.btnDeleteDesign.Image = Global.ProductionSystem.My.Resources.Resources.Cancel_16x
+        Me.btnDeleteDesign.Name = "btnDeleteDesign"
+        Me.btnDeleteDesign.Size = New System.Drawing.Size(99, 22)
+        Me.btnDeleteDesign.Text = "Delete Design"
+        Me.btnDeleteDesign.ToolTipText = "Delete an unused Design Master"
         '
         'BtnfrmItemsCategory
         '
@@ -427,7 +437,7 @@ Partial Class frmDesignNew
         Me.btnExit.Image = CType(resources.GetObject("btnExit.Image"), System.Drawing.Image)
         Me.btnExit.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnExit.Name = "btnExit"
-        Me.btnExit.Size = New System.Drawing.Size(45, 22)
+        Me.btnExit.Size = New System.Drawing.Size(46, 22)
         Me.btnExit.Text = "Exit"
         '
         'ToolStripSeparator2
@@ -1035,7 +1045,7 @@ Partial Class frmDesignNew
         Me.Label99.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Label99.Location = New System.Drawing.Point(508, 21)
         Me.Label99.Name = "Label99"
-        Me.Label99.Size = New System.Drawing.Size(112, 13)
+        Me.Label99.Size = New System.Drawing.Size(113, 13)
         Me.Label99.TabIndex = 293
         Me.Label99.Text = "PCS/ROW/FULL WDT"
         '
@@ -1250,7 +1260,7 @@ Partial Class frmDesignNew
         Me.Label92.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Label92.Location = New System.Drawing.Point(806, 21)
         Me.Label92.Name = "Label92"
-        Me.Label92.Size = New System.Drawing.Size(88, 13)
+        Me.Label92.Size = New System.Drawing.Size(87, 13)
         Me.Label92.TabIndex = 305
         Me.Label92.Text = "FABRIC WEIGHT"
         '
@@ -1529,7 +1539,7 @@ Partial Class frmDesignNew
         Me.Label62.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label62.Location = New System.Drawing.Point(452, 15)
         Me.Label62.Name = "Label62"
-        Me.Label62.Size = New System.Drawing.Size(64, 13)
+        Me.Label62.Size = New System.Drawing.Size(63, 13)
         Me.Label62.TabIndex = 90
         Me.Label62.Text = "BOM LINES"
         '
@@ -1539,7 +1549,7 @@ Partial Class frmDesignNew
         Me.Label52.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label52.Location = New System.Drawing.Point(13, 15)
         Me.Label52.Name = "Label52"
-        Me.Label52.Size = New System.Drawing.Size(78, 13)
+        Me.Label52.Size = New System.Drawing.Size(77, 13)
         Me.Label52.TabIndex = 89
         Me.Label52.Text = "BOM HEADER"
         '
@@ -1560,8 +1570,8 @@ Partial Class frmDesignNew
         'LineRunNo
         '
         Me.LineRunNo.DataPropertyName = "RunNo"
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.LineRunNo.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.LineRunNo.DefaultCellStyle = DataGridViewCellStyle1
         Me.LineRunNo.HeaderText = "No."
         Me.LineRunNo.Name = "LineRunNo"
         Me.LineRunNo.Width = 50
@@ -1614,8 +1624,8 @@ Partial Class frmDesignNew
         'RunNO
         '
         Me.RunNO.DataPropertyName = "RunNO"
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.RunNO.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.RunNO.DefaultCellStyle = DataGridViewCellStyle2
         Me.RunNO.HeaderText = "No."
         Me.RunNO.Name = "RunNO"
         Me.RunNO.Width = 50
@@ -1667,6 +1677,127 @@ Partial Class frmDesignNew
         Me.tpSpecification.Size = New System.Drawing.Size(1099, 412)
         Me.tpSpecification.TabIndex = 1
         Me.tpSpecification.Text = "SPECIFICATION"
+        '
+        'GroupBox13
+        '
+        Me.GroupBox13.Controls.Add(Me.Label128)
+        Me.GroupBox13.Controls.Add(Me.Label127)
+        Me.GroupBox13.Controls.Add(Me.Label126)
+        Me.GroupBox13.Controls.Add(Me.Label125)
+        Me.GroupBox13.Controls.Add(Me.Label123)
+        Me.GroupBox13.Controls.Add(Me.txtStitchNote2str)
+        Me.GroupBox13.Controls.Add(Me.Label122)
+        Me.GroupBox13.Controls.Add(Me.txtStitchNote1str)
+        Me.GroupBox13.Controls.Add(Me.Label120)
+        Me.GroupBox13.Controls.Add(Me.txtStitchNoteTr005)
+        Me.GroupBox13.Controls.Add(Me.Label116)
+        Me.GroupBox13.Controls.Add(Me.txtStitchNoteSuk90)
+        Me.GroupBox13.Location = New System.Drawing.Point(372, 173)
+        Me.GroupBox13.Name = "GroupBox13"
+        Me.GroupBox13.Size = New System.Drawing.Size(204, 159)
+        Me.GroupBox13.TabIndex = 100
+        Me.GroupBox13.TabStop = False
+        Me.GroupBox13.Text = "Stitch Note"
+        '
+        'Label128
+        '
+        Me.Label128.AutoSize = True
+        Me.Label128.Location = New System.Drawing.Point(94, 113)
+        Me.Label128.Name = "Label128"
+        Me.Label128.Size = New System.Drawing.Size(13, 13)
+        Me.Label128.TabIndex = 140
+        Me.Label128.Text = " :"
+        '
+        'Label127
+        '
+        Me.Label127.AutoSize = True
+        Me.Label127.Location = New System.Drawing.Point(94, 85)
+        Me.Label127.Name = "Label127"
+        Me.Label127.Size = New System.Drawing.Size(13, 13)
+        Me.Label127.TabIndex = 139
+        Me.Label127.Text = " :"
+        '
+        'Label126
+        '
+        Me.Label126.AutoSize = True
+        Me.Label126.Location = New System.Drawing.Point(94, 57)
+        Me.Label126.Name = "Label126"
+        Me.Label126.Size = New System.Drawing.Size(13, 13)
+        Me.Label126.TabIndex = 138
+        Me.Label126.Text = " :"
+        '
+        'Label125
+        '
+        Me.Label125.AutoSize = True
+        Me.Label125.Location = New System.Drawing.Point(94, 29)
+        Me.Label125.Name = "Label125"
+        Me.Label125.Size = New System.Drawing.Size(13, 13)
+        Me.Label125.TabIndex = 137
+        Me.Label125.Text = " :"
+        '
+        'Label123
+        '
+        Me.Label123.AutoSize = True
+        Me.Label123.Location = New System.Drawing.Point(24, 113)
+        Me.Label123.Name = "Label123"
+        Me.Label123.Size = New System.Drawing.Size(30, 13)
+        Me.Label123.TabIndex = 136
+        Me.Label123.Text = "2 Str"
+        '
+        'txtStitchNote2str
+        '
+        Me.txtStitchNote2str.Location = New System.Drawing.Point(113, 109)
+        Me.txtStitchNote2str.Name = "txtStitchNote2str"
+        Me.txtStitchNote2str.Size = New System.Drawing.Size(51, 22)
+        Me.txtStitchNote2str.TabIndex = 135
+        '
+        'Label122
+        '
+        Me.Label122.AutoSize = True
+        Me.Label122.Location = New System.Drawing.Point(24, 85)
+        Me.Label122.Name = "Label122"
+        Me.Label122.Size = New System.Drawing.Size(30, 13)
+        Me.Label122.TabIndex = 134
+        Me.Label122.Text = "1 Str"
+        '
+        'txtStitchNote1str
+        '
+        Me.txtStitchNote1str.Location = New System.Drawing.Point(113, 81)
+        Me.txtStitchNote1str.Name = "txtStitchNote1str"
+        Me.txtStitchNote1str.Size = New System.Drawing.Size(51, 22)
+        Me.txtStitchNote1str.TabIndex = 133
+        '
+        'Label120
+        '
+        Me.Label120.AutoSize = True
+        Me.Label120.Location = New System.Drawing.Point(24, 57)
+        Me.Label120.Name = "Label120"
+        Me.Label120.Size = New System.Drawing.Size(37, 13)
+        Me.Label120.TabIndex = 132
+        Me.Label120.Text = "Tr 005"
+        '
+        'txtStitchNoteTr005
+        '
+        Me.txtStitchNoteTr005.Location = New System.Drawing.Point(113, 53)
+        Me.txtStitchNoteTr005.Name = "txtStitchNoteTr005"
+        Me.txtStitchNoteTr005.Size = New System.Drawing.Size(51, 22)
+        Me.txtStitchNoteTr005.TabIndex = 131
+        '
+        'Label116
+        '
+        Me.Label116.AutoSize = True
+        Me.Label116.Location = New System.Drawing.Point(24, 29)
+        Me.Label116.Name = "Label116"
+        Me.Label116.Size = New System.Drawing.Size(41, 13)
+        Me.Label116.TabIndex = 130
+        Me.Label116.Text = "Suk 90"
+        '
+        'txtStitchNoteSuk90
+        '
+        Me.txtStitchNoteSuk90.Location = New System.Drawing.Point(113, 25)
+        Me.txtStitchNoteSuk90.Name = "txtStitchNoteSuk90"
+        Me.txtStitchNoteSuk90.Size = New System.Drawing.Size(51, 22)
+        Me.txtStitchNoteSuk90.TabIndex = 129
         '
         'GroupBox6
         '
@@ -1755,10 +1886,16 @@ Partial Class frmDesignNew
         '
         'cboMultiMachineGroup
         '
+        Me.cboMultiMachineGroup.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.cboMultiMachineGroup.DataSource = Nothing
+        Me.cboMultiMachineGroup.DisplayMember = Nothing
         Me.cboMultiMachineGroup.Location = New System.Drawing.Point(122, 22)
         Me.cboMultiMachineGroup.Name = "cboMultiMachineGroup"
+        Me.cboMultiMachineGroup.SelectedIndex = -1
+        Me.cboMultiMachineGroup.SelectedValue = Nothing
         Me.cboMultiMachineGroup.Size = New System.Drawing.Size(199, 21)
         Me.cboMultiMachineGroup.TabIndex = 54
+        Me.cboMultiMachineGroup.ValueMember = Nothing
         '
         'txtRpm
         '
@@ -1886,7 +2023,7 @@ Partial Class frmDesignNew
         Me.Label42.AutoSize = True
         Me.Label42.Location = New System.Drawing.Point(18, 290)
         Me.Label42.Name = "Label42"
-        Me.Label42.Size = New System.Drawing.Size(86, 13)
+        Me.Label42.Size = New System.Drawing.Size(87, 13)
         Me.Label42.TabIndex = 151
         Me.Label42.Text = "Thickness (mm.)"
         '
@@ -1895,7 +2032,7 @@ Partial Class frmDesignNew
         Me.Label43.AutoSize = True
         Me.Label43.Location = New System.Drawing.Point(241, 290)
         Me.Label43.Name = "Label43"
-        Me.Label43.Size = New System.Drawing.Size(99, 13)
+        Me.Label43.Size = New System.Drawing.Size(98, 13)
         Me.Label43.TabIndex = 149
         Me.Label43.Text = "Bursting Strength"
         '
@@ -2798,7 +2935,7 @@ Partial Class frmDesignNew
         Me.Label61.AutoSize = True
         Me.Label61.Location = New System.Drawing.Point(13, 121)
         Me.Label61.Name = "Label61"
-        Me.Label61.Size = New System.Drawing.Size(71, 13)
+        Me.Label61.Size = New System.Drawing.Size(70, 13)
         Me.Label61.TabIndex = 96
         Me.Label61.Text = "No.of Bands"
         '
@@ -3080,7 +3217,7 @@ Partial Class frmDesignNew
         Me.Label124.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label124.Location = New System.Drawing.Point(909, 19)
         Me.Label124.Name = "Label124"
-        Me.Label124.Size = New System.Drawing.Size(54, 13)
+        Me.Label124.Size = New System.Drawing.Size(53, 13)
         Me.Label124.TabIndex = 128
         Me.Label124.Text = "Spec Ver:"
         '
@@ -3411,127 +3548,6 @@ Partial Class frmDesignNew
         '
         Me.ErrorProvider1.ContainerControl = Me
         '
-        'GroupBox13
-        '
-        Me.GroupBox13.Controls.Add(Me.Label128)
-        Me.GroupBox13.Controls.Add(Me.Label127)
-        Me.GroupBox13.Controls.Add(Me.Label126)
-        Me.GroupBox13.Controls.Add(Me.Label125)
-        Me.GroupBox13.Controls.Add(Me.Label123)
-        Me.GroupBox13.Controls.Add(Me.txtStitchNote2str)
-        Me.GroupBox13.Controls.Add(Me.Label122)
-        Me.GroupBox13.Controls.Add(Me.txtStitchNote1str)
-        Me.GroupBox13.Controls.Add(Me.Label120)
-        Me.GroupBox13.Controls.Add(Me.txtStitchNoteTr005)
-        Me.GroupBox13.Controls.Add(Me.Label116)
-        Me.GroupBox13.Controls.Add(Me.txtStitchNoteSuk90)
-        Me.GroupBox13.Location = New System.Drawing.Point(372, 173)
-        Me.GroupBox13.Name = "GroupBox13"
-        Me.GroupBox13.Size = New System.Drawing.Size(204, 159)
-        Me.GroupBox13.TabIndex = 100
-        Me.GroupBox13.TabStop = False
-        Me.GroupBox13.Text = "Stitch Note"
-        '
-        'Label116
-        '
-        Me.Label116.AutoSize = True
-        Me.Label116.Location = New System.Drawing.Point(24, 29)
-        Me.Label116.Name = "Label116"
-        Me.Label116.Size = New System.Drawing.Size(41, 13)
-        Me.Label116.TabIndex = 130
-        Me.Label116.Text = "Suk 90"
-        '
-        'txtStitchNoteSuk90
-        '
-        Me.txtStitchNoteSuk90.Location = New System.Drawing.Point(113, 25)
-        Me.txtStitchNoteSuk90.Name = "txtStitchNoteSuk90"
-        Me.txtStitchNoteSuk90.Size = New System.Drawing.Size(51, 22)
-        Me.txtStitchNoteSuk90.TabIndex = 129
-        '
-        'Label120
-        '
-        Me.Label120.AutoSize = True
-        Me.Label120.Location = New System.Drawing.Point(24, 57)
-        Me.Label120.Name = "Label120"
-        Me.Label120.Size = New System.Drawing.Size(37, 13)
-        Me.Label120.TabIndex = 132
-        Me.Label120.Text = "Tr 005"
-        '
-        'txtStitchNoteTr005
-        '
-        Me.txtStitchNoteTr005.Location = New System.Drawing.Point(113, 53)
-        Me.txtStitchNoteTr005.Name = "txtStitchNoteTr005"
-        Me.txtStitchNoteTr005.Size = New System.Drawing.Size(51, 22)
-        Me.txtStitchNoteTr005.TabIndex = 131
-        '
-        'Label122
-        '
-        Me.Label122.AutoSize = True
-        Me.Label122.Location = New System.Drawing.Point(24, 85)
-        Me.Label122.Name = "Label122"
-        Me.Label122.Size = New System.Drawing.Size(30, 13)
-        Me.Label122.TabIndex = 134
-        Me.Label122.Text = "1 Str"
-        '
-        'txtStitchNote1str
-        '
-        Me.txtStitchNote1str.Location = New System.Drawing.Point(113, 81)
-        Me.txtStitchNote1str.Name = "txtStitchNote1str"
-        Me.txtStitchNote1str.Size = New System.Drawing.Size(51, 22)
-        Me.txtStitchNote1str.TabIndex = 133
-        '
-        'Label123
-        '
-        Me.Label123.AutoSize = True
-        Me.Label123.Location = New System.Drawing.Point(24, 113)
-        Me.Label123.Name = "Label123"
-        Me.Label123.Size = New System.Drawing.Size(30, 13)
-        Me.Label123.TabIndex = 136
-        Me.Label123.Text = "2 Str"
-        '
-        'txtStitchNote2str
-        '
-        Me.txtStitchNote2str.Location = New System.Drawing.Point(113, 109)
-        Me.txtStitchNote2str.Name = "txtStitchNote2str"
-        Me.txtStitchNote2str.Size = New System.Drawing.Size(51, 22)
-        Me.txtStitchNote2str.TabIndex = 135
-        '
-        'Label125
-        '
-        Me.Label125.AutoSize = True
-        Me.Label125.Location = New System.Drawing.Point(94, 29)
-        Me.Label125.Name = "Label125"
-        Me.Label125.Size = New System.Drawing.Size(13, 13)
-        Me.Label125.TabIndex = 137
-        Me.Label125.Text = " :"
-        '
-        'Label126
-        '
-        Me.Label126.AutoSize = True
-        Me.Label126.Location = New System.Drawing.Point(94, 57)
-        Me.Label126.Name = "Label126"
-        Me.Label126.Size = New System.Drawing.Size(13, 13)
-        Me.Label126.TabIndex = 138
-        Me.Label126.Text = " :"
-        '
-        'Label127
-        '
-        Me.Label127.AutoSize = True
-        Me.Label127.Location = New System.Drawing.Point(94, 85)
-        Me.Label127.Name = "Label127"
-        Me.Label127.Size = New System.Drawing.Size(13, 13)
-        Me.Label127.TabIndex = 139
-        Me.Label127.Text = " :"
-        '
-        'Label128
-        '
-        Me.Label128.AutoSize = True
-        Me.Label128.Location = New System.Drawing.Point(94, 113)
-        Me.Label128.Name = "Label128"
-        Me.Label128.Size = New System.Drawing.Size(13, 13)
-        Me.Label128.TabIndex = 140
-        Me.Label128.Text = " :"
-        '
         'frmDesignNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -3562,6 +3578,8 @@ Partial Class frmDesignNew
         CType(Me.dgvBOMLines, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgvBomHeader, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tpSpecification.ResumeLayout(False)
+        Me.GroupBox13.ResumeLayout(False)
+        Me.GroupBox13.PerformLayout()
         Me.GroupBox6.ResumeLayout(False)
         Me.GroupBox6.PerformLayout()
         CType(Me.cboMultiMachineGroup, System.ComponentModel.ISupportInitialize).EndInit()
@@ -3580,8 +3598,6 @@ Partial Class frmDesignNew
         Me.GroupBox11.ResumeLayout(False)
         Me.GroupBox11.PerformLayout()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox13.ResumeLayout(False)
-        Me.GroupBox13.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -3589,6 +3605,7 @@ Partial Class frmDesignNew
     Friend WithEvents ToolStrip1 As System.Windows.Forms.ToolStrip
     Friend WithEvents btnNew As System.Windows.Forms.ToolStripButton
     Friend WithEvents btnSave As System.Windows.Forms.ToolStripButton
+    Friend WithEvents btnDeleteDesign As System.Windows.Forms.ToolStripButton
     Friend WithEvents btnExit As System.Windows.Forms.ToolStripButton
     Friend WithEvents Label18 As System.Windows.Forms.Label
     Friend WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator

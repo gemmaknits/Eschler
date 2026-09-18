@@ -3,6 +3,20 @@ Imports System.Data.SqlClient
 Imports System.Text
 
 Public Class classMasterUpdate
+    Public Sub DeleteDesignMaster(ByVal itemId As Long, ByVal designNo As String, ByVal employeeCode As String)
+        Using connection As New SqlConnection((New classConnection).connection)
+            Using command As New SqlCommand("dbo.p_design_master_new_pkg_delete_master_record", connection)
+                command.CommandType = CommandType.StoredProcedure
+                command.CommandTimeout = 60
+                command.Parameters.Add("@p_item_id", SqlDbType.BigInt).Value = itemId
+                command.Parameters.Add("@p_design_no", SqlDbType.VarChar, 20).Value = designNo
+                command.Parameters.Add("@p_log_empcd", SqlDbType.VarChar, 20).Value = employeeCode
+                connection.Open()
+                command.ExecuteNonQuery()
+            End Using
+        End Using
+    End Sub
+
 	Public Structure Customer
 		Dim h01_custcd As String
 		Dim h02_name As String

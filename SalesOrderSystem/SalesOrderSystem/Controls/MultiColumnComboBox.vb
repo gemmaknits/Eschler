@@ -210,6 +210,13 @@ Namespace Controls
         Private _valueMember As String
         Private _selectedIndex As Integer = -1
 
+        ' Type-to-filter support -- John 18/09/2026
+        Private _allowTypeFilter As Boolean = False
+        Private _suppressTextChanged As Boolean = False
+        Private _popupBaseFilter As String = ""
+        Private _hookedOwnerForm As Form
+        Private _clickAwayFilter As ClickAwayMessageFilter
+
         Private ReadOnly _sharedModel As GridModelAccessor
         Private ReadOnly _listBoxAcc As ListBoxAccessor
         Private ReadOnly _gridListBox As GridListBox
@@ -223,6 +230,22 @@ Namespace Controls
         Public Property ScrollMetroColorTable As Object
         <Browsable(False), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
         Public Property MultiColumn As Boolean
+
+        ''' <summary>
+        ''' Opt-in: when True, the display textbox becomes typable and the dropdown
+        ''' list filters to rows whose DisplayMember contains the typed text.
+        ''' Default False preserves the original click-to-select-only behavior.
+        ''' -- John 18/09/2026
+        ''' </summary>
+        Public Property AllowTypeFilter As Boolean
+            Get
+                Return _allowTypeFilter
+            End Get
+            Set(value As Boolean)
+                _allowTypeFilter = value
+                _txtDisplay.ReadOnly = Not value
+            End Set
+        End Property
 
         Public Event SelectedIndexChanged As EventHandler
         Public Event SelectedValueChanged As EventHandler
@@ -252,6 +275,8 @@ Namespace Controls
             End With
             AddHandler _txtDisplay.Click, AddressOf OnTextClick
             AddHandler _txtDisplay.KeyDown, AddressOf OnTextKeyDown
+            AddHandler _txtDisplay.TextChanged, AddressOf OnDisplayTextChanged ' John 18/09/2026
+            AddHandler _txtDisplay.Leave, AddressOf OnEditControlLeave ' John 18/09/2026
 
             With _btnDrop
                 .Dock = DockStyle.Right
@@ -264,6 +289,7 @@ Namespace Controls
                 .TabStop = False
             End With
             AddHandler _btnDrop.Click, AddressOf OnButtonClick
+            AddHandler _btnDrop.Leave, AddressOf OnEditControlLeave ' John 18/09/2026
 
             Me.BorderStyle = BorderStyle.FixedSingle
             Me.Controls.Add(_txtDisplay)
@@ -329,15 +355,15 @@ Namespace Controls
             Set(value As Integer)
                 If _dataTable Is Nothing Then
                     _selectedIndex = -1
-                    _txtDisplay.Text = ""
+                    SetDisplayText("")
                     Return
                 End If
                 _selectedIndex = value
                 If value >= 0 AndAlso value < _dataTable.Rows.Count AndAlso Not String.IsNullOrEmpty(_displayMember) Then
-                    _txtDisplay.Text = _dataTable.Rows(value)(_displayMember).ToString()
+                    SetDisplayText(_dataTable.Rows(value)(_displayMember).ToString())
                 Else
                     _selectedIndex = -1
-                    _txtDisplay.Text = ""
+                    SetDisplayText("")
                 End If
             End Set
         End Property
@@ -352,7 +378,7 @@ Namespace Controls
             End Get
             Set(value As Object)
                 _selectedIndex = -1
-                _txtDisplay.Text = ""
+                SetDisplayText("")
                 If value Is Nothing OrElse _dataTable Is Nothing OrElse String.IsNullOrEmpty(_valueMember) Then Return
 
                 Dim searchStr As String = value.ToString().Trim()
@@ -360,7 +386,7 @@ Namespace Controls
                     If _dataTable.Rows(i)(_valueMember).ToString().Trim() = searchStr Then
                         _selectedIndex = i
                         If Not String.IsNullOrEmpty(_displayMember) Then
-                            _txtDisplay.Text = _dataTable.Rows(i)(_displayMember).ToString()
+                            SetDisplayText(_dataTable.Rows(i)(_displayMember).ToString())
                         End If
                         Return
                     End If
@@ -376,10 +402,21 @@ Namespace Controls
             Set(value As String)
                 MyBase.Text = value
                 If _txtDisplay Is Nothing Then Return
-                _txtDisplay.Text = value
+                SetDisplayText(value)
                 If String.IsNullOrEmpty(value) Then _selectedIndex = -1
             End Set
         End Property
+
+        ''' <summary>Sets the display textbox's text programmatically without
+        ''' triggering the type-to-filter TextChanged handler. -- John 18/09/2026</summary>
+        Private Sub SetDisplayText(value As String)
+            _suppressTextChanged = True
+            Try
+                _txtDisplay.Text = value
+            Finally
+                _suppressTextChanged = False
+            End Try
+        End Sub
 
         '------------------------------------------------------------------ '
         ' Syncfusion-compatible accessors
@@ -411,14 +448,92 @@ Namespace Controls
         End Sub
 
         Private Sub OnTextClick(s As Object, e As EventArgs)
+            If _allowTypeFilter Then
+                ' Editable text: a click while the list is already open just places
+                ' the caret for typing -- don't toggle it closed. -- John 18/09/2026
+                If _popup Is Nothing OrElse _popup.IsDisposed Then
+                    OpenPopup()
+                End If
+                Return
+            End If
             ToggleDropDown()
         End Sub
 
         Private Sub OnTextKeyDown(s As Object, e As KeyEventArgs)
+            If _allowTypeFilter Then
+                Select Case e.KeyCode
+                    Case Keys.F4
+                        ToggleDropDown()
+                        e.Handled = True
+                    Case Keys.Enter
+                        If _popup IsNot Nothing AndAlso Not _popup.IsDisposed AndAlso _dgv IsNot Nothing AndAlso _dgv.Rows.Count > 0 Then
+                            CommitSelection(0)
+                            ClosePopup()
+                            e.Handled = True
+                        End If
+                    Case Keys.Escape
+                        If _popup IsNot Nothing AndAlso Not _popup.IsDisposed Then
+                            ClosePopup()
+                            RestoreDisplayFromSelection()
+                            e.Handled = True
+                        End If
+                End Select
+                Return ' let normal characters, Backspace, Delete, arrows, etc. edit the text
+            End If
+
             If e.KeyCode = Keys.F4 OrElse e.KeyCode = Keys.Space Then
                 ToggleDropDown()
                 e.Handled = True
             End If
+        End Sub
+
+        ''' <summary>Type-to-filter: refilters the open dropdown as the user types.
+        ''' -- John 18/09/2026</summary>
+        Private Sub OnDisplayTextChanged(s As Object, e As EventArgs)
+            If Not _allowTypeFilter OrElse _suppressTextChanged Then Return
+            _selectedIndex = -1
+            If _popup Is Nothing OrElse _popup.IsDisposed Then
+                OpenPopup()
+            End If
+            ApplyTypeFilter(_txtDisplay.Text)
+            If Not _txtDisplay.Focused Then _txtDisplay.Focus() ' John 18/09/2026
+        End Sub
+
+        ''' <summary>Closes the dropdown once focus has left both the combo box and
+        ''' the popup (deferred so a click on a popup row is processed first).
+        ''' -- John 18/09/2026</summary>
+        Private Sub OnEditControlLeave(s As Object, e As EventArgs)
+            If Not _allowTypeFilter Then Return
+            Dim popupRef As Form = _popup
+            Me.BeginInvoke(New MethodInvoker(Sub()
+                If popupRef IsNot Nothing AndAlso Not popupRef.IsDisposed Then
+                    If Not popupRef.ContainsFocus AndAlso Not Me.ContainsFocus Then
+                        ClosePopup()
+                    End If
+                End If
+            End Sub))
+        End Sub
+
+        ''' <summary>Called for every application-wide mouse-down while a type-filter
+        ''' popup is open. Closes it if the click landed outside both the combo box
+        ''' and the popup -- covers clicks on non-focusable controls (Label, Panel,
+        ''' blank tab area) that would never raise a Leave event. -- John 18/09/2026</summary>
+        Private Sub OnAnyMouseDown()
+            If _popup Is Nothing OrElse _popup.IsDisposed Then Return
+            Dim pt As Point = Control.MousePosition
+            Dim overCombo As Boolean = Me.IsHandleCreated AndAlso Me.RectangleToScreen(Me.ClientRectangle).Contains(pt)
+            Dim overPopup As Boolean = _popup.Bounds.Contains(pt)
+            If Not overCombo AndAlso Not overPopup Then
+                ClosePopup()
+            End If
+        End Sub
+
+        Private Sub RestoreDisplayFromSelection()
+            Dim text As String = ""
+            If _selectedIndex >= 0 AndAlso _dataTable IsNot Nothing AndAlso _selectedIndex < _dataTable.Rows.Count AndAlso Not String.IsNullOrEmpty(_displayMember) Then
+                text = _dataTable.Rows(_selectedIndex)(_displayMember).ToString()
+            End If
+            SetDisplayText(text)
         End Sub
 
         Private Sub ToggleDropDown()
@@ -453,7 +568,13 @@ Namespace Controls
             _dgv.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(51, 153, 255)
             _dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(242, 248, 255)
 
-            _popup = New Form()
+            ' Type-filter popups must not steal keyboard focus from the textbox while
+            ' the user is typing, so they use a non-activating window. -- John 18/09/2026
+            If _allowTypeFilter Then
+                _popup = New NonActivatingPopup()
+            Else
+                _popup = New Form()
+            End If
             With _popup
                 .FormBorderStyle = FormBorderStyle.None
                 .ShowInTaskbar = False
@@ -491,6 +612,7 @@ Namespace Controls
                 bindView = If(_dataTable IsNot Nothing, _dataTable.DefaultView, Nothing)
             End If
             _dgv.DataSource = bindView
+            _popupBaseFilter = If(bindView IsNot Nothing, bindView.RowFilter, "") ' John 18/09/2026
 
             ' Apply hidden columns (1-based index)
             For Each col As DataGridViewColumn In _dgv.Columns
@@ -517,42 +639,7 @@ Namespace Controls
             _popup.Size = New Size(800, 400)
             _popup.Show(Me.FindForm())
 
-            ' Force DGV to measure column widths with real data
-            _dgv.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells)
-
-            ' Sum visible column widths to get total content width
-            Dim totalColW As Integer = 0
-            For Each col As DataGridViewColumn In _dgv.Columns
-                If col.Visible Then totalColW += col.Width
-            Next
-            ' Add scrollbar width margin
-            totalColW += SystemInformation.VerticalScrollBarWidth + 4
-
-            ' Calculate height: header + data rows (max 12 visible rows) + scrollbar allowance
-            Dim rowH As Integer = _dgv.RowTemplate.Height
-            Dim headerH As Integer = _dgv.ColumnHeadersHeight
-            Dim maxRows As Integer = Math.Min(_dataTable.Rows.Count, 12)
-            Dim dataH As Integer = maxRows * rowH
-            Dim hasScroll As Boolean = (_dataTable.Rows.Count > 12)
-            Dim scrollH As Integer = If(hasScroll, SystemInformation.HorizontalScrollBarHeight, 0)
-            Dim popupH As Integer = headerH + dataH + scrollH + 4
-
-            ' Width: at least as wide as the control, at most screen width - margin
-            Dim screenPt As Point = Me.PointToScreen(New Point(0, Me.Height))
-            Dim screenW As Integer = Screen.FromControl(Me).WorkingArea.Width
-            Dim screenH As Integer = Screen.FromControl(Me).WorkingArea.Bottom
-            Dim popupW As Integer = Math.Min(Math.Max(Me.Width, totalColW), screenW - screenPt.X - 4)
-
-            ' Flip up if not enough space below
-            Dim popupY As Integer = screenPt.Y
-            If popupY + popupH > screenH Then
-                Dim abovePt As Point = Me.PointToScreen(New Point(0, 0))
-                popupY = abovePt.Y - popupH
-                If popupY < 0 Then popupY = 0
-            End If
-
-            _popup.Location = New Point(screenPt.X, popupY)
-            _popup.Size = New Size(popupW, popupH)
+            UpdatePopupSize()
 
             ' Scroll to the currently selected row.
             ' Because the DGV may be showing a filtered view, we match by ValueMember
@@ -574,14 +661,127 @@ Namespace Controls
 
             AddHandler _dgv.CellClick, AddressOf OnDgvCellClick
             AddHandler _dgv.KeyDown, AddressOf OnDgvKeyDown
-            AddHandler _popup.Deactivate, AddressOf OnPopupDeactivate
 
-            _dgv.Focus()
+            If _allowTypeFilter Then
+                ' Do NOT hook _popup.Deactivate here: reclaiming focus for the textbox
+                ' below activates the owner form, which -- if the popup picked up any
+                ' transient activation when shown, despite the no-activate flags --
+                ' would fire Deactivate and immediately close the popup we just opened.
+                ' Closing on click-away is instead handled by:
+                '  - OnEditControlLeave (Leave on the textbox/button), and
+                '  - the owning form's Deactivate, as a fallback for e.g. Alt+Tab, and
+                '  - a global mouse-down watcher below, since a click on a non-focusable
+                '    control (a Label, a blank tab area, ...) never fires Leave at all.
+                ' -- John 18/09/2026
+                _hookedOwnerForm = Me.FindForm()
+                If _hookedOwnerForm IsNot Nothing Then AddHandler _hookedOwnerForm.Deactivate, AddressOf OnPopupDeactivate
+
+                If _clickAwayFilter Is Nothing Then
+                    _clickAwayFilter = New ClickAwayMessageFilter(AddressOf OnAnyMouseDown)
+                    Application.AddMessageFilter(_clickAwayFilter)
+                End If
+
+                ' Showing the popup Form assigns it an ActiveControl (the grid, being
+                ' its only child) and calls SetFocus on it internally -- this happens
+                ' even though the popup window itself never activates, because it's an
+                ' explicit managed focus call, not OS click/activation. Reclaim focus
+                ' so typed keystrokes keep landing in the textbox. -- John 18/09/2026
+                _txtDisplay.Focus()
+            Else
+                AddHandler _popup.Deactivate, AddressOf OnPopupDeactivate
+                _dgv.Focus()
+            End If
         End Sub
+
+        ''' <summary>Recomputes popup width/height/position from the DataGridView's
+        ''' current (possibly filtered) rows. Called on open and after each
+        ''' type-to-filter keystroke. -- John 18/09/2026</summary>
+        Private Sub UpdatePopupSize()
+            If _popup Is Nothing OrElse _popup.IsDisposed OrElse _dgv Is Nothing Then Return
+
+            ' Force DGV to measure column widths with real data
+            _dgv.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells)
+
+            ' Sum visible column widths to get total content width
+            Dim totalColW As Integer = 0
+            For Each col As DataGridViewColumn In _dgv.Columns
+                If col.Visible Then totalColW += col.Width
+            Next
+            ' Add scrollbar width margin
+            totalColW += SystemInformation.VerticalScrollBarWidth + 4
+
+            ' Calculate height: header + data rows (max 12 visible rows) + scrollbar allowance
+            Dim rowH As Integer = _dgv.RowTemplate.Height
+            Dim headerH As Integer = _dgv.ColumnHeadersHeight
+            Dim rowCount As Integer = _dgv.Rows.Count
+            Dim maxRows As Integer = Math.Min(rowCount, 12)
+            Dim dataH As Integer = maxRows * rowH
+            Dim hasScroll As Boolean = (rowCount > 12)
+            Dim scrollH As Integer = If(hasScroll, SystemInformation.HorizontalScrollBarHeight, 0)
+            Dim popupH As Integer = headerH + dataH + scrollH + 4
+            If rowCount = 0 Then popupH = headerH + rowH + 4
+
+            ' Width: at least as wide as the control, at most screen width - margin
+            Dim screenPt As Point = Me.PointToScreen(New Point(0, Me.Height))
+            Dim screenW As Integer = Screen.FromControl(Me).WorkingArea.Width
+            Dim screenH As Integer = Screen.FromControl(Me).WorkingArea.Bottom
+            Dim popupW As Integer = Math.Min(Math.Max(Me.Width, totalColW), screenW - screenPt.X - 4)
+
+            ' Flip up if not enough space below
+            Dim popupY As Integer = screenPt.Y
+            If popupY + popupH > screenH Then
+                Dim abovePt As Point = Me.PointToScreen(New Point(0, 0))
+                popupY = abovePt.Y - popupH
+                If popupY < 0 Then popupY = 0
+            End If
+
+            _popup.Location = New Point(screenPt.X, popupY)
+            _popup.Size = New Size(popupW, popupH)
+        End Sub
+
+        ''' <summary>Refilters the popup grid to rows whose DisplayMember starts with
+        ''' the typed text (not "contains anywhere"), layered on top of whatever base
+        ''' BindingSource filter was active when the popup opened (e.g. Ship-To
+        ''' filtered by Bill-To). -- John 18/09/2026</summary>
+        Private Sub ApplyTypeFilter(typedText As String)
+            If _dgv Is Nothing OrElse _dgv.IsDisposed Then Return
+            Dim dv As DataView = TryCast(_dgv.DataSource, DataView)
+            If dv Is Nothing Then Return
+
+            Dim filterExpr As String = _popupBaseFilter
+            Dim trimmedText As String = If(typedText, "").Trim()
+            If trimmedText <> "" AndAlso Not String.IsNullOrEmpty(_displayMember) AndAlso dv.Table.Columns.Contains(_displayMember) Then
+                Dim likeExpr As String = "[" & _displayMember & "] LIKE '" & EscapeLikeValue(trimmedText) & "%'"
+                filterExpr = If(String.IsNullOrEmpty(filterExpr), likeExpr, "(" & filterExpr & ") AND (" & likeExpr & ")")
+            End If
+
+            Try
+                dv.RowFilter = filterExpr
+            Catch
+                ' Malformed filter expression (unusual characters) -- keep prior filter
+            End Try
+
+            UpdatePopupSize()
+        End Sub
+
+        Private Function EscapeLikeValue(s As String) As String
+            Dim result As String = s.Replace("[", "[[]")
+            result = result.Replace("*", "[*]").Replace("%", "[%]")
+            result = result.Replace("'", "''")
+            Return result
+        End Function
 
         Private Sub ClosePopup()
             If _popup Is Nothing OrElse _popup.IsDisposed Then Return
             RemoveHandler _popup.Deactivate, AddressOf OnPopupDeactivate
+            If _hookedOwnerForm IsNot Nothing Then
+                RemoveHandler _hookedOwnerForm.Deactivate, AddressOf OnPopupDeactivate
+                _hookedOwnerForm = Nothing
+            End If
+            If _clickAwayFilter IsNot Nothing Then
+                Application.RemoveMessageFilter(_clickAwayFilter)
+                _clickAwayFilter = Nothing
+            End If
             _popup.Close()
             _popup.Dispose()
             _popup = Nothing
@@ -627,7 +827,7 @@ Namespace Controls
                 valueVal = _dgv.Rows(rowIndex).Cells(_valueMember).Value
             End If
 
-            _txtDisplay.Text = displayVal
+            SetDisplayText(displayVal)
 
             ' Map back to the row index in the unfiltered DataTable so that
             ' Model(SelectedIndex + 1, col) lookups continue to work correctly.
@@ -666,6 +866,63 @@ Namespace Controls
             End If
             MyBase.Dispose(disposing)
         End Sub
+
+        ''' <summary>
+        ''' Popup window that displays without becoming the active window, so showing
+        ''' or refiltering it never steals keyboard focus away from the combo box's
+        ''' textbox while the user is typing. Selection is still made by mouse click
+        ''' (DataGridView handles its own clicks regardless of window activation) or
+        ''' by Enter/Escape typed into the textbox. -- John 18/09/2026
+        ''' </summary>
+        Private Class NonActivatingPopup
+            Inherits Form
+
+            Protected Overrides ReadOnly Property ShowWithoutActivation As Boolean
+                Get
+                    Return True
+                End Get
+            End Property
+
+            Protected Overrides ReadOnly Property CreateParams As CreateParams
+                Get
+                    Const WS_EX_NOACTIVATE As Integer = &H8000000
+                    Dim cp As CreateParams = MyBase.CreateParams
+                    cp.ExStyle = cp.ExStyle Or WS_EX_NOACTIVATE
+                    Return cp
+                End Get
+            End Property
+        End Class
+
+        ''' <summary>
+        ''' Application-wide mouse-down watcher used while a type-filter popup is
+        ''' open, so clicking anywhere that isn't the combo box or its popup closes
+        ''' the list -- including clicks on non-focusable controls (Label, Panel,
+        ''' blank tab area) that never raise a Leave event on the textbox.
+        ''' -- John 18/09/2026
+        ''' </summary>
+        Private Class ClickAwayMessageFilter
+            Implements IMessageFilter
+
+            Private Const WM_LBUTTONDOWN As Integer = &H201
+            Private Const WM_RBUTTONDOWN As Integer = &H204
+            Private Const WM_MBUTTONDOWN As Integer = &H207
+            Private Const WM_NCLBUTTONDOWN As Integer = &HA1
+            Private Const WM_NCRBUTTONDOWN As Integer = &HA4
+
+            Private ReadOnly _onOutsideClick As Action
+
+            Public Sub New(onOutsideClick As Action)
+                _onOutsideClick = onOutsideClick
+            End Sub
+
+            Public Function PreFilterMessage(ByRef m As Message) As Boolean Implements IMessageFilter.PreFilterMessage
+                Select Case m.Msg
+                    Case WM_LBUTTONDOWN, WM_RBUTTONDOWN, WM_MBUTTONDOWN, WM_NCLBUTTONDOWN, WM_NCRBUTTONDOWN
+                        _onOutsideClick()
+                End Select
+                Return False ' never swallow the message -- only observe it
+            End Function
+        End Class
 
     End Class
 

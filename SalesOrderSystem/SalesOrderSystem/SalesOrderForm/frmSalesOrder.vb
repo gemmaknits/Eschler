@@ -234,6 +234,7 @@ Public Class frmSalesOrder
         Me.mcboCustomersBillToFlag.DataSource = bsCustomersBillToFlag '.DataSource
         Me.mcboCustomersBillToFlag.DisplayMember = "name"
         Me.mcboCustomersBillToFlag.ValueMember = "custcd"
+        Me.mcboCustomersBillToFlag.AllowTypeFilter = True ' allow typing to filter the customer list -- John 18/09/2026
         Me.mcboCustomersBillToFlag.Text = ""
         Me.mcboCustomersBillToFlag.ListBox.Grid.Model.Cols.Hidden(1) = True
         Me.mcboCustomersBillToFlag.ListBox.Grid.Model.Cols.Hidden(2) = True
@@ -258,6 +259,7 @@ Public Class frmSalesOrder
         Me.mcboCustomersShipToFlag.DataSource = bsCustomersShipToFlag '.DataSource
         Me.mcboCustomersShipToFlag.DisplayMember = "name"
         Me.mcboCustomersShipToFlag.ValueMember = "custcd"
+        Me.mcboCustomersShipToFlag.AllowTypeFilter = True ' allow typing to filter the customer list -- John 18/09/2026
         Me.mcboCustomersShipToFlag.Text = ""
         Me.mcboCustomersShipToFlag.ListBox.Grid.Model.Cols.Hidden(1) = True
         Me.mcboCustomersShipToFlag.ListBox.Grid.Model.Cols.Hidden(2) = True

@@ -162,14 +162,14 @@ CREATE PROCEDURE [SO].[P_SO_PRICE_LIST_PKG_update_price_list_row]
     @so_price_list_header_id bigint,
     -- which row (its key as currently stored)
     @design_no               nvarchar(60) = null,
-    @article                 nvarchar(30) = null,   -- old alias for @design_no
+    @article                 nvarchar(120) = null,  -- old alias for @design_no
     @article_variant         nvarchar(20)  = null,
     @qty_min                 int,
     @qty_max                 int           = null,
     @qty_unit                nvarchar(10)  = N'MTS',
     -- new values; NULL means leave alone, except new_qty_max (see below)
     @new_design_no           nvarchar(60)  = null,
-    @new_article             nvarchar(30)  = null,   -- old alias for @new_design_no
+    @new_article             nvarchar(120) = null,   -- old alias for @new_design_no
     @new_article_variant     nvarchar(20)  = null,
     @new_qty_min             int           = null,
     @new_qty_max             int           = null,

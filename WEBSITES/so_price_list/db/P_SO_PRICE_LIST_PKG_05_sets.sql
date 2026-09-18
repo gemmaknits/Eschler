@@ -36,7 +36,7 @@ CREATE PROCEDURE [SO].[P_SO_PRICE_LIST_PKG_insert_price_list_set]
     @so_price_list_header_id bigint,
     @after_set_no            int           = null,   -- NULL or 0 = put it first
     @design_no               nvarchar(60)  = null,
-    @article                 nvarchar(30)  = null,   -- old alias for @design_no
+    @article                 nvarchar(120) = null,   -- old alias for @design_no
     @article_variant         nvarchar(20)  = null,
     @qty_min                 int           = null,
     @qty_max                 int           = null,

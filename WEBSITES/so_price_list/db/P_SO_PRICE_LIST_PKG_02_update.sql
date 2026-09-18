@@ -182,7 +182,7 @@ CREATE PROCEDURE [SO].[P_SO_PRICE_LIST_PKG_update_price_list_detail]
     @so_price_list_header_id bigint        = null,
     @set_no                  int           = null,   -- which grid row to join
     @design_no               nvarchar(60)  = null,   -- the identifier; bind as string
-    @article                 nvarchar(30)  = null,   -- mirror of design_no, kept for get_price
+    @article                 nvarchar(120) = null,   -- mirror of design_no, kept for get_price
     @article_variant         nvarchar(20)  = null,
     @fabric_name             nvarchar(200) = null,
     @composition             nvarchar(200) = null,

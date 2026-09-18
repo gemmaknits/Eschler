@@ -116,7 +116,7 @@ app.MapGet("/price_list/price", async (Db db, HttpRequest r) =>
     var rows = await db.QueryAsync("P_SO_PRICE_LIST_PKG_get_price", new[]
     {
         Num("@so_price_list_header_id", headerId),
-        Text("@article",                article, 30),   // text: 487 lines look like '255484AA/11'
+        Text("@article",                article, 120),   // text: 487 lines look like '255484AA/11'
         Text("@color_tier",             S(r.Query["color_tier"]), 30),
         Int32P("@qty",                  I(r.Query["qty"])),
         Text("@qty_unit",               S(r.Query["qty_unit"]) ?? "MTS", 10),
@@ -220,7 +220,7 @@ app.MapGet("/price_list/{id:long}/detail", async (Db db, HttpRequest r, long id)
     {
         Num("@so_price_list_header_id", id),
         Text("@design_no",              S(r.Query["design_no"]), 60),
-        Text("@article",                S(r.Query["article"]), 30),
+        Text("@article",                S(r.Query["article"]), 120),
         Text("@search",                 S(r.Query["search"]), 100),
         Flag("@conflicts_only",         r.Query["conflicts_only"] == "1"),
         Text("@logempcd",               Who(r), 15)
@@ -260,7 +260,7 @@ app.MapPost("/price_list/detail", async (Db db, HttpRequest r, System.Text.Json.
         Num("@so_price_list_detail_id", LJ(b, "detail_id")),
         Num("@so_price_list_header_id", LJ(b, "header_id")),
         Int32P("@set_no",               IJ(b, "set_no")),
-        Text("@article",                SJ(b, "article"), 30),
+        Text("@article",                SJ(b, "article"), 120),
         Text("@design_no",              SJ(b, "design_no"), 60),
         Text("@article_variant",        SJ(b, "article_variant"), 20),
         Text("@fabric_name",            SJ(b, "fabric_name"), 200),
@@ -291,13 +291,13 @@ app.MapPost("/price_list/{id:long}/row", async (Db db, HttpRequest r, long id, S
     {
         Num("@so_price_list_header_id", id),
         Text("@design_no",              SJ(b, "design_no"), 60),
-        Text("@article",                SJ(b, "article"), 30),
+        Text("@article",                SJ(b, "article"), 120),
         Text("@article_variant",        SJ(b, "article_variant"), 20),
         Int32P("@qty_min",              IJ(b, "qty_min")),
         Int32P("@qty_max",              IJ(b, "qty_max")),
         Text("@qty_unit",               SJ(b, "qty_unit") ?? "MTS", 10),
         Text("@new_design_no",          SJ(b, "new_design_no"), 60),
-        Text("@new_article",            SJ(b, "new_article"), 30),
+        Text("@new_article",            SJ(b, "new_article"), 120),
         Text("@new_article_variant",    SJ(b, "new_article_variant"), 20),
         Int32P("@new_qty_min",          IJ(b, "new_qty_min")),
         Int32P("@new_qty_max",          IJ(b, "new_qty_max")),

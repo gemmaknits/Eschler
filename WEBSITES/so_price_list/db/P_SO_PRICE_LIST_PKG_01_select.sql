@@ -151,7 +151,7 @@ GO
 CREATE PROCEDURE [SO].[P_SO_PRICE_LIST_PKG_select_price_list_detail]
     @so_price_list_header_id bigint       = null,
     @design_no               nvarchar(60) = null,   -- exact; text, never numeric
-    @article                 nvarchar(30) = null,   -- accepted as an alias for @design_no
+    @article                 nvarchar(120) = null,  -- accepted as an alias for @design_no
     @search                  nvarchar(100)= null,   -- design / fabric / composition
     @conflicts_only          bit          = 0,
     @logempcd                varchar(15)  = ''
@@ -250,7 +250,7 @@ GO
 -- SO.P_SO_PRICE_LIST_PKG_get_price 31, '255484', 'PFE/PFD', 300, 'M', 'USD', null, ''
 CREATE PROCEDURE [SO].[P_SO_PRICE_LIST_PKG_get_price]
     @so_price_list_header_id bigint,
-    @article                 nvarchar(30),
+    @article                 nvarchar(120),
     @color_tier              nvarchar(30) = null,   -- null = every tier
     @qty                     int          = null,   -- null = every band
     @qty_unit                char(2)      = 'M',

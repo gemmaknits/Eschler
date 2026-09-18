@@ -75,7 +75,12 @@ static class Fallback
 
             outp.Add(new Line {
                 Sheet = sheetName, Row = r0 + i, HeaderRow = r0 + designRow,
-                Article = design, QtyMin = qmin, QtyMax = qmax,
+                /* Set here as well as in Scan: this is the second place a Line
+                   is built, and leaving it out left 57 headerless lines with a
+                   blank design number - they loaded, and showed as rows with
+                   no design at all. */
+                Article = design, DesignNo = Parse.DesignNo(design),
+                QtyMin = qmin, QtyMax = qmax,
                 QtyRaw = grid[i][bandCol],
                 Tier = "All_colors",
                 Currency = curCell ?? sheetVoice.FirstOrDefault() ?? "USD",

@@ -407,13 +407,16 @@ Public Class classSalesOrder
                 comm.Parameters.AddWithValue("@pJobNo", config.IsNull(.Item(i)("JobNo"), Nothing)) 'Sitthana 23/05/2024
                 comm.Parameters.AddWithValue("@pSentToId", config.IsNull(.Item(i)("sent_to_id"), Nothing)) 'Sitthana 23/05/2024
 
-                comm.Parameters.AddWithValue("@logempcd", SOH.h30_log_empcd)
+
 
                 comm.Parameters.AddWithValue("@p_prod_loss_perc", config.IsNull(.Item(i)("prod_loss_perc"), 0)) 'John 26/03/2026
                 comm.Parameters.AddWithValue("@p_qty_with_loss", config.IsNull(.Item(i)("qty_with_loss"), 0)) 'John 26/03/2026
                 comm.Parameters.AddWithValue("@p_hs_code", config.IsNull(.Item(i)("hs_code"), Nothing)) 'John 18/05/2026
                 comm.Parameters.AddWithValue("@p_sample_fabric_qty", config.IsNull(.Item(i)("sample_fabric_qty"), 0))
                 comm.Parameters.AddWithValue("@p_sample_bulk_qty", config.IsNull(.Item(i)("sample_bulk_qty"), 0))
+
+                ' last Record update
+                comm.Parameters.AddWithValue("@logempcd", SOH.h30_log_empcd) 'last record update
             End With
             Dim sql As String = config.BuildSQL(comm)
             da = New SqlDataAdapter(comm)
@@ -491,13 +494,15 @@ Public Class classSalesOrder
                 comm.Parameters.AddWithValue("@pJobNo", config.IsNull(.Item(i)("JobNo"), Nothing)) 'Sitthana 23/05/2024
                 comm.Parameters.AddWithValue("@pSentToId", config.IsNull(.Item(i)("sent_to_id"), Nothing)) 'Sitthana 23/05/2024
 
-                comm.Parameters.AddWithValue("@logempcd", SOH.h30_log_empcd)
-
                 comm.Parameters.AddWithValue("@p_prod_loss_perc", config.IsNull(.Item(i)("prod_loss_perc"), 0)) 'John 26/03/2026
                 comm.Parameters.AddWithValue("@p_qty_with_loss", config.IsNull(.Item(i)("qty_with_loss"), 0)) 'John 26/03/2026
                 comm.Parameters.AddWithValue("@p_hs_code", config.IsNull(.Item(i)("hs_code"), Nothing)) 'John 18/05/2026
                 comm.Parameters.AddWithValue("@p_sample_fabric_qty", config.IsNull(.Item(i)("sample_fabric_qty"), 0))
                 comm.Parameters.AddWithValue("@p_sample_bulk_qty", config.IsNull(.Item(i)("sample_bulk_qty"), 0))
+
+                ' last Record update
+                comm.Parameters.AddWithValue("@logempcd", SOH.h30_log_empcd) 'last record update
+
             End With
             da = New SqlDataAdapter(comm)
             dt = New DataTable

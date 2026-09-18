@@ -107,9 +107,11 @@ app.MapGet("/price_list", async (Db db, HttpRequest r) =>
 app.MapGet("/price_list/price", async (Db db, HttpRequest r) =>
 {
     var headerId = L(r.Query["header_id"]);
-    var article = S(r.Query["article"]);
+    // design_no is the identifier now; article is its mirror column, which is
+    // what get_price still filters on - so either query name works here.
+    var article = S(r.Query["design_no"]) ?? S(r.Query["article"]);
     if (headerId is null || article is null)
-        return Results.BadRequest(new { error = "header_id and article are required." });
+        return Results.BadRequest(new { error = "header_id and design_no are required." });
 
     var rows = await db.QueryAsync("P_SO_PRICE_LIST_PKG_get_price", new[]
     {
@@ -117,7 +119,7 @@ app.MapGet("/price_list/price", async (Db db, HttpRequest r) =>
         Text("@article",                article, 30),   // text: 487 lines look like '255484AA/11'
         Text("@color_tier",             S(r.Query["color_tier"]), 30),
         Int32P("@qty",                  I(r.Query["qty"])),
-        Chr("@qty_unit",                S(r.Query["qty_unit"]) ?? "M", 2),
+        Text("@qty_unit",               S(r.Query["qty_unit"]) ?? "MTS", 10),
         Chr("@currency",                S(r.Query["currency"]), 3),
         Dt("@as_of",                    D(r.Query["as_of"])),
         Flag("@include_inactive",       r.Query["include_inactive"] == "1"),
@@ -133,6 +135,68 @@ app.MapGet("/price_list/price", async (Db db, HttpRequest r) =>
         matches = rows
     });
 });
+
+// What the company already knows about a design: fabric name from dm.refdesno,
+// composition and spec from designs. Declared before /{id} so "design" is not
+// read as an id. Returns found=0 rather than an error when the design is not in
+// the masters - 31 of the 261 in use are not.
+app.MapGet("/price_list/design", async (Db db, HttpRequest r) =>
+{
+    var designNo = S(r.Query["design_no"]) ?? S(r.Query["article"]);
+    if (designNo is null)
+        return Results.BadRequest(new { error = "design_no is required." });
+
+    return Results.Ok(await db.SingleAsync("P_SO_PRICE_LIST_PKG_select_design", new[]
+    {
+        Text("@design_no", designNo, 60),
+        Text("@logempcd",  Who(r), 15)
+    }));
+});
+
+// Design list of values: a partial number (255699AA) offers the real ones the
+// ERP holds (255699AA/14, /15, /16). Declared before /{id} like the others.
+app.MapGet("/price_list/design_list", async (Db db, HttpRequest r) =>
+    Results.Ok(await db.QueryAsync("P_SO_PRICE_LIST_PKG_select_design_list", new[]
+    {
+        Text("@filter",   S(r.Query["filter"]), 60),
+        Int32P("@top_n",  I(r.Query["top_n"]) ?? 200),
+        Text("@logempcd", Who(r), 15)
+    })));
+
+// The units of measure the system knows, for the picker in the grid. A unit
+// that is not on this list is refused by the write procedures.
+app.MapGet("/uom", async (Db db, HttpRequest r) =>
+    Results.Ok(await db.QueryAsync("P_SO_PRICE_LIST_PKG_select_uom", new[]
+    {
+        Text("@filter",   S(r.Query["filter"]), 40),
+        Text("@logempcd", Who(r), 15)
+    })));
+
+// A price list is quoted to more than one customer. These read, add and
+// remove those assignments; each returns the full list afterwards, so the
+// modal never has to ask again.
+app.MapGet("/price_list/{id:long}/customers", async (Db db, HttpRequest r, long id) =>
+    Results.Ok(await db.QueryAsync("P_SO_PRICE_LIST_PKG_select_price_list_customer", new[]
+    {
+        Num("@so_price_list_header_id", id),
+        Text("@logempcd",               Who(r), 15)
+    })));
+
+app.MapPost("/price_list/{id:long}/customers", async (Db db, HttpRequest r, long id, System.Text.Json.JsonElement b) =>
+    Results.Ok(await db.QueryAsync("P_SO_PRICE_LIST_PKG_assign_price_list_customer", new[]
+    {
+        Num("@so_price_list_header_id", id),
+        Num("@customer_id",             LJ(b, "customer_id")),
+        Text("@logempcd",               Who(r), 15)
+    })));
+
+app.MapDelete("/price_list/{id:long}/customers/{customerId:long}", async (Db db, HttpRequest r, long id, long customerId) =>
+    Results.Ok(await db.QueryAsync("P_SO_PRICE_LIST_PKG_unassign_price_list_customer", new[]
+    {
+        Num("@so_price_list_header_id", id),
+        Num("@customer_id",             customerId),
+        Text("@logempcd",               Who(r), 15)
+    })));
 
 // Customer list of values. Lives in the LOV schema per house convention, so
 // the name is schema-qualified rather than resolved against SO.
@@ -155,6 +219,7 @@ app.MapGet("/price_list/{id:long}/detail", async (Db db, HttpRequest r, long id)
     Results.Ok(await db.QueryAsync("P_SO_PRICE_LIST_PKG_select_price_list_detail", new[]
     {
         Num("@so_price_list_header_id", id),
+        Text("@design_no",              S(r.Query["design_no"]), 60),
         Text("@article",                S(r.Query["article"]), 30),
         Text("@search",                 S(r.Query["search"]), 100),
         Flag("@conflicts_only",         r.Query["conflicts_only"] == "1"),
@@ -177,7 +242,6 @@ app.MapPost("/price_list", async (Db db, HttpRequest r, System.Text.Json.JsonEle
         Num("@so_price_list_header_id", LJ(b, "header_id")),
         Text("@list_name",              SJ(b, "list_name"), 60),
         Text("@list_desc",              SJ(b, "list_desc"), 400),
-        Num("@customer_id",             LJ(b, "customer_id")),
         Text("@customer_excel",         SJ(b, "customer_excel"), 120),
         Dt("@list_date",                DJ(b, "list_date")),
         Dt("@valid_from",               DJ(b, "valid_from")),
@@ -195,22 +259,24 @@ app.MapPost("/price_list/detail", async (Db db, HttpRequest r, System.Text.Json.
     {
         Num("@so_price_list_detail_id", LJ(b, "detail_id")),
         Num("@so_price_list_header_id", LJ(b, "header_id")),
+        Int32P("@set_no",               IJ(b, "set_no")),
         Text("@article",                SJ(b, "article"), 30),
-        Chr("@design_no",               SJ(b, "design_no"), 20),
+        Text("@design_no",              SJ(b, "design_no"), 60),
         Text("@article_variant",        SJ(b, "article_variant"), 20),
-        Text("@fabric_name",            SJ(b, "fabric_name"), 120),
+        Text("@fabric_name",            SJ(b, "fabric_name"), 200),
         Text("@composition",            SJ(b, "composition"), 200),
-        Text("@full_width_cm",          SJ(b, "full_width_cm"), 30),
-        Text("@usable_width_cm",        SJ(b, "usable_width_cm"), 30),
-        Text("@weight_gsm",             SJ(b, "weight_gsm"), 30),
-        Text("@moq",                    SJ(b, "moq"), 30),
+        Text("@full_width_cm",          SJ(b, "full_width_cm"), 60),
+        Text("@usable_width_cm",        SJ(b, "usable_width_cm"), 60),
+        Text("@weight_gsm",             SJ(b, "weight_gsm"), 60),
+        Text("@moq",                    SJ(b, "moq"), 60),
         Int32P("@qty_min",              IJ(b, "qty_min")),
         Int32P("@qty_max",              IJ(b, "qty_max")),
-        Chr("@qty_unit",                SJ(b, "qty_unit") ?? "M", 2),
+        Text("@qty_unit",               SJ(b, "qty_unit") ?? "MTS", 10),
         Text("@color_tier",             SJ(b, "color_tier"), 30),
         Chr("@currency",                SJ(b, "currency"), 3),
         Dec("@price",                   DecJ(b, "price")),
         Int32P("@line_no",              IJ(b, "line_no")),
+        Int32P("@after_line_no",        IJ(b, "after_line_no")),
         Chr("@active",                  SJ(b, "active"), 1),
         Text("@notes",                  SJ(b, "notes"), 500),
         Text("@logempcd",               Who(r), 15)
@@ -222,25 +288,84 @@ app.MapPost("/price_list/{id:long}/row", async (Db db, HttpRequest r, long id, S
     Results.Ok(await db.SingleAsync("P_SO_PRICE_LIST_PKG_update_price_list_row", new[]
     {
         Num("@so_price_list_header_id", id),
+        Text("@design_no",              SJ(b, "design_no"), 60),
         Text("@article",                SJ(b, "article"), 30),
         Text("@article_variant",        SJ(b, "article_variant"), 20),
         Int32P("@qty_min",              IJ(b, "qty_min")),
         Int32P("@qty_max",              IJ(b, "qty_max")),
-        Chr("@qty_unit",                SJ(b, "qty_unit") ?? "M", 2),
+        Text("@qty_unit",               SJ(b, "qty_unit") ?? "MTS", 10),
+        Text("@new_design_no",          SJ(b, "new_design_no"), 60),
         Text("@new_article",            SJ(b, "new_article"), 30),
         Text("@new_article_variant",    SJ(b, "new_article_variant"), 20),
         Int32P("@new_qty_min",          IJ(b, "new_qty_min")),
         Int32P("@new_qty_max",          IJ(b, "new_qty_max")),
         Flag("@clear_qty_max",          BJ(b, "clear_qty_max")),
-        Chr("@new_qty_unit",            SJ(b, "new_qty_unit"), 2),
-        Text("@fabric_name",            SJ(b, "fabric_name"), 120),
+        Text("@new_qty_unit",           SJ(b, "new_qty_unit"), 10),
+        Text("@fabric_name",            SJ(b, "fabric_name"), 200),
         Text("@composition",            SJ(b, "composition"), 200),
-        Text("@full_width_cm",          SJ(b, "full_width_cm"), 30),
-        Text("@usable_width_cm",        SJ(b, "usable_width_cm"), 30),
-        Text("@weight_gsm",             SJ(b, "weight_gsm"), 30),
-        Text("@moq",                    SJ(b, "moq"), 30),
-        Chr("@design_no",               SJ(b, "design_no"), 20),
+        Text("@full_width_cm",          SJ(b, "full_width_cm"), 60),
+        Text("@usable_width_cm",        SJ(b, "usable_width_cm"), 60),
+        Text("@weight_gsm",             SJ(b, "weight_gsm"), 60),
+        Text("@moq",                    SJ(b, "moq"), 60),
         Chr("@active",                  SJ(b, "active"), 1),
+        Text("@logempcd",               Who(r), 15)
+    })));
+
+// Right-click Copy then Insert. A grid row is a whole set, so this duplicates
+// every line behind it - all tiers, both currencies - and lands it after the
+// row that was right-clicked. after_set_no 0 puts it first.
+app.MapPost("/price_list/{id:long}/set/copy", async (Db db, HttpRequest r, long id, System.Text.Json.JsonElement b) =>
+    Results.Ok(await db.SingleAsync("P_SO_PRICE_LIST_PKG_copy_price_list_set", new[]
+    {
+        Num("@so_price_list_header_id", id),
+        Int32P("@source_set_no",        IJ(b, "source_set_no")),
+        Int32P("@after_set_no",         IJ(b, "after_set_no")),
+        Text("@logempcd",               Who(r), 15)
+    })));
+
+// Right-click Insert here with nothing copied: a brand new line at that spot.
+// The sets below shift down, so it lands where it was asked for rather than at
+// the end of the list.
+app.MapPost("/price_list/{id:long}/set/insert", async (Db db, HttpRequest r, long id, System.Text.Json.JsonElement b) =>
+    Results.Ok(await db.SingleAsync("P_SO_PRICE_LIST_PKG_insert_price_list_set", new[]
+    {
+        Num("@so_price_list_header_id", id),
+        Int32P("@after_set_no",         IJ(b, "after_set_no")),
+        Text("@design_no",              SJ(b, "design_no"), 60),
+        Text("@article_variant",        SJ(b, "article_variant"), 20),
+        Int32P("@qty_min",              IJ(b, "qty_min")),
+        Int32P("@qty_max",              IJ(b, "qty_max")),
+        Text("@qty_unit",               SJ(b, "qty_unit") ?? "MTS", 10),
+        Text("@color_tier",             SJ(b, "color_tier"), 30),
+        Chr("@currency",                SJ(b, "currency") ?? "USD", 3),
+        Dec("@price",                   DecJ(b, "price")),
+        Text("@fabric_name",            SJ(b, "fabric_name"), 200),
+        Text("@composition",            SJ(b, "composition"), 200),
+        Text("@full_width_cm",          SJ(b, "full_width_cm"), 60),
+        Text("@usable_width_cm",        SJ(b, "usable_width_cm"), 60),
+        Text("@weight_gsm",             SJ(b, "weight_gsm"), 60),
+        Text("@moq",                    SJ(b, "moq"), 60),
+        Text("@notes",                  SJ(b, "notes"), 500),
+        Text("@logempcd",               Who(r), 15)
+    })));
+
+// Right-click Delete. Soft, like every delete here: delete_mark goes to 'Y' and
+// the rows stay in the table, out of sight of every select.
+app.MapPost("/price_list/{id:long}/set/delete", async (Db db, HttpRequest r, long id, System.Text.Json.JsonElement b) =>
+    Results.Ok(await db.SingleAsync("P_SO_PRICE_LIST_PKG_delete_price_list_set", new[]
+    {
+        Num("@so_price_list_header_id", id),
+        Int32P("@set_no",               IJ(b, "set_no")),
+        Text("@logempcd",               Who(r), 15)
+    })));
+
+// "I have checked this list." The procedure refuses an unsigned confirmation,
+// so this is also the one call that fails when no user is set.
+app.MapPost("/price_list/{id:long}/verified", async (Db db, HttpRequest r, long id, System.Text.Json.JsonElement b) =>
+    Results.Ok(await db.SingleAsync("P_SO_PRICE_LIST_PKG_set_price_list_verified", new[]
+    {
+        Num("@so_price_list_header_id", id),
+        Chr("@verified",                SJ(b, "verified") ?? "Y", 1),
         Text("@logempcd",               Who(r), 15)
     })));
 
@@ -259,7 +384,6 @@ app.MapPost("/price_list/{id:long}/copy", async (Db db, HttpRequest r, long id, 
     {
         Num("@source_header_id", id),
         Text("@list_name",       SJ(b, "list_name"), 60),
-        Num("@customer_id",      LJ(b, "customer_id")),
         Dt("@valid_from",        DJ(b, "valid_from")),
         Dt("@valid_to",          DJ(b, "valid_to")),
         Text("@logempcd",        Who(r), 15)

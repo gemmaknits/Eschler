@@ -95,11 +95,51 @@ export const api = {
   saveRow: (headerId, body) =>
     call(`/price_list/${headerId}/row`, { method: 'POST', body: JSON.stringify(body) }),
 
+  // what the company already knows about a design - fabric name and spec.
+  // Comes back with found:false for a design the ERP masters do not carry.
+  lookupDesign: (designNo) =>
+    call(`/price_list/design${qs({ design_no: designNo })}`),
+
+  // the units the system knows; anything not on this list is refused on save
+  lovUom: (params = {}) => call(`/uom${qs(params)}`),
+
+  // the design picker: a partial number or a fabric name -> the real designs
+  lovDesign: (params = {}) => call(`/price_list/design_list${qs(params)}`),
+
+  // right-click Insert here with nothing copied: a new line at that position
+  insertSet: (headerId, body) =>
+    call(`/price_list/${headerId}/set/insert`, { method: 'POST', body: JSON.stringify(body) }),
+
+  // right-click Copy -> Insert: duplicates a whole grid row (every tier and
+  // currency behind it) and drops it after the row that was right-clicked
+  copySet: (headerId, body) =>
+    call(`/price_list/${headerId}/set/copy`, { method: 'POST', body: JSON.stringify(body) }),
+
+  // right-click Delete: soft, the lines keep their row and go delete_mark='Y'
+  deleteSet: (headerId, body) =>
+    call(`/price_list/${headerId}/set/delete`, { method: 'POST', body: JSON.stringify(body) }),
+
+  // records that a person has checked a price list; refuses to save unsigned
+  setVerified: (headerId, body) =>
+    call(`/price_list/${headerId}/verified`, { method: 'POST', body: JSON.stringify(body) }),
+
   saveGridShape: (headerId, body) =>
     call(`/price_list/${headerId}/grid_shape`, { method: 'POST', body: JSON.stringify(body) }),
 
   copyList: (headerId, body) =>
     call(`/price_list/${headerId}/copy`, { method: 'POST', body: JSON.stringify(body) }),
+
+  /* The customers a list is quoted to. Each of these returns the full list
+     afterwards, so the modal shows what the database holds rather than a
+     local copy kept in step by hand. */
+  listAssignedCustomers: (headerId) =>
+    call(`/price_list/${headerId}/customers`),
+
+  assignCustomer: (headerId, body) =>
+    call(`/price_list/${headerId}/customers`, { method: 'POST', body: JSON.stringify(body) }),
+
+  unassignCustomer: (headerId, customerId) =>
+    call(`/price_list/${headerId}/customers/${customerId}`, { method: 'DELETE' }),
 
   deleteList: (headerId) =>
     call(`/price_list/${headerId}`, { method: 'DELETE' }),
@@ -137,9 +177,9 @@ export function gridShape(header) {
 /* The key that identifies one price line: everything the unique index uses.
    Exported so the grid can find the other lines sharing a cell's key. */
 const SEP = '';
-export const bizKeyOf = ({ article, article_variant, qty_min, qty_max, qty_unit },
+export const bizKeyOf = ({ design_no, article_variant, qty_min, qty_max, qty_unit },
                          color_tier, currency) =>
-  [article, article_variant || '', qty_min, qty_max ?? '', (qty_unit || '').trim(),
+  [design_no, article_variant || '', qty_min, qty_max ?? '', (qty_unit || '').trim(),
    color_tier, (currency || '').trim()].join(SEP);
 
 export function pivotToGrid(rows) {
@@ -148,12 +188,16 @@ export function pivotToGrid(rows) {
   const currencies = new Set();
   const siblings = new Map();  // business key -> every detail line sharing it
 
-  const baseKeyOf = d => [d.article, d.article_variant || '', d.qty_min,
+  const baseKeyOf = d => [d.design_no, d.article_variant || '', d.qty_min,
                           d.qty_max ?? '', (d.qty_unit || '').trim()].join(SEP);
 
   const newBucket = (d, base, n) => ({
-    key: `${base}#${n}`,
+    key: `${base}#${d.set_no ?? n}`,
     baseKey: base,
+    set_no: d.set_no,
+    /* design_no is the identifier; article is the mirror column the order-entry
+       client still reads, carried along so a save can write both. */
+    design_no: d.design_no,
     article: d.article,
     article_variant: d.article_variant || '',
     qty_min: d.qty_min,
@@ -185,21 +229,14 @@ export function pivotToGrid(rows) {
     if (!byBase.has(base)) byBase.set(base, []);
     const buckets = byBase.get(base);
 
-    /* ONE detail per cell, never two. A second line for the same article and
-       colour tier gets its own grid row rather than being folded in behind a
-       badge - duplicated prices are a thing to look at, not to hide.
+    /* set_no says which grid row a line belongs to - the USD and THB halves of
+       one price line carry the same one. It is stored, not inferred, so an
+       inserted line stays exactly where it was put.
 
-       What MAY share a row is the set of lines that came from one worksheet
-       line: its USD and THB halves, and its colour tiers. source_row is what
-       identifies that original line, so a detail only ever joins a row with the
-       same source_row - never merely the first row with a free cell, which
-       would pair prices that were never together in the workbook.
-
-       Lines entered in the app carry no source_row; they group with each other
-       the same way, and never get absorbed into an imported row. */
-    const sameOrigin = b =>
-      (d.source_row == null ? b.source_row == null : b.source_row === d.source_row);
-    let bucket = buckets.find(b => sameOrigin(b) && b.cells[cellKey] === undefined);
+       A cell still only ever holds one detail: if a set somehow carried two
+       rows of the same tier and currency, the second starts its own row rather
+       than being hidden. */
+    let bucket = buckets.find(b => b.set_no === d.set_no && b.cells[cellKey] === undefined);
 
     if (!bucket) {
       bucket = newBucket(d, base, buckets.length);
@@ -208,10 +245,10 @@ export function pivotToGrid(rows) {
     bucket.cells[cellKey] = d;
   }
 
-  const gridRows = [...byBase.values()].flat().sort((a, b) =>
-    a.article.localeCompare(b.article) ||
-    a.qty_min - b.qty_min ||
-    (a.source_row ?? 0) - (b.source_row ?? 0));
+  /* set_no IS the order - it is what the procedure sorts by and what an
+     insert-between renumbers. Re-deriving an order here would undo that. */
+  const gridRows = [...byBase.values()].flat()
+    .sort((a, b) => (a.set_no ?? 0) - (b.set_no ?? 0));
 
   /* Rows sharing a base key are alternatives for the same article and quantity
      band - split apart so every price is visible, then bracketed in the grid.

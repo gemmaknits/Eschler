@@ -1,5 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { TIER_ORDER } from './api';
+
+/* Distance from the button, and the smallest gap left against the window edge. */
+const GAP = 6;
 
 /**
  * Which colour tiers and currencies this list's grid shows.
@@ -9,11 +12,50 @@ import { TIER_ORDER } from './api';
  * still needs a column to type into. Unticking a tier only hides the column -
  * the price lines underneath are untouched, so it is always reversible.
  */
-export default function ColumnsMenu({ tiers, currencies, allTiers, onApply, onClose }) {
+export default function ColumnsMenu({ tiers, currencies, allTiers, anchor, onApply, onClose }) {
   const ref = useRef(null);
   const [t, setT] = useState(new Set(tiers));
   const [c, setC] = useState(new Set(currencies));
   const [custom, setCustom] = useState('');
+  /* null until measured. The panel used to be pinned to the top-right corner
+     of the window, which put it nowhere near the button that opens it. */
+  const [pos, setPos] = useState(null);
+
+  /* Layout, not paint: this runs before the browser draws, so the panel is
+     never seen in the wrong place first. */
+  useLayoutEffect(() => {
+    const el = ref.current;
+    const btn = anchor?.current;
+    if (!el) return;
+
+    const place = () => {
+      if (!btn) return;
+      const b = btn.getBoundingClientRect();
+      const w = el.offsetWidth, h = el.offsetHeight;
+
+      /* Left edges aligned with the button, pulled back inside the window if
+         the panel would hang off the right. */
+      const left = Math.max(GAP, Math.min(b.left, window.innerWidth - w - GAP));
+      /* Below the button, unless there is no room down there - then above it. */
+      let top = b.bottom + GAP;
+      if (top + h > window.innerHeight - GAP) top = Math.max(GAP, b.top - GAP - h);
+
+      setPos(p => (p && p.top === top && p.left === left ? p : { top, left }));
+    };
+
+    place();
+    /* Ticking a tier changes the panel's height, which can change whether it
+       still fits below the button. */
+    const ro = typeof ResizeObserver === 'function' ? new ResizeObserver(place) : null;
+    ro?.observe(el);
+    window.addEventListener('resize', place);
+    window.addEventListener('scroll', place, true);
+    return () => {
+      ro?.disconnect();
+      window.removeEventListener('resize', place);
+      window.removeEventListener('scroll', place, true);
+    };
+  }, [anchor]);
 
   useEffect(() => {
     const onDown = e => { if (ref.current && !ref.current.contains(e.target)) onClose(); };
@@ -53,7 +95,15 @@ export default function ColumnsMenu({ tiers, currencies, allTiers, onApply, onCl
   };
 
   return (
-    <div className="pop colmenu" ref={ref} role="dialog" aria-label="Grid columns">
+    <div
+      className="pop colmenu"
+      ref={ref}
+      role="dialog"
+      aria-label="Grid columns"
+      /* Hidden rather than absent for the one frame before it is measured:
+         it has to be in the document to have a size to measure. */
+      style={pos ? { top: pos.top, left: pos.left } : { visibility: 'hidden' }}
+    >
       <h4>Columns</h4>
       <p className="sub">Which colour tiers and currencies this list prices.</p>
 

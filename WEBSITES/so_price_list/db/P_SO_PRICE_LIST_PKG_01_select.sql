@@ -12,6 +12,16 @@
    as Int, or the alphanumeric codes are rejected before they reach the proc.
    ============================================================================ */
 
+/* Baked in, not left to the deploy tool: so_price_list_detail carries FILTERED
+   indexes, and any INSERT or UPDATE from a module created with QUOTED_IDENTIFIER
+   OFF fails at run time with error 1934. sqlcmd defaults it OFF, SSMS ON, which
+   is why the same file could deploy working procedures one day and broken ones
+   the next. */
+SET ANSI_NULLS ON;
+GO
+SET QUOTED_IDENTIFIER ON;
+GO
+
 SET NOCOUNT ON;
 GO
 
@@ -39,8 +49,6 @@ BEGIN
     SELECT  h.so_price_list_header_id,
             h.list_name,
             h.list_desc,
-            h.customer_id,
-            h.customer_name,
             h.customer_excel,
             h.list_date,
             h.valid_from,
@@ -57,12 +65,24 @@ BEGIN
             h.tier_set,
             h.currency_set,
             h.hide_inactive,
+            /* whether a person has gone through this list and confirmed it */
+            h.excel_data_verified,
+            h.verified_by,
+            h.verified_date,
             h.creation_date,
             h.created_by,
             h.last_updated_date,
             h.updated_by,
             ISNULL(d.line_count, 0)    AS line_count,
             ISNULL(c.conflict_count,0) AS conflict_count,
+            /* Who this list is quoted to. The header used to carry one
+               customer_id that the import never filled in; a list goes to several,
+               so the assignments in so_price_list_customers are the answer and
+               these two carry it - the count for the header strip, the names
+               for the navigation. STUFF/FOR XML rather than STRING_AGG: the
+               target is SQL Server 2014. */
+            ISNULL(ac.customer_count, 0) AS customer_count,
+            ac.assigned_customers,
             CASE WHEN h.valid_to IS NOT NULL
                   AND h.valid_to < CAST(GETDATE() AS date) THEN 'Y' ELSE 'N' END AS expired_flag
     FROM    SO.so_price_list_header h
@@ -73,6 +93,19 @@ BEGIN
             GROUP BY so_price_list_header_id
     ) d ON d.so_price_list_header_id = h.so_price_list_header_id
     LEFT JOIN (
+            SELECT c.so_price_list_header_id,
+                   COUNT(*) AS customer_count,
+                   STUFF((SELECT N', ' + ISNULL(cu2.name, N'customer ' + CAST(c2.customer_id AS nvarchar(20)))
+                          FROM   SO.so_price_list_customers c2
+                          LEFT JOIN dbo.customers cu2 ON cu2.customer_id = c2.customer_id
+                          WHERE  c2.so_price_list_header_id = c.so_price_list_header_id
+                          ORDER BY cu2.name
+                          FOR XML PATH(''), TYPE).value('.','nvarchar(max)'), 1, 2, '')
+                       AS assigned_customers
+            FROM   SO.so_price_list_customers c
+            GROUP BY c.so_price_list_header_id
+    ) ac ON ac.so_price_list_header_id = h.so_price_list_header_id
+    LEFT JOIN (
             /* cells that resolve to more than one LIVE price line */
             SELECT so_price_list_header_id, COUNT(*) AS conflict_count
             FROM (
@@ -80,7 +113,7 @@ BEGIN
                 FROM   SO.so_price_list_detail
                 WHERE  delete_mark <> 'Y'
                   AND  active = 'Y'
-                GROUP BY so_price_list_header_id, article, article_variant,
+                GROUP BY so_price_list_header_id, design_no, article_variant,
                          qty_min, qty_max, qty_unit, color_tier, currency
                 HAVING COUNT(*) > 1
             ) z
@@ -88,7 +121,11 @@ BEGIN
     ) c ON c.so_price_list_header_id = h.so_price_list_header_id
     WHERE   h.delete_mark <> 'Y'
       AND  (@so_price_list_header_id IS NULL OR h.so_price_list_header_id = @so_price_list_header_id)
-      AND  (@customer_id IS NULL OR h.customer_id = @customer_id)
+      /* lists quoted to one customer, via the assignments */
+      AND  (@customer_id IS NULL
+            OR EXISTS (SELECT 1 FROM SO.so_price_list_customers ac2
+                       WHERE ac2.so_price_list_header_id = h.so_price_list_header_id
+                         AND ac2.customer_id = @customer_id))
       AND  (@search IS NULL OR @search = ''
             OR h.list_name      LIKE '%' + @search + '%'
             OR h.list_desc      LIKE '%' + @search + '%'
@@ -113,8 +150,9 @@ GO
 -- SO.P_SO_PRICE_LIST_PKG_select_price_list_detail 31, null, null, null, ''
 CREATE PROCEDURE [SO].[P_SO_PRICE_LIST_PKG_select_price_list_detail]
     @so_price_list_header_id bigint       = null,
-    @article                 nvarchar(30) = null,   -- exact; text, never numeric
-    @search                  nvarchar(100)= null,   -- article / fabric / composition
+    @design_no               nvarchar(60) = null,   -- exact; text, never numeric
+    @article                 nvarchar(30) = null,   -- accepted as an alias for @design_no
+    @search                  nvarchar(100)= null,   -- design / fabric / composition
     @conflicts_only          bit          = 0,
     @logempcd                varchar(15)  = ''
 AS
@@ -124,7 +162,7 @@ BEGIN
     /* Only ACTIVE lines compete. A withdrawn line is not an alternative price,
        so it must not inflate the count shown against the ones that are. */
     ;WITH dup AS (
-        SELECT so_price_list_header_id, article, article_variant,
+        SELECT so_price_list_header_id, design_no, article_variant,
                qty_min, qty_max, qty_unit, color_tier, currency,
                COUNT(*) AS n
         FROM   SO.so_price_list_detail
@@ -132,11 +170,14 @@ BEGIN
           AND  active = 'Y'
           AND (@so_price_list_header_id IS NULL
                OR so_price_list_header_id = @so_price_list_header_id)
-        GROUP BY so_price_list_header_id, article, article_variant,
+        GROUP BY so_price_list_header_id, design_no, article_variant,
                  qty_min, qty_max, qty_unit, color_tier, currency
     )
     SELECT  d.so_price_list_detail_id,
             d.so_price_list_header_id,
+            /* set_no is the grid row: the USD and THB halves of one price line
+               carry the same value, line_no orders them within it. */
+            d.set_no,
             d.line_no,
             d.article,
             d.design_no,
@@ -164,7 +205,7 @@ BEGIN
             CASE WHEN d.active = 'Y' THEN ISNULL(dup.n, 1) ELSE 0 END AS conflict_count
     FROM    SO.so_price_list_detail d
     LEFT JOIN dup ON dup.so_price_list_header_id = d.so_price_list_header_id
-                AND dup.article                = d.article
+                AND dup.design_no              = d.design_no
                 AND ISNULL(dup.article_variant,'') = ISNULL(d.article_variant,'')
                 AND dup.qty_min                = d.qty_min
                 AND ISNULL(dup.qty_max,-1)     = ISNULL(d.qty_max,-1)
@@ -174,13 +215,17 @@ BEGIN
     WHERE   d.delete_mark <> 'Y'
       AND  (@so_price_list_header_id IS NULL
             OR d.so_price_list_header_id = @so_price_list_header_id)
-      AND  (@article IS NULL OR @article = '' OR d.article = @article)
+      /* @article is the old name for this filter; either one narrows by design */
+      AND  (COALESCE(NULLIF(@design_no,''), NULLIF(@article,'')) IS NULL
+            OR d.design_no = COALESCE(NULLIF(@design_no,''), NULLIF(@article,'')))
       AND  (@search  IS NULL OR @search  = ''
-            OR d.article     LIKE '%' + @search + '%'
+            OR d.design_no   LIKE '%' + @search + '%'
             OR d.fabric_name LIKE '%' + @search + '%'
             OR d.composition LIKE '%' + @search + '%')
       AND  (@conflicts_only = 0 OR (d.active = 'Y' AND ISNULL(dup.n,0) > 1))
-    ORDER BY d.so_price_list_header_id, d.article, d.qty_min, d.color_tier, d.currency;
+    /* Workbook order, which is what set_no preserves - and what makes an
+       inserted line stay where it was put. */
+    ORDER BY d.so_price_list_header_id, d.set_no, d.line_no;
 END
 GO
 
@@ -338,18 +383,10 @@ BEGIN
 
     SELECT  d.color_tier,
             COUNT(*) AS line_count,
-            /* stable display order; unknown tiers fall to the end alphabetically */
-            CASE d.color_tier
-                 WHEN 'PFE/PFD'    THEN 1
-                 WHEN 'PFE'        THEN 2
-                 WHEN 'PFD'        THEN 3
-                 WHEN 'Greige'     THEN 4
-                 WHEN 'White'      THEN 5
-                 WHEN 'Light'      THEN 6
-                 WHEN 'Medium'     THEN 7
-                 WHEN 'Dark'       THEN 8
-                 WHEN 'All_colors' THEN 9
-                 ELSE 99 END AS sort_order
+            /* stable display order; unknown tiers fall to the end alphabetically.
+               Same function the insert uses to order lines within a set, so the
+               columns and the rows behind them can never disagree. */
+            SO.F_SO_PRICE_LIST_tier_order(d.color_tier) AS sort_order
     FROM    SO.so_price_list_detail d
     WHERE   d.delete_mark <> 'Y'
       AND  (@so_price_list_header_id IS NULL

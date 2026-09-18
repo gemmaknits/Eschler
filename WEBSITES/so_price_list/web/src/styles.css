@@ -245,20 +245,33 @@ table#grid thead th.thbc{background:var(--thb-tint); color:var(--thb-ink)}
    outranks a bare td.stk - so the frozen cells need their own higher
    specificity or they stop sticking and their left offset shoves them over
    the next column instead. Widths are pinned here too so the sticky offsets
-   always agree with the <colgroup>. */
+   always agree with the <colgroup>.
+
+   --w0 / --wact / --w1 are set on the table from the live column widths, so
+   dragging Act or Design No wider moves the columns frozen to their right
+   instead of letting them overlap. The fallbacks are the defaults. */
 th.stk,td.stk{position:sticky; z-index:2}
 table#grid tbody td.cell.stk{position:sticky; z-index:2}
-table#grid th.s0, table#grid td.s0{width:42px; min-width:42px; max-width:42px}
-table#grid th.s1, table#grid td.s1{width:118px; min-width:118px; max-width:118px}
-thead th.stk{z-index:5}
+table#grid th.s0, table#grid td.s0{
+  width:var(--w0,42px); min-width:var(--w0,42px); max-width:var(--w0,42px);
+}
+table#grid th.s1, table#grid td.s1{
+  width:var(--w1,118px); min-width:var(--w1,118px); max-width:var(--w1,118px);
+}
+/* Every one of these needs the #grid prefix. "table#grid thead th" above
+   carries an ID, so a bare "thead th.stk" loses to it however many classes it
+   has - the frozen header cells fell behind the group headings as soon as the
+   grid was scrolled right, and the strong rule down the frozen edge never
+   painted at all. */
+table#grid thead th.stk{z-index:5}
 th.s0,td.s0{left:0}
-th.s1,td.s1{left:42px}
+th.s1,td.s1{left:var(--w0,42px)}
 td.stk{background:var(--surface)}
-td.s1{border-right:1px solid var(--grid-strong)}
-thead th.s1{border-right:1px solid var(--grid-strong)}
+table#grid td.s1{border-right:1px solid var(--grid-strong)}
+table#grid thead th.s1{border-right:1px solid var(--grid-strong)}
 
 /* row-number gutter reads as a header, like Excel's row headings */
-td.rn{
+table#grid td.rn{
   background:var(--headfill); color:var(--headink);
   text-align:center; font-size:10.5px; font-variant-numeric:tabular-nums;
   border-right:1px solid var(--grid-strong);
@@ -356,7 +369,10 @@ kbd{
 .opt .tick{margin-left:auto; color:var(--accent); font-weight:700; visibility:hidden}
 .opt.chosen .tick{visibility:visible}
 
-.colmenu{position:fixed; top:88px; right:16px; min-width:246px; max-width:296px}
+/* Positioned in JS against the Columns button - fixed to the viewport, with
+   top/left set on the element. Pinned here to the window's top-right corner it
+   opened nowhere near the button that opens it. */
+.colmenu{position:fixed; min-width:246px; max-width:296px}
 .colgroup{display:flex; flex-wrap:wrap; gap:5px 9px; align-items:center; padding:7px 0; border-top:1px solid var(--rule)}
 .collabel{width:100%; font-size:9px; font-weight:600; letter-spacing:.09em; text-transform:uppercase; color:var(--muted)}
 .chk{display:flex; align-items:center; gap:4px; font-size:11.5px; cursor:pointer}
@@ -485,11 +501,13 @@ kbd{
 /* ============================ active flag ============================ */
 /* A third frozen column, so the flag stays visible while scrolling right.
    Offsets: gutter 42 -> Act 52 -> Article 118. */
-th.sAct,td.sAct{position:sticky; left:42px; z-index:2}
-thead th.sAct{z-index:5}
-table#grid th.sAct, table#grid td.sAct{width:52px; min-width:52px; max-width:52px}
+th.sAct,td.sAct{position:sticky; left:var(--w0,42px); z-index:2}
+table#grid thead th.sAct{z-index:5}
+table#grid th.sAct, table#grid td.sAct{
+  width:var(--wact,52px); min-width:var(--wact,52px); max-width:var(--wact,52px);
+}
 table#grid tbody td.cell.sAct{position:sticky; z-index:2}
-table#grid th.s1, table#grid td.s1{left:94px}
+table#grid th.s1, table#grid td.s1{left:calc(var(--w0,42px) + var(--wact,52px))}
 
 td.flagcell{text-align:center; background:var(--surface)}
 .flagbox{
@@ -533,6 +551,49 @@ tbody tr.rowinactive td.flagcell{background:var(--surface-3)}
    text columns use - that is enough to pick it out, without a marker glyph. */
 tbody td.hasnote{color:var(--ink)}
 
+/* A wide column still cannot hold 2,000 characters, so its cell scrolls
+   sideways instead of ending the note at an ellipsis. The scrollbar is there
+   whenever the text overflows - always, so nothing shifts - but its thumb only
+   takes colour under the pointer, or a list of notes would read as a stack of
+   grey bars. */
+td.wcell{padding:0}
+/* Absolute, so the scrollbar is out of the row's flow: in flow it added five
+   pixels to any row holding a long note and the grid lost its even ruling.
+   line-height is the full cell height while the visible band is six pixels
+   shorter, which puts the text on the same baseline as every other column and
+   leaves the bottom strip for the bar. */
+td.wcell > .scrollcell{
+  position:absolute; inset:0; padding:0 11px;
+  overflow-x:auto; overflow-y:hidden;
+  white-space:nowrap; line-height:29px;
+}
+/* scrollbar-width:thin would override the height below and force ten pixels */
+td.wcell > .scrollcell::-webkit-scrollbar{height:6px}
+td.wcell > .scrollcell::-webkit-scrollbar-track{background:transparent}
+td.wcell > .scrollcell::-webkit-scrollbar-thumb{background:transparent; border-radius:99px}
+td.wcell:hover > .scrollcell::-webkit-scrollbar-thumb{background:var(--grid-strong)}
+td.wcell > .scrollcell::-webkit-scrollbar-thumb:hover{background:var(--muted)}
+
+/* ---------- resizable columns ----------
+   A grip on the right edge of each header cell: the thing you drag is the
+   boundary you are moving. Invisible until the pointer is in the header, so it
+   does not add nine vertical rules to a grid whose whole point is the numbers. */
+table#grid thead th .rsz{
+  position:absolute; top:0; right:0; width:9px; height:100%;
+  cursor:col-resize; z-index:6;
+}
+table#grid thead th .rsz::after{
+  content:''; position:absolute; top:5px; bottom:5px; right:3px;
+  width:1px; background:transparent; border-radius:1px;
+}
+table#grid thead th:hover .rsz::after{background:var(--grid-strong)}
+table#grid thead th .rsz:hover::after{
+  top:1px; bottom:1px; right:2px; width:3px; background:var(--accent);
+}
+/* Hold the resize cursor for the whole drag, wherever the pointer wanders, and
+   stop the drag from selecting the header text it passes over. */
+body.colresizing, body.colresizing *{cursor:col-resize !important; user-select:none}
+
 /* ---------- alternatives: rows sharing an article + quantity band ----------
    A rail in the row-number gutter brackets them. It never touches the data
    cells, so it cannot fight the USD/THB column tints, and it stays readable
@@ -551,3 +612,169 @@ td input.edit.bad{
   box-shadow:inset 0 0 0 2px var(--danger);
   background:var(--danger-soft); color:var(--danger); font-weight:600;
 }
+
+/* ---- right-click menu on a grid row -------------------------------------
+   position:fixed against the viewport, because the grid scrolls inside its
+   own container - an absolutely positioned menu would be clipped by it. */
+.ctxmenu{
+  position:fixed; z-index:80; margin:0; padding:4px; list-style:none;
+  min-width:232px;
+  background:var(--surface); border:1px solid var(--rule-strong);
+  border-radius:5px; box-shadow:var(--shadow);
+}
+.ctxmenu li{
+  padding:6px 10px; border-radius:3px; cursor:pointer;
+  font-size:12px; color:var(--ink); white-space:nowrap;
+}
+.ctxmenu li:hover{background:var(--accent-soft); color:var(--accent)}
+.ctxmenu li.danger{color:var(--danger)}
+.ctxmenu li.danger:hover{background:var(--danger-soft); color:var(--danger)}
+/* Nothing copied yet: shown, not hidden, so the menu keeps a stable shape
+   and the entry explains why it does nothing. */
+.ctxmenu li.disabled{color:var(--muted); cursor:default}
+.ctxmenu li.disabled:hover{background:transparent; color:var(--muted)}
+
+/* The copied design, shown against Insert here so it is clear what will land */
+.ctxmenu .ctxnote{
+  margin-left:8px; font-family:IBM Plex Mono,monospace; font-size:11px;
+  color:var(--accent);
+}
+.ctxmenu li:hover .ctxnote{color:var(--accent)}
+
+/* Header line in a context menu: names what the menu will act on, so a
+   destructive entry cannot be read against the wrong row. */
+.ctxmenu li.ctxhead{
+  padding:4px 10px 6px; margin-bottom:2px;
+  border-bottom:1px solid var(--rule);
+  font-size:10px; font-weight:600; letter-spacing:.06em; text-transform:uppercase;
+  color:var(--muted); cursor:default;
+}
+.ctxmenu li.ctxhead:hover{background:transparent; color:var(--muted)}
+/* the nav is a positioned container, and the menu is fixed to the viewport */
+.nav{position:relative}
+
+/* The LOV grid's column widths are laid out fixed and sized for the CUSTOMER
+   picker's six columns. The design picker has five different ones, so without
+   its own widths "255699AA/14" is squeezed into 62px and the composition runs
+   over the weight. These override the nth-child rules above. */
+.lovgrid.designlov table{table-layout:fixed; width:100%}
+.lovgrid.designlov th:nth-child(1),.lovgrid.designlov td:nth-child(1){width:140px}
+.lovgrid.designlov th:nth-child(2),.lovgrid.designlov td:nth-child(2){width:auto}
+.lovgrid.designlov th:nth-child(3),.lovgrid.designlov td:nth-child(3){width:200px}
+.lovgrid.designlov th:nth-child(4),.lovgrid.designlov td:nth-child(4){width:104px}
+.lovgrid.designlov th:nth-child(5),.lovgrid.designlov td:nth-child(5){width:118px}
+/* every cell clips its own text rather than spilling into the next column */
+.lovgrid.designlov td,.lovgrid.designlov th{
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+
+/* Fabric names run to "PORTO INVISIBLE TM EMB"; the customer picker's 700px
+   leaves the column too narrow to read one. Wider modal, tighter spec columns. */
+.modal.lov.designlovmodal{max-width:820px}
+.lovgrid.designlov th:nth-child(3),.lovgrid.designlov td:nth-child(3){width:184px}
+.lovgrid.designlov th:nth-child(4),.lovgrid.designlov td:nth-child(4){width:98px}
+.lovgrid.designlov th:nth-child(5),.lovgrid.designlov td:nth-child(5){width:110px}
+
+/* The unit picker is a short list - three narrow columns, no need for the
+   customer picker's width. */
+.modal.lov.uomlovmodal{max-width:460px}
+.lovgrid.uomlov table{table-layout:fixed; width:100%}
+.lovgrid.uomlov th:nth-child(1),.lovgrid.uomlov td:nth-child(1){width:90px}
+.lovgrid.uomlov th:nth-child(2),.lovgrid.uomlov td:nth-child(2){width:auto}
+.lovgrid.uomlov th:nth-child(3),.lovgrid.uomlov td:nth-child(3){width:80px}
+
+/* Customers on a price list. Wider than a form, narrower than the pickers -
+   it is a short table with a Remove on each row. */
+.modal.assignmodal{max-width:640px}
+.lovgrid.assigngrid{max-height:min(48vh,360px)}
+.lovgrid.assigngrid table{table-layout:fixed; width:100%}
+.lovgrid.assigngrid th:nth-child(1),.lovgrid.assigngrid td:nth-child(1){width:70px}
+.lovgrid.assigngrid th:nth-child(2),.lovgrid.assigngrid td:nth-child(2){width:auto;
+  overflow:hidden; text-overflow:ellipsis}
+.lovgrid.assigngrid th:nth-child(3),.lovgrid.assigngrid td:nth-child(3){width:46px}
+.lovgrid.assigngrid th:nth-child(4),.lovgrid.assigngrid td:nth-child(4){width:96px}
+.lovgrid.assigngrid th:nth-child(5),.lovgrid.assigngrid td:nth-child(5){width:82px}
+.lovgrid.assigngrid td button{padding:1px 7px; font-size:11px}
+/* A ghost button that happens to be destructive: red LETTERING on the page,
+   not a solid red block. button.danger above paints the background red, and
+   overriding only the colour here put red text on red - an invisible label
+   inside a red rectangle. The background and border have to come back too. */
+button.ghost.danger{
+  background:transparent; border-color:transparent;
+  color:var(--danger); font-weight:500;
+}
+button.ghost.danger:hover:not(:disabled){
+  background:var(--danger-soft); border-color:var(--danger); color:var(--danger);
+}
+
+/* "Assigned to" in the header strip: reads as a value, behaves as a button. */
+.assignbtn{
+  display:inline-flex; align-items:center; gap:7px;
+  background:transparent; border:1px solid transparent; border-radius:3px;
+  padding:1px 6px 1px 0; font-size:12px; font-weight:500; color:var(--ink);
+}
+.assignbtn:hover:not(:disabled){
+  background:var(--accent-soft); border-color:var(--accent); color:var(--accent);
+  padding-left:6px;
+}
+.assignbtn .dim{color:var(--muted); font-style:italic; font-weight:400}
+.assignedit{
+  font-size:9px; font-weight:600; letter-spacing:.07em; text-transform:uppercase;
+  color:var(--muted); opacity:0; transition:opacity .12s;
+}
+.assignbtn:hover .assignedit{opacity:1; color:var(--accent)}
+
+/* The customers a list is quoted to, as shown in the header strip and the
+   header form. Reads as a value; behaves as a button. */
+.assignnames{
+  max-width:280px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.assignfield{
+  display:block; width:100%; text-align:left;
+  background:var(--surface-2); border:1px solid var(--rule-strong); border-radius:3px;
+  padding:5px 8px; font-size:12.5px; color:var(--ink);
+}
+.assignfield:hover:not(:disabled){border-color:var(--accent); background:var(--accent-soft)}
+.assignfield .dim{color:var(--muted); font-style:italic}
+
+/* "checked" against a price list that somebody has been through. */
+.navok{
+  font-size:9px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+  color:var(--accent); background:var(--accent-soft);
+  border-radius:99px; padding:0 5px; line-height:14px;
+}
+/* The confirmation in the header strip reads plainly until it is ticked, then
+   it says so - it is the one state in this app worth showing off. */
+.verifychk.on span{color:var(--accent); font-weight:600}
+.verifychk input{accent-color:var(--accent)}
+
+/* ---- waiting ------------------------------------------------------------
+   Shown only once a wait passes two seconds, so a fast load stays silent. */
+.loading{display:flex; flex-direction:column; gap:12px; align-items:flex-start}
+.slow{max-width:46ch}
+.slow p{margin:8px 0 0; font-size:11.5px; color:var(--muted); line-height:1.55}
+.slow p b{color:var(--ink-2); font-weight:600}
+
+/* An indeterminate bar: it says "still working", not "this much done", because
+   the app genuinely does not know how far through it is. */
+.slowbar{
+  position:relative; height:3px; width:260px; max-width:100%;
+  background:var(--surface-3); border-radius:99px; overflow:hidden;
+}
+.slowbar span{
+  position:absolute; top:0; bottom:0; left:0; width:40%;
+  background:var(--accent); border-radius:99px;
+  animation:slide 1.15s ease-in-out infinite;
+}
+@keyframes slide{
+  0%{left:-40%} 100%{left:100%}
+}
+@media (prefers-reduced-motion:reduce){
+  .slowbar span{animation:none; left:0; width:100%; opacity:.45}
+}
+
+.savingword{
+  font-size:11px; font-weight:600; letter-spacing:.04em;
+  color:var(--accent);
+}
+.navloading{color:var(--muted); font-style:italic}

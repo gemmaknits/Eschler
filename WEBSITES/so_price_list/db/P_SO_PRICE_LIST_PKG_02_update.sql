@@ -8,6 +8,16 @@
    way.
    ============================================================================ */
 
+/* Baked in, not left to the deploy tool: so_price_list_detail carries FILTERED
+   indexes, and any INSERT or UPDATE from a module created with QUOTED_IDENTIFIER
+   OFF fails at run time with error 1934. sqlcmd defaults it OFF, SSMS ON, which
+   is why the same file could deploy working procedures one day and broken ones
+   the next. */
+SET ANSI_NULLS ON;
+GO
+SET QUOTED_IDENTIFIER ON;
+GO
+
 SET NOCOUNT ON;
 GO
 
@@ -67,14 +77,13 @@ IF OBJECT_ID('SO.P_SO_PRICE_LIST_PKG_update_price_list','P') IS NOT NULL
 GO
 -- =============================================
 -- Description: Upsert a price list header. NULL id inserts, otherwise updates.
---              customer_name is snapshotted from customers at save time.
+--              Customers are assigned separately - see part 8.
 -- =============================================
 -- SO.P_SO_PRICE_LIST_PKG_update_price_list null,'ANITA 2027','New season',173,...,'SURES'
 CREATE PROCEDURE [SO].[P_SO_PRICE_LIST_PKG_update_price_list]
     @so_price_list_header_id bigint        = null,
     @list_name               nvarchar(60)  = null,
     @list_desc               nvarchar(400) = null,
-    @customer_id             bigint        = null,
     @customer_excel          nvarchar(120) = null,
     @list_date               date          = null,
     @valid_from              date          = null,
@@ -111,20 +120,14 @@ BEGIN
         RETURN;
     END
 
-    /* snapshot the customer name so the list still reads correctly if the
-       customer record is later renamed */
-    DECLARE @customer_name nvarchar(100) = null;
-    IF @customer_id IS NOT NULL
-        SELECT @customer_name = name FROM dbo.customers WHERE customer_id = @customer_id;
-
     IF @so_price_list_header_id IS NULL
     BEGIN
         INSERT INTO SO.so_price_list_header
-            (list_name, list_desc, customer_id, customer_name, customer_excel,
+            (list_name, list_desc, customer_excel,
              list_date, valid_from, valid_to, terms, quote_ref,
              sonoid, so_line_id, notes, created_by)
         VALUES
-            (@list_name, @list_desc, @customer_id, @customer_name, @customer_excel,
+            (@list_name, @list_desc, @customer_excel,
              @list_date, @valid_from, @valid_to, @terms, @quote_ref,
              @sonoid, @so_line_id, @notes, @logempcd);
 
@@ -135,8 +138,6 @@ BEGIN
         UPDATE SO.so_price_list_header
         SET    list_name         = @list_name,
                list_desc         = @list_desc,
-               customer_id       = @customer_id,
-               customer_name     = @customer_name,
                customer_excel    = @customer_excel,
                list_date         = @list_date,
                valid_from        = @valid_from,
@@ -179,23 +180,25 @@ GO
 CREATE PROCEDURE [SO].[P_SO_PRICE_LIST_PKG_update_price_list_detail]
     @so_price_list_detail_id bigint        = null,
     @so_price_list_header_id bigint        = null,
-    @article                 nvarchar(30)  = null,   -- bind as string, always
-    @design_no               char(20)      = null,
+    @set_no                  int           = null,   -- which grid row to join
+    @design_no               nvarchar(60)  = null,   -- the identifier; bind as string
+    @article                 nvarchar(30)  = null,   -- mirror of design_no, kept for get_price
     @article_variant         nvarchar(20)  = null,
-    @fabric_name             nvarchar(120) = null,
+    @fabric_name             nvarchar(200) = null,
     @composition             nvarchar(200) = null,
-    @full_width_cm           nvarchar(30)  = null,
-    @usable_width_cm         nvarchar(30)  = null,
-    @weight_gsm              nvarchar(30)  = null,
-    @moq                     nvarchar(30)  = null,
+    @full_width_cm           nvarchar(60)  = null,
+    @usable_width_cm         nvarchar(60)  = null,
+    @weight_gsm              nvarchar(60)  = null,
+    @moq                     nvarchar(60)  = null,
     @qty_min                 int           = null,
     @qty_max                 int           = null,
     @clear_qty_max           bit           = 0,      -- explicit: NULL is a real value
-    @qty_unit                char(2)       = 'M',
+    @qty_unit                nvarchar(10)  = N'MTS',
     @color_tier              nvarchar(30)  = null,
     @currency                char(3)       = null,
     @price                   decimal(18,4) = null,
     @line_no                 int           = null,
+    @after_line_no           int           = null,   -- insert after this line; NULL appends
     @active                  char(1)       = null,   -- 'Y' | 'N'
     @notes                   nvarchar(500) = null,
     @logempcd                varchar(15)   = ''
@@ -220,6 +223,14 @@ BEGIN
         RETURN;
     END
 
+    /* design_no is the identifier; article mirrors it.
+
+       Accept either one and fill in the other, so the two can never drift
+       apart. The grid sends design_no; get_price and the VB.NET order-entry
+       client still read article, which is why both columns are written. */
+    IF @design_no IS NULL OR LTRIM(RTRIM(@design_no)) = '' SET @design_no = @article;
+    IF @article   IS NULL OR LTRIM(RTRIM(@article))   = '' SET @article   = @design_no;
+
     IF @active IS NOT NULL AND @active NOT IN ('Y','N')
     BEGIN
         RAISERROR('Active must be Y or N.', 16, 1);
@@ -229,6 +240,18 @@ BEGIN
     IF @currency IS NOT NULL AND @currency NOT IN ('USD','THB')
     BEGIN
         RAISERROR('Currency must be USD or THB.', 16, 1);
+        RETURN;
+    END
+
+    /* The unit has to be one the system knows. dbo.uom is that list, and "M"
+       was never in it - which is how 8,742 lines came to carry a unit that
+       meant nothing. A unit that is not there is refused here, so it cannot be
+       stored and discovered later. */
+    IF @qty_unit IS NOT NULL AND LTRIM(RTRIM(@qty_unit)) <> ''
+       AND SO.F_SO_PRICE_LIST_uom_ok(@qty_unit) = 0
+    BEGIN
+        RAISERROR('Unit "%s" is not a unit of measure in the system. Pick one from the list.',
+                  16, 1, @qty_unit);
         RETURN;
     END
 
@@ -253,23 +276,99 @@ BEGIN
     IF @so_price_list_detail_id IS NULL
     BEGIN
         IF @qty_min    IS NULL SET @qty_min = 0;
-        IF @qty_unit   IS NULL SET @qty_unit = 'M';
+        IF @qty_unit IS NULL OR LTRIM(RTRIM(@qty_unit)) = '' SET @qty_unit = N'MTS';
         IF @color_tier IS NULL OR LTRIM(RTRIM(@color_tier)) = ''
             SET @color_tier = N'Unspecified';
 
-        /* append to the end of the list unless a position was given */
-        IF @line_no IS NULL
-            SELECT @line_no = ISNULL(MAX(line_no), 0) + 1
+        /* Which grid row does this line join?
+
+           A set is one article, variant and quantity band - it spans EVERY
+           colour tier, because tiers are columns within the row. So the lookup
+           must NOT match on colour tier: doing so meant a new tier started its
+           own set, and typing into an empty tier cell split the row in two.
+
+           The caller should pass @set_no, since only it knows which row was
+           clicked when several share an article and band. Without it, join the
+           first set with that article and band, or start a new one. */
+        IF @set_no IS NULL
+            SELECT TOP 1 @set_no = set_no
+            FROM   SO.so_price_list_detail
+            WHERE  so_price_list_header_id = @so_price_list_header_id
+              AND  design_no = @design_no
+              AND  ISNULL(article_variant,'') = ISNULL(@article_variant,'')
+              AND  qty_min = @qty_min
+              AND  ISNULL(qty_max,-1) = ISNULL(@qty_max,-1)
+              AND  qty_unit = @qty_unit
+              AND  delete_mark <> 'Y'
+            ORDER BY set_no;
+
+        IF @set_no IS NULL
+            SELECT @set_no = ISNULL(MAX(set_no), 0) + 1
             FROM   SO.so_price_list_detail
             WHERE  so_price_list_header_id = @so_price_list_header_id;
 
+        /* The cell may already hold a line.
+
+           Typing one currency creates its counterpart alongside it at 0, so
+           the other half of the pair usually EXISTS before it is first typed
+           into. Filling it in is an update of that line - a set holds at most
+           one row per tier and currency, and inserting here would put a second
+           Dark USD in the same grid row.
+
+           The grid passes the detail id and never reaches this, but a caller
+           that only knows which cell was clicked would otherwise duplicate. */
+        SELECT TOP 1 @so_price_list_detail_id = so_price_list_detail_id
+        FROM   SO.so_price_list_detail
+        WHERE  so_price_list_header_id = @so_price_list_header_id
+          AND  set_no     = @set_no
+          AND  color_tier = @color_tier
+          AND  currency   = @currency
+          AND  delete_mark <> 'Y'
+        ORDER BY so_price_list_detail_id;
+    END
+
+    IF @so_price_list_detail_id IS NULL
+    BEGIN
+        /* Where in the set does the new line go?
+
+           line_no is the position the user put the line at, and it has to stay
+           there. A tier added between lines 2 and 3 belongs between 2 and 3 -
+           it is NOT re-sorted into tier order, because the order within a set
+           is the user's, not the tier list's.
+
+           So make room and drop the pair into the gap. One line_no per tier
+           row, NOT per currency: the USD and THB halves are the same worksheet
+           line, so they share a number and the shift is 1, not 2.
+           @after_line_no NULL means append to the end of the set. */
+        IF @line_no IS NULL
+        BEGIN
+            IF @after_line_no IS NULL
+                SELECT @line_no = ISNULL(MAX(line_no), 0) + 1
+                FROM   SO.so_price_list_detail
+                WHERE  so_price_list_header_id = @so_price_list_header_id
+                  AND  set_no = @set_no;
+            ELSE
+            BEGIN
+                SET @line_no = @after_line_no + 1;
+
+                UPDATE SO.so_price_list_detail
+                SET    line_no           = line_no + 1,
+                       last_updated_date = SYSDATETIME(),
+                       updated_by        = @logempcd
+                WHERE  so_price_list_header_id = @so_price_list_header_id
+                  AND  set_no  = @set_no
+                  AND  line_no >= @line_no
+                  AND  delete_mark <> 'Y';
+            END
+        END
+
         INSERT INTO SO.so_price_list_detail
-            (so_price_list_header_id, line_no, article, design_no, article_variant,
+            (so_price_list_header_id, set_no, line_no, article, design_no, article_variant,
              fabric_name, composition, full_width_cm, usable_width_cm, weight_gsm,
              moq, qty_min, qty_max, qty_unit, color_tier, currency, price,
              active, notes, created_by)
         VALUES
-            (@so_price_list_header_id, @line_no, @article, @design_no, @article_variant,
+            (@so_price_list_header_id, @set_no, @line_no, @article, @design_no, @article_variant,
              @fabric_name, @composition, @full_width_cm, @usable_width_cm, @weight_gsm,
              @moq, @qty_min, @qty_max, @qty_unit, @color_tier, @currency, @price,
              ISNULL(@active,'Y'), @notes, @logempcd);
@@ -285,6 +384,12 @@ BEGIN
            cells exist from the start; entering the real figure then UPDATES
            that row rather than inserting a second one.
 
+           The counterpart carries the SAME line_no: one worksheet line holds
+           both currencies, so line_no numbers the tier row, not the currency.
+           (set_no, line_no) therefore names one tier row of one grid row, and
+           reading a pair back is a single equality test rather than arithmetic
+           on adjacent numbers.
+
            Skipped when the counterpart already exists - typing USD after THB
            must not create a duplicate.
            ------------------------------------------------------------------ */
@@ -295,33 +400,30 @@ BEGIN
            AND NOT EXISTS (
                SELECT 1 FROM SO.so_price_list_detail
                WHERE  so_price_list_header_id = @so_price_list_header_id
-                 AND  article  = @article
-                 AND  ISNULL(article_variant,'') = ISNULL(@article_variant,'')
-                 AND  qty_min  = @qty_min
-                 AND  ISNULL(qty_max,-1) = ISNULL(@qty_max,-1)
-                 AND  qty_unit = @qty_unit
+                 AND  set_no = @set_no
                  AND  color_tier = @color_tier
                  AND  currency = @other
                  AND  delete_mark <> 'Y')
         BEGIN
             INSERT INTO SO.so_price_list_detail
-                (so_price_list_header_id, line_no, article, design_no, article_variant,
+                (so_price_list_header_id, set_no, line_no, article, design_no, article_variant,
                  fabric_name, composition, full_width_cm, usable_width_cm, weight_gsm,
                  moq, qty_min, qty_max, qty_unit, color_tier, currency, price,
                  active, notes, created_by)
             VALUES
-                (@so_price_list_header_id, @line_no + 1, @article, @design_no, @article_variant,
+                (@so_price_list_header_id, @set_no, @line_no, @article, @design_no, @article_variant,
                  @fabric_name, @composition, @full_width_cm, @usable_width_cm, @weight_gsm,
                  @moq, @qty_min, @qty_max, @qty_unit, @color_tier, @other, 0,
                  ISNULL(@active,'Y'), @notes, @logempcd);
         END
+
     END
     ELSE
     BEGIN
         /* only overwrite what was supplied - the grid edits one cell at a time */
         UPDATE SO.so_price_list_detail
-        SET    article           = ISNULL(@article,         article),
-               design_no         = ISNULL(@design_no,       design_no),
+        SET    design_no         = ISNULL(@design_no,       design_no),
+               article           = ISNULL(@article,         article),
                article_variant   = ISNULL(@article_variant, article_variant),
                fabric_name       = ISNULL(@fabric_name,     fabric_name),
                composition       = ISNULL(@composition,     composition),
@@ -363,7 +465,7 @@ BEGIN
     JOIN   SO.so_price_list_detail me
              ON me.so_price_list_detail_id = @so_price_list_detail_id
     WHERE  d.so_price_list_header_id = me.so_price_list_header_id
-      AND  d.article                 = me.article
+      AND  d.design_no               = me.design_no
       AND  ISNULL(d.article_variant,'') = ISNULL(me.article_variant,'')
       AND  d.qty_min                 = me.qty_min
       AND  ISNULL(d.qty_max,-1)      = ISNULL(me.qty_max,-1)

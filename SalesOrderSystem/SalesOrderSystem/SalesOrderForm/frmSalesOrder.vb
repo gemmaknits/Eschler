@@ -4,10 +4,11 @@ Imports System.Windows.Forms
 Imports SalesOrderSystem.Controls
 Imports System.Text.RegularExpressions
 Imports System.Linq
+Imports System.Globalization
 
 Public Class frmSalesOrder
     Dim oConfig As New clsConfig
-    Dim clsConn As New ClassConnection
+    Dim clsConn As New classConnection
     Dim clsUser As New classUserInfo
     Dim objSecurity As New clsConfig
     Private clsMaster As New classMaster
@@ -203,7 +204,7 @@ Public Class frmSalesOrder
         Me.cboPaymode.DisplayMember = "paymodeDesc"
         Me.cboPaymode.ValueMember = "paymodecd"
 
-        Me.ComboSaleOrderType1.populateData((New ClassConnection).getSQLConnection)
+        Me.ComboSaleOrderType1.populateData((New classConnection).getSQLConnection)
         ' Me.cboBank1.populateData((New classConnection).getSQLConnection)
 
         Me.cboMtl_warehouse.DataSource = objDB.Combomtlwarehouse(clsUser.UserID)
@@ -963,7 +964,7 @@ Public Class frmSalesOrder
         Me.tabCustomer.Show()
         applyGridLayoutSettingsToGrid(grdSalesOrder) 'John 27/10/2025
 
-        Dim dbname = (New ClassConnection).database
+        Dim dbname = (New classConnection).database
         If dbname = "ColomboDB" OrElse dbname = "ColomboDBTest" Then
             btnCheckStock.Enabled = False
             btnCustomerItems.Enabled = False
@@ -1256,7 +1257,7 @@ Public Class frmSalesOrder
         logonInfo.ConnectionInfo.UserID = clsConn.Userid
         logonInfo.ConnectionInfo.Password = clsConn.Password
 
-        If UCase((New ClassConnection).database) = "KARISMA" Then
+        If UCase((New classConnection).database) = "KARISMA" Then
             rpt.Subreports(0).Database.Tables(0).ApplyLogOnInfo(logonInfo)
             rpt.DataSourceConnections.Item(0).SetConnection(clsConn.servername, clsConn.database, False)
             rpt.DataSourceConnections.Item(0).SetLogon(clsConn.Userid, clsConn.Password)
@@ -1276,7 +1277,7 @@ Public Class frmSalesOrder
         rpt.SetParameterValue("@use_show_price", False)
         rpt.SetParameterValue("@print_yield", False)
 
-        If UCase((New ClassConnection).database) = "KARISMA" Then
+        If UCase((New classConnection).database) = "KARISMA" Then
             rpt.DataDefinition.ParameterFields("@sono", rpt.Subreports(0).Name).ApplyCurrentValues(rpt.ParameterFields("@sono").CurrentValues)
             rpt.DataDefinition.ParameterFields("@datefr", rpt.Subreports(0).Name).ApplyCurrentValues(rpt.ParameterFields("@datefr").CurrentValues)
             rpt.DataDefinition.ParameterFields("@dateto", rpt.Subreports(0).Name).ApplyCurrentValues(rpt.ParameterFields("@dateto").CurrentValues)
@@ -1563,8 +1564,8 @@ Public Class frmSalesOrder
     End Sub
 
     Private Sub grdSalesOrder_DataError(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewDataErrorEventArgs) Handles grdSalesOrder.DataError
-        MessageBox.Show("Data error, please check your value !!", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
-        e.Cancel = True
+        'MessageBox.Show("Data error, please check your value !!", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+        'e.Cancel = True
     End Sub
 
     Private Sub chkSpecial2_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkSpecial2.CheckedChanged
@@ -2346,6 +2347,8 @@ Public Class frmSalesOrder
                 grdSalesOrder.Rows(e.RowIndex).Cells("colQtyWithLoss").Value = Val(oConfig.IsNull(qty, 0)) * (1 + Val(oConfig.IsNull(lossPerc, 0)) / 100)
             End If
         End If
+
+        ' grdSalesOrder.Rows(e.RowIndex).ErrorText = ""
     End Sub
 
     Private Sub btnViewSTTracking_Click(sender As Object, e As EventArgs) Handles btnViewSTTracking.Click 'John 07/07/2026
@@ -2399,5 +2402,152 @@ Public Class frmSalesOrder
                 Next
             End If
         End With
+    End Sub
+    Private Function ValidateDate(value As String) As Boolean
+
+        If value = "" Then
+            Return True
+        End If
+
+        Dim dt As DateTime
+
+        If Not DateTime.TryParseExact(
+            value,
+            "dd/MM/yyyy",
+            Globalization.CultureInfo.InvariantCulture,
+            Globalization.DateTimeStyles.None,
+            dt) Then
+
+            Return False
+        End If
+
+        If dt.Year < 1900 OrElse dt.Year > 2099 Then
+            Return False
+        End If
+
+        Return True
+
+    End Function
+    Private Function ValidateDecimal(value As String) As Boolean
+
+        If value = "" Then
+            Return True
+        End If
+
+        Dim n As Decimal
+
+        Return Decimal.TryParse(value, n)
+
+    End Function
+    Private Function ValidateInteger(value As String) As Boolean
+
+        If value = "" Then
+            Return True
+        End If
+
+        Dim n As Integer
+
+        Return Integer.TryParse(value, n)
+
+    End Function
+    Private Sub grdSalesOrder_CellValidating(sender As Object, e As DataGridViewCellValidatingEventArgs) Handles grdSalesOrder.CellValidating
+        Dim colName As String = grdSalesOrder.Columns(e.ColumnIndex).Name
+        Dim value As String = e.FormattedValue.ToString().Trim()
+
+        Select Case colName
+
+        '========================
+        ' Date
+        '========================
+            Case "colCustDelidt", "shipdt", "confirmed_shipdt"
+
+                If Not ValidateDate(value) Then
+                    MessageBox.Show(
+                    grdSalesOrder.Columns(e.ColumnIndex).HeaderText &
+                    " is invalid." & vbCrLf &
+                    "Please enter date as dd/MM/yyyy." & vbCrLf &
+                    "Year must be between 1900 and 2099.",
+                    "Invalid Date",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning)
+
+                    e.Cancel = True
+                End If
+
+
+        '========================
+        ' Decimal / Quantity
+        '========================
+            Case "qty", "price", "exrt"
+
+                If Not ValidateDecimal(value) Then
+                    MessageBox.Show(
+                    grdSalesOrder.Columns(e.ColumnIndex).HeaderText &
+                    " must be a number.",
+                    "Invalid Number",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning)
+
+                    e.Cancel = True
+                End If
+
+
+        '========================
+        ' Integer
+        '========================
+            Case "credit_days"
+
+                If Not ValidateInteger(value) Then
+                    MessageBox.Show(
+                    grdSalesOrder.Columns(e.ColumnIndex).HeaderText &
+                    " must be an integer.",
+                    "Invalid Number",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning)
+
+                    e.Cancel = True
+                End If
+
+
+                '========================
+                ' Required field
+                '========================
+                'Case "design_no", "col", "uom"
+
+                '    If value = "" Then
+                '        MessageBox.Show(
+                '        grdSalesOrder.Columns(e.ColumnIndex).HeaderText &
+                '        " is required.",
+                '        "Required Field",
+                '        MessageBoxButtons.OK,
+                '        MessageBoxIcon.Warning)
+
+                '        e.Cancel = True
+                '    End If
+
+        End Select
+    End Sub
+
+    Private Sub grdSalesOrder_CellParsing(sender As Object, e As DataGridViewCellParsingEventArgs) Handles grdSalesOrder.CellParsing
+        Dim colName As String = grdSalesOrder.Columns(e.ColumnIndex).Name
+
+        Select Case colName
+
+            Case "colCustDelidt", "shipdt", "confirmed_shipdt"
+
+                Dim value As String = ""
+
+                If e.Value IsNot Nothing Then
+                    value = e.Value.ToString.Trim
+                End If
+
+                'อนุญาตให้วันที่ว่าง
+                If value = "" Then
+                    e.Value = DBNull.Value
+                    e.ParsingApplied = True
+                    Exit Sub
+                End If
+
+        End Select
     End Sub
 End Class

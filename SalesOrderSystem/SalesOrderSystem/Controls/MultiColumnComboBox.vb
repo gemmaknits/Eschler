@@ -215,6 +215,7 @@ Namespace Controls
         Private _suppressTextChanged As Boolean = False
         Private _popupBaseFilter As String = ""
         Private _hookedOwnerForm As Form
+        Private _clickAwayFilter As ClickAwayMessageFilter
 
         Private ReadOnly _sharedModel As GridModelAccessor
         Private ReadOnly _listBoxAcc As ListBoxAccessor
@@ -513,6 +514,20 @@ Namespace Controls
             End Sub))
         End Sub
 
+        ''' <summary>Called for every application-wide mouse-down while a type-filter
+        ''' popup is open. Closes it if the click landed outside both the combo box
+        ''' and the popup -- covers clicks on non-focusable controls (Label, Panel,
+        ''' blank tab area) that would never raise a Leave event. -- John 18/09/2026</summary>
+        Private Sub OnAnyMouseDown()
+            If _popup Is Nothing OrElse _popup.IsDisposed Then Return
+            Dim pt As Point = Control.MousePosition
+            Dim overCombo As Boolean = Me.IsHandleCreated AndAlso Me.RectangleToScreen(Me.ClientRectangle).Contains(pt)
+            Dim overPopup As Boolean = _popup.Bounds.Contains(pt)
+            If Not overCombo AndAlso Not overPopup Then
+                ClosePopup()
+            End If
+        End Sub
+
         Private Sub RestoreDisplayFromSelection()
             Dim text As String = ""
             If _selectedIndex >= 0 AndAlso _dataTable IsNot Nothing AndAlso _selectedIndex < _dataTable.Rows.Count AndAlso Not String.IsNullOrEmpty(_displayMember) Then
@@ -652,11 +667,19 @@ Namespace Controls
                 ' below activates the owner form, which -- if the popup picked up any
                 ' transient activation when shown, despite the no-activate flags --
                 ' would fire Deactivate and immediately close the popup we just opened.
-                ' Closing on click-away is instead handled by OnEditControlLeave
-                ' (Leave on the textbox/button) plus the owning form's Deactivate as a
-                ' fallback for e.g. Alt+Tab. -- John 18/09/2026
+                ' Closing on click-away is instead handled by:
+                '  - OnEditControlLeave (Leave on the textbox/button), and
+                '  - the owning form's Deactivate, as a fallback for e.g. Alt+Tab, and
+                '  - a global mouse-down watcher below, since a click on a non-focusable
+                '    control (a Label, a blank tab area, ...) never fires Leave at all.
+                ' -- John 18/09/2026
                 _hookedOwnerForm = Me.FindForm()
                 If _hookedOwnerForm IsNot Nothing Then AddHandler _hookedOwnerForm.Deactivate, AddressOf OnPopupDeactivate
+
+                If _clickAwayFilter Is Nothing Then
+                    _clickAwayFilter = New ClickAwayMessageFilter(AddressOf OnAnyMouseDown)
+                    Application.AddMessageFilter(_clickAwayFilter)
+                End If
 
                 ' Showing the popup Form assigns it an ActiveControl (the grid, being
                 ' its only child) and calls SetFocus on it internally -- this happens
@@ -716,10 +739,10 @@ Namespace Controls
             _popup.Size = New Size(popupW, popupH)
         End Sub
 
-        ''' <summary>Refilters the popup grid to rows whose DisplayMember contains
-        ''' the typed text, layered on top of whatever base BindingSource filter
-        ''' was active when the popup opened (e.g. Ship-To filtered by Bill-To).
-        ''' -- John 18/09/2026</summary>
+        ''' <summary>Refilters the popup grid to rows whose DisplayMember starts with
+        ''' the typed text (not "contains anywhere"), layered on top of whatever base
+        ''' BindingSource filter was active when the popup opened (e.g. Ship-To
+        ''' filtered by Bill-To). -- John 18/09/2026</summary>
         Private Sub ApplyTypeFilter(typedText As String)
             If _dgv Is Nothing OrElse _dgv.IsDisposed Then Return
             Dim dv As DataView = TryCast(_dgv.DataSource, DataView)
@@ -728,7 +751,7 @@ Namespace Controls
             Dim filterExpr As String = _popupBaseFilter
             Dim trimmedText As String = If(typedText, "").Trim()
             If trimmedText <> "" AndAlso Not String.IsNullOrEmpty(_displayMember) AndAlso dv.Table.Columns.Contains(_displayMember) Then
-                Dim likeExpr As String = "[" & _displayMember & "] LIKE '%" & EscapeLikeValue(trimmedText) & "%'"
+                Dim likeExpr As String = "[" & _displayMember & "] LIKE '" & EscapeLikeValue(trimmedText) & "%'"
                 filterExpr = If(String.IsNullOrEmpty(filterExpr), likeExpr, "(" & filterExpr & ") AND (" & likeExpr & ")")
             End If
 
@@ -754,6 +777,10 @@ Namespace Controls
             If _hookedOwnerForm IsNot Nothing Then
                 RemoveHandler _hookedOwnerForm.Deactivate, AddressOf OnPopupDeactivate
                 _hookedOwnerForm = Nothing
+            End If
+            If _clickAwayFilter IsNot Nothing Then
+                Application.RemoveMessageFilter(_clickAwayFilter)
+                _clickAwayFilter = Nothing
             End If
             _popup.Close()
             _popup.Dispose()
@@ -864,6 +891,37 @@ Namespace Controls
                     Return cp
                 End Get
             End Property
+        End Class
+
+        ''' <summary>
+        ''' Application-wide mouse-down watcher used while a type-filter popup is
+        ''' open, so clicking anywhere that isn't the combo box or its popup closes
+        ''' the list -- including clicks on non-focusable controls (Label, Panel,
+        ''' blank tab area) that never raise a Leave event on the textbox.
+        ''' -- John 18/09/2026
+        ''' </summary>
+        Private Class ClickAwayMessageFilter
+            Implements IMessageFilter
+
+            Private Const WM_LBUTTONDOWN As Integer = &H201
+            Private Const WM_RBUTTONDOWN As Integer = &H204
+            Private Const WM_MBUTTONDOWN As Integer = &H207
+            Private Const WM_NCLBUTTONDOWN As Integer = &HA1
+            Private Const WM_NCRBUTTONDOWN As Integer = &HA4
+
+            Private ReadOnly _onOutsideClick As Action
+
+            Public Sub New(onOutsideClick As Action)
+                _onOutsideClick = onOutsideClick
+            End Sub
+
+            Public Function PreFilterMessage(ByRef m As Message) As Boolean Implements IMessageFilter.PreFilterMessage
+                Select Case m.Msg
+                    Case WM_LBUTTONDOWN, WM_RBUTTONDOWN, WM_MBUTTONDOWN, WM_NCLBUTTONDOWN, WM_NCRBUTTONDOWN
+                        _onOutsideClick()
+                End Select
+                Return False ' never swallow the message -- only observe it
+            End Function
         End Class
 
     End Class

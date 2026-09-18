@@ -374,7 +374,7 @@ BEGIN
         VALUES
             (@so_price_list_header_id, @set_no, @line_no, @article, @design_no, @article_variant,
              @fabric_name, @composition, @full_width_cm, @usable_width_cm, @weight_gsm,
-             @moq, @price_line_date, @qty_min, @qty_max, @qty_unit, @color_tier, @currency, @price,
+             @moq, ISNULL(@price_line_date, CAST(SYSDATETIME() AS date)), @qty_min, @qty_max, @qty_unit, @color_tier, @currency, @price,
              ISNULL(@active,'Y'), @notes, @logempcd);
 
         SET @so_price_list_detail_id = SCOPE_IDENTITY();
@@ -417,7 +417,7 @@ BEGIN
             VALUES
                 (@so_price_list_header_id, @set_no, @line_no, @article, @design_no, @article_variant,
                  @fabric_name, @composition, @full_width_cm, @usable_width_cm, @weight_gsm,
-                 @moq, @price_line_date, @qty_min, @qty_max, @qty_unit, @color_tier, @other, 0,
+                 @moq, ISNULL(@price_line_date, CAST(SYSDATETIME() AS date)), @qty_min, @qty_max, @qty_unit, @color_tier, @other, 0,
                  ISNULL(@active,'Y'), @notes, @logempcd);
         END
 

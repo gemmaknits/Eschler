@@ -13,6 +13,14 @@ import CustomerAssign from './CustomerAssign.jsx';
 
 /* Everything on a grid row that a reviewer can change, and therefore
    everything a one-row undo has to remember. */
+/* Today in the grid's own format. Local, not UTC: toISOString() would hand
+   Bangkok tomorrow's date for most of the working evening. */
+const today = () => {
+  const d = new Date();
+  const p = n => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
+};
+
 const ROW_FIELDS = ['design_no', 'article_variant', 'qty_min', 'qty_max',
                     'qty_unit', 'fabric_name', 'composition', 'full_width_cm',
                     'usable_width_cm', 'weight_gsm', 'moq', 'price_line_date',
@@ -377,7 +385,7 @@ export default function App() {
       qty_unit: target.qty_unit || 'MTS',
       fabric_name: '', composition: '',
       full_width_cm: '', usable_width_cm: '', weight_gsm: '', moq: '',
-      price_line_date: '',
+      price_line_date: today(),
       source_row: null,
       cells: {}
     }]);
@@ -451,6 +459,9 @@ export default function App() {
       usable_width_cm: last?.usable_width_cm || '',
       weight_gsm: last?.weight_gsm || '',
       moq: last?.moq || '',
+      /* Shown straight away rather than waiting for the save to come back:
+         the procedures default it to today as well, so the two agree. */
+      price_line_date: today(),
       source_row: null,
       cells: {}
     }]);
@@ -691,7 +702,8 @@ export default function App() {
           color_tier: tier, currency, price: value,
           fabric_name: row.fabric_name, composition: row.composition,
           full_width_cm: row.full_width_cm, usable_width_cm: row.usable_width_cm,
-          weight_gsm: row.weight_gsm, moq: row.moq
+          weight_gsm: row.weight_gsm, moq: row.moq,
+          price_line_date: row.price_line_date || null
         });
         say(`Added ${row.design_no} · ${tier} · ${currency}`);
         reload(true); refreshLists();
@@ -710,7 +722,8 @@ export default function App() {
           color_tier: tier, currency, price: value,
           fabric_name: row.fabric_name, composition: row.composition,
           full_width_cm: row.full_width_cm, usable_width_cm: row.usable_width_cm,
-          weight_gsm: row.weight_gsm, moq: row.moq
+          weight_gsm: row.weight_gsm, moq: row.moq,
+          price_line_date: row.price_line_date || null
         };
 
         /* A draft opened with "Insert here" knows where it belongs, and goes

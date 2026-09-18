@@ -142,7 +142,7 @@ BEGIN
              active, notes, created_by)
         SELECT @so_price_list_header_id, @new_set, v.line_no, @article, @design_no, @article_variant,
                @fabric_name, @composition, @full_width_cm, @usable_width_cm, @weight_gsm,
-               @moq, @price_line_date, @qty_min, @qty_max, @qty_unit, @color_tier, v.ccy, v.price,
+               @moq, ISNULL(@price_line_date, CAST(SYSDATETIME() AS date)), @qty_min, @qty_max, @qty_unit, @color_tier, v.ccy, v.price,
                'Y', @notes, @logempcd
         FROM  (VALUES (1, @currency, @price),
                       (1, @other,    CAST(0 AS decimal(18,4)))) AS v(line_no, ccy, price);
@@ -314,7 +314,7 @@ BEGIN
              active, notes, created_by)
         SELECT d.so_price_list_header_id, s.new_set, d.line_no, d.article, d.design_no,
                d.article_variant, d.fabric_name, d.composition, d.full_width_cm,
-               d.usable_width_cm, d.weight_gsm, d.moq, d.price_line_date,
+               d.usable_width_cm, d.weight_gsm, d.moq, CAST(SYSDATETIME() AS date),
                d.qty_min, d.qty_max, d.qty_unit,
                d.color_tier, d.currency, d.price, d.active, d.notes, @logempcd
         FROM   SO.so_price_list_detail d

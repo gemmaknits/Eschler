@@ -239,7 +239,7 @@ Public Class frmInvoiceExport
 
         txtGrossWeight.Text = dt.Rows(0)("gross_weight").ToString.Trim
         txtNetWeight.Text = dt.Rows(0)("net_weight").ToString.Trim
-        txtCapacity.Text = dt.Rows(0)("capacity").ToString.Trim
+        txtCapacity.Text = FormatNumber(dt.Rows(0)("capacity"), 3, TriState.False, TriState.False, TriState.True)
         txtEnWrapMaterial.Text = dt.Rows(0)("enwrap_material").ToString.Trim
         txtEnWrapCost.Text = dt.Rows(0)("enwrap_cost").ToString.Trim
 
@@ -931,7 +931,7 @@ Public Class frmInvoiceExport
         invh.h17_enwrap_cost = FormatNumber(txtEnWrapCost.Text.Trim, 4, TriState.False, TriState.False, TriState.False)
         invh.h18_gross_weight = FormatNumber(txtGrossWeight.Text.Trim, 4, TriState.False, TriState.False, TriState.False)
         invh.h19_net_weight = FormatNumber(txtNetWeight.Text.Trim, 4, TriState.False, TriState.False, TriState.False)
-        invh.h20_capacity = FormatNumber(txtCapacity.Text.Trim, 4, TriState.False, TriState.False, TriState.False)
+        invh.h20_capacity = FormatNumber(txtCapacity.Text.Trim, 3, TriState.False, TriState.False, TriState.False)
         invh.h21_freight_type = txtFreightType.Text.Trim
         invh.h22_fob_loc = txtFOBLoc.Text.Trim
         invh.h23_receiver_code = clsConfig.IsNull(cboReceiver.SelectedValue, "")
@@ -1396,6 +1396,10 @@ Public Class frmInvoiceExport
 
     Private Sub txtVat_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtVat.LostFocus
         Call SumGrid()
+    End Sub
+
+    Private Sub txtCapacity_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtCapacity.LostFocus
+        If txtCapacity.Text.Trim <> "" Then txtCapacity.Text = FormatNumber(txtCapacity.Text.Trim, 3, TriState.False, TriState.False, TriState.True)
     End Sub
 
     Private Sub txtNetAmt_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtNetAmt.LostFocus

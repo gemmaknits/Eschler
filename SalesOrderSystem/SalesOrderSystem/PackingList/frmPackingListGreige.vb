@@ -1479,12 +1479,12 @@ Public Class frmPackingListGreige
                 Dim dblCBMRoll As Double = 0 'Sitthana 20220729
 
                 For i As Integer = 0 To .Rows.Count - 1
-                    dblCBMCarton += Format(oConfig.IsNull(.Rows(i).Cells("grdData_CBMForCarton").Value, 0), "#00.00")  'Sitthana 20220729
-                    dblCBMRoll += Format(oConfig.IsNull(.Rows(i).Cells("grdData_CBMForRoll").Value, 0), "#00.00") 'Sitthana 20220729
+                    dblCBMCarton += oConfig.IsNull(.Rows(i).Cells("grdData_CBMForCarton").Value, 0)  'Sitthana 20220729
+                    dblCBMRoll += oConfig.IsNull(.Rows(i).Cells("grdData_CBMForRoll").Value, 0) 'Sitthana 20220729
                 Next
 
-                txtTotalCBMCarton.Text = Format(dblCBMCarton, "##0.00") 'Sitthana 20220729
-                txtTotalCBMRoll.Text = Format(dblCBMRoll, "##0.00") 'Sitthana 20220729
+                txtTotalCBMCarton.Text = Format(dblCBMCarton, "##0.000") 'Sitthana 20220729
+                txtTotalCBMRoll.Text = Format(dblCBMRoll, "##0.000") 'Sitthana 20220729
             End If
         End With
     End Sub

@@ -859,7 +859,7 @@ Partial Class frmPackingListGreigeRelateRequest
         'grdData_CBMForCarton
         '
         Me.grdData_CBMForCarton.DataPropertyName = "CBMForCarton"
-        DataGridViewCellStyle7.Format = "N2"
+        DataGridViewCellStyle7.Format = "N3"
         DataGridViewCellStyle7.NullValue = Nothing
         Me.grdData_CBMForCarton.DefaultCellStyle = DataGridViewCellStyle7
         Me.grdData_CBMForCarton.HeaderText = "CBM Carton"
@@ -869,7 +869,7 @@ Partial Class frmPackingListGreigeRelateRequest
         'grdData_CBMForRoll
         '
         Me.grdData_CBMForRoll.DataPropertyName = "CBMForRoll"
-        DataGridViewCellStyle8.Format = "N2"
+        DataGridViewCellStyle8.Format = "N3"
         DataGridViewCellStyle8.NullValue = Nothing
         Me.grdData_CBMForRoll.DefaultCellStyle = DataGridViewCellStyle8
         Me.grdData_CBMForRoll.HeaderText = "CBM Roll"

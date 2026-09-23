@@ -684,16 +684,16 @@ Public Class frmCreditNoteLocal
         For Each dr As DataRow In dt.Rows
             If dr.RowState <> DataRowState.Deleted Then
                 If (New clsConfig).IsNull(dr("Currency"), "").ToString = "" Then
-                    MessageBox.Show("�ѧ��������͡ʡ���Թ", "System Meassge", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+                    MessageBox.Show("ยังไม่ได้เลือกสกุลเงิน", "System Meassge", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
                     Return False
                 End If
                 If (New clsConfig).IsNull(dr("exchange_rate"), 0) = 0 Then
-                    MessageBox.Show("Exchange Rate ��ͧ�����ҡѺ 0", "System Meassge", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+                    MessageBox.Show("Exchange Rate ต้องไม่เท่ากับ 0", "System Meassge", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
                     Return False
                 End If
                 If (New clsConfig).IsNull(dr("currency"), "").ToString.Trim <> "THB" Then
                     If (New clsConfig).IsNull(dr("exchange_rate"), 0) = 1 Then
-                        MessageBox.Show("���ʡ���Թ��ʡ���Թ��ҧ����� �÷�Թ��ͧ�������ҡѺ 1", "System Meassge", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+                        MessageBox.Show("ถ้าสกุลเงินไม่ใช่เงินบาท เรทเงินต้องไม่เท่ากับ 1", "System Meassge", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
                         Return False
                     End If
                 End If
@@ -949,7 +949,7 @@ Public Class frmCreditNoteLocal
         If grdDetails.EditMode Then grdDetails.EndEdit()
         Dim i As Integer = 0
         If grdDetails.Rows.Count = 0 Then Exit Sub
-        Dim exrt As Double = InputBox("Input the exchange rate." & vbCrLf & "����ѵ���š����¹�Թ���", "System Message", "0.00")
+        Dim exrt As Double = InputBox("Input the exchange rate." & vbCrLf & "กรุณาใส่อัตราแลกเปลี่ยนเงินตรา", "System Message", "0.00")
         Dim dt As DataTable = grdDetails.DataSource
         For Each dr As DataRow In dt.Rows
             If dr.RowState <> DataRowState.Deleted Then

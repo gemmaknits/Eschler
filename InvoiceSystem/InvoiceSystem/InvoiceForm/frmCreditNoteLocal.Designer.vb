@@ -206,7 +206,7 @@ Partial Class frmCreditNoteLocal
         Me.ToolStripLabel2.ForeColor = System.Drawing.Color.Red
         Me.ToolStripLabel2.Name = "ToolStripLabel2"
         Me.ToolStripLabel2.Size = New System.Drawing.Size(78, 22)
-        Me.ToolStripLabel2.Text = "���  .5 �Ѵ���"
+        Me.ToolStripLabel2.Text = "เศษ .5 ปัดขึ้น"
         '
         'dtpDocDate
         '

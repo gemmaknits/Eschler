@@ -22,6 +22,7 @@ Partial Class frmInvoiceExport
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmInvoiceExport))
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
         Me.cboInvNo = New System.Windows.Forms.ToolStripComboBox()
@@ -2529,6 +2530,9 @@ Partial Class frmInvoiceExport
         'cbm
         '
         Me.cbm.DataPropertyName = "cbm"
+        DataGridViewCellStyle3.Format = "N3"
+        DataGridViewCellStyle3.NullValue = Nothing
+        Me.cbm.DefaultCellStyle = DataGridViewCellStyle3
         Me.cbm.HeaderText = "CBM"
         Me.cbm.Name = "cbm"
         Me.cbm.Width = 40

@@ -771,7 +771,7 @@ Partial Class frmInvoiceLocal
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(257, 13)
         Me.Label16.TabIndex = 13
-        Me.Label16.Text = "������ʴ� Pack + Cartno ���� Invoice �����  "
+        Me.Label16.Text = "ไม่แสดง Pack + Cartno ที่ทำ Invoice แล้ว  "
         '
         'Label1
         '
@@ -783,7 +783,7 @@ Partial Class frmInvoiceLocal
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(237, 13)
         Me.Label1.TabIndex = 51
-        Me.Label1.Text = "**��� Qty = 0 �����˹��� � SO Item ***"
+        Me.Label1.Text = "**ถ้า Qty = 0 ให้ไปกำหนดที่ SO Item ***"
         '
         'optStockY
         '
@@ -1340,7 +1340,7 @@ Partial Class frmInvoiceLocal
         Me.Label28.Name = "Label28"
         Me.Label28.Size = New System.Drawing.Size(139, 13)
         Me.Label28.TabIndex = 79
-        Me.Label28.Text = "��͡������ ���� �� Add"
+        Me.Label28.Text = "เลือกข้อมูลก่อนกด Add"
         '
         'txtGrade
         '

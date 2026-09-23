@@ -726,8 +726,8 @@
                     dblCBMRoll += clsconfig.IsNull(.Rows(i).Cells("grdData_CBMForRoll").Value, 0) 'Sitthana 20220729
                 Next
 
-                txtTotalCBMCarton.Text = Format(dblCBMCarton, "##0.00") 'Sitthana 20220729
-                txtTotalCBMRoll.Text = Format(dblCBMRoll, "##0.00") 'Sitthana 20220729
+                txtTotalCBMCarton.Text = Format(dblCBMCarton, "##0.000") 'Sitthana 20220729
+                txtTotalCBMRoll.Text = Format(dblCBMRoll, "##0.000") 'Sitthana 20220729
             End If
         End With
     End Sub

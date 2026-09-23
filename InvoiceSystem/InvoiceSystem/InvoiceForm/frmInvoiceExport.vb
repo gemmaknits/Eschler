@@ -664,14 +664,14 @@ Public Class frmInvoiceExport
             For Each row As DataRow In dtInvDet.Rows
                 If row.RowState <> DataRowState.Deleted Then
                     If (New clsConfig).IsNull(row("packno"), "").ToString().Trim.Equals(pPackno) And (New clsConfig).IsNull(row("cartno"), "").ToString().Trim.Equals(pCartNo) Then
-                        MessageBox.Show("�س���ѧ���������͡���!!!", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
-                        Return True '���
+                        MessageBox.Show("คุณกำลังเลือกข้อมูลซ้ำ!!!", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+                        Return True 'ซ้ำ
                     End If
                 End If
             Next
         End If
 
-        Return False '�����
+        Return False 'ไม่ซ้ำ
     End Function
     Private Function CheckIsNotDuplicatePackCart(ByVal pPackno As String, ByVal pCartNo As String) As Boolean
         Dim result As Boolean = False
@@ -682,13 +682,13 @@ Public Class frmInvoiceExport
                 If row.RowState <> DataRowState.Deleted Then
                     If (New clsConfig).IsNull(row("packno"), "").ToString().Trim.Equals(pPackno) And (New clsConfig).IsNull(row("cartno"), "").ToString().Trim.Equals(pCartNo) Then
                         MessageBox.Show("Packno and Cartno is Already in Grid." & vbCrLf & "Do not get dupicate!!!", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
-                        Return False '���
+                        Return False 'ซ้ำ
                     End If
                 End If
             Next
         End If
 
-        Return True '�����
+        Return True 'ไม่ซ้ำ
     End Function
     Private Sub LoadPacking(pPacknoCartno As String)
         Dim config As New clsConfig
@@ -703,7 +703,7 @@ Public Class frmInvoiceExport
         If dtNew.Rows.Count > 0 Then
 
             If Not CheckDataPacking(dtNew) Then Exit Sub
-            '�� packno , cartno ����·������
+            'เช็ค packno, cartno ว่าซ้ำหรือไม่
             If Not CheckIsNotDuplicatePackCart(config.IsNull(dtNew.Rows(0)("packno"), "").ToString.Trim, config.IsNull(dtNew.Rows(i)("cartno"), "").ToString.Trim) Then Exit Sub
 
 
@@ -752,18 +752,18 @@ Public Class frmInvoiceExport
             For Each drInv As DataRow In dtInv.Rows
                 If drInv.RowState <> DataRowState.Deleted Then
                     If drInv.Item("currency").ToString.Trim <> dr.Item("currency").ToString.Trim Then
-                        MessageBox.Show("�س���ѧ Load Packing List ��� ��ҧʡ���Թ�ѹ ������������ö������� ��س����͡ Packing ������ͷӡ����䢡�͹", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+                        MessageBox.Show("คุณกำลัง Load Packing List ที่ต่างสกุลเงินกัน ไม่สามารถโหลดได้ กรุณาเลือก Packing ใหม่หรือทำการแก้ไขก่อน", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
                         Return False
                     End If
                 End If
                 'If drInv.Item("currency").ToString.Trim <> dr.Item("currency").ToString.Trim Then
-                '    MessageBox.Show("�س���ѧ Load Packing List ��� ��ҧʡ���Թ�ѹ ������������ö������� ��س����͡ Packing ������ͷӡ����䢡�͹", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+                '    MessageBox.Show("คุณกำลัง Load Packing List ที่ต่างสกุลเงินกัน ไม่สามารถโหลดได้ กรุณาเลือก Packing ใหม่หรือทำการแก้ไขก่อน", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
                 '    Return False
                 'End If
             Next
             'For Each row As DataGridViewRow In grdInv.Rows
             '    If row.Cells("currency").Value.ToString.Trim <> dr.Item("currency").ToString.Trim Then
-            '        MessageBox.Show("�س���ѧ Packing ������ ��� ��ҧʡ���Թ�ѹ", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+            '        MessageBox.Show("คุณกำลัง Packing ไม่ถูกต้อง หรือต่างสกุลเงินกัน", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
             '        Return False
             '    End If
             'Next
@@ -1092,16 +1092,16 @@ Public Class frmInvoiceExport
         '967', 968, 1133   : Pressless
 
         'If InStr(1, cboCustomer.Text.Trim.ToUpper, "PRESSLESS") > 0 Then
-        '    MessageBox.Show("�١��� Pressless �������ö����� Standard Invoice ���Ѻ", "��ͼԴ��Ҵ", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        '    MessageBox.Show("ลูกค้า Pressless ไม่สามารถพิมพ์ Standard Invoice ได้ครับ", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
         'Else
         '    If InStr(1, cboCustomer.Text.Trim.ToUpper, "SCAVI") > 0 Then
-        '        MessageBox.Show("�١��� SCAVI �������ö����� Standard Invoice ���Ѻ", "��ͼԴ��Ҵ", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        '        MessageBox.Show("ลูกค้า SCAVI ไม่สามารถพิมพ์ Standard Invoice ได้ครับ", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
         '    Else
         '        Select Case cboCustomer.SelectedValue
         '            Case 967, 968, 1133
-        '                MessageBox.Show("�١��� Pressless �������ö����� Standard Invoice ���Ѻ", "��ͼԴ��Ҵ", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        '                MessageBox.Show("ลูกค้า Pressless ไม่สามารถพิมพ์ Standard Invoice ได้ครับ", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
         '            Case 768, 991
-        '                MessageBox.Show("�١��� SCAVI �������ö����� Standard Invoice ���Ѻ", "��ͼԴ��Ҵ", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        '                MessageBox.Show("ลูกค้า SCAVI ไม่สามารถพิมพ์ Standard Invoice ได้ครับ", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
         '            Case Else
         '                PrintInvoice("rptInvExport.rpt", "Export Invoice")
         '        End Select
@@ -1123,7 +1123,7 @@ Public Class frmInvoiceExport
         '        Case 768, 991, 1107
         '            PrintInvoice("rptInvExportScavi.rpt", "Export Invoice Scavi Format")
         '        Case Else
-        '            MessageBox.Show("�����١��� ��ͧ�դ���� SCAVI �������к� Customer Code �֧�о���� Scavi Invoice ���Ѻ", "��ͼԴ��Ҵ", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        '            MessageBox.Show("ลูกค้าต้องมีคำว่า SCAVI หรือระบุ Customer Code จึงจะพิมพ์ Scavi Invoice ได้ครับ", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
         '    End Select
         'End If 'Sitthana 20230504, 20231116 K.joom need to use for anthor customer
         PrintInvoice("rptInvExportScavi.rpt", "Export Invoice Scavi Format")
@@ -1145,7 +1145,7 @@ Public Class frmInvoiceExport
                 Case 967, 968, 1133
                     PrintInvoice("rptInvExportPressless.rpt", "Export Invoice Pressless Format")
                 Case Else
-                    MessageBox.Show("�����١��� ��ͧ�դ���� Pressless �������к� Customer Code �֧�о���� Pressless Invoice ���Ѻ", "��ͼԴ��Ҵ", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    MessageBox.Show("ลูกค้าต้องมีคำว่า Pressless หรือระบุ Customer Code จึงจะพิมพ์ Pressless Invoice ได้ครับ", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Select
         End If 'Sitthana 20230504
     End Sub
@@ -1187,9 +1187,9 @@ Public Class frmInvoiceExport
         '968    : PREELESS GmbH
         ' Select Case cboCustomer.SelectedValue
         ' Case 768, 991
-        ' MessageBox.Show("�١��� Scavi ������� Packing ���٢ͧ Scavi ��ҹ��", "��ͼԴ��Ҵ", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        ' MessageBox.Show("ลูกค้า Scavi สามารถพิมพ์ Packing รูปแบบ Scavi เท่านั้น", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
         ' Case 967, 968
-        'MessageBox.Show("�١��� Pressless ������� Packing ���٢ͧ Pressless ��ҹ��", "��ͼԴ��Ҵ", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        'MessageBox.Show("ลูกค้า Pressless สามารถพิมพ์ Packing รูปแบบ Pressless เท่านั้น", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
         'Case Else
         PrintPacking("rptInvExportPacking.rpt", "Export Invoice Packing List (Standard Packing)")
         'End Select
@@ -1202,7 +1202,7 @@ Public Class frmInvoiceExport
         ' Case 768, 991
         PrintPacking("rptInvExportPackingScavi.rpt", "Export Invoice Packing List (Scavi Format)")
         '     Case Else
-        'MessageBox.Show("����� Packing ੾���١��� Scavi ��ҹ��", "��ͼԴ��Ҵ", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        'MessageBox.Show("พิมพ์ Packing เฉพาะลูกค้า Scavi เท่านั้น", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
         'End Select
     End Sub
 
@@ -1216,7 +1216,7 @@ Public Class frmInvoiceExport
         ' Case 967, 968
         PrintPacking("rptInvExportPackingPressless.rpt", "Export Invoice Packing List (Pressless Format)")
         '    Case Else
-        'MessageBox.Show("����� Packing ੾���١��� Pressless ��ҹ��", "��ͼԴ��Ҵ", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        'MessageBox.Show("พิมพ์ Packing เฉพาะลูกค้า Pressless เท่านั้น", "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
         'End Select
     End Sub
 
@@ -1459,9 +1459,9 @@ Public Class frmInvoiceExport
         '            .Columns(0).HeaderText = "#"
         '        dgvSectionList.Rows(i).Cells(0).Value = i + 1
 
-        '        '.Columns(1).HeaderText = "�Ţ����Ե"
+        '        '.Columns(1).HeaderText = "เลขที่ผลิต"
 
-        '        .Columns(1).HeaderText = "˹���"
+        '        .Columns(1).HeaderText = "หน่วย"
 
         '        .Columns(0).Width = 40
 
@@ -1490,7 +1490,7 @@ Public Class frmInvoiceExport
         Dim i As Integer = 0
         If grdInv.Rows.Count > 1 Then
             Try
-                Dim exrt As Double = InputBox("Input the exchange rate." & vbCrLf & "����ѵ���š����¹�Թ���", "System Message", "0.00")
+                Dim exrt As Double = InputBox("Input the exchange rate." & vbCrLf & "กรุณาใส่อัตราแลกเปลี่ยนเงินตรา", "System Message", "0.00")
                 For i = 0 To grdInv.Rows.Count - 2
                     grdInv.Rows(i).Cells("exchange_rate").Value = exrt
                 Next
@@ -1932,7 +1932,7 @@ Public Class frmInvoiceExport
         With grdProduct
             Select Case .CurrentRow.Index
                 Case 0
-                    MessageBox.Show("��¡�ù������¡���á�ش���Ǥ�Ѻ", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    MessageBox.Show("รายการนี้อยู่รายการแรกสุดแล้วครับ", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Case Else
                     Dim i As Integer
                     i = .CurrentRow.Index
@@ -1974,7 +1974,7 @@ Public Class frmInvoiceExport
         With grdProduct
             Select Case .CurrentRow.Index
                 Case .RowCount - 2
-                    MessageBox.Show("��¡�ù������¡���ش�������Ǥ�Ѻ", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    MessageBox.Show("รายการนี้อยู่รายการสุดท้ายแล้วครับ", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Case Else
                     Dim i As Integer
                     i = .CurrentRow.Index

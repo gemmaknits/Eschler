@@ -711,7 +711,7 @@ Partial Class frmPackingListDyed
         'grdData_CBMForCarton
         '
         Me.grdData_CBMForCarton.DataPropertyName = "CBMForCarton"
-        DataGridViewCellStyle11.Format = "N2"
+        DataGridViewCellStyle11.Format = "N3"
         DataGridViewCellStyle11.NullValue = Nothing
         Me.grdData_CBMForCarton.DefaultCellStyle = DataGridViewCellStyle11
         Me.grdData_CBMForCarton.HeaderText = "CBM Carton"
@@ -721,7 +721,7 @@ Partial Class frmPackingListDyed
         '
         'grdData_CBMForRoll
         '
-        DataGridViewCellStyle12.Format = "N2"
+        DataGridViewCellStyle12.Format = "N3"
         DataGridViewCellStyle12.NullValue = Nothing
         Me.grdData_CBMForRoll.DefaultCellStyle = DataGridViewCellStyle12
         Me.grdData_CBMForRoll.HeaderText = "CBM Roll"

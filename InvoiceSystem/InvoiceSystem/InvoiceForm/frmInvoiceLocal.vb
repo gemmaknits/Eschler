@@ -443,14 +443,14 @@ Public Class frmInvoiceLocal
             For Each row As DataRow In dtInvDet.Rows
                 If row.RowState <> DataRowState.Deleted Then
                     If (New clsConfig).IsNull(row("packno"), "").ToString().Trim.Equals(pPackno) And (New clsConfig).IsNull(row("cartno"), "").ToString().Trim.Equals(pCartNo) Then
-                        MessageBox.Show("�س���ѧ���������͡���!!!", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
-                        Return True '���
+                        MessageBox.Show("คุณกำลังเลือกข้อมูลซ้ำ!!!", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+                        Return True 'ซ้ำ
                     End If
                 End If
             Next
         End If
 
-        Return False '�����
+        Return False 'ไม่ซ้ำ
     End Function
     Private Function CheckIsNotDuplicatePackCart(ByVal pPackno As String, ByVal pCartNo As String) As Boolean
         Dim result As Boolean = False
@@ -461,13 +461,13 @@ Public Class frmInvoiceLocal
                 If row.RowState <> DataRowState.Deleted Then
                     If (New clsConfig).IsNull(row("packno"), "").ToString().Trim.Equals(pPackno) And (New clsConfig).IsNull(row("cartno"), "").ToString().Trim.Equals(pCartNo) Then
                         MessageBox.Show("Packno and Cartno is Already in Grid." & vbCrLf & "Do not get dupicate!!!", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
-                        Return False '���
+                        Return False 'ซ้ำ
                     End If
                 End If
             Next
         End If
 
-        Return True '�����
+        Return True 'ไม่ซ้ำ
     End Function
     Private Sub LoadPacking()
         'On Error Resume Next
@@ -482,7 +482,7 @@ Public Class frmInvoiceLocal
         If dtNew.Rows.Count > 0 Then
 
             If Not CheckDataPacking(dtNew) Then Exit Sub
-            '�� packno , cartno ����·������
+            'เช็ค packno, cartno ว่าซ้ำหรือไม่
             If Not CheckIsNotDuplicatePackCart(config.IsNull(dtNew.Rows(0)("packno"), "").ToString.Trim, config.IsNull(dtNew.Rows(i)("cartno"), "").ToString.Trim) Then Exit Sub
 
             If config.IsNull(mcboCustomersBillToFlag.SelectedValue, "") = "" Then
@@ -530,7 +530,7 @@ Public Class frmInvoiceLocal
             For Each drInv As DataRow In dtInv.Rows
                 If drInv.RowState <> DataRowState.Deleted Then
                     If drInv.Item("currency").ToString.Trim <> dr.Item("currency").ToString.Trim Then
-                        MessageBox.Show("�س���ѧ Load Packing List ��� ��ҧʡ���Թ�ѹ ������������ö������� ��س����͡ Packing ������ͷӡ����䢡�͹", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+                        MessageBox.Show("คุณกำลัง Load Packing List ที่ต่างสกุลเงินกัน ไม่สามารถโหลดได้ กรุณาเลือก Packing ใหม่หรือทำการแก้ไขก่อน", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
                         Return False
                     End If
                 End If
@@ -804,9 +804,9 @@ Public Class frmInvoiceLocal
         If MessageBox.Show("Would you like to cancel this document ?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.No Then Exit Sub
         Dim inv As New classInvoice
         If inv.InvLocCancel(lngInvID, clsUser.UserID, message) Then
-            MessageBox.Show("¡��ԡ�����", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
+            MessageBox.Show("ยกเลิกสำเร็จ", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
         Else
-            MessageBox.Show("¡��ԡ �������� : " + message, "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+            MessageBox.Show("ยกเลิกไม่สำเร็จ : " + message, "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
         End If
         Call btnNew_Click(sender, e)
     End Sub
@@ -924,12 +924,12 @@ Public Class frmInvoiceLocal
     Private Function CheckDataLoadCharge() As Boolean
 
         If txtItdesc.Text.Trim = "" Then
-            MessageBox.Show("��ͧ�� ��ͤ��� Issue " & vbCrLf & "Qty Should be More then 0", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("ต้องใส่ข้อความ Issue " & vbCrLf & "Qty Should be More then 0", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return False
         End If
 
         If Val(txtqty.Text) = 0 Then
-            MessageBox.Show("Qty ��ͧ�ҡ���� 0" & vbCrLf & "Qty Should be More then 0", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Qty ต้องมากกว่า 0" & vbCrLf & "Qty Should be More then 0", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return False
         End If
 

@@ -398,14 +398,14 @@ Partial Class frmInvoiceExport
         'tsmnStandardInvoice
         '
         Me.tsmnStandardInvoice.Name = "tsmnStandardInvoice"
-        Me.tsmnStandardInvoice.Size = New System.Drawing.Size(162, 22)
+        Me.tsmnStandardInvoice.Size = New System.Drawing.Size(180, 22)
         Me.tsmnStandardInvoice.Text = "Standard Invoice"
         '
         'tsmnScaviInvoice
         '
         Me.tsmnScaviInvoice.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmnScaviInvoiceStd, Me.tsmnScaviInvoiceNoInvNo})
         Me.tsmnScaviInvoice.Name = "tsmnScaviInvoice"
-        Me.tsmnScaviInvoice.Size = New System.Drawing.Size(162, 22)
+        Me.tsmnScaviInvoice.Size = New System.Drawing.Size(180, 22)
         Me.tsmnScaviInvoice.Text = "Scavi Invoice"
         '
         'tsmnScaviInvoiceStd
@@ -423,7 +423,7 @@ Partial Class frmInvoiceExport
         'tsmnPresslessInvoice
         '
         Me.tsmnPresslessInvoice.Name = "tsmnPresslessInvoice"
-        Me.tsmnPresslessInvoice.Size = New System.Drawing.Size(162, 22)
+        Me.tsmnPresslessInvoice.Size = New System.Drawing.Size(180, 22)
         Me.tsmnPresslessInvoice.Text = "Pressless Invoice"
         '
         'btnPrintLabel
@@ -439,20 +439,20 @@ Partial Class frmInvoiceExport
         '
         Me.tsmnStandardRoll.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmnStandardRollI})
         Me.tsmnStandardRoll.Name = "tsmnStandardRoll"
-        Me.tsmnStandardRoll.Size = New System.Drawing.Size(156, 22)
+        Me.tsmnStandardRoll.Size = New System.Drawing.Size(155, 22)
         Me.tsmnStandardRoll.Text = "Standard Roll"
         '
         'tsmnStandardRollI
         '
         Me.tsmnStandardRollI.Name = "tsmnStandardRollI"
-        Me.tsmnStandardRollI.Size = New System.Drawing.Size(152, 22)
+        Me.tsmnStandardRollI.Size = New System.Drawing.Size(150, 22)
         Me.tsmnStandardRollI.Text = "Standard Roll I"
         '
         'PLDNoToolStripMenuItem
         '
         Me.PLDNoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmnPLDNoShowRollNoPerInvoice, Me.tsmnPLDNoShowRollNoPerPack})
         Me.PLDNoToolStripMenuItem.Name = "PLDNoToolStripMenuItem"
-        Me.PLDNoToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
+        Me.PLDNoToolStripMenuItem.Size = New System.Drawing.Size(155, 22)
         Me.PLDNoToolStripMenuItem.Text = "PLD No."
         '
         'tsmnPLDNoShowRollNoPerInvoice
@@ -470,33 +470,33 @@ Partial Class frmInvoiceExport
         'CHRISTIANToolStripMenuItem
         '
         Me.CHRISTIANToolStripMenuItem.Name = "CHRISTIANToolStripMenuItem"
-        Me.CHRISTIANToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
+        Me.CHRISTIANToolStripMenuItem.Size = New System.Drawing.Size(155, 22)
         Me.CHRISTIANToolStripMenuItem.Text = "CHRISTIAN No."
         '
         'tsbtnWedTex
         '
         Me.tsbtnWedTex.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmnWedTexWSET, Me.tsmnWedTexMJO})
         Me.tsbtnWedTex.Name = "tsbtnWedTex"
-        Me.tsbtnWedTex.Size = New System.Drawing.Size(156, 22)
+        Me.tsbtnWedTex.Size = New System.Drawing.Size(155, 22)
         Me.tsbtnWedTex.Text = "WED TEX"
         '
         'tsmnWedTexWSET
         '
         Me.tsmnWedTexWSET.Name = "tsmnWedTexWSET"
-        Me.tsmnWedTexWSET.Size = New System.Drawing.Size(168, 22)
+        Me.tsmnWedTexWSET.Size = New System.Drawing.Size(166, 22)
         Me.tsmnWedTexWSET.Text = "WED TEX (WS-ET)"
         '
         'tsmnWedTexMJO
         '
         Me.tsmnWedTexMJO.Name = "tsmnWedTexMJO"
-        Me.tsmnWedTexMJO.Size = New System.Drawing.Size(168, 22)
+        Me.tsmnWedTexMJO.Size = New System.Drawing.Size(166, 22)
         Me.tsmnWedTexMJO.Text = "WED TEX (MJO)"
         '
         'tsmnScavi
         '
         Me.tsmnScavi.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmnScaviStd, Me.tsmnScaviNoInvNo})
         Me.tsmnScavi.Name = "tsmnScavi"
-        Me.tsmnScavi.Size = New System.Drawing.Size(156, 22)
+        Me.tsmnScavi.Size = New System.Drawing.Size(155, 22)
         Me.tsmnScavi.Text = "Scavi"
         '
         'tsmnScaviStd
@@ -514,13 +514,13 @@ Partial Class frmInvoiceExport
         'WacoalToolStripMenuItem
         '
         Me.WacoalToolStripMenuItem.Name = "WacoalToolStripMenuItem"
-        Me.WacoalToolStripMenuItem.Size = New System.Drawing.Size(156, 22)
+        Me.WacoalToolStripMenuItem.Size = New System.Drawing.Size(155, 22)
         Me.WacoalToolStripMenuItem.Text = "Wacoal"
         '
         'tsmnPresslessRoll
         '
         Me.tsmnPresslessRoll.Name = "tsmnPresslessRoll"
-        Me.tsmnPresslessRoll.Size = New System.Drawing.Size(156, 22)
+        Me.tsmnPresslessRoll.Size = New System.Drawing.Size(155, 22)
         Me.tsmnPresslessRoll.Text = "Pressless"
         '
         'btnPrintLabelCarton
@@ -703,7 +703,7 @@ Partial Class frmInvoiceExport
         Me.btnExit.Image = CType(resources.GetObject("btnExit.Image"), System.Drawing.Image)
         Me.btnExit.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnExit.Name = "btnExit"
-        Me.btnExit.Size = New System.Drawing.Size(45, 22)
+        Me.btnExit.Size = New System.Drawing.Size(46, 22)
         Me.btnExit.Text = "Exit"
         '
         'TabPage2
@@ -1204,7 +1204,7 @@ Partial Class frmInvoiceExport
         Me.Label43.AutoSize = True
         Me.Label43.Location = New System.Drawing.Point(6, 166)
         Me.Label43.Name = "Label43"
-        Me.Label43.Size = New System.Drawing.Size(44, 13)
+        Me.Label43.Size = New System.Drawing.Size(43, 13)
         Me.Label43.TabIndex = 42
         Me.Label43.Text = "Benefit"
         '
@@ -1230,7 +1230,7 @@ Partial Class frmInvoiceExport
         Me.Label65.AutoSize = True
         Me.Label65.Location = New System.Drawing.Point(249, 142)
         Me.Label65.Name = "Label65"
-        Me.Label65.Size = New System.Drawing.Size(26, 13)
+        Me.Label65.Size = New System.Drawing.Size(25, 13)
         Me.Label65.TabIndex = 38
         Me.Label65.Text = "BOI"
         '
@@ -1281,7 +1281,7 @@ Partial Class frmInvoiceExport
         Me.Label35.AutoSize = True
         Me.Label35.Location = New System.Drawing.Point(194, 214)
         Me.Label35.Name = "Label35"
-        Me.Label35.Size = New System.Drawing.Size(116, 13)
+        Me.Label35.Size = New System.Drawing.Size(102, 13)
         Me.Label35.TabIndex = 29
         Me.Label35.Text = "(วันที่ลงทะเบียนส่งพัสดุ)"
         '
@@ -1371,7 +1371,7 @@ Partial Class frmInvoiceExport
         Me.Label21.AutoSize = True
         Me.Label21.Location = New System.Drawing.Point(6, 214)
         Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(59, 13)
+        Me.Label21.Size = New System.Drawing.Size(57, 13)
         Me.Label21.TabIndex = 20
         Me.Label21.Text = "AWB Date"
         '
@@ -1414,7 +1414,7 @@ Partial Class frmInvoiceExport
         Me.Label18.AutoSize = True
         Me.Label18.Location = New System.Drawing.Point(6, 142)
         Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(54, 13)
+        Me.Label18.Size = New System.Drawing.Size(51, 13)
         Me.Label18.TabIndex = 14
         Me.Label18.Text = "B/L, AWB"
         '
@@ -1450,7 +1450,7 @@ Partial Class frmInvoiceExport
         Me.Label16.AutoSize = True
         Me.Label16.Location = New System.Drawing.Point(121, 22)
         Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(76, 13)
+        Me.Label16.Size = New System.Drawing.Size(75, 13)
         Me.Label16.TabIndex = 10
         Me.Label16.Text = "FOB Location"
         '
@@ -1518,7 +1518,7 @@ Partial Class frmInvoiceExport
         Me.Label36.AutoSize = True
         Me.Label36.Location = New System.Drawing.Point(8, 236)
         Me.Label36.Name = "Label36"
-        Me.Label36.Size = New System.Drawing.Size(86, 13)
+        Me.Label36.Size = New System.Drawing.Size(79, 13)
         Me.Label36.TabIndex = 20
         Me.Label36.Text = "ต้นทุนบรรจุภัณฑ์"
         '
@@ -1548,7 +1548,7 @@ Partial Class frmInvoiceExport
         Me.Label34.AutoSize = True
         Me.Label34.Location = New System.Drawing.Point(8, 100)
         Me.Label34.Name = "Label34"
-        Me.Label34.Size = New System.Drawing.Size(229, 13)
+        Me.Label34.Size = New System.Drawing.Size(218, 13)
         Me.Label34.TabIndex = 16
         Me.Label34.Text = "Enwrap Material && Cost (วัสดุที่ใช้บรรจุหีบห่อ)"
         '
@@ -1557,7 +1557,7 @@ Partial Class frmInvoiceExport
         Me.Label13.AutoSize = True
         Me.Label13.Location = New System.Drawing.Point(208, 75)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(95, 13)
+        Me.Label13.Size = New System.Drawing.Size(85, 13)
         Me.Label13.TabIndex = 15
         Me.Label13.Text = "M³ (ลูกบาศก์เมตร)"
         '
@@ -1593,7 +1593,7 @@ Partial Class frmInvoiceExport
         Me.Label10.AutoSize = True
         Me.Label10.Location = New System.Drawing.Point(8, 75)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(97, 13)
+        Me.Label10.Size = New System.Drawing.Size(93, 13)
         Me.Label10.TabIndex = 11
         Me.Label10.Text = "Capacity (ปริมาตร)"
         '
@@ -1661,18 +1661,22 @@ Partial Class frmInvoiceExport
         Me.Label71.AutoSize = True
         Me.Label71.Location = New System.Drawing.Point(11, 21)
         Me.Label71.Name = "Label71"
-        Me.Label71.Size = New System.Drawing.Size(33, 13)
+        Me.Label71.Size = New System.Drawing.Size(32, 13)
         Me.Label71.TabIndex = 52
         Me.Label71.Text = "Bank"
         '
         'mcboBanks
         '
-        Me.mcboBanks.BeforeTouchSize = New System.Drawing.Size(368, 21)
+        Me.mcboBanks.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.mcboBanks.DataSource = Nothing
+        Me.mcboBanks.DisplayMember = Nothing
         Me.mcboBanks.Location = New System.Drawing.Point(112, 21)
-        Me.mcboBanks.MetroColor = System.Drawing.Color.FromArgb(CType(CType(22, Byte), Integer), CType(CType(165, Byte), Integer), CType(CType(220, Byte), Integer))
         Me.mcboBanks.Name = "mcboBanks"
+        Me.mcboBanks.SelectedIndex = -1
+        Me.mcboBanks.SelectedValue = Nothing
         Me.mcboBanks.Size = New System.Drawing.Size(368, 21)
         Me.mcboBanks.TabIndex = 51
+        Me.mcboBanks.ValueMember = Nothing
         '
         'txtLcAmt
         '
@@ -1723,7 +1727,7 @@ Partial Class frmInvoiceExport
         Me.Label6.AutoSize = True
         Me.Label6.Location = New System.Drawing.Point(8, 75)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(72, 13)
+        Me.Label6.Size = New System.Drawing.Size(70, 13)
         Me.Label6.TabIndex = 11
         Me.Label6.Text = "Bank Branch"
         '
@@ -1765,7 +1769,7 @@ Partial Class frmInvoiceExport
         Me.Label4.AutoSize = True
         Me.Label4.Location = New System.Drawing.Point(208, 51)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(65, 13)
+        Me.Label4.Size = New System.Drawing.Size(64, 13)
         Me.Label4.TabIndex = 6
         Me.Label4.Text = "Bank Name"
         '
@@ -1774,7 +1778,7 @@ Partial Class frmInvoiceExport
         Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(8, 51)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(63, 13)
+        Me.Label3.Size = New System.Drawing.Size(62, 13)
         Me.Label3.TabIndex = 5
         Me.Label3.Text = "Bank Code"
         '
@@ -2049,7 +2053,7 @@ Partial Class frmInvoiceExport
         Me.LblQty.AutoSize = True
         Me.LblQty.Location = New System.Drawing.Point(363, 51)
         Me.LblQty.Name = "LblQty"
-        Me.LblQty.Size = New System.Drawing.Size(28, 13)
+        Me.LblQty.Size = New System.Drawing.Size(27, 13)
         Me.LblQty.TabIndex = 51
         Me.LblQty.Text = "Qty."
         '
@@ -2160,7 +2164,7 @@ Partial Class frmInvoiceExport
         Me.Label38.AutoSize = True
         Me.Label38.Location = New System.Drawing.Point(765, 400)
         Me.Label38.Name = "Label38"
-        Me.Label38.Size = New System.Drawing.Size(26, 13)
+        Me.Label38.Size = New System.Drawing.Size(25, 13)
         Me.Label38.TabIndex = 39
         Me.Label38.Text = "VAT"
         '
@@ -2605,7 +2609,7 @@ Partial Class frmInvoiceExport
         Me.Label63.AutoSize = True
         Me.Label63.Location = New System.Drawing.Point(572, 466)
         Me.Label63.Name = "Label63"
-        Me.Label63.Size = New System.Drawing.Size(26, 13)
+        Me.Label63.Size = New System.Drawing.Size(25, 13)
         Me.Label63.TabIndex = 70
         Me.Label63.Text = "VAT"
         '
@@ -2795,7 +2799,7 @@ Partial Class frmInvoiceExport
         Me.Label48.AutoSize = True
         Me.Label48.Location = New System.Drawing.Point(444, 442)
         Me.Label48.Name = "Label48"
-        Me.Label48.Size = New System.Drawing.Size(102, 13)
+        Me.Label48.Size = New System.Drawing.Size(101, 13)
         Me.Label48.TabIndex = 49
         Me.Label48.Text = "Non - VAT Amount"
         '
@@ -2838,7 +2842,7 @@ Partial Class frmInvoiceExport
         Me.Label49.AutoSize = True
         Me.Label49.Location = New System.Drawing.Point(668, 466)
         Me.Label49.Name = "Label49"
-        Me.Label49.Size = New System.Drawing.Size(70, 13)
+        Me.Label49.Size = New System.Drawing.Size(69, 13)
         Me.Label49.TabIndex = 47
         Me.Label49.Text = "VAT Amount"
         '
@@ -2917,7 +2921,7 @@ Partial Class frmInvoiceExport
         Me.Label45.ForeColor = System.Drawing.Color.Red
         Me.Label45.Location = New System.Drawing.Point(436, 32)
         Me.Label45.Name = "Label45"
-        Me.Label45.Size = New System.Drawing.Size(260, 16)
+        Me.Label45.Size = New System.Drawing.Size(259, 16)
         Me.Label45.TabIndex = 31
         Me.Label45.Text = "All Amount must be in same currency"
         '

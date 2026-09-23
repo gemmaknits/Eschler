@@ -239,7 +239,7 @@ Public Class frmInvoiceExport
 
         txtGrossWeight.Text = dt.Rows(0)("gross_weight").ToString.Trim
         txtNetWeight.Text = dt.Rows(0)("net_weight").ToString.Trim
-        txtCapacity.Text = FormatNumber(dt.Rows(0)("capacity"), 3, TriState.False, TriState.False, TriState.True)
+        txtCapacity.Text = FormatNumber(dt.Rows(0)("capacity"), 3, TriState.True, TriState.False, TriState.True)
         txtEnWrapMaterial.Text = dt.Rows(0)("enwrap_material").ToString.Trim
         txtEnWrapCost.Text = dt.Rows(0)("enwrap_cost").ToString.Trim
 
@@ -265,12 +265,12 @@ Public Class frmInvoiceExport
         txtChargeAmt.Text = dt.Rows(0)("chargeamt").ToString
 
         txtRemark.Text = dt.Rows(0)("remark").ToString.Trim
-        txtGrossAmt.Text = FormatNumber(dt.Rows(0)("grossamt"), 2, TriState.False, TriState.False, TriState.True)
-        txtDiscAmt.Text = FormatNumber(dt.Rows(0)("discamt"), 2, TriState.False, TriState.False, TriState.True)
-        txtPreTaxAmt.Text = FormatNumber(dt.Rows(0)("pretaxamt"), 2, TriState.False, TriState.False, TriState.True)
-        txtVat.Text = FormatNumber(dt.Rows(0)("vat"), 2, TriState.False, TriState.False, TriState.True)
-        txtVatAmt.Text = FormatNumber(dt.Rows(0)("vatamt"), 2, TriState.False, TriState.False, TriState.True)
-        txtNetAmt.Text = FormatNumber(dt.Rows(0)("netamt"), 2, TriState.False, TriState.False, TriState.True)
+        txtGrossAmt.Text = FormatNumber(dt.Rows(0)("grossamt"), 2, TriState.True, TriState.False, TriState.True)
+        txtDiscAmt.Text = FormatNumber(dt.Rows(0)("discamt"), 2, TriState.True, TriState.False, TriState.True)
+        txtPreTaxAmt.Text = FormatNumber(dt.Rows(0)("pretaxamt"), 2, TriState.True, TriState.False, TriState.True)
+        txtVat.Text = FormatNumber(dt.Rows(0)("vat"), 2, TriState.True, TriState.False, TriState.True)
+        txtVatAmt.Text = FormatNumber(dt.Rows(0)("vatamt"), 2, TriState.True, TriState.False, TriState.True)
+        txtNetAmt.Text = FormatNumber(dt.Rows(0)("netamt"), 2, TriState.True, TriState.False, TriState.True)
 
         txtShipVia.Text = dt.Rows(0)("shipvia").ToString.Trim
         txtFrInvNo.Text = dt.Rows(0)("fr_inv_no").ToString.Trim
@@ -2311,5 +2311,7 @@ Public Class frmInvoiceExport
         PrintPacking("rptInvExportPackingGrossWeight.rpt", "Export Invoice Packing List (Gross Weight Packing)")
     End Sub
 
+    Private Sub tsmnScaviInvoice_Click(sender As Object, e As EventArgs) Handles tsmnScaviInvoice.Click
 
+    End Sub
 End Class

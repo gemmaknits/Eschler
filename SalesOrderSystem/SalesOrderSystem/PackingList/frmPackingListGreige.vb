@@ -81,6 +81,8 @@ Public Class frmPackingListGreige
             If GetCartonsData(txtPackNo.Text) Then
 
             End If
+            SumGrdPackingList() 'Recalc CBM Roll after cartons loaded 20260923
+            SumCBM() '20260923
 
         End If
     End Sub

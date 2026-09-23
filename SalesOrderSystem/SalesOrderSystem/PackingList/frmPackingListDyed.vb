@@ -156,6 +156,8 @@ Public Class frmPackingListDyed
             txtPackNo.Text = (frm.pPackno.Trim.ToUpper)
             Call GetPackinglistDData(txtPackNo.Text, "")
             Call GetCartonsData(txtPackNo.Text)
+            Call SumGrdPackingList() 'Show Total CBM after cartons loaded 20260923
+            Call SumCBM() '20260923
         End If
         Me.Cursor = Cursors.Default
         frm.Dispose()
@@ -930,8 +932,8 @@ Public Class frmPackingListDyed
             Call BindDataText(DtDataCartons, DtDataPackingList)
 
             Call AutoDeleteCarton()
-            Call SumCBM()
             Call SumGrdPackingList()
+            Call SumCBM() 'Moved after SumGrdPackingList so CBM Roll is multiplied by rolls first 20260923
         Else
             MessageBox.Show("Pack No ไม่ถูกต้อง ", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
             Call InitControl()
@@ -1144,6 +1146,8 @@ Public Class frmPackingListDyed
         If e.KeyCode.Equals(Keys.Enter) Then
             Call GetPackinglistDData(txtPackNo.Text, "")
             Call GetCartonsData(txtPackNo.Text)
+            Call SumGrdPackingList() 'Show Total CBM after cartons loaded 20260923
+            Call SumCBM() '20260923
         End If
 
     End Sub

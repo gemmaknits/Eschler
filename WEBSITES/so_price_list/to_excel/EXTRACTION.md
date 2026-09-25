@@ -313,9 +313,22 @@ This is an assisted extraction, not a guarantee. Every list carries
 
 ## Loading into the database
 
+**This has already happened, and it cannot happen again as written.** The load
+ran on 18 September 2026; since 25 September the book is live and people are
+correcting it by hand. `rebuild_from_rescan.sql` deletes every line it
+reloads, and both of its writing batches now refuse while any line carries work
+done since the last load. See `db/DEPLOY.md`.
+
+What follows is how the load was done, kept because the next one — if there is
+one — will have to merge rather than replace.
+
 1. `scan` → `full_scan.csv`
-2. Bulk-copy into `SO.so_price_list_stage` (all columns, including `block_note`)
-3. `db/rebuild_from_rescan.sql`
+2. Bulk-copy into `SO.so_price_list_stage` (all columns, including
+   `block_note` and `design_no`). Not `BULK INSERT`: this is SQL Server 2014,
+   which has no `FORMAT='CSV'`, and the file has quoted fields carrying commas
+   and newlines. A client-side `SqlBulkCopy` driven from PowerShell parses it
+   correctly and needs no file on the server.
+3. `db/rebuild_from_rescan.sql` — **destructive, guarded, see above**
 
 The rebuild **keeps the headers** — their names, customer assignments, validity
 dates and grid shape — and replaces only the price lines. It is wrapped in a

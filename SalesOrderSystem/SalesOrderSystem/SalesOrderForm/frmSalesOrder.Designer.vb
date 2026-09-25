@@ -21,31 +21,31 @@ Partial Class frmSalesOrder
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmSalesOrder))
-        Dim DataGridViewCellStyle51 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle52 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle53 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle54 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle55 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle56 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle57 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle58 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle59 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle60 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle61 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle62 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle63 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle64 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle65 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle66 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle67 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle68 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle69 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle70 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle71 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle72 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle73 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle74 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle75 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle25 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.btnGetSoNo = New System.Windows.Forms.Button()
         Me.chkDevlOrder = New System.Windows.Forms.CheckBox()
@@ -81,6 +81,7 @@ Partial Class frmSalesOrder
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.mcboDesignProperties = New SalesOrderSystem.Controls.MultiColumnComboBox()
         Me.Label45 = New System.Windows.Forms.Label()
         Me.ComboSaleOrderType1 = New Classes.comboSaleOrderType()
         Me.chkClearOrder = New System.Windows.Forms.CheckBox()
@@ -111,6 +112,57 @@ Partial Class frmSalesOrder
         Me.txtRemark = New System.Windows.Forms.TextBox()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.grdSalesOrder = New System.Windows.Forms.DataGridView()
+        Me.sonoid = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ref_stnoid = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.design_gwth_nob = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.design_no = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.labeldes = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colRefdesno = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.labelarticle = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colGmPerSqM = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Custdes = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.fwth = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cboWidth = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.gwth = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.sample_fabric_qty = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.sample_bulk_qty = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.custcol = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.labdipno = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.labdip_comment = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.labelcolor = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.labeldata1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.labeldata2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colCustDelidt = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.shipdt = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.confirmed_shipdt = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.knit_begin_date = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.knit_end_date = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.dye_end_date = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.yarn_available_date = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.confirmed_appointment = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.qty = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.uom = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.price = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colProdLossPerc = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colQtyWithLoss = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.show_price = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.curr = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.exrt = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.gr_itamt = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.discamt = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.nt_itamt = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.closed2 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.cboid_so_routing = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.so_line_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.mtl_customer_items_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.mtl_customer_items_xref_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.qtyship = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.qtybal = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.jobno = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.sent_to = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.st_reorder_bal_kg = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.txtNetAmt = New System.Windows.Forms.TextBox()
         Me.Label21 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
@@ -143,7 +195,9 @@ Partial Class frmSalesOrder
         Me.txtContact = New System.Windows.Forms.TextBox()
         Me.txtCustAddr = New System.Windows.Forms.TextBox()
         Me.btnCustPoUnique = New System.Windows.Forms.Button()
+        Me.mcboCustomersBillToFlag = New SalesOrderSystem.Controls.MultiColumnComboBox()
         Me.tabDelivery = New System.Windows.Forms.TabPage()
+        Me.mcboCustomersShipToFlag = New SalesOrderSystem.Controls.MultiColumnComboBox()
         Me.cboMtl_warehouse = New System.Windows.Forms.ComboBox()
         Me.Label34 = New System.Windows.Forms.Label()
         Me.txtShipQty_Tolerance_high = New System.Windows.Forms.TextBox()
@@ -155,6 +209,7 @@ Partial Class frmSalesOrder
         Me.Label23 = New System.Windows.Forms.Label()
         Me.txtDeliAddr = New System.Windows.Forms.TextBox()
         Me.tabTerms = New System.Windows.Forms.TabPage()
+        Me.mcboBanks = New SalesOrderSystem.Controls.MultiColumnComboBox()
         Me.Label32 = New System.Windows.Forms.Label()
         Me.Label26 = New System.Windows.Forms.Label()
         Me.cboPaymode = New System.Windows.Forms.ComboBox()
@@ -207,70 +262,21 @@ Partial Class frmSalesOrder
         Me.btnPrintSR = New System.Windows.Forms.Button()
         Me.cbbSrTypeId = New System.Windows.Forms.ComboBox()
         Me.Label40 = New System.Windows.Forms.Label()
-        Me.mcboCustomersBillToFlag = New SalesOrderSystem.Controls.MultiColumnComboBox()
-        Me.mcboCustomersShipToFlag = New SalesOrderSystem.Controls.MultiColumnComboBox()
-        Me.mcboBanks = New SalesOrderSystem.Controls.MultiColumnComboBox()
-        Me.mcboDesignProperties = New SalesOrderSystem.Controls.MultiColumnComboBox()
-        Me.sonoid = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ref_stnoid = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.design_gwth_nob = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.design_no = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.labeldes = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colRefdesno = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.labelarticle = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colGmPerSqM = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Custdes = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.fwth = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cboWidth = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.gwth = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.sample_fabric_qty = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.sample_bulk_qty = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.custcol = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.labdipno = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.labdip_comment = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.labelcolor = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.labeldata1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.labeldata2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colCustDelidt = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.shipdt = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.confirmed_shipdt = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.knit_begin_date = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.knit_end_date = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.dye_end_date = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.yarn_available_date = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.confirmed_appointment = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.qty = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.uom = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.price = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colProdLossPerc = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colQtyWithLoss = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.show_price = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.curr = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.exrt = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.gr_itamt = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.discamt = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.nt_itamt = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.closed2 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.cboid_so_routing = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.so_line_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.mtl_customer_items_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.mtl_customer_items_xref_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.qtyship = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.qtybal = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.jobno = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.sent_to = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.st_reorder_bal_kg = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Label49 = New System.Windows.Forms.Label()
+        Me.cboPriceListCustomer = New System.Windows.Forms.ComboBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
+        CType(Me.mcboDesignProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ToolStrip1.SuspendLayout()
         CType(Me.grdSalesOrder, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl1.SuspendLayout()
         Me.tabSales.SuspendLayout()
         Me.tabCustomer.SuspendLayout()
+        CType(Me.mcboCustomersBillToFlag, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabDelivery.SuspendLayout()
+        CType(Me.mcboCustomersShipToFlag, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabTerms.SuspendLayout()
+        CType(Me.mcboBanks, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabOther.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.TabSample.SuspendLayout()
@@ -281,10 +287,6 @@ Partial Class frmSalesOrder
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox5.SuspendLayout()
         Me.grpSampleRequest.SuspendLayout()
-        CType(Me.mcboCustomersBillToFlag, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.mcboCustomersShipToFlag, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.mcboBanks, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.mcboDesignProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -561,7 +563,7 @@ Partial Class frmSalesOrder
         Me.Label7.AutoSize = True
         Me.Label7.Location = New System.Drawing.Point(20, 93)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(97, 13)
+        Me.Label7.Size = New System.Drawing.Size(98, 13)
         Me.Label7.TabIndex = 8
         Me.Label7.Text = "End Buyer / Cust.:"
         '
@@ -615,7 +617,7 @@ Partial Class frmSalesOrder
         Me.Label6.AutoSize = True
         Me.Label6.Location = New System.Drawing.Point(14, 14)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(62, 13)
+        Me.Label6.Size = New System.Drawing.Size(61, 13)
         Me.Label6.TabIndex = 6
         Me.Label6.Text = "Delivery To"
         '
@@ -633,6 +635,20 @@ Partial Class frmSalesOrder
         Me.GroupBox3.TabIndex = 3
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Order type"
+        '
+        'mcboDesignProperties
+        '
+        Me.mcboDesignProperties.AllowTypeFilter = False
+        Me.mcboDesignProperties.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.mcboDesignProperties.DataSource = Nothing
+        Me.mcboDesignProperties.DisplayMember = Nothing
+        Me.mcboDesignProperties.Location = New System.Drawing.Point(34, 64)
+        Me.mcboDesignProperties.Name = "mcboDesignProperties"
+        Me.mcboDesignProperties.SelectedIndex = -1
+        Me.mcboDesignProperties.SelectedValue = Nothing
+        Me.mcboDesignProperties.Size = New System.Drawing.Size(212, 21)
+        Me.mcboDesignProperties.TabIndex = 37
+        Me.mcboDesignProperties.ValueMember = Nothing
         '
         'Label45
         '
@@ -682,7 +698,7 @@ Partial Class frmSalesOrder
         Me.chkSpecial1.BackColor = System.Drawing.Color.Gold
         Me.chkSpecial1.Location = New System.Drawing.Point(11, 133)
         Me.chkSpecial1.Name = "chkSpecial1"
-        Me.chkSpecial1.Size = New System.Drawing.Size(158, 17)
+        Me.chkSpecial1.Size = New System.Drawing.Size(159, 17)
         Me.chkSpecial1.TabIndex = 0
         Me.chkSpecial1.Text = "Bulk approve by customer"
         Me.chkSpecial1.UseVisualStyleBackColor = False
@@ -736,7 +752,7 @@ Partial Class frmSalesOrder
         Me.Label9.AutoSize = True
         Me.Label9.Location = New System.Drawing.Point(14, 37)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(79, 13)
+        Me.Label9.Size = New System.Drawing.Size(78, 13)
         Me.Label9.TabIndex = 12
         Me.Label9.Text = "Delivery Terms"
         '
@@ -853,7 +869,7 @@ Partial Class frmSalesOrder
         Me.btnExit.Image = CType(resources.GetObject("btnExit.Image"), System.Drawing.Image)
         Me.btnExit.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnExit.Name = "btnExit"
-        Me.btnExit.Size = New System.Drawing.Size(50, 24)
+        Me.btnExit.Size = New System.Drawing.Size(49, 24)
         Me.btnExit.Text = "Exit"
         '
         'ToolStripLabel2
@@ -895,6 +911,527 @@ Partial Class frmSalesOrder
         Me.grdSalesOrder.RowHeadersWidth = 51
         Me.grdSalesOrder.Size = New System.Drawing.Size(1183, 204)
         Me.grdSalesOrder.TabIndex = 1
+        '
+        'sonoid
+        '
+        Me.sonoid.DataPropertyName = "sonoid"
+        Me.sonoid.Frozen = True
+        Me.sonoid.HeaderText = "S/O No. ID"
+        Me.sonoid.MinimumWidth = 6
+        Me.sonoid.Name = "sonoid"
+        Me.sonoid.Width = 85
+        '
+        'ref_stnoid
+        '
+        Me.ref_stnoid.DataPropertyName = "ref_stnoid"
+        Me.ref_stnoid.Frozen = True
+        Me.ref_stnoid.HeaderText = "Ref. S/T No. ID"
+        Me.ref_stnoid.MinimumWidth = 6
+        Me.ref_stnoid.Name = "ref_stnoid"
+        Me.ref_stnoid.ReadOnly = True
+        Me.ref_stnoid.Width = 85
+        '
+        'design_gwth_nob
+        '
+        Me.design_gwth_nob.DataPropertyName = "design_gwth_nob"
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.design_gwth_nob.DefaultCellStyle = DataGridViewCellStyle1
+        Me.design_gwth_nob.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.[Nothing]
+        Me.design_gwth_nob.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.design_gwth_nob.HeaderText = "Design/Gwth/Nob"
+        Me.design_gwth_nob.MinimumWidth = 6
+        Me.design_gwth_nob.Name = "design_gwth_nob"
+        Me.design_gwth_nob.Visible = False
+        Me.design_gwth_nob.Width = 200
+        '
+        'design_no
+        '
+        Me.design_no.DataPropertyName = "design_no"
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.Gold
+        Me.design_no.DefaultCellStyle = DataGridViewCellStyle2
+        Me.design_no.Frozen = True
+        Me.design_no.HeaderText = "Design No."
+        Me.design_no.MinimumWidth = 6
+        Me.design_no.Name = "design_no"
+        Me.design_no.Width = 125
+        '
+        'labeldes
+        '
+        Me.labeldes.DataPropertyName = "labeldes"
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.Gold
+        Me.labeldes.DefaultCellStyle = DataGridViewCellStyle3
+        Me.labeldes.Frozen = True
+        Me.labeldes.HeaderText = "Label Design"
+        Me.labeldes.MinimumWidth = 6
+        Me.labeldes.Name = "labeldes"
+        Me.labeldes.Width = 125
+        '
+        'colRefdesno
+        '
+        Me.colRefdesno.DataPropertyName = "refdesno"
+        Me.colRefdesno.Frozen = True
+        Me.colRefdesno.HeaderText = "Article no."
+        Me.colRefdesno.MinimumWidth = 6
+        Me.colRefdesno.Name = "colRefdesno"
+        Me.colRefdesno.Width = 125
+        '
+        'labelarticle
+        '
+        Me.labelarticle.DataPropertyName = "labelarticle"
+        Me.labelarticle.Frozen = True
+        Me.labelarticle.HeaderText = "Label Article"
+        Me.labelarticle.MinimumWidth = 6
+        Me.labelarticle.Name = "labelarticle"
+        Me.labelarticle.Width = 125
+        '
+        'colGmPerSqM
+        '
+        Me.colGmPerSqM.DataPropertyName = "gmpersqm"
+        Me.colGmPerSqM.HeaderText = "Gm/ Sq.m"
+        Me.colGmPerSqM.MinimumWidth = 6
+        Me.colGmPerSqM.Name = "colGmPerSqM"
+        Me.colGmPerSqM.Width = 50
+        '
+        'Custdes
+        '
+        Me.Custdes.DataPropertyName = "Custdes"
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.Gold
+        Me.Custdes.DefaultCellStyle = DataGridViewCellStyle4
+        Me.Custdes.HeaderText = "Customer design"
+        Me.Custdes.MinimumWidth = 6
+        Me.Custdes.Name = "Custdes"
+        Me.Custdes.Width = 125
+        '
+        'fwth
+        '
+        Me.fwth.DataPropertyName = "fwth"
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.Gold
+        Me.fwth.DefaultCellStyle = DataGridViewCellStyle5
+        Me.fwth.HeaderText = "Finished Width (cm)"
+        Me.fwth.MinimumWidth = 6
+        Me.fwth.Name = "fwth"
+        Me.fwth.Width = 50
+        '
+        'cboWidth
+        '
+        Me.cboWidth.DataPropertyName = "sys_width_id"
+        Me.cboWidth.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.[Nothing]
+        Me.cboWidth.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.cboWidth.HeaderText = "Width"
+        Me.cboWidth.MinimumWidth = 6
+        Me.cboWidth.Name = "cboWidth"
+        Me.cboWidth.Width = 75
+        '
+        'gwth
+        '
+        Me.gwth.DataPropertyName = "gwth"
+        Me.gwth.HeaderText = "Gwth"
+        Me.gwth.MinimumWidth = 6
+        Me.gwth.Name = "gwth"
+        Me.gwth.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.gwth.Width = 50
+        '
+        'sample_fabric_qty
+        '
+        Me.sample_fabric_qty.DataPropertyName = "sample_fabric_qty"
+        Me.sample_fabric_qty.HeaderText = "Sample Fabric Qty"
+        Me.sample_fabric_qty.MinimumWidth = 6
+        Me.sample_fabric_qty.Name = "sample_fabric_qty"
+        Me.sample_fabric_qty.Width = 80
+        '
+        'sample_bulk_qty
+        '
+        Me.sample_bulk_qty.DataPropertyName = "sample_bulk_qty"
+        Me.sample_bulk_qty.HeaderText = "Sample Bulk Qty"
+        Me.sample_bulk_qty.MinimumWidth = 6
+        Me.sample_bulk_qty.Name = "sample_bulk_qty"
+        Me.sample_bulk_qty.Width = 80
+        '
+        'col
+        '
+        Me.col.DataPropertyName = "col"
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.Gold
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.col.DefaultCellStyle = DataGridViewCellStyle6
+        Me.col.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.[Nothing]
+        Me.col.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.col.HeaderText = "Color Code (Way)"
+        Me.col.MinimumWidth = 6
+        Me.col.Name = "col"
+        Me.col.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.col.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.col.Width = 125
+        '
+        'custcol
+        '
+        Me.custcol.DataPropertyName = "custcol"
+        DataGridViewCellStyle7.BackColor = System.Drawing.Color.Gold
+        Me.custcol.DefaultCellStyle = DataGridViewCellStyle7
+        Me.custcol.HeaderText = "Customer Color"
+        Me.custcol.MinimumWidth = 6
+        Me.custcol.Name = "custcol"
+        Me.custcol.Width = 125
+        '
+        'Column1
+        '
+        Me.Column1.DataPropertyName = "hs_code"
+        Me.Column1.HeaderText = "HS Code"
+        Me.Column1.MinimumWidth = 6
+        Me.Column1.Name = "Column1"
+        Me.Column1.Width = 125
+        '
+        'labdipno
+        '
+        Me.labdipno.DataPropertyName = "labdipno"
+        Me.labdipno.HeaderText = "Labdip No."
+        Me.labdipno.MinimumWidth = 6
+        Me.labdipno.Name = "labdipno"
+        Me.labdipno.Width = 125
+        '
+        'labdip_comment
+        '
+        Me.labdip_comment.DataPropertyName = "labdip_comment"
+        Me.labdip_comment.HeaderText = "Labdip Comment"
+        Me.labdip_comment.MinimumWidth = 6
+        Me.labdip_comment.Name = "labdip_comment"
+        Me.labdip_comment.Width = 125
+        '
+        'labelcolor
+        '
+        Me.labelcolor.DataPropertyName = "labelcolor"
+        Me.labelcolor.HeaderText = "Label Color"
+        Me.labelcolor.MinimumWidth = 6
+        Me.labelcolor.Name = "labelcolor"
+        Me.labelcolor.Width = 125
+        '
+        'labeldata1
+        '
+        Me.labeldata1.DataPropertyName = "labeldata1"
+        Me.labeldata1.HeaderText = "Label Data1"
+        Me.labeldata1.MinimumWidth = 6
+        Me.labeldata1.Name = "labeldata1"
+        Me.labeldata1.Width = 125
+        '
+        'labeldata2
+        '
+        Me.labeldata2.HeaderText = "Label Data2"
+        Me.labeldata2.MinimumWidth = 6
+        Me.labeldata2.Name = "labeldata2"
+        Me.labeldata2.Width = 125
+        '
+        'colCustDelidt
+        '
+        Me.colCustDelidt.DataPropertyName = "cust_shipdt"
+        DataGridViewCellStyle8.BackColor = System.Drawing.Color.Gold
+        Me.colCustDelidt.DefaultCellStyle = DataGridViewCellStyle8
+        Me.colCustDelidt.HeaderText = "Cust. Reqd. Deliv.Date"
+        Me.colCustDelidt.MinimumWidth = 6
+        Me.colCustDelidt.Name = "colCustDelidt"
+        Me.colCustDelidt.ToolTipText = "(dd/MM/yyyy)"
+        Me.colCustDelidt.Width = 75
+        '
+        'shipdt
+        '
+        Me.shipdt.DataPropertyName = "shipdt"
+        DataGridViewCellStyle9.BackColor = System.Drawing.Color.Gold
+        DataGridViewCellStyle9.NullValue = Nothing
+        Me.shipdt.DefaultCellStyle = DataGridViewCellStyle9
+        Me.shipdt.HeaderText = "Ship Date"
+        Me.shipdt.MinimumWidth = 6
+        Me.shipdt.Name = "shipdt"
+        Me.shipdt.ToolTipText = "(dd/MM/yyyy)"
+        Me.shipdt.Width = 75
+        '
+        'confirmed_shipdt
+        '
+        Me.confirmed_shipdt.DataPropertyName = "confirmed_shipdt"
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle10.BackColor = System.Drawing.Color.Gold
+        Me.confirmed_shipdt.DefaultCellStyle = DataGridViewCellStyle10
+        Me.confirmed_shipdt.HeaderText = "Confirmed Ship Date"
+        Me.confirmed_shipdt.MinimumWidth = 6
+        Me.confirmed_shipdt.Name = "confirmed_shipdt"
+        Me.confirmed_shipdt.ToolTipText = "(dd/MM/yyyy)"
+        Me.confirmed_shipdt.Width = 75
+        '
+        'knit_begin_date
+        '
+        Me.knit_begin_date.DataPropertyName = "knit_begin_date"
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.knit_begin_date.DefaultCellStyle = DataGridViewCellStyle11
+        Me.knit_begin_date.HeaderText = "Begin Knitting Date"
+        Me.knit_begin_date.MinimumWidth = 6
+        Me.knit_begin_date.Name = "knit_begin_date"
+        Me.knit_begin_date.ToolTipText = "(dd/MM/yyyy)"
+        Me.knit_begin_date.Visible = False
+        Me.knit_begin_date.Width = 75
+        '
+        'knit_end_date
+        '
+        Me.knit_end_date.DataPropertyName = "knit_end_date"
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.knit_end_date.DefaultCellStyle = DataGridViewCellStyle12
+        Me.knit_end_date.HeaderText = "End Knitting Date"
+        Me.knit_end_date.MinimumWidth = 6
+        Me.knit_end_date.Name = "knit_end_date"
+        Me.knit_end_date.ToolTipText = "(dd/MM/yyyy)"
+        Me.knit_end_date.Visible = False
+        Me.knit_end_date.Width = 75
+        '
+        'dye_end_date
+        '
+        Me.dye_end_date.DataPropertyName = "dye_end_date"
+        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.dye_end_date.DefaultCellStyle = DataGridViewCellStyle13
+        Me.dye_end_date.HeaderText = "End Dyeing Date"
+        Me.dye_end_date.MinimumWidth = 6
+        Me.dye_end_date.Name = "dye_end_date"
+        Me.dye_end_date.ToolTipText = "(dd/MM/yyyy)"
+        Me.dye_end_date.Visible = False
+        Me.dye_end_date.Width = 75
+        '
+        'yarn_available_date
+        '
+        Me.yarn_available_date.DataPropertyName = "yarn_available_date"
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.yarn_available_date.DefaultCellStyle = DataGridViewCellStyle14
+        Me.yarn_available_date.HeaderText = "Yarn Available Date"
+        Me.yarn_available_date.MinimumWidth = 6
+        Me.yarn_available_date.Name = "yarn_available_date"
+        Me.yarn_available_date.ToolTipText = "(dd/MM/yyyy)"
+        Me.yarn_available_date.Visible = False
+        Me.yarn_available_date.Width = 75
+        '
+        'confirmed_appointment
+        '
+        Me.confirmed_appointment.DataPropertyName = "confirmed_appointment"
+        Me.confirmed_appointment.HeaderText = "Confirmed Appointment"
+        Me.confirmed_appointment.MinimumWidth = 6
+        Me.confirmed_appointment.Name = "confirmed_appointment"
+        Me.confirmed_appointment.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.confirmed_appointment.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.confirmed_appointment.Visible = False
+        Me.confirmed_appointment.Width = 75
+        '
+        'qty
+        '
+        Me.qty.DataPropertyName = "qty"
+        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle15.BackColor = System.Drawing.Color.Gold
+        DataGridViewCellStyle15.Format = "#.#0"
+        Me.qty.DefaultCellStyle = DataGridViewCellStyle15
+        Me.qty.HeaderText = "Qty."
+        Me.qty.MinimumWidth = 6
+        Me.qty.Name = "qty"
+        Me.qty.Width = 50
+        '
+        'uom
+        '
+        Me.uom.DataPropertyName = "uom"
+        Me.uom.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.[Nothing]
+        Me.uom.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.uom.HeaderText = "UOM"
+        Me.uom.MinimumWidth = 6
+        Me.uom.Name = "uom"
+        Me.uom.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.uom.Width = 50
+        '
+        'price
+        '
+        Me.price.DataPropertyName = "price"
+        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle16.Format = "0.0000"
+        DataGridViewCellStyle16.NullValue = Nothing
+        Me.price.DefaultCellStyle = DataGridViewCellStyle16
+        Me.price.HeaderText = "Unit Price"
+        Me.price.MinimumWidth = 6
+        Me.price.Name = "price"
+        Me.price.Width = 60
+        '
+        'colProdLossPerc
+        '
+        Me.colProdLossPerc.DataPropertyName = "prod_loss_perc"
+        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle17.Format = "N2"
+        Me.colProdLossPerc.DefaultCellStyle = DataGridViewCellStyle17
+        Me.colProdLossPerc.HeaderText = "Qty + Loss Perc"
+        Me.colProdLossPerc.MinimumWidth = 6
+        Me.colProdLossPerc.Name = "colProdLossPerc"
+        Me.colProdLossPerc.Width = 125
+        '
+        'colQtyWithLoss
+        '
+        Me.colQtyWithLoss.DataPropertyName = "qty_with_loss"
+        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle18.Format = "N2"
+        Me.colQtyWithLoss.DefaultCellStyle = DataGridViewCellStyle18
+        Me.colQtyWithLoss.HeaderText = "Qty with Loss"
+        Me.colQtyWithLoss.MinimumWidth = 6
+        Me.colQtyWithLoss.Name = "colQtyWithLoss"
+        Me.colQtyWithLoss.Width = 125
+        '
+        'show_price
+        '
+        Me.show_price.DataPropertyName = "show_price"
+        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle19.Format = "#.#0"
+        Me.show_price.DefaultCellStyle = DataGridViewCellStyle19
+        Me.show_price.HeaderText = "Under Value Price"
+        Me.show_price.MinimumWidth = 6
+        Me.show_price.Name = "show_price"
+        Me.show_price.Visible = False
+        Me.show_price.Width = 50
+        '
+        'curr
+        '
+        Me.curr.DataPropertyName = "curr"
+        DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle20.BackColor = System.Drawing.Color.Gold
+        DataGridViewCellStyle20.Format = "#.###0"
+        Me.curr.DefaultCellStyle = DataGridViewCellStyle20
+        Me.curr.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.[Nothing]
+        Me.curr.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.curr.HeaderText = "Currency"
+        Me.curr.MinimumWidth = 6
+        Me.curr.Name = "curr"
+        Me.curr.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.curr.Width = 55
+        '
+        'exrt
+        '
+        Me.exrt.DataPropertyName = "exrt"
+        DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle21.BackColor = System.Drawing.Color.Gold
+        DataGridViewCellStyle21.Format = "#.###0"
+        Me.exrt.DefaultCellStyle = DataGridViewCellStyle21
+        Me.exrt.HeaderText = "Exchange Rate To BAHT"
+        Me.exrt.MinimumWidth = 6
+        Me.exrt.Name = "exrt"
+        Me.exrt.Width = 60
+        '
+        'gr_itamt
+        '
+        Me.gr_itamt.DataPropertyName = "gr_itamt"
+        DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle22.Format = "0.#0"
+        Me.gr_itamt.DefaultCellStyle = DataGridViewCellStyle22
+        Me.gr_itamt.HeaderText = "Item Amount"
+        Me.gr_itamt.MinimumWidth = 6
+        Me.gr_itamt.Name = "gr_itamt"
+        Me.gr_itamt.Width = 60
+        '
+        'discamt
+        '
+        Me.discamt.DataPropertyName = "discamt"
+        DataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle23.BackColor = System.Drawing.Color.Gold
+        DataGridViewCellStyle23.Format = "0.#0"
+        Me.discamt.DefaultCellStyle = DataGridViewCellStyle23
+        Me.discamt.HeaderText = "Discount Amount"
+        Me.discamt.MinimumWidth = 6
+        Me.discamt.Name = "discamt"
+        Me.discamt.Width = 55
+        '
+        'nt_itamt
+        '
+        Me.nt_itamt.DataPropertyName = "nt_itamt"
+        DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle24.Format = "0.#0"
+        Me.nt_itamt.DefaultCellStyle = DataGridViewCellStyle24
+        Me.nt_itamt.HeaderText = "Net Item Amount"
+        Me.nt_itamt.MinimumWidth = 6
+        Me.nt_itamt.Name = "nt_itamt"
+        Me.nt_itamt.Width = 60
+        '
+        'closed2
+        '
+        Me.closed2.DataPropertyName = "closed"
+        Me.closed2.HeaderText = "Closed"
+        Me.closed2.MinimumWidth = 6
+        Me.closed2.Name = "closed2"
+        Me.closed2.Width = 50
+        '
+        'cboid_so_routing
+        '
+        Me.cboid_so_routing.DataPropertyName = "id_so_routing"
+        Me.cboid_so_routing.HeaderText = "S/O Route"
+        Me.cboid_so_routing.MinimumWidth = 6
+        Me.cboid_so_routing.Name = "cboid_so_routing"
+        Me.cboid_so_routing.Width = 125
+        '
+        'so_line_id
+        '
+        Me.so_line_id.DataPropertyName = "so_line_id"
+        Me.so_line_id.HeaderText = "S/O Line ID"
+        Me.so_line_id.MinimumWidth = 6
+        Me.so_line_id.Name = "so_line_id"
+        Me.so_line_id.ReadOnly = True
+        Me.so_line_id.Visible = False
+        Me.so_line_id.Width = 125
+        '
+        'mtl_customer_items_id
+        '
+        Me.mtl_customer_items_id.DataPropertyName = "mtl_customer_items_id"
+        Me.mtl_customer_items_id.HeaderText = "CUSTOMER ITEMS ID"
+        Me.mtl_customer_items_id.MinimumWidth = 6
+        Me.mtl_customer_items_id.Name = "mtl_customer_items_id"
+        Me.mtl_customer_items_id.Width = 125
+        '
+        'mtl_customer_items_xref_id
+        '
+        Me.mtl_customer_items_xref_id.DataPropertyName = "mtl_customer_items_xref_id"
+        Me.mtl_customer_items_xref_id.HeaderText = "CUSTOMER ITEMS XREF ID"
+        Me.mtl_customer_items_xref_id.MinimumWidth = 6
+        Me.mtl_customer_items_xref_id.Name = "mtl_customer_items_xref_id"
+        Me.mtl_customer_items_xref_id.Width = 50
+        '
+        'qtyship
+        '
+        Me.qtyship.DataPropertyName = "qtyship"
+        Me.qtyship.HeaderText = "Qty Ship"
+        Me.qtyship.MinimumWidth = 6
+        Me.qtyship.Name = "qtyship"
+        Me.qtyship.ReadOnly = True
+        Me.qtyship.Width = 50
+        '
+        'qtybal
+        '
+        Me.qtybal.DataPropertyName = "qtybal"
+        Me.qtybal.HeaderText = "Qty Bal."
+        Me.qtybal.MinimumWidth = 6
+        Me.qtybal.Name = "qtybal"
+        Me.qtybal.ReadOnly = True
+        Me.qtybal.Width = 50
+        '
+        'jobno
+        '
+        Me.jobno.DataPropertyName = "jobno"
+        Me.jobno.HeaderText = "jobno"
+        Me.jobno.MinimumWidth = 6
+        Me.jobno.Name = "jobno"
+        Me.jobno.Width = 125
+        '
+        'sent_to
+        '
+        Me.sent_to.DataPropertyName = "sent_to_id"
+        Me.sent_to.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.sent_to.HeaderText = "sent_to_id"
+        Me.sent_to.MinimumWidth = 6
+        Me.sent_to.Name = "sent_to"
+        Me.sent_to.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.sent_to.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.sent_to.Width = 125
+        '
+        'st_reorder_bal_kg
+        '
+        Me.st_reorder_bal_kg.DataPropertyName = "st_reorder_bal_kg"
+        DataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle25.Format = "N2"
+        Me.st_reorder_bal_kg.DefaultCellStyle = DataGridViewCellStyle25
+        Me.st_reorder_bal_kg.HeaderText = "S/T Reorder Bal (Kg)"
+        Me.st_reorder_bal_kg.Name = "st_reorder_bal_kg"
+        Me.st_reorder_bal_kg.Width = 90
         '
         'txtNetAmt
         '
@@ -960,7 +1497,7 @@ Partial Class frmSalesOrder
         Me.checkBulkAppInternal.BackColor = System.Drawing.Color.Gold
         Me.checkBulkAppInternal.Location = New System.Drawing.Point(7, -1)
         Me.checkBulkAppInternal.Name = "checkBulkAppInternal"
-        Me.checkBulkAppInternal.Size = New System.Drawing.Size(136, 17)
+        Me.checkBulkAppInternal.Size = New System.Drawing.Size(137, 17)
         Me.checkBulkAppInternal.TabIndex = 35
         Me.checkBulkAppInternal.Text = "Bulk approve internal"
         Me.checkBulkAppInternal.UseVisualStyleBackColor = False
@@ -1088,6 +1625,8 @@ Partial Class frmSalesOrder
         '
         'tabCustomer
         '
+        Me.tabCustomer.Controls.Add(Me.cboPriceListCustomer)
+        Me.tabCustomer.Controls.Add(Me.Label49)
         Me.tabCustomer.Controls.Add(Me.Label48)
         Me.tabCustomer.Controls.Add(Me.Label46)
         Me.tabCustomer.Controls.Add(Me.txtCustAddlInfo)
@@ -1122,7 +1661,7 @@ Partial Class frmSalesOrder
         Me.Label48.AutoSize = True
         Me.Label48.Location = New System.Drawing.Point(13, 111)
         Me.Label48.Name = "Label48"
-        Me.Label48.Size = New System.Drawing.Size(94, 13)
+        Me.Label48.Size = New System.Drawing.Size(95, 13)
         Me.Label48.TabIndex = 48
         Me.Label48.Text = "Customer (Bill to)"
         '
@@ -1203,7 +1742,7 @@ Partial Class frmSalesOrder
         Me.lblCustomersActive.AutoSize = True
         Me.lblCustomersActive.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(222, Byte))
         Me.lblCustomersActive.ForeColor = System.Drawing.Color.Red
-        Me.lblCustomersActive.Location = New System.Drawing.Point(424, 82)
+        Me.lblCustomersActive.Location = New System.Drawing.Point(447, 185)
         Me.lblCustomersActive.Name = "lblCustomersActive"
         Me.lblCustomersActive.Size = New System.Drawing.Size(225, 24)
         Me.lblCustomersActive.TabIndex = 36
@@ -1235,7 +1774,7 @@ Partial Class frmSalesOrder
         Me.txtCustAddr.Multiline = True
         Me.txtCustAddr.Name = "txtCustAddr"
         Me.txtCustAddr.ReadOnly = True
-        Me.txtCustAddr.Size = New System.Drawing.Size(676, 38)
+        Me.txtCustAddr.Size = New System.Drawing.Size(411, 38)
         Me.txtCustAddr.TabIndex = 32
         '
         'btnCustPoUnique
@@ -1246,6 +1785,20 @@ Partial Class frmSalesOrder
         Me.btnCustPoUnique.Size = New System.Drawing.Size(25, 24)
         Me.btnCustPoUnique.TabIndex = 41
         Me.btnCustPoUnique.UseVisualStyleBackColor = True
+        '
+        'mcboCustomersBillToFlag
+        '
+        Me.mcboCustomersBillToFlag.AllowTypeFilter = False
+        Me.mcboCustomersBillToFlag.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.mcboCustomersBillToFlag.DataSource = Nothing
+        Me.mcboCustomersBillToFlag.DisplayMember = Nothing
+        Me.mcboCustomersBillToFlag.Location = New System.Drawing.Point(167, 108)
+        Me.mcboCustomersBillToFlag.Name = "mcboCustomersBillToFlag"
+        Me.mcboCustomersBillToFlag.SelectedIndex = -1
+        Me.mcboCustomersBillToFlag.SelectedValue = Nothing
+        Me.mcboCustomersBillToFlag.Size = New System.Drawing.Size(260, 21)
+        Me.mcboCustomersBillToFlag.TabIndex = 35
+        Me.mcboCustomersBillToFlag.ValueMember = Nothing
         '
         'tabDelivery
         '
@@ -1274,6 +1827,20 @@ Partial Class frmSalesOrder
         Me.tabDelivery.Text = "Delivery details"
         Me.tabDelivery.UseVisualStyleBackColor = True
         '
+        'mcboCustomersShipToFlag
+        '
+        Me.mcboCustomersShipToFlag.AllowTypeFilter = False
+        Me.mcboCustomersShipToFlag.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.mcboCustomersShipToFlag.DataSource = Nothing
+        Me.mcboCustomersShipToFlag.DisplayMember = Nothing
+        Me.mcboCustomersShipToFlag.Location = New System.Drawing.Point(110, 14)
+        Me.mcboCustomersShipToFlag.Name = "mcboCustomersShipToFlag"
+        Me.mcboCustomersShipToFlag.SelectedIndex = -1
+        Me.mcboCustomersShipToFlag.SelectedValue = Nothing
+        Me.mcboCustomersShipToFlag.Size = New System.Drawing.Size(231, 21)
+        Me.mcboCustomersShipToFlag.TabIndex = 46
+        Me.mcboCustomersShipToFlag.ValueMember = Nothing
+        '
         'cboMtl_warehouse
         '
         Me.cboMtl_warehouse.FormattingEnabled = True
@@ -1287,7 +1854,7 @@ Partial Class frmSalesOrder
         Me.Label34.AutoSize = True
         Me.Label34.Location = New System.Drawing.Point(3, 108)
         Me.Label34.Name = "Label34"
-        Me.Label34.Size = New System.Drawing.Size(107, 13)
+        Me.Label34.Size = New System.Drawing.Size(108, 13)
         Me.Label34.TabIndex = 44
         Me.Label34.Text = "Ship By WareHouse"
         '
@@ -1332,7 +1899,7 @@ Partial Class frmSalesOrder
         Me.Label25.AutoSize = True
         Me.Label25.Location = New System.Drawing.Point(356, 64)
         Me.Label25.Name = "Label25"
-        Me.Label25.Size = New System.Drawing.Size(265, 13)
+        Me.Label25.Size = New System.Drawing.Size(264, 13)
         Me.Label25.TabIndex = 37
         Me.Label25.Text = "(This data will be used to close s/o after shipment)"
         '
@@ -1350,7 +1917,7 @@ Partial Class frmSalesOrder
         Me.Label23.AutoSize = True
         Me.Label23.Location = New System.Drawing.Point(352, 40)
         Me.Label23.Name = "Label23"
-        Me.Label23.Size = New System.Drawing.Size(80, 13)
+        Me.Label23.Size = New System.Drawing.Size(79, 13)
         Me.Label23.TabIndex = 35
         Me.Label23.Text = "Tolerance (%) :"
         '
@@ -1381,12 +1948,26 @@ Partial Class frmSalesOrder
         Me.tabTerms.Text = "Payment terms"
         Me.tabTerms.UseVisualStyleBackColor = True
         '
+        'mcboBanks
+        '
+        Me.mcboBanks.AllowTypeFilter = False
+        Me.mcboBanks.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.mcboBanks.DataSource = Nothing
+        Me.mcboBanks.DisplayMember = Nothing
+        Me.mcboBanks.Location = New System.Drawing.Point(112, 103)
+        Me.mcboBanks.Name = "mcboBanks"
+        Me.mcboBanks.SelectedIndex = -1
+        Me.mcboBanks.SelectedValue = Nothing
+        Me.mcboBanks.Size = New System.Drawing.Size(578, 21)
+        Me.mcboBanks.TabIndex = 49
+        Me.mcboBanks.ValueMember = Nothing
+        '
         'Label32
         '
         Me.Label32.AutoSize = True
         Me.Label32.Location = New System.Drawing.Point(16, 108)
         Me.Label32.Name = "Label32"
-        Me.Label32.Size = New System.Drawing.Size(35, 13)
+        Me.Label32.Size = New System.Drawing.Size(36, 13)
         Me.Label32.TabIndex = 21
         Me.Label32.Text = "Bank:"
         '
@@ -1539,7 +2120,7 @@ Partial Class frmSalesOrder
         Me.Label37.AutoSize = True
         Me.Label37.Location = New System.Drawing.Point(265, 194)
         Me.Label37.Name = "Label37"
-        Me.Label37.Size = New System.Drawing.Size(83, 13)
+        Me.Label37.Size = New System.Drawing.Size(82, 13)
         Me.Label37.TabIndex = 55
         Me.Label37.Text = "MTS PER ROLL:"
         '
@@ -1673,7 +2254,7 @@ Partial Class frmSalesOrder
         Me.lblSampleBulkQty.AutoSize = True
         Me.lblSampleBulkQty.Location = New System.Drawing.Point(28, 55)
         Me.lblSampleBulkQty.Name = "lblSampleBulkQty"
-        Me.lblSampleBulkQty.Size = New System.Drawing.Size(89, 13)
+        Me.lblSampleBulkQty.Size = New System.Drawing.Size(90, 13)
         Me.lblSampleBulkQty.TabIndex = 15
         Me.lblSampleBulkQty.Text = "Sample Bulk Qty"
         '
@@ -1892,578 +2473,22 @@ Partial Class frmSalesOrder
         Me.Label40.TabIndex = 3
         Me.Label40.Text = "Objective"
         '
-        'mcboCustomersBillToFlag
-        '
-        Me.mcboCustomersBillToFlag.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.mcboCustomersBillToFlag.DataSource = Nothing
-        Me.mcboCustomersBillToFlag.DisplayMember = Nothing
-        Me.mcboCustomersBillToFlag.Location = New System.Drawing.Point(167, 108)
-        Me.mcboCustomersBillToFlag.Name = "mcboCustomersBillToFlag"
-        Me.mcboCustomersBillToFlag.SelectedIndex = -1
-        Me.mcboCustomersBillToFlag.SelectedValue = Nothing
-        Me.mcboCustomersBillToFlag.Size = New System.Drawing.Size(260, 21)
-        Me.mcboCustomersBillToFlag.TabIndex = 35
-        Me.mcboCustomersBillToFlag.ValueMember = Nothing
-        '
-        'mcboCustomersShipToFlag
-        '
-        Me.mcboCustomersShipToFlag.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.mcboCustomersShipToFlag.DataSource = Nothing
-        Me.mcboCustomersShipToFlag.DisplayMember = Nothing
-        Me.mcboCustomersShipToFlag.Location = New System.Drawing.Point(110, 14)
-        Me.mcboCustomersShipToFlag.Name = "mcboCustomersShipToFlag"
-        Me.mcboCustomersShipToFlag.SelectedIndex = -1
-        Me.mcboCustomersShipToFlag.SelectedValue = Nothing
-        Me.mcboCustomersShipToFlag.Size = New System.Drawing.Size(231, 21)
-        Me.mcboCustomersShipToFlag.TabIndex = 46
-        Me.mcboCustomersShipToFlag.ValueMember = Nothing
-        '
-        'mcboBanks
-        '
-        Me.mcboBanks.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.mcboBanks.DataSource = Nothing
-        Me.mcboBanks.DisplayMember = Nothing
-        Me.mcboBanks.Location = New System.Drawing.Point(112, 103)
-        Me.mcboBanks.Name = "mcboBanks"
-        Me.mcboBanks.SelectedIndex = -1
-        Me.mcboBanks.SelectedValue = Nothing
-        Me.mcboBanks.Size = New System.Drawing.Size(578, 21)
-        Me.mcboBanks.TabIndex = 49
-        Me.mcboBanks.ValueMember = Nothing
-        '
-        'mcboDesignProperties
-        '
-        Me.mcboDesignProperties.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.mcboDesignProperties.DataSource = Nothing
-        Me.mcboDesignProperties.DisplayMember = Nothing
-        Me.mcboDesignProperties.Location = New System.Drawing.Point(34, 64)
-        Me.mcboDesignProperties.Name = "mcboDesignProperties"
-        Me.mcboDesignProperties.SelectedIndex = -1
-        Me.mcboDesignProperties.SelectedValue = Nothing
-        Me.mcboDesignProperties.Size = New System.Drawing.Size(212, 21)
-        Me.mcboDesignProperties.TabIndex = 37
-        Me.mcboDesignProperties.ValueMember = Nothing
-        '
-        'sonoid
-        '
-        Me.sonoid.DataPropertyName = "sonoid"
-        Me.sonoid.Frozen = True
-        Me.sonoid.HeaderText = "S/O No. ID"
-        Me.sonoid.MinimumWidth = 6
-        Me.sonoid.Name = "sonoid"
-        Me.sonoid.Width = 85
-        '
-        'ref_stnoid
-        '
-        Me.ref_stnoid.DataPropertyName = "ref_stnoid"
-        Me.ref_stnoid.Frozen = True
-        Me.ref_stnoid.HeaderText = "Ref. S/T No. ID"
-        Me.ref_stnoid.MinimumWidth = 6
-        Me.ref_stnoid.Name = "ref_stnoid"
-        Me.ref_stnoid.ReadOnly = True
-        Me.ref_stnoid.Width = 85
-        '
-        'design_gwth_nob
-        '
-        Me.design_gwth_nob.DataPropertyName = "design_gwth_nob"
-        DataGridViewCellStyle51.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.design_gwth_nob.DefaultCellStyle = DataGridViewCellStyle51
-        Me.design_gwth_nob.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.[Nothing]
-        Me.design_gwth_nob.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.design_gwth_nob.HeaderText = "Design/Gwth/Nob"
-        Me.design_gwth_nob.MinimumWidth = 6
-        Me.design_gwth_nob.Name = "design_gwth_nob"
-        Me.design_gwth_nob.Visible = False
-        Me.design_gwth_nob.Width = 200
-        '
-        'design_no
-        '
-        Me.design_no.DataPropertyName = "design_no"
-        DataGridViewCellStyle52.BackColor = System.Drawing.Color.Gold
-        Me.design_no.DefaultCellStyle = DataGridViewCellStyle52
-        Me.design_no.Frozen = True
-        Me.design_no.HeaderText = "Design No."
-        Me.design_no.MinimumWidth = 6
-        Me.design_no.Name = "design_no"
-        Me.design_no.Width = 125
-        '
-        'labeldes
-        '
-        Me.labeldes.DataPropertyName = "labeldes"
-        DataGridViewCellStyle53.BackColor = System.Drawing.Color.Gold
-        Me.labeldes.DefaultCellStyle = DataGridViewCellStyle53
-        Me.labeldes.Frozen = True
-        Me.labeldes.HeaderText = "Label Design"
-        Me.labeldes.MinimumWidth = 6
-        Me.labeldes.Name = "labeldes"
-        Me.labeldes.Width = 125
-        '
-        'colRefdesno
-        '
-        Me.colRefdesno.DataPropertyName = "refdesno"
-        Me.colRefdesno.Frozen = True
-        Me.colRefdesno.HeaderText = "Article no."
-        Me.colRefdesno.MinimumWidth = 6
-        Me.colRefdesno.Name = "colRefdesno"
-        Me.colRefdesno.Width = 125
-        '
-        'labelarticle
-        '
-        Me.labelarticle.DataPropertyName = "labelarticle"
-        Me.labelarticle.Frozen = True
-        Me.labelarticle.HeaderText = "Label Article"
-        Me.labelarticle.MinimumWidth = 6
-        Me.labelarticle.Name = "labelarticle"
-        Me.labelarticle.Width = 125
-        '
-        'colGmPerSqM
-        '
-        Me.colGmPerSqM.DataPropertyName = "gmpersqm"
-        Me.colGmPerSqM.HeaderText = "Gm/ Sq.m"
-        Me.colGmPerSqM.MinimumWidth = 6
-        Me.colGmPerSqM.Name = "colGmPerSqM"
-        Me.colGmPerSqM.Width = 50
-        '
-        'Custdes
-        '
-        Me.Custdes.DataPropertyName = "Custdes"
-        DataGridViewCellStyle54.BackColor = System.Drawing.Color.Gold
-        Me.Custdes.DefaultCellStyle = DataGridViewCellStyle54
-        Me.Custdes.HeaderText = "Customer design"
-        Me.Custdes.MinimumWidth = 6
-        Me.Custdes.Name = "Custdes"
-        Me.Custdes.Width = 125
-        '
-        'fwth
-        '
-        Me.fwth.DataPropertyName = "fwth"
-        DataGridViewCellStyle55.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle55.BackColor = System.Drawing.Color.Gold
-        Me.fwth.DefaultCellStyle = DataGridViewCellStyle55
-        Me.fwth.HeaderText = "Finished Width (cm)"
-        Me.fwth.MinimumWidth = 6
-        Me.fwth.Name = "fwth"
-        Me.fwth.Width = 50
-        '
-        'cboWidth
-        '
-        Me.cboWidth.DataPropertyName = "sys_width_id"
-        Me.cboWidth.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.[Nothing]
-        Me.cboWidth.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.cboWidth.HeaderText = "Width"
-        Me.cboWidth.MinimumWidth = 6
-        Me.cboWidth.Name = "cboWidth"
-        Me.cboWidth.Width = 75
-        '
-        'gwth
-        '
-        Me.gwth.DataPropertyName = "gwth"
-        Me.gwth.HeaderText = "Gwth"
-        Me.gwth.MinimumWidth = 6
-        Me.gwth.Name = "gwth"
-        Me.gwth.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.gwth.Width = 50
-        '
-        'sample_fabric_qty
-        '
-        Me.sample_fabric_qty.DataPropertyName = "sample_fabric_qty"
-        Me.sample_fabric_qty.HeaderText = "Sample Fabric Qty"
-        Me.sample_fabric_qty.MinimumWidth = 6
-        Me.sample_fabric_qty.Name = "sample_fabric_qty"
-        Me.sample_fabric_qty.Width = 80
-        '
-        'sample_bulk_qty
-        '
-        Me.sample_bulk_qty.DataPropertyName = "sample_bulk_qty"
-        Me.sample_bulk_qty.HeaderText = "Sample Bulk Qty"
-        Me.sample_bulk_qty.MinimumWidth = 6
-        Me.sample_bulk_qty.Name = "sample_bulk_qty"
-        Me.sample_bulk_qty.Width = 80
-        '
-        'col
-        '
-        Me.col.DataPropertyName = "col"
-        DataGridViewCellStyle56.BackColor = System.Drawing.Color.Gold
-        DataGridViewCellStyle56.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.col.DefaultCellStyle = DataGridViewCellStyle56
-        Me.col.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.[Nothing]
-        Me.col.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.col.HeaderText = "Color Code (Way)"
-        Me.col.MinimumWidth = 6
-        Me.col.Name = "col"
-        Me.col.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.col.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.col.Width = 125
-        '
-        'custcol
-        '
-        Me.custcol.DataPropertyName = "custcol"
-        DataGridViewCellStyle57.BackColor = System.Drawing.Color.Gold
-        Me.custcol.DefaultCellStyle = DataGridViewCellStyle57
-        Me.custcol.HeaderText = "Customer Color"
-        Me.custcol.MinimumWidth = 6
-        Me.custcol.Name = "custcol"
-        Me.custcol.Width = 125
-        '
-        'Column1
-        '
-        Me.Column1.DataPropertyName = "hs_code"
-        Me.Column1.HeaderText = "HS Code"
-        Me.Column1.MinimumWidth = 6
-        Me.Column1.Name = "Column1"
-        Me.Column1.Width = 125
-        '
-        'labdipno
-        '
-        Me.labdipno.DataPropertyName = "labdipno"
-        Me.labdipno.HeaderText = "Labdip No."
-        Me.labdipno.MinimumWidth = 6
-        Me.labdipno.Name = "labdipno"
-        Me.labdipno.Width = 125
-        '
-        'labdip_comment
-        '
-        Me.labdip_comment.DataPropertyName = "labdip_comment"
-        Me.labdip_comment.HeaderText = "Labdip Comment"
-        Me.labdip_comment.MinimumWidth = 6
-        Me.labdip_comment.Name = "labdip_comment"
-        Me.labdip_comment.Width = 125
-        '
-        'labelcolor
-        '
-        Me.labelcolor.DataPropertyName = "labelcolor"
-        Me.labelcolor.HeaderText = "Label Color"
-        Me.labelcolor.MinimumWidth = 6
-        Me.labelcolor.Name = "labelcolor"
-        Me.labelcolor.Width = 125
-        '
-        'labeldata1
-        '
-        Me.labeldata1.DataPropertyName = "labeldata1"
-        Me.labeldata1.HeaderText = "Label Data1"
-        Me.labeldata1.MinimumWidth = 6
-        Me.labeldata1.Name = "labeldata1"
-        Me.labeldata1.Width = 125
-        '
-        'labeldata2
-        '
-        Me.labeldata2.HeaderText = "Label Data2"
-        Me.labeldata2.MinimumWidth = 6
-        Me.labeldata2.Name = "labeldata2"
-        Me.labeldata2.Width = 125
-        '
-        'colCustDelidt
-        '
-        Me.colCustDelidt.DataPropertyName = "cust_shipdt"
-        DataGridViewCellStyle58.BackColor = System.Drawing.Color.Gold
-        Me.colCustDelidt.DefaultCellStyle = DataGridViewCellStyle58
-        Me.colCustDelidt.HeaderText = "Cust. Reqd. Deliv.Date"
-        Me.colCustDelidt.MinimumWidth = 6
-        Me.colCustDelidt.Name = "colCustDelidt"
-        Me.colCustDelidt.ToolTipText = "(dd/MM/yyyy)"
-        Me.colCustDelidt.Width = 75
-        '
-        'shipdt
-        '
-        Me.shipdt.DataPropertyName = "shipdt"
-        DataGridViewCellStyle59.BackColor = System.Drawing.Color.Gold
-        DataGridViewCellStyle59.NullValue = Nothing
-        Me.shipdt.DefaultCellStyle = DataGridViewCellStyle59
-        Me.shipdt.HeaderText = "Ship Date"
-        Me.shipdt.MinimumWidth = 6
-        Me.shipdt.Name = "shipdt"
-        Me.shipdt.ToolTipText = "(dd/MM/yyyy)"
-        Me.shipdt.Width = 75
-        '
-        'confirmed_shipdt
-        '
-        Me.confirmed_shipdt.DataPropertyName = "confirmed_shipdt"
-        DataGridViewCellStyle60.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle60.BackColor = System.Drawing.Color.Gold
-        Me.confirmed_shipdt.DefaultCellStyle = DataGridViewCellStyle60
-        Me.confirmed_shipdt.HeaderText = "Confirmed Ship Date"
-        Me.confirmed_shipdt.MinimumWidth = 6
-        Me.confirmed_shipdt.Name = "confirmed_shipdt"
-        Me.confirmed_shipdt.ToolTipText = "(dd/MM/yyyy)"
-        Me.confirmed_shipdt.Width = 75
-        '
-        'knit_begin_date
-        '
-        Me.knit_begin_date.DataPropertyName = "knit_begin_date"
-        DataGridViewCellStyle61.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.knit_begin_date.DefaultCellStyle = DataGridViewCellStyle61
-        Me.knit_begin_date.HeaderText = "Begin Knitting Date"
-        Me.knit_begin_date.MinimumWidth = 6
-        Me.knit_begin_date.Name = "knit_begin_date"
-        Me.knit_begin_date.ToolTipText = "(dd/MM/yyyy)"
-        Me.knit_begin_date.Visible = False
-        Me.knit_begin_date.Width = 75
-        '
-        'knit_end_date
-        '
-        Me.knit_end_date.DataPropertyName = "knit_end_date"
-        DataGridViewCellStyle62.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.knit_end_date.DefaultCellStyle = DataGridViewCellStyle62
-        Me.knit_end_date.HeaderText = "End Knitting Date"
-        Me.knit_end_date.MinimumWidth = 6
-        Me.knit_end_date.Name = "knit_end_date"
-        Me.knit_end_date.ToolTipText = "(dd/MM/yyyy)"
-        Me.knit_end_date.Visible = False
-        Me.knit_end_date.Width = 75
-        '
-        'dye_end_date
-        '
-        Me.dye_end_date.DataPropertyName = "dye_end_date"
-        DataGridViewCellStyle63.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.dye_end_date.DefaultCellStyle = DataGridViewCellStyle63
-        Me.dye_end_date.HeaderText = "End Dyeing Date"
-        Me.dye_end_date.MinimumWidth = 6
-        Me.dye_end_date.Name = "dye_end_date"
-        Me.dye_end_date.ToolTipText = "(dd/MM/yyyy)"
-        Me.dye_end_date.Visible = False
-        Me.dye_end_date.Width = 75
-        '
-        'yarn_available_date
-        '
-        Me.yarn_available_date.DataPropertyName = "yarn_available_date"
-        DataGridViewCellStyle64.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.yarn_available_date.DefaultCellStyle = DataGridViewCellStyle64
-        Me.yarn_available_date.HeaderText = "Yarn Available Date"
-        Me.yarn_available_date.MinimumWidth = 6
-        Me.yarn_available_date.Name = "yarn_available_date"
-        Me.yarn_available_date.ToolTipText = "(dd/MM/yyyy)"
-        Me.yarn_available_date.Visible = False
-        Me.yarn_available_date.Width = 75
-        '
-        'confirmed_appointment
-        '
-        Me.confirmed_appointment.DataPropertyName = "confirmed_appointment"
-        Me.confirmed_appointment.HeaderText = "Confirmed Appointment"
-        Me.confirmed_appointment.MinimumWidth = 6
-        Me.confirmed_appointment.Name = "confirmed_appointment"
-        Me.confirmed_appointment.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.confirmed_appointment.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.confirmed_appointment.Visible = False
-        Me.confirmed_appointment.Width = 75
-        '
-        'qty
-        '
-        Me.qty.DataPropertyName = "qty"
-        DataGridViewCellStyle65.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle65.BackColor = System.Drawing.Color.Gold
-        DataGridViewCellStyle65.Format = "#.#0"
-        Me.qty.DefaultCellStyle = DataGridViewCellStyle65
-        Me.qty.HeaderText = "Qty."
-        Me.qty.MinimumWidth = 6
-        Me.qty.Name = "qty"
-        Me.qty.Width = 50
-        '
-        'uom
-        '
-        Me.uom.DataPropertyName = "uom"
-        Me.uom.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.[Nothing]
-        Me.uom.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.uom.HeaderText = "UOM"
-        Me.uom.MinimumWidth = 6
-        Me.uom.Name = "uom"
-        Me.uom.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.uom.Width = 50
-        '
-        'price
-        '
-        Me.price.DataPropertyName = "price"
-        DataGridViewCellStyle66.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle66.Format = "0.0000"
-        DataGridViewCellStyle66.NullValue = Nothing
-        Me.price.DefaultCellStyle = DataGridViewCellStyle66
-        Me.price.HeaderText = "Unit Price"
-        Me.price.MinimumWidth = 6
-        Me.price.Name = "price"
-        Me.price.Width = 60
-        '
-        'colProdLossPerc
-        '
-        Me.colProdLossPerc.DataPropertyName = "prod_loss_perc"
-        DataGridViewCellStyle67.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle67.Format = "N2"
-        Me.colProdLossPerc.DefaultCellStyle = DataGridViewCellStyle67
-        Me.colProdLossPerc.HeaderText = "Qty + Loss Perc"
-        Me.colProdLossPerc.MinimumWidth = 6
-        Me.colProdLossPerc.Name = "colProdLossPerc"
-        Me.colProdLossPerc.Width = 125
-        '
-        'colQtyWithLoss
-        '
-        Me.colQtyWithLoss.DataPropertyName = "qty_with_loss"
-        DataGridViewCellStyle68.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle68.Format = "N2"
-        Me.colQtyWithLoss.DefaultCellStyle = DataGridViewCellStyle68
-        Me.colQtyWithLoss.HeaderText = "Qty with Loss"
-        Me.colQtyWithLoss.MinimumWidth = 6
-        Me.colQtyWithLoss.Name = "colQtyWithLoss"
-        Me.colQtyWithLoss.Width = 125
-        '
-        'show_price
-        '
-        Me.show_price.DataPropertyName = "show_price"
-        DataGridViewCellStyle69.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle69.Format = "#.#0"
-        Me.show_price.DefaultCellStyle = DataGridViewCellStyle69
-        Me.show_price.HeaderText = "Under Value Price"
-        Me.show_price.MinimumWidth = 6
-        Me.show_price.Name = "show_price"
-        Me.show_price.Visible = False
-        Me.show_price.Width = 50
-        '
-        'curr
-        '
-        Me.curr.DataPropertyName = "curr"
-        DataGridViewCellStyle70.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle70.BackColor = System.Drawing.Color.Gold
-        DataGridViewCellStyle70.Format = "#.###0"
-        Me.curr.DefaultCellStyle = DataGridViewCellStyle70
-        Me.curr.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.[Nothing]
-        Me.curr.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.curr.HeaderText = "Currency"
-        Me.curr.MinimumWidth = 6
-        Me.curr.Name = "curr"
-        Me.curr.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.curr.Width = 55
-        '
-        'exrt
-        '
-        Me.exrt.DataPropertyName = "exrt"
-        DataGridViewCellStyle71.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle71.BackColor = System.Drawing.Color.Gold
-        DataGridViewCellStyle71.Format = "#.###0"
-        Me.exrt.DefaultCellStyle = DataGridViewCellStyle71
-        Me.exrt.HeaderText = "Exchange Rate To BAHT"
-        Me.exrt.MinimumWidth = 6
-        Me.exrt.Name = "exrt"
-        Me.exrt.Width = 60
-        '
-        'gr_itamt
-        '
-        Me.gr_itamt.DataPropertyName = "gr_itamt"
-        DataGridViewCellStyle72.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle72.Format = "0.#0"
-        Me.gr_itamt.DefaultCellStyle = DataGridViewCellStyle72
-        Me.gr_itamt.HeaderText = "Item Amount"
-        Me.gr_itamt.MinimumWidth = 6
-        Me.gr_itamt.Name = "gr_itamt"
-        Me.gr_itamt.Width = 60
-        '
-        'discamt
-        '
-        Me.discamt.DataPropertyName = "discamt"
-        DataGridViewCellStyle73.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle73.BackColor = System.Drawing.Color.Gold
-        DataGridViewCellStyle73.Format = "0.#0"
-        Me.discamt.DefaultCellStyle = DataGridViewCellStyle73
-        Me.discamt.HeaderText = "Discount Amount"
-        Me.discamt.MinimumWidth = 6
-        Me.discamt.Name = "discamt"
-        Me.discamt.Width = 55
-        '
-        'nt_itamt
-        '
-        Me.nt_itamt.DataPropertyName = "nt_itamt"
-        DataGridViewCellStyle74.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle74.Format = "0.#0"
-        Me.nt_itamt.DefaultCellStyle = DataGridViewCellStyle74
-        Me.nt_itamt.HeaderText = "Net Item Amount"
-        Me.nt_itamt.MinimumWidth = 6
-        Me.nt_itamt.Name = "nt_itamt"
-        Me.nt_itamt.Width = 60
-        '
-        'closed2
-        '
-        Me.closed2.DataPropertyName = "closed"
-        Me.closed2.HeaderText = "Closed"
-        Me.closed2.MinimumWidth = 6
-        Me.closed2.Name = "closed2"
-        Me.closed2.Width = 50
-        '
-        'cboid_so_routing
-        '
-        Me.cboid_so_routing.DataPropertyName = "id_so_routing"
-        Me.cboid_so_routing.HeaderText = "S/O Route"
-        Me.cboid_so_routing.MinimumWidth = 6
-        Me.cboid_so_routing.Name = "cboid_so_routing"
-        Me.cboid_so_routing.Width = 125
-        '
-        'so_line_id
-        '
-        Me.so_line_id.DataPropertyName = "so_line_id"
-        Me.so_line_id.HeaderText = "S/O Line ID"
-        Me.so_line_id.MinimumWidth = 6
-        Me.so_line_id.Name = "so_line_id"
-        Me.so_line_id.ReadOnly = True
-        Me.so_line_id.Visible = False
-        Me.so_line_id.Width = 125
-        '
-        'mtl_customer_items_id
-        '
-        Me.mtl_customer_items_id.DataPropertyName = "mtl_customer_items_id"
-        Me.mtl_customer_items_id.HeaderText = "CUSTOMER ITEMS ID"
-        Me.mtl_customer_items_id.MinimumWidth = 6
-        Me.mtl_customer_items_id.Name = "mtl_customer_items_id"
-        Me.mtl_customer_items_id.Width = 125
-        '
-        'mtl_customer_items_xref_id
-        '
-        Me.mtl_customer_items_xref_id.DataPropertyName = "mtl_customer_items_xref_id"
-        Me.mtl_customer_items_xref_id.HeaderText = "CUSTOMER ITEMS XREF ID"
-        Me.mtl_customer_items_xref_id.MinimumWidth = 6
-        Me.mtl_customer_items_xref_id.Name = "mtl_customer_items_xref_id"
-        Me.mtl_customer_items_xref_id.Width = 50
-        '
-        'qtyship
-        '
-        Me.qtyship.DataPropertyName = "qtyship"
-        Me.qtyship.HeaderText = "Qty Ship"
-        Me.qtyship.MinimumWidth = 6
-        Me.qtyship.Name = "qtyship"
-        Me.qtyship.ReadOnly = True
-        Me.qtyship.Width = 50
-        '
-        'qtybal
-        '
-        Me.qtybal.DataPropertyName = "qtybal"
-        Me.qtybal.HeaderText = "Qty Bal."
-        Me.qtybal.MinimumWidth = 6
-        Me.qtybal.Name = "qtybal"
-        Me.qtybal.ReadOnly = True
-        Me.qtybal.Width = 50
-        '
-        'jobno
-        '
-        Me.jobno.DataPropertyName = "jobno"
-        Me.jobno.HeaderText = "jobno"
-        Me.jobno.MinimumWidth = 6
-        Me.jobno.Name = "jobno"
-        Me.jobno.Width = 125
-        '
-        'sent_to
-        '
-        Me.sent_to.DataPropertyName = "sent_to_id"
-        Me.sent_to.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.sent_to.HeaderText = "sent_to_id"
-        Me.sent_to.MinimumWidth = 6
-        Me.sent_to.Name = "sent_to"
-        Me.sent_to.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.sent_to.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.sent_to.Width = 125
-        '
-        'st_reorder_bal_kg
-        '
-        Me.st_reorder_bal_kg.DataPropertyName = "st_reorder_bal_kg"
-        DataGridViewCellStyle75.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle75.Format = "N2"
-        Me.st_reorder_bal_kg.DefaultCellStyle = DataGridViewCellStyle75
-        Me.st_reorder_bal_kg.HeaderText = "S/T Reorder Bal (Kg)"
-        Me.st_reorder_bal_kg.Name = "st_reorder_bal_kg"
-        Me.st_reorder_bal_kg.Width = 90
+        'Label49
+        '
+        Me.Label49.AutoSize = True
+        Me.Label49.Location = New System.Drawing.Point(432, 92)
+        Me.Label49.Name = "Label49"
+        Me.Label49.Size = New System.Drawing.Size(103, 13)
+        Me.Label49.TabIndex = 49
+        Me.Label49.Text = "Price List Customer"
+        '
+        'cboPriceListCustomer
+        '
+        Me.cboPriceListCustomer.FormattingEnabled = True
+        Me.cboPriceListCustomer.Location = New System.Drawing.Point(433, 108)
+        Me.cboPriceListCustomer.Name = "cboPriceListCustomer"
+        Me.cboPriceListCustomer.Size = New System.Drawing.Size(239, 21)
+        Me.cboPriceListCustomer.TabIndex = 50
         '
         'frmSalesOrder
         '
@@ -2494,6 +2519,7 @@ Partial Class frmSalesOrder
         Me.GroupBox1.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
+        CType(Me.mcboDesignProperties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
         CType(Me.grdSalesOrder, System.ComponentModel.ISupportInitialize).EndInit()
@@ -2502,10 +2528,13 @@ Partial Class frmSalesOrder
         Me.tabSales.PerformLayout()
         Me.tabCustomer.ResumeLayout(False)
         Me.tabCustomer.PerformLayout()
+        CType(Me.mcboCustomersBillToFlag, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabDelivery.ResumeLayout(False)
         Me.tabDelivery.PerformLayout()
+        CType(Me.mcboCustomersShipToFlag, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabTerms.ResumeLayout(False)
         Me.tabTerms.PerformLayout()
+        CType(Me.mcboBanks, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabOther.ResumeLayout(False)
         Me.tabOther.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
@@ -2520,10 +2549,6 @@ Partial Class frmSalesOrder
         Me.GroupBox5.ResumeLayout(False)
         Me.grpSampleRequest.ResumeLayout(False)
         Me.grpSampleRequest.PerformLayout()
-        CType(Me.mcboCustomersBillToFlag, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.mcboCustomersShipToFlag, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.mcboBanks, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.mcboDesignProperties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -2745,4 +2770,6 @@ Partial Class frmSalesOrder
     Friend WithEvents jobno As DataGridViewTextBoxColumn
     Friend WithEvents sent_to As DataGridViewComboBoxColumn
     Friend WithEvents st_reorder_bal_kg As DataGridViewTextBoxColumn
+    Friend WithEvents cboPriceListCustomer As ComboBox
+    Friend WithEvents Label49 As Label
 End Class

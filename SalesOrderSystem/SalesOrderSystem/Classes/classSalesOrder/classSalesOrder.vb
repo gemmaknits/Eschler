@@ -79,6 +79,7 @@ Public Class classSalesOrder
         Dim h62_cust_addl_info As String
         Dim h63_sample_fabric_qty As Double
         Dim h64_sample_bulk_qty As Double
+        Dim h65_price_list_header_id As Nullable(Of Int64)
         '-------------------------
     End Structure
 
@@ -325,6 +326,7 @@ Public Class classSalesOrder
             comm.Parameters.AddWithValue("@p_cust_addl_info", .h62_cust_addl_info.Trim)
             comm.Parameters.AddWithValue("@p_sample_fabric_qty", .h63_sample_fabric_qty)
             comm.Parameters.AddWithValue("@p_sample_bulk_qty", .h64_sample_bulk_qty)
+            comm.Parameters.AddWithValue("@p_price_list_header_id", .h65_price_list_header_id)
 
 
             '-----------------------------------

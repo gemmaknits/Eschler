@@ -400,6 +400,7 @@ export default function App() {
       fabric_name: '', composition: '',
       full_width_cm: '', usable_width_cm: '', weight_gsm: '', moq: '',
       price_line_date: today(),
+      active: 'Y',
       source_row: null,
       cells: {}
     }]);
@@ -473,6 +474,10 @@ export default function App() {
       usable_width_cm: last?.usable_width_cm || '',
       weight_gsm: last?.weight_gsm || '',
       moq: last?.moq || '',
+      /* A new line is a line you intend to use. The column defaults to 'Y' and
+         so does every insert path, but the draft says so itself rather than
+         leaving the grid to infer it from an absent field. */
+      active: 'Y',
       /* Shown straight away rather than waiting for the save to come back:
          the procedures default it to today as well, so the two agree. */
       price_line_date: today(),
@@ -737,7 +742,13 @@ export default function App() {
           fabric_name: row.fabric_name, composition: row.composition,
           full_width_cm: row.full_width_cm, usable_width_cm: row.usable_width_cm,
           weight_gsm: row.weight_gsm, moq: row.moq,
-          price_line_date: row.price_line_date || null
+          price_line_date: row.price_line_date || null,
+          active: row.active || 'Y',
+          /* "+ Add line" means a new row. Without this the procedure joins the
+             first set with the same design and quantity band, and the line the
+             user just added disappears into a row further up - inheriting its
+             position and its withdrawn flag. */
+          force_new_set: true
         };
 
         /* A draft opened with "Insert here" knows where it belongs, and goes

@@ -260,6 +260,8 @@ app.MapPost("/price_list/detail", async (Db db, HttpRequest r, System.Text.Json.
         Num("@so_price_list_detail_id", LJ(b, "detail_id")),
         Num("@so_price_list_header_id", LJ(b, "header_id")),
         Int32P("@set_no",               IJ(b, "set_no")),
+        // an explicit new line must not be absorbed into an existing row
+        Flag("@force_new_set",          BJ(b, "force_new_set")),
         Text("@article",                SJ(b, "article"), 120),
         Text("@design_no",              SJ(b, "design_no"), 60),
         Text("@article_variant",        SJ(b, "article_variant"), 20),

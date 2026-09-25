@@ -181,6 +181,13 @@ CREATE PROCEDURE [SO].[P_SO_PRICE_LIST_PKG_update_price_list_detail]
     @so_price_list_detail_id bigint        = null,
     @so_price_list_header_id bigint        = null,
     @set_no                  int           = null,   -- which grid row to join
+    /* "+ Add line" and "Insert here blank" mean a NEW row, not a tier added to
+       one that already exists. Without this they were silently absorbed: the
+       lookup below joins the first set with the same design and quantity band,
+       so a new line typed against a design already in the list vanished into
+       that design's existing row - jumping away from where it was added, and
+       taking on that row's appearance, withdrawn flag and all. */
+    @force_new_set           bit           = 0,
     @design_no               nvarchar(60)  = null,   -- the identifier; bind as string
     @article                 nvarchar(120) = null,   -- mirror of design_no, kept for get_price
     @article_variant         nvarchar(20)  = null,
@@ -294,7 +301,7 @@ BEGIN
            The caller should pass @set_no, since only it knows which row was
            clicked when several share an article and band. Without it, join the
            first set with that article and band, or start a new one. */
-        IF @set_no IS NULL
+        IF @set_no IS NULL AND @force_new_set = 0
             SELECT TOP 1 @set_no = set_no
             FROM   SO.so_price_list_detail
             WHERE  so_price_list_header_id = @so_price_list_header_id

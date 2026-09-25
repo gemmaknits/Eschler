@@ -209,6 +209,10 @@ export default function App() {
     narrowed && tiersInData.length ? [...tiersInData, ...pinned.tiers]
                                    : [...shape.tiers, ...tiersInData]);
   const currenciesInData = grid.currenciesInData || [];
+  /* Columns that hold a real quote, as opposed to columns that merely have
+     lines. Only these are locked against removal. */
+  const tiersPriced = grid.tiersPriced || [];
+  const currenciesPriced = grid.currenciesPriced || [];
   const currencies = ['USD', 'THB'].filter(c =>
     narrowed && currenciesInData.length
       ? (currenciesInData.includes(c) || pinned.currencies.includes(c))
@@ -784,17 +788,46 @@ export default function App() {
 
   const applyShape = useCallback(async (newTiers, newCurrencies) => {
     setShowCols(false);
+    const goneTiers = tiers.filter(t => !newTiers.includes(t));
+    const goneCcys  = currencies.filter(c => !newCurrencies.includes(c));
+    const added     = [...newTiers.filter(t => !tiers.includes(t)),
+                       ...newCurrencies.filter(c => !currencies.includes(c))];
+
     setShape({ tiers: newTiers, currencies: newCurrencies });
     setPinned({ tiers: newTiers, currencies: newCurrencies });
+    setBusy(true);
     try {
+      /* A column is not just a heading: it is the lines behind it. Removing one
+         takes those lines with it - soft, so a mistake is recoverable - and the
+         procedure refuses outright if any of them carry a real price. The menu
+         will not offer a priced column, so this is the second lock rather than
+         the first. */
+      let removed = 0;
+      for (const t of goneTiers)
+        removed += (await api.removeColumn(headerId, { color_tier: t }))?.lines_removed ?? 0;
+      for (const c of goneCcys)
+        removed += (await api.removeColumn(headerId, { currency: c }))?.lines_removed ?? 0;
+
       await api.saveGridShape(headerId, {
         tier_set: newTiers.join(','),
         currency_set: newCurrencies.join(',')
       });
-      say('Columns saved for this list');
+
+      /* A column nobody can type into is just a heading. Adding one opens a
+         blank line carrying it, so there is somewhere to put the first price -
+         a draft, so it costs nothing until a design and a price are typed. */
+      if (added.length) addRow();
+
+      say(removed
+        ? `Columns saved — ${removed} empty line${removed === 1 ? '' : 's'} removed`
+        : added.length
+          ? `Columns saved — a blank line is waiting for ${added.join(', ')}`
+          : 'Columns saved for this list');
+      if (removed) reload(true);
       refreshLists();
     } catch (err) { setError(err.message); }
-  }, [headerId, say]);
+    finally { setBusy(false); }
+  }, [headerId, say, tiers, currencies, addRow, reload]);
 
   /* ---- header created or edited -------------------------------------------
      Refresh the nav, then open the list. A brand-new list has no lines, so the
@@ -995,7 +1028,7 @@ export default function App() {
       {showCols && (
         <ColumnsMenu
           tiers={tiers} currencies={currencies} allTiers={allTiers}
-          tiersInData={tiersInData} currenciesInData={currenciesInData}
+          tiersInData={tiersPriced} currenciesInData={currenciesPriced}
           anchor={colBtnRef}
           onApply={applyShape} onClose={() => setShowCols(false)}
         />

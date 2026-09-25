@@ -123,6 +123,11 @@ export const api = {
   setVerified: (headerId, body) =>
     call(`/price_list/${headerId}/verified`, { method: 'POST', body: JSON.stringify(body) }),
 
+  /* Take a colour tier or a currency off a list. The procedure refuses while
+     the column holds a real price, and says how many. */
+  removeColumn: (headerId, body) =>
+    call(`/price_list/${headerId}/column/remove`, { method: 'POST', body: JSON.stringify(body) }),
+
   saveGridShape: (headerId, body) =>
     call(`/price_list/${headerId}/grid_shape`, { method: 'POST', body: JSON.stringify(body) }),
 
@@ -186,6 +191,8 @@ export function pivotToGrid(rows) {
   const byBase = new Map();    // base key -> grid rows ("buckets") for that key
   const tiers = new Set();
   const currencies = new Set();
+  const tiersPriced = new Set();
+  const currenciesPriced = new Set();
   const siblings = new Map();  // business key -> every detail line sharing it
 
   const baseKeyOf = d => [d.design_no, d.article_variant || '', d.qty_min,
@@ -223,6 +230,14 @@ export function pivotToGrid(rows) {
   for (const d of rows) {
     tiers.add(d.color_tier);
     currencies.add((d.currency || '').trim());
+    /* A line existing is not the same as a price being quoted. Zero is what
+       the other half of a USD/THB pair is born as when only one side was
+       typed, and a column of those is empty in every sense that matters - it
+       can be removed, where a column holding a real price cannot. */
+    if (d.price !== null && d.price !== undefined && Number(d.price) !== 0) {
+      tiersPriced.add(d.color_tier);
+      currenciesPriced.add((d.currency || '').trim());
+    }
 
     const bk = bizKeyOf(d, d.color_tier, d.currency);
     if (!siblings.has(bk)) siblings.set(bk, []);
@@ -277,6 +292,8 @@ export function pivotToGrid(rows) {
     rows: gridRows,
     tiersInData: [...tiers],
     currenciesInData: [...currencies].filter(Boolean),
+    tiersPriced: [...tiersPriced],
+    currenciesPriced: [...currenciesPriced].filter(Boolean),
     siblings
   };
 }

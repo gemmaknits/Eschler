@@ -356,6 +356,18 @@ app.MapPost("/price_list/{id:long}/set/insert", async (Db db, HttpRequest r, lon
         Text("@logempcd",               Who(r), 15)
     })));
 
+// Taking a colour tier or a currency off a list. Refused by the procedure
+// while the column holds a real price, so the rule cannot be bypassed by a
+// caller that forgot to check.
+app.MapPost("/price_list/{id:long}/column/remove", async (Db db, HttpRequest r, long id, System.Text.Json.JsonElement b) =>
+    Results.Ok(await db.SingleAsync("P_SO_PRICE_LIST_PKG_remove_price_list_column", new[]
+    {
+        Num("@so_price_list_header_id", id),
+        Text("@color_tier",             SJ(b, "color_tier"), 60),
+        Chr("@currency",                SJ(b, "currency"), 3),
+        Text("@logempcd",               Who(r), 15)
+    })));
+
 // Right-click Delete. Soft, like every delete here: delete_mark goes to 'Y' and
 // the rows stay in the table, out of sight of every select.
 app.MapPost("/price_list/{id:long}/set/delete", async (Db db, HttpRequest r, long id, System.Text.Json.JsonElement b) =>

@@ -1,6 +1,19 @@
 /* ============================================================================
    Rebuild the price lines from the re-scan.
 
+   *** THIS SCRIPT IS DESTRUCTIVE AND THE BOOK IS LIVE. ***
+
+   It hard-deletes every price line of every sheet in the stage table and
+   reloads them from the scan. It was the right thing to run once, on
+   2026-09-18, when the data was an import nobody depended on. It is not the
+   right thing to run now: people are correcting these lines by hand, there is
+   no history table to recover an overwritten value from, and the snapshots
+   predate the live editing so restoring one would lose the corrections rather
+   than save them.
+
+   Both writing batches below refuse while any line carries work done since the
+   last load. That guard is self-arming and deliberately awkward to remove.
+
    WHAT IS KEPT
    Everything a person put there. A header that already exists for a sheet
    keeps its id, its name, its customer mapping, its validity dates and its
@@ -34,6 +47,28 @@ GO
    empty. That happened once - the snapshot is what made it recoverable. */
 SET XACT_ABORT ON;
 GO
+
+/* ---- REFUSE IF THE BOOK IS LIVE -------------------------------------------
+   Self-arming, so it cannot be forgotten: every line this script loads is
+   stamped created_by = 'RESCAN' with no last_updated_date. The moment anybody
+   edits or inserts one, that stops being true, and this refuses.
+
+   Repeated in each writing batch on purpose - a DECLAREd flag does not survive
+   GO, and in sqlcmd a RAISERROR in one batch does not stop the next.
+
+   To rebuild anyway you must mean it: take a fresh snapshot, then delete this
+   block from both batches. See db/DEPLOY.md. This is the batch that deletes and reloads the price lines. */
+DECLARE @touched int = (
+    SELECT COUNT(*) FROM SO.so_price_list_detail
+    WHERE  delete_mark <> 'Y'
+      AND  (ISNULL(created_by, '') <> 'RESCAN' OR last_updated_date IS NOT NULL));
+
+IF @touched > 0
+BEGIN
+    RAISERROR('REFUSED: the price book is live. %d price line(s) carry work done since the last load, and this script deletes every line it reloads. There is no history table to get them back, and the snapshots predate the live editing. See db/DEPLOY.md.',
+              16, 1, @touched);
+    RETURN;
+END
 
 DECLARE @who varchar(15) = 'RESCAN';
 
@@ -134,6 +169,28 @@ COMMIT;
 GO
 
 /* ---- 4. the grid shape of each list, from what its lines actually use ---- */
+/* ---- REFUSE IF THE BOOK IS LIVE -------------------------------------------
+   Self-arming, so it cannot be forgotten: every line this script loads is
+   stamped created_by = 'RESCAN' with no last_updated_date. The moment anybody
+   edits or inserts one, that stops being true, and this refuses.
+
+   Repeated in each writing batch on purpose - a DECLAREd flag does not survive
+   GO, and in sqlcmd a RAISERROR in one batch does not stop the next.
+
+   To rebuild anyway you must mean it: take a fresh snapshot, then delete this
+   block from both batches. See db/DEPLOY.md. This batch rewrites every list's tier_set and currency_set. */
+DECLARE @touched int = (
+    SELECT COUNT(*) FROM SO.so_price_list_detail
+    WHERE  delete_mark <> 'Y'
+      AND  (ISNULL(created_by, '') <> 'RESCAN' OR last_updated_date IS NOT NULL));
+
+IF @touched > 0
+BEGIN
+    RAISERROR('REFUSED: the price book is live. %d price line(s) carry work done since the last load, and this script deletes every line it reloads. There is no history table to get them back, and the snapshots predate the live editing. See db/DEPLOY.md.',
+              16, 1, @touched);
+    RETURN;
+END
+
 UPDATE h
 SET    h.tier_set     = t.tiers,
        h.currency_set = c.currencies

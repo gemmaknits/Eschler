@@ -1,11 +1,24 @@
 import { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 
+/* Two decimals, both currencies, always - so a column of prices reads as a
+   column of prices rather than 1.8 above 2.15 above 216.
+
+   The column is decimal(18,4) and 14 lines in the book do use the third and
+   fourth place (USD 6.152, THB 54.922). Those are SHOWN rounded and STORED
+   whole: the editor is seeded from the stored number, not from this, so
+   opening such a cell shows 6.152 and pressing Enter changes nothing. Nothing
+   here can round anything away. */
 const money = (v, ccy) => {
   if (v === null || v === undefined || v === '') return '';
   const n = Number(v);
-  return ccy === 'THB'
-    ? n.toFixed(2).replace(/\.00$/, '')
-    : n.toFixed(4).replace(/0+$/, '').replace(/\.$/, '');
+  return Number.isFinite(n) ? n.toFixed(2) : '';
+};
+
+/* True when the stored price carries more than the two places shown, so the
+   cell can say so on hover instead of quietly hiding it. */
+const isRounded = v => {
+  const n = Number(v);
+  return Number.isFinite(n) && Number(n.toFixed(2)) !== n;
 };
 
 /* Row-level columns, editable. `num` writes an integer, `blank` means the empty
@@ -832,7 +845,11 @@ export default function PriceGrid({
                   <td
                     key={col.key || `${col.currency}${col.tier}`}
                     className={cls.join(' ')}
-                    title={col.wide && row[col.key] ? row[col.key] : undefined}
+                    title={
+                      col.kind === 'price' && d && isRounded(d.price)
+                        ? `Stored as ${d.price} — shown to two places`
+                        : col.wide && row[col.key] ? row[col.key] : undefined
+                    }
                     data-r={ri} data-c={ci}
                     onClick={e => {
                       /* The bottom few pixels of a wide cell are its own

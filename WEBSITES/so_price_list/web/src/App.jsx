@@ -61,6 +61,14 @@ export default function App() {
   // hidden by default; the header carries each list's own choice
   const [hideInactive, setHideInactive] = useState(true);
   const [showCols, setShowCols] = useState(false);
+  /* Columns chosen by hand from the Columns menu, this session.
+
+     The narrowing further down hides tiers the filtered rows do not use, which
+     is right for a list that declares seven of them and prices two - but wrong
+     the moment somebody asks for a column by name and it does not appear. It
+     looked like the menu had not worked; F5 "fixed" it only because a reload
+     clears the filter. An explicit choice outranks the narrowing. */
+  const [pinned, setPinned] = useState({ tiers: [], currencies: [] });
   /* The Columns popover opens against this button rather than in the corner
      of the window, so the panel appears where you clicked. */
   const colBtnRef = useRef(null);
@@ -112,6 +120,8 @@ export default function App() {
   }, []);
 
   const header = lists.find(l => l.so_price_list_header_id === headerId);
+
+  useEffect(() => { setPinned({ tiers: [], currencies: [] }); }, [headerId]);
 
   /* Columns come from the header, so an empty list still has somewhere to type. */
   useEffect(() => {
@@ -196,12 +206,12 @@ export default function App() {
   const narrowed = Boolean(filter.trim()) || conflictsOnly;
   const tiersInData = grid.tiersInData || [];
   const tiers = orderTiers(
-    narrowed && tiersInData.length ? tiersInData
+    narrowed && tiersInData.length ? [...tiersInData, ...pinned.tiers]
                                    : [...shape.tiers, ...tiersInData]);
   const currenciesInData = grid.currenciesInData || [];
   const currencies = ['USD', 'THB'].filter(c =>
     narrowed && currenciesInData.length
-      ? currenciesInData.includes(c)
+      ? (currenciesInData.includes(c) || pinned.currencies.includes(c))
       : ((shape.currencies.length ? shape.currencies : ['USD']).includes(c)
          || currenciesInData.includes(c)));
   const visibleRows = hideInactive
@@ -775,6 +785,7 @@ export default function App() {
   const applyShape = useCallback(async (newTiers, newCurrencies) => {
     setShowCols(false);
     setShape({ tiers: newTiers, currencies: newCurrencies });
+    setPinned({ tiers: newTiers, currencies: newCurrencies });
     try {
       await api.saveGridShape(headerId, {
         tier_set: newTiers.join(','),
@@ -984,6 +995,7 @@ export default function App() {
       {showCols && (
         <ColumnsMenu
           tiers={tiers} currencies={currencies} allTiers={allTiers}
+          tiersInData={tiersInData} currenciesInData={currenciesInData}
           anchor={colBtnRef}
           onApply={applyShape} onClose={() => setShowCols(false)}
         />

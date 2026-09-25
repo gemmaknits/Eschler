@@ -906,3 +906,8 @@ td input.edit.datein{
 :root:not([data-theme="light"]) td input.edit.datein::-webkit-calendar-picker-indicator{
   filter:invert(1) brightness(1.4);
 }
+
+/* A column that holds prices: the box is disabled, and it should look it
+   rather than just silently refusing to move. */
+.chk.locked{cursor:not-allowed; color:var(--muted)}
+.chk.locked input{cursor:not-allowed}

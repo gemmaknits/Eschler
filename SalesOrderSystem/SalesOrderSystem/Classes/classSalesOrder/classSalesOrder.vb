@@ -416,6 +416,7 @@ Public Class classSalesOrder
                 comm.Parameters.AddWithValue("@p_hs_code", config.IsNull(.Item(i)("hs_code"), Nothing)) 'John 18/05/2026
                 comm.Parameters.AddWithValue("@p_sample_fabric_qty", config.IsNull(.Item(i)("sample_fabric_qty"), 0))
                 comm.Parameters.AddWithValue("@p_sample_bulk_qty", config.IsNull(.Item(i)("sample_bulk_qty"), 0))
+                comm.Parameters.AddWithValue("@p_price_list_override_reason", config.IsNull(.Item(i)("price_list_override_reason"), Nothing))
 
                 ' last Record update
                 comm.Parameters.AddWithValue("@logempcd", SOH.h30_log_empcd) 'last record update
@@ -501,6 +502,7 @@ Public Class classSalesOrder
                 comm.Parameters.AddWithValue("@p_hs_code", config.IsNull(.Item(i)("hs_code"), Nothing)) 'John 18/05/2026
                 comm.Parameters.AddWithValue("@p_sample_fabric_qty", config.IsNull(.Item(i)("sample_fabric_qty"), 0))
                 comm.Parameters.AddWithValue("@p_sample_bulk_qty", config.IsNull(.Item(i)("sample_bulk_qty"), 0))
+                comm.Parameters.AddWithValue("@p_price_list_override_reason", config.IsNull(.Item(i)("price_list_override_reason"), Nothing))
 
                 ' last Record update
                 comm.Parameters.AddWithValue("@logempcd", SOH.h30_log_empcd) 'last record update

@@ -17,18 +17,28 @@
    tell an answer from a list of candidates without counting rows. It is last,
    so anything reading the specified columns by position is unaffected.
 
-   COLOUR TIERS, in the order they are tried:
+   COLOUR TIERS. There are two kinds of request and they behave differently.
 
-     1. the tier named exactly by @p_color_code       ('PFD' -> PFD)
-     2. for PFE or PFD only, a combined tier          ('PFE' -> PFE/PFD)
-     3. All_colors, the catch-all
+   UNDYED - PFE, PFD, PFE/PFD, PFD/PFE, Greige. These are cloth states, not
+   colours, and they are priced quite differently from dyed goods. Such a
+   request is answered ONLY from an undyed tier:
 
-   Step 3 is NOT in the written spec and is the one judgement call here. The
-   book holds nine tiers, and 5,020 of 8,650 active lines are All_colors: an
-   ordinary colour code like BLACK matches no tier at all, and without this
-   step every such lookup would come back "colour unclear" and resolve
-   nothing. If a real colour should instead be refused rather than priced at
-   All_colors, delete step 3 and the proc will report it as ambiguous.
+     1. the tier named exactly           ('PFD' -> PFD)
+     2. for PFE or PFD, a combined tier  ('PFE' -> PFE/PFD, or PFD/PFE)
+
+   and if the design has no undyed tier at all, NOTHING is returned. It must
+   not fall through to All_colors: on the ANITA list 257035AA/12 is priced only
+   at All_colors, and asking for PFE was being answered with the dyed price of
+   5.95 - a quote for goods the customer did not order.
+
+   DYED - anything else, including a real colour code like BLACK and the shade
+   tiers White, Light, Medium, Dark:
+
+     1. the tier named exactly           ('Light' -> Light)
+     2. All_colors, the catch-all
+
+   All_colors is 5,020 of the 8,650 active lines and is what an ordinary colour
+   is meant to be priced from, so that fallback stays for dyed requests only.
 
    DESIGN NUMBERS. The order line usually carries a fully qualified design -
    255434AA/11 - where the price list may only hold the base, 255434. So the
@@ -228,19 +238,29 @@ BEGIN
     /* ---- 2. which colour tier applies ---- */
     DECLARE @tier nvarchar(60) = NULL;
 
+    /* A cloth state rather than a colour. */
+    DECLARE @undyed bit =
+        CASE WHEN UPPER(@colour) IN ('PFE', 'PFD', 'PFE/PFD', 'PFD/PFE', 'GREIGE')
+             THEN 1 ELSE 0 END;
+
     -- named exactly
     SELECT TOP 1 @tier = color_tier FROM @cand
-    WHERE  LTRIM(RTRIM(color_tier)) = @colour;
+    WHERE  UPPER(LTRIM(RTRIM(color_tier))) = UPPER(@colour);
 
     -- a combined tier, for the two codes that have one
-    IF @tier IS NULL AND @colour IN ('PFE', 'PFD')
+    IF @tier IS NULL AND UPPER(@colour) IN ('PFE', 'PFD')
         SELECT TOP 1 @tier = color_tier FROM @cand
-        WHERE  LTRIM(RTRIM(color_tier)) IN ('PFE/PFD', 'PFD/PFE');
+        WHERE  UPPER(LTRIM(RTRIM(color_tier))) IN ('PFE/PFD', 'PFD/PFE');
 
-    -- the catch-all; see the header note, this step is a judgement call
-    IF @tier IS NULL
+    /* The catch-all, for dyed requests only. An undyed one is never answered
+       from All_colors - see the note at the top. */
+    IF @tier IS NULL AND @undyed = 0
         SELECT TOP 1 @tier = color_tier FROM @cand
         WHERE  LTRIM(RTRIM(color_tier)) = 'All_colors';
+
+    /* Undyed, and this design has no undyed tier: there is no right answer,
+       and showing the dyed rows would invite the wrong one. */
+    IF @tier IS NULL AND @undyed = 1 RETURN;
 
     /* ---- 3. which quantity band applies, within that tier ---- */
     /* A set is identified by (header, set_no), never by set_no alone - the

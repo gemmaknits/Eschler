@@ -476,7 +476,7 @@ Public Class frmSalesOrder
         txtFulfilmentComment.Text = dt.Rows(0)("fulfilment_comment") 'Sitthana 19/09/2018
         cbbSrTypeId.SelectedValue = dt.Rows(0)("sr_type_id") 'Sitthana 20240523
         mcboDesignProperties.SelectedValue = dt.Rows(0)("design_properties_id") 'John 28/10/2025
-        cboPriceListCustomer.SelectedValue = dt.Rows(0)("price_list_header_id")
+        cboPriceListCustomer.SelectedValue = oConfig.IsNull(dt.Rows(0)("price_list_header_id"), Nothing)
         txtSampleFabricQty.Text = If(dt.Columns.Contains("so_sample_fabric_qty"), dt.Rows(0)("so_sample_fabric_qty").ToString, "0")
         txtSampleBulkQty.Text = If(dt.Columns.Contains("so_sample_bulk_qty"), dt.Rows(0)("so_sample_bulk_qty").ToString, "0")
 
@@ -653,11 +653,13 @@ Public Class frmSalesOrder
             Return False
         End If
 
-        If cboPriceListCustomer.SelectedIndex = -1 OrElse (New clsConfig).IsNull(cboPriceListCustomer.SelectedValue, "").ToString.Trim = "" Then ' John 25/09/2026
-            MessageBox.Show("A Price List Customer must be selected before the order can be saved.", "Validation Required", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1)
-            ErrorProvider1.SetError(cboPriceListCustomer, "A Price List Customer must be selected.")
-            CheckData = False
-            Exit Function
+        If oConfig.IsNull(ComboSaleOrderType1.SelectedValue, "").ToString.Trim = "CUSTORDER" Then 'Add By Neung Check only CUSTORDER
+            If cboPriceListCustomer.SelectedIndex = -1 OrElse (New clsConfig).IsNull(cboPriceListCustomer.SelectedValue, "").ToString.Trim = "" Then ' John 25/09/2026
+                MessageBox.Show("A Price List Customer must be selected before the order can be saved.", "Validation Required", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1)
+                ErrorProvider1.SetError(cboPriceListCustomer, "A Price List Customer must be selected.")
+                CheckData = False
+                Exit Function
+            End If
         End If
 
         If (New clsConfig).IsNull(cboSalesMan.SelectedValue, "").ToString.Trim = "" Then

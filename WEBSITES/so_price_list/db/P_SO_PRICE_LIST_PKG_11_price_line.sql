@@ -41,9 +41,23 @@
    all. A prefix search needs no format at all, and prefers 255434AA over
    255434 when both exist, which is the more specific answer.
 
-   A prefix must be at least 5 characters. The book contains junk design
-   numbers read out of quantity cells - '250', '300kg' - and '250' is a prefix
-   of every design in the 250-thousands.
+   IT WORKS BOTH WAYS. The spec's example has the parameter longer than what
+   is stored, but the live book shows the opposite just as often. On the ANITA
+   list a reviewer renamed the 2021 revision of 254990 to 254990AA/11 and
+   withdrew the superseded 2012 quote, which still carries the plain number -
+   so asking for 254990 found only withdrawn rows and returned nothing. So
+   after looking for a stored design that is a prefix of the parameter, it
+   looks for stored designs that START WITH the parameter.
+
+   That direction can find several - 254990AA/11 and 254990AA/14 and
+   254990BB/11 are all "254990 something" and are genuinely different fabrics.
+   Choosing one would be guessing, so all of them come back as candidates with
+   resolution 'design ambiguous', which is the same bargain the colour and
+   quantity rules already make.
+
+   Either way the comparison must be at least 5 characters. The book contains
+   junk design numbers read out of quantity cells - '250', '300kg' - and '250'
+   is a prefix of every design in the 250-thousands.
 
    When the price comes from a base design rather than the one asked for, the
    caller has to know: matched_design_no says which design actually supplied
@@ -136,6 +150,46 @@ BEGIN
           AND  LEN(z.design_no) < LEN(@design)
           AND  LEFT(@design, LEN(z.design_no)) = z.design_no
         ORDER  BY LEN(z.design_no) DESC;
+
+    /* The other direction: the order line carries the base and the list holds
+       a qualified design. More than one may qualify, and they are different
+       fabrics, so they are all returned rather than one being picked. */
+    DECLARE @wider TABLE (design_no nvarchar(60));
+
+    IF @match_design IS NULL AND LEN(@design) >= 5
+        INSERT INTO @wider (design_no)
+        SELECT DISTINCT LTRIM(RTRIM(d.design_no))
+        FROM   SO.so_price_list_detail d
+        JOIN   SO.so_price_list_header h
+                 ON h.so_price_list_header_id = d.so_price_list_header_id
+                AND h.delete_mark <> 'Y'
+        WHERE  d.delete_mark <> 'Y' AND d.active = 'Y'
+          AND  (@p_so_price_list_header_id IS NULL
+                OR d.so_price_list_header_id = @p_so_price_list_header_id)
+          AND  LEN(LTRIM(RTRIM(d.design_no))) > LEN(@design)
+          AND  LEFT(LTRIM(RTRIM(d.design_no)), LEN(@design)) = @design;
+
+    IF @match_design IS NULL AND (SELECT COUNT(*) FROM @wider) = 1
+        SELECT @match_design = design_no FROM @wider;
+
+    /* Several qualified designs start with it - hand them all back. */
+    IF @match_design IS NULL AND (SELECT COUNT(*) FROM @wider) > 1
+    BEGIN
+        SELECT d.so_price_list_header_id, d.so_price_list_detail_id, d.set_no, d.line_no,
+               d.color_tier, d.qty_min, d.qty_max, d.currency AS curr, d.price, d.notes,
+               d.qty_unit AS uom,
+               'design ambiguous' AS resolution, d.design_no AS matched_design_no
+        FROM   SO.so_price_list_detail d
+        JOIN   SO.so_price_list_header h
+                 ON h.so_price_list_header_id = d.so_price_list_header_id
+                AND h.delete_mark <> 'Y'
+        JOIN   @wider w ON w.design_no = LTRIM(RTRIM(d.design_no))
+        WHERE  d.delete_mark <> 'Y' AND d.active = 'Y'
+          AND  (@p_so_price_list_header_id IS NULL
+                OR d.so_price_list_header_id = @p_so_price_list_header_id)
+        ORDER  BY d.so_price_list_header_id, d.set_no, d.line_no;
+        RETURN;
+    END
 
     /* Nothing resembling it anywhere: say so by returning no rows, as an
        unknown design already did. */

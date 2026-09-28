@@ -12,7 +12,9 @@ const GAP = 6;
  * still needs a column to type into. Unticking a tier only hides the column -
  * the price lines underneath are untouched, so it is always reversible.
  */
-export default function ColumnsMenu({ tiers, currencies, allTiers, anchor, onApply, onClose }) {
+export default function ColumnsMenu({ tiers, currencies, allTiers,
+                                      tiersInData = [], currenciesInData = [],
+                                      anchor, onApply, onClose }) {
   const ref = useRef(null);
   const [t, setT] = useState(new Set(tiers));
   const [c, setC] = useState(new Set(currencies));
@@ -68,8 +70,22 @@ export default function ColumnsMenu({ tiers, currencies, allTiers, anchor, onApp
     };
   }, [onClose]);
 
-  const known = [...new Set([...TIER_ORDER, ...allTiers, ...tiers])];
-  const toggle = (set, setter, v) => {
+  /* A tier added by hand has no checkbox of its own until it is applied,
+     because "known" is built from the fixed order plus what exists. Include
+     whatever is currently ticked and the new one appears at once. */
+  const known = [...new Set([...TIER_ORDER, ...allTiers, ...tiers, ...t])];
+
+  /* Unticking only ever hid a column - the prices stayed in the table. That is
+     still true, but it does not survive contact with a reviewer: a column of
+     prices vanishing reads as the prices being gone, and the way back is a
+     menu they have just closed. So a tier or currency THIS LIST HAS PRICES IN
+     cannot be turned off. Empty ones still can, which is the case the menu is
+     actually for. */
+  const lockedTier = v => tiersInData.includes(v);
+  const lockedCcy  = v => currenciesInData.includes(v);
+
+  const toggle = (set, setter, v, locked) => {
+    if (locked && set.has(v)) return;       // on, and holding prices: stays on
     const next = new Set(set);
     next.has(v) ? next.delete(v) : next.add(v);
     setter(next);
@@ -109,22 +125,32 @@ export default function ColumnsMenu({ tiers, currencies, allTiers, anchor, onApp
 
       <div className="colgroup">
         <span className="collabel">Currency</span>
-        {['USD', 'THB'].map(x => (
-          <label key={x} className="chk">
-            <input type="checkbox" checked={c.has(x)} onChange={() => toggle(c, setC, x)} />
-            <span>{x}</span>
-          </label>
-        ))}
+        {['USD', 'THB'].map(x => {
+          const locked = lockedCcy(x) && c.has(x);
+          return (
+            <label key={x} className={`chk${locked ? ' locked' : ''}`}
+                   title={locked ? `This list has ${x} prices. Clear them before removing the column.` : undefined}>
+              <input type="checkbox" checked={c.has(x)} disabled={locked}
+                     onChange={() => toggle(c, setC, x, lockedCcy(x))} />
+              <span>{x}</span>
+            </label>
+          );
+        })}
       </div>
 
       <div className="colgroup">
         <span className="collabel">Colour tier</span>
-        {known.map(x => (
-          <label key={x} className="chk">
-            <input type="checkbox" checked={t.has(x)} onChange={() => toggle(t, setT, x)} />
-            <span>{x}</span>
-          </label>
-        ))}
+        {known.map(x => {
+          const locked = lockedTier(x) && t.has(x);
+          return (
+            <label key={x} className={`chk${locked ? ' locked' : ''}`}
+                   title={locked ? `This list has prices at ${x}. Clear them before removing the column.` : undefined}>
+              <input type="checkbox" checked={t.has(x)} disabled={locked}
+                     onChange={() => toggle(t, setT, x, lockedTier(x))} />
+              <span>{x}</span>
+            </label>
+          );
+        })}
       </div>
 
       <div className="colgroup">
@@ -144,7 +170,9 @@ export default function ColumnsMenu({ tiers, currencies, allTiers, anchor, onApp
         <button className="ghost" onClick={onClose}>Cancel</button>
       </div>
       <p className="sub" style={{ margin: '6px 0 0' }}>
-        Hiding a tier keeps its prices — nothing is deleted.
+        {tiersInData.length || currenciesInData.length
+          ? 'Columns holding prices cannot be removed. Empty ones can.'
+          : 'Hiding a tier keeps its prices — nothing is deleted.'}
       </p>
     </div>
   );

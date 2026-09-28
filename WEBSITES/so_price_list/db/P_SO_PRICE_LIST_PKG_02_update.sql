@@ -181,8 +181,15 @@ CREATE PROCEDURE [SO].[P_SO_PRICE_LIST_PKG_update_price_list_detail]
     @so_price_list_detail_id bigint        = null,
     @so_price_list_header_id bigint        = null,
     @set_no                  int           = null,   -- which grid row to join
+    /* "+ Add line" and "Insert here blank" mean a NEW row, not a tier added to
+       one that already exists. Without this they were silently absorbed: the
+       lookup below joins the first set with the same design and quantity band,
+       so a new line typed against a design already in the list vanished into
+       that design's existing row - jumping away from where it was added, and
+       taking on that row's appearance, withdrawn flag and all. */
+    @force_new_set           bit           = 0,
     @design_no               nvarchar(60)  = null,   -- the identifier; bind as string
-    @article                 nvarchar(30)  = null,   -- mirror of design_no, kept for get_price
+    @article                 nvarchar(120) = null,   -- mirror of design_no, kept for get_price
     @article_variant         nvarchar(20)  = null,
     @fabric_name             nvarchar(200) = null,
     @composition             nvarchar(200) = null,
@@ -190,6 +197,10 @@ CREATE PROCEDURE [SO].[P_SO_PRICE_LIST_PKG_update_price_list_detail]
     @usable_width_cm         nvarchar(60)  = null,
     @weight_gsm              nvarchar(60)  = null,
     @moq                     nvarchar(60)  = null,
+    /* When the price was quoted. NULL leaves it alone; clearing it needs the
+       explicit flag, for the same reason @clear_qty_max exists. */
+    @price_line_date         date          = null,
+    @clear_price_line_date   bit           = 0,
     @qty_min                 int           = null,
     @qty_max                 int           = null,
     @clear_qty_max           bit           = 0,      -- explicit: NULL is a real value
@@ -290,7 +301,7 @@ BEGIN
            The caller should pass @set_no, since only it knows which row was
            clicked when several share an article and band. Without it, join the
            first set with that article and band, or start a new one. */
-        IF @set_no IS NULL
+        IF @set_no IS NULL AND @force_new_set = 0
             SELECT TOP 1 @set_no = set_no
             FROM   SO.so_price_list_detail
             WHERE  so_price_list_header_id = @so_price_list_header_id
@@ -365,12 +376,12 @@ BEGIN
         INSERT INTO SO.so_price_list_detail
             (so_price_list_header_id, set_no, line_no, article, design_no, article_variant,
              fabric_name, composition, full_width_cm, usable_width_cm, weight_gsm,
-             moq, qty_min, qty_max, qty_unit, color_tier, currency, price,
+             moq, price_line_date, qty_min, qty_max, qty_unit, color_tier, currency, price,
              active, notes, created_by)
         VALUES
             (@so_price_list_header_id, @set_no, @line_no, @article, @design_no, @article_variant,
              @fabric_name, @composition, @full_width_cm, @usable_width_cm, @weight_gsm,
-             @moq, @qty_min, @qty_max, @qty_unit, @color_tier, @currency, @price,
+             @moq, ISNULL(@price_line_date, CAST(SYSDATETIME() AS date)), @qty_min, @qty_max, @qty_unit, @color_tier, @currency, @price,
              ISNULL(@active,'Y'), @notes, @logempcd);
 
         SET @so_price_list_detail_id = SCOPE_IDENTITY();
@@ -408,12 +419,12 @@ BEGIN
             INSERT INTO SO.so_price_list_detail
                 (so_price_list_header_id, set_no, line_no, article, design_no, article_variant,
                  fabric_name, composition, full_width_cm, usable_width_cm, weight_gsm,
-                 moq, qty_min, qty_max, qty_unit, color_tier, currency, price,
+                 moq, price_line_date, qty_min, qty_max, qty_unit, color_tier, currency, price,
                  active, notes, created_by)
             VALUES
                 (@so_price_list_header_id, @set_no, @line_no, @article, @design_no, @article_variant,
                  @fabric_name, @composition, @full_width_cm, @usable_width_cm, @weight_gsm,
-                 @moq, @qty_min, @qty_max, @qty_unit, @color_tier, @other, 0,
+                 @moq, ISNULL(@price_line_date, CAST(SYSDATETIME() AS date)), @qty_min, @qty_max, @qty_unit, @color_tier, @other, 0,
                  ISNULL(@active,'Y'), @notes, @logempcd);
         END
 
@@ -431,6 +442,8 @@ BEGIN
                usable_width_cm   = ISNULL(@usable_width_cm, usable_width_cm),
                weight_gsm        = ISNULL(@weight_gsm,      weight_gsm),
                moq               = ISNULL(@moq,             moq),
+               price_line_date   = CASE WHEN @clear_price_line_date = 1 THEN NULL
+                                        ELSE ISNULL(@price_line_date, price_line_date) END,
                qty_min           = ISNULL(@qty_min,         qty_min),
                /* An open upper bound is a real value, so it cannot be signalled
                   by passing NULL - that is indistinguishable from "leave alone",

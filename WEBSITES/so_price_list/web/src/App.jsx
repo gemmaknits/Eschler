@@ -11,6 +11,21 @@ import DesignLov from './DesignLov.jsx';
 import UomLov from './UomLov.jsx';
 import CustomerAssign from './CustomerAssign.jsx';
 
+/* Everything on a grid row that a reviewer can change, and therefore
+   everything a one-row undo has to remember. */
+/* Today in the grid's own format. Local, not UTC: toISOString() would hand
+   Bangkok tomorrow's date for most of the working evening. */
+const today = () => {
+  const d = new Date();
+  const p = n => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
+};
+
+const ROW_FIELDS = ['design_no', 'article_variant', 'qty_min', 'qty_max',
+                    'qty_unit', 'fabric_name', 'composition', 'full_width_cm',
+                    'usable_width_cm', 'weight_gsm', 'moq', 'price_line_date',
+                    'notes', 'active'];
+
 /**
  * True once `active` has been true CONTINUOUSLY for `ms`.
  *
@@ -46,6 +61,14 @@ export default function App() {
   // hidden by default; the header carries each list's own choice
   const [hideInactive, setHideInactive] = useState(true);
   const [showCols, setShowCols] = useState(false);
+  /* Columns chosen by hand from the Columns menu, this session.
+
+     The narrowing further down hides tiers the filtered rows do not use, which
+     is right for a list that declares seven of them and prices two - but wrong
+     the moment somebody asks for a column by name and it does not appear. It
+     looked like the menu had not worked; F5 "fixed" it only because a reload
+     clears the filter. An explicit choice outranks the narrowing. */
+  const [pinned, setPinned] = useState({ tiers: [], currencies: [] });
   /* The Columns popover opens against this button rather than in the corner
      of the window, so the panel appears where you clicked. */
   const colBtnRef = useRef(null);
@@ -97,6 +120,8 @@ export default function App() {
   }, []);
 
   const header = lists.find(l => l.so_price_list_header_id === headerId);
+
+  useEffect(() => { setPinned({ tiers: [], currencies: [] }); }, [headerId]);
 
   /* Columns come from the header, so an empty list still has somewhere to type. */
   useEffect(() => {
@@ -181,12 +206,16 @@ export default function App() {
   const narrowed = Boolean(filter.trim()) || conflictsOnly;
   const tiersInData = grid.tiersInData || [];
   const tiers = orderTiers(
-    narrowed && tiersInData.length ? tiersInData
+    narrowed && tiersInData.length ? [...tiersInData, ...pinned.tiers]
                                    : [...shape.tiers, ...tiersInData]);
   const currenciesInData = grid.currenciesInData || [];
+  /* Columns that hold a real quote, as opposed to columns that merely have
+     lines. Only these are locked against removal. */
+  const tiersPriced = grid.tiersPriced || [];
+  const currenciesPriced = grid.currenciesPriced || [];
   const currencies = ['USD', 'THB'].filter(c =>
     narrowed && currenciesInData.length
-      ? currenciesInData.includes(c)
+      ? (currenciesInData.includes(c) || pinned.currencies.includes(c))
       : ((shape.currencies.length ? shape.currencies : ['USD']).includes(c)
          || currenciesInData.includes(c)));
   const visibleRows = hideInactive
@@ -219,52 +248,187 @@ export default function App() {
   /* Before the first list arrives there is nothing on screen at all. */
   const booting  = loading && lists.length === 0 && !error;
 
+
+  /* ---- undo, one row deep ------------------------------------------------
+
+     Saves happen as you type, so there is no Cancel to press. Instead the row
+     under the cursor is photographed when you arrive on it, and Undo puts that
+     photograph back. Step off the row and the photograph is replaced by one of
+     the row you stepped onto - so this covers "I have just made a mess of this
+     line", which is the case that actually happens, and deliberately not "what
+     did I change half an hour ago", which would need a history table.
+
+     Held in memory only. A reload loses it, which is honest: after a reload
+     there is nothing on screen that the user still thinks of as "just now". */
+  const [rowSnap, setRowSnap] = useState(null);
+
+  /* Photographed on the first edit to a row, not on arriving at it.
+
+     Arriving looked like the obvious moment, and it is how this was written
+     first - but Enter commits and steps down a row, exactly as in a
+     spreadsheet. So the commonest gesture there is, type-then-Enter, left the
+     row instantly and threw the photograph away before Undo could use it.
+
+     Taking it on the first edit is both simpler and safer: the edit handlers
+     are already holding the row as it was immediately before the write, which
+     is precisely the thing Undo needs. Where the cursor goes afterwards stops
+     mattering. Editing a different row replaces the photograph - so this is
+     still one row deep, and still "the row I have just made a mess of". */
+  const armRow = useCallback(row => {
+    if (!row || row.isDraft) return;
+    setRowSnap(prev => {
+      if (prev && prev.key === row.key) return prev;     // already photographed
+      const fields = {};
+      for (const f of ROW_FIELDS) fields[f] = row[f] ?? null;
+      return {
+        key: row.key,
+        design_no: row.design_no,
+        fields,
+        cells: Object.fromEntries(Object.entries(row.cells || {}).map(([k, d]) =>
+          [k, { detail_id: d.so_price_list_detail_id, price: d.price }]))
+      };
+    });
+  }, []);
+
+  /* What Undo would actually put back. Also what greys the button out: an
+     enabled Undo on an untouched row is a lie. */
+  const liveSnapRow = rowSnap ? grid.rows.find(r => r.key === rowSnap.key) : null;
+  const undoable = (() => {
+    if (!rowSnap || !liveSnapRow) return null;
+    const changed = ROW_FIELDS.filter(f =>
+      String(liveSnapRow[f] ?? '') !== String(rowSnap.fields[f] ?? ''));
+    const live = liveSnapRow.cells || {};
+    const priceChanges = Object.entries(rowSnap.cells)
+      .filter(([k, s]) => live[k] && String(live[k].price ?? '') !== String(s.price ?? ''));
+    /* A price typed into an empty cell created a line; putting the row back
+       means taking it away again. */
+    const added = Object.entries(live).filter(([k]) => !rowSnap.cells[k]);
+    if (!changed.length && !priceChanges.length && !added.length) return null;
+    return { changed, priceChanges, added, row: liveSnapRow };
+  })();
+
+  const undoRow = useCallback(async () => {
+    if (!undoable || !rowSnap) return;
+    const { changed, priceChanges, added, row } = undoable;
+    setBusy(true);
+    try {
+      /* Prices first, then the row fields, then the lines that did not exist
+         when we arrived - deleting those last means a failure part way through
+         leaves more of the row restored rather than less. */
+      for (const [, s] of priceChanges)
+        await api.saveDetail({ detail_id: s.detail_id, price: s.price });
+
+      if (changed.length) {
+        const patch = {};
+        for (const f of changed) {
+          patch[f] = rowSnap.fields[f];
+          /* NULL means "leave alone" to the procedure, so putting a value back
+             to empty has to say so explicitly. */
+          if (f === 'qty_max' && (rowSnap.fields[f] === null || rowSnap.fields[f] === ''))
+            patch.clear_qty_max = true;
+          if (f === 'price_line_date' && !rowSnap.fields[f])
+            patch.clear_price_line_date = true;
+        }
+        for (const d of Object.values(row.cells || {}))
+          await api.saveDetail({ detail_id: d.so_price_list_detail_id, ...patch });
+      }
+
+      for (const [, d] of added) await api.deleteDetail(d.so_price_list_detail_id);
+
+      const n = changed.length + priceChanges.length + added.length;
+      say(`${rowSnap.design_no} put back — ${n} change${n === 1 ? '' : 's'} undone`);
+      reload(true); refreshLists();
+    } catch (err) { setError(err.message); } finally { setBusy(false); }
+  }, [undoable, rowSnap, reload, say]);
+
   /* ---- right-click: copy / insert / delete a whole line ------------------
      A grid row is a whole set - every tier, both currencies - so all three act
      on the set, never on the single cell that was clicked. */
-  const copyRow = useCallback(row => {
-    setCopied({ set_no: row.set_no, design_no: row.design_no });
-    say(`Copied ${row.design_no} — right-click another line to insert it`);
+  /* Trailing zeros off, so a clipboard summary reads 6.17 and 216 rather than
+     6.1700 and 216.0000. */
+  const shortMoney = v => {
+    if (v === null || v === undefined || v === '') return null;
+    const n = Number(v);
+    return Number.isFinite(n) ? String(Number(n.toFixed(4))) : null;
+  };
+
+  /* One row or a whole selection - the grid passes a list either way.
+
+     What is remembered is not just which rows, but enough about the first of
+     them to describe it in the menu: a design number on its own does not
+     identify a row, because the same design appears once per quantity band and
+     what tells them apart is the colour tier and the price. */
+  const copyRow = useCallback(list => {
+    const picked = (Array.isArray(list) ? list : [list]).filter(r => r && !r.isDraft);
+    if (!picked.length) return;
+    const first = picked[0];
+
+    setCopied({
+      set_nos: picked.map(r => r.set_no),
+      count: picked.length,
+      design_no: first.design_no,
+      designs: picked.map(r => r.design_no),
+      qty_min: first.qty_min,
+      qty_max: first.qty_max,
+      tiers: Object.entries(first.cells || {}).map(([k, d]) => {
+        const [currency, tier] = k.split('|');
+        return { currency, tier, price: shortMoney(d?.price) };
+      })
+    });
+
+    say(picked.length === 1
+      ? `Copied ${first.design_no} — right-click another line to insert it`
+      : `Copied ${picked.length} lines — right-click where they should go`);
+  }, [say]);
+
+  /* A blank line at a chosen position. It is a draft, so it costs nothing
+     until a design and a price are typed - but it remembers where it was asked
+     for, and saves into that slot rather than at the end of the list.
+
+     Its own handler now, because with something on the clipboard "Insert here"
+     means that row, and there still has to be a way to say "a new empty one". */
+  const insertBlank = useCallback(target => {
+    setDrafts(d => [...d, {
+      key: `draft-${Date.now()}-${d.length}`,
+      isDraft: true,
+      after_set_no: target.set_no,
+      design_no: '',
+      article_variant: '',
+      qty_min: 0,
+      qty_max: null,
+      qty_unit: target.qty_unit || 'MTS',
+      fabric_name: '', composition: '',
+      full_width_cm: '', usable_width_cm: '', weight_gsm: '', moq: '',
+      price_line_date: today(),
+      active: 'Y',
+      source_row: null,
+      cells: {}
+    }]);
+    say(`New line below ${target.design_no} — fill the design no and a price`);
   }, [say]);
 
   const insertCopied = useCallback(async target => {
-    /* Nothing copied: open a blank line in that position instead. It is a
-       draft, so it costs nothing until a design and a price are typed - but it
-       remembers where it was asked for, and saves into that slot rather than
-       at the end of the list. */
-    if (!copied) {
-      setDrafts(d => [...d, {
-        key: `draft-${Date.now()}-${d.length}`,
-        isDraft: true,
-        after_set_no: target.set_no,
-        design_no: '',
-        article_variant: '',
-        qty_min: 0,
-        qty_max: null,
-        qty_unit: target.qty_unit || 'MTS',
-        fabric_name: '', composition: '',
-        full_width_cm: '', usable_width_cm: '', weight_gsm: '', moq: '',
-        source_row: null,
-        cells: {}
-      }]);
-      say(`New line below ${target.design_no} — fill the design no and a price`);
-      return;
-    }
+    if (!copied) { insertBlank(target); return; }
 
     setBusy(true);
     try {
-      /* after_set_no is the row that was right-clicked, so the copy lands
+      /* after_set_no is the row that was right-clicked, so the copies land
          directly below it. The procedure shifts everything under that point
-         down, and carries line_no over unchanged so the tiers inside the
-         copied row keep the order they were put in. */
+         down in one move and carries line_no over unchanged, so the tiers
+         inside each copied row keep the order they were put in.
+
+         The whole selection goes in one call. Copying them one at a time would
+         shift the rows below once per copy and land them reversed. */
       const res = await api.copySet(headerId, {
-        source_set_no: copied.set_no,
+        source_set_nos: copied.set_nos.join(','),
         after_set_no: target.set_no
       });
-      say(`Inserted ${copied.design_no} below ${target.design_no} — ${res?.rows_created ?? 0} prices`);
+      say(copied.count === 1
+        ? `Inserted ${copied.design_no} below ${target.design_no} — ${res?.rows_created ?? 0} prices`
+        : `Inserted ${res?.sets_copied ?? copied.count} lines below ${target.design_no} — ${res?.rows_created ?? 0} prices`);
       reload(true); refreshLists();
     } catch (err) { setError(err.message); } finally { setBusy(false); }
-  }, [copied, headerId, reload, say]);
+  }, [copied, headerId, reload, say, insertBlank]);
 
   const deleteRow = useCallback(row => {
     setConfirm({
@@ -277,7 +441,12 @@ export default function App() {
         setBusy(true);
         try {
           const res = await api.deleteSet(headerId, { set_no: row.set_no });
-          if (copied?.set_no === row.set_no) setCopied(null);
+          if (copied?.set_nos?.includes(row.set_no)) {
+            const left = copied.set_nos.filter(n => n !== row.set_no);
+            setCopied(left.length
+              ? { ...copied, set_nos: left, count: left.length }
+              : null);
+          }
           say(`${row.design_no} deleted — ${res?.lines_deleted ?? 0} prices`);
           reload(true); refreshLists();
         } catch (err) { setError(err.message); } finally { setBusy(false); }
@@ -305,6 +474,13 @@ export default function App() {
       usable_width_cm: last?.usable_width_cm || '',
       weight_gsm: last?.weight_gsm || '',
       moq: last?.moq || '',
+      /* A new line is a line you intend to use. The column defaults to 'Y' and
+         so does every insert path, but the draft says so itself rather than
+         leaving the grid to infer it from an absent field. */
+      active: 'Y',
+      /* Shown straight away rather than waiting for the save to come back:
+         the procedures default it to today as well, so the two agree. */
+      price_line_date: today(),
       source_row: null,
       cells: {}
     }]);
@@ -406,6 +582,7 @@ export default function App() {
   }, [uomLov, patchRowLocally, say]);
 
   const editRow = useCallback(async (row, col, raw) => {
+    armRow(row);            // before anything is written
     /* The unit has to be one the system knows. The database refuses anything
        else, so rather than let the save fail and report it, check here and
        open the picker - the typed value is shown so it is clear what was
@@ -488,7 +665,11 @@ export default function App() {
           detail_id: d.so_price_list_detail_id,
           [col.key]: value,
           // an open upper bound is a real value, not "leave alone"
-          ...(col.key === 'qty_max' && value === null ? { clear_qty_max: true } : {})
+          ...(col.key === 'qty_max' && value === null ? { clear_qty_max: true } : {}),
+          /* Same problem for the date: an empty string reaches the procedure
+             as NULL, which means "leave alone", so blanking a wrong date would
+             silently do nothing. Say so explicitly. */
+          ...(col.date && value === '' ? { clear_price_line_date: true } : {})
         });
       }
       patchRowLocally(row.key, { [col.key]: value }, { [col.key]: value });
@@ -505,10 +686,11 @@ export default function App() {
     } catch (err) {
       setError(err.message);
     } finally { setBusy(false); }
-  }, [headerId, reload, say, fillFromDesign, uoms]);
+  }, [headerId, reload, say, fillFromDesign, uoms, armRow]);
 
   /* ---- edit or create a price ---- */
   const editPrice = useCallback(async (row, currency, tier, value) => {
+    armRow(row);            // before anything is written
     const w = row.cells?.[`${currency}|${tier}`] || null;
 
     if (!row.isDraft && !w) {
@@ -539,7 +721,8 @@ export default function App() {
           color_tier: tier, currency, price: value,
           fabric_name: row.fabric_name, composition: row.composition,
           full_width_cm: row.full_width_cm, usable_width_cm: row.usable_width_cm,
-          weight_gsm: row.weight_gsm, moq: row.moq
+          weight_gsm: row.weight_gsm, moq: row.moq,
+          price_line_date: row.price_line_date || null
         });
         say(`Added ${row.design_no} · ${tier} · ${currency}`);
         reload(true); refreshLists();
@@ -558,7 +741,14 @@ export default function App() {
           color_tier: tier, currency, price: value,
           fabric_name: row.fabric_name, composition: row.composition,
           full_width_cm: row.full_width_cm, usable_width_cm: row.usable_width_cm,
-          weight_gsm: row.weight_gsm, moq: row.moq
+          weight_gsm: row.weight_gsm, moq: row.moq,
+          price_line_date: row.price_line_date || null,
+          active: row.active || 'Y',
+          /* "+ Add line" means a new row. Without this the procedure joins the
+             first set with the same design and quantity band, and the line the
+             user just added disappears into a row further up - inheriting its
+             position and its withdrawn flag. */
+          force_new_set: true
         };
 
         /* A draft opened with "Insert here" knows where it belongs, and goes
@@ -592,7 +782,7 @@ export default function App() {
       }));
       say(`${row.design_no} · ${tier} · ${currency} → ${value}`);
     } catch (err) { setError(err.message); } finally { setBusy(false); }
-  }, [headerId, reload, say]);
+  }, [headerId, reload, say, armRow]);
 
 
   /* A per-list view preference, stored on the header so the next person to open
@@ -609,16 +799,46 @@ export default function App() {
 
   const applyShape = useCallback(async (newTiers, newCurrencies) => {
     setShowCols(false);
+    const goneTiers = tiers.filter(t => !newTiers.includes(t));
+    const goneCcys  = currencies.filter(c => !newCurrencies.includes(c));
+    const added     = [...newTiers.filter(t => !tiers.includes(t)),
+                       ...newCurrencies.filter(c => !currencies.includes(c))];
+
     setShape({ tiers: newTiers, currencies: newCurrencies });
+    setPinned({ tiers: newTiers, currencies: newCurrencies });
+    setBusy(true);
     try {
+      /* A column is not just a heading: it is the lines behind it. Removing one
+         takes those lines with it - soft, so a mistake is recoverable - and the
+         procedure refuses outright if any of them carry a real price. The menu
+         will not offer a priced column, so this is the second lock rather than
+         the first. */
+      let removed = 0;
+      for (const t of goneTiers)
+        removed += (await api.removeColumn(headerId, { color_tier: t }))?.lines_removed ?? 0;
+      for (const c of goneCcys)
+        removed += (await api.removeColumn(headerId, { currency: c }))?.lines_removed ?? 0;
+
       await api.saveGridShape(headerId, {
         tier_set: newTiers.join(','),
         currency_set: newCurrencies.join(',')
       });
-      say('Columns saved for this list');
+
+      /* A column nobody can type into is just a heading. Adding one opens a
+         blank line carrying it, so there is somewhere to put the first price -
+         a draft, so it costs nothing until a design and a price are typed. */
+      if (added.length) addRow();
+
+      say(removed
+        ? `Columns saved — ${removed} empty line${removed === 1 ? '' : 's'} removed`
+        : added.length
+          ? `Columns saved — a blank line is waiting for ${added.join(', ')}`
+          : 'Columns saved for this list');
+      if (removed) reload(true);
       refreshLists();
     } catch (err) { setError(err.message); }
-  }, [headerId, say]);
+    finally { setBusy(false); }
+  }, [headerId, say, tiers, currencies, addRow, reload]);
 
   /* ---- header created or edited -------------------------------------------
      Refresh the nav, then open the list. A brand-new list has no lines, so the
@@ -699,6 +919,19 @@ export default function App() {
 
         <button ref={colBtnRef} onClick={() => setShowCols(v => !v)}>
           Columns <span className="dimcount">{tiers.length}×{currencies.length}</span>
+        </button>
+
+        {/* Nothing to undo reads as a disabled button rather than a missing
+            one, so the way back is always in the same place. */}
+        <button
+          className="undobtn"
+          onClick={undoRow}
+          disabled={!undoable || busy}
+          title={undoable
+            ? `Put ${rowSnap.design_no} back as it was when you moved onto it — ${undoable.changed.length + undoable.priceChanges.length + undoable.added.length} change(s)`
+            : 'Nothing to undo on this line. Edits save as you type; Undo covers the line the cursor is on.'}
+        >
+          ↶ Undo line
         </button>
 
         <div className="spacer" />
@@ -783,6 +1016,7 @@ export default function App() {
                     copied={copied}
                     onCopyRow={copyRow}
                     onInsertCopied={insertCopied}
+                    onInsertBlank={insertBlank}
                     onDeleteRow={deleteRow}
                   />}
           </div>
@@ -805,6 +1039,7 @@ export default function App() {
       {showCols && (
         <ColumnsMenu
           tiers={tiers} currencies={currencies} allTiers={allTiers}
+          tiersInData={tiersPriced} currenciesInData={currenciesPriced}
           anchor={colBtnRef}
           onApply={applyShape} onClose={() => setShowCols(false)}
         />

@@ -217,6 +217,10 @@ Public Class frmSalesOrder
         Me.cbofulfilment_type.DisplayMember = "lookup_value"
         Me.cbofulfilment_type.ValueMember = "lookup_value_id"
 
+        'Me.cboPriceListCustomer.DataSource = objDB.getPriceListCustomer(Nothing)
+        'Me.cboPriceListCustomer.DisplayMember = "name"
+        'Me.cboPriceListCustomer.ValueMember = "so_price_list_header_id"
+
         'John 27/10/2025
         'Me.cboDesignProperties.DataSource = objDB.getDesignProperties
         'Me.cboDesignProperties.DisplayMember = "lookup_value_code"
@@ -293,6 +297,10 @@ Public Class frmSalesOrder
             .DisplayMember = "lookup_value"
             .ValueMember = "lookup_value_id"
         End With
+
+        Me.cboPriceListCustomer.DataSource = objDB.getPriceListCustomer(Nothing)
+        Me.cboPriceListCustomer.DisplayMember = "name"
+        Me.cboPriceListCustomer.ValueMember = "customer_id"
 
         'Used In Datagrid
         'Me.design_gwth_nob.DataSource = objDB.GetDesignGwth
@@ -468,6 +476,7 @@ Public Class frmSalesOrder
         txtFulfilmentComment.Text = dt.Rows(0)("fulfilment_comment") 'Sitthana 19/09/2018
         cbbSrTypeId.SelectedValue = dt.Rows(0)("sr_type_id") 'Sitthana 20240523
         mcboDesignProperties.SelectedValue = dt.Rows(0)("design_properties_id") 'John 28/10/2025
+        cboPriceListCustomer.SelectedValue = dt.Rows(0)("price_list_header_id")
         txtSampleFabricQty.Text = If(dt.Columns.Contains("so_sample_fabric_qty"), dt.Rows(0)("so_sample_fabric_qty").ToString, "0")
         txtSampleBulkQty.Text = If(dt.Columns.Contains("so_sample_bulk_qty"), dt.Rows(0)("so_sample_bulk_qty").ToString, "0")
 
@@ -642,6 +651,13 @@ Public Class frmSalesOrder
             MessageBox.Show("Please choose customer ship to!!", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
             ErrorProvider1.SetError(mcboCustomersBillToFlag, "Please choose customer ship to!!")
             Return False
+        End If
+
+        If cboPriceListCustomer.SelectedIndex = -1 OrElse (New clsConfig).IsNull(cboPriceListCustomer.SelectedValue, "").ToString.Trim = "" Then ' John 25/09/2026
+            MessageBox.Show("A Price List Customer must be selected before the order can be saved.", "Validation Required", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1)
+            ErrorProvider1.SetError(cboPriceListCustomer, "A Price List Customer must be selected.")
+            CheckData = False
+            Exit Function
         End If
 
         If (New clsConfig).IsNull(cboSalesMan.SelectedValue, "").ToString.Trim = "" Then
@@ -893,6 +909,7 @@ Public Class frmSalesOrder
         header.h62_cust_addl_info = txtCustAddlInfo.Text.Trim
         header.h63_sample_fabric_qty = Val(txtSampleFabricQty.Text)
         header.h64_sample_bulk_qty = Val(txtSampleBulkQty.Text)
+        header.h65_price_list_header_id = oConfig.IsNull(cboPriceListCustomer.SelectedValue, Nothing) 'John 25/09/2026
         '--------------------------------
         If Me.textBatches.Text = "" Then
             Me.textBatches.Text = 0
@@ -2128,6 +2145,16 @@ Public Class frmSalesOrder
 
     Private Sub mcboCustomersBillToFlag_SelectedIndexChanged(sender As Object, e As EventArgs) Handles mcboCustomersBillToFlag.SelectedIndexChanged
         bsCustomersShipToFlag.Filter = "parent_customer_id = " & Me.mcboCustomersBillToFlag.ListBox.Grid.Model(Me.mcboCustomersBillToFlag.SelectedIndex + 1, 1).CellValue & "" 'Disible By Neung K.Piew No Need to Filter Cust Deli
+
+        ' Refresh the customer's price list to match the selected Bill To customer -- John 25/09/2026
+        Dim objDB As New classMaster
+        Dim custIdCell As Object = Me.mcboCustomersBillToFlag.ListBox.Grid.Model(Me.mcboCustomersBillToFlag.SelectedIndex + 1, 1).CellValue
+        Dim custId As Nullable(Of Int64) = Nothing
+        If custIdCell IsNot Nothing AndAlso Not IsDBNull(custIdCell) Then custId = Convert.ToInt64(custIdCell)
+        Me.cboPriceListCustomer.DataSource = objDB.getPriceListCustomer(custId)
+        Me.cboPriceListCustomer.DisplayMember = "name"
+        Me.cboPriceListCustomer.ValueMember = "customer_id"
+
         Call bindCustomerBillToData()
         Call bindCustomerShipToData()
         Call BindCustomerBillToAddr()

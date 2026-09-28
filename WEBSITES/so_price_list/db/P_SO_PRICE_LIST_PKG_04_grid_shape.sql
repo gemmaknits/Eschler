@@ -162,14 +162,14 @@ CREATE PROCEDURE [SO].[P_SO_PRICE_LIST_PKG_update_price_list_row]
     @so_price_list_header_id bigint,
     -- which row (its key as currently stored)
     @design_no               nvarchar(60) = null,
-    @article                 nvarchar(30) = null,   -- old alias for @design_no
+    @article                 nvarchar(120) = null,  -- old alias for @design_no
     @article_variant         nvarchar(20)  = null,
     @qty_min                 int,
     @qty_max                 int           = null,
     @qty_unit                nvarchar(10)  = N'MTS',
     -- new values; NULL means leave alone, except new_qty_max (see below)
     @new_design_no           nvarchar(60)  = null,
-    @new_article             nvarchar(30)  = null,   -- old alias for @new_design_no
+    @new_article             nvarchar(120) = null,   -- old alias for @new_design_no
     @new_article_variant     nvarchar(20)  = null,
     @new_qty_min             int           = null,
     @new_qty_max             int           = null,
@@ -181,6 +181,12 @@ CREATE PROCEDURE [SO].[P_SO_PRICE_LIST_PKG_update_price_list_row]
     @usable_width_cm         nvarchar(60)  = null,
     @weight_gsm              nvarchar(60)  = null,
     @moq                     nvarchar(60)  = null,
+    /* When the price was quoted. A property of the row, like the columns
+       above it, so it is written to every line of the set. NULL leaves it
+       alone; clearing it needs the explicit flag, since NULL is a real value
+       here - the same reason @clear_qty_max exists. */
+    @price_line_date         date          = null,
+    @clear_price_line_date   bit           = 0,
     @active                  char(1)       = null,   -- 'Y' | 'N', whole row
     @logempcd                varchar(15)   = ''
 AS
@@ -251,6 +257,8 @@ BEGIN
            usable_width_cm   = ISNULL(@usable_width_cm, usable_width_cm),
            weight_gsm        = ISNULL(@weight_gsm,      weight_gsm),
            moq               = ISNULL(@moq,             moq),
+           price_line_date   = CASE WHEN @clear_price_line_date = 1 THEN NULL
+                                    ELSE ISNULL(@price_line_date, price_line_date) END,
            active            = ISNULL(@active,         active),
            last_updated_date = SYSDATETIME(),
            updated_by        = @logempcd

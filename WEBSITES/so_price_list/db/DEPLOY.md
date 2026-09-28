@@ -1,7 +1,32 @@
 # Eschler Price Book — deployment
 
 Three pieces: database, API, web app. The API is the one with a trap — read
-section 2 before copying anything over it.
+section 2 before copying anything over it. And read the warning directly
+below before running anything in `db/` at all.
+
+---
+
+## ⚠ The book is live
+
+Since **25 September 2026** people are editing, inserting and correcting price
+lines through the app. Two consequences, and neither is optional:
+
+**Do not run `db/rebuild_from_rescan.sql`.** It hard-deletes every price line
+of every sheet in the staging table and reloads them from the scan. Both of its
+writing batches now refuse while any line carries work done since the last
+load — the guard is self-arming, because a reloaded line is stamped
+`created_by = 'RESCAN'` with no `last_updated_date` and the first edit breaks
+that. It refuses today, naming how many lines it would have destroyed.
+
+**The snapshots are not a rollback any more.**
+`SO.so_price_list_detail_snap_20260918_0722` and its header pair were taken
+*before* the live editing. Restoring one would lose the corrections rather than
+recover them. They are only good for comparing against the pre-live state.
+
+There is no history table, so an overwritten price is gone. If a rebuild ever
+genuinely has to happen: take a fresh snapshot, decide what to do about the
+work it will destroy, and only then delete the guard block from both batches.
+
 
 ---
 
@@ -19,6 +44,8 @@ tables and the package — with the customer list of values in `LOV`:
 | `so_price_list_bak_20260907` | `dbo` — a point-in-time backup, deliberately left behind |
 | `customers`, `so` | `dbo` — not ours, never move them |
 
+## 1a. Procedures
+
 Run the scripts in this folder in this order:
 
     move_tables_to_SO_schema.sql             one-off; idempotent, safe to re-run
@@ -29,6 +56,14 @@ Run the scripts in this folder in this order:
     P_LOV_PKG_select_customer_list.sql       customer LOV
     add_active_flag.sql                      active column on the detail table
     add_active_flag_raw.sql                  active column on the raw flat table
+    P_SO_PRICE_LIST_PKG_05_sets.sql          copy / insert / delete a grid row
+    P_SO_PRICE_LIST_PKG_06_design.sql        design master lookups
+    P_SO_PRICE_LIST_PKG_07_uom.sql           unit of measure, checked against dbo.uom
+    P_SO_PRICE_LIST_PKG_08_customers.sql     customer assignment
+    P_SO_PRICE_LIST_PKG_09_verify.sql        "I have checked this list"
+    P_SO_PRICE_LIST_PKG_10_columns.sql       remove a tier/currency column
+    add_price_line_date.sql                  when a price was quoted
+    widen_article.sql                        article holds the sheet's full text
 
 Each script drops and recreates what it owns, so re-running is safe. The two
 `add_active_flag*` scripts also create a staging table used by the backfill in

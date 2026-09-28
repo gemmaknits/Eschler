@@ -11,6 +11,21 @@ Public Class classMaster
     'Public Const WWW_BOT = "http://www.bot.or.th/Thai/Pages/BOTDefault.aspx"
     'Public Const WWW_BOT = "http://www2.bot.or.th/RSS/fxrates/fxrate-USD.xml" 'Add By Neung 20151028
     Public Const WWW_BOT = "https://www.bot.Or.th/App/RSS/fxrate-usd.xml" 'Add By Neung 20190708
+
+    Public Function getPriceListCustomer(pCustomerId As Nullable(Of Int64)) As DataTable 'John 25/09/2026
+        Dim conn As New SqlConnection((New classConnection).connection)
+        Dim comm As New SqlCommand("", conn)
+        comm.CommandType = CommandType.StoredProcedure
+        comm.CommandText = "[dbo].[P_SO_FORM_PKG_get_customers_price_list]"
+        comm.Parameters.Clear()
+        comm.Parameters.AddWithValue("@p_customer_id", pCustomerId)
+        Dim da As New SqlDataAdapter(comm)
+        Dim dt As New DataTable
+        da.Fill(dt)
+        conn.Close()
+        Return dt
+    End Function
+
     Public Function GetSupplier(Optional ByVal suppcd As String = "") As DataTable
         Dim conn As New SqlConnection((New ClassConnection).connection)
         Dim comm As New SqlCommand("", conn)

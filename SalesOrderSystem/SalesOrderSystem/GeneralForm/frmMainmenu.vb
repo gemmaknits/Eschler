@@ -124,6 +124,7 @@ Public Class frmMainmenu
 
     Private Sub CustomerItemsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CustomerItemsToolStripMenuItem.Click
         Dim frm As New STV.frmCustomerItems
+
         'frm.UserInfo = clsUser
         frm.MdiParent = Me
         frm.Show()
@@ -202,12 +203,13 @@ Public Class frmMainmenu
         frm.Show()
     End Sub
     Private Sub mnuCloseSalesOrderByPO_Click(sender As Object, e As EventArgs) Handles mnuCloseSalesOrderByPO.Click
-        Dim frmSOClosing As STV.frmSOClosing
+        Dim frm As New STV.frmSOClosing
         Cursor = Cursors.WaitCursor
-        frmSOClosing = New STV.frmSOClosing()
-        frmSOClosing.pUserID = clsUser.UserID
-        frmSOClosing.MdiParent = Me
-        frmSOClosing.Show()
+        'frm = New STV.frmSOClosing()
+        ' frm.setConnectionString((New classConnection).getSQLConnectionPOC) 'STV project
+        frm.pUserID = clsUser.UserID
+        frm.MdiParent = Me
+        frm.Show()
         Cursor = Cursors.Default
     End Sub
     Private Sub menuSTOrder_Click(sender As Object, e As EventArgs) Handles menuSTOrder_Close.Click

@@ -30,6 +30,26 @@
    nothing. If a real colour should instead be refused rather than priced at
    All_colors, delete step 3 and the proc will report it as ambiguous.
 
+   DESIGN NUMBERS. The order line usually carries a fully qualified design -
+   255434AA/11 - where the price list may only hold the base, 255434. So the
+   full number is tried first, and failing that the LONGEST stored design that
+   is a prefix of it wins.
+
+   Longest, not "strip the slash": the book holds all three shapes - 312 plain
+   (255434), 76 with letters (205652BA), 305 with a slash (255434AA/11) - and
+   some start with a letter (W7LF001-1A/14), so no stripping rule fits them
+   all. A prefix search needs no format at all, and prefers 255434AA over
+   255434 when both exist, which is the more specific answer.
+
+   A prefix must be at least 5 characters. The book contains junk design
+   numbers read out of quantity cells - '250', '300kg' - and '250' is a prefix
+   of every design in the 250-thousands.
+
+   When the price comes from a base design rather than the one asked for, the
+   caller has to know: matched_design_no says which design actually supplied
+   it. A silent substitution in an order-entry path is exactly the kind of
+   thing nobody notices until an invoice is wrong.
+
    QUANTITY BANDS. qty_max NULL means "and up" - it is an open top band, not a
    missing value, and 1,031 rows in the book rely on that. A band matches when
    qty >= qty_min AND (qty_max IS NULL OR qty <= qty_max).
@@ -86,6 +106,41 @@ BEGIN
         RETURN;
     END
 
+    /* ---- 0. which design this order line is actually priced from ----
+       The full number first; then the longest stored design that is a prefix
+       of it. Scope, active and delete_mark are applied here too, so a design
+       that exists only on a deleted list cannot be chosen. */
+    DECLARE @match_design nvarchar(60) = NULL;
+
+    SELECT TOP 1 @match_design = d.design_no
+    FROM   SO.so_price_list_detail d
+    JOIN   SO.so_price_list_header h
+             ON h.so_price_list_header_id = d.so_price_list_header_id
+            AND h.delete_mark <> 'Y'
+    WHERE  d.delete_mark <> 'Y' AND d.active = 'Y'
+      AND  (@p_so_price_list_header_id IS NULL
+            OR d.so_price_list_header_id = @p_so_price_list_header_id)
+      AND  LTRIM(RTRIM(d.design_no)) = @design;
+
+    IF @match_design IS NULL
+        SELECT TOP 1 @match_design = z.design_no
+        FROM  (SELECT DISTINCT LTRIM(RTRIM(d.design_no)) AS design_no
+               FROM   SO.so_price_list_detail d
+               JOIN   SO.so_price_list_header h
+                        ON h.so_price_list_header_id = d.so_price_list_header_id
+                       AND h.delete_mark <> 'Y'
+               WHERE  d.delete_mark <> 'Y' AND d.active = 'Y'
+                 AND  (@p_so_price_list_header_id IS NULL
+                       OR d.so_price_list_header_id = @p_so_price_list_header_id)) z
+        WHERE  LEN(z.design_no) >= 5
+          AND  LEN(z.design_no) < LEN(@design)
+          AND  LEFT(@design, LEN(z.design_no)) = z.design_no
+        ORDER  BY LEN(z.design_no) DESC;
+
+    /* Nothing resembling it anywhere: say so by returning no rows, as an
+       unknown design already did. */
+    IF @match_design IS NULL RETURN;
+
     /* ---- 1. everything this order line could possibly be priced from ---- */
     DECLARE @cand TABLE (
         so_price_list_header_id bigint,
@@ -112,7 +167,7 @@ BEGIN
       AND  d.active = 'Y'
       AND  (@p_so_price_list_header_id IS NULL
             OR d.so_price_list_header_id = @p_so_price_list_header_id)
-      AND  d.design_no = @design
+      AND  LTRIM(RTRIM(d.design_no)) = @match_design
       AND  (@curr IS NULL OR @curr = '' OR LTRIM(RTRIM(d.currency))  = @curr)
       AND  (@uom  IS NULL OR @uom  = '' OR LTRIM(RTRIM(d.qty_unit)) = @uom);
 
@@ -162,7 +217,7 @@ BEGIN
     IF @tier IS NOT NULL AND @set_no IS NOT NULL
         SELECT so_price_list_header_id, so_price_list_detail_id, set_no, line_no,
                color_tier, qty_min, qty_max, curr, price, notes, uom,
-               'matched' AS resolution
+               'matched' AS resolution, @match_design AS matched_design_no
         FROM   @cand
         WHERE  color_tier = @tier
           AND  so_price_list_header_id = @set_hdr AND set_no = @set_no
@@ -172,7 +227,7 @@ BEGIN
         /* the colour is settled, the quantity is not - every band of it */
         SELECT so_price_list_header_id, so_price_list_detail_id, set_no, line_no,
                color_tier, qty_min, qty_max, curr, price, notes, uom,
-               'quantity ambiguous' AS resolution
+               'quantity ambiguous' AS resolution, @match_design AS matched_design_no
         FROM   @cand
         WHERE  color_tier = @tier
         ORDER  BY so_price_list_header_id, set_no, line_no;
@@ -181,7 +236,7 @@ BEGIN
         /* nothing settled - everything this design has */
         SELECT so_price_list_header_id, so_price_list_detail_id, set_no, line_no,
                color_tier, qty_min, qty_max, curr, price, notes, uom,
-               'colour and quantity ambiguous' AS resolution
+               'colour and quantity ambiguous' AS resolution, @match_design AS matched_design_no
         FROM   @cand
         ORDER  BY so_price_list_header_id, set_no, line_no;
 END

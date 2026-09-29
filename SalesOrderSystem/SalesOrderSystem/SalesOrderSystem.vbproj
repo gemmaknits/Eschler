@@ -953,6 +953,12 @@
     <Compile Include="SalesOrderForm\frmSalesOrder.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="SalesOrderForm\frmSelectPriceLine.Designer.vb">
+      <DependentUpon>frmSelectPriceLine.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SalesOrderForm\frmSelectPriceLine.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="SalesOrderForm\frmSalesOrderClose.Designer.vb">
       <DependentUpon>frmSalesOrderClose.vb</DependentUpon>
     </Compile>

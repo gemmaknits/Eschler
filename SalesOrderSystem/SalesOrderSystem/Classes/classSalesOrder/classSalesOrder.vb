@@ -802,4 +802,30 @@ Public Class classSalesOrder
         conn.Close()
         Return dt
     End Function
+
+    ''' <summary>
+    ''' The price line(s) that apply to one order line's design/color/uom/qty, or the
+    ''' candidates to choose from when SO.P_SO_PRICE_LIST_PKG_select_price_line can't
+    ''' decide on its own (see the "resolution" column: matched / design ambiguous /
+    ''' quantity ambiguous / colour and quantity ambiguous). Empty result = no match.
+    ''' -- John 29/09/2026
+    ''' </summary>
+    Public Function selectPriceLine(pSoPriceListHeaderId As Nullable(Of Int64), pDesignNo As String, pColorCode As String, pUom As String, pQty As Decimal, pCurr As String) As DataTable
+        Dim conn As New SqlConnection((New classConnection).connection)
+        Dim comm As New SqlCommand("", conn)
+        comm.CommandType = CommandType.StoredProcedure
+        comm.CommandText = "SO.P_SO_PRICE_LIST_PKG_select_price_line"
+        comm.Parameters.Clear()
+        comm.Parameters.AddWithValue("@p_so_price_list_header_id", pSoPriceListHeaderId)
+        comm.Parameters.AddWithValue("@p_design_no", pDesignNo)
+        comm.Parameters.AddWithValue("@p_color_code", pColorCode)
+        comm.Parameters.AddWithValue("@p_uom", pUom)
+        comm.Parameters.AddWithValue("@p_qty", pQty)
+        comm.Parameters.AddWithValue("@p_curr", If(String.IsNullOrEmpty(pCurr), "", pCurr))
+        Dim da As New SqlDataAdapter(comm)
+        Dim dt As New DataTable
+        da.Fill(dt)
+        conn.Close()
+        Return dt
+    End Function
 End Class

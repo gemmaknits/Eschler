@@ -2382,7 +2382,62 @@ Public Class frmSalesOrder
             End If
         End If
 
+        ' Check after any cell edit on the row -- CheckSelectPriceLine itself only
+        ' actually fires the popup once design no, color, uom and qty are all
+        ' filled, so it's harmless to check regardless of which cell was just
+        ' edited. -- John 29/09/2026
+        ' Temporarily disabled -- John checking something else -- 29/09/2026
+        'Call CheckSelectPriceLine(e.RowIndex)
+
         ' grdSalesOrder.Rows(e.RowIndex).ErrorText = ""
+    End Sub
+
+    ''' <summary>
+    ''' Step 1 of price-line selection: once design no, color, uom and qty are all
+    ''' filled on a line, ask SO.P_SO_PRICE_LIST_PKG_select_price_line for the
+    ''' matching price line(s) and let the user pick one via frmSelectPriceLine
+    ''' (shown every time, even for a single unambiguous match). The chosen
+    ''' so_price_list_detail_id is only held in the hidden grid column for now --
+    ''' where it ultimately gets saved comes later. -- John 29/09/2026
+    ''' </summary>
+    Private Sub CheckSelectPriceLine(rowIndex As Integer)
+        If rowIndex < 0 OrElse rowIndex >= grdSalesOrder.Rows.Count Then Exit Sub
+
+        Dim row As DataGridViewRow = grdSalesOrder.Rows(rowIndex)
+        Dim designNo As String = oConfig.IsNull(row.Cells("design_no").Value, "").ToString.Trim
+        Dim colorCode As String = oConfig.IsNull(row.Cells("col").Value, "").ToString.Trim
+        Dim uom As String = oConfig.IsNull(row.Cells("uom").Value, "").ToString.Trim
+        Dim qtyText As String = oConfig.IsNull(row.Cells("qty").Value, "").ToString.Trim
+
+        If designNo = "" OrElse colorCode = "" OrElse uom = "" OrElse qtyText = "" Then Exit Sub
+
+        Dim qty As Decimal
+        If Not Decimal.TryParse(qtyText, qty) Then Exit Sub
+
+        Dim headerId As Nullable(Of Int64) = Nothing
+        If cboPriceListCustomer.SelectedValue IsNot Nothing AndAlso Not IsDBNull(cboPriceListCustomer.SelectedValue) Then
+            headerId = Convert.ToInt64(cboPriceListCustomer.SelectedValue)
+        End If
+
+        ' selectPriceLine needs so_price_list_header_id -- that comes from
+        ' cboPriceListCustomer, so don't call the SP without it. -- John 29/09/2026
+        If Not headerId.HasValue Then
+            MessageBox.Show("Please select a Price List Customer before editing this!", "Validation Required", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1)
+            Exit Sub
+        End If
+
+        Dim curr As String = oConfig.IsNull(row.Cells("curr").Value, "").ToString.Trim
+
+        Dim dt As DataTable = (New classSalesOrder).selectPriceLine(headerId, designNo, colorCode, uom, qty, curr)
+        If dt Is Nothing OrElse dt.Rows.Count = 0 Then Exit Sub
+
+        Dim frm As New frmSelectPriceLine
+        Dim selectedId As Nullable(Of Int64) = frm.ShowAndSelect(dt)
+        frm.Dispose()
+
+        If selectedId.HasValue Then
+            row.Cells("so_price_list_detail_id").Value = selectedId.Value
+        End If
     End Sub
 
     Private Sub btnViewSTTracking_Click(sender As Object, e As EventArgs) Handles btnViewSTTracking.Click 'John 07/07/2026

@@ -155,6 +155,7 @@ Partial Class frmSalesOrder
         Me.closed2 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.cboid_so_routing = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.so_line_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.so_price_list_detail_id = New System.Windows.Forms.DataGridViewTextBoxColumn() ' John 29/09/2026
         Me.mtl_customer_items_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.mtl_customer_items_xref_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.qtyship = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -892,7 +893,7 @@ Partial Class frmSalesOrder
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grdSalesOrder.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grdSalesOrder.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.sonoid, Me.ref_stnoid, Me.design_gwth_nob, Me.design_no, Me.labeldes, Me.colRefdesno, Me.labelarticle, Me.colGmPerSqM, Me.Custdes, Me.fwth, Me.cboWidth, Me.gwth, Me.sample_fabric_qty, Me.sample_bulk_qty, Me.col, Me.custcol, Me.Column1, Me.labdipno, Me.labdip_comment, Me.labelcolor, Me.labeldata1, Me.labeldata2, Me.colCustDelidt, Me.shipdt, Me.confirmed_shipdt, Me.knit_begin_date, Me.knit_end_date, Me.dye_end_date, Me.yarn_available_date, Me.confirmed_appointment, Me.qty, Me.uom, Me.price, Me.colProdLossPerc, Me.colQtyWithLoss, Me.show_price, Me.curr, Me.exrt, Me.gr_itamt, Me.discamt, Me.nt_itamt, Me.closed2, Me.cboid_so_routing, Me.so_line_id, Me.mtl_customer_items_id, Me.mtl_customer_items_xref_id, Me.qtyship, Me.qtybal, Me.jobno, Me.sent_to, Me.st_reorder_bal_kg, Me.Column2})
+        Me.grdSalesOrder.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.sonoid, Me.ref_stnoid, Me.design_gwth_nob, Me.design_no, Me.labeldes, Me.colRefdesno, Me.labelarticle, Me.colGmPerSqM, Me.Custdes, Me.fwth, Me.cboWidth, Me.gwth, Me.sample_fabric_qty, Me.sample_bulk_qty, Me.col, Me.custcol, Me.Column1, Me.labdipno, Me.labdip_comment, Me.labelcolor, Me.labeldata1, Me.labeldata2, Me.colCustDelidt, Me.shipdt, Me.confirmed_shipdt, Me.knit_begin_date, Me.knit_end_date, Me.dye_end_date, Me.yarn_available_date, Me.confirmed_appointment, Me.qty, Me.uom, Me.price, Me.colProdLossPerc, Me.colQtyWithLoss, Me.show_price, Me.curr, Me.exrt, Me.gr_itamt, Me.discamt, Me.nt_itamt, Me.closed2, Me.cboid_so_routing, Me.so_line_id, Me.so_price_list_detail_id, Me.mtl_customer_items_id, Me.mtl_customer_items_xref_id, Me.qtyship, Me.qtybal, Me.jobno, Me.sent_to, Me.st_reorder_bal_kg, Me.Column2})
         Me.grdSalesOrder.Location = New System.Drawing.Point(3, 31)
         Me.grdSalesOrder.Name = "grdSalesOrder"
         Me.grdSalesOrder.RowHeadersWidth = 51
@@ -1356,6 +1357,18 @@ Partial Class frmSalesOrder
         Me.so_line_id.ReadOnly = True
         Me.so_line_id.Visible = False
         Me.so_line_id.Width = 125
+        '
+        'so_price_list_detail_id
+        ' Unbound (no DataPropertyName) -- holds the id picked from the price line
+        ' selection popup, per row, until we're told where it should be saved.
+        ' John 29/09/2026
+        '
+        Me.so_price_list_detail_id.HeaderText = "Price List Detail ID"
+        Me.so_price_list_detail_id.MinimumWidth = 6
+        Me.so_price_list_detail_id.Name = "so_price_list_detail_id"
+        Me.so_price_list_detail_id.ReadOnly = True
+        Me.so_price_list_detail_id.Visible = False
+        Me.so_price_list_detail_id.Width = 125
         '
         'mtl_customer_items_id
         '
@@ -2774,6 +2787,7 @@ Partial Class frmSalesOrder
     Friend WithEvents closed2 As DataGridViewCheckBoxColumn
     Friend WithEvents cboid_so_routing As DataGridViewTextBoxColumn
     Friend WithEvents so_line_id As DataGridViewTextBoxColumn
+    Friend WithEvents so_price_list_detail_id As DataGridViewTextBoxColumn ' John 29/09/2026
     Friend WithEvents mtl_customer_items_id As DataGridViewTextBoxColumn
     Friend WithEvents mtl_customer_items_xref_id As DataGridViewTextBoxColumn
     Friend WithEvents qtyship As DataGridViewTextBoxColumn

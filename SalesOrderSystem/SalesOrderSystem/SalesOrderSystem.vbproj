@@ -37,7 +37,7 @@
     <MinimumRequiredVersion>1.0.0.158</MinimumRequiredVersion>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>1051</ApplicationRevision>
+    <ApplicationRevision>1052</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -951,6 +951,12 @@
     </Compile>
     <Compile Include="Controls\MultiColumnComboBox.vb" />
     <Compile Include="SalesOrderForm\frmSalesOrder.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SalesOrderForm\frmSelectPriceLine.Designer.vb">
+      <DependentUpon>frmSelectPriceLine.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SalesOrderForm\frmSelectPriceLine.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="SalesOrderForm\frmSalesOrderClose.Designer.vb">

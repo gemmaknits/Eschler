@@ -1359,10 +1359,11 @@ Partial Class frmSalesOrder
         Me.so_line_id.Width = 125
         '
         'so_price_list_detail_id
-        ' Unbound (no DataPropertyName) -- holds the id picked from the price line
-        ' selection popup, per row, until we're told where it should be saved.
-        ' John 29/09/2026
+        ' Bound to soitm.price_list_detail_id (added to p_soitm_select's output) so
+        ' the value picked from the price line popup round-trips through the normal
+        ' save flow, same as mtl_customer_items_id. -- John 30/09/2026
         '
+        Me.so_price_list_detail_id.DataPropertyName = "price_list_detail_id"
         Me.so_price_list_detail_id.HeaderText = "Price List Detail ID"
         Me.so_price_list_detail_id.MinimumWidth = 6
         Me.so_price_list_detail_id.Name = "so_price_list_detail_id"

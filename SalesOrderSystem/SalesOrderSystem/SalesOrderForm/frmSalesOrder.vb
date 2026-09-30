@@ -2359,6 +2359,22 @@ Public Class frmSalesOrder
         End If
     End Sub
 
+    ''' <summary>
+    ''' Blocks editing design no / color / uom / qty until a Price List Customer is
+    ''' selected, so nothing can be typed in the first place -- a warning inside
+    ''' CellEndEdit is too late, since the value is already committed by then.
+    ''' -- John 30/09/2026
+    ''' </summary>
+    Private Sub grdSalesOrder_CellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles grdSalesOrder.CellBeginEdit
+        Dim colName As String = grdSalesOrder.Columns(e.ColumnIndex).Name
+        If colName = "design_no" OrElse colName = "col" OrElse colName = "uom" OrElse colName = "qty" Then
+            If cboPriceListCustomer.SelectedValue Is Nothing OrElse IsDBNull(cboPriceListCustomer.SelectedValue) Then
+                MessageBox.Show("Please select a Price List Customer before editing this!", "Validation Required", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1)
+                e.Cancel = True
+            End If
+        End If
+    End Sub
+
     Private Sub grdSalesOrder_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles grdSalesOrder.CellEndEdit
         If grdSalesOrder.Columns(e.ColumnIndex).Name = "colProdLossPerc" Then 'John 26/03/2026
             Dim qty = grdSalesOrder.Rows(e.RowIndex).Cells("qty").Value
@@ -2386,8 +2402,7 @@ Public Class frmSalesOrder
         ' actually fires the popup once design no, color, uom and qty are all
         ' filled, so it's harmless to check regardless of which cell was just
         ' edited. -- John 29/09/2026
-        ' Temporarily disabled -- John checking something else -- 29/09/2026
-        'Call CheckSelectPriceLine(e.RowIndex)
+        Call CheckSelectPriceLine(e.RowIndex)
 
         ' grdSalesOrder.Rows(e.RowIndex).ErrorText = ""
     End Sub
@@ -2432,7 +2447,7 @@ Public Class frmSalesOrder
         If dt Is Nothing OrElse dt.Rows.Count = 0 Then Exit Sub
 
         Dim frm As New frmSelectPriceLine
-        Dim selectedId As Nullable(Of Int64) = frm.ShowAndSelect(dt)
+        Dim selectedId As Nullable(Of Int64) = frm.ShowAndSelect(dt, Me)
         frm.Dispose()
 
         If selectedId.HasValue Then

@@ -406,10 +406,9 @@ Public Class classSalesOrder
 
                 comm.Parameters.AddWithValue("@mtl_customer_items_xref_id", config.IsNull(.Item(i)("mtl_customer_items_xref_id"), Nothing)) 'Sitthana 16/02/2018
                 comm.Parameters.AddWithValue("@mtl_customer_items_id", config.IsNull(.Item(i)("mtl_customer_items_id"), Nothing)) 'Sitthana 16/02/2018
+                comm.Parameters.AddWithValue("@p_price_list_detail_id", config.IsNull(.Item(i)("price_list_detail_id"), Nothing)) 'John 30/09/2026
                 comm.Parameters.AddWithValue("@pJobNo", config.IsNull(.Item(i)("JobNo"), Nothing)) 'Sitthana 23/05/2024
                 comm.Parameters.AddWithValue("@pSentToId", config.IsNull(.Item(i)("sent_to_id"), Nothing)) 'Sitthana 23/05/2024
-
-
 
                 comm.Parameters.AddWithValue("@p_prod_loss_perc", config.IsNull(.Item(i)("prod_loss_perc"), 0)) 'John 26/03/2026
                 comm.Parameters.AddWithValue("@p_qty_with_loss", config.IsNull(.Item(i)("qty_with_loss"), 0)) 'John 26/03/2026
@@ -494,6 +493,7 @@ Public Class classSalesOrder
                 comm.Parameters.AddWithValue("@SO_FULFIL_SRC_ID", SOH.SO_FULFIL_SRC_ID)
                 comm.Parameters.AddWithValue("@mtl_customer_items_xref_id", config.IsNull(.Item(i)("mtl_customer_items_xref_id"), Nothing)) 'Sitthana 16/02/2018
                 comm.Parameters.AddWithValue("@mtl_customer_items_id", config.IsNull(.Item(i)("mtl_customer_items_id"), Nothing)) 'Sitthana 16/02/2018
+                comm.Parameters.AddWithValue("@p_price_list_detail_id", config.IsNull(.Item(i)("price_list_detail_id"), Nothing)) 'John 30/09/2026
                 comm.Parameters.AddWithValue("@pJobNo", config.IsNull(.Item(i)("JobNo"), Nothing)) 'Sitthana 23/05/2024
                 comm.Parameters.AddWithValue("@pSentToId", config.IsNull(.Item(i)("sent_to_id"), Nothing)) 'Sitthana 23/05/2024
 

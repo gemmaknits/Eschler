@@ -5,13 +5,19 @@
 Public Class frmSelectPriceLine
     Private _selectedDetailId As Nullable(Of Int64)
 
-    Public Function ShowAndSelect(dt As DataTable) As Nullable(Of Int64)
+    ''' <summary>
+    ''' Pass the calling form as owner -- without it, ShowDialog() in this MDI app
+    ''' can open the modal dialog behind the main window's Z-order: it's really
+    ''' open and blocking, just invisible, which looks exactly like "no popup".
+    ''' -- John 30/09/2026
+    ''' </summary>
+    Public Function ShowAndSelect(dt As DataTable, owner As IWin32Window) As Nullable(Of Int64)
         _selectedDetailId = Nothing
         dgvResults.AutoGenerateColumns = True
         dgvResults.DataSource = dt
         ConfigureColumns()
         If dgvResults.Rows.Count > 0 Then dgvResults.Rows(0).Selected = True
-        Me.ShowDialog()
+        Me.ShowDialog(owner)
         Return _selectedDetailId
     End Function
 

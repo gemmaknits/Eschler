@@ -299,7 +299,7 @@ Public Class frmSalesOrder
         End With
 
         Me.cboPriceListCustomer.DataSource = objDB.getPriceListCustomer(Nothing)
-        Me.cboPriceListCustomer.DisplayMember = "name"
+        Me.cboPriceListCustomer.DisplayMember = "list_name"
         Me.cboPriceListCustomer.ValueMember = "so_price_list_header_id"
 
         'Used In Datagrid

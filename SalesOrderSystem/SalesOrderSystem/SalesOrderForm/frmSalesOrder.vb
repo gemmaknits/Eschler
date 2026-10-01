@@ -2448,10 +2448,14 @@ Public Class frmSalesOrder
 
         Dim frm As New frmSelectPriceLine
         Dim selectedId As Nullable(Of Int64) = frm.ShowAndSelect(dt, Me)
+        Dim selectedPrice As Nullable(Of Decimal) = frm.SelectedPrice
+        Dim selectedCurrency As String = frm.SelectedCurrency
         frm.Dispose()
 
         If selectedId.HasValue Then
             row.Cells("so_price_list_detail_id").Value = selectedId.Value
+            If selectedPrice.HasValue Then row.Cells("price").Value = selectedPrice.Value
+            If Not String.IsNullOrEmpty(selectedCurrency) Then row.Cells("curr").Value = selectedCurrency
         End If
     End Sub
 

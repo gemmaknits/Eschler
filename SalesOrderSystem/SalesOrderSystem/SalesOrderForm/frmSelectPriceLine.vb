@@ -5,6 +5,21 @@
 Public Class frmSelectPriceLine
     Private _selectedDetailId As Nullable(Of Int64)
 
+    ''' <summary>Unit price and currency of the row the user picked, so the caller
+    ''' can push them onto the SO line alongside the detail id. -- John 01/10/2026</summary>
+    Private _selectedPrice As Nullable(Of Decimal)
+    Private _selectedCurrency As String
+    Public ReadOnly Property SelectedPrice As Nullable(Of Decimal)
+        Get
+            Return _selectedPrice
+        End Get
+    End Property
+    Public ReadOnly Property SelectedCurrency As String
+        Get
+            Return _selectedCurrency
+        End Get
+    End Property
+
     ''' <summary>
     ''' Pass the calling form as owner -- without it, ShowDialog() in this MDI app
     ''' can open the modal dialog behind the main window's Z-order: it's really
@@ -64,12 +79,20 @@ Public Class frmSelectPriceLine
             _selectedDetailId = Convert.ToInt64(raw)
         End If
 
+        Dim priceRaw As Object = dgvResults.CurrentRow.Cells("price").Value
+        _selectedPrice = If(priceRaw Is Nothing OrElse IsDBNull(priceRaw), Nothing, CType(Convert.ToDecimal(priceRaw), Decimal?))
+
+        Dim currRaw As Object = dgvResults.CurrentRow.Cells("curr").Value
+        _selectedCurrency = If(currRaw Is Nothing OrElse IsDBNull(currRaw), Nothing, currRaw.ToString.Trim)
+
         Me.DialogResult = DialogResult.OK
         Me.Close()
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         _selectedDetailId = Nothing
+        _selectedPrice = Nothing
+        _selectedCurrency = Nothing
         Me.DialogResult = DialogResult.Cancel
         Me.Close()
     End Sub

@@ -1317,7 +1317,7 @@ Public Class frmSalesOrder
             End If
         End If
 
-        If UCase((New ClassConnection).database) = "KARISMA" Then
+        If UCase((New classConnection).database) = "KARISMA" Then
             rpt.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.PaperLetter
             rpt.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Landscape
             rpt.PrintOptions.PaperSource = CrystalDecisions.Shared.PaperSource.Auto
@@ -1808,7 +1808,7 @@ Public Class frmSalesOrder
     End Sub
 
     Private Sub hidecolumns()
-        Dim classcn As New ClassConnection
+        Dim classcn As New classConnection
         If UCase(classcn.database) = "GEMMASOFT" Then
             colRefdesno.Visible = True
             colGmPerSqM.Visible = True
@@ -2052,7 +2052,7 @@ Public Class frmSalesOrder
     End Sub
 
     Private Sub btnCheckStock_Click(sender As Object, e As EventArgs) Handles btnCheckStock.Click
-        Dim dbname = (New ClassConnection).database
+        Dim dbname = (New classConnection).database
         If dbname = "ColomboDB" OrElse dbname = "ColomboDBTest" Then
             Exit Sub
         End If
@@ -2077,7 +2077,7 @@ Public Class frmSalesOrder
     End Sub
 
     Private Sub btnSpecialCharges_Click(sender As Object, e As EventArgs) Handles btnSpecialCharges.Click
-        Dim dbname = (New ClassConnection).database
+        Dim dbname = (New classConnection).database
         If dbname = "ColomboDB" OrElse dbname = "ColomboDBTest" Then
             Exit Sub
         End If
@@ -2100,7 +2100,7 @@ Public Class frmSalesOrder
     End Sub
 
     Private Sub btnAltItems_Click(sender As Object, e As EventArgs) Handles btnAltItems.Click
-        Dim dbname = (New ClassConnection).database
+        Dim dbname = (New classConnection).database
         If dbname = "ColomboDB" OrElse dbname = "ColomboDBTest" Then
             Exit Sub
         End If
@@ -2154,8 +2154,12 @@ Public Class frmSalesOrder
         bsCustomersShipToFlag.Filter = "parent_customer_id = " & Me.mcboCustomersBillToFlag.ListBox.Grid.Model(Me.mcboCustomersBillToFlag.SelectedIndex + 1, 1).CellValue & "" 'Disible By Neung K.Piew No Need to Filter Cust Deli
 
         ' Refresh the customer's price list to match the selected Bill To customer -- John 25/09/2026
+        ' By name, not column index, so this can't silently break if
+        ' P_SO_FORM_PKG_get_customers_bill_to_flag's column order ever changes.
+        ' (The Ship-To filter above intentionally uses parent_customer_id instead --
+        ' a different field, not interchangeable with customer_id.) -- John 01/10/2026
         Dim objDB As New classMaster
-        Dim custIdCell As Object = Me.mcboCustomersBillToFlag.ListBox.Grid.Model(Me.mcboCustomersBillToFlag.SelectedIndex + 1, 1).CellValue
+        Dim custIdCell As Object = Me.mcboCustomersBillToFlag.ListBox.Grid.Model(Me.mcboCustomersBillToFlag.SelectedIndex + 1, "customer_id").CellValue
         Dim custId As Nullable(Of Int64) = Nothing
         If custIdCell IsNot Nothing AndAlso Not IsDBNull(custIdCell) Then custId = Convert.ToInt64(custIdCell)
         Me.cboPriceListCustomer.DataSource = objDB.getPriceListCustomer(custId)

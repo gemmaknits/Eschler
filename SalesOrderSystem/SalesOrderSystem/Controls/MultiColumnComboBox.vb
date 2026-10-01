@@ -137,6 +137,26 @@ Namespace Controls
             End Get
         End Property
 
+        ''' <summary>
+        ''' Same as Model(row, colIndex), but by the underlying DataTable's column
+        ''' name instead of a positional index -- e.g. Model(SelectedIndex + 1,
+        ''' "customer_id") instead of a magic number that silently breaks if the
+        ''' source stored proc's column order ever changes. -- John 01/10/2026
+        ''' </summary>
+        Default Public ReadOnly Property Item(row As Integer, columnName As String) As GridCellInfo
+            Get
+                Dim dv As DataView = _dataViewProvider()
+                If dv Is Nothing OrElse row <= 0 OrElse row > dv.Count Then
+                    Return New GridCellInfo(Nothing)
+                End If
+                Dim dataRow As DataRowView = dv(row - 1)
+                If Not dataRow.Row.Table.Columns.Contains(columnName) Then
+                    Return New GridCellInfo(Nothing)
+                End If
+                Return New GridCellInfo(dataRow(columnName))
+            End Get
+        End Property
+
         Public Event QueryCellInfo As EventHandler(Of GridQueryCellInfoEventArgs)
 
         Friend Sub RaiseQueryCellInfo(e As GridQueryCellInfoEventArgs)

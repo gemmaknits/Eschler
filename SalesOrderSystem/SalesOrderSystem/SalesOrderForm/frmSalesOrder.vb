@@ -2164,7 +2164,7 @@ Public Class frmSalesOrder
         If custIdCell IsNot Nothing AndAlso Not IsDBNull(custIdCell) Then custId = Convert.ToInt64(custIdCell)
         Me.cboPriceListCustomer.DataSource = objDB.getPriceListCustomer(custId)
         Me.cboPriceListCustomer.DisplayMember = "name"
-        Me.cboPriceListCustomer.ValueMember = "customer_id"
+        Me.cboPriceListCustomer.ValueMember = "so_price_list_header_id" ' John 01/10/2026 -- was "customer_id", which fed the wrong id into @p_so_price_list_header_id and into the saved so.price_list_header_id
 
         Call bindCustomerBillToData()
         Call bindCustomerShipToData()

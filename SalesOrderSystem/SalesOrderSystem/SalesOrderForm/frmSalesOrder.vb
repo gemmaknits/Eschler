@@ -2377,7 +2377,33 @@ Public Class frmSalesOrder
                 e.Cancel = True
             End If
         End If
+
+        ' Remember the value this edit session started with, so CellEndEdit can tell a
+        ' real change from a session that ended with nothing changed. -- John 05/10/2026
+        If Not e.Cancel Then
+            _editStartRow = e.RowIndex
+            _editStartCol = e.ColumnIndex
+            _editStartValue = oConfig.IsNull(grdSalesOrder.Rows(e.RowIndex).Cells(e.ColumnIndex).Value, "").ToString.Trim
+        End If
     End Sub
+
+    ' Value of the cell when its edit session began (see CellBeginEdit / CellEndEdit).
+    Private _editStartRow As Integer = -1
+    Private _editStartCol As Integer = -1
+    Private _editStartValue As String = ""
+
+    ''' <summary>
+    ''' True if a price line input cell really changed during an edit session. qty is
+    ''' compared as a number (1500 vs 1500.00 is not a change); everything else as text,
+    ''' since e.g. design no 0123 and 123 are different designs. -- John 05/10/2026
+    ''' </summary>
+    Private Function PriceLineInputChanged(colName As String, before As String, after As String) As Boolean
+        If colName = "qty" Then
+            Dim b As Decimal, a As Decimal
+            If Decimal.TryParse(before, b) AndAlso Decimal.TryParse(after, a) Then Return a <> b
+        End If
+        Return Not String.Equals(before, after, StringComparison.Ordinal)
+    End Function
 
     Private Sub grdSalesOrder_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles grdSalesOrder.CellEndEdit
         If grdSalesOrder.Columns(e.ColumnIndex).Name = "colProdLossPerc" Then 'John 26/03/2026
@@ -2402,11 +2428,23 @@ Public Class frmSalesOrder
             End If
         End If
 
-        ' Check after any cell edit on the row -- CheckSelectPriceLine itself only
-        ' actually fires the popup once design no, color, uom and qty are all
-        ' filled, so it's harmless to check regardless of which cell was just
-        ' edited. -- John 29/09/2026
-        Call CheckSelectPriceLine(e.RowIndex)
+        ' Re-check the price line only when one of the inputs to it (design no, color,
+        ' uom, qty, curr) actually changed. CellEndEdit also fires for an edit session
+        ' that ended with nothing changed -- e.g. a click on the already-selected cell
+        ' followed by an arrow key -- which used to reopen the popup. CheckSelectPriceLine
+        ' itself still waits until design no, color, uom and qty are all filled.
+        ' -- John 29/09/2026, changed 05/10/2026
+        Dim endColName As String = grdSalesOrder.Columns(e.ColumnIndex).Name
+        If endColName = "design_no" OrElse endColName = "col" OrElse endColName = "uom" OrElse endColName = "qty" OrElse endColName = "curr" Then
+            If e.RowIndex = _editStartRow AndAlso e.ColumnIndex = _editStartCol Then
+                Dim endValue As String = oConfig.IsNull(grdSalesOrder.Rows(e.RowIndex).Cells(e.ColumnIndex).Value, "").ToString.Trim
+                If PriceLineInputChanged(endColName, _editStartValue, endValue) Then
+                    Call CheckSelectPriceLine(e.RowIndex)
+                End If
+            End If
+        End If
+        _editStartRow = -1
+        _editStartCol = -1
 
         ' grdSalesOrder.Rows(e.RowIndex).ErrorText = ""
     End Sub

@@ -2009,7 +2009,7 @@ Public Class frmMainmenu
         System.Diagnostics.Process.Start(url)
     End Sub
 
-    Private Sub tsmiPDR_Click(sender As Object, e As EventArgs) Handles tsmiPDR.Click
+    Private Sub tsmiPDR_Click(sender As Object, e As EventArgs) Handles tsmiPDR.Click '09/10/2026 John
         Dim url As String = "http://172.16.3.2:5000/ui/login.aspx?user_id=" & Uri.EscapeDataString(clsUser.UserName) & "&pwd=" & Uri.EscapeDataString(clsUser.Password)
         System.Diagnostics.Process.Start(url)
     End Sub

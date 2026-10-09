@@ -1968,4 +1968,44 @@ Public Class frmMainmenu
     Private Sub menuSalesOrder_Click(sender As Object, e As EventArgs) Handles menuSalesOrder.Click
 
     End Sub
+
+    Private Sub tsmiSOStatus_Click(sender As Object, e As EventArgs) Handles tsmiSOStatus.Click '08/10/2026 John
+        Dim url As String = "http://172.16.3.2:3001/SOStatus/?emp=" & Uri.EscapeDataString(clsUser.UserName) & "&dbname=" & Uri.EscapeDataString(classConnection.database)
+        System.Diagnostics.Process.Start(url)
+    End Sub
+
+    Private Sub tsmiSOPriceList_Click(sender As Object, e As EventArgs) Handles tsmiSOPriceList.Click '08/10/2026 John
+        Dim url As String = "http://172.16.3.2:3001/SOPRICELIST/"
+        System.Diagnostics.Process.Start(url)
+    End Sub
+
+    Private Sub tsmiCMRStatus_Click(sender As Object, e As EventArgs) Handles tsmiCMRStatus.Click '08/10/2026 John
+        Dim url As String = "http://172.16.3.2:3001/CmrStatus/?emp=" & Uri.EscapeDataString(clsUser.UserName) & "&dbname=" & Uri.EscapeDataString(classConnection.database)
+        System.Diagnostics.Process.Start(url)
+    End Sub
+
+    Private Sub tsmiGammaDyePerf_Click(sender As Object, e As EventArgs) Handles tsmiGammaDyePerf.Click '08/10/2026 John
+        Dim url As String = "http://172.16.3.2:3001/GammaDye/"
+        System.Diagnostics.Process.Start(url)
+    End Sub
+
+    Private Sub tsmiDFGammaControl_Click(sender As Object, e As EventArgs) Handles tsmiDFGammaControl.Click '08/10/2026 John
+        Dim url As String = "http://172.16.3.2:3001/DFGamma/?emp=" & Uri.EscapeDataString(clsUser.UserName) & "&dbname=" & Uri.EscapeDataString(classConnection.database)
+        System.Diagnostics.Process.Start(url)
+    End Sub
+
+    Private Sub tsmiGreigeDefectRoll_Click(sender As Object, e As EventArgs) Handles tsmiGreigeDefectRoll.Click '08/10/2026 John
+        Dim url As String = "http://172.16.3.2:3001/GreigeRollDefect/"
+        System.Diagnostics.Process.Start(url)
+    End Sub
+
+    Private Sub tsmiSTTracking_Click(sender As Object, e As EventArgs) Handles tsmiSTTracking.Click '08/10/2026 John
+        Dim url As String = "http://172.16.3.2:3001/STTracking/"
+        System.Diagnostics.Process.Start(url)
+    End Sub
+
+    Private Sub tsmiStenterView_Click(sender As Object, e As EventArgs) Handles tsmiStenterView.Click '08/10/2026 John
+        Dim url As String = "http://172.16.3.2:3001/StenterView/"
+        System.Diagnostics.Process.Start(url)
+    End Sub
 End Class

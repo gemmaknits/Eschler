@@ -253,6 +253,16 @@ Partial Class frmMainmenu
         Me.tsmnCMRLabStatus = New System.Windows.Forms.ToolStripMenuItem()
         Me.ManagementToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ManagementSummaryReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsmiWebsites = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsmiSOStatus = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsmiSOPriceList = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsmiCMRStatus = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsmiGammaDyePerf = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsmiDFGammaControl = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsmiGreigeDefectRoll = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsmiSTTracking = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsmiStenterView = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsmiPDR = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.CascadeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CascadeToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
@@ -268,15 +278,6 @@ Partial Class frmMainmenu
         Me.TrayMenu = New System.Windows.Forms.ContextMenu()
         Me.mnuRestore = New System.Windows.Forms.MenuItem()
         Me.mnuExit = New System.Windows.Forms.MenuItem()
-        Me.tsmiWebsites = New System.Windows.Forms.ToolStripMenuItem()
-        Me.tsmiSOStatus = New System.Windows.Forms.ToolStripMenuItem()
-        Me.tsmiSOPriceList = New System.Windows.Forms.ToolStripMenuItem()
-        Me.tsmiCMRStatus = New System.Windows.Forms.ToolStripMenuItem()
-        Me.tsmiGammaDyePerf = New System.Windows.Forms.ToolStripMenuItem()
-        Me.tsmiDFGammaControl = New System.Windows.Forms.ToolStripMenuItem()
-        Me.tsmiGreigeDefectRoll = New System.Windows.Forms.ToolStripMenuItem()
-        Me.tsmiSTTracking = New System.Windows.Forms.ToolStripMenuItem()
-        Me.tsmiStenterView = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -1714,99 +1715,9 @@ Partial Class frmMainmenu
         Me.ManagementSummaryReportToolStripMenuItem.Size = New System.Drawing.Size(237, 22)
         Me.ManagementSummaryReportToolStripMenuItem.Text = "Management Summary Report"
         '
-        'ToolStripMenuItem2
-        '
-        Me.ToolStripMenuItem2.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CascadeToolStripMenuItem, Me.ChangePasswordToolStripMenuItem, Me.ExitToolStripMenuItem})
-        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(68, 23)
-        Me.ToolStripMenuItem2.Text = "Windows"
-        '
-        'CascadeToolStripMenuItem
-        '
-        Me.CascadeToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CascadeToolStripMenuItem1, Me.TileHorizontalToolStripMenuItem, Me.TileVerticalToolStripMenuItem})
-        Me.CascadeToolStripMenuItem.Name = "CascadeToolStripMenuItem"
-        Me.CascadeToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.CascadeToolStripMenuItem.Text = "Arrange Windows"
-        '
-        'CascadeToolStripMenuItem1
-        '
-        Me.CascadeToolStripMenuItem1.Name = "CascadeToolStripMenuItem1"
-        Me.CascadeToolStripMenuItem1.Size = New System.Drawing.Size(151, 22)
-        Me.CascadeToolStripMenuItem1.Text = "Cascade"
-        '
-        'TileHorizontalToolStripMenuItem
-        '
-        Me.TileHorizontalToolStripMenuItem.Name = "TileHorizontalToolStripMenuItem"
-        Me.TileHorizontalToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
-        Me.TileHorizontalToolStripMenuItem.Text = "Tile Horizontal"
-        '
-        'TileVerticalToolStripMenuItem
-        '
-        Me.TileVerticalToolStripMenuItem.Name = "TileVerticalToolStripMenuItem"
-        Me.TileVerticalToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
-        Me.TileVerticalToolStripMenuItem.Text = "Tile Vertical"
-        '
-        'ChangePasswordToolStripMenuItem
-        '
-        Me.ChangePasswordToolStripMenuItem.Name = "ChangePasswordToolStripMenuItem"
-        Me.ChangePasswordToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.ChangePasswordToolStripMenuItem.Text = "Change Password"
-        '
-        'ExitToolStripMenuItem
-        '
-        Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.ExitToolStripMenuItem.Text = "Exit"
-        '
-        'ExchangeRateUSTHBToolStripMenuItem
-        '
-        Me.ExchangeRateUSTHBToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ActiveCaption
-        Me.ExchangeRateUSTHBToolStripMenuItem.Name = "ExchangeRateUSTHBToolStripMenuItem"
-        Me.ExchangeRateUSTHBToolStripMenuItem.Size = New System.Drawing.Size(148, 23)
-        Me.ExchangeRateUSTHBToolStripMenuItem.Text = "Exchange Rate USD/THB"
-        Me.ExchangeRateUSTHBToolStripMenuItem.ToolTipText = "Exchange Rate From Bank Of Thailand"
-        '
-        'txtExchangeRate
-        '
-        Me.txtExchangeRate.Enabled = False
-        Me.txtExchangeRate.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.txtExchangeRate.Name = "txtExchangeRate"
-        Me.txtExchangeRate.Size = New System.Drawing.Size(50, 23)
-        Me.txtExchangeRate.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'lblConnection
-        '
-        Me.lblConnection.Name = "lblConnection"
-        Me.lblConnection.Size = New System.Drawing.Size(81, 23)
-        Me.lblConnection.Text = "Connection"
-        '
-        'lblDataBase
-        '
-        Me.lblDataBase.Name = "lblDataBase"
-        Me.lblDataBase.Size = New System.Drawing.Size(12, 23)
-        '
-        'TrayIcon
-        '
-        Me.TrayIcon.Text = "NotifyIcon1"
-        Me.TrayIcon.Visible = True
-        '
-        'TrayMenu
-        '
-        Me.TrayMenu.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.mnuRestore, Me.mnuExit})
-        '
-        'mnuRestore
-        '
-        Me.mnuRestore.Index = 0
-        Me.mnuRestore.Text = "&Restore"
-        '
-        'mnuExit
-        '
-        Me.mnuExit.Index = 1
-        Me.mnuExit.Text = "E&xit"
-        '
         'tsmiWebsites
         '
-        Me.tsmiWebsites.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmiSOStatus, Me.tsmiSOPriceList, Me.tsmiCMRStatus, Me.tsmiGammaDyePerf, Me.tsmiDFGammaControl, Me.tsmiGreigeDefectRoll, Me.tsmiSTTracking, Me.tsmiStenterView})
+        Me.tsmiWebsites.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmiSOStatus, Me.tsmiSOPriceList, Me.tsmiCMRStatus, Me.tsmiGammaDyePerf, Me.tsmiDFGammaControl, Me.tsmiGreigeDefectRoll, Me.tsmiSTTracking, Me.tsmiStenterView, Me.tsmiPDR})
         Me.tsmiWebsites.Name = "tsmiWebsites"
         Me.tsmiWebsites.Size = New System.Drawing.Size(73, 23)
         Me.tsmiWebsites.Text = "Web Apps"
@@ -1858,6 +1769,102 @@ Partial Class frmMainmenu
         Me.tsmiStenterView.Name = "tsmiStenterView"
         Me.tsmiStenterView.Size = New System.Drawing.Size(210, 22)
         Me.tsmiStenterView.Text = "Stenter View"
+        '
+        'tsmiPDR
+        '
+        Me.tsmiPDR.Name = "tsmiPDR"
+        Me.tsmiPDR.Size = New System.Drawing.Size(210, 22)
+        Me.tsmiPDR.Text = "PDR"
+        '
+        'ToolStripMenuItem2
+        '
+        Me.ToolStripMenuItem2.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CascadeToolStripMenuItem, Me.ChangePasswordToolStripMenuItem, Me.ExitToolStripMenuItem})
+        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(68, 23)
+        Me.ToolStripMenuItem2.Text = "Windows"
+        '
+        'CascadeToolStripMenuItem
+        '
+        Me.CascadeToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CascadeToolStripMenuItem1, Me.TileHorizontalToolStripMenuItem, Me.TileVerticalToolStripMenuItem})
+        Me.CascadeToolStripMenuItem.Name = "CascadeToolStripMenuItem"
+        Me.CascadeToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
+        Me.CascadeToolStripMenuItem.Text = "Arrange Windows"
+        '
+        'CascadeToolStripMenuItem1
+        '
+        Me.CascadeToolStripMenuItem1.Name = "CascadeToolStripMenuItem1"
+        Me.CascadeToolStripMenuItem1.Size = New System.Drawing.Size(151, 22)
+        Me.CascadeToolStripMenuItem1.Text = "Cascade"
+        '
+        'TileHorizontalToolStripMenuItem
+        '
+        Me.TileHorizontalToolStripMenuItem.Name = "TileHorizontalToolStripMenuItem"
+        Me.TileHorizontalToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
+        Me.TileHorizontalToolStripMenuItem.Text = "Tile Horizontal"
+        '
+        'TileVerticalToolStripMenuItem
+        '
+        Me.TileVerticalToolStripMenuItem.Name = "TileVerticalToolStripMenuItem"
+        Me.TileVerticalToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
+        Me.TileVerticalToolStripMenuItem.Text = "Tile Vertical"
+        '
+        'ChangePasswordToolStripMenuItem
+        '
+        Me.ChangePasswordToolStripMenuItem.Name = "ChangePasswordToolStripMenuItem"
+        Me.ChangePasswordToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
+        Me.ChangePasswordToolStripMenuItem.Text = "Change Password"
+        '
+        'ExitToolStripMenuItem
+        '
+        Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
+        Me.ExitToolStripMenuItem.Text = "Exit"
+        '
+        'ExchangeRateUSTHBToolStripMenuItem
+        '
+        Me.ExchangeRateUSTHBToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ActiveCaption
+        Me.ExchangeRateUSTHBToolStripMenuItem.Name = "ExchangeRateUSTHBToolStripMenuItem"
+        Me.ExchangeRateUSTHBToolStripMenuItem.Size = New System.Drawing.Size(148, 23)
+        Me.ExchangeRateUSTHBToolStripMenuItem.Text = "Exchange Rate USD/THB"
+        Me.ExchangeRateUSTHBToolStripMenuItem.ToolTipText = "Exchange Rate From Bank Of Thailand"
+        '
+        'txtExchangeRate
+        '
+        Me.txtExchangeRate.Enabled = False
+        Me.txtExchangeRate.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.txtExchangeRate.Name = "txtExchangeRate"
+        Me.txtExchangeRate.Size = New System.Drawing.Size(50, 23)
+        Me.txtExchangeRate.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'lblConnection
+        '
+        Me.lblConnection.Name = "lblConnection"
+        Me.lblConnection.Size = New System.Drawing.Size(81, 23)
+        Me.lblConnection.Text = "Connection"
+        '
+        'lblDataBase
+        '
+        Me.lblDataBase.Name = "lblDataBase"
+        Me.lblDataBase.Size = New System.Drawing.Size(12, 23)
+        '
+        'TrayIcon
+        '
+        Me.TrayIcon.Text = "NotifyIcon1"
+        Me.TrayIcon.Visible = True
+        '
+        'TrayMenu
+        '
+        Me.TrayMenu.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.mnuRestore, Me.mnuExit})
+        '
+        'mnuRestore
+        '
+        Me.mnuRestore.Index = 0
+        Me.mnuRestore.Text = "&Restore"
+        '
+        'mnuExit
+        '
+        Me.mnuExit.Index = 1
+        Me.mnuExit.Text = "E&xit"
         '
         'frmMainmenu
         '
@@ -2134,4 +2141,5 @@ Partial Class frmMainmenu
     Friend WithEvents tsmiGreigeDefectRoll As ToolStripMenuItem
     Friend WithEvents tsmiSTTracking As ToolStripMenuItem
     Friend WithEvents tsmiStenterView As ToolStripMenuItem
+    Friend WithEvents tsmiPDR As ToolStripMenuItem
 End Class

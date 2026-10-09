@@ -1968,7 +1968,7 @@ Public Class frmMainmenu
     Private Sub menuSalesOrder_Click(sender As Object, e As EventArgs) Handles menuSalesOrder.Click
 
     End Sub
-
+    '---------------Websites Menu------------Added By John 09/10/2026---------------------------------
     Private Sub tsmiSOStatus_Click(sender As Object, e As EventArgs) Handles tsmiSOStatus.Click '08/10/2026 John
         Dim url As String = "http://172.16.3.2:3001/SOStatus/?emp=" & Uri.EscapeDataString(clsUser.UserName) & "&dbname=" & Uri.EscapeDataString(classConnection.database)
         System.Diagnostics.Process.Start(url)
@@ -2008,4 +2008,10 @@ Public Class frmMainmenu
         Dim url As String = "http://172.16.3.2:3001/StenterView/"
         System.Diagnostics.Process.Start(url)
     End Sub
+
+    Private Sub tsmiPDR_Click(sender As Object, e As EventArgs) Handles tsmiPDR.Click
+        Dim url As String = "http://172.16.3.2:5000/ui/login.aspx?user_id=" & Uri.EscapeDataString(clsUser.UserName) & "&pwd=" & Uri.EscapeDataString(clsUser.Password)
+        System.Diagnostics.Process.Start(url)
+    End Sub
+    '-------------------------------------------------------------------------------------------------------------------------------
 End Class

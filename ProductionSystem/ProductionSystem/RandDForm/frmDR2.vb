@@ -711,7 +711,7 @@ Public Class frmDR2
         Dim objMaster As New classMaster
         Dim dtDesignMaster As New DataTable
 
-        dtDesignMaster = objMaster.getDesignMasterRecord("", txtNewDesignNo.Text.ToString)
+        dtDesignMaster = (New classDesignNew).getDesignMasterRecord("", txtNewDesignNo.Text.ToString)
         If dtDesignMaster.Rows.Count > 0 Then
             txtDesignNo.Text = dtDesignMaster.Rows(0).Item("dm_parent_design").ToString.Trim
             txtFabricType.Text = dtDesignMaster.Rows(0).Item("fabric_type").ToString.Trim

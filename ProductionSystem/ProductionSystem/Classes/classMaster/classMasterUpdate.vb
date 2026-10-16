@@ -17,33 +17,33 @@ Public Class classMasterUpdate
         End Using
     End Sub
 
-	Public Structure Customer
-		Dim h01_custcd As String
-		Dim h02_name As String
-		Dim h03_namet As String
-		Dim h04_addr1 As String
-		Dim h05_addr2 As String
-		Dim h06_addr3 As String
-		Dim h07_addr1t As String
-		Dim h08_addr2t As String
-		Dim h09_addr3t As String
-		Dim h10_city As String
-		Dim h11_ctry As String
-		Dim h12_tel As String
-		Dim h13_fax As String
-		Dim h14_email As String
-		Dim h15_contact As String
-		Dim h16_credit As Integer
-		Dim h17_payterms As String
-		Dim h18_agcd As String
-		Dim h19_Custgroup As String
-		Dim h20_active As Integer
-		Dim h21_crdays As Integer
+    Public Structure Customer
+        Dim h01_custcd As String
+        Dim h02_name As String
+        Dim h03_namet As String
+        Dim h04_addr1 As String
+        Dim h05_addr2 As String
+        Dim h06_addr3 As String
+        Dim h07_addr1t As String
+        Dim h08_addr2t As String
+        Dim h09_addr3t As String
+        Dim h10_city As String
+        Dim h11_ctry As String
+        Dim h12_tel As String
+        Dim h13_fax As String
+        Dim h14_email As String
+        Dim h15_contact As String
+        Dim h16_credit As Integer
+        Dim h17_payterms As String
+        Dim h18_agcd As String
+        Dim h19_Custgroup As String
+        Dim h20_active As Integer
+        Dim h21_crdays As Integer
         Dim h22_log_empcd As String
         Dim h23_name2 As String
     End Structure
 
-	Public Structure Agency
+    Public Structure Agency
 		Dim h01_Agcd As String
 		Dim h02_Nickname As String
 		Dim h03_Name As String
@@ -146,165 +146,6 @@ Public Class classMasterUpdate
 
     End Structure
 
-    'New Procedure in Gemmaknits   -- Sitthana 13/03/2018
-    Public Function DesignMasterNewSave(ByVal drvDesignMaster As DataRowView, ByVal LoginEmpCD As String) As DataTable
-        Dim config As New clsConfig
-        Dim conn As New SqlConnection((New classConnection).connection)
-        conn.Open()
-        Dim tran As SqlTransaction = conn.BeginTransaction
-        Dim comm As New SqlCommand("", conn)
-        Dim i As Integer = 0
-        Dim strLotNo As String = ""
-        comm.Transaction = tran
-        comm.CommandType = CommandType.StoredProcedure
-        comm.CommandText = "p_design_master_new_pkg_update_master_record"
-
-        comm.Parameters.AddWithValue("@p_dm_item_id", drvDesignMaster("dm_item_id"))
-        comm.Parameters.AddWithValue("@p_dm_Design_no", drvDesignMaster("dm_design_no"))
-        comm.Parameters.AddWithValue("@p_dm_compo", drvDesignMaster("dm_compo"))
-        comm.Parameters.AddWithValue("@p_dm_compo_for_tag", drvDesignMaster("dm_compo_for_tag")) 'Add by Neung 20200302
-        comm.Parameters.AddWithValue("@p_dm_rem", drvDesignMaster("dm_rem"))
-        comm.Parameters.AddWithValue("@p_dm_supdes_no", drvDesignMaster("dm_supdes_no"))
-        comm.Parameters.AddWithValue("@p_dm_cust_design_no", drvDesignMaster("dm_cust_design_no"))
-        comm.Parameters.AddWithValue("@p_dm_refdesno", drvDesignMaster("dm_refdesno"))
-        comm.Parameters.AddWithValue("@p_log_empcd", LoginEmpCD)
-        comm.Parameters.AddWithValue("@p_dm_fin_id", drvDesignMaster("dm_fin_id"))
-        comm.Parameters.AddWithValue("@p_dm_parent_design", drvDesignMaster("dm_parent_design"))
-        comm.Parameters.AddWithValue("@p_dm_design_family", config.IsNull(drvDesignMaster("dm_design_family"), String.Empty))
-        comm.Parameters.AddWithValue("@p_dm_mtl_inventory_types_id", drvDesignMaster("dm_mtl_inventory_types_id"))
-
-        comm.Parameters.AddWithValue("@p_ds_fwth", drvDesignMaster("ds_fwth"))
-        comm.Parameters.AddWithValue("@p_ds_nob", drvDesignMaster("ds_nob"))
-        comm.Parameters.AddWithValue("@p_ds_usewth", drvDesignMaster("ds_usewth"))
-        comm.Parameters.AddWithValue("@p_ds_mtkg", drvDesignMaster("ds_mtkg"))
-        comm.Parameters.AddWithValue("@p_ds_Needle", drvDesignMaster("ds_needle"))
-        comm.Parameters.AddWithValue("@p_ds_gmpersqm", drvDesignMaster("ds_gmpersqm"))
-        comm.Parameters.AddWithValue("@p_ds_cpi", drvDesignMaster("ds_cpi"))
-        comm.Parameters.AddWithValue("@p_ds_wpi", drvDesignMaster("ds_wpi"))
-        comm.Parameters.AddWithValue("@p_ds_kg_per_roll", drvDesignMaster("ds_kg_per_roll"))
-        comm.Parameters.AddWithValue("@p_ds_mts_per_roll", drvDesignMaster("ds_mts_per_roll"))
-        comm.Parameters.AddWithValue("@p_ds_kg_per_day", drvDesignMaster("ds_kg_per_day"))
-        comm.Parameters.AddWithValue("@p_ds_kg_per_meter", drvDesignMaster("ds_kg_per_meter"))
-        comm.Parameters.AddWithValue("@p_ds_meters_per_day", drvDesignMaster("ds_meters_per_day"))
-        comm.Parameters.AddWithValue("@p_ds_hours_per_day", drvDesignMaster("ds_hours_per_day"))
-        comm.Parameters.AddWithValue("@p_ds_counter_per_roll", drvDesignMaster("ds_counter_per_roll"))
-        comm.Parameters.AddWithValue("@p_ds_rpm", drvDesignMaster("ds_rpm"))
-        comm.Parameters.AddWithValue("@p_ds_elongation", drvDesignMaster("ds_elongation"))
-        comm.Parameters.AddWithValue("@p_ds_modulus", drvDesignMaster("ds_modulus"))
-        comm.Parameters.AddWithValue("@p_ds_mtkg_edge", drvDesignMaster("ds_mtkg_edge"))
-        comm.Parameters.AddWithValue("@p_ds_mtkg_useable", drvDesignMaster("ds_mtkg_useable"))
-        comm.Parameters.AddWithValue("@p_ds_machine_group_id", drvDesignMaster("ds_machine_group_id"))
-        comm.Parameters.AddWithValue("@p_ds_edge_cut_wth", drvDesignMaster("ds_edge_cut_wth"))
-
-        comm.Parameters.AddWithValue("@p_ds_elasticity_length", drvDesignMaster("ds_elasticity_length"))
-        comm.Parameters.AddWithValue("@p_ds_elasticity_width", drvDesignMaster("ds_elasticity_width"))
-        comm.Parameters.AddWithValue("@p_ds_modulus_length", drvDesignMaster("ds_modulus_length"))
-        comm.Parameters.AddWithValue("@p_ds_modulus_width", drvDesignMaster("ds_modulus_width"))
-        comm.Parameters.AddWithValue("@p_ds_brust", drvDesignMaster("ds_brust"))
-        comm.Parameters.AddWithValue("@p_ds_shrinkage_centigrade", drvDesignMaster("ds_shrinkage_centigrade"))
-        comm.Parameters.AddWithValue("@p_ds_shrinkage_length", drvDesignMaster("ds_shrinkage_length"))
-        comm.Parameters.AddWithValue("@p_ds_shrinkage_width", drvDesignMaster("ds_shrinkage_width"))
-        comm.Parameters.AddWithValue("@p_ds_pairs_per_meter", drvDesignMaster("ds_pairs_per_meter"))
-        comm.Parameters.AddWithValue("@p_ds_shoe_size", drvDesignMaster("ds_shoe_size"))
-        comm.Parameters.AddWithValue("@p_ds_shoe_style", drvDesignMaster("ds_shoe_style"))
-        comm.Parameters.AddWithValue("@p_ds_shoe_length_cm", drvDesignMaster("ds_shoe_length_cm"))
-        comm.Parameters.AddWithValue("@p_ds_shoe_width_cm", drvDesignMaster("ds_shoe_width_cm"))
-
-        comm.Parameters.AddWithValue("@p_ds_pallet_pattern_no", drvDesignMaster("ds_pallet_pattern_no"))
-        comm.Parameters.AddWithValue("@p_ds_product_pattern_no", drvDesignMaster("ds_product_pattern_no"))
-        comm.Parameters.AddWithValue("@p_ds_sh_grams_per_row", drvDesignMaster("ds_sh_grams_per_row"))
-        comm.Parameters.AddWithValue("@p_ds_sh_length_cm_per_repeat", drvDesignMaster("ds_sh_length_cm_per_repeat"))
-        comm.Parameters.AddWithValue("@p_ds_sh_length_cm_mark_to_mark", drvDesignMaster("ds_sh_length_cm_mark_to_mark"))
-        comm.Parameters.AddWithValue("@p_ds_sh_width_cm_mark_to_mark", drvDesignMaster("ds_sh_width_cm_mark_to_mark"))
-        comm.Parameters.AddWithValue("@p_ds_sh_needle_width_cm", drvDesignMaster("ds_sh_needle_width_cm"))
-        comm.Parameters.AddWithValue("@p_ds_sh_pattern_area", drvDesignMaster("ds_sh_pattern_area"))
-
-        comm.Parameters.AddWithValue("@p_ds_sh_grams_of_lasercut_pc", drvDesignMaster("ds_sh_grams_of_lasercut_pc"))
-        comm.Parameters.AddWithValue("@p_ds_sh_grams_of_lasercut_pair", drvDesignMaster("ds_sh_grams_of_lasercut_pair"))
-
-        comm.Parameters.AddWithValue("@p_ds_sh_pcs_fabric_needle_width", drvDesignMaster("ds_sh_pcs_fabric_needle_width"))
-        comm.Parameters.AddWithValue("@p_ds_sh_pcs_fabric_edge_to_edge", drvDesignMaster("ds_sh_pcs_fabric_edge_to_edge"))
-
-        comm.Parameters.AddWithValue("@p_ds_sh_rows_per_meter", drvDesignMaster("ds_sh_rows_per_meter"))
-        comm.Parameters.AddWithValue("@p_ds_sh_pairs_per_repeat_of_fabric_width", drvDesignMaster("ds_sh_pairs_per_repeat_of_fabric_width"))
-
-        comm.Parameters.AddWithValue("@p_ds_sh_fabric_grams_with_pattern", drvDesignMaster("ds_sh_fabric_grams_with_pattern"))
-        comm.Parameters.AddWithValue("@p_ds_sh_fabric_grams_without_pattern", drvDesignMaster("ds_sh_fabric_grams_without_pattern"))
-
-        comm.Parameters.AddWithValue("@p_ds_foremb", drvDesignMaster("ds_foremb")) 'Sitthana 23/03/2018
-        comm.Parameters.AddWithValue("@p_ds_tensile_strength", drvDesignMaster("ds_tensile_strength"))
-        comm.Parameters.AddWithValue("@p_ds_piling", drvDesignMaster("ds_piling"))
-        comm.Parameters.AddWithValue("@p_ds_snagging", drvDesignMaster("ds_snagging"))
-        comm.Parameters.AddWithValue("@p_ds_sh_repeat_per_day", drvDesignMaster("ds_sh_repeat_per_day"))
-        comm.Parameters.AddWithValue("@p_ds_shoe_gender_id", drvDesignMaster("ds_shoe_gender_id"))
-        comm.Parameters.AddWithValue("@p_ds_sh_minutes_per_repeat", drvDesignMaster("ds_sh_minutes_per_repeat"))
-        comm.Parameters.AddWithValue("@p_ds_sh_pairs_per_day", drvDesignMaster("ds_sh_pairs_per_day"))
-        comm.Parameters.AddWithValue("@p_ds_shoe_country_id", drvDesignMaster("ds_shoe_country_id"))
-        comm.Parameters.AddWithValue("@p_dm_fabric_type_id", drvDesignMaster("dm_fabric_type_id"))
-
-        '------------------------ Sitthana 15/03/2018
-        comm.Parameters.AddWithValue("@p_ds_fwth_min", drvDesignMaster("ds_Fwth_min"))
-        comm.Parameters.AddWithValue("@p_ds_fwth_max", drvDesignMaster("ds_Fwth_max"))
-        comm.Parameters.AddWithValue("@p_ds_edge_min", drvDesignMaster("ds_Edge_min"))
-        comm.Parameters.AddWithValue("@p_ds_edge_max", drvDesignMaster("ds_Edge_max"))
-        comm.Parameters.AddWithValue("@p_ds_usewth_min", drvDesignMaster("ds_Usewth_min"))
-        comm.Parameters.AddWithValue("@p_ds_usewth_max", drvDesignMaster("ds_Usewth_max"))
-        comm.Parameters.AddWithValue("@p_ds_cpi_remark", drvDesignMaster("ds_cpi_remark"))
-        comm.Parameters.AddWithValue("@p_ds_wpi_remark", drvDesignMaster("ds_wpi_remark"))
-        comm.Parameters.AddWithValue("@p_ds_gmpersqm_min", drvDesignMaster("ds_gmpersqm_min"))
-        comm.Parameters.AddWithValue("@p_ds_gmpersqm_max", drvDesignMaster("ds_gmpersqm_max"))
-        comm.Parameters.AddWithValue("@p_ds_shrinkage_length_min", drvDesignMaster("ds_shrinkage_length_min"))
-        comm.Parameters.AddWithValue("@p_ds_shrinkage_length_max", drvDesignMaster("ds_shrinkage_length_max"))
-        comm.Parameters.AddWithValue("@p_ds_shrinkage_width_min", drvDesignMaster("ds_shrinkage_width_min"))
-        comm.Parameters.AddWithValue("@p_ds_shrinkage_width_max", drvDesignMaster("ds_shrinkage_width_max"))
-        comm.Parameters.AddWithValue("@p_ds_elongation_length_min", drvDesignMaster("ds_elongation_length_min"))
-        comm.Parameters.AddWithValue("@p_ds_elongation_length_max", drvDesignMaster("ds_elongation_length_max"))
-        comm.Parameters.AddWithValue("@p_ds_elongation_width_min", drvDesignMaster("ds_elongation_width_min"))
-        comm.Parameters.AddWithValue("@p_ds_elongation_width_max", drvDesignMaster("ds_elongation_width_max"))
-        comm.Parameters.AddWithValue("@p_ds_modulus_length_min", drvDesignMaster("ds_modulus_length_min"))
-        comm.Parameters.AddWithValue("@p_ds_modulus_length_max", drvDesignMaster("ds_modulus_length_max"))
-        comm.Parameters.AddWithValue("@p_ds_modulus_width_min", drvDesignMaster("ds_modulus_width_min"))
-        comm.Parameters.AddWithValue("@p_ds_modulus_width_max", drvDesignMaster("ds_modulus_width_max"))
-        ''--------------------------------------------
-        '------------------------ Sitthana 25/04/2018
-        comm.Parameters.AddWithValue("@p_ds_thickness", drvDesignMaster("ds_thickness"))
-        comm.Parameters.AddWithValue("@p_ds_thickness_tolerance", drvDesignMaster("ds_thickness_tolerance"))
-        comm.Parameters.AddWithValue("@p_ds_thickness_tolerance_sign", drvDesignMaster("ds_thickness_tolerance_sign"))
-
-        '----- Sitthana 21/05/2018
-        comm.Parameters.AddWithValue("@p_ds_tongue_weight", drvDesignMaster("ds_tongue_weight"))
-        comm.Parameters.AddWithValue("@p_ds_tongue_width", drvDesignMaster("ds_tongue_width"))
-        comm.Parameters.AddWithValue("@p_ds_tongue_length", drvDesignMaster("ds_tongue_length"))
-        comm.Parameters.AddWithValue("@p_ds_tongue_center_Mark_Length", drvDesignMaster("ds_tongue_center_Mark_Length"))
-        ''comm.Parameters.AddWithValue("@p_ds_tongue_center_Mark_Length", drvDesignMaster("ds_tongue_center_Mark_Length"))--------------------------------------------
-        comm.Parameters.AddWithValue("@p_ds_design_gauge", drvDesignMaster("dm_design_gauge")) 'Sitthana 20181203
-        comm.Parameters.AddWithValue("@p_dm_spec_status", drvDesignMaster("dm_spec_status"))
-        comm.Parameters.AddWithValue("@p_dm_spec_version", drvDesignMaster("dm_spec_version"))
-        comm.Parameters.AddWithValue("@p_dm_spec_approved_date", drvDesignMaster("dm_spec_approved_date"))
-        comm.Parameters.AddWithValue("@p_dm_spec_approved_by", drvDesignMaster("dm_spec_approved_by"))
-
-        '----- Sitthana 12/12/2023
-        comm.Parameters.AddWithValue("@p_stitch_note_suk90", drvDesignMaster("stitch_note_suk90"))
-        comm.Parameters.AddWithValue("@p_stitch_note_tr005", drvDesignMaster("stitch_note_tr005"))
-        comm.Parameters.AddWithValue("@p_stitch_note_1str", drvDesignMaster("stitch_note_1str"))
-        comm.Parameters.AddWithValue("@p_stitch_note_2str", drvDesignMaster("stitch_note_2str"))
-
-
-        Dim da As New SqlDataAdapter(comm)
-        Dim dt As New DataTable
-        Try
-            da.Fill(dt)
-        Catch ex As Exception
-            tran.Rollback()
-            conn.Close()  'Sitthana 20190325
-            Throw ex
-        End Try
-        tran.Commit()
-        conn.Close()  'Sitthana 20190325
-        Return dt
-    End Function
-
-    'End Procedure in Gemmaknits   -- Sitthana 13/03/2018
 
     Public Function CustomerSave(ByVal Cust As Customer, ByRef msgerr As String, ByRef CustCD As String) As Boolean
 		Dim config As New clsConfig

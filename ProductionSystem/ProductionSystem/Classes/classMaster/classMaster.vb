@@ -142,19 +142,6 @@ Public Class classMaster
         Return dt
 
     End Function
-    Public Function getDesignMasterRecord(Optional ByVal ItemID As String = "", Optional ByVal DesignNo As String = "") As DataTable
-        Dim conn As New SqlConnection((New classConnection).connection)
-        Dim comm As New SqlCommand("", conn)
-        comm.CommandType = CommandType.StoredProcedure
-        comm.CommandText = "p_design_master_new_pkg_select_master_record"
-        comm.Parameters.AddWithValue("@p_item_id", ItemID)
-        comm.Parameters.AddWithValue("@p_design_no", DesignNo)
-        Dim da As New SqlDataAdapter(comm)
-        Dim dt As New DataTable
-        da.Fill(dt)
-        conn.Close()  'Sitthana 20190325
-        Return dt
-    End Function
     Public Function getDesignByParentDesign(pParentDesignNo As String) As DataTable
         Dim conn As New SqlConnection((New classConnection).connection)
         Dim comm As New SqlCommand("", conn)

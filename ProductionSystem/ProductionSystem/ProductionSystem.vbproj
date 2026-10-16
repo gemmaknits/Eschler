@@ -206,6 +206,8 @@
     <Compile Include="Classes\classMaster\classItemsCategory.vb" />
     <Compile Include="Classes\classMaster\classMaster.vb" />
     <Compile Include="Classes\classMaster\classMasterUpdate.vb" />
+    <Compile Include="Classes\classDesignNew\classDesignNew.vb" />
+    <Compile Include="MasterForm\frmSendToGMKConfirm.vb" />
     <Compile Include="Classes\classmfgOperationsStepKnitting\classmfgOperationsStepKnitting.vb" />
     <Compile Include="Classes\classMould\Mould.vb" />
     <Compile Include="Classes\classOperations\classOperations.vb" />

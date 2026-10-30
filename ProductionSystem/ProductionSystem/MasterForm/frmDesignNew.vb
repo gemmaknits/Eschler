@@ -688,11 +688,12 @@ Public Class frmDesignNew
                 SaveData = True
 
                 'Sync to GMK (one-way Eschler -> GMK). Eschler save is already done: a sync problem must not stop the user.
-                Try
-                    Dim syncMsg As String = oDesignNew.SyncAfterSave(dtDesignMaster.Rows(0), UserInfo.UserID)
-                    If syncMsg <> "" Then MessageBox.Show(syncMsg, "System Message", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                Catch
-                End Try
+                'Try
+                '    Dim syncMsg As String = oDesignNew.SyncAfterSave(dtDesignMaster.Rows(0), UserInfo.UserID)
+                '    If syncMsg <> "" Then MessageBox.Show(syncMsg, "System Message", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                'Catch
+                'End Try
+
             Catch ex As Exception
                 MessageBox.Show(ex.Message, "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
                 SaveData = False

@@ -43,6 +43,7 @@ Partial Class formYarnInReturn
         Me.txtTotalSpools = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.BtnYarnPrintDoc = New System.Windows.Forms.Button()
+        Me.btnNew = New System.Windows.Forms.Button()
         Me.BtnYarnSave = New System.Windows.Forms.Button()
         Me.DgYarn = New System.Windows.Forms.DataGridView()
         Me.DGV_select = New System.Windows.Forms.DataGridViewCheckBoxColumn()
@@ -354,6 +355,17 @@ Partial Class formYarnInReturn
         Me.BtnYarnPrintDoc.TabIndex = 108
         Me.BtnYarnPrintDoc.Text = "Print document"
         Me.BtnYarnPrintDoc.UseVisualStyleBackColor = False
+        '
+        'btnNew
+        '
+        Me.btnNew.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnNew.BackColor = System.Drawing.Color.PeachPuff
+        Me.btnNew.Location = New System.Drawing.Point(600, 569)
+        Me.btnNew.Name = "btnNew"
+        Me.btnNew.Size = New System.Drawing.Size(93, 34)
+        Me.btnNew.TabIndex = 106
+        Me.btnNew.Text = "New"
+        Me.btnNew.UseVisualStyleBackColor = False
         '
         'BtnYarnSave
         '
@@ -1106,6 +1118,7 @@ Partial Class formYarnInReturn
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.BtnYarnPrintDoc)
         Me.Controls.Add(Me.BtnYarnSave)
+        Me.Controls.Add(Me.btnNew)
         Me.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Name = "formYarnInReturn"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -1149,6 +1162,7 @@ Partial Class formYarnInReturn
     Friend WithEvents BtnYarnExit As System.Windows.Forms.Button
     Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
     Friend WithEvents BtnYarnPrintDoc As System.Windows.Forms.Button
+    Friend WithEvents btnNew As System.Windows.Forms.Button
     Friend WithEvents BtnYarnSave As System.Windows.Forms.Button
     Friend WithEvents DgYarn As System.Windows.Forms.DataGridView
     Friend WithEvents DateYIN As System.Windows.Forms.DateTimePicker

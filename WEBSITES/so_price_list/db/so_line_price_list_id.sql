@@ -72,6 +72,8 @@ CREATE TABLE SO.so_line_price_list_id (
     order_uom               varchar(20)  NULL,
     exchange_rate_used      decimal(18,6) NULL,
     uom_factor              decimal(18,6) NULL,
+    /* What was done, in words - the same sentence order entry will show. */
+    conversion_note         nvarchar(600) NULL,
 
     /* and why nothing did, where that is the case */
     why_not                 varchar(80)  NULL,

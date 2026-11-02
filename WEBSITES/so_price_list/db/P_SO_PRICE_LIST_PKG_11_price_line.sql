@@ -136,6 +136,12 @@
    is not symmetric, and inventing the other side of it in an order-entry path
    is not a decision this procedure should make.
 
+   conversion_note says in words what was done, because a column of factors is
+   not something somebody taking an order should have to multiply in their
+   head. It names the rate's OWN date, which is not always the order's: rates
+   are published up to 104 times a day and not at all at weekends, so a Sunday
+   order is priced at Friday's rate and the note says Friday.
+
    THE COLUMN ORDER is the order an order-entry screen reads in: can I use
    this (resolution), what do I charge (order_price, order_curr, order_uom),
    what was that worked out from (price, price_curr, price_uom, and the two
@@ -265,6 +271,8 @@ BEGIN
                d.qty_unit AS price_uom,
                CAST(1 AS decimal(18,6)) AS exchange_rate_used,
                CAST(1 AS decimal(18,6)) AS uom_factor,
+               'Several designs begin with that number - shown as the book prices them, with no conversion applied.'
+                      AS conversion_note,
                d.design_no AS matched_design_no,
                d.color_tier,
                d.qty_min,
@@ -381,6 +389,9 @@ BEGIN
     /* ---- 1b. which currency this is priced from, and at what rate ---- */
     DECLARE @price_curr varchar(3) = NULL;
     DECLARE @rate decimal(18,6) = 1;
+    /* The date of the rate used, which is the most recent on or before the
+       order date and so is often earlier than it. */
+    DECLARE @rate_date varchar(10) = NULL;
 
     IF @curr IS NULL OR @curr = ''
         SET @price_curr = NULL;                       -- caller did not say; take it as priced
@@ -390,8 +401,14 @@ BEGIN
     BEGIN
         /* Nothing in the requested currency. Take the currency that has the
            most lines here and a published rate into the requested one. */
-        SELECT TOP 1 @price_curr = c.cur, @rate = c.rate
+        SELECT TOP 1 @price_curr = c.cur, @rate = c.rate, @rate_date = c.rdate
         FROM  (SELECT LTRIM(RTRIM(x.curr)) AS cur, COUNT(*) AS lines,
+                      (SELECT TOP 1 STUFF(STUFF(e.curr_date, 7, 0, '-'), 5, 0, '-')
+                       FROM   dbo.exchange_rate e
+                       WHERE  e.curr_fr = LTRIM(RTRIM(x.curr)) COLLATE DATABASE_DEFAULT
+                         AND  e.curr_to = @curr COLLATE DATABASE_DEFAULT
+                         AND  e.curr_date <= @on_date
+                       ORDER  BY e.curr_date DESC, e.curr_time DESC) AS rdate,
                       (SELECT TOP 1 e.exchange_rate
                        FROM   dbo.exchange_rate e
                        WHERE  e.curr_fr = LTRIM(RTRIM(x.curr)) COLLATE DATABASE_DEFAULT
@@ -478,6 +495,31 @@ BEGIN
                uom        AS price_uom,
                @rate      AS exchange_rate_used,
                CAST(@uom_factor AS decimal(18,6)) AS uom_factor,
+               /* What was done, in words, for whoever is taking the order. */
+               CONCAT(
+                 'Listed at ', CONVERT(varchar(24), CAST(price AS decimal(18,2))), ' ', LTRIM(RTRIM(curr)), ' per ', LTRIM(RTRIM(uom)), '.',
+                 CASE WHEN @uom_factor = 1 AND @rate = 1 THEN ' No conversion.' ELSE
+                   CONCAT(
+                     CASE WHEN @uom_factor <> 1
+                          THEN CONCAT(' 1 ', ISNULL(NULLIF(@uom,''), LTRIM(RTRIM(uom))), ' = ',
+                                      CONVERT(varchar(24), CAST(@uom_factor AS decimal(18,4))), ' ', LTRIM(RTRIM(uom)))
+                          ELSE '' END,
+                     CASE WHEN @uom_factor <> 1 AND @rate <> 1 THEN ' and' ELSE '' END,
+                     CASE WHEN @rate <> 1
+                          THEN CONCAT(' ', LTRIM(RTRIM(curr)), ' to ', ISNULL(NULLIF(@curr,''), LTRIM(RTRIM(curr))),
+                                      ' at ', CONVERT(varchar(24), CAST(@rate AS decimal(18,4))),
+                                      ISNULL(CONCAT(' (rate of ', @rate_date, ')'), ''))
+                          ELSE '' END,
+                     ', so ', CONVERT(varchar(24), CAST(price * @uom_factor * @rate AS decimal(18,2))), ' ',
+                     ISNULL(NULLIF(@curr,''), LTRIM(RTRIM(curr))), ' per ',
+                     ISNULL(NULLIF(@uom,''), LTRIM(RTRIM(uom))), '.',
+                     CASE WHEN @uom_factor <> 1
+                          THEN CONCAT(' Order of ', CONVERT(varchar(24), CAST(@p_qty AS decimal(18,2))), ' ',
+                                      ISNULL(NULLIF(@uom,''), LTRIM(RTRIM(uom))),
+                                      ' read as ', CONVERT(varchar(24), CAST(@qty_match AS decimal(18,2))), ' ', LTRIM(RTRIM(uom)),
+                                      ' to choose the quantity band.')
+                          ELSE '' END)
+                 END) AS conversion_note,
                /* which line it came from */
                @match_design AS matched_design_no,
                color_tier,
@@ -509,6 +551,31 @@ BEGIN
                uom        AS price_uom,
                @rate      AS exchange_rate_used,
                CAST(@uom_factor AS decimal(18,6)) AS uom_factor,
+               /* What was done, in words, for whoever is taking the order. */
+               CONCAT(
+                 'Listed at ', CONVERT(varchar(24), CAST(price AS decimal(18,2))), ' ', LTRIM(RTRIM(curr)), ' per ', LTRIM(RTRIM(uom)), '.',
+                 CASE WHEN @uom_factor = 1 AND @rate = 1 THEN ' No conversion.' ELSE
+                   CONCAT(
+                     CASE WHEN @uom_factor <> 1
+                          THEN CONCAT(' 1 ', ISNULL(NULLIF(@uom,''), LTRIM(RTRIM(uom))), ' = ',
+                                      CONVERT(varchar(24), CAST(@uom_factor AS decimal(18,4))), ' ', LTRIM(RTRIM(uom)))
+                          ELSE '' END,
+                     CASE WHEN @uom_factor <> 1 AND @rate <> 1 THEN ' and' ELSE '' END,
+                     CASE WHEN @rate <> 1
+                          THEN CONCAT(' ', LTRIM(RTRIM(curr)), ' to ', ISNULL(NULLIF(@curr,''), LTRIM(RTRIM(curr))),
+                                      ' at ', CONVERT(varchar(24), CAST(@rate AS decimal(18,4))),
+                                      ISNULL(CONCAT(' (rate of ', @rate_date, ')'), ''))
+                          ELSE '' END,
+                     ', so ', CONVERT(varchar(24), CAST(price * @uom_factor * @rate AS decimal(18,2))), ' ',
+                     ISNULL(NULLIF(@curr,''), LTRIM(RTRIM(curr))), ' per ',
+                     ISNULL(NULLIF(@uom,''), LTRIM(RTRIM(uom))), '.',
+                     CASE WHEN @uom_factor <> 1
+                          THEN CONCAT(' Order of ', CONVERT(varchar(24), CAST(@p_qty AS decimal(18,2))), ' ',
+                                      ISNULL(NULLIF(@uom,''), LTRIM(RTRIM(uom))),
+                                      ' read as ', CONVERT(varchar(24), CAST(@qty_match AS decimal(18,2))), ' ', LTRIM(RTRIM(uom)),
+                                      ' to choose the quantity band.')
+                          ELSE '' END)
+                 END) AS conversion_note,
                /* which line it came from */
                @match_design AS matched_design_no,
                color_tier,
@@ -539,6 +606,31 @@ BEGIN
                uom        AS price_uom,
                @rate      AS exchange_rate_used,
                CAST(@uom_factor AS decimal(18,6)) AS uom_factor,
+               /* What was done, in words, for whoever is taking the order. */
+               CONCAT(
+                 'Listed at ', CONVERT(varchar(24), CAST(price AS decimal(18,2))), ' ', LTRIM(RTRIM(curr)), ' per ', LTRIM(RTRIM(uom)), '.',
+                 CASE WHEN @uom_factor = 1 AND @rate = 1 THEN ' No conversion.' ELSE
+                   CONCAT(
+                     CASE WHEN @uom_factor <> 1
+                          THEN CONCAT(' 1 ', ISNULL(NULLIF(@uom,''), LTRIM(RTRIM(uom))), ' = ',
+                                      CONVERT(varchar(24), CAST(@uom_factor AS decimal(18,4))), ' ', LTRIM(RTRIM(uom)))
+                          ELSE '' END,
+                     CASE WHEN @uom_factor <> 1 AND @rate <> 1 THEN ' and' ELSE '' END,
+                     CASE WHEN @rate <> 1
+                          THEN CONCAT(' ', LTRIM(RTRIM(curr)), ' to ', ISNULL(NULLIF(@curr,''), LTRIM(RTRIM(curr))),
+                                      ' at ', CONVERT(varchar(24), CAST(@rate AS decimal(18,4))),
+                                      ISNULL(CONCAT(' (rate of ', @rate_date, ')'), ''))
+                          ELSE '' END,
+                     ', so ', CONVERT(varchar(24), CAST(price * @uom_factor * @rate AS decimal(18,2))), ' ',
+                     ISNULL(NULLIF(@curr,''), LTRIM(RTRIM(curr))), ' per ',
+                     ISNULL(NULLIF(@uom,''), LTRIM(RTRIM(uom))), '.',
+                     CASE WHEN @uom_factor <> 1
+                          THEN CONCAT(' Order of ', CONVERT(varchar(24), CAST(@p_qty AS decimal(18,2))), ' ',
+                                      ISNULL(NULLIF(@uom,''), LTRIM(RTRIM(uom))),
+                                      ' read as ', CONVERT(varchar(24), CAST(@qty_match AS decimal(18,2))), ' ', LTRIM(RTRIM(uom)),
+                                      ' to choose the quantity band.')
+                          ELSE '' END)
+                 END) AS conversion_note,
                /* which line it came from */
                @match_design AS matched_design_no,
                color_tier,

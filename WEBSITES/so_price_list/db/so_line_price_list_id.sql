@@ -66,6 +66,7 @@ CREATE TABLE SO.so_line_price_list_id (
     qty_max                 int          NULL,
     price                   decimal(18,4) NULL,
     price_curr              varchar(10)  NULL,
+    price_uom               varchar(20)  NULL,
     order_price             decimal(18,4) NULL,
     order_curr              varchar(10)  NULL,
     order_uom               varchar(20)  NULL,

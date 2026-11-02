@@ -136,6 +136,16 @@
    is not symmetric, and inventing the other side of it in an order-entry path
    is not a decision this procedure should make.
 
+   THE COLUMN ORDER is the order an order-entry screen reads in: can I use
+   this (resolution), what do I charge (order_price, order_curr, order_uom),
+   what was that worked out from (price, price_curr, price_uom, and the two
+   factors), which line it came from, then the keys and the notes.
+
+   price_curr and price_uom were called curr and uom. With order_curr and
+   order_uom beside them the old names said nothing about which side of the
+   conversion they were on, and on a list kept in USD per metre and sold in
+   baht per yard that is the whole question.
+
    PADDING. @p_uom is char(10) and @p_curr is char(10), so both arrive padded
    with spaces; qty_unit is nvarchar(20) and currency is char(3). Every
    comparison below trims, or nothing would ever match.
@@ -242,16 +252,28 @@ BEGIN
     /* Several qualified designs start with it - hand them all back. */
     IF @match_design IS NULL AND (SELECT COUNT(*) FROM @wider) > 1
     BEGIN
-        SELECT d.so_price_list_header_id, d.so_price_list_detail_id, d.set_no, d.line_no,
-               d.color_tier, d.qty_min, d.qty_max, d.currency AS curr, d.price, d.notes,
-               d.qty_unit AS uom,
-               'design ambiguous' AS resolution, d.design_no AS matched_design_no,
-               /* This branch runs before a currency is settled - these are
-                  candidates across several designs, shown as priced. */
-               d.price AS order_price, LTRIM(RTRIM(d.currency)) AS order_curr,
+        SELECT
+               'design ambiguous' AS resolution,
+               /* This branch runs before a currency or unit is settled - these
+                  are candidates across several designs, shown exactly as the
+                  book prices them. */
+               d.price AS order_price,
+               LTRIM(RTRIM(d.currency)) AS order_curr,
                LTRIM(RTRIM(d.qty_unit)) AS order_uom,
+               d.price AS price,
+               d.currency AS price_curr,
+               d.qty_unit AS price_uom,
                CAST(1 AS decimal(18,6)) AS exchange_rate_used,
-               CAST(1 AS decimal(18,6)) AS uom_factor
+               CAST(1 AS decimal(18,6)) AS uom_factor,
+               d.design_no AS matched_design_no,
+               d.color_tier,
+               d.qty_min,
+               d.qty_max,
+               d.so_price_list_detail_id,
+               d.so_price_list_header_id,
+               d.set_no,
+               d.line_no,
+               d.notes
         FROM   SO.so_price_list_detail d
         JOIN   SO.so_price_list_header h
                  ON h.so_price_list_header_id = d.so_price_list_header_id
@@ -443,14 +465,30 @@ BEGIN
 
     /* ---- 4. answer, or candidates ---- */
     IF @tier IS NOT NULL AND @set_no IS NOT NULL
-        SELECT so_price_list_header_id, so_price_list_detail_id, set_no, line_no,
-               color_tier, qty_min, qty_max, curr, price, notes, uom,
-               'matched' AS resolution, @match_design AS matched_design_no,
+        SELECT
+               /* can I use this? */
+               'matched' AS resolution,
+               /* what to charge */
                CAST(price * @uom_factor * @rate AS decimal(18,4)) AS order_price,
                ISNULL(NULLIF(@curr, ''), curr) AS order_curr,
-               ISNULL(NULLIF(@uom, ''), uom) AS order_uom,
-               @rate AS exchange_rate_used,
-               CAST(@uom_factor AS decimal(18,6)) AS uom_factor
+               ISNULL(NULLIF(@uom,  ''), uom)  AS order_uom,
+               /* what that was worked out from */
+               price      AS price,
+               curr       AS price_curr,
+               uom        AS price_uom,
+               @rate      AS exchange_rate_used,
+               CAST(@uom_factor AS decimal(18,6)) AS uom_factor,
+               /* which line it came from */
+               @match_design AS matched_design_no,
+               color_tier,
+               qty_min,
+               qty_max,
+               /* keys, and the small print */
+               so_price_list_detail_id,
+               so_price_list_header_id,
+               set_no,
+               line_no,
+               notes
         FROM   @cand
         WHERE  color_tier = @tier
           AND  so_price_list_header_id = @set_hdr AND set_no = @set_no
@@ -458,28 +496,60 @@ BEGIN
 
     ELSE IF @tier IS NOT NULL
         /* the colour is settled, the quantity is not - every band of it */
-        SELECT so_price_list_header_id, so_price_list_detail_id, set_no, line_no,
-               color_tier, qty_min, qty_max, curr, price, notes, uom,
-               'quantity ambiguous' AS resolution, @match_design AS matched_design_no,
+        SELECT
+               /* can I use this? */
+               'quantity ambiguous' AS resolution,
+               /* what to charge */
                CAST(price * @uom_factor * @rate AS decimal(18,4)) AS order_price,
                ISNULL(NULLIF(@curr, ''), curr) AS order_curr,
-               ISNULL(NULLIF(@uom, ''), uom) AS order_uom,
-               @rate AS exchange_rate_used,
-               CAST(@uom_factor AS decimal(18,6)) AS uom_factor
+               ISNULL(NULLIF(@uom,  ''), uom)  AS order_uom,
+               /* what that was worked out from */
+               price      AS price,
+               curr       AS price_curr,
+               uom        AS price_uom,
+               @rate      AS exchange_rate_used,
+               CAST(@uom_factor AS decimal(18,6)) AS uom_factor,
+               /* which line it came from */
+               @match_design AS matched_design_no,
+               color_tier,
+               qty_min,
+               qty_max,
+               /* keys, and the small print */
+               so_price_list_detail_id,
+               so_price_list_header_id,
+               set_no,
+               line_no,
+               notes
         FROM   @cand
         WHERE  color_tier = @tier
         ORDER  BY so_price_list_header_id, set_no, line_no;
 
     ELSE
         /* nothing settled - everything this design has */
-        SELECT so_price_list_header_id, so_price_list_detail_id, set_no, line_no,
-               color_tier, qty_min, qty_max, curr, price, notes, uom,
-               'colour and quantity ambiguous' AS resolution, @match_design AS matched_design_no,
+        SELECT
+               /* can I use this? */
+               'colour and quantity ambiguous' AS resolution,
+               /* what to charge */
                CAST(price * @uom_factor * @rate AS decimal(18,4)) AS order_price,
                ISNULL(NULLIF(@curr, ''), curr) AS order_curr,
-               ISNULL(NULLIF(@uom, ''), uom) AS order_uom,
-               @rate AS exchange_rate_used,
-               CAST(@uom_factor AS decimal(18,6)) AS uom_factor
+               ISNULL(NULLIF(@uom,  ''), uom)  AS order_uom,
+               /* what that was worked out from */
+               price      AS price,
+               curr       AS price_curr,
+               uom        AS price_uom,
+               @rate      AS exchange_rate_used,
+               CAST(@uom_factor AS decimal(18,6)) AS uom_factor,
+               /* which line it came from */
+               @match_design AS matched_design_no,
+               color_tier,
+               qty_min,
+               qty_max,
+               /* keys, and the small print */
+               so_price_list_detail_id,
+               so_price_list_header_id,
+               set_no,
+               line_no,
+               notes
         FROM   @cand
         ORDER  BY so_price_list_header_id, set_no, line_no;
 END

@@ -41,12 +41,27 @@ WHERE  i.price_list_detail_id IS NULL
 DECLARE @scope_n int = (SELECT COUNT(*) FROM #scope);
 PRINT CONCAT('order lines in scope: ', @scope_n);
 
-CREATE TABLE #out (hdr bigint, did bigint, set_no int, line_no int, color_tier nvarchar(60),
-                   qty_min int, qty_max int, curr char(3), price decimal(18,4),
-                   notes nvarchar(2000), uom nvarchar(20), resolution varchar(40),
-                   matched_design_no nvarchar(60), order_price decimal(18,4),
-                   order_curr varchar(3), order_uom varchar(20),
-                   exchange_rate_used decimal(18,6), uom_factor decimal(18,6));
+/* Mirrors the procedure's result, in its order - INSERT ... EXEC matches by
+   position, so this has to move whenever that does. */
+CREATE TABLE #out (
+    resolution              varchar(40),
+    order_price             decimal(18,4),
+    order_curr              varchar(3),
+    order_uom               varchar(20),
+    price                   decimal(18,4),
+    price_curr              char(3),
+    price_uom               nvarchar(20),
+    exchange_rate_used      decimal(18,6),
+    uom_factor              decimal(18,6),
+    matched_design_no       nvarchar(60),
+    color_tier              nvarchar(60),
+    qty_min                 int,
+    qty_max                 int,
+    so_price_list_detail_id bigint,
+    so_price_list_header_id bigint,
+    set_no                  int,
+    line_no                 int,
+    notes                   nvarchar(2000));
 
 TRUNCATE TABLE SO.so_line_price_list_id;
 
@@ -76,12 +91,12 @@ BEGIN
         (so_line_id, price_list_detail_id, sono, so_price_list_header_id, design_no,
          color_code, uom, qty, curr, order_date, resolution, candidates,
          matched_design_no, color_tier, qty_min, qty_max, price, price_curr,
-         order_price, order_curr, order_uom, exchange_rate_used, uom_factor, why_not)
+         order_price, order_curr, order_uom, exchange_rate_used, uom_factor, price_uom, why_not)
     SELECT @id,
            /* Only a single, unambiguous match is carried forward. Several
               candidates means a person has to choose. */
            CASE WHEN @n = 1 AND (SELECT MAX(resolution) FROM #out) = 'matched'
-                THEN (SELECT MAX(did) FROM #out) END,
+                THEN (SELECT MAX(so_price_list_detail_id) FROM #out) END,
            @sono, @h, @d, NULLIF(@c, ''), @u, @q, @cur, @dt,
            ISNULL((SELECT MAX(resolution) FROM #out), 'no rows'),
            @n,
@@ -90,12 +105,13 @@ BEGIN
            CASE WHEN @n = 1 THEN (SELECT MAX(qty_min)     FROM #out) END,
            CASE WHEN @n = 1 THEN (SELECT MAX(qty_max)     FROM #out) END,
            CASE WHEN @n = 1 THEN (SELECT MAX(price)       FROM #out) END,
-           CASE WHEN @n = 1 THEN (SELECT MAX(curr)        FROM #out) END,
+           CASE WHEN @n = 1 THEN (SELECT MAX(price_curr)  FROM #out) END,
            CASE WHEN @n = 1 THEN (SELECT MAX(order_price) FROM #out) END,
            CASE WHEN @n = 1 THEN (SELECT MAX(order_curr)  FROM #out) END,
            CASE WHEN @n = 1 THEN (SELECT MAX(order_uom)   FROM #out) END,
            CASE WHEN @n = 1 THEN (SELECT MAX(exchange_rate_used) FROM #out) END,
            CASE WHEN @n = 1 THEN (SELECT MAX(uom_factor)  FROM #out) END,
+           CASE WHEN @n = 1 THEN (SELECT MAX(price_uom)   FROM #out) END,
            /* Why nothing came back, in the order the procedure would have
               failed. The first of these that is true is the reason. */
            CASE WHEN @n > 0 THEN NULL

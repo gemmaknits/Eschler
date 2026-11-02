@@ -1530,6 +1530,15 @@ Public Class frmSalesOrder
         End If
     End Sub
 
+    'John 02/11/2026 Commit the Currency dropdown as soon as a value is picked, so CellValueChanged
+    'updates the exchange rate right away instead of only after the cell loses focus.
+    Private Sub grdSalesOrder_CurrentCellDirtyStateChanged(sender As Object, e As EventArgs) Handles grdSalesOrder.CurrentCellDirtyStateChanged
+        If grdSalesOrder.IsCurrentCellDirty AndAlso grdSalesOrder.CurrentCell IsNot Nothing AndAlso
+           grdSalesOrder.CurrentCell.OwningColumn.Name = "curr" Then
+            grdSalesOrder.CommitEdit(DataGridViewDataErrorContexts.Commit)
+        End If
+    End Sub
+
     Private Sub grdSalesOrder_CellValueChanged(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles grdSalesOrder.CellValueChanged
         Dim obj As New classMaster
         Dim designNo As String
@@ -1545,7 +1554,7 @@ Public Class frmSalesOrder
             'If clsConfig.IsNull(grdSalesOrder.Rows(e.RowIndex).Cells("curr").Value, "") = "USD" Then grdSalesOrder.Rows(e.RowIndex).Cells("exrt").Value = FormatNumber(clsUser.ExchangeRate, 4)
             'If clsConfig.IsNull(grdSalesOrder.Rows(e.RowIndex).Cells("curr").Value, "") = "THB" Then grdSalesOrder.Rows(e.RowIndex).Cells("exrt").Value = FormatNumber(1, 4)
             With grdSalesOrder
-                Select Case oConfig.IsNull(.Rows(e.RowIndex).Cells("curr").Value, "").ToString.ToUpper
+                Select Case oConfig.IsNull(.Rows(e.RowIndex).Cells("curr").Value, "").ToString.Trim.ToUpper 'John 02/11/2026 Trim: currency may come back space-padded (char column)
                     Case "USD"
                         .Rows(e.RowIndex).Cells("exrt").Value = FormatNumber(clsUser.ExchangeRate, 4)
                     Case "JPY"
@@ -1563,7 +1572,7 @@ Public Class frmSalesOrder
                     Case "CNY"
                         .Rows(e.RowIndex).Cells("exrt").Value = FormatNumber(clsUser.ExchangeRateCNY, 4)
                     Case "THB"
-                        .Rows(e.RowIndex).Cells("exrt").Value = FormatNumber(clsUser.ExchangeRate, 4)
+                        .Rows(e.RowIndex).Cells("exrt").Value = FormatNumber(1, 4) 'John 02/11/2026 THB to BAHT is 1 (was using the USD rate)
                 End Select
             End With 'Sitthana 20240913
         End If

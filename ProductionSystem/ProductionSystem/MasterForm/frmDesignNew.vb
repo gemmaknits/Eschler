@@ -1,4 +1,4 @@
-Imports ProductionSystem.Controls
+﻿Imports ProductionSystem.Controls
 
 Public Class frmDesignNew
     Private _AllowEdit As Boolean = True
@@ -69,6 +69,7 @@ Public Class frmDesignNew
     Dim DesignNo As String
 
     Dim objMaster As New classMaster
+    Dim oDesignNew As New classDesignNew   'data work of this form (read/save Design Master)
     Dim drv As DataRowView
     Dim CalculateMeasurements As Boolean
     Event bsBOMHeaderPosChanged As EventHandler
@@ -79,6 +80,92 @@ Public Class frmDesignNew
     'Finish Appen by Sitthana 01/02/2018
 
     Dim rpt As New CrystalDecisions.CrystalReports.Engine.ReportDocument 'Move By Sitthana 18/08/2018
+
+    'Send to GMK button: defined in frmDesignNew.Designer.vb (btnSendGMK), it is enabled with the Save button (same permission).
+    'The flow (check the differences, confirm, send) is in SendToGmkFlow below
+    Private Sub btnSendGMK_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSendGMK.Click
+        Try
+            Me.Validate()
+            bsDesignMaster.EndEdit()
+            Dim unsaved As Boolean = (dtDesignMaster.GetChanges() IsNot Nothing)
+            Dim row As DataRow = Nothing
+            Dim cur As DataRowView = TryCast(bsDesignMaster.Current, DataRowView)
+            If cur IsNot Nothing Then
+                row = cur.Row
+            ElseIf dtDesignMaster.Rows.Count > 0 Then
+                row = dtDesignMaster.Rows(0)
+            End If
+            SendToGmkFlow(row, unsaved)
+        Catch ex As Exception
+            MessageBox.Show(ex.Message, "Send to GMK", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    'Send to GMK: check the design, show the differences, ask to confirm, send, tell the result.
+    'The data work (compare / send) is in classDesignNew; this form only talks to the user.
+    Private Sub SendToGmkFlow(ByVal row As DataRow, ByVal hasUnsavedChanges As Boolean)
+        Const MsgTitle As String = "Send to GMK"
+
+        If hasUnsavedChanges Then
+            MessageBox.Show(Me, "กรุณากดบันทึก (Save) ก่อน แล้วจึงส่งข้อมูลไป GMK", MsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Return
+        End If
+        If row Is Nothing OrElse row("dm_design_no").ToString().Trim() = "" Then
+            MessageBox.Show(Me, "ยังไม่มี Design No.", MsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Return
+        End If
+
+        Dim sendDesignNo As String = row("dm_design_no").ToString().Trim()
+        Dim svc As classDesignNew = oDesignNew
+        Dim diff As classDesignNew.DiffResult
+        Dim oldCursor As Cursor = Cursor.Current
+        Cursor.Current = Cursors.WaitCursor
+        Try
+            diff = svc.GetDifferences(row, UserInfo.UserID)
+        Finally
+            Cursor.Current = oldCursor
+        End Try
+
+        If diff.Disabled Then
+            MessageBox.Show(Me, "ระบบส่งข้อมูลไป GMK ถูกปิดอยู่ กรุณาติดต่อผู้ดูแลระบบ", MsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Return
+        End If
+        If diff.ErrorMessage <> "" Then
+            MessageBox.Show(Me, "ตรวจข้อมูลที่ GMK ไม่สำเร็จ" & vbCrLf & vbCrLf & diff.ErrorMessage, MsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
+        If Not diff.ExistsInGmk Then
+            Dim ask As DialogResult = MessageBox.Show(Me, "ไม่พบ Design " & sendDesignNo & " ใน GMK" & vbCrLf & "ต้องการสร้างใหม่ใน GMK หรือไม่?", _
+                                                      MsgTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+            If ask <> DialogResult.Yes Then Return
+        ElseIf diff.Items.Count = 0 Then
+            Dim same As String = "ข้อมูลตรงกับ GMK แล้ว ไม่มีอะไรต้องส่ง"
+            If diff.Warnings.Count > 0 Then same &= vbCrLf & vbCrLf & "ค่าที่ไม่ได้ส่ง (ตามกติกา):" & vbCrLf & String.Join(vbCrLf, diff.Warnings.ToArray())
+            MessageBox.Show(Me, same, MsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Return
+        Else
+            Using dlg As New frmSendToGMKConfirm(sendDesignNo, diff)
+                If dlg.ShowDialog(Me) <> DialogResult.OK Then Return
+            End Using
+        End If
+
+        Dim res As classDesignNew.SyncResult
+        Cursor.Current = Cursors.WaitCursor
+        Try
+            res = svc.SendToGMK(row, UserInfo.UserID)
+        Finally
+            Cursor.Current = oldCursor
+        End Try
+
+        If Not res.Success Then
+            MessageBox.Show(Me, "ส่งข้อมูลไป GMK ไม่สำเร็จ" & vbCrLf & vbCrLf & res.Message, MsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error)
+        ElseIf res.Warnings.Count > 0 Then
+            MessageBox.Show(Me, "ส่งข้อมูลไป GMK สำเร็จ แต่มีค่าที่ไม่ได้ส่ง (ตามกติกา):" & vbCrLf & String.Join(vbCrLf, res.Warnings.ToArray()), MsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Else
+            MessageBox.Show(Me, "ส่งข้อมูลไป GMK สำเร็จ", MsgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+    End Sub
 
     Private Sub frmDesign_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         AddHandler bsBOMHeader.PositionChanged, New EventHandler(AddressOf bsBomHeader_PositionChanged)
@@ -93,6 +180,7 @@ Public Class frmDesignNew
         tsbCopy.Enabled = AllowNew
         btnSave.Enabled = AllowEdit
         btnPrint.Enabled = AllowPrint
+        btnSendGMK.Enabled = btnSave.Enabled
         AddHandler bsDesignMaster.CurrentChanged, AddressOf UpdateDeleteDesignButton
         AddHandler bsDesignMaster.ListChanged, AddressOf UpdateDeleteDesignButton
         UpdateDeleteDesignButton(Nothing, EventArgs.Empty)
@@ -491,9 +579,9 @@ Public Class frmDesignNew
             Exit Function
         End If
         If Trim(txtParentDesign.Text) = "" Then
-            MessageBox.Show("Knitting Design �������ö�������ҧ��" & vbCr _
-                            & Space(3) & "���س��͹������������º���¡�͹ �֧�кѹ�֡��" _
-                            , "��ͼԴ��Ҵ", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Knitting Design ไม่สามารถเป็นค่าว่างได้" & vbCr _
+                            & Space(3) & "กรุณากรอกข้อมูลให้เรียบร้อยก่อน จึงจะบันทึกได้" _
+                            , "ข้อผิดพลาด", MessageBoxButtons.OK, MessageBoxIcon.Error)
             ErrorProvider1.SetError(Me.txtParentDesign, "Please fill Knitting Design !!")
             txtParentDesign.Focus()
             CheckData = False
@@ -505,7 +593,7 @@ Public Class frmDesignNew
         'Auto Gen Design Family
         '--- Begin Cancel by Sitthana 28/06/2018
         'If txtDesignFamily.Text.Trim.Length = 0 Then
-        '    MessageBox.Show("��Ҥس�������� Design Family �к��� Gen ����ѵ��ѵ�! ", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
+        '    MessageBox.Show("ถ้าคุณไม่กรอก Design Family ระบบจะ Gen ให้อัตโนมัติ!", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
         '    'CheckData = False
         '    'Exit Function
         'End If
@@ -540,7 +628,7 @@ Public Class frmDesignNew
 
     Private Sub InitDataBinding()
         ItemID = -1
-        dtDesignMaster = objMaster.getDesignMasterRecord(ItemID, txtDesignNo.Text)
+        dtDesignMaster = oDesignNew.getDesignMasterRecord(ItemID, txtDesignNo.Text)
         bsDesignMaster.DataSource = dtDesignMaster
         bsDesignMaster.MoveFirst()
         ' CreateNewRecord() 'Sitthana comment 25/04/2018
@@ -563,7 +651,7 @@ Public Class frmDesignNew
 
     Private Sub LoadData(Optional ByVal ItemID As String = "", Optional DesignNo As String = "")
 
-        dtDesignMaster = objMaster.getDesignMasterRecord(ItemID, DesignNo)
+        dtDesignMaster = oDesignNew.getDesignMasterRecord(ItemID, DesignNo)
 
         bsDesignMaster.DataSource = dtDesignMaster
         bsDesignMaster.MoveFirst()
@@ -591,13 +679,21 @@ Public Class frmDesignNew
 
             ItemID = drv.Item("dm_item_id")
             Try
-                dtDesignMaster = objMasterUpdate.DesignMasterNewSave(drv, UserInfo.UserID)
+                dtDesignMaster = oDesignNew.DesignMasterNewSave(drv, UserInfo.UserID)
                 bsDesignMaster.DataSource = dtDesignMaster
                 bsDesignMaster.MoveFirst()
                 ItemID = dtDesignMaster.Rows(0)("dm_item_id")
                 DesignNo = dtDesignMaster.Rows(0)("dm_design_no")
 
                 SaveData = True
+
+                'Sync to GMK (one-way Eschler -> GMK). Eschler save is already done: a sync problem must not stop the user.
+                'Try
+                '    Dim syncMsg As String = oDesignNew.SyncAfterSave(dtDesignMaster.Rows(0), UserInfo.UserID)
+                '    If syncMsg <> "" Then MessageBox.Show(syncMsg, "System Message", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                'Catch
+                'End Try
+
             Catch ex As Exception
                 MessageBox.Show(ex.Message, "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
                 SaveData = False
@@ -736,6 +832,8 @@ Public Class frmDesignNew
                 result = MessageBox.Show("Would you like to save ?", "System Message", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3)
                 If result = System.Windows.Forms.DialogResult.Cancel Then blnCancel = True
                 If result <> System.Windows.Forms.DialogResult.Yes Then Exit Sub
+
+                Call AutoGenerateDesignFamily()
 
                 If Not CheckData() Then Exit Sub
 
@@ -1054,17 +1152,102 @@ Public Class frmDesignNew
     Private Sub CopyDesign()
         bsDesignMaster.EndEdit()
         drv = CType(bsDesignMaster.Current, DataRowView)
-        AskBeforeSave()
+        'If the current design has unsaved changes, ask to save before copying (Yes = save, No = discard, Cancel = stop copying)
+        If AllowEdit AndAlso HasRealChanges() Then
+            Dim result As DialogResult = MessageBox.Show("ข้อมูลมีการเปลี่ยนแปลง ต้องการบันทึกก่อนคัดลอกหรือไม่?", "System Message", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3)
+            If result = DialogResult.Cancel Then Exit Sub
+            If result = DialogResult.Yes Then
+                Call AutoGenerateDesignFamily()
+                If Not CheckData() Then Exit Sub
+                Me.Cursor = Cursors.WaitCursor
+                Dim saved As Boolean = SaveData()
+                Me.Cursor = Cursors.Default
+                If Not saved Then Exit Sub
+                MessageBox.Show("Save Completed", "Result", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                LoadData(ItemID, "")
+                drv = CType(bsDesignMaster.Current, DataRowView)
+            End If
+        End If
         dtBOMHeader.Clear()
         dtBOMLines.Clear()
         drv.Item("dm_item_id") = -1
         drv.Item("dm_design_no") = ""
+        drv.Item("dm_design_family") = "" 'Clear so Design Family is generated from the new Design No on save
+        drv.Item("dm_parent_design") = ""
         ItemID = -1
+        MessageBox.Show("คัดลอกข้อมูลแล้ว แต่ยังไม่ได้บันทึก" & vbCr &
+                        "กรุณาใส่ Design No ใหม่ แล้วกดปุ่ม Save", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Information)
     End Sub
+
+    Private Sub AutoGenerateDesignFamily()
+        'Default Design Family (only when the family is empty):
+        '  1) Design No starts with 6 digits -> digits 3-6.   Example: 257398AA/14 -> 7398, 207398BA -> 7398
+        '  2) Letters + "-" + digits (GMK style) -> letters, dash and the whole digit run, upper-case.   Example: SAP-1234AA/11 -> SAP-1234, SAP-123AA/11 -> SAP-123
+        'Other Design No formats are left for the user to type.
+        If txtDesignFamily.Text.Trim <> "" Then Exit Sub
+        Dim designNo As String = txtDesignNo.Text.Trim
+        Dim family As String = ""
+        If System.Text.RegularExpressions.Regex.IsMatch(designNo, "^\d{6}") Then
+            family = designNo.Substring(2, 4)
+        Else
+            Dim m As System.Text.RegularExpressions.Match = System.Text.RegularExpressions.Regex.Match(designNo, "^[A-Za-z]+-\d+")
+            If m.Success Then family = m.Value.ToUpper()
+        End If
+        If family <> "" Then
+            txtDesignFamily.Text = family
+            MessageBox.Show("เนื่องจากไม่ได้ระบุ Design Family" & vbCr &
+                            "ระบบจึง Generate ให้อัตโนมัติ " & vbCr &
+                            "จาก Design No ได้ค่า " & family, "System Message", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+    End Sub
+
+    Private Function HasRealChanges() As Boolean
+        'True only if the user really changed something: compares Original vs Current values and ignores formatting-only differences
+        Dim row As DataRow
+        For Each row In dtDesignMaster.Rows
+            Select Case row.RowState
+                Case DataRowState.Deleted
+                    Return True
+                Case DataRowState.Added
+                    'New record: only counts when something was typed
+                    If row("dm_design_no").ToString.Trim <> "" Or row("dm_compo").ToString.Trim <> "" Or row("dm_rem").ToString.Trim <> "" Or row("dm_cust_design_no").ToString.Trim <> "" Then Return True
+                Case DataRowState.Modified
+                    Dim col As DataColumn
+                    For Each col In dtDesignMaster.Columns
+                        If Not IsSameValue(row(col, DataRowVersion.Original), row(col, DataRowVersion.Current)) Then
+                            Debug.WriteLine("Design Master changed column: " & col.ColumnName)
+                            Return True
+                        End If
+                    Next
+            End Select
+        Next
+        Return False
+    End Function
+
+    Private Function IsSameValue(ByVal a As Object, ByVal b As Object) As Boolean
+        Dim aNull As Boolean = (a Is Nothing OrElse IsDBNull(a))
+        Dim bNull As Boolean = (b Is Nothing OrElse IsDBNull(b))
+        If aNull And bNull Then Return True
+        Try
+            If aNull Or bNull Then
+                'Null versus empty text / zero is not a user change
+                Dim v As Object = If(aNull, b, a)
+                If TypeOf v Is String Then Return v.ToString.Trim = ""
+                If IsNumeric(v) Then Return Convert.ToDouble(v) = 0
+                Return False
+            End If
+            If TypeOf a Is String Or TypeOf b Is String Then Return a.ToString.Trim = b.ToString.Trim
+            If IsNumeric(a) And IsNumeric(b) Then Return Math.Abs(Convert.ToDouble(a) - Convert.ToDouble(b)) < 0.0001
+            Return a.Equals(b)
+        Catch ex As Exception
+            Return a.ToString = b.ToString
+        End Try
+    End Function
 
 #Region "CALCULATIONS"
     Private Sub CalculateMeterPerKGFullWidth()
         Dim objMaster As New classMaster
+    Dim oDesignNew As New classDesignNew   'data work of this form (read/save Design Master)
         Dim FullWidth As Decimal 'Sitthana 20200525 Changed from Integer to decimal
         Dim Gmpersqm As Decimal 'Sitthana 20200525 Changed from Integer to decimal
         Dim KgPerMeter As Decimal
@@ -1109,6 +1292,7 @@ Public Class frmDesignNew
 
     Private Sub CalculateMeterPerKGEdgeWidth()
         Dim objMaster As New classMaster
+    Dim oDesignNew As New classDesignNew   'data work of this form (read/save Design Master)
         Dim EdgeWidth As Integer
         Dim Gmpersqm As Integer
         Dim KgPerMeter As Decimal

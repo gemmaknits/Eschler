@@ -72,6 +72,7 @@ namespace PDR
         {
             try
             {
+                if (Session["username"] != null && Session["usersessionid"] != null) // 09/10/2026 John - skip when not logged in
                 lblUserName.Text = Session["username"].ToString() + "(" + Session["usersessionid"].ToString() + ")";
                 lblversion.Text ="(v" + Assembly.GetExecutingAssembly().GetName().Version.ToString() + ")";
                string buildv=  Assembly.GetExecutingAssembly().GetName().Version.Build.ToString();

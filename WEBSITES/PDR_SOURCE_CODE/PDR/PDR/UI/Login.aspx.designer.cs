@@ -83,7 +83,12 @@ namespace PDR.UI {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSubmit;
-        
+
+        /// <summary>
+        /// lblLoginMsg control. 09/10/2026 John
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Label lblLoginMsg; // 09/10/2026 John
+
         /// <summary>
         /// Label2 control.
         /// </summary>

@@ -236,6 +236,13 @@ Public Class classSalesOrder
         Return dt
     End Function
 
+    'John 02/11/2026 Reads a price-list column from a line, or Nothing when p_soitm_select does not return it
+    'yet, so a save does not fail on a missing column.
+    Private Function PriceListColumnValue(ByVal line As DataRowView, ByVal colName As String) As Object
+        If line.Row.Table.Columns.Contains(colName) Then Return line(colName)
+        Return Nothing
+    End Function
+
     Public Function SOSave(ByVal SOH As SOHeader, ByVal SOD_ADD As DataView, ByVal SOD_UPD As DataView, ByVal SOD_DEL As DataView, ByRef msgerr As String, ByRef sono As String) As Boolean
         Dim config As New clsConfig
         Dim conn As New SqlConnection((New ClassConnection).connection)
@@ -406,10 +413,13 @@ Public Class classSalesOrder
 
                 comm.Parameters.AddWithValue("@mtl_customer_items_xref_id", config.IsNull(.Item(i)("mtl_customer_items_xref_id"), Nothing)) 'Sitthana 16/02/2018
                 comm.Parameters.AddWithValue("@mtl_customer_items_id", config.IsNull(.Item(i)("mtl_customer_items_id"), Nothing)) 'Sitthana 16/02/2018
+                comm.Parameters.AddWithValue("@p_price_list_detail_id", config.IsNull(.Item(i)("price_list_detail_id"), Nothing)) 'John 30/09/2026
+                comm.Parameters.AddWithValue("@p_price_list_uom", config.IsNull(PriceListColumnValue(.Item(i), "price_list_uom"), Nothing)) 'John 02/11/2026
+                comm.Parameters.AddWithValue("@p_price_list_uom_conv", config.IsNull(PriceListColumnValue(.Item(i), "price_list_uom_conv"), Nothing)) 'John 02/11/2026
+                comm.Parameters.AddWithValue("@p_price_list_exrt", config.IsNull(PriceListColumnValue(.Item(i), "price_list_exrt"), Nothing)) 'John 02/11/2026
+                comm.Parameters.AddWithValue("@p_price_list_system_note", config.IsNull(PriceListColumnValue(.Item(i), "price_list_system_note"), Nothing)) 'John 02/11/2026
                 comm.Parameters.AddWithValue("@pJobNo", config.IsNull(.Item(i)("JobNo"), Nothing)) 'Sitthana 23/05/2024
                 comm.Parameters.AddWithValue("@pSentToId", config.IsNull(.Item(i)("sent_to_id"), Nothing)) 'Sitthana 23/05/2024
-
-
 
                 comm.Parameters.AddWithValue("@p_prod_loss_perc", config.IsNull(.Item(i)("prod_loss_perc"), 0)) 'John 26/03/2026
                 comm.Parameters.AddWithValue("@p_qty_with_loss", config.IsNull(.Item(i)("qty_with_loss"), 0)) 'John 26/03/2026
@@ -494,6 +504,11 @@ Public Class classSalesOrder
                 comm.Parameters.AddWithValue("@SO_FULFIL_SRC_ID", SOH.SO_FULFIL_SRC_ID)
                 comm.Parameters.AddWithValue("@mtl_customer_items_xref_id", config.IsNull(.Item(i)("mtl_customer_items_xref_id"), Nothing)) 'Sitthana 16/02/2018
                 comm.Parameters.AddWithValue("@mtl_customer_items_id", config.IsNull(.Item(i)("mtl_customer_items_id"), Nothing)) 'Sitthana 16/02/2018
+                comm.Parameters.AddWithValue("@p_price_list_detail_id", config.IsNull(.Item(i)("price_list_detail_id"), Nothing)) 'John 30/09/2026
+                comm.Parameters.AddWithValue("@p_price_list_uom", config.IsNull(PriceListColumnValue(.Item(i), "price_list_uom"), Nothing)) 'John 02/11/2026
+                comm.Parameters.AddWithValue("@p_price_list_uom_conv", config.IsNull(PriceListColumnValue(.Item(i), "price_list_uom_conv"), Nothing)) 'John 02/11/2026
+                comm.Parameters.AddWithValue("@p_price_list_exrt", config.IsNull(PriceListColumnValue(.Item(i), "price_list_exrt"), Nothing)) 'John 02/11/2026
+                comm.Parameters.AddWithValue("@p_price_list_system_note", config.IsNull(PriceListColumnValue(.Item(i), "price_list_system_note"), Nothing)) 'John 02/11/2026
                 comm.Parameters.AddWithValue("@pJobNo", config.IsNull(.Item(i)("JobNo"), Nothing)) 'Sitthana 23/05/2024
                 comm.Parameters.AddWithValue("@pSentToId", config.IsNull(.Item(i)("sent_to_id"), Nothing)) 'Sitthana 23/05/2024
 
@@ -796,6 +811,32 @@ Public Class classSalesOrder
         comm.Parameters.AddWithValue("@Sort_By", PM_SortBy)
         comm.Parameters.AddWithValue("@dateof", PM_DateOf)
 
+        Dim da As New SqlDataAdapter(comm)
+        Dim dt As New DataTable
+        da.Fill(dt)
+        conn.Close()
+        Return dt
+    End Function
+
+    ''' <summary>
+    ''' The price line(s) that apply to one order line's design/color/uom/qty, or the
+    ''' candidates to choose from when SO.P_SO_PRICE_LIST_PKG_select_price_line can't
+    ''' decide on its own (see the "resolution" column: matched / design ambiguous /
+    ''' quantity ambiguous / colour and quantity ambiguous). Empty result = no match.
+    ''' -- John 29/09/2026
+    ''' </summary>
+    Public Function selectPriceLine(pSoPriceListHeaderId As Nullable(Of Int64), pDesignNo As String, pColorCode As String, pUom As String, pQty As Decimal, pCurr As String) As DataTable
+        Dim conn As New SqlConnection((New classConnection).connection)
+        Dim comm As New SqlCommand("", conn)
+        comm.CommandType = CommandType.StoredProcedure
+        comm.CommandText = "SO.P_SO_PRICE_LIST_PKG_select_price_line"
+        comm.Parameters.Clear()
+        comm.Parameters.AddWithValue("@p_so_price_list_header_id", pSoPriceListHeaderId)
+        comm.Parameters.AddWithValue("@p_design_no", pDesignNo)
+        comm.Parameters.AddWithValue("@p_color_code", pColorCode)
+        comm.Parameters.AddWithValue("@p_uom", pUom)
+        comm.Parameters.AddWithValue("@p_qty", pQty)
+        comm.Parameters.AddWithValue("@p_curr", If(String.IsNullOrEmpty(pCurr), "", pCurr))
         Dim da As New SqlDataAdapter(comm)
         Dim dt As New DataTable
         da.Fill(dt)

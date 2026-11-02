@@ -299,8 +299,8 @@ Public Class frmSalesOrder
         End With
 
         Me.cboPriceListCustomer.DataSource = objDB.getPriceListCustomer(Nothing)
-        Me.cboPriceListCustomer.DisplayMember = "name"
-        Me.cboPriceListCustomer.ValueMember = "customer_id"
+        Me.cboPriceListCustomer.DisplayMember = "list_name"
+        Me.cboPriceListCustomer.ValueMember = "so_price_list_header_id"
 
         'Used In Datagrid
         'Me.design_gwth_nob.DataSource = objDB.GetDesignGwth
@@ -476,7 +476,7 @@ Public Class frmSalesOrder
         txtFulfilmentComment.Text = dt.Rows(0)("fulfilment_comment") 'Sitthana 19/09/2018
         cbbSrTypeId.SelectedValue = dt.Rows(0)("sr_type_id") 'Sitthana 20240523
         mcboDesignProperties.SelectedValue = dt.Rows(0)("design_properties_id") 'John 28/10/2025
-        cboPriceListCustomer.SelectedValue = oConfig.IsNull(dt.Rows(0)("price_list_header_id"), Nothing)
+        cboPriceListCustomer.SelectedValue = dt.Rows(0)("price_list_header_id")
         txtSampleFabricQty.Text = If(dt.Columns.Contains("so_sample_fabric_qty"), dt.Rows(0)("so_sample_fabric_qty").ToString, "0")
         txtSampleBulkQty.Text = If(dt.Columns.Contains("so_sample_bulk_qty"), dt.Rows(0)("so_sample_bulk_qty").ToString, "0")
 
@@ -645,6 +645,8 @@ Public Class frmSalesOrder
             MessageBox.Show("Please choose customer bill to!!", "System Message", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1)
             ErrorProvider1.SetError(mcboCustomersBillToFlag, "Please choose customer bill to!!")
             Return False
+        Else
+            ErrorProvider1.SetError(mcboCustomersBillToFlag, "")
         End If
 
         If (New clsConfig).IsNull(mcboCustomersShipToFlag.SelectedValue, "") = "" Then
@@ -655,10 +657,11 @@ Public Class frmSalesOrder
 
         If oConfig.IsNull(ComboSaleOrderType1.SelectedValue, "").ToString.Trim = "CUSTORDER" Then 'Add By Neung Check only CUSTORDER
             If cboPriceListCustomer.SelectedIndex = -1 OrElse (New clsConfig).IsNull(cboPriceListCustomer.SelectedValue, "").ToString.Trim = "" Then ' John 25/09/2026
-                MessageBox.Show("A Price List Customer must be selected before the order can be saved.", "Validation Required", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1)
-                ErrorProvider1.SetError(cboPriceListCustomer, "A Price List Customer must be selected.")
-                CheckData = False
-                Exit Function
+
+                'MessageBox.Show("A Price List Customer must be selected before the order can be saved.", "Validation Required", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1)
+                'ErrorProvider1.SetError(cboPriceListCustomer, "A Price List Customer must be selected.")
+                'CheckData = False
+                'Exit Function
             End If
         End If
 
@@ -683,6 +686,8 @@ Public Class frmSalesOrder
                 ErrorProvider1.SetError(cboMtl_warehouse, "Please choose Ship From WareHouse  !!")
                 CheckData = False
                 Exit Function
+            Else
+                ErrorProvider1.SetError(cboMtl_warehouse, "")
             End If
         End If
 
@@ -1312,7 +1317,7 @@ Public Class frmSalesOrder
             End If
         End If
 
-        If UCase((New ClassConnection).database) = "KARISMA" Then
+        If UCase((New classConnection).database) = "KARISMA" Then
             rpt.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.PaperLetter
             rpt.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Landscape
             rpt.PrintOptions.PaperSource = CrystalDecisions.Shared.PaperSource.Auto
@@ -1525,6 +1530,15 @@ Public Class frmSalesOrder
         End If
     End Sub
 
+    'John 02/11/2026 Commit the Currency dropdown as soon as a value is picked, so CellValueChanged
+    'updates the exchange rate right away instead of only after the cell loses focus.
+    Private Sub grdSalesOrder_CurrentCellDirtyStateChanged(sender As Object, e As EventArgs) Handles grdSalesOrder.CurrentCellDirtyStateChanged
+        If grdSalesOrder.IsCurrentCellDirty AndAlso grdSalesOrder.CurrentCell IsNot Nothing AndAlso
+           grdSalesOrder.CurrentCell.OwningColumn.Name = "curr" Then
+            grdSalesOrder.CommitEdit(DataGridViewDataErrorContexts.Commit)
+        End If
+    End Sub
+
     Private Sub grdSalesOrder_CellValueChanged(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles grdSalesOrder.CellValueChanged
         Dim obj As New classMaster
         Dim designNo As String
@@ -1540,7 +1554,7 @@ Public Class frmSalesOrder
             'If clsConfig.IsNull(grdSalesOrder.Rows(e.RowIndex).Cells("curr").Value, "") = "USD" Then grdSalesOrder.Rows(e.RowIndex).Cells("exrt").Value = FormatNumber(clsUser.ExchangeRate, 4)
             'If clsConfig.IsNull(grdSalesOrder.Rows(e.RowIndex).Cells("curr").Value, "") = "THB" Then grdSalesOrder.Rows(e.RowIndex).Cells("exrt").Value = FormatNumber(1, 4)
             With grdSalesOrder
-                Select Case oConfig.IsNull(.Rows(e.RowIndex).Cells("curr").Value, "").ToString.ToUpper
+                Select Case oConfig.IsNull(.Rows(e.RowIndex).Cells("curr").Value, "").ToString.Trim.ToUpper 'John 02/11/2026 Trim: currency may come back space-padded (char column)
                     Case "USD"
                         .Rows(e.RowIndex).Cells("exrt").Value = FormatNumber(clsUser.ExchangeRate, 4)
                     Case "JPY"
@@ -1558,7 +1572,7 @@ Public Class frmSalesOrder
                     Case "CNY"
                         .Rows(e.RowIndex).Cells("exrt").Value = FormatNumber(clsUser.ExchangeRateCNY, 4)
                     Case "THB"
-                        .Rows(e.RowIndex).Cells("exrt").Value = FormatNumber(clsUser.ExchangeRate, 4)
+                        .Rows(e.RowIndex).Cells("exrt").Value = FormatNumber(1, 4) 'John 02/11/2026 THB to BAHT is 1 (was using the USD rate)
                 End Select
             End With 'Sitthana 20240913
         End If
@@ -1803,7 +1817,7 @@ Public Class frmSalesOrder
     End Sub
 
     Private Sub hidecolumns()
-        Dim classcn As New ClassConnection
+        Dim classcn As New classConnection
         If UCase(classcn.database) = "GEMMASOFT" Then
             colRefdesno.Visible = True
             colGmPerSqM.Visible = True
@@ -2047,7 +2061,7 @@ Public Class frmSalesOrder
     End Sub
 
     Private Sub btnCheckStock_Click(sender As Object, e As EventArgs) Handles btnCheckStock.Click
-        Dim dbname = (New ClassConnection).database
+        Dim dbname = (New classConnection).database
         If dbname = "ColomboDB" OrElse dbname = "ColomboDBTest" Then
             Exit Sub
         End If
@@ -2072,7 +2086,7 @@ Public Class frmSalesOrder
     End Sub
 
     Private Sub btnSpecialCharges_Click(sender As Object, e As EventArgs) Handles btnSpecialCharges.Click
-        Dim dbname = (New ClassConnection).database
+        Dim dbname = (New classConnection).database
         If dbname = "ColomboDB" OrElse dbname = "ColomboDBTest" Then
             Exit Sub
         End If
@@ -2095,7 +2109,7 @@ Public Class frmSalesOrder
     End Sub
 
     Private Sub btnAltItems_Click(sender As Object, e As EventArgs) Handles btnAltItems.Click
-        Dim dbname = (New ClassConnection).database
+        Dim dbname = (New classConnection).database
         If dbname = "ColomboDB" OrElse dbname = "ColomboDBTest" Then
             Exit Sub
         End If
@@ -2149,13 +2163,17 @@ Public Class frmSalesOrder
         bsCustomersShipToFlag.Filter = "parent_customer_id = " & Me.mcboCustomersBillToFlag.ListBox.Grid.Model(Me.mcboCustomersBillToFlag.SelectedIndex + 1, 1).CellValue & "" 'Disible By Neung K.Piew No Need to Filter Cust Deli
 
         ' Refresh the customer's price list to match the selected Bill To customer -- John 25/09/2026
+        ' By name, not column index, so this can't silently break if
+        ' P_SO_FORM_PKG_get_customers_bill_to_flag's column order ever changes.
+        ' (The Ship-To filter above intentionally uses parent_customer_id instead --
+        ' a different field, not interchangeable with customer_id.) -- John 01/10/2026
         Dim objDB As New classMaster
-        Dim custIdCell As Object = Me.mcboCustomersBillToFlag.ListBox.Grid.Model(Me.mcboCustomersBillToFlag.SelectedIndex + 1, 1).CellValue
+        Dim custIdCell As Object = Me.mcboCustomersBillToFlag.ListBox.Grid.Model(Me.mcboCustomersBillToFlag.SelectedIndex + 1, "customer_id").CellValue
         Dim custId As Nullable(Of Int64) = Nothing
         If custIdCell IsNot Nothing AndAlso Not IsDBNull(custIdCell) Then custId = Convert.ToInt64(custIdCell)
         Me.cboPriceListCustomer.DataSource = objDB.getPriceListCustomer(custId)
-        Me.cboPriceListCustomer.DisplayMember = "name"
-        Me.cboPriceListCustomer.ValueMember = "customer_id"
+        Me.cboPriceListCustomer.DisplayMember = "list_name"
+        Me.cboPriceListCustomer.ValueMember = "so_price_list_header_id" ' John 01/10/2026 -- was "customer_id", which fed the wrong id into @p_so_price_list_header_id and into the saved so.price_list_header_id
 
         Call bindCustomerBillToData()
         Call bindCustomerShipToData()
@@ -2354,6 +2372,49 @@ Public Class frmSalesOrder
         End If
     End Sub
 
+    ''' <summary>
+    ''' Blocks editing design no / color / uom / qty until a Price List Customer is
+    ''' selected, so nothing can be typed in the first place -- a warning inside
+    ''' CellEndEdit is too late, since the value is already committed by then.
+    ''' -- John 30/09/2026
+    ''' </summary>
+    Private Sub grdSalesOrder_CellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles grdSalesOrder.CellBeginEdit
+        Dim colName As String = grdSalesOrder.Columns(e.ColumnIndex).Name
+        If colName = "design_no" OrElse colName = "col" OrElse colName = "uom" OrElse colName = "qty" Then
+            If cboPriceListCustomer.SelectedValue Is Nothing OrElse IsDBNull(cboPriceListCustomer.SelectedValue) Then
+                MessageBox.Show("Please select a Price List Customer before editing this!", "Validation Required", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1)
+                e.Cancel = True
+            End If
+        End If
+
+        ' Remember the value this edit session started with, so CellEndEdit can tell a
+        ' real change from a session that ended with nothing changed. -- John 05/10/2026
+        If Not e.Cancel Then
+            _editStartRow = e.RowIndex
+            _editStartCol = e.ColumnIndex
+            _editStartValue = oConfig.IsNull(grdSalesOrder.Rows(e.RowIndex).Cells(e.ColumnIndex).Value, "").ToString.Trim
+        End If
+        PriceLineTrace("BeginEdit  r=" & e.RowIndex & " c=" & colName & " cancelled=" & e.Cancel & " startValue='" & _editStartValue & "'")
+    End Sub
+
+    ' Value of the cell when its edit session began (see CellBeginEdit / CellEndEdit).
+    Private _editStartRow As Integer = -1
+    Private _editStartCol As Integer = -1
+    Private _editStartValue As String = ""
+
+    ''' <summary>
+    ''' True if a price line input cell really changed during an edit session. qty is
+    ''' compared as a number (1500 vs 1500.00 is not a change); everything else as text,
+    ''' since e.g. design no 0123 and 123 are different designs. -- John 05/10/2026
+    ''' </summary>
+    Private Function PriceLineInputChanged(colName As String, before As String, after As String) As Boolean
+        If colName = "qty" Then
+            Dim b As Decimal, a As Decimal
+            If Decimal.TryParse(before, b) AndAlso Decimal.TryParse(after, a) Then Return a <> b
+        End If
+        Return Not String.Equals(before, after, StringComparison.Ordinal)
+    End Function
+
     Private Sub grdSalesOrder_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles grdSalesOrder.CellEndEdit
         If grdSalesOrder.Columns(e.ColumnIndex).Name = "colProdLossPerc" Then 'John 26/03/2026
             Dim qty = grdSalesOrder.Rows(e.RowIndex).Cells("qty").Value
@@ -2377,7 +2438,98 @@ Public Class frmSalesOrder
             End If
         End If
 
+        ' Re-check the price line only when one of the inputs to it (design no, color,
+        ' uom, qty, curr) actually changed. CellEndEdit also fires for an edit session
+        ' that ended with nothing changed -- e.g. a click on the already-selected cell
+        ' followed by an arrow key -- which used to reopen the popup. CheckSelectPriceLine
+        ' itself still waits until design no, color, uom and qty are all filled.
+        ' -- John 29/09/2026, changed 05/10/2026
+        Dim endColName As String = grdSalesOrder.Columns(e.ColumnIndex).Name
+        If endColName = "design_no" OrElse endColName = "col" OrElse endColName = "uom" OrElse endColName = "qty" OrElse endColName = "curr" Then
+            Dim endValue As String = oConfig.IsNull(grdSalesOrder.Rows(e.RowIndex).Cells(e.ColumnIndex).Value, "").ToString.Trim
+            Dim sameCell As Boolean = (e.RowIndex = _editStartRow AndAlso e.ColumnIndex = _editStartCol)
+            Dim changed As Boolean = sameCell AndAlso PriceLineInputChanged(endColName, _editStartValue, endValue)
+            PriceLineTrace("EndEdit    r=" & e.RowIndex & " c=" & endColName & " beginWasSameCell=" & sameCell & " start='" & _editStartValue & "' end='" & endValue & "' -> fires=" & changed)
+            If changed Then
+                Call CheckSelectPriceLine(e.RowIndex)
+            End If
+        Else
+            PriceLineTrace("EndEdit    r=" & e.RowIndex & " c=" & endColName & " (not a price line input)")
+        End If
+        _editStartRow = -1
+        _editStartCol = -1
+
         ' grdSalesOrder.Rows(e.RowIndex).ErrorText = ""
+    End Sub
+
+    ''' <summary>
+    ''' Step 1 of price-line selection: once design no, color, uom and qty are all
+    ''' filled on a line, ask SO.P_SO_PRICE_LIST_PKG_select_price_line for the
+    ''' matching price line(s) and let the user pick one via frmSelectPriceLine
+    ''' (shown every time, even for a single unambiguous match). The chosen
+    ''' so_price_list_detail_id is only held in the hidden grid column for now --
+    ''' where it ultimately gets saved comes later. -- John 29/09/2026
+    ''' </summary>
+    ' TEMP DIAGNOSTIC -- John 12/10/2026 -- silent trace to %TEMP%\so_priceline_trace.log
+    ' to find why the price line popup stops firing on a second qty edit. Remove after.
+    Private Sub PriceLineTrace(msg As String)
+        Try
+            System.IO.File.AppendAllText(System.IO.Path.Combine(System.IO.Path.GetTempPath(), "so_priceline_trace.log"),
+                                         DateTime.Now.ToString("HH:mm:ss.fff") & "  " & msg & vbCrLf)
+        Catch
+        End Try
+    End Sub
+
+    Private Sub CheckSelectPriceLine(rowIndex As Integer)
+        If rowIndex < 0 OrElse rowIndex >= grdSalesOrder.Rows.Count Then PriceLineTrace("  CheckSelectPriceLine r=" & rowIndex & ": EXIT bad row index") : Exit Sub
+
+        Dim row As DataGridViewRow = grdSalesOrder.Rows(rowIndex)
+        Dim designNo As String = oConfig.IsNull(row.Cells("design_no").Value, "").ToString.Trim
+        Dim colorCode As String = oConfig.IsNull(row.Cells("col").Value, "").ToString.Trim
+        Dim uom As String = oConfig.IsNull(row.Cells("uom").Value, "").ToString.Trim
+        Dim qtyText As String = oConfig.IsNull(row.Cells("qty").Value, "").ToString.Trim
+        Dim curr As String = oConfig.IsNull(row.Cells("curr").Value, "").ToString.Trim
+
+        ' Currency is required too: it filters the price lines, so the popup waits until
+        ' design no, color, uom, qty and curr are all filled. -- John 12/10/2026
+        If designNo = "" OrElse colorCode = "" OrElse uom = "" OrElse qtyText = "" OrElse curr = "" Then
+            PriceLineTrace("  CheckSelectPriceLine r=" & rowIndex & ": EXIT blank field  design='" & designNo & "' col='" & colorCode & "' uom='" & uom & "' qty='" & qtyText & "' curr='" & curr & "'")
+            Exit Sub
+        End If
+
+        Dim qty As Decimal
+        If Not Decimal.TryParse(qtyText, qty) Then PriceLineTrace("  CheckSelectPriceLine r=" & rowIndex & ": EXIT qty not a number '" & qtyText & "'") : Exit Sub
+
+        Dim headerId As Nullable(Of Int64) = Nothing
+        If cboPriceListCustomer.SelectedValue IsNot Nothing AndAlso Not IsDBNull(cboPriceListCustomer.SelectedValue) Then
+            headerId = Convert.ToInt64(cboPriceListCustomer.SelectedValue)
+        End If
+
+        ' selectPriceLine needs so_price_list_header_id -- that comes from
+        ' cboPriceListCustomer, so don't call the SP without it. -- John 29/09/2026
+        If Not headerId.HasValue Then
+            PriceLineTrace("  CheckSelectPriceLine r=" & rowIndex & ": EXIT no price list customer selected (warning shown)")
+            MessageBox.Show("Please select a Price List Customer before editing this!", "Validation Required", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1)
+            Exit Sub
+        End If
+
+        PriceLineTrace("  CheckSelectPriceLine r=" & rowIndex & ": calling SP header=" & headerId.Value & " design='" & designNo & "' col='" & colorCode & "' uom='" & uom & "' qty=" & qty & " curr='" & curr & "'")
+        Dim dt As DataTable = (New classSalesOrder).selectPriceLine(headerId, designNo, colorCode, uom, qty, curr)
+        PriceLineTrace("  CheckSelectPriceLine r=" & rowIndex & ": SP returned " & If(dt Is Nothing, "NOTHING", dt.Rows.Count.ToString & " row(s)"))
+        If dt Is Nothing OrElse dt.Rows.Count = 0 Then Exit Sub
+
+        Dim frm As New frmSelectPriceLine
+        Dim selectedId As Nullable(Of Int64) = frm.ShowAndSelect(dt, Me)
+        Dim selectedPrice As Nullable(Of Decimal) = frm.SelectedPrice
+        Dim selectedCurrency As String = frm.SelectedCurrency
+        frm.Dispose()
+        PriceLineTrace("  CheckSelectPriceLine r=" & rowIndex & ": popup closed selectedId=" & If(selectedId.HasValue, selectedId.Value.ToString, "none (cancelled)") & " price=" & If(selectedPrice.HasValue, selectedPrice.Value.ToString, "none") & " curr='" & selectedCurrency & "'")
+
+        If selectedId.HasValue Then
+            row.Cells("so_price_list_detail_id").Value = selectedId.Value
+            If selectedPrice.HasValue Then row.Cells("price").Value = selectedPrice.Value
+            If Not String.IsNullOrEmpty(selectedCurrency) Then row.Cells("curr").Value = selectedCurrency
+        End If
     End Sub
 
     Private Sub btnViewSTTracking_Click(sender As Object, e As EventArgs) Handles btnViewSTTracking.Click 'John 07/07/2026

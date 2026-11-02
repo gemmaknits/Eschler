@@ -20,20 +20,10 @@ Partial Class frmDesignNew
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDesignNew))
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDesignNew))
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
-        Me.btnNew = New System.Windows.Forms.ToolStripButton()
-        Me.btnSave = New System.Windows.Forms.ToolStripButton()
-        Me.btnDeleteDesign = New System.Windows.Forms.ToolStripButton()
-        Me.BtnfrmItemsCategory = New System.Windows.Forms.ToolStripButton()
-        Me.tsbCopy = New System.Windows.Forms.ToolStripButton()
-        Me.btnPrint = New System.Windows.Forms.ToolStripDropDownButton()
-        Me.tsbtnRptDesignMaster = New System.Windows.Forms.ToolStripMenuItem()
-        Me.tsbtnTechnicalDatasheet = New System.Windows.Forms.ToolStripMenuItem()
-        Me.BtmfrmDoc_attachments = New System.Windows.Forms.ToolStripButton()
-        Me.btnExit = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.tpSpecialFabricPro = New System.Windows.Forms.TabPage()
         Me.GroupBox10 = New System.Windows.Forms.GroupBox()
@@ -327,6 +317,17 @@ Partial Class frmDesignNew
         Me.Label21 = New System.Windows.Forms.Label()
         Me.txtSuppDesignNo = New System.Windows.Forms.TextBox()
         Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.btnNew = New System.Windows.Forms.ToolStripButton()
+        Me.btnSave = New System.Windows.Forms.ToolStripButton()
+        Me.btnSendGMK = New System.Windows.Forms.ToolStripButton()
+        Me.btnDeleteDesign = New System.Windows.Forms.ToolStripButton()
+        Me.BtnfrmItemsCategory = New System.Windows.Forms.ToolStripButton()
+        Me.tsbCopy = New System.Windows.Forms.ToolStripButton()
+        Me.btnPrint = New System.Windows.Forms.ToolStripDropDownButton()
+        Me.tsbtnRptDesignMaster = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsbtnTechnicalDatasheet = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BtmfrmDoc_attachments = New System.Windows.Forms.ToolStripButton()
+        Me.btnExit = New System.Windows.Forms.ToolStripButton()
         Me.ToolStrip1.SuspendLayout()
         Me.tpSpecialFabricPro.SuspendLayout()
         Me.GroupBox10.SuspendLayout()
@@ -355,90 +356,11 @@ Partial Class frmDesignNew
         '
         'ToolStrip1
         '
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnNew, Me.btnSave, Me.btnDeleteDesign, Me.BtnfrmItemsCategory, Me.tsbCopy, Me.btnPrint, Me.BtmfrmDoc_attachments, Me.btnExit, Me.ToolStripSeparator2})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnNew, Me.btnSave, Me.btnSendGMK, Me.btnDeleteDesign, Me.BtnfrmItemsCategory, Me.tsbCopy, Me.btnPrint, Me.BtmfrmDoc_attachments, Me.btnExit, Me.ToolStripSeparator2})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.Size = New System.Drawing.Size(1118, 25)
         Me.ToolStrip1.TabIndex = 37
-        '
-        'btnNew
-        '
-        Me.btnNew.Image = CType(resources.GetObject("btnNew.Image"), System.Drawing.Image)
-        Me.btnNew.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnNew.Name = "btnNew"
-        Me.btnNew.Size = New System.Drawing.Size(51, 22)
-        Me.btnNew.Text = "New"
-        '
-        'btnSave
-        '
-        Me.btnSave.Image = CType(resources.GetObject("btnSave.Image"), System.Drawing.Image)
-        Me.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(51, 22)
-        Me.btnSave.Text = "Save"
-        '
-        'btnDeleteDesign
-        '
-        Me.btnDeleteDesign.Enabled = False
-        Me.btnDeleteDesign.Image = Global.ProductionSystem.My.Resources.Resources.Cancel_16x
-        Me.btnDeleteDesign.Name = "btnDeleteDesign"
-        Me.btnDeleteDesign.Size = New System.Drawing.Size(99, 22)
-        Me.btnDeleteDesign.Text = "Delete Design"
-        Me.btnDeleteDesign.ToolTipText = "Delete an unused Design Master"
-        '
-        'BtnfrmItemsCategory
-        '
-        Me.BtnfrmItemsCategory.Image = CType(resources.GetObject("BtnfrmItemsCategory.Image"), System.Drawing.Image)
-        Me.BtnfrmItemsCategory.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.BtnfrmItemsCategory.Name = "BtnfrmItemsCategory"
-        Me.BtnfrmItemsCategory.Size = New System.Drawing.Size(128, 22)
-        Me.BtnfrmItemsCategory.Text = "Inventory Category"
-        Me.BtnfrmItemsCategory.ToolTipText = "Inventory Category"
-        '
-        'tsbCopy
-        '
-        Me.tsbCopy.Image = CType(resources.GetObject("tsbCopy.Image"), System.Drawing.Image)
-        Me.tsbCopy.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbCopy.Name = "tsbCopy"
-        Me.tsbCopy.Size = New System.Drawing.Size(55, 22)
-        Me.tsbCopy.Text = "Copy"
-        '
-        'btnPrint
-        '
-        Me.btnPrint.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbtnRptDesignMaster, Me.tsbtnTechnicalDatasheet})
-        Me.btnPrint.Image = CType(resources.GetObject("btnPrint.Image"), System.Drawing.Image)
-        Me.btnPrint.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnPrint.Name = "btnPrint"
-        Me.btnPrint.Size = New System.Drawing.Size(61, 22)
-        Me.btnPrint.Text = "Print"
-        '
-        'tsbtnRptDesignMaster
-        '
-        Me.tsbtnRptDesignMaster.Name = "tsbtnRptDesignMaster"
-        Me.tsbtnRptDesignMaster.Size = New System.Drawing.Size(187, 22)
-        Me.tsbtnRptDesignMaster.Text = "Report Design Master"
-        '
-        'tsbtnTechnicalDatasheet
-        '
-        Me.tsbtnTechnicalDatasheet.Name = "tsbtnTechnicalDatasheet"
-        Me.tsbtnTechnicalDatasheet.Size = New System.Drawing.Size(187, 22)
-        Me.tsbtnTechnicalDatasheet.Text = "Technical Datasheet"
-        '
-        'BtmfrmDoc_attachments
-        '
-        Me.BtmfrmDoc_attachments.Image = CType(resources.GetObject("BtmfrmDoc_attachments.Image"), System.Drawing.Image)
-        Me.BtmfrmDoc_attachments.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.BtmfrmDoc_attachments.Name = "BtmfrmDoc_attachments"
-        Me.BtmfrmDoc_attachments.Size = New System.Drawing.Size(59, 22)
-        Me.BtmfrmDoc_attachments.Text = "Photo"
-        '
-        'btnExit
-        '
-        Me.btnExit.Image = CType(resources.GetObject("btnExit.Image"), System.Drawing.Image)
-        Me.btnExit.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnExit.Name = "btnExit"
-        Me.btnExit.Size = New System.Drawing.Size(46, 22)
-        Me.btnExit.Text = "Exit"
         '
         'ToolStripSeparator2
         '
@@ -3548,6 +3470,94 @@ Partial Class frmDesignNew
         '
         Me.ErrorProvider1.ContainerControl = Me
         '
+        'btnNew
+        '
+        Me.btnNew.Image = CType(resources.GetObject("btnNew.Image"), System.Drawing.Image)
+        Me.btnNew.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnNew.Name = "btnNew"
+        Me.btnNew.Size = New System.Drawing.Size(51, 22)
+        Me.btnNew.Text = "New"
+        '
+        'btnSave
+        '
+        Me.btnSave.Image = CType(resources.GetObject("btnSave.Image"), System.Drawing.Image)
+        Me.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(51, 22)
+        Me.btnSave.Text = "Save"
+        '
+        'btnSendGMK
+        '
+        Me.btnSendGMK.Image = Global.ProductionSystem.My.Resources.Resources.Send_16x
+        Me.btnSendGMK.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnSendGMK.Name = "btnSendGMK"
+        Me.btnSendGMK.Size = New System.Drawing.Size(96, 22)
+        Me.btnSendGMK.Text = "Send to GMK"
+        Me.btnSendGMK.ToolTipText = "Send this design to GMK (the differences are shown before sending)"
+        '
+        'btnDeleteDesign
+        '
+        Me.btnDeleteDesign.Enabled = False
+        Me.btnDeleteDesign.Image = Global.ProductionSystem.My.Resources.Resources.Cancel_16x
+        Me.btnDeleteDesign.Name = "btnDeleteDesign"
+        Me.btnDeleteDesign.Size = New System.Drawing.Size(99, 22)
+        Me.btnDeleteDesign.Text = "Delete Design"
+        Me.btnDeleteDesign.ToolTipText = "Delete an unused Design Master"
+        '
+        'BtnfrmItemsCategory
+        '
+        Me.BtnfrmItemsCategory.Image = CType(resources.GetObject("BtnfrmItemsCategory.Image"), System.Drawing.Image)
+        Me.BtnfrmItemsCategory.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.BtnfrmItemsCategory.Name = "BtnfrmItemsCategory"
+        Me.BtnfrmItemsCategory.Size = New System.Drawing.Size(128, 22)
+        Me.BtnfrmItemsCategory.Text = "Inventory Category"
+        Me.BtnfrmItemsCategory.ToolTipText = "Inventory Category"
+        '
+        'tsbCopy
+        '
+        Me.tsbCopy.Image = CType(resources.GetObject("tsbCopy.Image"), System.Drawing.Image)
+        Me.tsbCopy.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbCopy.Name = "tsbCopy"
+        Me.tsbCopy.Size = New System.Drawing.Size(55, 22)
+        Me.tsbCopy.Text = "Copy"
+        '
+        'btnPrint
+        '
+        Me.btnPrint.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbtnRptDesignMaster, Me.tsbtnTechnicalDatasheet})
+        Me.btnPrint.Image = CType(resources.GetObject("btnPrint.Image"), System.Drawing.Image)
+        Me.btnPrint.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnPrint.Name = "btnPrint"
+        Me.btnPrint.Size = New System.Drawing.Size(61, 22)
+        Me.btnPrint.Text = "Print"
+        '
+        'tsbtnRptDesignMaster
+        '
+        Me.tsbtnRptDesignMaster.Name = "tsbtnRptDesignMaster"
+        Me.tsbtnRptDesignMaster.Size = New System.Drawing.Size(187, 22)
+        Me.tsbtnRptDesignMaster.Text = "Report Design Master"
+        '
+        'tsbtnTechnicalDatasheet
+        '
+        Me.tsbtnTechnicalDatasheet.Name = "tsbtnTechnicalDatasheet"
+        Me.tsbtnTechnicalDatasheet.Size = New System.Drawing.Size(187, 22)
+        Me.tsbtnTechnicalDatasheet.Text = "Technical Datasheet"
+        '
+        'BtmfrmDoc_attachments
+        '
+        Me.BtmfrmDoc_attachments.Image = CType(resources.GetObject("BtmfrmDoc_attachments.Image"), System.Drawing.Image)
+        Me.BtmfrmDoc_attachments.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.BtmfrmDoc_attachments.Name = "BtmfrmDoc_attachments"
+        Me.BtmfrmDoc_attachments.Size = New System.Drawing.Size(59, 22)
+        Me.BtmfrmDoc_attachments.Text = "Photo"
+        '
+        'btnExit
+        '
+        Me.btnExit.Image = CType(resources.GetObject("btnExit.Image"), System.Drawing.Image)
+        Me.btnExit.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnExit.Name = "btnExit"
+        Me.btnExit.Size = New System.Drawing.Size(46, 22)
+        Me.btnExit.Text = "Exit"
+        '
         'frmDesignNew
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -3605,6 +3615,7 @@ Partial Class frmDesignNew
     Friend WithEvents ToolStrip1 As System.Windows.Forms.ToolStrip
     Friend WithEvents btnNew As System.Windows.Forms.ToolStripButton
     Friend WithEvents btnSave As System.Windows.Forms.ToolStripButton
+    Friend WithEvents btnSendGMK As System.Windows.Forms.ToolStripButton
     Friend WithEvents btnDeleteDesign As System.Windows.Forms.ToolStripButton
     Friend WithEvents btnExit As System.Windows.Forms.ToolStripButton
     Friend WithEvents Label18 As System.Windows.Forms.Label

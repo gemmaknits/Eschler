@@ -18,6 +18,10 @@ Public Class frmCreditNoteLocal
     Dim bsFreight As New BindingSource
 #End Region
 
+    Private Function RoundAmount(ByVal value As Decimal) As Decimal
+        Return Math.Round(value, 2, MidpointRounding.AwayFromZero)
+    End Function
+
 #Region "Properties"
     Public Property UserInfo() As classUserInfo
         Get
@@ -590,15 +594,15 @@ Public Class frmCreditNoteLocal
 
         For i = 0 To dtc.Rows.Count - 1
             If dtc.Rows(i).RowState <> DataRowState.Deleted Then
-                dblGrossAmt = dblGrossAmt + Math.Round(config.IsNull(dtc.Rows(i)("qty"), 0) * config.IsNull(dtc.Rows(i)("uprice"), 0), 2)
-                dblOldAmt = Math.Round(config.IsNull(dtc.Rows(i)("oldamt"), 0), 2)
+                dblGrossAmt = dblGrossAmt + RoundAmount(CDec(config.IsNull(dtc.Rows(i)("qty"), 0)) * CDec(config.IsNull(dtc.Rows(i)("uprice"), 0)))
+                dblOldAmt = RoundAmount(CDec(config.IsNull(dtc.Rows(i)("oldamt"), 0)))
             End If
         Next
         'dblOldAmt = config.IsNull(dtc.Rows(0)("oldamt"), 0)
-        dblPreTaxAmt = dblGrossAmt - Math.Round(dblDiscAmt, 2)
+        dblPreTaxAmt = dblGrossAmt - RoundAmount(CDec(dblDiscAmt))
         dblNetAmt = dblOldAmt - dblPreTaxAmt
         dblDifferentAmt = dblPreTaxAmt
-        dblVATAmt = Math.Round((dblPreTaxAmt * dblVAT) / 100, 2, MidpointRounding.AwayFromZero)
+        dblVATAmt = RoundAmount(CDec((dblPreTaxAmt * dblVAT) / 100))
         dblTotalAmt = dblPreTaxAmt + dblVATAmt
 
         txtGrossAmt.Text = FormatNumber(dblGrossAmt, 2, TriState.False, TriState.False, TriState.False)
@@ -636,11 +640,11 @@ Public Class frmCreditNoteLocal
         Dim dbtotalAmt As Double = 0
         For i = 0 To dt.Rows.Count - 1
             If dt.Rows(i).RowState <> DataRowState.Deleted Then
-                dblOldAmt = dblOldAmt + Math.Round(config.IsNull(dt.Rows(i)("qty"), 0) * config.IsNull(dt.Rows(i)("uprice"), 0), 2)
+                dblOldAmt = dblOldAmt + RoundAmount(CDec(config.IsNull(dt.Rows(i)("qty"), 0)) * CDec(config.IsNull(dt.Rows(i)("uprice"), 0)))
             End If
         Next
 
-        dblVATAmt = Math.Round((dblPreTaxAmt * dblVAT) / 100, 2)
+        dblVATAmt = RoundAmount(CDec((dblPreTaxAmt * dblVAT) / 100))
 
         If dblDiscAmt > 0 Then
             dbtotalAmt = dblDiscAmt
@@ -808,7 +812,7 @@ Public Class frmCreditNoteLocal
     Private Sub grdDetails_CellValueChanged(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles grdDetails.CellValueChanged
         If grdDetails.Columns(e.ColumnIndex).Name = "qty" _
          Or grdDetails.Columns(e.ColumnIndex).Name = "uprice" Then
-            grdDetails.CurrentRow.Cells("lineamt").Value = Math.Round(grdDetails.CurrentRow.Cells("qty").Value * grdDetails.CurrentRow.Cells("uprice").Value, 2)
+            grdDetails.CurrentRow.Cells("lineamt").Value = RoundAmount(CDec(grdDetails.CurrentRow.Cells("qty").Value) * CDec(grdDetails.CurrentRow.Cells("uprice").Value))
             Call SumGrid(grdDetails.DataSource)
         End If
     End Sub

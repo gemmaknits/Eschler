@@ -81,6 +81,7 @@ Partial Class frmSalesOrder
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.mcboDesignProperties = New SalesOrderSystem.Controls.MultiColumnComboBox()
         Me.Label45 = New System.Windows.Forms.Label()
         Me.ComboSaleOrderType1 = New Classes.comboSaleOrderType()
         Me.chkClearOrder = New System.Windows.Forms.CheckBox()
@@ -129,6 +130,8 @@ Partial Class frmSalesOrder
         Me.Label29 = New System.Windows.Forms.Label()
         Me.txtAgentCommPer = New Classes.textboxNumeric()
         Me.tabCustomer = New System.Windows.Forms.TabPage()
+        Me.cboPriceListCustomer = New System.Windows.Forms.ComboBox()
+        Me.Label49 = New System.Windows.Forms.Label()
         Me.Label48 = New System.Windows.Forms.Label()
         Me.Label46 = New System.Windows.Forms.Label()
         Me.txtCustAddlInfo = New System.Windows.Forms.TextBox()
@@ -143,7 +146,9 @@ Partial Class frmSalesOrder
         Me.txtContact = New System.Windows.Forms.TextBox()
         Me.txtCustAddr = New System.Windows.Forms.TextBox()
         Me.btnCustPoUnique = New System.Windows.Forms.Button()
+        Me.mcboCustomersBillToFlag = New SalesOrderSystem.Controls.MultiColumnComboBox()
         Me.tabDelivery = New System.Windows.Forms.TabPage()
+        Me.mcboCustomersShipToFlag = New SalesOrderSystem.Controls.MultiColumnComboBox()
         Me.cboMtl_warehouse = New System.Windows.Forms.ComboBox()
         Me.Label34 = New System.Windows.Forms.Label()
         Me.txtShipQty_Tolerance_high = New System.Windows.Forms.TextBox()
@@ -155,6 +160,7 @@ Partial Class frmSalesOrder
         Me.Label23 = New System.Windows.Forms.Label()
         Me.txtDeliAddr = New System.Windows.Forms.TextBox()
         Me.tabTerms = New System.Windows.Forms.TabPage()
+        Me.mcboBanks = New SalesOrderSystem.Controls.MultiColumnComboBox()
         Me.Label32 = New System.Windows.Forms.Label()
         Me.Label26 = New System.Windows.Forms.Label()
         Me.cboPaymode = New System.Windows.Forms.ComboBox()
@@ -207,12 +213,6 @@ Partial Class frmSalesOrder
         Me.btnPrintSR = New System.Windows.Forms.Button()
         Me.cbbSrTypeId = New System.Windows.Forms.ComboBox()
         Me.Label40 = New System.Windows.Forms.Label()
-        Me.Label49 = New System.Windows.Forms.Label()
-        Me.cboPriceListCustomer = New System.Windows.Forms.ComboBox()
-        Me.mcboCustomersBillToFlag = New SalesOrderSystem.Controls.MultiColumnComboBox()
-        Me.mcboCustomersShipToFlag = New SalesOrderSystem.Controls.MultiColumnComboBox()
-        Me.mcboBanks = New SalesOrderSystem.Controls.MultiColumnComboBox()
-        Me.mcboDesignProperties = New SalesOrderSystem.Controls.MultiColumnComboBox()
         Me.sonoid = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ref_stnoid = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.design_gwth_nob = New System.Windows.Forms.DataGridViewComboBoxColumn()
@@ -246,6 +246,7 @@ Partial Class frmSalesOrder
         Me.qty = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.uom = New System.Windows.Forms.DataGridViewComboBoxColumn()
         Me.price = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colProdLossPerc = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colQtyWithLoss = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.show_price = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -257,6 +258,7 @@ Partial Class frmSalesOrder
         Me.closed2 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.cboid_so_routing = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.so_line_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.so_price_list_detail_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.mtl_customer_items_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.mtl_customer_items_xref_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.qtyship = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -264,16 +266,19 @@ Partial Class frmSalesOrder
         Me.jobno = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.sent_to = New System.Windows.Forms.DataGridViewComboBoxColumn()
         Me.st_reorder_bal_kg = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
+        CType(Me.mcboDesignProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ToolStrip1.SuspendLayout()
         CType(Me.grdSalesOrder, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl1.SuspendLayout()
         Me.tabSales.SuspendLayout()
         Me.tabCustomer.SuspendLayout()
+        CType(Me.mcboCustomersBillToFlag, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabDelivery.SuspendLayout()
+        CType(Me.mcboCustomersShipToFlag, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabTerms.SuspendLayout()
+        CType(Me.mcboBanks, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabOther.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.TabSample.SuspendLayout()
@@ -284,10 +289,6 @@ Partial Class frmSalesOrder
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox5.SuspendLayout()
         Me.grpSampleRequest.SuspendLayout()
-        CType(Me.mcboCustomersBillToFlag, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.mcboCustomersShipToFlag, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.mcboBanks, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.mcboDesignProperties, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -637,6 +638,20 @@ Partial Class frmSalesOrder
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Order type"
         '
+        'mcboDesignProperties
+        '
+        Me.mcboDesignProperties.AllowTypeFilter = False
+        Me.mcboDesignProperties.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.mcboDesignProperties.DataSource = Nothing
+        Me.mcboDesignProperties.DisplayMember = Nothing
+        Me.mcboDesignProperties.Location = New System.Drawing.Point(34, 64)
+        Me.mcboDesignProperties.Name = "mcboDesignProperties"
+        Me.mcboDesignProperties.SelectedIndex = -1
+        Me.mcboDesignProperties.SelectedValue = Nothing
+        Me.mcboDesignProperties.Size = New System.Drawing.Size(212, 21)
+        Me.mcboDesignProperties.TabIndex = 37
+        Me.mcboDesignProperties.ValueMember = Nothing
+        '
         'Label45
         '
         Me.Label45.AutoSize = True
@@ -892,7 +907,7 @@ Partial Class frmSalesOrder
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grdSalesOrder.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grdSalesOrder.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.sonoid, Me.ref_stnoid, Me.design_gwth_nob, Me.design_no, Me.labeldes, Me.colRefdesno, Me.labelarticle, Me.colGmPerSqM, Me.Custdes, Me.fwth, Me.cboWidth, Me.gwth, Me.sample_fabric_qty, Me.sample_bulk_qty, Me.col, Me.custcol, Me.Column1, Me.labdipno, Me.labdip_comment, Me.labelcolor, Me.labeldata1, Me.labeldata2, Me.colCustDelidt, Me.shipdt, Me.confirmed_shipdt, Me.knit_begin_date, Me.knit_end_date, Me.dye_end_date, Me.yarn_available_date, Me.confirmed_appointment, Me.qty, Me.uom, Me.price, Me.colProdLossPerc, Me.colQtyWithLoss, Me.show_price, Me.curr, Me.exrt, Me.gr_itamt, Me.discamt, Me.nt_itamt, Me.closed2, Me.cboid_so_routing, Me.so_line_id, Me.mtl_customer_items_id, Me.mtl_customer_items_xref_id, Me.qtyship, Me.qtybal, Me.jobno, Me.sent_to, Me.st_reorder_bal_kg, Me.Column2})
+        Me.grdSalesOrder.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.sonoid, Me.ref_stnoid, Me.design_gwth_nob, Me.design_no, Me.labeldes, Me.colRefdesno, Me.labelarticle, Me.colGmPerSqM, Me.Custdes, Me.fwth, Me.cboWidth, Me.gwth, Me.sample_fabric_qty, Me.sample_bulk_qty, Me.col, Me.custcol, Me.Column1, Me.labdipno, Me.labdip_comment, Me.labelcolor, Me.labeldata1, Me.labeldata2, Me.colCustDelidt, Me.shipdt, Me.confirmed_shipdt, Me.knit_begin_date, Me.knit_end_date, Me.dye_end_date, Me.yarn_available_date, Me.confirmed_appointment, Me.qty, Me.uom, Me.price, Me.Column2, Me.colProdLossPerc, Me.colQtyWithLoss, Me.show_price, Me.curr, Me.exrt, Me.gr_itamt, Me.discamt, Me.nt_itamt, Me.closed2, Me.cboid_so_routing, Me.so_line_id, Me.so_price_list_detail_id, Me.mtl_customer_items_id, Me.mtl_customer_items_xref_id, Me.qtyship, Me.qtybal, Me.jobno, Me.sent_to, Me.st_reorder_bal_kg})
         Me.grdSalesOrder.Location = New System.Drawing.Point(3, 31)
         Me.grdSalesOrder.Name = "grdSalesOrder"
         Me.grdSalesOrder.RowHeadersWidth = 51
@@ -1122,6 +1137,23 @@ Partial Class frmSalesOrder
         Me.tabCustomer.Text = "Customer details"
         Me.tabCustomer.UseVisualStyleBackColor = True
         '
+        'cboPriceListCustomer
+        '
+        Me.cboPriceListCustomer.FormattingEnabled = True
+        Me.cboPriceListCustomer.Location = New System.Drawing.Point(433, 108)
+        Me.cboPriceListCustomer.Name = "cboPriceListCustomer"
+        Me.cboPriceListCustomer.Size = New System.Drawing.Size(239, 21)
+        Me.cboPriceListCustomer.TabIndex = 50
+        '
+        'Label49
+        '
+        Me.Label49.AutoSize = True
+        Me.Label49.Location = New System.Drawing.Point(432, 92)
+        Me.Label49.Name = "Label49"
+        Me.Label49.Size = New System.Drawing.Size(103, 13)
+        Me.Label49.TabIndex = 49
+        Me.Label49.Text = "Price List Customer"
+        '
         'Label48
         '
         Me.Label48.AutoSize = True
@@ -1252,6 +1284,20 @@ Partial Class frmSalesOrder
         Me.btnCustPoUnique.TabIndex = 41
         Me.btnCustPoUnique.UseVisualStyleBackColor = True
         '
+        'mcboCustomersBillToFlag
+        '
+        Me.mcboCustomersBillToFlag.AllowTypeFilter = False
+        Me.mcboCustomersBillToFlag.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.mcboCustomersBillToFlag.DataSource = Nothing
+        Me.mcboCustomersBillToFlag.DisplayMember = Nothing
+        Me.mcboCustomersBillToFlag.Location = New System.Drawing.Point(167, 108)
+        Me.mcboCustomersBillToFlag.Name = "mcboCustomersBillToFlag"
+        Me.mcboCustomersBillToFlag.SelectedIndex = -1
+        Me.mcboCustomersBillToFlag.SelectedValue = Nothing
+        Me.mcboCustomersBillToFlag.Size = New System.Drawing.Size(260, 21)
+        Me.mcboCustomersBillToFlag.TabIndex = 35
+        Me.mcboCustomersBillToFlag.ValueMember = Nothing
+        '
         'tabDelivery
         '
         Me.tabDelivery.Controls.Add(Me.mcboCustomersShipToFlag)
@@ -1279,8 +1325,23 @@ Partial Class frmSalesOrder
         Me.tabDelivery.Text = "Delivery details"
         Me.tabDelivery.UseVisualStyleBackColor = True
         '
+        'mcboCustomersShipToFlag
+        '
+        Me.mcboCustomersShipToFlag.AllowTypeFilter = False
+        Me.mcboCustomersShipToFlag.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.mcboCustomersShipToFlag.DataSource = Nothing
+        Me.mcboCustomersShipToFlag.DisplayMember = Nothing
+        Me.mcboCustomersShipToFlag.Location = New System.Drawing.Point(110, 14)
+        Me.mcboCustomersShipToFlag.Name = "mcboCustomersShipToFlag"
+        Me.mcboCustomersShipToFlag.SelectedIndex = -1
+        Me.mcboCustomersShipToFlag.SelectedValue = Nothing
+        Me.mcboCustomersShipToFlag.Size = New System.Drawing.Size(231, 21)
+        Me.mcboCustomersShipToFlag.TabIndex = 46
+        Me.mcboCustomersShipToFlag.ValueMember = Nothing
+        '
         'cboMtl_warehouse
         '
+        Me.cboMtl_warehouse.BackColor = System.Drawing.Color.Gold
         Me.cboMtl_warehouse.FormattingEnabled = True
         Me.cboMtl_warehouse.Location = New System.Drawing.Point(110, 111)
         Me.cboMtl_warehouse.Name = "cboMtl_warehouse"
@@ -1385,6 +1446,20 @@ Partial Class frmSalesOrder
         Me.tabTerms.TabIndex = 2
         Me.tabTerms.Text = "Payment terms"
         Me.tabTerms.UseVisualStyleBackColor = True
+        '
+        'mcboBanks
+        '
+        Me.mcboBanks.AllowTypeFilter = False
+        Me.mcboBanks.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.mcboBanks.DataSource = Nothing
+        Me.mcboBanks.DisplayMember = Nothing
+        Me.mcboBanks.Location = New System.Drawing.Point(112, 103)
+        Me.mcboBanks.Name = "mcboBanks"
+        Me.mcboBanks.SelectedIndex = -1
+        Me.mcboBanks.SelectedValue = Nothing
+        Me.mcboBanks.Size = New System.Drawing.Size(578, 21)
+        Me.mcboBanks.TabIndex = 49
+        Me.mcboBanks.ValueMember = Nothing
         '
         'Label32
         '
@@ -1897,79 +1972,6 @@ Partial Class frmSalesOrder
         Me.Label40.TabIndex = 3
         Me.Label40.Text = "Objective"
         '
-        'Label49
-        '
-        Me.Label49.AutoSize = True
-        Me.Label49.Location = New System.Drawing.Point(432, 92)
-        Me.Label49.Name = "Label49"
-        Me.Label49.Size = New System.Drawing.Size(103, 13)
-        Me.Label49.TabIndex = 49
-        Me.Label49.Text = "Price List Customer"
-        '
-        'cboPriceListCustomer
-        '
-        Me.cboPriceListCustomer.FormattingEnabled = True
-        Me.cboPriceListCustomer.Location = New System.Drawing.Point(433, 108)
-        Me.cboPriceListCustomer.Name = "cboPriceListCustomer"
-        Me.cboPriceListCustomer.Size = New System.Drawing.Size(239, 21)
-        Me.cboPriceListCustomer.TabIndex = 50
-        '
-        'mcboCustomersBillToFlag
-        '
-        Me.mcboCustomersBillToFlag.AllowTypeFilter = False
-        Me.mcboCustomersBillToFlag.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.mcboCustomersBillToFlag.DataSource = Nothing
-        Me.mcboCustomersBillToFlag.DisplayMember = Nothing
-        Me.mcboCustomersBillToFlag.Location = New System.Drawing.Point(167, 108)
-        Me.mcboCustomersBillToFlag.Name = "mcboCustomersBillToFlag"
-        Me.mcboCustomersBillToFlag.SelectedIndex = -1
-        Me.mcboCustomersBillToFlag.SelectedValue = Nothing
-        Me.mcboCustomersBillToFlag.Size = New System.Drawing.Size(260, 21)
-        Me.mcboCustomersBillToFlag.TabIndex = 35
-        Me.mcboCustomersBillToFlag.ValueMember = Nothing
-        '
-        'mcboCustomersShipToFlag
-        '
-        Me.mcboCustomersShipToFlag.AllowTypeFilter = False
-        Me.mcboCustomersShipToFlag.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.mcboCustomersShipToFlag.DataSource = Nothing
-        Me.mcboCustomersShipToFlag.DisplayMember = Nothing
-        Me.mcboCustomersShipToFlag.Location = New System.Drawing.Point(110, 14)
-        Me.mcboCustomersShipToFlag.Name = "mcboCustomersShipToFlag"
-        Me.mcboCustomersShipToFlag.SelectedIndex = -1
-        Me.mcboCustomersShipToFlag.SelectedValue = Nothing
-        Me.mcboCustomersShipToFlag.Size = New System.Drawing.Size(231, 21)
-        Me.mcboCustomersShipToFlag.TabIndex = 46
-        Me.mcboCustomersShipToFlag.ValueMember = Nothing
-        '
-        'mcboBanks
-        '
-        Me.mcboBanks.AllowTypeFilter = False
-        Me.mcboBanks.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.mcboBanks.DataSource = Nothing
-        Me.mcboBanks.DisplayMember = Nothing
-        Me.mcboBanks.Location = New System.Drawing.Point(112, 103)
-        Me.mcboBanks.Name = "mcboBanks"
-        Me.mcboBanks.SelectedIndex = -1
-        Me.mcboBanks.SelectedValue = Nothing
-        Me.mcboBanks.Size = New System.Drawing.Size(578, 21)
-        Me.mcboBanks.TabIndex = 49
-        Me.mcboBanks.ValueMember = Nothing
-        '
-        'mcboDesignProperties
-        '
-        Me.mcboDesignProperties.AllowTypeFilter = False
-        Me.mcboDesignProperties.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.mcboDesignProperties.DataSource = Nothing
-        Me.mcboDesignProperties.DisplayMember = Nothing
-        Me.mcboDesignProperties.Location = New System.Drawing.Point(34, 64)
-        Me.mcboDesignProperties.Name = "mcboDesignProperties"
-        Me.mcboDesignProperties.SelectedIndex = -1
-        Me.mcboDesignProperties.SelectedValue = Nothing
-        Me.mcboDesignProperties.Size = New System.Drawing.Size(212, 21)
-        Me.mcboDesignProperties.TabIndex = 37
-        Me.mcboDesignProperties.ValueMember = Nothing
-        '
         'sonoid
         '
         Me.sonoid.DataPropertyName = "sonoid"
@@ -2307,6 +2309,13 @@ Partial Class frmSalesOrder
         Me.price.Name = "price"
         Me.price.Width = 60
         '
+        'Column2
+        '
+        Me.Column2.DataPropertyName = "price_list_override_reason"
+        Me.Column2.HeaderText = "Price Override Reason"
+        Me.Column2.Name = "Column2"
+        Me.Column2.Width = 150
+        '
         'colProdLossPerc
         '
         Me.colProdLossPerc.DataPropertyName = "prod_loss_perc"
@@ -2428,6 +2437,16 @@ Partial Class frmSalesOrder
         Me.so_line_id.Visible = False
         Me.so_line_id.Width = 125
         '
+        'so_price_list_detail_id
+        '
+        Me.so_price_list_detail_id.DataPropertyName = "price_list_detail_id"
+        Me.so_price_list_detail_id.HeaderText = "Price List Detail ID"
+        Me.so_price_list_detail_id.MinimumWidth = 6
+        Me.so_price_list_detail_id.Name = "so_price_list_detail_id"
+        Me.so_price_list_detail_id.ReadOnly = True
+        Me.so_price_list_detail_id.Visible = False
+        Me.so_price_list_detail_id.Width = 125
+        '
         'mtl_customer_items_id
         '
         Me.mtl_customer_items_id.DataPropertyName = "mtl_customer_items_id"
@@ -2491,13 +2510,6 @@ Partial Class frmSalesOrder
         Me.st_reorder_bal_kg.Name = "st_reorder_bal_kg"
         Me.st_reorder_bal_kg.Width = 90
         '
-        'Column2
-        '
-        Me.Column2.DataPropertyName = "price_list_override_reason"
-        Me.Column2.HeaderText = "Price Override Reason"
-        Me.Column2.Name = "Column2"
-        Me.Column2.Width = 150
-        '
         'frmSalesOrder
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2527,6 +2539,7 @@ Partial Class frmSalesOrder
         Me.GroupBox1.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
+        CType(Me.mcboDesignProperties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
         CType(Me.grdSalesOrder, System.ComponentModel.ISupportInitialize).EndInit()
@@ -2535,10 +2548,13 @@ Partial Class frmSalesOrder
         Me.tabSales.PerformLayout()
         Me.tabCustomer.ResumeLayout(False)
         Me.tabCustomer.PerformLayout()
+        CType(Me.mcboCustomersBillToFlag, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabDelivery.ResumeLayout(False)
         Me.tabDelivery.PerformLayout()
+        CType(Me.mcboCustomersShipToFlag, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabTerms.ResumeLayout(False)
         Me.tabTerms.PerformLayout()
+        CType(Me.mcboBanks, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabOther.ResumeLayout(False)
         Me.tabOther.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
@@ -2553,10 +2569,6 @@ Partial Class frmSalesOrder
         Me.GroupBox5.ResumeLayout(False)
         Me.grpSampleRequest.ResumeLayout(False)
         Me.grpSampleRequest.PerformLayout()
-        CType(Me.mcboCustomersBillToFlag, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.mcboCustomersShipToFlag, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.mcboBanks, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.mcboDesignProperties, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -2762,6 +2774,7 @@ Partial Class frmSalesOrder
     Friend WithEvents qty As DataGridViewTextBoxColumn
     Friend WithEvents uom As DataGridViewComboBoxColumn
     Friend WithEvents price As DataGridViewTextBoxColumn
+    Friend WithEvents Column2 As DataGridViewTextBoxColumn
     Friend WithEvents colProdLossPerc As DataGridViewTextBoxColumn
     Friend WithEvents colQtyWithLoss As DataGridViewTextBoxColumn
     Friend WithEvents show_price As DataGridViewTextBoxColumn
@@ -2773,6 +2786,7 @@ Partial Class frmSalesOrder
     Friend WithEvents closed2 As DataGridViewCheckBoxColumn
     Friend WithEvents cboid_so_routing As DataGridViewTextBoxColumn
     Friend WithEvents so_line_id As DataGridViewTextBoxColumn
+    Friend WithEvents so_price_list_detail_id As DataGridViewTextBoxColumn
     Friend WithEvents mtl_customer_items_id As DataGridViewTextBoxColumn
     Friend WithEvents mtl_customer_items_xref_id As DataGridViewTextBoxColumn
     Friend WithEvents qtyship As DataGridViewTextBoxColumn
@@ -2780,5 +2794,4 @@ Partial Class frmSalesOrder
     Friend WithEvents jobno As DataGridViewTextBoxColumn
     Friend WithEvents sent_to As DataGridViewComboBoxColumn
     Friend WithEvents st_reorder_bal_kg As DataGridViewTextBoxColumn
-    Friend WithEvents Column2 As DataGridViewTextBoxColumn
 End Class

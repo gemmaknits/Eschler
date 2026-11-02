@@ -247,6 +247,45 @@ Public Class formYarnInReturn
 
     End Sub
 
+    Private Sub btnNew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNew.Click
+        Dim result As DialogResult
+        result = MessageBox.Show("Would you like to start a new record?", "System Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+        If result <> DialogResult.Yes Then Exit Sub
+
+        If DgYarn.DataSource IsNot Nothing Then
+            DgYarn.DataSource = Nothing
+        Else
+            For i As Integer = DgYarn.Rows.Count - 1 To 0 Step -1
+                If Not DgYarn.Rows(i).IsNewRow Then
+                    DgYarn.Rows.RemoveAt(i)
+                End If
+            Next
+        End If
+
+        ds = New DataSet()
+        txtDocno.Clear()
+        txtyarn_out_no.Clear()
+        txt_tran_type.Clear()
+        txtJobno.Clear()
+        txtKono.Clear()
+        txtDesignNo.Clear()
+        txtSupp.Clear()
+        txtremark.Clear()
+        txttotalgross.Text = "0"
+        txttotalnet.Text = "0"
+        txttotalboxes.Text = "0"
+        txtTotalSpools.Text = "0"
+        txtTotItemGW.Text = "0"
+        txtTotItemNW.Text = "0"
+        txtTotItemBox.Text = "0"
+        txtTotItemSpools.Text = "0"
+        dtpSinvdt.Checked = False
+        DateYIN.Value = Date.Today
+        ErrorProvider1.Clear()
+        BtnYarnSave.Enabled = True
+        txtyarn_out_no.Focus()
+    End Sub
+
 
     Private Function CheckData() As Boolean
 
@@ -707,13 +746,12 @@ Public Class formYarnInReturn
     End Sub
 
     Private Function chkErrbutUseYarnIn_table_havedata(ByVal strmsg As String) As Boolean
-        Try
-            ds.Tables("v_YarnInReturn").Clear()
-            chkErrbutUseYarnIn_table_havedata = True
-        Catch ex As Exception
-            chkErrbutUseYarnIn_table_havedata = False
-            Exit Function
-        End Try
+        If ds Is Nothing OrElse Not ds.Tables.Contains("v_YarnInReturn") Then
+            Return False
+        End If
+
+        ds.Tables("v_YarnInReturn").Clear()
+        Return True
     End Function
 
     Private Sub btnSelectAll_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelectAll.Click

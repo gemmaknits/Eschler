@@ -11,6 +11,11 @@ namespace PDR.UI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["userid"] == null) // 09/10/2026 John - not logged in, go to login
+            { // 09/10/2026 John
+                Response.Redirect("~/UI/Login.aspx"); // 09/10/2026 John
+                return; // 09/10/2026 John
+            } // 09/10/2026 John
         }
 
         protected void btnNewQuote_Click(object sender, EventArgs e)

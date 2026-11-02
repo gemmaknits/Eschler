@@ -48,6 +48,10 @@
 </table>
     
     </div>
+     <%-- 09/10/2026 John - message shown after a failed URL login --%>
+     <div style ="left:295px; top:340px; position:absolute">
+         <asp:Label ID="lblLoginMsg" runat="server" ForeColor="Red" Text=""></asp:Label>
+     </div>
      <div style ="left:224px; top:76px; position:absolute">
          <asp:Label ID="Label2" runat="server" Text="PRODUCT DEVELOPMENT REQUIREMENT"></asp:Label>
      </div>

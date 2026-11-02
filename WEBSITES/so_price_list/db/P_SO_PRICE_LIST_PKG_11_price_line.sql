@@ -83,6 +83,31 @@
    alternatives the grid brackets together. Those cannot be resolved here and
    must go back to a person.
 
+   CURRENCY, AND CONVERTING WHEN THERE IS NO PRICE IN IT.
+
+   Some lists are kept in USD only and sold in baht - Chantasia_UPDATE has 309
+   USD lines and 3 THB ones - so asking for a THB price there found nothing at
+   all. Now, when the requested currency has no line, a currency that does is
+   used and its price converted with dbo.exchange_rate.
+
+   The original price and its currency are returned untouched; order_price and
+   order_curr carry the converted figure, and exchange_rate_used carries the
+   rate it was converted at. Nobody can audit a converted price without the
+   rate, and an order-entry figure that cannot be reproduced is not worth
+   having. When no conversion was needed the rate is 1 and order_price equals
+   price.
+
+   THE RATE is the most recent one published ON OR BEFORE the date - not an
+   exact match on it. There are up to 104 rates a day and none at all at
+   weekends, so an exact match would fail every Saturday.
+
+   ONE DIRECTION ONLY. Every row in exchange_rate converts INTO baht: curr_to
+   is THB in all 36,825 of them. So a USD price can be sold in THB, and a THB
+   price cannot be sold in USD - that returns nothing rather than quietly
+   inverting the rate. Inverting is arithmetic, not a price: a dealing spread
+   is not symmetric, and inventing the other side of it in an order-entry path
+   is not a decision this procedure should make.
+
    PADDING. @p_uom is char(10) and @p_curr is char(10), so both arrive padded
    with spaces; qty_unit is nvarchar(20) and currency is char(3). Every
    comparison below trims, or nothing would ever match.
@@ -114,7 +139,10 @@ CREATE PROCEDURE [SO].[P_SO_PRICE_LIST_PKG_select_price_line]
     @p_color_code              varchar(30),
     @p_uom                     char(10),
     @p_qty                     numeric(12,2),
-    @p_curr                    char(10)
+    @p_curr                    char(10),
+    /* The date the rate is taken from. NULL means today, which is what the
+       caller usually wants; an order being re-priced can pass its own date. */
+    @p_order_date              date = NULL
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -123,6 +151,7 @@ BEGIN
     DECLARE @colour varchar(30)  = LTRIM(RTRIM(@p_color_code));
     DECLARE @uom    varchar(20)  = LTRIM(RTRIM(@p_uom));
     DECLARE @curr   varchar(3)   = LTRIM(RTRIM(@p_curr));
+    DECLARE @on_date varchar(8)   = CONVERT(varchar(8), ISNULL(@p_order_date, CAST(GETDATE() AS date)), 112);
 
     IF @design IS NULL OR @design = ''
     BEGIN
@@ -188,7 +217,11 @@ BEGIN
         SELECT d.so_price_list_header_id, d.so_price_list_detail_id, d.set_no, d.line_no,
                d.color_tier, d.qty_min, d.qty_max, d.currency AS curr, d.price, d.notes,
                d.qty_unit AS uom,
-               'design ambiguous' AS resolution, d.design_no AS matched_design_no
+               'design ambiguous' AS resolution, d.design_no AS matched_design_no,
+               /* This branch runs before a currency is settled - these are
+                  candidates across several designs, shown as priced. */
+               d.price AS order_price, LTRIM(RTRIM(d.currency)) AS order_curr,
+               CAST(1 AS decimal(18,6)) AS exchange_rate_used
         FROM   SO.so_price_list_detail d
         JOIN   SO.so_price_list_header h
                  ON h.so_price_list_header_id = d.so_price_list_header_id
@@ -232,8 +265,41 @@ BEGIN
       AND  (@p_so_price_list_header_id IS NULL
             OR d.so_price_list_header_id = @p_so_price_list_header_id)
       AND  LTRIM(RTRIM(d.design_no)) = @match_design
-      AND  (@curr IS NULL OR @curr = '' OR LTRIM(RTRIM(d.currency))  = @curr)
+      /* Every currency, so one can stand in for another below. */
       AND  (@uom  IS NULL OR @uom  = '' OR LTRIM(RTRIM(d.qty_unit)) = @uom);
+
+    /* ---- 1a. which currency this is priced from, and at what rate ---- */
+    DECLARE @price_curr varchar(3) = NULL;
+    DECLARE @rate decimal(18,6) = 1;
+
+    IF @curr IS NULL OR @curr = ''
+        SET @price_curr = NULL;                       -- caller did not say; take it as priced
+    ELSE IF EXISTS (SELECT 1 FROM @cand WHERE LTRIM(RTRIM(curr)) = @curr)
+        SET @price_curr = @curr;                      -- priced in it already
+    ELSE
+    BEGIN
+        /* Nothing in the requested currency. Take the currency that has the
+           most lines here and a published rate into the requested one. */
+        SELECT TOP 1 @price_curr = c.cur, @rate = c.rate
+        FROM  (SELECT LTRIM(RTRIM(x.curr)) AS cur, COUNT(*) AS lines,
+                      (SELECT TOP 1 e.exchange_rate
+                       FROM   dbo.exchange_rate e
+                       WHERE  e.curr_fr = LTRIM(RTRIM(x.curr)) COLLATE DATABASE_DEFAULT
+                         AND  e.curr_to = @curr COLLATE DATABASE_DEFAULT
+                         AND  e.curr_date <= @on_date
+                       ORDER  BY e.curr_date DESC, e.curr_time DESC) AS rate
+               FROM   @cand x
+               GROUP  BY LTRIM(RTRIM(x.curr))) c
+        WHERE  c.rate IS NOT NULL
+        ORDER  BY c.lines DESC;
+
+        /* Priced in something, but nothing that can be sold in the currency
+           asked for - see the one-direction note at the top. */
+        IF @price_curr IS NULL RETURN;
+    END
+
+    IF @price_curr IS NOT NULL
+        DELETE FROM @cand WHERE LTRIM(RTRIM(curr)) <> @price_curr;
 
     /* ---- 2. which colour tier applies ---- */
     DECLARE @tier nvarchar(60) = NULL;
@@ -291,7 +357,10 @@ BEGIN
     IF @tier IS NOT NULL AND @set_no IS NOT NULL
         SELECT so_price_list_header_id, so_price_list_detail_id, set_no, line_no,
                color_tier, qty_min, qty_max, curr, price, notes, uom,
-               'matched' AS resolution, @match_design AS matched_design_no
+               'matched' AS resolution, @match_design AS matched_design_no,
+               CAST(price * @rate AS decimal(18,4)) AS order_price,
+               ISNULL(NULLIF(@curr, ''), curr) AS order_curr,
+               @rate AS exchange_rate_used
         FROM   @cand
         WHERE  color_tier = @tier
           AND  so_price_list_header_id = @set_hdr AND set_no = @set_no
@@ -301,7 +370,10 @@ BEGIN
         /* the colour is settled, the quantity is not - every band of it */
         SELECT so_price_list_header_id, so_price_list_detail_id, set_no, line_no,
                color_tier, qty_min, qty_max, curr, price, notes, uom,
-               'quantity ambiguous' AS resolution, @match_design AS matched_design_no
+               'quantity ambiguous' AS resolution, @match_design AS matched_design_no,
+               CAST(price * @rate AS decimal(18,4)) AS order_price,
+               ISNULL(NULLIF(@curr, ''), curr) AS order_curr,
+               @rate AS exchange_rate_used
         FROM   @cand
         WHERE  color_tier = @tier
         ORDER  BY so_price_list_header_id, set_no, line_no;
@@ -310,7 +382,10 @@ BEGIN
         /* nothing settled - everything this design has */
         SELECT so_price_list_header_id, so_price_list_detail_id, set_no, line_no,
                color_tier, qty_min, qty_max, curr, price, notes, uom,
-               'colour and quantity ambiguous' AS resolution, @match_design AS matched_design_no
+               'colour and quantity ambiguous' AS resolution, @match_design AS matched_design_no,
+               CAST(price * @rate AS decimal(18,4)) AS order_price,
+               ISNULL(NULLIF(@curr, ''), curr) AS order_curr,
+               @rate AS exchange_rate_used
         FROM   @cand
         ORDER  BY so_price_list_header_id, set_no, line_no;
 END

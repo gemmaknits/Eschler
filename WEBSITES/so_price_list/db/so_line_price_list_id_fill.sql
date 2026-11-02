@@ -45,7 +45,8 @@ CREATE TABLE #out (hdr bigint, did bigint, set_no int, line_no int, color_tier n
                    qty_min int, qty_max int, curr char(3), price decimal(18,4),
                    notes nvarchar(2000), uom nvarchar(20), resolution varchar(40),
                    matched_design_no nvarchar(60), order_price decimal(18,4),
-                   order_curr varchar(3), exchange_rate_used decimal(18,6));
+                   order_curr varchar(3), order_uom varchar(20),
+                   exchange_rate_used decimal(18,6), uom_factor decimal(18,6));
 
 TRUNCATE TABLE SO.so_line_price_list_id;
 
@@ -75,7 +76,7 @@ BEGIN
         (so_line_id, price_list_detail_id, sono, so_price_list_header_id, design_no,
          color_code, uom, qty, curr, order_date, resolution, candidates,
          matched_design_no, color_tier, qty_min, qty_max, price, price_curr,
-         order_price, order_curr, exchange_rate_used, why_not)
+         order_price, order_curr, order_uom, exchange_rate_used, uom_factor, why_not)
     SELECT @id,
            /* Only a single, unambiguous match is carried forward. Several
               candidates means a person has to choose. */
@@ -92,7 +93,9 @@ BEGIN
            CASE WHEN @n = 1 THEN (SELECT MAX(curr)        FROM #out) END,
            CASE WHEN @n = 1 THEN (SELECT MAX(order_price) FROM #out) END,
            CASE WHEN @n = 1 THEN (SELECT MAX(order_curr)  FROM #out) END,
+           CASE WHEN @n = 1 THEN (SELECT MAX(order_uom)   FROM #out) END,
            CASE WHEN @n = 1 THEN (SELECT MAX(exchange_rate_used) FROM #out) END,
+           CASE WHEN @n = 1 THEN (SELECT MAX(uom_factor)  FROM #out) END,
            /* Why nothing came back, in the order the procedure would have
               failed. The first of these that is true is the reason. */
            CASE WHEN @n > 0 THEN NULL

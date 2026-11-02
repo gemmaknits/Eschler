@@ -83,6 +83,34 @@
    alternatives the grid brackets together. Those cannot be resolved here and
    must go back to a person.
 
+   UNITS, AND CONVERTING WHEN THE BOOK IS KEPT IN ANOTHER ONE.
+
+   The price book is entirely in metres; orders are not. Of the order lines
+   waiting to be priced, 192 are MTS, 63 YDS, 30 KGS and 34 are hangers, sets
+   or rolls. A price per metre is converted to the unit the order is in:
+
+       a yard is 0.9144 metres, fixed;
+       a kilo is dbo.designs.mtkg metres - metres per kilo, by design,
+       ranging from 0.29 to 95 across the book.
+
+   Everything converts through metres: price_per_order_unit = price_per_metre
+   x metres_in_an_order_unit. uom_factor carries that multiplier and order_uom
+   says what the converted price is per, so the arithmetic can be checked.
+
+   THE QUANTITY BAND IS CONVERTED TOO, and this matters more than the price.
+   A 40 kg order compared against a 200-600 metre band falls below every band
+   and prices at nothing; at 11.5 metres per kilo it is really 460 metres and
+   belongs in the middle band. The quantity is restated in the price list's
+   own unit before any band is compared, so the band chosen is the one the
+   customer is actually buying into.
+
+   HANGER, SET and ROLL have no length at all, and a kilo has none without an
+   mtkg - only 11 of the 30 KGS lines have one. Those return nothing rather
+   than a price per metre pretending to be a price per piece.
+
+   ydkg is NOT used even though the column exists: it is 0.00 on most rows, so
+   yards come from the fixed 0.9144 instead.
+
    CURRENCY, AND CONVERTING WHEN THERE IS NO PRICE IN IT.
 
    Some lists are kept in USD only and sold in baht - Chantasia_UPDATE has 309
@@ -221,7 +249,9 @@ BEGIN
                /* This branch runs before a currency is settled - these are
                   candidates across several designs, shown as priced. */
                d.price AS order_price, LTRIM(RTRIM(d.currency)) AS order_curr,
-               CAST(1 AS decimal(18,6)) AS exchange_rate_used
+               LTRIM(RTRIM(d.qty_unit)) AS order_uom,
+               CAST(1 AS decimal(18,6)) AS exchange_rate_used,
+               CAST(1 AS decimal(18,6)) AS uom_factor
         FROM   SO.so_price_list_detail d
         JOIN   SO.so_price_list_header h
                  ON h.so_price_list_header_id = d.so_price_list_header_id
@@ -265,10 +295,68 @@ BEGIN
       AND  (@p_so_price_list_header_id IS NULL
             OR d.so_price_list_header_id = @p_so_price_list_header_id)
       AND  LTRIM(RTRIM(d.design_no)) = @match_design
-      /* Every currency, so one can stand in for another below. */
-      AND  (@uom  IS NULL OR @uom  = '' OR LTRIM(RTRIM(d.qty_unit)) = @uom);
+      /* Every currency and every unit, so one can stand in for another. */;
 
-    /* ---- 1a. which currency this is priced from, and at what rate ---- */
+    /* ---- 1a. which unit this is priced in, and the factor to the order's ----
+
+       metres_per_unit: MTS 1, YDS 0.9144, KGS the design's mtkg. Anything else
+       has no length and cannot be bridged. */
+    DECLARE @mtkg float =
+        (SELECT TOP 1 g.mtkg FROM dbo.designs g
+         WHERE  RTRIM(g.Design_no) COLLATE DATABASE_DEFAULT
+                IN (@design COLLATE DATABASE_DEFAULT, @match_design COLLATE DATABASE_DEFAULT)
+           AND  g.mtkg > 0
+         ORDER  BY CASE WHEN RTRIM(g.Design_no) COLLATE DATABASE_DEFAULT
+                             = @design COLLATE DATABASE_DEFAULT THEN 0 ELSE 1 END);
+
+    DECLARE @mpu_order float =
+        CASE UPPER(@uom) WHEN 'MTS' THEN 1.0 WHEN 'M' THEN 1.0
+                         WHEN 'YDS' THEN 0.9144 WHEN 'YD' THEN 0.9144
+                         WHEN 'KGS' THEN @mtkg  WHEN 'KG' THEN @mtkg END;
+
+    DECLARE @price_uom varchar(20) = NULL;
+    DECLARE @uom_factor float = 1;
+
+    IF @uom IS NULL OR @uom = ''
+        SET @price_uom = NULL;                        -- caller did not say
+    ELSE IF EXISTS (SELECT 1 FROM @cand WHERE LTRIM(RTRIM(uom)) = @uom)
+        SET @price_uom = @uom;                        -- priced in it already
+    ELSE
+    BEGIN
+        /* Nothing in the order's unit. Take the unit with the most lines that
+           can be converted into it. */
+        IF @mpu_order IS NULL RETURN;                 -- no length: nothing to convert through
+
+        SELECT TOP 1 @price_uom = u.cur, @uom_factor = @mpu_order / u.mpu
+        FROM  (SELECT LTRIM(RTRIM(x.uom)) AS cur, COUNT(*) AS lines,
+                      CASE UPPER(LTRIM(RTRIM(x.uom)))
+                           WHEN 'MTS' THEN 1.0 WHEN 'M'  THEN 1.0
+                           WHEN 'YDS' THEN 0.9144 WHEN 'YD' THEN 0.9144
+                           WHEN 'KGS' THEN @mtkg WHEN 'KG' THEN @mtkg END AS mpu
+               FROM   @cand x
+               GROUP  BY LTRIM(RTRIM(x.uom))) u
+        WHERE  u.mpu IS NOT NULL AND u.mpu > 0
+        ORDER  BY u.lines DESC;
+
+        /* Priced, but in a unit this order cannot be converted from. */
+        IF @price_uom IS NULL RETURN;
+    END
+
+    IF @price_uom IS NOT NULL
+        DELETE FROM @cand WHERE LTRIM(RTRIM(uom)) <> @price_uom;
+
+    /* The order quantity, restated in the unit the bands are written in.
+
+       MULTIPLIED, not divided. uom_factor is metres in one order unit, so 40
+       kilos at 9.34 metres a kilo is 40 x 9.34 = 373.6 metres. Dividing gave
+       4.28, which falls below every band - every kilo order priced as if it
+       were the smallest possible. The yard case hid it: 800 / 0.9144 and
+       800 x 0.9144 both land in the same band. */
+    DECLARE @qty_match numeric(18,4) = @p_qty;
+    IF @uom_factor <> 1 AND @uom_factor > 0
+        SET @qty_match = CAST(@p_qty * @uom_factor AS numeric(18,4));
+
+    /* ---- 1b. which currency this is priced from, and at what rate ---- */
     DECLARE @price_curr varchar(3) = NULL;
     DECLARE @rate decimal(18,6) = 1;
 
@@ -342,15 +430,15 @@ BEGIN
         FROM  (SELECT DISTINCT so_price_list_header_id, set_no
                FROM   @cand
                WHERE  color_tier = @tier
-                 AND  @p_qty >= qty_min
-                 AND  (qty_max IS NULL OR @p_qty <= qty_max)) z;
+                 AND  @qty_match >= qty_min
+                 AND  (qty_max IS NULL OR @qty_match <= qty_max)) z;
 
         IF @sets = 1
             SELECT TOP 1 @set_hdr = so_price_list_header_id, @set_no = set_no
             FROM   @cand
             WHERE  color_tier = @tier
-              AND  @p_qty >= qty_min
-              AND  (qty_max IS NULL OR @p_qty <= qty_max);
+              AND  @qty_match >= qty_min
+              AND  (qty_max IS NULL OR @qty_match <= qty_max);
     END
 
     /* ---- 4. answer, or candidates ---- */
@@ -358,9 +446,11 @@ BEGIN
         SELECT so_price_list_header_id, so_price_list_detail_id, set_no, line_no,
                color_tier, qty_min, qty_max, curr, price, notes, uom,
                'matched' AS resolution, @match_design AS matched_design_no,
-               CAST(price * @rate AS decimal(18,4)) AS order_price,
+               CAST(price * @uom_factor * @rate AS decimal(18,4)) AS order_price,
                ISNULL(NULLIF(@curr, ''), curr) AS order_curr,
-               @rate AS exchange_rate_used
+               ISNULL(NULLIF(@uom, ''), uom) AS order_uom,
+               @rate AS exchange_rate_used,
+               CAST(@uom_factor AS decimal(18,6)) AS uom_factor
         FROM   @cand
         WHERE  color_tier = @tier
           AND  so_price_list_header_id = @set_hdr AND set_no = @set_no
@@ -371,9 +461,11 @@ BEGIN
         SELECT so_price_list_header_id, so_price_list_detail_id, set_no, line_no,
                color_tier, qty_min, qty_max, curr, price, notes, uom,
                'quantity ambiguous' AS resolution, @match_design AS matched_design_no,
-               CAST(price * @rate AS decimal(18,4)) AS order_price,
+               CAST(price * @uom_factor * @rate AS decimal(18,4)) AS order_price,
                ISNULL(NULLIF(@curr, ''), curr) AS order_curr,
-               @rate AS exchange_rate_used
+               ISNULL(NULLIF(@uom, ''), uom) AS order_uom,
+               @rate AS exchange_rate_used,
+               CAST(@uom_factor AS decimal(18,6)) AS uom_factor
         FROM   @cand
         WHERE  color_tier = @tier
         ORDER  BY so_price_list_header_id, set_no, line_no;
@@ -383,9 +475,11 @@ BEGIN
         SELECT so_price_list_header_id, so_price_list_detail_id, set_no, line_no,
                color_tier, qty_min, qty_max, curr, price, notes, uom,
                'colour and quantity ambiguous' AS resolution, @match_design AS matched_design_no,
-               CAST(price * @rate AS decimal(18,4)) AS order_price,
+               CAST(price * @uom_factor * @rate AS decimal(18,4)) AS order_price,
                ISNULL(NULLIF(@curr, ''), curr) AS order_curr,
-               @rate AS exchange_rate_used
+               ISNULL(NULLIF(@uom, ''), uom) AS order_uom,
+               @rate AS exchange_rate_used,
+               CAST(@uom_factor AS decimal(18,6)) AS uom_factor
         FROM   @cand
         ORDER  BY so_price_list_header_id, set_no, line_no;
 END

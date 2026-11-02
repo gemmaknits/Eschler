@@ -68,7 +68,9 @@ CREATE TABLE SO.so_line_price_list_id (
     price_curr              varchar(10)  NULL,
     order_price             decimal(18,4) NULL,
     order_curr              varchar(10)  NULL,
+    order_uom               varchar(20)  NULL,
     exchange_rate_used      decimal(18,6) NULL,
+    uom_factor              decimal(18,6) NULL,
 
     /* and why nothing did, where that is the case */
     why_not                 varchar(80)  NULL,

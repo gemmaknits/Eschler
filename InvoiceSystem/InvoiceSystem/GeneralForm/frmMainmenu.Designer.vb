@@ -146,7 +146,7 @@ Partial Class frmMainmenu
         '
         Me.DomesticInvoiceToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EditToolStripMenuItem, Me.EditInvoiceToolStripMenuItem1, Me.PrintInvoiceToolStripMenuItem, Me.PrintControlToolStripMenuItem})
         Me.DomesticInvoiceToolStripMenuItem.Name = "DomesticInvoiceToolStripMenuItem"
-        Me.DomesticInvoiceToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.DomesticInvoiceToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.DomesticInvoiceToolStripMenuItem.Text = "Local Invoice"
         '
         'EditToolStripMenuItem
@@ -177,7 +177,7 @@ Partial Class frmMainmenu
         '
         Me.ExportInvoiceToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EditInvoiceToolStripMenuItem, Me.PrintInvoiceToolStripMenuItem1, Me.PrintControlToolStripMenuItem1, Me.PrintBOIAnalysisToolStripMenuItem, Me.PrintInvoiceWithNotesToolStripMenuItem, Me.PrintCargoDeliveryReceiptToolStripMenuItem})
         Me.ExportInvoiceToolStripMenuItem.Name = "ExportInvoiceToolStripMenuItem"
-        Me.ExportInvoiceToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.ExportInvoiceToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ExportInvoiceToolStripMenuItem.Text = "Export Invoice"
         '
         'EditInvoiceToolStripMenuItem
@@ -220,7 +220,7 @@ Partial Class frmMainmenu
         '
         Me.ReportToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GammaBillControlToolStripMenuItem, Me.InvoiceBOIControlToolStripMenuItem, Me.DailyInvoiceSummaryToolStripMenuItem, Me.ExportInvoiceDINBalanceToolStripMenuItem, Me.ExportInvoiceDeailToolStripMenuItem, Me.tsmnInvoiceYarnLot})
         Me.ReportToolStripMenuItem1.Name = "ReportToolStripMenuItem1"
-        Me.ReportToolStripMenuItem1.Size = New System.Drawing.Size(149, 22)
+        Me.ReportToolStripMenuItem1.Size = New System.Drawing.Size(180, 22)
         Me.ReportToolStripMenuItem1.Text = "Report"
         '
         'GammaBillControlToolStripMenuItem

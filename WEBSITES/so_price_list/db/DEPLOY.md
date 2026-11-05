@@ -62,6 +62,7 @@ Run the scripts in this folder in this order:
     P_SO_PRICE_LIST_PKG_08_customers.sql     customer assignment
     P_SO_PRICE_LIST_PKG_09_verify.sql        "I have checked this list"
     P_SO_PRICE_LIST_PKG_10_columns.sql       remove a tier/currency column
+    P_SO_PRICE_LIST_PKG_11_price_line.sql    the price line for a sales order line
     add_price_line_date.sql                  when a price was quoted
     widen_article.sql                        article holds the sheet's full text
 

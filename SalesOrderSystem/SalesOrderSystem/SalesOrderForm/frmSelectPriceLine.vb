@@ -37,25 +37,39 @@ Public Class frmSelectPriceLine
     End Function
 
     Private Sub ConfigureColumns()
-        Dim hiddenCols() As String = {"so_price_list_header_id", "so_price_list_detail_id", "set_no", "line_no"}
+        'John 02/11/2026 Show every column the SP returns, in the SP's own order; only the ids are hidden.
+        Dim hiddenCols() As String = {"so_price_list_header_id", "so_price_list_detail_id"}
         For Each colName In hiddenCols
             If dgvResults.Columns.Contains(colName) Then dgvResults.Columns(colName).Visible = False
         Next
 
         Dim headers As New Dictionary(Of String, String) From {
+            {"resolution", "Resolution"},
+            {"order_price", "Order Price"},
+            {"order_curr", "Order Curr"},
+            {"order_uom", "Order UOM"},
+            {"price", "Price"},
+            {"price_curr", "Price Curr"},
+            {"price_uom", "Price UOM"},
+            {"exchange_rate_used", "Exchange Rate Used"},
+            {"uom_factor", "UOM Factor"},
+            {"conversion_note", "Conversion Note"},
             {"matched_design_no", "Design No"},
             {"color_tier", "Color Tier"},
             {"qty_min", "Qty Min"},
             {"qty_max", "Qty Max"},
-            {"uom", "UOM"},
-            {"curr", "Currency"},
-            {"price", "Price"},
-            {"notes", "Notes"},
-            {"resolution", "Resolution"}
+            {"set_no", "Set No"},
+            {"line_no", "Line No"},
+            {"notes", "Notes"}
         }
         For Each kv In headers
             If dgvResults.Columns.Contains(kv.Key) Then dgvResults.Columns(kv.Key).HeaderText = kv.Value
         Next
+
+        'Many columns: size each to its content (the grid scrolls sideways) and open the dialog wider.
+        dgvResults.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
+        Dim wa As Rectangle = Screen.FromControl(Me).WorkingArea
+        Me.Width = Math.Min(1400, wa.Width - 40)
     End Sub
 
     Private Sub btnSelect_Click(sender As Object, e As EventArgs) Handles btnSelect.Click
@@ -79,10 +93,14 @@ Public Class frmSelectPriceLine
             _selectedDetailId = Convert.ToInt64(raw)
         End If
 
-        Dim priceRaw As Object = dgvResults.CurrentRow.Cells("price").Value
+        'John 02/11/2026 The SP now returns order_price / order_curr (the price already converted to the
+        'order's currency and unit) instead of curr; fall back to price / price_curr if they are absent.
+        Dim priceCol As String = If(dgvResults.Columns.Contains("order_price"), "order_price", "price")
+        Dim priceRaw As Object = dgvResults.CurrentRow.Cells(priceCol).Value
         _selectedPrice = If(priceRaw Is Nothing OrElse IsDBNull(priceRaw), Nothing, CType(Convert.ToDecimal(priceRaw), Decimal?))
 
-        Dim currRaw As Object = dgvResults.CurrentRow.Cells("curr").Value
+        Dim currCol As String = If(dgvResults.Columns.Contains("order_curr"), "order_curr", "price_curr")
+        Dim currRaw As Object = If(dgvResults.Columns.Contains(currCol), dgvResults.CurrentRow.Cells(currCol).Value, Nothing)
         _selectedCurrency = If(currRaw Is Nothing OrElse IsDBNull(currRaw), Nothing, currRaw.ToString.Trim)
 
         Me.DialogResult = DialogResult.OK

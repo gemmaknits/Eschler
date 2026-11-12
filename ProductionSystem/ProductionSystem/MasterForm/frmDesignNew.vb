@@ -87,7 +87,9 @@ Public Class frmDesignNew
         Try
             Me.Validate()
             bsDesignMaster.EndEdit()
-            Dim unsaved As Boolean = (dtDesignMaster.GetChanges() IsNot Nothing)
+            'GetChanges() also reports formatting/calculation-only DataRow changes.
+            'Use the value comparison so Send to GMK only blocks for real unsaved edits.
+            Dim unsaved As Boolean = HasRealChanges()
             Dim row As DataRow = Nothing
             Dim cur As DataRowView = TryCast(bsDesignMaster.Current, DataRowView)
             If cur IsNot Nothing Then

@@ -33,12 +33,18 @@ Public Class frmRequestGMColorMatch
 
     Private cmrHeaderID As Integer = 0
     Private CmrNumber As String = ""
+    ' Keep the persisted number as the update key while allowing the textbox
+    ' to remain editable for searching/manual entry.
+    Private OriginalCmrNumber As String = ""
     Private SoHeaderId As Integer = 0
     Private LastLineNum As Integer = 0
     Private CurCmrRevisionNumber As Integer = 0
     Private PlanDayAdd As Integer = 0
     Private CmrClosed As String = "N"
     Private CmrCancel As String = "N"
+    ' True only when the user explicitly chooses to create a historical record
+    ' with a number that was entered before the record was found.
+    Private isHistoricalCmrNumberEntry As Boolean = False
 
     '--- For Default Value
     Private defaultCmrDocPrefix As String = ""
@@ -61,6 +67,7 @@ Public Class frmRequestGMColorMatch
 
     'Eschler
     Private Const CmrDocPrefixEL As String = "EL"
+    Private Const CmrDocPrefixSTG As String = "STG"
     Private Const VendorNameEL As String = "Eschler"
     Private Const mtlSubinvIdLABGAM As Integer = 46
     'End 
@@ -153,6 +160,46 @@ Public Class frmRequestGMColorMatch
     Private Sub SetErrorProvider()
         ErrProvider.Clear()
     End Sub
+
+    Private Function GetSelectedCmrDocPrefixCode() As String
+        If cboCmrDocPrefix.SelectedIndex < 0 Then
+            Return String.Empty
+        End If
+
+        ' The lookup uses the prefix code as ValueMember (EL, ES, STG, ...).
+        ' Read SelectedValue explicitly so the value sent to the stored
+        ' procedure is never the display text (for example "STG - Shweninger").
+        If cboCmrDocPrefix.SelectedValue IsNot Nothing AndAlso
+           Not TypeOf cboCmrDocPrefix.SelectedValue Is DataRowView Then
+            Return cboCmrDocPrefix.SelectedValue.ToString().Trim().ToUpperInvariant()
+        End If
+
+        Return String.Empty
+    End Function
+
+    Private Sub PrepareNewCmrNumberInput()
+        ' Allow manual entry for legacy/historical documents. When the field
+        ' is left blank, the database allocates the next number on Save.
+        txtCmrNumber.ReadOnly = False
+        cboCmrDocPrefix.Enabled = Not isHistoricalCmrNumberEntry
+        If Not isHistoricalCmrNumberEntry Then
+            Dim isStgPrefix As Boolean = String.Equals(GetSelectedCmrDocPrefixCode(), CmrDocPrefixSTG, StringComparison.OrdinalIgnoreCase)
+            If isStgPrefix Then
+                cboCmrDocSuffix.SelectedIndex = 0
+            End If
+            cboCmrDocSuffix.Enabled = Not isStgPrefix
+        End If
+    End Sub
+
+    Private Sub cboCmrDocPrefix_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboCmrDocPrefix.SelectedValueChanged
+        If cmrHeaderID <= 0 AndAlso Not isHistoricalCmrNumberEntry AndAlso cboCmrDocPrefix.SelectedIndex >= 0 Then
+            Dim isStgPrefix As Boolean = String.Equals(GetSelectedCmrDocPrefixCode(), CmrDocPrefixSTG, StringComparison.OrdinalIgnoreCase)
+            If isStgPrefix Then
+                cboCmrDocSuffix.SelectedIndex = 0
+            End If
+            cboCmrDocSuffix.Enabled = Not isStgPrefix
+        End If
+    End Sub
     Private Sub InitControl()
         Dim obj As Control
         For Each obj In Me.Controls
@@ -209,6 +256,8 @@ Public Class frmRequestGMColorMatch
                 .Rows(0)("cmr_closed") = "N"
                 .Rows(0)("cmr_revision_number") = 0
             End With
+            isHistoricalCmrNumberEntry = False
+            OriginalCmrNumber = ""
             With dtCMRLines
                 If .Rows.Count > 0 Then
                     Dim dttmp As New DataTable
@@ -235,11 +284,7 @@ Public Class frmRequestGMColorMatch
             tsbtnSave.Enabled = True
             tsbtnSaveAsRevision.Enabled = False
             tsbtnSaveAsRevision.Enabled = False
-
-            If cboCmrDocPrefix.SelectedValue = "STG" Then
-                cboCmrDocSuffix.Enabled = True
-                txtCmrNumber.ReadOnly = False
-            End If
+            PrepareNewCmrNumberInput()
 
             lblGammaTransferAlready.Text = "" 'Sitthana 20230801
             grdCmrLines.ReadOnly = False 'Sitthana 20230801
@@ -330,6 +375,8 @@ Public Class frmRequestGMColorMatch
     End Sub
     Private Sub InitDataBinding()
         ClearDataBindings()
+        isHistoricalCmrNumberEntry = False
+        OriginalCmrNumber = ""
         txtCurStockBalance.Text = ""
         LblCmrClosed.Visible = False
         SetControlValue(Me)
@@ -761,11 +808,14 @@ Public Class frmRequestGMColorMatch
                 tsmnitmCMRForm.Enabled = False
                 tsbtnCancel.Enabled = False
                 cboCmrDocSuffix.Enabled = True
-                txtCmrNumber.ReadOnly = False
+                PrepareNewCmrNumberInput()
                 cbForOrderEnable(False)
                 lblStockBalance.Text = "Stock Balance"
             Case ModeUpdate
                 'tsmnRevisionHistoryOfLabRequestNo.Enabled = True
+                cboCmrDocPrefix.Enabled = False
+                cboCmrDocSuffix.Enabled = False
+                txtCmrNumber.ReadOnly = False
                 tsbtnCopy.Enabled = True
                 tsbtnCancel.Enabled = True
                 If clsConfig.IsNull(dtCMRHeader.Rows(0)("cmr_closed"), "N") = "Y" Then
@@ -805,7 +855,8 @@ Public Class frmRequestGMColorMatch
                     tsmnitmCMRForm.Enabled = True
                     tsbtnCancel.Text = "Cancel"
                     cboCmrDocSuffix.Enabled = False
-                    txtCmrNumber.ReadOnly = True
+                    txtCmrNumber.ReadOnly = False
+                    cboCmrDocPrefix.Enabled = False
                 End If
 
                 'Check Gamma transfer Data Already
@@ -827,7 +878,8 @@ Public Class frmRequestGMColorMatch
                 tsmnitmCMRForm.Enabled = True
                 tsbtnCancel.Enabled = False
                 cboCmrDocSuffix.Enabled = False
-                txtCmrNumber.ReadOnly = True
+                txtCmrNumber.ReadOnly = False
+                cboCmrDocPrefix.Enabled = False
                 cbForOrderEnable(False)
         End Select
     End Sub
@@ -1106,14 +1158,20 @@ Public Class frmRequestGMColorMatch
         If cboCmrDocPrefix.SelectedIndex = -1 Then
             cboCmrDocPrefix.SelectedIndex = 0
         End If
-        drv.Item("cmr_doc_prefix") = cboCmrDocPrefix.SelectedValue
+        drv.Item("cmr_doc_prefix") = GetSelectedCmrDocPrefixCode()
         If cboCmrDocSuffix.SelectedIndex = -1 Then
             cboCmrDocSuffix.SelectedIndex = 0
         End If
         drv.Item("cmr_doc_suffix") = cboCmrDocSuffix.SelectedValue 'Sitthana 28/11/2018
-        If txtCmrNumber.Text.Trim = "" Then
+        ' Keep the original key when saving an existing record. If the user
+        ' wants to open another number, pressing Enter calls LoadData first.
+        If cmrHeaderID > 0 AndAlso OriginalCmrNumber <> "" Then
+            drv.Item("Cmr_Number") = OriginalCmrNumber
+        ElseIf txtCmrNumber.Text.Trim = "" Then
+            ' A blank value asks the database to allocate the next number.
             drv.Item("Cmr_Number") = ""
         Else
+            ' A nonblank value is intentionally preserved for manual/historical use.
             drv.Item("Cmr_Number") = txtCmrNumber.Text.Trim
         End If
         drv.Item("cmr_date") = dtpCmrDate.Value
@@ -1299,9 +1357,12 @@ Public Class frmRequestGMColorMatch
                              , "ผลการค้นหาข้อมูล", MessageBoxButtons.YesNo, MessageBoxIcon.Question _
                              , MessageBoxDefaultButton.Button2) = vbYes Then
                 CmrNumber = txtCmrNumber.Text.Trim
+                cmrHeaderID = -1
+                OriginalCmrNumber = ""
+                isHistoricalCmrNumberEntry = True
                 ' cboCmrDocPrefix.Enabled = False
                 cboCmrDocSuffix.Enabled = False
-                txtCmrNumber.ReadOnly = True
+                txtCmrNumber.ReadOnly = False
                 tsbtnCopy.Enabled = False
                 tsbtnRelab.Enabled = False
                 tsbtnSaveAsRevision.Enabled = False
@@ -1310,6 +1371,7 @@ Public Class frmRequestGMColorMatch
                 InitEnvironment("New")
             Else
                 txtCmrNumber.Text = ""
+                OriginalCmrNumber = ""
             End If
         Else
             ClearDataBindings()
@@ -1317,6 +1379,8 @@ Public Class frmRequestGMColorMatch
             bsCMRHeader.MoveFirst()
             drv = CType(bsCMRHeader.Current, DataRowView)
             cmrHeaderID = dtCMRHeader.Rows(0)("cmr_header_id")
+            OriginalCmrNumber = dtCMRHeader.Rows(0)("cmr_number").ToString().Trim()
+            CmrNumber = OriginalCmrNumber
             LastLineNum = dtCMRHeader.Rows(0)("last_line_num")
             CmrClosed = clsConfig.IsNull(dtCMRHeader.Rows(0)("cmr_closed"), "N")
             CmrCancel = clsConfig.IsNull(dtCMRHeader.Rows(0)("cmr_cancel"), "N")
@@ -1420,6 +1484,7 @@ Public Class frmRequestGMColorMatch
     '--- KeyPress for Get data
     Private Sub txtCmrNumber_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtCmrNumber.KeyPress
         If e.KeyChar = vbCr Then
+            e.Handled = True
             If txtCmrNumber.Text.Trim <> "" Then
                 LoadData(0, txtCmrNumber.Text.Trim)
             End If

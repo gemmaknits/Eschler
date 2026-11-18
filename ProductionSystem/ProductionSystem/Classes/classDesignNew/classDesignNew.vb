@@ -201,7 +201,7 @@ Public Class classDesignNew
     '
     ' Mapping rules (agreed with the user 16/10/2026):
     '   - Machine group      : never sent (GMK keeps its own value, new design = NULL)
-    '   - Finishing group    : matched by fin_code, not by fin_id
+    '   - Finishing Formula  : matched by code, not by fin_id
     '                          codes 15, 16, 41, 22-M and codes that GMK does not have are not sent
     '                          (GMK keeps its own value, new design = 0) and the user is warned
     '   - Fabric type        : ids that GMK does not have (e.g. INNER) are not sent (GMK keeps its own value, new design = NULL)
@@ -464,23 +464,47 @@ Public Class classDesignNew
         Return False
     End Function
 
-    'Finishing/fabric values are GMK ids at this point: show the code/name instead of the id
+    'Finishing values use the same lookup Stored Procedure as the Design Master ComboBox.
+    Private Function GetFinishingLookup(ByVal conn As SqlConnection, ByVal tran As SqlTransaction) As DataTable
+        Dim cmd As New SqlCommand("p_finishing_group_select", conn)
+        cmd.CommandType = CommandType.StoredProcedure
+        If tran IsNot Nothing Then cmd.Transaction = tran
+        Dim da As New SqlDataAdapter(cmd)
+        Dim dt As New DataTable
+        da.Fill(dt)
+        Return dt
+    End Function
+
     Private Function FinishingText(ByVal conn As SqlConnection, ByVal tran As SqlTransaction, ByVal id As Object) As String
         If id Is Nothing OrElse IsDBNull(id) OrElse CLng(id) = 0 Then Return "-"
-        Dim cmd As New SqlCommand("SELECT RTRIM(fin_code) + ' ' + RTRIM(ISNULL(fin_desc, '')) FROM finishing_group WHERE fin_id = @id", conn, tran)
-        cmd.Parameters.AddWithValue("@id", CLng(id))
-        Dim o As Object = cmd.ExecuteScalar()
-        If o Is Nothing OrElse IsDBNull(o) Then Return id.ToString()
-        Return o.ToString().Trim()
+        Dim dt As DataTable = GetFinishingLookup(conn, tran)
+        For Each r As DataRow In dt.Rows
+            If Not IsDBNull(r("fin_id")) AndAlso CLng(r("fin_id")) = CLng(id) Then
+                Return r("fin_desc2").ToString().Trim()
+            End If
+        Next
+        Return id.ToString()
+    End Function
+
+    Private Function GetFabricTypeLookup(ByVal conn As SqlConnection, ByVal tran As SqlTransaction) As DataTable
+        Dim cmd As New SqlCommand("p_design_master_new_pkg_combo_fabric_type", conn)
+        cmd.CommandType = CommandType.StoredProcedure
+        If tran IsNot Nothing Then cmd.Transaction = tran
+        Dim da As New SqlDataAdapter(cmd)
+        Dim dt As New DataTable
+        da.Fill(dt)
+        Return dt
     End Function
 
     Private Function FabricTypeText(ByVal conn As SqlConnection, ByVal tran As SqlTransaction, ByVal id As Object) As String
         If id Is Nothing OrElse IsDBNull(id) OrElse CLng(id) = 0 Then Return "-"
-        Dim cmd As New SqlCommand("SELECT RTRIM(lookup_value) FROM lookup_values WHERE lookup_value_id = @id", conn, tran)
-        cmd.Parameters.AddWithValue("@id", CLng(id))
-        Dim o As Object = cmd.ExecuteScalar()
-        If o Is Nothing OrElse IsDBNull(o) Then Return id.ToString()
-        Return o.ToString().Trim()
+        Dim dt As DataTable = GetFabricTypeLookup(conn, tran)
+        For Each r As DataRow In dt.Rows
+            If Not IsDBNull(r("lookup_value_id")) AndAlso CLng(r("lookup_value_id")) = CLng(id) Then
+                Return r("lookup_value").ToString().Trim()
+            End If
+        Next
+        Return id.ToString()
     End Function
 
     'Readable names for the common fields, the column name is shown for the others
@@ -615,7 +639,7 @@ Public Class classDesignNew
     End Function
 
     '------------------------------------------------------------------
-    ' Finishing group : match by fin_code. Value that cannot be matched is not sent.
+    ' Finishing Formula : match by code. Value that cannot be matched is not sent.
     '------------------------------------------------------------------
     Private Function MapFinishing(ByVal conn As SqlConnection, ByVal tran As SqlTransaction, ByVal eschlerFinId As Object, _
                                   ByVal existing As DataRow, ByVal res As SyncResult) As Object
@@ -628,10 +652,12 @@ Public Class classDesignNew
         ElseIf Array.IndexOf(AmbiguousFinCodes, code.ToUpper()) >= 0 Then
             reason = "Finishing รหัส " & code & " มีความหมายต่างกันระหว่าง Eschler กับ GMK"
         Else
-            Dim cmd As New SqlCommand("SELECT TOP 1 fin_id FROM finishing_group WHERE RTRIM(fin_code) = @code", conn, tran)
-            cmd.Parameters.AddWithValue("@code", code)
-            Dim o As Object = cmd.ExecuteScalar()
-            If o IsNot Nothing AndAlso Not IsDBNull(o) Then Return CInt(o)
+            Dim dt As DataTable = GetFinishingLookup(conn, tran)
+            For Each r As DataRow In dt.Rows
+                If String.Equals(r("fin_code").ToString().Trim(), code, StringComparison.OrdinalIgnoreCase) Then
+                    Return CInt(r("fin_id"))
+                End If
+            Next
             reason = "ไม่มี Finishing รหัส " & code & " ใน GMK"
         End If
 
@@ -647,13 +673,14 @@ Public Class classDesignNew
     Private Function GetEschlerFinCode(ByVal finId As Integer) As String
         Using c As New SqlConnection((New classConnection).connection)
             c.Open()
-            Using cmd As New SqlCommand("SELECT RTRIM(fin_code) FROM finishing_group WHERE fin_id = @id", c)
-                cmd.Parameters.AddWithValue("@id", finId)
-                Dim o As Object = cmd.ExecuteScalar()
-                If o Is Nothing OrElse IsDBNull(o) Then Return ""
-                Return o.ToString().Trim()
-            End Using
+            Dim dt As DataTable = GetFinishingLookup(c, Nothing)
+            For Each r As DataRow In dt.Rows
+                If Not IsDBNull(r("fin_id")) AndAlso CLng(r("fin_id")) = finId Then
+                    Return r("fin_code").ToString().Trim()
+                End If
+            Next
         End Using
+        Return ""
     End Function
 
     '------------------------------------------------------------------
@@ -666,10 +693,12 @@ Public Class classDesignNew
             Return DBNull.Value
         End If
 
-        Dim cmd As New SqlCommand("SELECT COUNT(*) FROM lookup_values lv INNER JOIN lookup_type lt ON lt.lookup_id = lv.lookup_id " & _
-                                  "WHERE lt.lookup_type = 'FABRIC_TYPE' AND lv.lookup_value_id = @id", conn, tran)
-        cmd.Parameters.AddWithValue("@id", CLng(eschlerId))
-        If CInt(cmd.ExecuteScalar()) > 0 Then Return CLng(eschlerId)
+        Dim dt As DataTable = GetFabricTypeLookup(conn, tran)
+        For Each r As DataRow In dt.Rows
+            If Not IsDBNull(r("lookup_value_id")) AndAlso CLng(r("lookup_value_id")) = CLng(eschlerId) Then
+                Return CLng(eschlerId)
+            End If
+        Next
 
         If existing IsNot Nothing Then
             res.Warnings.Add("Fabric Type (id " & eschlerId.ToString() & ") ไม่มีใน GMK (คงค่าเดิมของ GMK ไว้)")

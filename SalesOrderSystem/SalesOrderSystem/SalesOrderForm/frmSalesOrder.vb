@@ -125,6 +125,7 @@ Public Class frmSalesOrder
         'grpSampleRequest.Enabled = False
         btnCancel.Text = "Cancel"
         Call LoadData("")
+        Me.cboPriceListCustomer.SelectedIndex = -1 'John 23/11/2026 New order: no Price List Customer until the user selects one
         Me.ComboSaleOrderType1.SelectedValue = "CUSTORDER"
         Me.chkSpecial1.Checked = True
         Me.checkBulkAppInternal.Checked = False
@@ -301,6 +302,7 @@ Public Class frmSalesOrder
         Me.cboPriceListCustomer.DataSource = objDB.getPriceListCustomer(Nothing)
         Me.cboPriceListCustomer.DisplayMember = "list_name"
         Me.cboPriceListCustomer.ValueMember = "so_price_list_header_id"
+        Me.cboPriceListCustomer.SelectedIndex = -1 'John 23/11/2026 Binding selects the first item; start empty so the user has to choose
 
         'Used In Datagrid
         'Me.design_gwth_nob.DataSource = objDB.GetDesignGwth
@@ -476,7 +478,19 @@ Public Class frmSalesOrder
         txtFulfilmentComment.Text = dt.Rows(0)("fulfilment_comment") 'Sitthana 19/09/2018
         cbbSrTypeId.SelectedValue = dt.Rows(0)("sr_type_id") 'Sitthana 20240523
         mcboDesignProperties.SelectedValue = dt.Rows(0)("design_properties_id") 'John 28/10/2025
-        cboPriceListCustomer.SelectedValue = dt.Rows(0)("price_list_header_id")
+        'John 23/11/2026 Loaded order: show the saved Price List Customer. Matched as text so a bigint / int type
+        'difference cannot leave it on the wrong row; empty when the order has none.
+        cboPriceListCustomer.SelectedIndex = -1
+        If Not IsDBNull(dt.Rows(0)("price_list_header_id")) Then
+            Dim savedHeaderId As String = dt.Rows(0)("price_list_header_id").ToString.Trim
+            For i As Integer = 0 To cboPriceListCustomer.Items.Count - 1
+                Dim listRow As DataRowView = TryCast(cboPriceListCustomer.Items(i), DataRowView)
+                If listRow IsNot Nothing AndAlso listRow("so_price_list_header_id").ToString.Trim = savedHeaderId Then
+                    cboPriceListCustomer.SelectedIndex = i
+                    Exit For
+                End If
+            Next
+        End If
         txtSampleFabricQty.Text = If(dt.Columns.Contains("so_sample_fabric_qty"), dt.Rows(0)("so_sample_fabric_qty").ToString, "0")
         txtSampleBulkQty.Text = If(dt.Columns.Contains("so_sample_bulk_qty"), dt.Rows(0)("so_sample_bulk_qty").ToString, "0")
 
@@ -2174,6 +2188,7 @@ Public Class frmSalesOrder
         Me.cboPriceListCustomer.DataSource = objDB.getPriceListCustomer(custId)
         Me.cboPriceListCustomer.DisplayMember = "list_name"
         Me.cboPriceListCustomer.ValueMember = "so_price_list_header_id" ' John 01/10/2026 -- was "customer_id", which fed the wrong id into @p_so_price_list_header_id and into the saved so.price_list_header_id
+        Me.cboPriceListCustomer.SelectedIndex = -1 'John 23/11/2026 Refilling selects the first item; the user picks the Price List Customer (BindData sets it when an order is loaded)
 
         Call bindCustomerBillToData()
         Call bindCustomerShipToData()
@@ -2380,7 +2395,7 @@ Public Class frmSalesOrder
     ''' </summary>
     Private Sub grdSalesOrder_CellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles grdSalesOrder.CellBeginEdit
         Dim colName As String = grdSalesOrder.Columns(e.ColumnIndex).Name
-        If colName = "design_no" OrElse colName = "col" OrElse colName = "uom" OrElse colName = "qty" Then
+        If colName = "design_no" OrElse colName = "col" OrElse colName = "uom" OrElse colName = "qty" OrElse colName = "curr" Then 'John 23/11/2026 curr added: it is a price line input too
             If cboPriceListCustomer.SelectedValue Is Nothing OrElse IsDBNull(cboPriceListCustomer.SelectedValue) Then
                 MessageBox.Show("Please select a Price List Customer before editing this!", "Validation Required", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1)
                 e.Cancel = True
@@ -2530,6 +2545,21 @@ Public Class frmSalesOrder
             If selectedPrice.HasValue Then row.Cells("price").Value = selectedPrice.Value
             If Not String.IsNullOrEmpty(selectedCurrency) Then row.Cells("curr").Value = selectedCurrency
         End If
+    End Sub
+
+    'John 23/11/2026 When the user picks a different Price List Customer, every line that is already filled in
+    '(design no, color, uom, qty, curr) is looked up again against the new price list, so the pop-up opens for it.
+    'SelectionChangeCommitted fires only for a user's choice, not when an order is loaded or the list is refilled
+    'in code. The work is queued with BeginInvoke because SelectedValue is not updated yet while this event runs.
+    Private Sub cboPriceListCustomer_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cboPriceListCustomer.SelectionChangeCommitted
+        Me.BeginInvoke(New MethodInvoker(AddressOf RecheckPriceLinesForPriceList))
+    End Sub
+
+    Private Sub RecheckPriceLinesForPriceList()
+        grdSalesOrder.EndEdit()
+        For i As Integer = 0 To grdSalesOrder.Rows.Count - 1
+            If Not grdSalesOrder.Rows(i).IsNewRow Then Call CheckSelectPriceLine(i)
+        Next
     End Sub
 
     Private Sub btnViewSTTracking_Click(sender As Object, e As EventArgs) Handles btnViewSTTracking.Click 'John 07/07/2026

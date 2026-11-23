@@ -20,6 +20,42 @@ Public Class frmSelectPriceLine
         End Get
     End Property
 
+    ''' <summary>How the price was worked out, kept on the SO line (soitm.price_list_uom, price_list_uom_conv,
+    ''' price_list_exrt, price_list_system_note): the unit the list prices in, the unit factor, the exchange
+    ''' rate used and the SP's conversion note. -- John 23/11/2026</summary>
+    Private _selectedPriceUom As String
+    Private _selectedUomConv As Nullable(Of Decimal)
+    Private _selectedExRate As Nullable(Of Decimal)
+    Private _selectedNote As String
+    Public ReadOnly Property SelectedPriceUom As String
+        Get
+            Return _selectedPriceUom
+        End Get
+    End Property
+    Public ReadOnly Property SelectedUomConv As Nullable(Of Decimal)
+        Get
+            Return _selectedUomConv
+        End Get
+    End Property
+    Public ReadOnly Property SelectedExRate As Nullable(Of Decimal)
+        Get
+            Return _selectedExRate
+        End Get
+    End Property
+    Public ReadOnly Property SelectedNote As String
+        Get
+            Return _selectedNote
+        End Get
+    End Property
+
+    'Value of a column in the picked row, or Nothing if the SP did not return it or it is NULL.
+    Private Function PickedValue(colName As String) As Object
+        If Not dgvResults.Columns.Contains(colName) Then Return Nothing
+        Dim v As Object = dgvResults.CurrentRow.Cells(colName).Value
+        If v Is Nothing OrElse IsDBNull(v) Then Return Nothing
+        Return v
+    End Function
+
     ''' <summary>
     ''' Pass the calling form as owner -- without it, ShowDialog() in this MDI app
     ''' can open the modal dialog behind the main window's Z-order: it's really
@@ -103,6 +139,23 @@ Public Class frmSelectPriceLine
         Dim currRaw As Object = If(dgvResults.Columns.Contains(currCol), dgvResults.CurrentRow.Cells(currCol).Value, Nothing)
         _selectedCurrency = If(currRaw Is Nothing OrElse IsDBNull(currRaw), Nothing, currRaw.ToString.Trim)
 
+        'John 23/11/2026 What the SP says the price was worked out from (limits match the soitm columns:
+        'char(10), numeric(12,4), numeric(12,4), nvarchar(100)).
+        Dim v As Object
+        v = PickedValue("price_uom")
+        _selectedPriceUom = If(v Is Nothing, Nothing, v.ToString.Trim)
+        v = PickedValue("uom_factor")
+        _selectedUomConv = If(v Is Nothing, Nothing, CType(Math.Round(Convert.ToDecimal(v), 4), Decimal?))
+        v = PickedValue("exchange_rate_used")
+        _selectedExRate = If(v Is Nothing, Nothing, CType(Math.Round(Convert.ToDecimal(v), 4), Decimal?))
+        v = PickedValue("conversion_note")
+        If v Is Nothing Then
+            _selectedNote = Nothing
+        Else
+            _selectedNote = v.ToString.Trim
+            If _selectedNote.Length > 100 Then _selectedNote = _selectedNote.Substring(0, 100)
+        End If
+
         Me.DialogResult = DialogResult.OK
         Me.Close()
     End Sub
@@ -111,6 +164,10 @@ Public Class frmSelectPriceLine
         _selectedDetailId = Nothing
         _selectedPrice = Nothing
         _selectedCurrency = Nothing
+        _selectedPriceUom = Nothing
+        _selectedUomConv = Nothing
+        _selectedExRate = Nothing
+        _selectedNote = Nothing
         Me.DialogResult = DialogResult.Cancel
         Me.Close()
     End Sub

@@ -259,6 +259,10 @@ Partial Class frmSalesOrder
         Me.cboid_so_routing = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.so_line_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.so_price_list_detail_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colPriceListUom = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colPriceListUomConv = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colPriceListExrt = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colPriceListSystemNote = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.mtl_customer_items_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.mtl_customer_items_xref_id = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.qtyship = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -907,7 +911,7 @@ Partial Class frmSalesOrder
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grdSalesOrder.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grdSalesOrder.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.sonoid, Me.ref_stnoid, Me.design_gwth_nob, Me.design_no, Me.labeldes, Me.colRefdesno, Me.labelarticle, Me.colGmPerSqM, Me.Custdes, Me.fwth, Me.cboWidth, Me.gwth, Me.sample_fabric_qty, Me.sample_bulk_qty, Me.col, Me.custcol, Me.Column1, Me.labdipno, Me.labdip_comment, Me.labelcolor, Me.labeldata1, Me.labeldata2, Me.colCustDelidt, Me.shipdt, Me.confirmed_shipdt, Me.knit_begin_date, Me.knit_end_date, Me.dye_end_date, Me.yarn_available_date, Me.confirmed_appointment, Me.qty, Me.uom, Me.price, Me.Column2, Me.colProdLossPerc, Me.colQtyWithLoss, Me.show_price, Me.curr, Me.exrt, Me.gr_itamt, Me.discamt, Me.nt_itamt, Me.closed2, Me.cboid_so_routing, Me.so_line_id, Me.so_price_list_detail_id, Me.mtl_customer_items_id, Me.mtl_customer_items_xref_id, Me.qtyship, Me.qtybal, Me.jobno, Me.sent_to, Me.st_reorder_bal_kg})
+        Me.grdSalesOrder.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.sonoid, Me.ref_stnoid, Me.design_gwth_nob, Me.design_no, Me.labeldes, Me.colRefdesno, Me.labelarticle, Me.colGmPerSqM, Me.Custdes, Me.fwth, Me.cboWidth, Me.gwth, Me.sample_fabric_qty, Me.sample_bulk_qty, Me.col, Me.custcol, Me.Column1, Me.labdipno, Me.labdip_comment, Me.labelcolor, Me.labeldata1, Me.labeldata2, Me.colCustDelidt, Me.shipdt, Me.confirmed_shipdt, Me.knit_begin_date, Me.knit_end_date, Me.dye_end_date, Me.yarn_available_date, Me.confirmed_appointment, Me.qty, Me.uom, Me.price, Me.Column2, Me.colProdLossPerc, Me.colQtyWithLoss, Me.show_price, Me.curr, Me.exrt, Me.gr_itamt, Me.discamt, Me.nt_itamt, Me.closed2, Me.cboid_so_routing, Me.so_line_id, Me.so_price_list_detail_id, Me.colPriceListUom, Me.colPriceListUomConv, Me.colPriceListExrt, Me.colPriceListSystemNote, Me.mtl_customer_items_id, Me.mtl_customer_items_xref_id, Me.qtyship, Me.qtybal, Me.jobno, Me.sent_to, Me.st_reorder_bal_kg})
         Me.grdSalesOrder.Location = New System.Drawing.Point(3, 31)
         Me.grdSalesOrder.Name = "grdSalesOrder"
         Me.grdSalesOrder.RowHeadersWidth = 51
@@ -2447,6 +2451,46 @@ Partial Class frmSalesOrder
         Me.so_price_list_detail_id.Visible = False
         Me.so_price_list_detail_id.Width = 125
         '
+        'colPriceListUom
+        '
+        Me.colPriceListUom.DataPropertyName = "price_list_uom"
+        Me.colPriceListUom.HeaderText = "Price List UOM"
+        Me.colPriceListUom.MinimumWidth = 6
+        Me.colPriceListUom.Name = "price_list_uom"
+        Me.colPriceListUom.ReadOnly = True
+        Me.colPriceListUom.Visible = False
+        Me.colPriceListUom.Width = 125
+        '
+        'colPriceListUomConv
+        '
+        Me.colPriceListUomConv.DataPropertyName = "price_list_uom_conv"
+        Me.colPriceListUomConv.HeaderText = "Price List UOM Conv"
+        Me.colPriceListUomConv.MinimumWidth = 6
+        Me.colPriceListUomConv.Name = "price_list_uom_conv"
+        Me.colPriceListUomConv.ReadOnly = True
+        Me.colPriceListUomConv.Visible = False
+        Me.colPriceListUomConv.Width = 125
+        '
+        'colPriceListExrt
+        '
+        Me.colPriceListExrt.DataPropertyName = "price_list_exrt"
+        Me.colPriceListExrt.HeaderText = "Price List Exchange Rate"
+        Me.colPriceListExrt.MinimumWidth = 6
+        Me.colPriceListExrt.Name = "price_list_exrt"
+        Me.colPriceListExrt.ReadOnly = True
+        Me.colPriceListExrt.Visible = False
+        Me.colPriceListExrt.Width = 125
+        '
+        'colPriceListSystemNote
+        '
+        Me.colPriceListSystemNote.DataPropertyName = "price_list_system_note"
+        Me.colPriceListSystemNote.HeaderText = "Price List System Note"
+        Me.colPriceListSystemNote.MinimumWidth = 6
+        Me.colPriceListSystemNote.Name = "price_list_system_note"
+        Me.colPriceListSystemNote.ReadOnly = True
+        Me.colPriceListSystemNote.Visible = False
+        Me.colPriceListSystemNote.Width = 125
+        '
         'mtl_customer_items_id
         '
         Me.mtl_customer_items_id.DataPropertyName = "mtl_customer_items_id"
@@ -2787,6 +2831,10 @@ Partial Class frmSalesOrder
     Friend WithEvents cboid_so_routing As DataGridViewTextBoxColumn
     Friend WithEvents so_line_id As DataGridViewTextBoxColumn
     Friend WithEvents so_price_list_detail_id As DataGridViewTextBoxColumn
+    Friend WithEvents colPriceListUom As DataGridViewTextBoxColumn
+    Friend WithEvents colPriceListUomConv As DataGridViewTextBoxColumn
+    Friend WithEvents colPriceListExrt As DataGridViewTextBoxColumn
+    Friend WithEvents colPriceListSystemNote As DataGridViewTextBoxColumn
     Friend WithEvents mtl_customer_items_id As DataGridViewTextBoxColumn
     Friend WithEvents mtl_customer_items_xref_id As DataGridViewTextBoxColumn
     Friend WithEvents qtyship As DataGridViewTextBoxColumn

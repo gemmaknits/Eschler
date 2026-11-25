@@ -2216,8 +2216,14 @@ Public Class frmSalesOrder
         Me.cboPriceListCustomer.DataSource = objDB.getPriceListCustomer(custId)
         Me.cboPriceListCustomer.DisplayMember = "list_name"
         Me.cboPriceListCustomer.ValueMember = "so_price_list_header_id" ' John 01/10/2026 -- was "customer_id", which fed the wrong id into @p_so_price_list_header_id and into the saved so.price_list_header_id
-        Me.cboPriceListCustomer.SelectedIndex = -1 'John 23/11/2026 Refilling selects the first item; the user picks the Price List Customer (BindData sets it when an order is loaded)
+        'John 23/11/2026 Refilling selects the first item; the user picks the Price List Customer (BindData sets it
+        'when an order is loaded). John 25/11/2026: if the selected Bill To customer has only one price list, select
+        'it automatically (never while an order is loading, and never when no Bill To customer is selected).
+        Dim autoSelectPriceList As Boolean = Not _bindingData AndAlso custId.HasValue AndAlso Me.mcboCustomersBillToFlag.SelectedIndex >= 0 AndAlso Me.cboPriceListCustomer.Items.Count = 1
+        Me.cboPriceListCustomer.SelectedIndex = If(autoSelectPriceList, 0, -1)
         _priceListMarker = ""
+        'Same as the user picking it: filled lines are checked against the list that was just selected.
+        If autoSelectPriceList Then Me.BeginInvoke(New MethodInvoker(AddressOf RecheckPriceLinesForPriceList))
         'John 23/11/2026 The lines still carry price line ids from the previous customer's list. Drop them when the
         'user changes Bill To (not while an order is loading); picking the new list re-checks every line.
         If Not _bindingData AndAlso grdSalesOrder.Columns.Contains("so_price_list_detail_id") Then

@@ -197,6 +197,7 @@ Partial Class frmSalesOrder
         Me.TabControl2 = New System.Windows.Forms.TabControl()
         Me.tabItems = New System.Windows.Forms.TabPage()
         Me.btnViewSTTracking = New System.Windows.Forms.Button()
+        Me.btnSelectPriceLine = New System.Windows.Forms.Button()
         Me.btnSaveSettings = New System.Windows.Forms.Button()
         Me.btnGridLayoutSettings = New System.Windows.Forms.Button()
         Me.tabOthers = New System.Windows.Forms.TabPage()
@@ -1802,6 +1803,7 @@ Partial Class frmSalesOrder
         'tabItems
         '
         Me.tabItems.Controls.Add(Me.btnViewSTTracking)
+        Me.tabItems.Controls.Add(Me.btnSelectPriceLine)
         Me.tabItems.Controls.Add(Me.btnSaveSettings)
         Me.tabItems.Controls.Add(Me.btnGridLayoutSettings)
         Me.tabItems.Controls.Add(Me.grdSalesOrder)
@@ -1821,6 +1823,15 @@ Partial Class frmSalesOrder
         Me.btnViewSTTracking.TabIndex = 4
         Me.btnViewSTTracking.Text = "View ST Tracking"
         Me.btnViewSTTracking.UseVisualStyleBackColor = True
+        '
+        'btnSelectPriceLine
+        '
+        Me.btnSelectPriceLine.Location = New System.Drawing.Point(125, 3)
+        Me.btnSelectPriceLine.Name = "btnSelectPriceLine"
+        Me.btnSelectPriceLine.Size = New System.Drawing.Size(113, 23)
+        Me.btnSelectPriceLine.TabIndex = 5
+        Me.btnSelectPriceLine.Text = "Select Price Line"
+        Me.btnSelectPriceLine.UseVisualStyleBackColor = True
         '
         'btnSaveSettings
         '
@@ -2782,6 +2793,7 @@ Partial Class frmSalesOrder
     Friend WithEvents Label47 As Label
     Friend WithEvents txtContractNumber As TextBox
     Friend WithEvents btnViewSTTracking As Button
+    Friend WithEvents btnSelectPriceLine As Button
     Friend WithEvents Label48 As Label
     Friend WithEvents cboPriceListCustomer As ComboBox
     Friend WithEvents Label49 As Label

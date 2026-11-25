@@ -243,6 +243,32 @@ Public Class classSalesOrder
         Return Nothing
     End Function
 
+    'John 25/11/2026 Which price list (so_price_list_header_id) each price line (so_price_list_detail_id) belongs to,
+    'so a save can check the lines against the order's Price List Customer. Returns detail id -> header id; a detail
+    'id that no longer exists is simply absent. The ids are Int64 values, so the IN list can not carry anything else.
+    Public Function getPriceListHeaderOfDetails(ByVal detailIds As List(Of Int64)) As Dictionary(Of Int64, Int64)
+        Dim result As New Dictionary(Of Int64, Int64)
+        If detailIds Is Nothing OrElse detailIds.Count = 0 Then Return result
+
+        Dim conn As New SqlConnection((New classConnection).connection)
+        Dim comm As New SqlCommand("", conn)
+        comm.CommandType = CommandType.Text
+        Dim idList As New List(Of String)
+        For Each detailId As Int64 In detailIds
+            idList.Add(detailId.ToString)
+        Next
+        comm.CommandText = "SELECT so_price_list_detail_id, so_price_list_header_id FROM SO.so_price_list_detail WHERE so_price_list_detail_id IN (" &
+                           String.Join(",", idList.ToArray) & ")"
+        Dim da As New SqlDataAdapter(comm)
+        Dim dt As New DataTable
+        da.Fill(dt)
+        conn.Close()
+        For Each r As DataRow In dt.Rows
+            result(Convert.ToInt64(r("so_price_list_detail_id"))) = Convert.ToInt64(r("so_price_list_header_id"))
+        Next
+        Return result
+    End Function
+
     Public Function SOSave(ByVal SOH As SOHeader, ByVal SOD_ADD As DataView, ByVal SOD_UPD As DataView, ByVal SOD_DEL As DataView, ByRef msgerr As String, ByRef sono As String) As Boolean
         Dim config As New clsConfig
         Dim conn As New SqlConnection((New ClassConnection).connection)

@@ -126,7 +126,6 @@ Public Class frmSalesOrder
         btnCancel.Text = "Cancel"
         Call LoadData("")
         Me.cboPriceListCustomer.SelectedIndex = -1 'John 23/11/2026 New order: no Price List Customer until the user selects one
-        _priceListMarker = ""
         Me.ComboSaleOrderType1.SelectedValue = "CUSTORDER"
         Me.chkSpecial1.Checked = True
         Me.checkBulkAppInternal.Checked = False
@@ -304,7 +303,6 @@ Public Class frmSalesOrder
         Me.cboPriceListCustomer.DisplayMember = "list_name"
         Me.cboPriceListCustomer.ValueMember = "so_price_list_header_id"
         Me.cboPriceListCustomer.SelectedIndex = -1 'John 23/11/2026 Binding selects the first item; start empty so the user has to choose
-        _priceListMarker = ""
 
         'Used In Datagrid
         'Me.design_gwth_nob.DataSource = objDB.GetDesignGwth
@@ -399,13 +397,6 @@ Public Class frmSalesOrder
     'John 23/11/2026 True while an order is being loaded into the form, so refilling the Price List Customer
     'list (Bill To change) is not mistaken for the user changing the customer.
     Private _bindingData As Boolean = False
-    'The Price List Customer (as text) the lines were last checked against, so the check only reruns on a real change.
-    Private _priceListMarker As String = ""
-
-    Private Function CurrentPriceListHeaderText() As String
-        If cboPriceListCustomer.SelectedIndex = -1 OrElse cboPriceListCustomer.SelectedValue Is Nothing OrElse IsDBNull(cboPriceListCustomer.SelectedValue) Then Return ""
-        Return cboPriceListCustomer.SelectedValue.ToString.Trim
-    End Function
 
     Private Sub BindData(ByVal dt As DataTable)
         _bindingData = True
@@ -413,7 +404,6 @@ Public Class frmSalesOrder
             BindDataInner(dt)
         Finally
             _bindingData = False
-            _priceListMarker = CurrentPriceListHeaderText()
         End Try
     End Sub
 
@@ -697,13 +687,41 @@ Public Class frmSalesOrder
             Return False
         End If
 
-        If oConfig.IsNull(ComboSaleOrderType1.SelectedValue, "").ToString.Trim = "CUSTORDER" Then 'Add By Neung Check only CUSTORDER
-            If cboPriceListCustomer.SelectedIndex = -1 OrElse (New clsConfig).IsNull(cboPriceListCustomer.SelectedValue, "").ToString.Trim = "" Then ' John 25/09/2026
-                'John 23/11/2026 Re-enabled: an order can not be saved without a Price List Customer.
-                MessageBox.Show("A Price List Customer must be selected before the order can be saved.", "Validation Required", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1)
-                ErrorProvider1.SetError(cboPriceListCustomer, "A Price List Customer must be selected.")
-                CheckData = False
-                Exit Function
+        'John 25/11/2026 For every order type, not only CUSTORDER: an order can not be saved without a Price List Customer.
+        If cboPriceListCustomer.SelectedIndex = -1 OrElse (New clsConfig).IsNull(cboPriceListCustomer.SelectedValue, "").ToString.Trim = "" Then ' John 25/09/2026
+            MessageBox.Show("A Price List Customer must be selected before the order can be saved.", "Validation Required", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1)
+            ErrorProvider1.SetError(cboPriceListCustomer, "A Price List Customer must be selected.")
+            CheckData = False
+            Exit Function
+        End If
+
+        'John 25/11/2026 Every line's price line must belong to the order's Price List Customer: a line that still
+        'carries a price line from another price list can not be saved.
+        If cboPriceListCustomer.SelectedValue IsNot Nothing AndAlso Not IsDBNull(cboPriceListCustomer.SelectedValue) Then
+            Dim orderHeaderId As Int64 = Convert.ToInt64(cboPriceListCustomer.SelectedValue)
+            Dim lineDetailIds As New Dictionary(Of Integer, Int64)  'line number -> price line id
+            For Each gridRow As DataGridViewRow In grdSalesOrder.Rows
+                If gridRow.IsNewRow Then Continue For
+                Dim detailValue As Object = gridRow.Cells("so_price_list_detail_id").Value
+                If detailValue IsNot Nothing AndAlso Not IsDBNull(detailValue) AndAlso Convert.ToInt64(detailValue) <> 0 Then
+                    lineDetailIds(gridRow.Index + 1) = Convert.ToInt64(detailValue)
+                End If
+            Next
+            If lineDetailIds.Count > 0 Then
+                Dim headerOfDetail As Dictionary(Of Int64, Int64) = (New classSalesOrder).getPriceListHeaderOfDetails(New List(Of Int64)(lineDetailIds.Values))
+                Dim wrongLines As New List(Of String)
+                For Each kv As KeyValuePair(Of Integer, Int64) In lineDetailIds
+                    Dim lineHeaderId As Int64
+                    If Not headerOfDetail.TryGetValue(kv.Value, lineHeaderId) OrElse lineHeaderId <> orderHeaderId Then wrongLines.Add(kv.Key.ToString)
+                Next
+                If wrongLines.Count > 0 Then
+                    MessageBox.Show("The price line on line(s) " & String.Join(", ", wrongLines.ToArray) & " does not belong to the selected Price List Customer." & vbCrLf &
+                                    "Please press 'Select Price Line' on those lines again, or select the correct Price List Customer.",
+                                    "Validation Required", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1)
+                    ErrorProvider1.SetError(cboPriceListCustomer, "A price line on this order belongs to a different Price List Customer.")
+                    CheckData = False
+                    Exit Function
+                End If
             End If
         End If
 
@@ -2221,14 +2239,17 @@ Public Class frmSalesOrder
         'it automatically (never while an order is loading, and never when no Bill To customer is selected).
         Dim autoSelectPriceList As Boolean = Not _bindingData AndAlso custId.HasValue AndAlso Me.mcboCustomersBillToFlag.SelectedIndex >= 0 AndAlso Me.cboPriceListCustomer.Items.Count = 1
         Me.cboPriceListCustomer.SelectedIndex = If(autoSelectPriceList, 0, -1)
-        _priceListMarker = ""
-        'Same as the user picking it: filled lines are checked against the list that was just selected.
-        If autoSelectPriceList Then Me.BeginInvoke(New MethodInvoker(AddressOf RecheckPriceLinesForPriceList))
-        'John 23/11/2026 The lines still carry price line ids from the previous customer's list. Drop them when the
-        'user changes Bill To (not while an order is loading); picking the new list re-checks every line.
+        'John 23/11/2026 The lines still carry price line ids (and how they were priced) from the previous customer's
+        'list. Drop them when the user changes Bill To (not while an order is loading); the user then presses
+        '"Select Price Line" on each line to pick again.
         If Not _bindingData AndAlso grdSalesOrder.Columns.Contains("so_price_list_detail_id") Then
             For Each gridRow As DataGridViewRow In grdSalesOrder.Rows
-                If Not gridRow.IsNewRow Then gridRow.Cells("so_price_list_detail_id").Value = DBNull.Value
+                If gridRow.IsNewRow Then Continue For
+                gridRow.Cells("so_price_list_detail_id").Value = DBNull.Value
+                gridRow.Cells("price_list_uom").Value = DBNull.Value
+                gridRow.Cells("price_list_uom_conv").Value = DBNull.Value
+                gridRow.Cells("price_list_exrt").Value = DBNull.Value
+                gridRow.Cells("price_list_system_note").Value = DBNull.Value
             Next
         End If
 
@@ -2430,7 +2451,7 @@ Public Class frmSalesOrder
     End Sub
 
     ''' <summary>
-    ''' Blocks editing design no / color / uom / qty until a Price List Customer is
+    ''' Blocks editing design no / color / uom / qty / curr until a Price List Customer is
     ''' selected, so nothing can be typed in the first place -- a warning inside
     ''' CellEndEdit is too late, since the value is already committed by then.
     ''' -- John 30/09/2026
@@ -2443,33 +2464,7 @@ Public Class frmSalesOrder
                 e.Cancel = True
             End If
         End If
-
-        ' Remember the value this edit session started with, so CellEndEdit can tell a
-        ' real change from a session that ended with nothing changed. -- John 05/10/2026
-        If Not e.Cancel Then
-            _editStartRow = e.RowIndex
-            _editStartCol = e.ColumnIndex
-            _editStartValue = oConfig.IsNull(grdSalesOrder.Rows(e.RowIndex).Cells(e.ColumnIndex).Value, "").ToString.Trim
-        End If
     End Sub
-
-    ' Value of the cell when its edit session began (see CellBeginEdit / CellEndEdit).
-    Private _editStartRow As Integer = -1
-    Private _editStartCol As Integer = -1
-    Private _editStartValue As String = ""
-
-    ''' <summary>
-    ''' True if a price line input cell really changed during an edit session. qty is
-    ''' compared as a number (1500 vs 1500.00 is not a change); everything else as text,
-    ''' since e.g. design no 0123 and 123 are different designs. -- John 05/10/2026
-    ''' </summary>
-    Private Function PriceLineInputChanged(colName As String, before As String, after As String) As Boolean
-        If colName = "qty" Then
-            Dim b As Decimal, a As Decimal
-            If Decimal.TryParse(before, b) AndAlso Decimal.TryParse(after, a) Then Return a <> b
-        End If
-        Return Not String.Equals(before, after, StringComparison.Ordinal)
-    End Function
 
     Private Sub grdSalesOrder_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles grdSalesOrder.CellEndEdit
         If grdSalesOrder.Columns(e.ColumnIndex).Name = "colProdLossPerc" Then 'John 26/03/2026
@@ -2494,39 +2489,96 @@ Public Class frmSalesOrder
             End If
         End If
 
-        ' Re-check the price line only when one of the inputs to it (design no, color,
-        ' uom, qty, curr) actually changed. CellEndEdit also fires for an edit session
-        ' that ended with nothing changed -- e.g. a click on the already-selected cell
-        ' followed by an arrow key -- which used to reopen the popup. CheckSelectPriceLine
-        ' itself still waits until design no, color, uom and qty are all filled.
-        ' -- John 29/09/2026, changed 05/10/2026
-        Dim endColName As String = grdSalesOrder.Columns(e.ColumnIndex).Name
-        If endColName = "design_no" OrElse endColName = "col" OrElse endColName = "uom" OrElse endColName = "qty" OrElse endColName = "curr" Then
-            Dim endValue As String = oConfig.IsNull(grdSalesOrder.Rows(e.RowIndex).Cells(e.ColumnIndex).Value, "").ToString.Trim
-            Dim sameCell As Boolean = (e.RowIndex = _editStartRow AndAlso e.ColumnIndex = _editStartCol)
-            Dim changed As Boolean = sameCell AndAlso PriceLineInputChanged(endColName, _editStartValue, endValue)
-            If changed Then
-                Call CheckSelectPriceLine(e.RowIndex)
-            End If
-        End If
-        _editStartRow = -1
-        _editStartCol = -1
+        'John 25/11/2026 The price line pop-up no longer opens by itself when design no, color, uom, qty or curr
+        'is edited (or when the Price List Customer changes): the user selects a line and presses "Select Price Line".
 
         ' grdSalesOrder.Rows(e.RowIndex).ErrorText = ""
     End Sub
 
+    'John 25/11/2026 When the user changes the Price List Customer, a line whose price line belongs to a different
+    'price list is cleared (price line id and how it was priced); lines that belong to the new list are kept.
+    'Runs when the list closes or the combo loses focus (not on every arrow-key step, which would clear lines
+    'while the user is only scrolling through the list), and not while an order is being loaded.
+    Private Sub cboPriceListCustomer_DropDownClosed(sender As Object, e As EventArgs) Handles cboPriceListCustomer.DropDownClosed
+        Me.BeginInvoke(New MethodInvoker(AddressOf ClearPriceLinesOfOtherPriceList))
+    End Sub
+
+    Private Sub cboPriceListCustomer_Leave(sender As Object, e As EventArgs) Handles cboPriceListCustomer.Leave
+        Me.BeginInvoke(New MethodInvoker(AddressOf ClearPriceLinesOfOtherPriceList))
+    End Sub
+
+    Private Sub ClearPriceLinesOfOtherPriceList()
+        If Me.IsDisposed OrElse _bindingData OrElse Not cboPriceListCustomer.Enabled Then Exit Sub
+        If cboPriceListCustomer.SelectedValue Is Nothing OrElse IsDBNull(cboPriceListCustomer.SelectedValue) Then Exit Sub
+        Dim headerId As Int64 = Convert.ToInt64(cboPriceListCustomer.SelectedValue)
+
+        Dim lineRows As New Dictionary(Of DataGridViewRow, Int64)
+        For Each gridRow As DataGridViewRow In grdSalesOrder.Rows
+            If gridRow.IsNewRow Then Continue For
+            Dim detailValue As Object = gridRow.Cells("so_price_list_detail_id").Value
+            If detailValue IsNot Nothing AndAlso Not IsDBNull(detailValue) AndAlso Convert.ToInt64(detailValue) <> 0 Then
+                lineRows(gridRow) = Convert.ToInt64(detailValue)
+            End If
+        Next
+        If lineRows.Count = 0 Then Exit Sub
+
+        Dim headerOfDetail As Dictionary(Of Int64, Int64) = (New classSalesOrder).getPriceListHeaderOfDetails(New List(Of Int64)(lineRows.Values))
+        Dim clearedLines As New List(Of String)
+        For Each kv As KeyValuePair(Of DataGridViewRow, Int64) In lineRows
+            Dim lineHeaderId As Int64
+            If Not headerOfDetail.TryGetValue(kv.Value, lineHeaderId) OrElse lineHeaderId <> headerId Then
+                kv.Key.Cells("so_price_list_detail_id").Value = DBNull.Value
+                kv.Key.Cells("price_list_uom").Value = DBNull.Value
+                kv.Key.Cells("price_list_uom_conv").Value = DBNull.Value
+                kv.Key.Cells("price_list_exrt").Value = DBNull.Value
+                kv.Key.Cells("price_list_system_note").Value = DBNull.Value
+                clearedLines.Add((kv.Key.Index + 1).ToString)
+            End If
+        Next
+        If clearedLines.Count > 0 Then
+            MessageBox.Show("The price line on line(s) " & String.Join(", ", clearedLines.ToArray) & " does not belong to the selected Price List Customer and has been cleared." & vbCrLf &
+                            "Please press 'Select Price Line' on those lines again.",
+                            "Price List", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+    End Sub
+
+    'John 25/11/2026 "Select Price Line" button: opens the price line pop-up for the line the user has selected.
+    Private Sub btnSelectPriceLine_Click(sender As Object, e As EventArgs) Handles btnSelectPriceLine.Click
+        grdSalesOrder.EndEdit()
+        'The line is the row the user selected in the grid (click the row header); if no whole row is selected, the
+        'row of the cell they are on.
+        Dim selectedRow As DataGridViewRow = Nothing
+        Dim pickedRows As New List(Of DataGridViewRow)
+        For Each r As DataGridViewRow In grdSalesOrder.SelectedRows
+            If Not r.IsNewRow Then pickedRows.Add(r)
+        Next
+        If pickedRows.Count > 1 Then
+            MessageBox.Show("Please select only one line.", "Select Price Line", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        ElseIf pickedRows.Count = 1 Then
+            selectedRow = pickedRows(0)
+        Else
+            selectedRow = grdSalesOrder.CurrentRow
+        End If
+        If selectedRow Is Nothing OrElse selectedRow.IsNewRow Then
+            MessageBox.Show("Please select a line first.", "Select Price Line", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+        If Not cboPriceListCustomer.Enabled Then
+            MessageBox.Show("The price list can not be changed on this order.", "Select Price Line", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+        Call CheckSelectPriceLine(selectedRow.Index)
+    End Sub
+
     ''' <summary>
-    ''' Step 1 of price-line selection: once design no, color, uom and qty are all
-    ''' filled on a line, ask SO.P_SO_PRICE_LIST_PKG_select_price_line for the
-    ''' matching price line(s) and let the user pick one via frmSelectPriceLine
-    ''' (shown every time, even for a single unambiguous match). The chosen
-    ''' so_price_list_detail_id is only held in the hidden grid column for now --
-    ''' where it ultimately gets saved comes later. -- John 29/09/2026
+    ''' Price-line selection for one line: ask SO.P_SO_PRICE_LIST_PKG_select_price_line for the
+    ''' price line(s) that match the line's design no, color, uom, qty and curr and let the user pick one
+    ''' via frmSelectPriceLine (shown every time, even for a single unambiguous match). The choice is held in
+    ''' the line's hidden price list columns and saved with the order. -- John 29/09/2026
     ''' </summary>
-    'Returns True when the price list has no price line for this line (nothing to pick from). quiet = True lets a
-    'caller that checks many lines show one summary instead of a message per line. -- John 23/11/2026
-    Private Function CheckSelectPriceLine(rowIndex As Integer, Optional quiet As Boolean = False) As Boolean
-        If rowIndex < 0 OrElse rowIndex >= grdSalesOrder.Rows.Count Then Return False
+    Private Sub CheckSelectPriceLine(rowIndex As Integer)
+        If rowIndex < 0 OrElse rowIndex >= grdSalesOrder.Rows.Count Then Exit Sub
 
         Dim row As DataGridViewRow = grdSalesOrder.Rows(rowIndex)
         Dim designNo As String = oConfig.IsNull(row.Cells("design_no").Value, "").ToString.Trim
@@ -2535,14 +2587,23 @@ Public Class frmSalesOrder
         Dim qtyText As String = oConfig.IsNull(row.Cells("qty").Value, "").ToString.Trim
         Dim curr As String = oConfig.IsNull(row.Cells("curr").Value, "").ToString.Trim
 
-        ' Currency is required too: it filters the price lines, so the popup waits until
-        ' design no, color, uom, qty and curr are all filled. -- John 12/10/2026
-        If designNo = "" OrElse colorCode = "" OrElse uom = "" OrElse qtyText = "" OrElse curr = "" Then
-            Return False
+        ' Currency is required too: it filters the price lines. -- John 12/10/2026
+        Dim missing As New List(Of String)
+        If designNo = "" Then missing.Add("Design No")
+        If colorCode = "" Then missing.Add("Color")
+        If uom = "" Then missing.Add("UOM")
+        If qtyText = "" Then missing.Add("Qty")
+        If curr = "" Then missing.Add("Currency")
+        If missing.Count > 0 Then
+            MessageBox.Show("Please fill in " & String.Join(", ", missing.ToArray) & " on this line first.", "Select Price Line", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
         End If
 
         Dim qty As Decimal
-        If Not Decimal.TryParse(qtyText, qty) Then Return False
+        If Not Decimal.TryParse(qtyText, qty) Then
+            MessageBox.Show("The quantity on this line is not a valid number.", "Select Price Line", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
 
         Dim headerId As Nullable(Of Int64) = Nothing
         If cboPriceListCustomer.SelectedValue IsNot Nothing AndAlso Not IsDBNull(cboPriceListCustomer.SelectedValue) Then
@@ -2552,8 +2613,8 @@ Public Class frmSalesOrder
         ' selectPriceLine needs so_price_list_header_id -- that comes from
         ' cboPriceListCustomer, so don't call the SP without it. -- John 29/09/2026
         If Not headerId.HasValue Then
-            MessageBox.Show("Please select a Price List Customer before editing this!", "Validation Required", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1)
-            Return False
+            MessageBox.Show("Please select a Price List Customer first.", "Validation Required", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1)
+            Exit Sub
         End If
 
         Dim dt As DataTable = (New classSalesOrder).selectPriceLine(headerId, designNo, colorCode, uom, qty, curr)
@@ -2565,14 +2626,12 @@ Public Class frmSalesOrder
             row.Cells("price_list_uom_conv").Value = DBNull.Value
             row.Cells("price_list_exrt").Value = DBNull.Value
             row.Cells("price_list_system_note").Value = DBNull.Value
-            If Not quiet Then
-                MessageBox.Show("No price line was found on the selected Price List Customer for:" & vbCrLf & vbCrLf &
-                                "Design No: " & designNo & vbCrLf & "Color: " & colorCode & vbCrLf & "UOM: " & uom & vbCrLf &
-                                "Qty: " & qty.ToString & vbCrLf & "Currency: " & curr & vbCrLf & vbCrLf &
-                                "Any price list reference on this line has been cleared. Please check the price.",
-                                "Price List", MessageBoxButtons.OK, MessageBoxIcon.Information)
-            End If
-            Return True
+            MessageBox.Show("No price line was found on the selected Price List Customer for:" & vbCrLf & vbCrLf &
+                            "Design No: " & designNo & vbCrLf & "Color: " & colorCode & vbCrLf & "UOM: " & uom & vbCrLf &
+                            "Qty: " & qty.ToString & vbCrLf & "Currency: " & curr & vbCrLf & vbCrLf &
+                            "Any price list reference on this line has been cleared. Please check the price.",
+                            "Price List", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
         End If
 
         Dim frm As New frmSelectPriceLine
@@ -2594,41 +2653,6 @@ Public Class frmSalesOrder
             row.Cells("price_list_uom_conv").Value = If(selectedUomConv.HasValue, CObj(selectedUomConv.Value), DBNull.Value)
             row.Cells("price_list_exrt").Value = If(selectedExRate.HasValue, CObj(selectedExRate.Value), DBNull.Value)
             row.Cells("price_list_system_note").Value = If(String.IsNullOrEmpty(selectedNote), DBNull.Value, CObj(selectedNote))
-        End If
-        Return False
-    End Function
-
-    'John 23/11/2026 When the user picks a different Price List Customer, every line that is already filled in
-    '(design no, color, uom, qty, curr) is looked up again against the new price list, so the pop-up opens for it.
-    'It runs when the list closes or the combo loses focus, not on every selection change, so stepping through the
-    'list with the arrow keys does not open pop-ups, and only when the list really changed (_priceListMarker).
-    'Loading an order or refilling the list in code does not trigger it.
-    Private Sub cboPriceListCustomer_DropDownClosed(sender As Object, e As EventArgs) Handles cboPriceListCustomer.DropDownClosed
-        Me.BeginInvoke(New MethodInvoker(AddressOf RecheckPriceLinesForPriceList))
-    End Sub
-
-    Private Sub cboPriceListCustomer_Leave(sender As Object, e As EventArgs) Handles cboPriceListCustomer.Leave
-        Me.BeginInvoke(New MethodInvoker(AddressOf RecheckPriceLinesForPriceList))
-    End Sub
-
-    Private Sub RecheckPriceLinesForPriceList()
-        If Me.IsDisposed OrElse _bindingData OrElse Not cboPriceListCustomer.Enabled Then Exit Sub
-        Dim current As String = CurrentPriceListHeaderText()
-        If current = _priceListMarker Then Exit Sub
-        _priceListMarker = current
-        If current = "" Then Exit Sub
-
-        grdSalesOrder.EndEdit()
-        Dim noMatch As New List(Of String)
-        For i As Integer = 0 To grdSalesOrder.Rows.Count - 1
-            If grdSalesOrder.Rows(i).IsNewRow Then Continue For
-            If CheckSelectPriceLine(i, True) Then noMatch.Add((i + 1).ToString)
-        Next
-        'One message for all the lines the new list can not price, instead of one per line.
-        If noMatch.Count > 0 Then
-            MessageBox.Show("No price line was found on the selected Price List Customer for line(s) " & String.Join(", ", noMatch.ToArray) & "." & vbCrLf &
-                            "Any price list reference on those lines has been cleared. Please review the price on them.",
-                            "Price List", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
 
